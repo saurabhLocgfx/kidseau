@@ -14,7 +14,7 @@ class Onboarding1Screen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Color(0xff8267ac),
       body: SingleChildScrollView(
-        child: Column(
+        child: Column(crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Image.asset("images/Artboard 1 1.png"),
             Container(
@@ -50,7 +50,7 @@ class Onboarding1Screen extends StatelessWidget {
                                     SizedBox(height:Get.size.height * 0.03),
                                     Image.asset(
                                         _controller.onboardingPages[index].imageAsset,height: 320,),
-                                    SizedBox(height: 32),
+                                    SizedBox(height: 10),
                                     Row(crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
                                         Padding(
@@ -63,12 +63,22 @@ class Onboarding1Screen extends StatelessWidget {
                                                 style: FontConstant.headingText,
                                               ),
                                                Padding(
-                                                 padding: const EdgeInsets.only(top: 10.0),
-                                                 child: Text(
-                                                  _controller.onboardingPages[index].description,
-                                                  textAlign: TextAlign.center,
-                                                  style: FontConstant.lightText,
+                                                 padding: const EdgeInsets.only(top: 0.0),
+                                                 child: Row(mainAxisAlignment: MainAxisAlignment.start,
+                                                   crossAxisAlignment: CrossAxisAlignment.start,
+                                                   children: [
+                                                     Column(mainAxisAlignment: MainAxisAlignment.start,
+                                                       crossAxisAlignment: CrossAxisAlignment.start,
+                                                       children: [
+                                                         Text(
+                                                          _controller.onboardingPages[index].description,
+                                                          textAlign: TextAlign.center,
+                                                          style: FontConstant.lightText,
                                               ),
+                                                       ],
+                                                     ),
+                                                   ],
+                                                 ),
                                                ),
                                             ],
                                           ),
