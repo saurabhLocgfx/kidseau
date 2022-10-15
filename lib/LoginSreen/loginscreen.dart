@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:kidseau/HomeScreen/homescreen.dart';
 import 'package:kidseau/SignupScreen/signupscreen.dart';
 import 'package:kidseau/Theme.dart';
 import 'package:kidseau/widgets.dart';
@@ -29,7 +30,7 @@ class LoginScreen extends StatelessWidget {
                 ),
 
                 Padding(
-                  padding: const EdgeInsets.only(top: 200.0),
+                  padding: const EdgeInsets.only(top: 160.0),
                   child: Center(child: Image.asset("assets/images/logowithtext.png",height: 200,)),
                 ),
               ]
@@ -56,7 +57,9 @@ class LoginScreen extends StatelessWidget {
                       textfield(context, "Change Password"),),
                       Padding(
                         padding: const EdgeInsets.only(top: 30.0),
-                        child: materialButton(context, () {}, "Login", Color(0xff8267AC)),
+                        child: materialButton(context, () {
+                          Get.to(()=> HomeScreen());
+                        }, "Login", Color(0xff8267AC),52.0),
                       ),
                     ],
                   ),
@@ -100,7 +103,7 @@ class LoginScreen extends StatelessWidget {
                             Text("Conditions ",style: TextStyle(color: Color(0xffB7A4B2),decoration: TextDecoration.underline,fontSize: 14,fontWeight: FontWeight.w400),),
                           ],
                         ),
-                        SizedBox(height: 50,)
+                        SizedBox(height: 30,)
                       ],
                     ),
                   ],

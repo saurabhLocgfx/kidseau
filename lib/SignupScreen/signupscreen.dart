@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:kidseau/Theme.dart';
+import 'package:kidseau/VoucherScreen/voucherscreen.dart';
 import 'package:kidseau/widgets.dart';
 
 class SignupScreen extends StatelessWidget {
@@ -28,7 +29,7 @@ class SignupScreen extends StatelessWidget {
                   ),
 
                   Padding(
-                    padding: const EdgeInsets.only(top: 200.0),
+                    padding: const EdgeInsets.only(top: 160.0),
                     child: Center(child: Image.asset("assets/images/logowithtext.png",height: 200,)),
                   ),
                 ]
@@ -42,26 +43,28 @@ class SignupScreen extends StatelessWidget {
                   Column(crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(top: 15.0),
+                        padding: const EdgeInsets.only(top: 13.0),
                         child: Text("Email",style: FontConstant.smallboldText),
                       ),
                       Padding(padding: EdgeInsets.only(top: 10,),child:
                       textfield(context, "Enter your kid's name"),),
                       Padding(
-                        padding: const EdgeInsets.only(top: 15.0),
+                        padding: const EdgeInsets.only(top: 13.0),
                         child: Text("Password",style: FontConstant.smallboldText),
                       ),
                       Padding(padding: EdgeInsets.only(top: 10,),child:
                       textfield(context, "Enter Password"),),
                       Padding(
-                        padding: const EdgeInsets.only(top: 15.0),
+                        padding: const EdgeInsets.only(top: 13.0),
                         child: Text("ConfirmPassword",style: FontConstant.smallboldText),
                       ),
                       Padding(padding: EdgeInsets.only(top: 10,),child:
                       textfield(context, "Confirm Password"),),
                       Padding(
                         padding: const EdgeInsets.only(top: 30.0),
-                        child: materialButton(context, () {}, "Login", Color(0xff8267AC)),
+                        child: materialButton(context, () {
+                          Get.to(()=>VoucherScreen());
+                        }, "Singup", Color(0xff8267AC),52.0),
                       ),
                     ],
                   ),

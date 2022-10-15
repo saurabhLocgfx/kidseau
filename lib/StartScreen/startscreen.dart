@@ -38,11 +38,11 @@ class StartScreen extends StatelessWidget {
                   SizedBox(height: Get.size.height * 0.10,),
                   Image.asset("assets/images/logo.png",height: 130,width: 120,),
                   SizedBox(height: Get.size.height * 0.05,),
-                  materialButton(context, () {}, "i'm a Teacher", ThemeColor.primaryorange),
+                  materialButton(context, () {}, "i'm a Teacher", ThemeColor.primaryorange,56.0),
                   SizedBox(height: Get.size.height * 0.02,),
                   materialButton(context, () {
                     Get.to(()=>Onboarding1Screen());
-                  }, "i'm a Parent", ThemeColor.primarycolor),
+                  }, "i'm a Parent", ThemeColor.primarycolor,56.0),
                   SizedBox(height: Get.size.height * 0.18,),
                   Image.asset("assets/images/Made with ❤️ Locgfx.png")
 

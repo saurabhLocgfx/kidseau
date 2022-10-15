@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:kidseau/Theme.dart';
 
 textfield (context, txt) {
   return Container(
+    height: 56,
     width: MediaQuery.of(context).size.width *0.92,
     child: TextFormField(
       decoration: InputDecoration(
@@ -28,13 +30,13 @@ textfield (context, txt) {
   );
 }
 
-materialButton(context, onpressed, txt,c) {
+materialButton(context, onpressed, txt,c,h) {
   return MaterialButton(
     onPressed: onpressed,
     enableFeedback: true,
     shape:  RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(30))),
-    height: 50.0,
+    height: h,
     minWidth: MediaQuery.of(context).size.width *0.92,
     elevation: 0.5,
     color: c,
@@ -43,6 +45,10 @@ materialButton(context, onpressed, txt,c) {
       style: FontConstant.materialbuttonText,
     ),
   );
+}
+
+Center mainlogo() {
+  return Center(child: SizedBox(width:174,height:173,child: Image.asset('assets/images/logo.png')));
 }
 
 // FontConstant.normaltext.copyWith(

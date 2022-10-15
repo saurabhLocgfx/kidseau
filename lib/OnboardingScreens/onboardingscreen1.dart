@@ -126,7 +126,7 @@ class Onboarding1Screen extends StatelessWidget {
                                         child: MaterialButton(
                                           minWidth: 25,
                                           onPressed: _controller.forwardAction,
-                                            child: Icon(_controller.isLastPage ? Icons.arrow_forward_outlined:Icons.arrow_forward_outlined),),
+                                            child: Icon(_controller.isLastPage ? Icons.arrow_forward_outlined:Icons.arrow_forward_outlined,color: Colors.white,),),
                                       ),
                                       
                                     ],)),
