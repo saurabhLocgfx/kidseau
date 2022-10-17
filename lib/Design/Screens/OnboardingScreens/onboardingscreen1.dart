@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:kidseau/OnboardingScreens/onboardingscreencontroller.dart';
+import 'package:kidseau/Design/Screens/OnboardingScreens/onboardingscreencontroller.dart';
 import 'package:kidseau/Theme.dart';
-import 'package:kidseau/widgets.dart';
+
 
 
 class Onboarding1Screen extends StatelessWidget {
@@ -18,14 +18,14 @@ class Onboarding1Screen extends StatelessWidget {
           children: [
             // Image.asset("images/Artboard 1 1.png"),
             Container(
-              height: Get.size.height *0.30,
+              height: 229,
               width: Get.size.width,
               decoration: BoxDecoration(
                 color: Colors.transparent,),
               child: Image.asset("assets/images/Artboard 1 1.png",fit: BoxFit.cover,),
             ),
             Container(
-              height: Get.size.height *0.70,
+              height: Get.size.height *6.07,
               width: Get.size.width,
               decoration: BoxDecoration(
                 color: Colors.white,
@@ -60,7 +60,7 @@ class Onboarding1Screen extends StatelessWidget {
                                             children: [
                                               Text(
                                                 _controller.onboardingPages[index].title,
-                                                style: FontConstant.headingText,
+                                                style: FontConstant.k32w500blackText,
                                               ),
                                                Padding(
                                                  padding: const EdgeInsets.only(top: 0.0),
@@ -73,7 +73,7 @@ class Onboarding1Screen extends StatelessWidget {
                                                          Text(
                                                           _controller.onboardingPages[index].description,
                                                           textAlign: TextAlign.center,
-                                                          style: FontConstant.lightText,
+                                                          style: FontConstant.k14w400lightText,
                                               ),
                                                        ],
                                                      ),
@@ -90,60 +90,65 @@ class Onboarding1Screen extends StatelessWidget {
                                 ),
                               );
                             }),
-                        Positioned(
-                          bottom: 20,
-                          left: 20,
-                          child: Row(
-                            children: List.generate(
-                              _controller.onboardingPages.length,
-                                  (index) => Obx(() {
-                                return Container(
-                                  margin: const EdgeInsets.all(4),
-                                  width: 16,
-                                  height: 12,
-                                  decoration: BoxDecoration(
-                                    color: _controller.selectedPageIndex.value == index
-                                        ? Color(0xfff0ad56)
-                                        : Color(0xfffbebd6),
-                                    borderRadius: BorderRadius.circular(10)
-                                    
+                        Padding(
+                          padding: const EdgeInsets.only(top: 400.0),
+                          child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(left: 15.0),
+                                child: Row(
+                                  children: List.generate(
+                                    _controller.onboardingPages.length,
+                                        (index) => Obx(() {
+                                      return Container(
+                                        margin: const EdgeInsets.all(4),
+                                        width: 16,
+                                        height: 12,
+                                        decoration: BoxDecoration(
+                                          color: _controller.selectedPageIndex.value == index
+                                              ? Color(0xfff0ad56)
+                                              : Color(0xfffbebd6),
+                                          borderRadius: BorderRadius.circular(10)
+
+                                        ),
+                                      );
+                                    }),
                                   ),
-                                );
-                              }),
-                            ),
+                                ),
+                              ),
+                              Stack(
+                                children: [
+                                  Positioned(
+                                      child: Stack(
+                                        children: [
+                                          Image.asset("assets/images/Vector (1) - Copy.png"),
+                                          Padding(
+                                            padding: const EdgeInsets.only(top: 85.0,left: 28),
+                                            child: MaterialButton(
+                                              minWidth: 25,
+                                              onPressed: _controller.forwardAction,
+                                              child: Icon(_controller.isLastPage ? Icons.arrow_forward_outlined:Icons.arrow_forward_outlined,color: Colors.white,),),
+                                          ),
+
+                                        ],)),
+
+                                  // Positioned(
+                                  //   right: 20,
+                                  //   bottom: 20,
+                                  //   child: FloatingActionButton(
+                                  //     elevation: 0,
+                                  //     onPressed: _controller.forwardAction,
+                                  //     child: Obx(() {
+                                  //       return Text(_controller.isLastPage ? 'Start' : 'Next');
+                                  //     }),
+                                  //   ),
+                                  // ),
+                                ],
+                              ),
+                            ],
                           ),
                         ),
-                        Stack(
-                          children: [
-                            Positioned(
-                              right:0,
-                                bottom: 0,
-                                child: Stack(
-                                    children: [
-                                      Image.asset("assets/images/Vector (1) - Copy.png"),
-                                      Padding(
-                                        padding: const EdgeInsets.only(top: 85.0,left: 28),
-                                        child: MaterialButton(
-                                          minWidth: 25,
-                                          onPressed: _controller.forwardAction,
-                                            child: Icon(_controller.isLastPage ? Icons.arrow_forward_outlined:Icons.arrow_forward_outlined,color: Colors.white,),),
-                                      ),
-                                      
-                                    ],)),
 
-                            // Positioned(
-                            //   right: 20,
-                            //   bottom: 20,
-                            //   child: FloatingActionButton(
-                            //     elevation: 0,
-                            //     onPressed: _controller.forwardAction,
-                            //     child: Obx(() {
-                            //       return Text(_controller.isLastPage ? 'Start' : 'Next');
-                            //     }),
-                            //   ),
-                            // ),
-                          ],
-                        ),
                       ],
                     ),
                   ),

@@ -1,6 +1,6 @@
 
 import 'package:get/get.dart';
-import 'package:kidseau/StartScreen/startscreen.dart';
+import 'package:kidseau/Design/Screens/StartScreen/startscreen.dart';
 
 
 class SplashController extends GetxController {

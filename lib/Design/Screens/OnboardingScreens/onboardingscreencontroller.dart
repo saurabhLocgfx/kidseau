@@ -3,8 +3,9 @@ import 'package:get/get.dart';
 
 import 'package:get/state_manager.dart';
 import 'package:get/utils.dart';
-import 'package:kidseau/LoginSreen/loginscreen.dart';
-import 'package:kidseau/OnboardingScreens/onboardinginfo.dart';
+import 'package:kidseau/Design/Screens/LoginSreen/loginscreen.dart';
+import 'package:kidseau/Design/Screens/OnboardingScreens/onboardinginfo.dart';
+
 
 class OnboardingController extends GetxController {
   var selectedPageIndex = 0.obs;

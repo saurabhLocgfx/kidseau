@@ -24,22 +24,24 @@ class FontConstant {
     );
 
   }
-  static TextStyle simplewhiteText = GoogleFonts.balooDa2(
+  static TextStyle k18w500whiteText = GoogleFonts.balooDa2(
       fontWeight: FontWeight.w500, fontSize: 18, color: Colors.white);
-  static TextStyle headingText = GoogleFonts.balooDa2(
+  static TextStyle k32w500blackText = GoogleFonts.balooDa2(
       fontWeight: FontWeight.w500, fontSize: 32, color: Colors.black);
-  static TextStyle lightText = GoogleFonts.balooDa2(
+  static TextStyle k14w400lightText = GoogleFonts.balooDa2(
       fontWeight: FontWeight.w400, fontSize: 14, color: Color(0xffbeb1b9));
-  static TextStyle smallboldText = GoogleFonts.balooDa2(
+  static TextStyle k16blackboldText = GoogleFonts.balooDa2(
       fontWeight: FontWeight.normal, fontSize: 16, color: Colors.black);
-  static TextStyle smallnormalText = GoogleFonts.balooDa2(
+  static TextStyle k13w400blackText = GoogleFonts.balooDa2(
       fontWeight: FontWeight.w400, fontSize: 13, color: Colors.black);
-  static TextStyle smallpurpleText = GoogleFonts.balooDa2(
+  static TextStyle k16w500purpleText = GoogleFonts.balooDa2(
       fontWeight: FontWeight.w500, fontSize: 16, color: Color(0xff8267AC),);
-  static TextStyle smalllightpurpleText = GoogleFonts.balooDa2(
-    fontWeight: FontWeight.w500, fontSize: 16, color: Color(0xff8267AC),);
-  static TextStyle materialbuttonText = GoogleFonts.balooDa2(
+  static TextStyle k14w400lightpurpleText = GoogleFonts.balooDa2(
+    fontWeight: FontWeight.w400, fontSize: 14, color: Color(0xffB7A4B2),);
+  static TextStyle k18w500materialbuttonText = GoogleFonts.balooDa2(
       fontWeight: FontWeight.w500, fontSize: 18, color: Colors.white);
+  static TextStyle k16w500brownText = GoogleFonts.balooDa2(
+    fontWeight: FontWeight.w500, fontSize: 16, color: Color(0xff331F2D));
 
 }
 

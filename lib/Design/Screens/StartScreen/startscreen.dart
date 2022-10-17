@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:kidseau/OnboardingScreens/onboardingscreen1.dart';
+import 'package:kidseau/Design/Screens/OnboardingScreens/onboardingscreen1.dart';
 import 'package:kidseau/Theme.dart';
-import 'package:kidseau/widgets.dart';
+import 'package:kidseau/Widgets/buttons.dart';
+import 'package:kidseau/Widgets/widgets.dart';
+
 
 
 class StartScreen extends StatelessWidget {
@@ -17,26 +19,26 @@ class StartScreen extends StatelessWidget {
           children: [
             // Image.asset("images/Artboard 1 1.png"),
             Container(
-              height: Get.size.height *0.30,
+              height: 229,
               width: Get.size.width,
               decoration: BoxDecoration(
                 color: Colors.transparent,),
               child: Image.asset("assets/images/Artboard 1 1.png",fit: BoxFit.cover,),
             ),
             Container(
-              height: Get.size.height *0.70,
+              height: Get.size.height * 6.07,
               width: Get.size.width,
               decoration: BoxDecoration(
                 color: Colors.white,
                   borderRadius: new BorderRadius.only(
-                    topLeft: const Radius.circular(40.0),
-                    topRight: const Radius.circular(40.0),
+                    topLeft: const Radius.circular(24.0),
+                    topRight: const Radius.circular(24.0),
                   ),
               ),
               child: Column(
                 children: [
-                  SizedBox(height: Get.size.height * 0.10,),
-                  Image.asset("assets/images/logo.png",height: 130,width: 120,),
+                  SizedBox(height: 59,),
+                  mainlogo(),
                   SizedBox(height: Get.size.height * 0.05,),
                   materialButton(context, () {}, "i'm a Teacher", ThemeColor.primaryorange,56.0),
                   SizedBox(height: Get.size.height * 0.02,),

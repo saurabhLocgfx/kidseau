@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:kidseau/Theme.dart';
-import 'package:kidseau/VoucherScreen/voucherscreen.dart';
-import 'package:kidseau/widgets.dart';
+import 'package:kidseau/Widgets/buttons.dart';
+import 'package:kidseau/Widgets/widgets.dart';
 
 
 class VoucherScreen extends StatelessWidget {
@@ -37,28 +37,28 @@ class VoucherScreen extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(top: 15.0),
                         child: Text("We have sent you a verification main on",
-                            style: FontConstant.smalllightpurpleText.copyWith
+                            style: FontConstant.k14w400lightpurpleText.copyWith
                               (fontSize: 16,fontWeight: FontWeight.w400)),
                       ),
                       Row(
                         children: [
                           Text("xyz@gmail.com.",
-                              style: FontConstant.smalllightpurpleText.copyWith
+                              style: FontConstant.k14w400lightpurpleText.copyWith
                                 (fontSize: 16,fontWeight: FontWeight.w500)),
                           Text("Please verify before 48 hours",
-                              style: FontConstant.smalllightpurpleText.copyWith
+                              style: FontConstant.k14w400lightpurpleText.copyWith
                                 (fontSize: 16,fontWeight: FontWeight.w400)),
                         ],
                       ),
                       Padding(
                         padding: const EdgeInsets.only(top: 22.0),
-                        child: Text("Voucher's code",style: FontConstant.smallboldText,),
+                        child: Text("Voucher's code",style: FontConstant.k16blackboldText,),
                       ),
                       Padding(padding: EdgeInsets.only(top: 15)),
                       textfield(context, "Enter your Voucher's code"),
                       Padding(
                         padding: const EdgeInsets.only(top: 8.0,left:14),
-                        child: Text("Voucher's are given by kid's school",style: FontConstant.smallpurpleText.copyWith(
+                        child: Text("Voucher's are given by kid's school",style: FontConstant.k16w500purpleText.copyWith(
                           fontWeight: FontWeight.w400,color: Color(0xffB7A4B2),
                         )),
                       ),
