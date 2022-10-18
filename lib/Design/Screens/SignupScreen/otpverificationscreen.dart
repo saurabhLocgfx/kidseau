@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
-import 'package:kidseau/Design/Screens/SignupScreen/otpverificationscreen.dart';
+import 'package:kidseau/Design/Screens/SignupScreen/verificationcode.dart';
 import 'package:kidseau/Theme.dart';
 import 'package:kidseau/Widgets/buttons.dart';
 import 'package:kidseau/Widgets/textfields.dart';
 
-class SignupScreen extends StatelessWidget {
-  const SignupScreen({Key? key}) : super(key: key);
+class OtpScreen extends StatelessWidget {
+  const OtpScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -54,18 +54,65 @@ class SignupScreen extends StatelessWidget {
                   children: [
                     Padding(
                       padding: const EdgeInsets.only(top: 10.0),
-                      child:
-                          Text("Account", style: FontConstant.k24w500brownText),
+                      child: Text("OTP verification",
+                          style: FontConstant.k24w500brownText),
                     ),
                     Text(
-                      "Login/create a new account to track your kids’ activities.",
+                      "A OTP has been sent to “9876543210”. Please enter the OTP here.",
                       style: FontConstant.k16w400B7A4Text,
-                      textAlign: TextAlign.center,
+                      textAlign: TextAlign.start,
                     ),
                     SizedBox(height: 24),
-                    Text("Email/Phone number",
-                        style: FontConstant.k16w500331FText),
-                    textfield(context, "Enter Password"),
+                    Center(
+                      child: Container(
+                        height: 50,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            SizedBox(
+                              height: 19,
+                              width: 60,
+                              child: Otpfield(
+                                onTap: () {},
+                                title: "",
+                                underlinecolor1: ThemeColor.primarycolor,
+                                underlinecolor2: ThemeColor.primarycolor,
+                              ),
+                            ),
+                            SizedBox(
+                              height: 19,
+                              width: 60,
+                              child: Otpfield(
+                                onTap: () {},
+                                title: "",
+                                underlinecolor1: ThemeColor.primarycolor,
+                                underlinecolor2: ThemeColor.primarycolor,
+                              ),
+                            ),
+                            SizedBox(
+                              height: 19,
+                              width: 60,
+                              child: Otpfield(
+                                onTap: () {},
+                                title: "",
+                                underlinecolor1: ThemeColor.primarycolor,
+                                underlinecolor2: ThemeColor.primarycolor,
+                              ),
+                            ),
+                            SizedBox(
+                              height: 19,
+                              width: 60,
+                              child: Otpfield(
+                                onTap: () {},
+                                title: "",
+                                underlinecolor1: ThemeColor.primarycolor,
+                                underlinecolor2: ThemeColor.primarycolor,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
                     SizedBox(height: 32),
                     SizedBox(
                       height: 52,
@@ -73,9 +120,10 @@ class SignupScreen extends StatelessWidget {
                       child: MainButton(
                           onTap: () {
                             Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => OtpScreen()));
+                                builder: (context) =>
+                                    VerificationcodeScreen()));
                           },
-                          title: "Login with OTP",
+                          title: "Continue",
                           textStyleColor: Colors.white,
                           backgroundColor: ThemeColor.primarycolor),
                     ),
