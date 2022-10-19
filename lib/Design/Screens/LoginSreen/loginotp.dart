@@ -3,8 +3,8 @@ import 'package:kidseau/Theme.dart';
 import 'package:kidseau/Widgets/buttons.dart';
 import 'package:kidseau/Widgets/textfields.dart';
 
-class SignupOtp extends StatelessWidget {
-  const SignupOtp({Key? key}) : super(key: key);
+class LoginOtp extends StatelessWidget {
+  const LoginOtp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -126,7 +126,7 @@ class SignupOtp extends StatelessWidget {
                       child: MainButton(
                           onTap: () {
                             // Navigator.of(context).push(MaterialPageRoute(
-                            //     builder: (context) => OtpScreen()));
+                            // builder: (context) => OtpScreen()));
                           },
                           title: "Continue",
                           textStyleColor: Colors.white,

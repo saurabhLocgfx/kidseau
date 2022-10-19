@@ -4,10 +4,8 @@ import 'package:get/get.dart';
 import 'package:kidseau/Design/Screens/HomeScreen/homebody/activity.dart';
 import 'package:kidseau/Design/Screens/HomeScreen/homebody/tutorials.dart';
 import 'package:kidseau/Design/Screens/HomeScreen/homesubpages/Kidsection/addkid.dart';
-import 'package:kidseau/Design/Screens/Messages/messages.dart';
 import 'package:kidseau/Design/Screens/Posts/posts.dart';
 import 'package:kidseau/Theme.dart';
-import 'package:kidseau/Widgets/widgets.dart';
 
 class HomeScreen extends StatefulWidget {
   HomeScreen({Key? key}) : super(key: key);
@@ -17,12 +15,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final List screens = [
-    HomeScreen(),
-    Messages(),
-  ];
-
-  int _currentTab = 0;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -32,24 +24,6 @@ class _HomeScreenState extends State<HomeScreen> {
         color: Color.fromRGBO(190, 116, 170, 0.08),
       ),
       child: Scaffold(
-        bottomNavigationBar: CustomBottomAppbar(
-          unSelectedColor: Colors.grey.shade400,
-          selectedColor: ThemeColor.primarycolor,
-          onTap: (index) {
-            setState(() {});
-          },
-          selectedTab: _currentTab,
-          children: const [
-            CustomBottomAppBarItem(
-              text: "Home",
-              image: 'assets/images/Homeicon.png',
-            ),
-            CustomBottomAppBarItem(
-              text: "Home",
-              image: 'assets/images/Profileicon.png',
-            ),
-          ],
-        ),
         appBar: AppBar(
           toolbarHeight: 45.0,
           backgroundColor: Color(0x2a8267ac),
