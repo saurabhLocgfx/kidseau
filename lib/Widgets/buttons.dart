@@ -35,6 +35,53 @@ class MainButton extends StatelessWidget {
   }
 }
 
+class SmallButton extends StatelessWidget {
+  // final MaterialStateProperty<Color> backgroundColor;
+  final Color textStyleColor;
+  final Color borderColor;
+  final Color backgroundColor;
+  final Function onTap;
+  final String title;
+  final String image;
+  const SmallButton({
+    Key? key,
+    // required this.backgroundColor,
+    required this.onTap,
+    required this.title,
+    required this.textStyleColor,
+    required this.borderColor,
+    required this.backgroundColor,
+    required this.image,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialButton(
+      color: backgroundColor,
+      shape: RoundedRectangleBorder(
+          side: BorderSide(color: borderColor, width: 1),
+          borderRadius: BorderRadius.all(Radius.circular(30))),
+      onPressed: () {
+        onTap();
+      },
+      child: Center(
+        child: Row(
+          children: [
+            Image.asset(
+              image,
+              height: 24,
+            ),
+            Text(
+              title,
+              style: FontConstant.k18w500materialbuttonText,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
 materialButton(context, onpressed, txt, c, h) {
   return MaterialButton(
     onPressed: onpressed,

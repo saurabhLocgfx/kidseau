@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:kidseau/Design/Screens/Messages/messages.dart';
 import 'package:kidseau/Design/Screens/Notifications/notificationbody.dart';
 import 'package:kidseau/Theme.dart';
+import 'package:kidseau/Widgets/widgets.dart';
 
 class NotificationScreen extends StatefulWidget {
   const NotificationScreen({Key? key}) : super(key: key);
@@ -63,21 +64,66 @@ class _NotificationScreenState extends State<NotificationScreen> {
                   MaterialPageRoute(builder: (context) => MessageScreen()));
             },
             child: Text("Notifications",
-                style: FontConstant.k32w5008267Text.copyWith(fontSize: 25)),
+                style: FontConstant2.k32w5008267text.copyWith(fontSize: 25)),
           ),
           actions: [
-            Padding(
-              padding: const EdgeInsets.only(right: 16.0),
-              child: Row(
-                children: [
-                  Image.asset(
+            PopupMenuButton(
+                padding: EdgeInsets.all(60),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16)),
+                iconSize: 48,
+                icon: ImageIcon(
+                  AssetImage(
                     "assets/images/dots.png",
-                    height: 48,
-                    width: 48,
                   ),
-                ],
-              ),
-            ),
+                ),
+                itemBuilder: (context) {
+                  return [
+                    PopupMenuItem(
+                      enabled: false,
+                      child: Container(
+                        height: 160,
+                        width: 258,
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 32.0),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Row(
+                                children: [
+                                  Image.asset(
+                                    "assets/images/markicon.png",
+                                    height: 24,
+                                  ),
+                                  SizedBox(width: 24),
+                                  Text(
+                                    "Mark all as read",
+                                    style: FontConstant.k18w5008471Text,
+                                  )
+                                ],
+                              ),
+                              SizedBox(height: 26),
+                              Row(
+                                children: [
+                                  Image.asset(
+                                    "assets/images/gearicon.png",
+                                    height: 24,
+                                  ),
+                                  SizedBox(width: 24),
+                                  Text(
+                                    "Notification setting",
+                                    style: FontConstant.k18w5008471Text,
+                                  )
+                                ],
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ];
+                }),
           ],
         ),
         body: SingleChildScrollView(
@@ -159,9 +205,14 @@ class _NotificationScreenState extends State<NotificationScreen> {
                           ),
                           Row(
                             children: [
-                              Text(
-                                "Anouncement",
-                                style: FontConstant.k14w5008471Text,
+                              GestureDetector(
+                                onTap: () {
+                                  AnnouncementDialog(context);
+                                },
+                                child: Text(
+                                  "Anouncement",
+                                  style: FontConstant.k14w5008471Text,
+                                ),
                               ),
                               SizedBox(width: 08),
                               Center(
@@ -186,11 +237,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
               ),
             ),
             list1(),
-
-            // listview1(),
-            SizedBox(
-              height: 30,
-            ),
+            // listview1()
             Align(
               alignment: Alignment.center,
               child: Text(
@@ -198,7 +245,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                 style: FontConstant.k14w500B7A4Text,
               ),
             ),
-            SizedBox(height: 32),
+            SizedBox(height: 24),
             list2(),
             // listview2(),
           ],

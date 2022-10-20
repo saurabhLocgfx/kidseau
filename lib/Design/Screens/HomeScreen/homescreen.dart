@@ -21,7 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
       height: 1110,
       width: 414,
       decoration: BoxDecoration(
-        color: Color.fromRGBO(190, 116, 170, 0.08),
+        color: Color(0xff8267AC).withOpacity(.06),
       ),
       child: Scaffold(
         appBar: AppBar(

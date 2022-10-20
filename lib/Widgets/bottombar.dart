@@ -16,48 +16,51 @@ class BottomNavBar extends StatelessWidget {
           horizontal: 10,
         ),
         color: Colors.transparent,
-        child: Container(
-          width: double.infinity,
-          height: 70,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
-            color: Colors.white,
-            boxShadow: [
-              BoxShadow(
-                blurRadius: 20,
-                color: Colors.grey.shade300,
-              )
-            ],
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              BottomBarData(
-                  text: "Home",
-                  image: "assets/images/Homeicon.png",
-                  selected: true,
-                  onPressed: () {}),
-              BottomBarData(
-                  text: "Home",
-                  image: "assets/images/Homeicon.png",
-                  selected: true,
-                  onPressed: () {}),
-              BottomBarData(
-                  text: "Home",
-                  image: "assets/images/Homeicon.png",
-                  selected: true,
-                  onPressed: () {}),
-              BottomBarData(
-                  text: "Home",
-                  image: "assets/images/Homeicon.png",
-                  selected: true,
-                  onPressed: () {}),
-              BottomBarData(
-                  text: "Home",
-                  image: "assets/images/Homeicon.png",
-                  selected: true,
-                  onPressed: () {}),
-            ],
+        child: GestureDetector(
+          onTap: () {},
+          child: Container(
+            width: double.infinity,
+            height: 70,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20),
+              color: Colors.white,
+              boxShadow: [
+                BoxShadow(
+                  blurRadius: 20,
+                  color: Colors.grey.shade300,
+                )
+              ],
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                BottomBarData(
+                    text: "Home",
+                    image: "assets/images/profileicon.png",
+                    selected: true,
+                    onPressed: () {}),
+                BottomBarData(
+                    text: "Home",
+                    image: "assets/images/profileicon.png",
+                    selected: true,
+                    onPressed: () {}),
+                BottomBarData(
+                    text: "Home",
+                    image: "assets/images/profileicon.png",
+                    selected: true,
+                    onPressed: () {}),
+                BottomBarData(
+                    text: "Home",
+                    image: "assets/images/profileicon.png",
+                    selected: true,
+                    onPressed: () {}),
+                BottomBarData(
+                    text: "Home",
+                    image: "assets/images/profileicon.png",
+                    selected: true,
+                    onPressed: () {}),
+              ],
+            ),
           ),
         ),
       ),

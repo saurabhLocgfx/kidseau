@@ -1,101 +1,73 @@
 import 'package:flutter/material.dart';
 
-class BottomNavBarFb5 extends StatelessWidget {
-  const BottomNavBarFb5({Key? key}) : super(key: key);
+class HomePage2 extends StatefulWidget {
+  @override
+  HomePage2State createState() => HomePage2State();
+}
 
-  final primaryColor = const Color(0xff4338CA);
-  final secondaryColor = const Color(0xff6D28D9);
-  final accentColor = const Color(0xffffffff);
-  final backgroundColor = const Color(0xffffffff);
-  final errorColor = const Color(0xffEF4444);
-
+class HomePage2State extends State<HomePage2> {
+  int selectedIndex = 0;
+  List<IconData> data = [
+    Icons.home_outlined,
+    Icons.search,
+    Icons.add_box_outlined,
+    Icons.favorite_outline_sharp,
+    Icons.person_outline_sharp
+  ];
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: const BoxDecoration(
-        gradient:
-            LinearGradient(colors: [Color(0xff4338CA), Color(0xff6D28D9)]),
-      ),
-      child: BottomAppBar(
-        elevation: 0,
-        color: Colors.transparent,
-        child: SizedBox(
-          height: 56,
-          width: MediaQuery.of(context).size.width,
-          child: Padding(
-            padding: const EdgeInsets.only(left: 25.0, right: 25.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                IconBottomBar(
-                    text: "Home",
-                    icon: Icons.home,
-                    selected: true,
-                    onPressed: () {}),
-                IconBottomBar(
-                    text: "Search",
-                    icon: Icons.search_outlined,
-                    selected: false,
-                    onPressed: () {}),
-                IconBottomBar(
-                    text: "Add",
-                    icon: Icons.add_to_photos_outlined,
-                    selected: false,
-                    onPressed: () {}),
-                IconBottomBar(
-                    text: "Cart",
-                    icon: Icons.local_grocery_store_outlined,
-                    selected: false,
-                    onPressed: () {}),
-                IconBottomBar(
-                    text: "Calendar",
-                    icon: Icons.date_range_outlined,
-                    selected: false,
-                    onPressed: () {})
-              ],
+    return Scaffold(
+      backgroundColor: Colors.red,
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.all(20),
+        child: Material(
+          elevation: 10,
+          borderRadius: BorderRadius.circular(20),
+          color: Colors.black,
+          child: Container(
+            height: 70,
+            width: double.infinity,
+            child: ListView.builder(
+              itemCount: data.length,
+              padding: EdgeInsets.symmetric(horizontal: 10),
+              itemBuilder: (ctx, i) => Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 15),
+                child: GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      selectedIndex = i;
+                    });
+                  },
+                  child: AnimatedContainer(
+                    duration: Duration(milliseconds: 250),
+                    width: 35,
+                    decoration: BoxDecoration(
+                      border: i == selectedIndex
+                          ? Border(
+                              top: BorderSide(width: 3.0, color: Colors.white))
+                          : null,
+                      gradient: i == selectedIndex
+                          ? LinearGradient(
+                              colors: [Colors.grey.shade800, Colors.black],
+                              begin: Alignment.topCenter,
+                              end: Alignment.bottomCenter)
+                          : null,
+                    ),
+                    child: Icon(
+                      data[i],
+                      size: 35,
+                      color: i == selectedIndex
+                          ? Colors.white
+                          : Colors.grey.shade800,
+                    ),
+                  ),
+                ),
+              ),
+              scrollDirection: Axis.horizontal,
             ),
           ),
         ),
       ),
-    );
-  }
-}
-
-class IconBottomBar extends StatelessWidget {
-  const IconBottomBar(
-      {Key? key,
-      required this.text,
-      required this.icon,
-      required this.selected,
-      required this.onPressed})
-      : super(key: key);
-  final String text;
-  final IconData icon;
-  final bool selected;
-  final Function() onPressed;
-
-  final primaryColor = const Color(0xff4338CA);
-  final accentColor = const Color(0xffffffff);
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        IconButton(
-          onPressed: onPressed,
-          icon:
-              Icon(icon, size: 25, color: selected ? accentColor : Colors.grey),
-        ),
-        Text(
-          text,
-          style: TextStyle(
-              fontSize: 12,
-              height: .1,
-              color: selected ? accentColor : Colors.grey),
-        )
-      ],
     );
   }
 }

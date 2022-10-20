@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kidseau/Design/Screens/dashboard.dart';
 import 'package:kidseau/Theme.dart';
 import 'package:kidseau/Widgets/buttons.dart';
 import 'package:kidseau/Widgets/textfields.dart';
@@ -125,8 +126,8 @@ class LoginOtp extends StatelessWidget {
                       width: 382,
                       child: MainButton(
                           onTap: () {
-                            // Navigator.of(context).push(MaterialPageRoute(
-                            // builder: (context) => OtpScreen()));
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => Dashboard()));
                           },
                           title: "Continue",
                           textStyleColor: Colors.white,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kidseau/Theme.dart';
 
 Center mainlogo() {
   return Center(
@@ -118,3 +119,91 @@ Center mainlogo() {
 //     );
 //   }
 // }
+Future<Object?> AnnouncementDialog(BuildContext context) {
+  return showGeneralDialog(
+      context: context,
+      barrierDismissible: true,
+      barrierLabel: MaterialLocalizations.of(context).modalBarrierDismissLabel,
+      barrierColor: Colors.black45,
+      transitionDuration: const Duration(milliseconds: 200),
+      pageBuilder: (BuildContext buildContext, Animation animation,
+          Animation secondaryAnimation) {
+        return Center(
+          child: Material(
+            child: Container(
+              width: 382,
+              height: 290,
+              decoration: BoxDecoration(
+                  color: Colors.white, borderRadius: BorderRadius.circular(24)),
+              child: Padding(
+                padding: const EdgeInsets.only(left: 16, right: 16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "Bring notebook (Title)",
+                      style: FontConstant2.k24w500331Ftext,
+                    ),
+                    Text(
+                      "Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.",
+                      style: FontConstant.k16w4008471Text,
+                    ),
+                    SizedBox(height: 24),
+                    Row(
+                      children: [
+                        SizedBox(
+                          height: 52,
+                          width: 170,
+                          child: MaterialButton(
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            color: Colors.white,
+                            shape: RoundedRectangleBorder(
+                                side: BorderSide(
+                                    color: ThemeColor.lightpurple, width: 1),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(94))),
+                            child: Text(
+                              "Close",
+                              style: FontConstant.k16w5008267Text,
+                            ),
+                          ),
+                        ),
+                        SizedBox(width: 8),
+                        SizedBox(
+                          height: 52,
+                          width: 170,
+                          child: MaterialButton(
+                            onPressed: () {},
+                            color: ThemeColor.primarycolor,
+                            shape: RoundedRectangleBorder(
+                                side: BorderSide(
+                                    color: ThemeColor.lightpurple, width: 1),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(94))),
+                            child: Row(
+                              children: [
+                                Image.asset(
+                                  "assets/images/clockicon.png",
+                                  height: 24,
+                                ),
+                                SizedBox(width: 14),
+                                Text("Add reminder ",
+                                    style: FontConstant.k16w5008267Text
+                                        .copyWith(color: Colors.white)),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        );
+      });
+}

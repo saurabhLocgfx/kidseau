@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kidseau/Design/Screens/Notifications/notifications.dart';
 import 'package:kidseau/Theme.dart';
+import 'package:kidseau/Widgets/widgets.dart';
 
 class list2 extends StatelessWidget {
   const list2({
@@ -44,9 +45,14 @@ class list2 extends StatelessWidget {
                           ),
                           Row(
                             children: [
-                              Text(
-                                "Announcement",
-                                style: FontConstant.k14w5008471Text,
+                              GestureDetector(
+                                onTap: () {
+                                  AnnouncementDialog(context);
+                                },
+                                child: Text(
+                                  "Announcement",
+                                  style: FontConstant.k14w5008471Text,
+                                ),
                               ),
                               SizedBox(width: 08),
                               Center(
@@ -82,58 +88,66 @@ class list1 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-        physics: NeverScrollableScrollPhysics(),
-        shrinkWrap: true,
-        itemCount: images.length,
-        itemBuilder: (BuildContext context, int index) {
-          return Padding(
-            padding: const EdgeInsets.all(2.0),
-            child: Container(
-              height: 99,
-              width: 414,
-              color: Colors.white,
-              child: Padding(
-                padding: const EdgeInsets.only(left: 16.0),
-                child: Row(
-                  children: [
-                    Container(
-                      height: 67,
-                      width: 50,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(08),
-                          image: DecorationImage(
-                              image: AssetImage(images[index]))),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(top: 10.0, left: 12),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Mohammad Umar has added new post",
-                            style: FontConstant.k16w500331FText,
-                          ),
-                          Row(
-                            children: [
-                              Text(
-                                "Announcement",
-                                style: FontConstant.k14w5008471Text,
-                              ),
-                              Text(
-                                "2 hours ago.",
-                                style: FontConstant.k14w5008471Text,
-                              ),
-                            ],
-                          ),
-                        ],
+    return Container(
+      height: MediaQuery.of(context).size.height * 0.40,
+      child: ListView.builder(
+          physics: NeverScrollableScrollPhysics(),
+          shrinkWrap: true,
+          itemCount: images.length,
+          itemBuilder: (BuildContext context, int index) {
+            return Padding(
+              padding: const EdgeInsets.all(2.0),
+              child: Container(
+                height: 99,
+                width: 414,
+                color: Colors.white,
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 16.0),
+                  child: Row(
+                    children: [
+                      Container(
+                        height: 67,
+                        width: 50,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(08),
+                            image: DecorationImage(
+                                image: AssetImage(images[index]))),
                       ),
-                    )
-                  ],
+                      Padding(
+                        padding: EdgeInsets.only(top: 10.0, left: 12),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Mohammad Umar has added new post",
+                              style: FontConstant.k16w500331FText,
+                            ),
+                            Row(
+                              children: [
+                                GestureDetector(
+                                  onTap: () {
+                                    AnnouncementDialog(context);
+                                  },
+                                  child: Text(
+                                    "Announcement",
+                                    style: FontConstant.k14w5008471Text,
+                                  ),
+                                ),
+                                Text(
+                                  "2 hours ago.",
+                                  style: FontConstant.k14w5008471Text,
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
                 ),
               ),
-            ),
-          );
-        });
+            );
+          }),
+    );
   }
 }

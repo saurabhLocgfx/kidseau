@@ -31,10 +31,15 @@ class _LearningAplphabetsState extends State<LearningAplphabets> {
           backgroundColor: ThemeColor.lightpurple.withOpacity(0.16),
           title: Row(
             children: [
-              Image.asset(
-                "assets/images/arrow-left.png",
-                height: 24,
-                width: 24,
+              GestureDetector(
+                onTap: () {
+                  Navigator.pop(context);
+                },
+                child: Image.asset(
+                  "assets/images/arrow-left.png",
+                  height: 24,
+                  width: 24,
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.only(left: 17.93),

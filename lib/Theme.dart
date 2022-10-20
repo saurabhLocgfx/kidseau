@@ -8,6 +8,7 @@ class ThemeColor {
   static const Color primarycolor = Color(0xff8267AC);
   static const Color primaryorange = Color(0xffF0AD56);
   static const Color lightpurple = Color(0xff8267AC);
+  static const Color darkpurple = Color(0xff84717F);
 }
 
 // ------------------FONTS-------------------
@@ -27,6 +28,8 @@ class FontConstant {
 
   static TextStyle k18w500whiteText = GoogleFonts.balooDa2(
       fontWeight: FontWeight.w500, fontSize: 18, color: Colors.white);
+  static TextStyle k18w5008471Text = GoogleFonts.balooDa2(
+      fontWeight: FontWeight.w500, fontSize: 18, color: Color(0xff84717F));
   static TextStyle k32w500blackText = GoogleFonts.balooDa2(
       fontWeight: FontWeight.w500, fontSize: 32, color: Colors.black);
   static TextStyle k14w400lightText = GoogleFonts.balooDa2(
@@ -106,10 +109,14 @@ class FontConstant2 {
     );
   }
 
-  static TextStyle baloothampifont = GoogleFonts.balooDa2(
+  static TextStyle baloothampifont = GoogleFonts.balooThambi2(
       fontWeight: FontWeight.w500, fontSize: 24, color: Color(0xff84717F));
-  static TextStyle k24w5008267text = GoogleFonts.balooDa2(
+  static TextStyle k24w5008267text = GoogleFonts.balooThambi2(
       fontWeight: FontWeight.w500, fontSize: 24, color: Color(0xff8267AC));
-  static TextStyle k16w5008267text = GoogleFonts.balooDa2(
+  static TextStyle k32w5008267text = GoogleFonts.balooThambi2(
+      fontWeight: FontWeight.w500, fontSize: 32, color: Color(0xff8267AC));
+  static TextStyle k16w5008267text = GoogleFonts.balooThambi2(
       fontWeight: FontWeight.w500, fontSize: 16, color: Color(0xff331F2D));
+  static TextStyle k24w500331Ftext = GoogleFonts.balooThambi2(
+      fontWeight: FontWeight.w500, fontSize: 24, color: Color(0xff331F2D));
 }

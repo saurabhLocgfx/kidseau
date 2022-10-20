@@ -22,6 +22,15 @@ class _MessageScreenState extends State<MessageScreen> {
   final List screen = [MessageScreen()];
 
   int current = 0;
+
+  final controller = PageController(initialPage: 1);
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

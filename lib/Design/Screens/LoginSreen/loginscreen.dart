@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kidseau/Design/Screens/LoginSreen/loginotp.dart';
+import 'package:kidseau/Design/Screens/dashboard.dart';
 import 'package:kidseau/Theme.dart';
 import 'package:kidseau/Widgets/buttons.dart';
 import 'package:kidseau/Widgets/textfields.dart';
@@ -83,7 +83,7 @@ class LoginScreen extends StatelessWidget {
                       child: MainButton(
                           onTap: () {
                             Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => LoginOtp()));
+                                builder: (context) => Dashboard()));
                           },
                           title: "Login with OTP",
                           textStyleColor: Colors.white,
