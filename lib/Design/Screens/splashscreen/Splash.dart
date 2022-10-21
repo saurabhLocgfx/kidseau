@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kidseau/Design/Screens/StartScreen/startscreen.dart';
 import 'package:kidseau/Widgets/widgets.dart';
 
@@ -21,6 +22,14 @@ class _SplashState extends State<Splash> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(color: Colors.white, child: mainlogo());
+    return Container(
+      height: 1242.h,
+      width: 414.w,
+      decoration: BoxDecoration(
+          color: Colors.white,
+          image: DecorationImage(
+              image: AssetImage("assets/images/splashbackground.png"))),
+      child: mainlogo(),
+    );
   }
 }

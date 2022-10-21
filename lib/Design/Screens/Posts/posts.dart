@@ -36,22 +36,19 @@ class _PostsState extends State<Posts> {
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 16.0),
-            child: Padding(
-              padding: const EdgeInsets.only(top: 20.0),
-              child: Row(
-                children: [
-                  Image.asset(
-                    "assets/images/appbaricon1.png",
-                    height: 48,
-                    width: 48,
-                  ),
-                  Image.asset(
-                    "assets/images/appbarclock.png",
-                    height: 24,
-                    width: 24,
-                  ),
-                ],
-              ),
+            child: Row(
+              children: [
+                Image.asset(
+                  "assets/images/appbaricon1.png",
+                  height: 48,
+                  width: 48,
+                ),
+                Image.asset(
+                  "assets/images/appbarclock.png",
+                  height: 24,
+                  width: 24,
+                ),
+              ],
             ),
           ),
         ],
@@ -72,7 +69,7 @@ class _PostsState extends State<Posts> {
                 ),
                 image: DecorationImage(
                     image: AssetImage(
-                      "assets/images/backgroundaddschool.png",
+                      "assets/images/postsbackground.png",
                     ),
                     fit: BoxFit.cover),
               ),

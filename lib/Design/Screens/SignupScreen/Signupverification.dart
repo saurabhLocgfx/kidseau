@@ -4,8 +4,8 @@ import 'package:kidseau/Widgets/buttons.dart';
 import 'package:kidseau/Widgets/textfields.dart';
 import 'package:kidseau/Widgets/widgets.dart';
 
-class VerificationcodeScreen extends StatelessWidget {
-  VerificationcodeScreen({Key? key}) : super(key: key);
+class Signupverification extends StatelessWidget {
+  Signupverification({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,31 +16,32 @@ class VerificationcodeScreen extends StatelessWidget {
         backgroundColor: Color(0xfff7f6fa),
         body: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.only(left: 8, right: 8),
+            padding: const EdgeInsets.only(left: 16, right: 16),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(height: 84),
-                mainlogo(),
-                SizedBox(height: 10),
+                SizedBox(height: 80),
+                Padding(
+                    padding: EdgeInsets.only(left: 120, right: 120),
+                    child: mainlogo()),
+                SizedBox(height: 08),
                 Text(
-                  "We have sent you a verification mail on “xyz@gmail.com”. Please verify before 48 hours.",
-                  style: FontConstant.k16w5008267Text,
+                  "We offers a new way to track your children and watch them grow.",
+                  style: FontConstant.k16w4008471Text,
+                  textAlign: TextAlign.center,
                 ),
-                SizedBox(height: 24),
+                SizedBox(height: 35),
                 Text(
                   "Voucher’s code",
                   style: FontConstant.k16w500331FText,
                   textAlign: TextAlign.start,
                 ),
                 SizedBox(
-                  height: 08,
-                ),
-                SizedBox(
                   height: 56,
                   width: 382,
                   child: textfield(context, "Enter your Voucher’s code"),
                 ),
+                SizedBox(height: 04),
                 Padding(
                   padding: const EdgeInsets.only(left: 14.0),
                   child: Text(
@@ -53,6 +54,7 @@ class VerificationcodeScreen extends StatelessWidget {
                   height: 214,
                   width: 382,
                   decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(12),
                       image: DecorationImage(
                           image: AssetImage(
                             "assets/images/laptopbackgroundplay.png",
@@ -77,9 +79,6 @@ class VerificationcodeScreen extends StatelessWidget {
                       textStyleColor: Colors.white,
                       backgroundColor: ThemeColor.primarycolor),
                 ),
-                SizedBox(
-                  height: 45,
-                )
               ],
             ),
           ),

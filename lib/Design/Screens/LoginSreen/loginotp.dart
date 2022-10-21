@@ -31,7 +31,7 @@ class LoginOtp extends StatelessWidget {
                       ],
                     ),
                     image: DecorationImage(
-                      image: AssetImage("assets/images/backgrounddesigns.png"),
+                      image: AssetImage("assets/images/postsbackground.png"),
                       fit: BoxFit.cover,
                     ),
                   ),

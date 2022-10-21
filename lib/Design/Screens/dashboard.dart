@@ -4,6 +4,7 @@ import 'package:kidseau/Design/Screens/Messages/messages.dart';
 import 'package:kidseau/Design/Screens/Notifications/notifications.dart';
 import 'package:kidseau/Design/Screens/Posts/posts.dart';
 import 'package:kidseau/Design/Screens/Profile/profile.dart';
+import 'package:kidseau/Theme.dart';
 
 // class Dashboard extends StatefulWidget {
 //   const Dashboard({Key? key}) : super(key: key);
@@ -161,7 +162,7 @@ class _DashboardState extends State<Dashboard> {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBody: true,
-      bottomNavigationBar: Bottombar(),
+      bottomNavigationBar: buildBottomNavigationBar(context),
       body: PageView(
         controller: _pageController,
         onPageChanged: (page) {
@@ -245,61 +246,61 @@ class _DashboardState extends State<Dashboard> {
     );
   }
 
-  // Container buildBottomNavigationBar(BuildContext context) {
-  //   return Container(
-  //     height: 64,
-  //     width: 382,
-  //     margin: EdgeInsets.all(20),
-  //     decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
-  //     child: BottomNavigationBar(
-  //       selectedItemColor: ThemeColor.primarycolor,
-  //       unselectedItemColor: ThemeColor.primarycolor,
-  //       currentIndex: currentIndex,
-  //       onTap: (value) {
-  //         currentIndex = value;
-  //         _pageController.animateToPage(
-  //           value,
-  //           duration: Duration(milliseconds: 200),
-  //           curve: Curves.linear,
-  //         );
-  //
-  //         setState(() {});
-  //       },
-  //       items: [
-  //         BottomNavigationBarItem(
-  //           icon: ImageIcon(
-  //             AssetImage(
-  //               "assets/images/iconhome.png",
-  //             ),
-  //           ),
-  //           label: "First",
-  //         ),
-  //         BottomNavigationBarItem(
-  //           icon: ImageIcon(
-  //             AssetImage("assets/images/profileicon.png"),
-  //           ),
-  //           label: "Second",
-  //         ),
-  //         BottomNavigationBarItem(
-  //           icon: ImageIcon(
-  //             AssetImage("assets/images/Postsicon.png"),
-  //           ),
-  //           label: "Third",
-  //         ),
-  //         BottomNavigationBarItem(
-  //           icon: ImageIcon(
-  //             AssetImage("assets/images/notificationicon.png"),
-  //           ),
-  //           label: "Third",
-  //         ),
-  //         BottomNavigationBarItem(
-  //           icon: ImageIcon(
-  //             AssetImage("assets/images/messageicon.png"),
-  //           ),
-  //           label: "Third",
-  //         ),
-  //       ],
-  //     ),
-  //   );
-  // }
+  Container buildBottomNavigationBar(BuildContext context) {
+    return Container(
+      height: 64,
+      width: 382,
+      margin: EdgeInsets.all(20),
+      decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
+      child: BottomNavigationBar(
+        selectedItemColor: ThemeColor.primarycolor,
+        unselectedItemColor: ThemeColor.primarycolor,
+        currentIndex: currentIndex,
+        onTap: (value) {
+          currentIndex = value;
+          _pageController.animateToPage(
+            value,
+            duration: Duration(milliseconds: 200),
+            curve: Curves.linear,
+          );
+
+          setState(() {});
+        },
+        items: [
+          BottomNavigationBarItem(
+            icon: ImageIcon(
+              AssetImage(
+                "assets/images/iconhome.png",
+              ),
+            ),
+            label: "First",
+          ),
+          BottomNavigationBarItem(
+            icon: ImageIcon(
+              AssetImage("assets/images/iconprofile2.png"),
+            ),
+            label: "Second",
+          ),
+          BottomNavigationBarItem(
+            icon: ImageIcon(
+              AssetImage("assets/images/Postsicon.png"),
+            ),
+            label: "Third",
+          ),
+          BottomNavigationBarItem(
+            icon: ImageIcon(
+              AssetImage("assets/images/notificationicon.png"),
+            ),
+            label: "Third",
+          ),
+          BottomNavigationBarItem(
+            icon: ImageIcon(
+              AssetImage("assets/images/messageicon.png"),
+            ),
+            label: "Third",
+          ),
+        ],
+      ),
+    );
+  }
 }

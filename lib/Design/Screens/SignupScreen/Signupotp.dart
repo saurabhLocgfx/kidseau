@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:kidseau/Design/Screens/SignupScreen/Signupotp.dart';
+import 'package:kidseau/Design/Screens/SignupScreen/Signupverification.dart';
 import 'package:kidseau/Theme.dart';
 import 'package:kidseau/Widgets/buttons.dart';
 import 'package:kidseau/Widgets/textfields.dart';
 
-class SignupScreen extends StatelessWidget {
-  const SignupScreen({Key? key}) : super(key: key);
+class SignupotpScreen extends StatelessWidget {
+  const SignupotpScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -63,19 +63,63 @@ class SignupScreen extends StatelessWidget {
                   children: [
                     Padding(
                       padding: const EdgeInsets.only(top: 1.0),
-                      child:
-                          Text("Account", style: FontConstant.k24w500brownText),
+                      child: Text("OTP verification",
+                          style: FontConstant.k24w500brownText),
                     ),
                     Text(
                       "A OTP has been sent to “9876543210”. Please enter the OTP here.",
                       style: FontConstant.k16w400B7A4Text,
                       textAlign: TextAlign.start,
                     ),
-                    SizedBox(height: 10),
-                    Text("Email/Phone number",
-                        style: FontConstant.k16w500331FText),
-                    SizedBox(height: 5),
-                    textfield(context, "Enter Password"),
+                    SizedBox(height: 43),
+                    Container(
+                      height: 50,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          SizedBox(
+                            height: 19,
+                            width: 60,
+                            child: Otpfield(
+                              onTap: () {},
+                              title: "",
+                              underlinecolor1: ThemeColor.primarycolor,
+                              underlinecolor2: ThemeColor.primarycolor,
+                            ),
+                          ),
+                          SizedBox(
+                            height: 19,
+                            width: 60,
+                            child: Otpfield(
+                              onTap: () {},
+                              title: "",
+                              underlinecolor1: ThemeColor.primarycolor,
+                              underlinecolor2: ThemeColor.primarycolor,
+                            ),
+                          ),
+                          SizedBox(
+                            height: 19,
+                            width: 60,
+                            child: Otpfield(
+                              onTap: () {},
+                              title: "",
+                              underlinecolor1: ThemeColor.primarycolor,
+                              underlinecolor2: ThemeColor.primarycolor,
+                            ),
+                          ),
+                          SizedBox(
+                            height: 19,
+                            width: 60,
+                            child: Otpfield(
+                              onTap: () {},
+                              title: "",
+                              underlinecolor1: ThemeColor.primarycolor,
+                              underlinecolor2: ThemeColor.primarycolor,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                     SizedBox(height: 32),
                     SizedBox(
                       height: 52,
@@ -83,9 +127,9 @@ class SignupScreen extends StatelessWidget {
                       child: MainButton(
                           onTap: () {
                             Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => SignupotpScreen()));
+                                builder: (context) => Signupverification()));
                           },
-                          title: "Signup with OTP",
+                          title: "Continue",
                           textStyleColor: Colors.white,
                           backgroundColor: ThemeColor.primarycolor),
                     ),

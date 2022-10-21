@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:kidseau/Design/Screens/dashboard.dart';
+import 'package:kidseau/Design/Screens/LoginSreen/loginotp.dart';
+import 'package:kidseau/Design/Screens/SignupScreen/signupscreen.dart';
 import 'package:kidseau/Theme.dart';
 import 'package:kidseau/Widgets/buttons.dart';
 import 'package:kidseau/Widgets/textfields.dart';
@@ -31,7 +32,7 @@ class LoginScreen extends StatelessWidget {
                       ],
                     ),
                     image: DecorationImage(
-                      image: AssetImage("assets/images/backgrounddesigns.png"),
+                      image: AssetImage("assets/images/postsbackground.png"),
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -66,10 +67,16 @@ class LoginScreen extends StatelessWidget {
                       child:
                           Text("Account", style: FontConstant.k24w500brownText),
                     ),
-                    Text(
-                      "A OTP has been sent to “9876543210”. Please enter the OTP here.",
-                      style: FontConstant.k16w400B7A4Text,
-                      textAlign: TextAlign.start,
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => SignupScreen()));
+                      },
+                      child: Text(
+                        "Login/create a new account to track your kids’ activities.",
+                        style: FontConstant.k16w400B7A4Text,
+                        textAlign: TextAlign.start,
+                      ),
                     ),
                     SizedBox(height: 10),
                     Text("Email/Phone number",
@@ -83,7 +90,7 @@ class LoginScreen extends StatelessWidget {
                       child: MainButton(
                           onTap: () {
                             Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => Dashboard()));
+                                builder: (context) => LoginOtp()));
                           },
                           title: "Login with OTP",
                           textStyleColor: Colors.white,
