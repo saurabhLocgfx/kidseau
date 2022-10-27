@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:kidseau/Design/Screens/Messages/messages.dart';
+import 'package:kidseau/Design/Screens/Messages/MessageScreen.dart';
 import 'package:kidseau/Design/Screens/Notifications/notificationbody.dart';
 import 'package:kidseau/Theme.dart';
 import 'package:kidseau/Widgets/widgets.dart';

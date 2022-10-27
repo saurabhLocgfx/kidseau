@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kidseau/Design/Screens/LoginSreen/loginotp.dart';
 import 'package:kidseau/Design/Screens/SignupScreen/signupscreen.dart';
 import 'package:kidseau/Theme.dart';
@@ -11,8 +12,8 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 896,
-      width: 414,
+      height: 896.h,
+      width: 414.w,
       child: Scaffold(
         backgroundColor: Color(0xfff7f6fa),
         body: SingleChildScrollView(
@@ -23,14 +24,6 @@ class LoginScreen extends StatelessWidget {
                   height: 414,
                   width: 414,
                   decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      colors: [
-                        Color(0xffD9D9D9).withOpacity(0.99),
-                        Color(0xffD9D9D9).withOpacity(0.0)
-                      ],
-                    ),
                     image: DecorationImage(
                       image: AssetImage("assets/images/postsbackground.png"),
                       fit: BoxFit.cover,

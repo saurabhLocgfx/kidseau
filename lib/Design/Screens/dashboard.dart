@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:kidseau/Design/Screens/HomeScreen/homescreen.dart';
-import 'package:kidseau/Design/Screens/Messages/messages.dart';
+import 'package:kidseau/Design/Screens/Messages/MessageScreen.dart';
 import 'package:kidseau/Design/Screens/Notifications/notifications.dart';
 import 'package:kidseau/Design/Screens/Posts/posts.dart';
 import 'package:kidseau/Design/Screens/Profile/profile.dart';
-import 'package:kidseau/Theme.dart';
 
 // class Dashboard extends StatefulWidget {
 //   const Dashboard({Key? key}) : super(key: key);
@@ -162,7 +161,7 @@ class _DashboardState extends State<Dashboard> {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBody: true,
-      bottomNavigationBar: buildBottomNavigationBar(context),
+      bottomNavigationBar: Bottombar(),
       body: PageView(
         controller: _pageController,
         onPageChanged: (page) {
@@ -188,7 +187,7 @@ class _DashboardState extends State<Dashboard> {
       padding: const EdgeInsets.all(20),
       child: Material(
         elevation: 10,
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(131),
         color: Colors.white,
         child: Container(
           height: 64,
@@ -204,39 +203,36 @@ class _DashboardState extends State<Dashboard> {
                       selectedIndex = i;
                     });
                   },
-                  child: GestureDetector(
-                    onTap: () {},
-                    child: Container(
-                      height: 62,
-                      width: 68,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Image.asset(
-                                imagedata[i],
-                                height: 24,
-                                width: 24,
+                  child: Container(
+                    height: 62,
+                    width: 68,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Image.asset(
+                              imagedata[i],
+                              height: 24,
+                              width: 24,
+                              color: i == selectedIndex
+                                  ? Color(0xffB7A4B2)
+                                  : Color(0xffB7A4B2),
+                            ),
+                            Text(
+                              txt[i],
+                              style: TextStyle(
+                                fontSize: 12,
+                                fontWeight: FontWeight.w400,
                                 color: i == selectedIndex
                                     ? Color(0xffB7A4B2)
                                     : Color(0xffB7A4B2),
                               ),
-                              Text(
-                                txt[i],
-                                style: TextStyle(
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w400,
-                                  color: i == selectedIndex
-                                      ? Color(0xffB7A4B2)
-                                      : Color(0xffB7A4B2),
-                                ),
-                              )
-                            ],
-                          ),
-                        ],
-                      ),
+                            )
+                          ],
+                        ),
+                      ],
                     ),
                   ),
                 );
@@ -246,61 +242,61 @@ class _DashboardState extends State<Dashboard> {
     );
   }
 
-  Container buildBottomNavigationBar(BuildContext context) {
-    return Container(
-      height: 64,
-      width: 382,
-      margin: EdgeInsets.all(20),
-      decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
-      child: BottomNavigationBar(
-        selectedItemColor: ThemeColor.primarycolor,
-        unselectedItemColor: ThemeColor.primarycolor,
-        currentIndex: currentIndex,
-        onTap: (value) {
-          currentIndex = value;
-          _pageController.animateToPage(
-            value,
-            duration: Duration(milliseconds: 200),
-            curve: Curves.linear,
-          );
-
-          setState(() {});
-        },
-        items: [
-          BottomNavigationBarItem(
-            icon: ImageIcon(
-              AssetImage(
-                "assets/images/iconhome.png",
-              ),
-            ),
-            label: "First",
-          ),
-          BottomNavigationBarItem(
-            icon: ImageIcon(
-              AssetImage("assets/images/iconprofile2.png"),
-            ),
-            label: "Second",
-          ),
-          BottomNavigationBarItem(
-            icon: ImageIcon(
-              AssetImage("assets/images/Postsicon.png"),
-            ),
-            label: "Third",
-          ),
-          BottomNavigationBarItem(
-            icon: ImageIcon(
-              AssetImage("assets/images/notificationicon.png"),
-            ),
-            label: "Third",
-          ),
-          BottomNavigationBarItem(
-            icon: ImageIcon(
-              AssetImage("assets/images/messageicon.png"),
-            ),
-            label: "Third",
-          ),
-        ],
-      ),
-    );
-  }
+  // Container buildBottomNavigationBar(BuildContext context) {
+  //   return Container(
+  //     height: 64,
+  //     width: 382,
+  //     margin: EdgeInsets.all(20),
+  //     decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
+  //     child: BottomNavigationBar(
+  //       selectedItemColor: ThemeColor.primarycolor,
+  //       unselectedItemColor: ThemeColor.primarycolor,
+  //       currentIndex: currentIndex,
+  //       onTap: (value) {
+  //         currentIndex = value;
+  //         _pageController.animateToPage(
+  //           value,
+  //           duration: Duration(milliseconds: 200),
+  //           curve: Curves.linear,
+  //         );
+  //
+  //         setState(() {});
+  //       },
+  //       items: [
+  //         BottomNavigationBarItem(
+  //           icon: ImageIcon(
+  //             AssetImage(
+  //               "assets/images/iconhome.png",
+  //             ),
+  //           ),
+  //           label: "First",
+  //         ),
+  //         BottomNavigationBarItem(
+  //           icon: ImageIcon(
+  //             AssetImage("assets/images/iconprofile2.png"),
+  //           ),
+  //           label: "Second",
+  //         ),
+  //         BottomNavigationBarItem(
+  //           icon: ImageIcon(
+  //             AssetImage("assets/images/Postsicon.png"),
+  //           ),
+  //           label: "Third",
+  //         ),
+  //         BottomNavigationBarItem(
+  //           icon: ImageIcon(
+  //             AssetImage("assets/images/notificationicon.png"),
+  //           ),
+  //           label: "Third",
+  //         ),
+  //         BottomNavigationBarItem(
+  //           icon: ImageIcon(
+  //             AssetImage("assets/images/messageicon.png"),
+  //           ),
+  //           label: "Third",
+  //         ),
+  //       ],
+  //     ),
+  //   );
+  // }
 }
