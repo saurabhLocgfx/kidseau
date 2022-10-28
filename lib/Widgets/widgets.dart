@@ -216,13 +216,13 @@ class Notificationpopup extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PopupMenuButton(
-        padding: EdgeInsets.all(60),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
         iconSize: 48,
         icon: ImageIcon(
           AssetImage(
-            "assets/images/dots.png",
+            "assets/images/dots2.png",
           ),
+          color: ThemeColor.primarycolor,
         ),
         itemBuilder: (context) {
           return [

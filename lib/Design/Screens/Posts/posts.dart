@@ -63,8 +63,8 @@ class _PostsState extends State<Posts> {
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                   colors: [
-                    Color(0xffD9D9D9),
-                    Color(0xffD9D9D9).withOpacity(0),
+                    Color(0xffD9D9D9).withOpacity(.100),
+                    Color(0xffD9D9D9).withOpacity(.0),
                   ],
                 ),
                 image: DecorationImage(

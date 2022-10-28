@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kidseau/Design/Screens/Messages/OpenMessages.dart';
 import 'package:kidseau/Theme.dart';
+import 'package:kidseau/Widgets/dialogs.dart';
 
 class Messages extends StatefulWidget {
   const Messages({Key? key}) : super(key: key);
@@ -108,10 +109,15 @@ class _MessagesState extends State<Messages> {
                             ),
                           ],
                         ),
-                        Image.asset(
-                          "assets/images/dots2.png",
-                          height: 48.h,
-                          width: 48.w,
+                        Container(
+                          child: Stack(children: [
+                            Image.asset(
+                              "assets/images/dots2.png",
+                              height: 48.h,
+                              width: 48.w,
+                            ),
+                            messageoptiondialog(),
+                          ]),
                         ),
                       ],
                     ),

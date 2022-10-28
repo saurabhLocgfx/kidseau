@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kidseau/Design/Screens/Messages/Messages.dart';
 import 'package:kidseau/Design/Screens/Messages/Teachers.dart';
+import 'package:kidseau/Design/Screens/ReminderScreens/ReminderScreen.dart';
 import 'package:kidseau/Theme.dart';
 
 class MessageScreen extends StatefulWidget {
@@ -79,10 +80,19 @@ class _MessageScreenState extends State<MessageScreen> {
                     height: 48,
                     width: 48,
                   ),
-                  Image.asset(
-                    "assets/images/appbarclock.png",
-                    height: 24,
-                    width: 24,
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => ReminderScreen(),
+                        ),
+                      );
+                    },
+                    child: Image.asset(
+                      "assets/images/appbarclock.png",
+                      height: 24,
+                      width: 24,
+                    ),
                   ),
                 ],
               ),

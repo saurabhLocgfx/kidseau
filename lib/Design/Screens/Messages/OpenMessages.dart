@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:grouped_list/grouped_list.dart';
+import 'package:kidseau/Design/Screens/Messages/OpenChats.dart';
 import 'package:kidseau/Theme.dart';
 import 'package:kidseau/Widgets/popups.dart';
 
@@ -90,36 +91,48 @@ class _OpenMessagesState extends State<OpenMessages> {
               SizedBox(
                 height: 140.h,
               ),
-              Row(
-                children: [
-                  Container(
-                    height: 112.h,
-                    width: 84.w,
-                    decoration: BoxDecoration(
-                        image: DecorationImage(
-                            image: AssetImage("assets/images/teacher1.png"))),
-                  ),
-                  SizedBox(
-                    width: 16.w,
-                  ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.center,
+              GestureDetector(
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => OpenChats(),
+                    ),
+                  );
+                },
+                child: Container(
+                  child: Row(
                     children: [
-                      Text("Mohammad Umar",
-                          style: FontConstant.k24w500brownText
-                              .copyWith(color: ThemeColor.primarycolor)),
-                      Text(
-                        "Class teacher",
-                        style: FontConstant.k16w400B7A4Text,
+                      Container(
+                        height: 112.h,
+                        width: 84.w,
+                        decoration: BoxDecoration(
+                            image: DecorationImage(
+                                image:
+                                    AssetImage("assets/images/teacher1.png"))),
                       ),
-                      Text(
-                        "English, French, Arabic",
-                        style: FontConstant.k16w4008471Text,
+                      SizedBox(
+                        width: 16.w,
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text("Mohammad Umar",
+                              style: FontConstant.k24w500brownText
+                                  .copyWith(color: ThemeColor.primarycolor)),
+                          Text(
+                            "Class teacher",
+                            style: FontConstant.k16w400B7A4Text,
+                          ),
+                          Text(
+                            "English, French, Arabic",
+                            style: FontConstant.k16w4008471Text,
+                          )
+                        ],
                       )
                     ],
-                  )
-                ],
+                  ),
+                ),
               ),
               Expanded(
                   child: GroupedListView<Messages, DateTime>(

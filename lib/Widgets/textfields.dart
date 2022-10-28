@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kidseau/Theme.dart';
 
 textfield(context, txt) {
   return Container(
-    height: 56,
-    width: 382,
+    height: 56.h,
+    width: 382.w,
     child: TextFormField(
       decoration: InputDecoration(
         contentPadding: EdgeInsets.all(14.0),
