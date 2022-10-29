@@ -3,7 +3,7 @@ import 'package:kidseau/Design/Screens/HomeScreen/homescreen.dart';
 import 'package:kidseau/Design/Screens/Messages/MessageScreen.dart';
 import 'package:kidseau/Design/Screens/Notifications/notifications.dart';
 import 'package:kidseau/Design/Screens/Posts/posts.dart';
-import 'package:kidseau/Design/Screens/Profile/profile.dart';
+import 'package:kidseau/Design/Screens/Profile/ProfileScreen.dart';
 
 // class Dashboard extends StatefulWidget {
 //   const Dashboard({Key? key}) : super(key: key);
@@ -173,7 +173,7 @@ class _DashboardState extends State<Dashboard> {
         },
         children: <Widget>[
           HomeScreen(),
-          Profile(),
+          ProfileScreen(),
           Posts(),
           NotificationScreen(),
           MessageScreen()

@@ -30,10 +30,16 @@ class FontConstant {
       fontWeight: FontWeight.w500, fontSize: 18, color: Colors.white);
   static TextStyle k18w5008471Text = GoogleFonts.balooDa2(
       fontWeight: FontWeight.w500, fontSize: 18, color: Color(0xff84717F));
+  static TextStyle k18w5008267Text = GoogleFonts.balooDa2(
+      fontWeight: FontWeight.w500, fontSize: 18, color: Color(0xff8267AC));
   static TextStyle k32w500blackText = GoogleFonts.balooDa2(
       fontWeight: FontWeight.w500, fontSize: 32, color: Colors.black);
+  static TextStyle k18w500331FText = GoogleFonts.balooDa2(
+      fontWeight: FontWeight.w500, fontSize: 18, color: Color(0xff331F2D));
   static TextStyle k14w400lightText = GoogleFonts.balooDa2(
       fontWeight: FontWeight.w400, fontSize: 14, color: Color(0xffbeb1b9));
+  static TextStyle k22w5008471Text = GoogleFonts.balooDa2(
+      fontWeight: FontWeight.w500, fontSize: 22, color: Color(0xff84717F));
   static TextStyle k16blackboldText = GoogleFonts.balooDa2(
       fontWeight: FontWeight.normal, fontSize: 16, color: Colors.black);
   static TextStyle k13w400blackText = GoogleFonts.balooDa2(
@@ -97,6 +103,8 @@ class FontConstant {
       fontWeight: FontWeight.w500, fontSize: 16, color: Color(0xff666666));
   static TextStyle k16w4008471Text = GoogleFonts.balooDa2(
       fontWeight: FontWeight.w400, fontSize: 16, color: Color(0xff84717F));
+  static TextStyle k16w400331FText = GoogleFonts.balooDa2(
+      fontWeight: FontWeight.w400, fontSize: 16, color: Color(0xff331F2D));
   static TextStyle k16w5008471Text = GoogleFonts.balooDa2(
       fontWeight: FontWeight.w500, fontSize: 16, color: Color(0xff84717F));
   static TextStyle k14w5008471Text = GoogleFonts.balooDa2(

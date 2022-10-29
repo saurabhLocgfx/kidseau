@@ -142,54 +142,7 @@ class _LearningAplphabetsState extends State<LearningAplphabets> {
                       style: FontConstant2.baloothampifont,
                     )),
                 SizedBox(height: 24),
-                Container(
-                  height: 128,
-                  width: 382,
-                  decoration: BoxDecoration(
-                      image: DecorationImage(
-                          image: AssetImage(
-                              "assets/images/Teacher card leaarning ap.png"))),
-                  child: Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Row(
-                      children: [
-                        Container(
-                          height: 96,
-                          width: 72,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(16),
-                            image: DecorationImage(
-                                image: AssetImage(
-                                    "assets/images/leaning alp person.png")),
-                          ),
-                        ),
-                        SizedBox(width: 12),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              "Mohammad Umar",
-                              style: FontConstant.k18w500whiteText,
-                            ),
-                            Text("Class teacher",
-                                style: FontConstant.k18w500whiteText.copyWith(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w400,
-                                  color: Colors.white.withOpacity(0.6),
-                                )),
-                            Text("Class teacher",
-                                style: FontConstant.k18w500whiteText.copyWith(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w400,
-                                  color: Colors.white.withOpacity(0.74),
-                                )),
-                          ],
-                        )
-                      ],
-                    ),
-                  ),
-                ),
+                TeacherCard(),
                 SizedBox(
                   height: 32,
                 ),
@@ -199,6 +152,63 @@ class _LearningAplphabetsState extends State<LearningAplphabets> {
               ],
             ),
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class TeacherCard extends StatelessWidget {
+  const TeacherCard({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 128,
+      width: 382,
+      decoration: BoxDecoration(
+          image: DecorationImage(
+              image:
+                  AssetImage("assets/images/Teacher card leaarning ap.png"))),
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Row(
+          children: [
+            Container(
+              height: 96,
+              width: 72,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(16),
+                image: DecorationImage(
+                    image: AssetImage("assets/images/leaning alp person.png")),
+              ),
+            ),
+            SizedBox(width: 12),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  "Mohammad Umar",
+                  style: FontConstant.k18w500whiteText,
+                ),
+                Text("Class teacher",
+                    style: FontConstant.k18w500whiteText.copyWith(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400,
+                      color: Colors.white.withOpacity(0.6),
+                    )),
+                Text("Class teacher",
+                    style: FontConstant.k18w500whiteText.copyWith(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w400,
+                      color: Colors.white.withOpacity(0.74),
+                    )),
+              ],
+            )
+          ],
         ),
       ),
     );

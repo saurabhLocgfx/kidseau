@@ -38,6 +38,7 @@ class _ActivityState extends State<Activity> {
       height: Get.size.height * 0.40,
       width: Get.size.width * 0.95,
       child: ListView.builder(
+          padding: EdgeInsets.zero,
           physics: NeverScrollableScrollPhysics(),
           itemCount: images.length,
           scrollDirection: Axis.vertical,

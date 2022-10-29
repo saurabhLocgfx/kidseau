@@ -151,7 +151,8 @@ class _NotificationScreenState extends State<NotificationScreen> {
                             children: [
                               GestureDetector(
                                 onTap: () {
-                                  AnnouncementDialog(context);
+                                  notificationdialog(context);
+                                  // AnnouncementDialog(context);
                                 },
                                 child: Text(
                                   "Anouncement",
