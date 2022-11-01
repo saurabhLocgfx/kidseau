@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:kidseau/Design/Screens/HomeScreen/homebody/activity.dart';
 import 'package:kidseau/Design/Screens/HomeScreen/homebody/tutorials.dart';
 import 'package:kidseau/Design/Screens/HomeScreen/homesubpages/Kidsection/addkid.dart';
+import 'package:kidseau/Design/Screens/HomeScreen/homesubpages/Kidsection/kidshomeprofile.dart';
 import 'package:kidseau/Design/Screens/Posts/posts.dart';
 import 'package:kidseau/Theme.dart';
 
@@ -51,7 +52,15 @@ class _HomeScreenState extends State<HomeScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Studentcard(),
+                      GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => KidsHomeProfile()),
+                            );
+                          },
+                          child: Studentcard()),
                       GestureDetector(
                         onTap: () {
                           Get.to(() => Addkid());

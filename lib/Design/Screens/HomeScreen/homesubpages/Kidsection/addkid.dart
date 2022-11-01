@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:kidseau/Design/Screens/HomeScreen/homesubpages/Kidsection/kidsinformation.dart';
 import 'package:kidseau/Theme.dart';
@@ -21,34 +22,30 @@ class _AddkidState extends State<Addkid> {
         color: Color.fromRGBO(190, 116, 170, 0.08),
       ),
       child: Scaffold(
-        appBar: PreferredSize(
-          preferredSize: Size.fromHeight(70.0), // here the desired height
-          child: Column(
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          elevation: 0,
+          systemOverlayStyle: SystemUiOverlayStyle(
+            statusBarColor: Color(0xff8267AC).withOpacity(0.16),
+          ),
+          backgroundColor: Color(0xff8267AC).withOpacity(0.16),
+          title: Text(
+            "Add Kid",
+            style: FontConstant.k18w5008471Text,
+          ),
+          leading: Row(
             children: [
-              AppBar(
-                backgroundColor: Color(0x2a8267ac),
-                automaticallyImplyLeading: false,
-                elevation: 0,
-                title: Row(
-                  children: [
-                    GestureDetector(
-                        onTap: () {
-                          Get.back();
-                        },
-                        child: Image.asset(
-                          "assets/images/arrow-left.png",
-                          height: 24,
-                          width: 24,
-                        )),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 17.93),
-                      child: Text("Good Morning",
-                          style: FontConstant.k14w400lightpurpleText.copyWith(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w400,
-                              color: Color(0xff84717F))),
-                    ),
-                  ],
+              Padding(
+                padding: const EdgeInsets.only(left: 16.0),
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                  child: Image.asset(
+                    "assets/images/backarrow.png",
+                    height: 24,
+                    width: 24,
+                  ),
                 ),
               ),
             ],

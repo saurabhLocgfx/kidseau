@@ -47,7 +47,7 @@ class list2 extends StatelessWidget {
                             children: [
                               GestureDetector(
                                 onTap: () {
-                                  AnnouncementDialog(context);
+                                  notificationdialog(context);
                                 },
                                 child: Text(
                                   "Announcement",
@@ -126,13 +126,22 @@ class list1 extends StatelessWidget {
                               children: [
                                 GestureDetector(
                                   onTap: () {
-                                    AnnouncementDialog(context);
+                                    notificationdialog(context);
                                   },
                                   child: Text(
                                     "Announcement",
                                     style: FontConstant.k14w5008471Text,
                                   ),
                                 ),
+                                SizedBox(width: 08),
+                                Center(
+                                  child: Icon(
+                                    Icons.circle,
+                                    size: 3,
+                                    color: Color(0xffB7A4B2),
+                                  ),
+                                ),
+                                SizedBox(width: 06),
                                 Text(
                                   "2 hours ago.",
                                   style: FontConstant.k14w5008471Text,

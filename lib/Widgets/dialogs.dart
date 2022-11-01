@@ -65,3 +65,82 @@ class messageoptiondialog extends StatelessWidget {
         });
   }
 }
+
+class kidsgallerydialog extends StatelessWidget {
+  const kidsgallerydialog({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return PopupMenuButton(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+        iconSize: 10,
+        icon: ImageIcon(
+          AssetImage(
+            "assets/images/dots2.png",
+          ),
+        ),
+        itemBuilder: (context) {
+          return [
+            PopupMenuItem(
+              enabled: false,
+              child: Container(
+                height: 200,
+                width: 135,
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 10.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Row(
+                        children: [
+                          Image.asset(
+                            "assets/images/eyelogo.png",
+                            height: 20,
+                          ),
+                          SizedBox(width: 20),
+                          Text(
+                            "Hide",
+                            style: FontConstant.k18w5008471Text,
+                          )
+                        ],
+                      ),
+                      SizedBox(height: 20),
+                      Row(
+                        children: [
+                          Image.asset(
+                            "assets/images/reportlogo.png",
+                            height: 24,
+                          ),
+                          SizedBox(width: 20),
+                          Text(
+                            "Report",
+                            style: FontConstant.k18w5008471Text,
+                          )
+                        ],
+                      ),
+                      SizedBox(height: 20),
+                      Row(
+                        children: [
+                          Image.asset(
+                            "assets/images/downloadicon.png",
+                            height: 24,
+                          ),
+                          SizedBox(width: 20),
+                          Text(
+                            "Download",
+                            style: FontConstant.k18w5008471Text,
+                          )
+                        ],
+                      )
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ];
+        });
+  }
+}

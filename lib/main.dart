@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:kidseau/Design/Screens/splashscreen/Splash.dart';
+import 'package:kidseau/Theme.dart';
 
 void main() {
   runApp(const MyApp());
@@ -20,6 +21,11 @@ class MyApp extends StatelessWidget {
         splitScreenMode: true,
         builder: (context, child) {
           return GetMaterialApp(
+            theme: ThemeData().copyWith(
+              colorScheme: ThemeData().colorScheme.copyWith(
+                    primary: ThemeColor.primarycolor,
+                  ),
+            ),
             debugShowCheckedModeBanner: false,
             home: Splash(),
           );

@@ -21,7 +21,7 @@ class StartScreen extends StatelessWidget {
             children: [
               Container(
                 height: 229.h,
-                width: Get.size.width,
+                width: 414.w,
                 decoration: BoxDecoration(
                   color: Colors.transparent,
                 ),
@@ -31,8 +31,8 @@ class StartScreen extends StatelessWidget {
                 ),
               ),
               Container(
-                height: 667.h,
-                width: 414.w,
+                height: 667,
+                width: 414,
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: new BorderRadius.only(

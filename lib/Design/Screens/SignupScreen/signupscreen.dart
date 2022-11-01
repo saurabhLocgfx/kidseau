@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kidseau/Design/Screens/SignupScreen/Signupotp.dart';
 import 'package:kidseau/Theme.dart';
 import 'package:kidseau/Widgets/buttons.dart';
@@ -10,8 +11,8 @@ class SignupScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 896,
-      width: 414,
+      height: 896.h,
+      width: 414.w,
       child: Scaffold(
         backgroundColor: Color(0xfff7f6fa),
         body: SingleChildScrollView(
@@ -22,14 +23,6 @@ class SignupScreen extends StatelessWidget {
                   height: 414,
                   width: 414,
                   decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      colors: [
-                        Color(0xffD9D9D9).withOpacity(0.99),
-                        Color(0xffD9D9D9).withOpacity(0.0)
-                      ],
-                    ),
                     image: DecorationImage(
                       image: AssetImage("assets/images/postsbackground.png"),
                       fit: BoxFit.cover,
@@ -61,20 +54,24 @@ class SignupScreen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.only(top: 1.0),
-                      child:
-                          Text("Account", style: FontConstant.k24w500brownText),
+                    SizedBox(height: 25),
+                    Text("Account", style: FontConstant.k24w500brownText),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => SignupScreen()));
+                      },
+                      child: Text(
+                        "Login/create a new account to track your kids’ activities.",
+                        style:
+                            FontConstant.k16w400B7A4Text.copyWith(fontSize: 15),
+                        textAlign: TextAlign.start,
+                      ),
                     ),
-                    Text(
-                      "A OTP has been sent to “9876543210”. Please enter the OTP here.",
-                      style: FontConstant.k16w400B7A4Text,
-                      textAlign: TextAlign.start,
-                    ),
-                    SizedBox(height: 10),
+                    SizedBox(height: 24),
                     Text("Email/Phone number",
                         style: FontConstant.k16w500331FText),
-                    SizedBox(height: 5),
+                    SizedBox(height: 6),
                     textfield(context, "Enter Password"),
                     SizedBox(height: 32),
                     SizedBox(
@@ -83,7 +80,7 @@ class SignupScreen extends StatelessWidget {
                       child: MainButton(
                           onTap: () {
                             Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => SignupotpScreen()));
+                                builder: (context) => SignupOtp()));
                           },
                           title: "Signup with OTP",
                           textStyleColor: Colors.white,
@@ -93,7 +90,7 @@ class SignupScreen extends StatelessWidget {
                     Text(
                       "By proceeding you agree to our Privacy Policy an& Terms and Conditions",
                       style: FontConstant.k14w500B7A4Text,
-                      textAlign: TextAlign.center,
+                      textAlign: TextAlign.start,
                     ),
                     SizedBox(height: 26),
                   ],

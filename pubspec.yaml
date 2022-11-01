@@ -41,6 +41,12 @@ dependencies:
   floating_navbar: ^2.0.2
   grouped_list: ^5.1.2
   intl: ^0.17.0
+  flutter_calendar_carousel: ^2.4.0
+  bottom_bar: ^2.0.2
+  floating_bottom_navigation_bar: ^1.5.2
+  custom_navigation_bar: ^0.8.2
+
+
 
 dev_dependencies:
   flutter_test:

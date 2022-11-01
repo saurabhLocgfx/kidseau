@@ -133,7 +133,7 @@ class _DashboardState extends State<Dashboard> {
   PageController _pageController = PageController(
     initialPage: 0,
   );
-  int currentIndex = 0;
+  int pageIndex = 0;
 
   @override
   void dispose() {
@@ -161,13 +161,87 @@ class _DashboardState extends State<Dashboard> {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBody: true,
-      bottomNavigationBar: Bottombar(),
+      bottomNavigationBar: buildMyNavBar(context),
+      // bottomNavigationBar: Padding(
+      //   padding: const EdgeInsets.all(20.0),
+      //   child: CustomNavigationBar(
+      //     strokeColor: ThemeColor.primarycolor,
+      //     borderRadius: Radius.circular(120.0),
+      //     currentIndex: currentIndex,
+      //     selectedColor: Colors.purple,
+      //     unSelectedColor: Colors.red,
+      //     backgroundColor: Colors.white,
+      //     onTap: (value) {
+      //       currentIndex = value;
+      //       _pageController.animateToPage(
+      //         value,
+      //         duration: Duration(milliseconds: 200),
+      //         curve: Curves.linear,
+      //       );
+      //       setState(() {});
+      //     },
+      //     items: [
+      //       CustomNavigationBarItem(
+      //         icon: ImageIcon(AssetImage("assets/images/iconhome.png")),
+      //         title: Text(
+      //           "Home",
+      //           style: TextStyle(
+      //             fontWeight: FontWeight.w500,
+      //             fontSize: 14,
+      //             color: currentIndex == currentIndex
+      //                 ? Color(0xff8267AC)
+      //                 : Colors.red,
+      //           ),
+      //         ),
+      //       ),
+      //       CustomNavigationBarItem(
+      //         icon: Icon(Icons.shopping_cart),
+      //         title: Text(
+      //           "Cart",
+      //           style: TextStyle(
+      //             fontWeight: FontWeight.w500,
+      //             fontSize: 14,
+      //             color: currentIndex == currentIndex
+      //                 ? Color(0xff8267AC)
+      //                 : Colors.red,
+      //           ),
+      //         ),
+      //       ),
+      //       CustomNavigationBarItem(
+      //         icon: Icon(Icons.lightbulb_outline),
+      //         title: Text(
+      //           "Explore",
+      //           style: TextStyle(
+      //             fontWeight: FontWeight.w500,
+      //             fontSize: 14,
+      //             color: currentIndex == currentIndex
+      //                 ? Color(0xff8267AC)
+      //                 : Colors.green,
+      //           ),
+      //         ),
+      //       ),
+      //       CustomNavigationBarItem(
+      //         icon: Icon(Icons.search),
+      //         title: Text(
+      //           "Search",
+      //           style: TextStyle(
+      //             fontWeight: FontWeight.w500,
+      //             fontSize: 14,
+      //             color: currentIndex == currentIndex
+      //                 ? Color(0xff8267AC)
+      //                 : Colors.red,
+      //           ),
+      //         ),
+      //       ),
+      //     ],
+      //   ),
+      // ),
       body: PageView(
         controller: _pageController,
         onPageChanged: (page) {
           setState(
             () {
-              currentIndex = page;
+              pageIndex = page;
             },
           );
         },
@@ -249,6 +323,7 @@ class _DashboardState extends State<Dashboard> {
   //     margin: EdgeInsets.all(20),
   //     decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
   //     child: BottomNavigationBar(
+  //       selectedLabelStyle: ,
   //       selectedItemColor: ThemeColor.primarycolor,
   //       unselectedItemColor: ThemeColor.primarycolor,
   //       currentIndex: currentIndex,
@@ -299,4 +374,158 @@ class _DashboardState extends State<Dashboard> {
   //     ),
   //   );
   // }
+  Container buildMyNavBar(BuildContext context) {
+    return Container(
+      height: 64,
+      width: 382,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(126),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          GestureDetector(
+            onTap: () {
+              setState(() {
+                pageIndex = 0;
+              });
+            },
+            child: Image.asset(
+              "assets/images/galleryicon.png",
+              color: pageIndex == 0 ? Colors.green : Colors.grey,
+            ),
+          ),
+          Image.asset(
+            "assets/images/galleryicon.png",
+            color: pageIndex == 1 ? Colors.green : Colors.grey,
+          ),
+          Image.asset(
+            "assets/images/galleryicon.png",
+            color: pageIndex == 2 ? Colors.green : Colors.grey,
+          ),
+          Image.asset(
+            "assets/images/galleryicon.png",
+            color: pageIndex == 3 ? Colors.green : Colors.grey,
+          ),
+          Image.asset(
+            "assets/images/galleryicon.png",
+            color: pageIndex == 4 ? Colors.green : Colors.grey,
+          ),
+
+          // IconButton(
+          //     // enableFeedback: false,
+          //     onPressed: () {
+          //       setState(() {
+          //         pageIndex = 0;
+          //       });
+          //     },
+          //     icon: pageIndex == 0
+          //         ? const ImageIcon(
+          //             AssetImage("assets/images/Galleryfill.png"),
+          //             color: Color(0xffB7A4B2),
+          //             size: 35,
+          //           )
+          //         : const ImageIcon(
+          //             AssetImage("assets/images/galleryicon.png"),
+          //             color: Color(0xffB7A4B2),
+          //             size: 35,
+          //           )),
+          // IconButton(
+          //     // enableFeedback: false,
+          //     onPressed: () {
+          //       setState(() {
+          //         pageIndex = 1;
+          //       });
+          //     },
+          //     icon: pageIndex == 1
+          //         ? const ImageIcon(
+          //             AssetImage("assets/images/Galleryfill.png"),
+          //             color: Color(0xff8267AC),
+          //             size: 35,
+          //           )
+          //         : const ImageIcon(
+          //             AssetImage("assets/images/galleryicon.png"),
+          //             color: Color(0xffB7A4B2),
+          //             size: 35,
+          //           )),
+          // IconButton(
+          //     // enableFeedback: false,
+          //     onPressed: () {
+          //       setState(() {
+          //         pageIndex = 2;
+          //       });
+          //     },
+          //     icon: pageIndex == 2
+          //         ? const ImageIcon(
+          //             AssetImage("assets/images/Galleryfill.png"),
+          //             color: Color(0xff8267AC),
+          //             size: 35,
+          //           )
+          //         : const ImageIcon(
+          //             AssetImage("assets/images/galleryicon.png"),
+          //             color: Color(0xffB7A4B2),
+          //             size: 35,
+          //           )),
+          // IconButton(
+          //     // enableFeedback: false,
+          //     onPressed: () {
+          //       setState(() {
+          //         pageIndex = 3;
+          //       });
+          //     },
+          //     icon: pageIndex == 3
+          //         ? const ImageIcon(
+          //             AssetImage("assets/images/Galleryfill.png"),
+          //             color: Color(0xff8267AC),
+          //             size: 35,
+          //           )
+          //         : const ImageIcon(
+          //             AssetImage("assets/images/galleryicon.png"),
+          //             color: Color(0xffB7A4B2),
+          //             size: 35,
+          //           )),
+          // IconButton(
+          //     // enableFeedback: false,
+          //     onPressed: () {
+          //       setState(() {
+          //         pageIndex = 4;
+          //       });
+          //     },
+          //     icon: pageIndex == 4
+          //         ? const ImageIcon(
+          //             AssetImage("assets/images/Galleryfill.png"),
+          //             color: Color(0xffB7A4B2),
+          //             size: 35,
+          //           )
+          //         : const ImageIcon(
+          //             AssetImage("assets/images/galleryicon.png"),
+          //             color: Colors.white,
+          //             size: 35,
+          //           )),
+        ],
+      ),
+    );
+  }
 }
+// bottomNavigationBar: FloatingNavbar(
+//   backgroundColor: Colors.white,
+//   unselectedItemColor: Colors.red,
+//   selectedItemColor: Colors.purple,
+//   currentIndex: currentIndex,
+//   onTap: (value) {
+//     currentIndex = value;
+//     _pageController.animateToPage(
+//       value,
+//       duration: Duration(milliseconds: 200),
+//       curve: Curves.linear,
+//     );
+//     setState(() {});
+//   },
+//   items: [
+//     FloatingNavbarItem( icon: ImageIcon(AssetImage("assets/images/iconhome.png")), title: 'Home'),
+//     FloatingNavbarItem(icon: Icons.explore, title: 'Explore'),
+//     FloatingNavbarItem(icon: Icons.chat_bubble_outline, title: 'Chats'),
+//     FloatingNavbarItem(icon: Icons.settings, title: 'Settings'),
+//   ],
+// ),

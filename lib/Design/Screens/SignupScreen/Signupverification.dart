@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:kidseau/Design/Screens/SignupScreen/informationfill.dart';
 import 'package:kidseau/Theme.dart';
 import 'package:kidseau/Widgets/buttons.dart';
 import 'package:kidseau/Widgets/textfields.dart';
@@ -10,8 +12,8 @@ class Signupverification extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 896,
-      width: 414,
+      height: 896.h,
+      width: 414.w,
       child: Scaffold(
         backgroundColor: Color(0xfff7f6fa),
         body: SingleChildScrollView(
@@ -21,9 +23,7 @@ class Signupverification extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(height: 80),
-                Padding(
-                    padding: EdgeInsets.only(left: 120, right: 120),
-                    child: mainlogo()),
+                mainlogo(),
                 SizedBox(height: 08),
                 Text(
                   "We offers a new way to track your children and watch them grow.",
@@ -36,6 +36,7 @@ class Signupverification extends StatelessWidget {
                   style: FontConstant.k16w500331FText,
                   textAlign: TextAlign.start,
                 ),
+                SizedBox(height: 5),
                 SizedBox(
                   height: 56,
                   width: 382,
@@ -49,7 +50,7 @@ class Signupverification extends StatelessWidget {
                     style: FontConstant.k14w400B7A4Text,
                   ),
                 ),
-                SizedBox(height: 40),
+                SizedBox(height: 25),
                 Container(
                   height: 214,
                   width: 382,
@@ -68,17 +69,24 @@ class Signupverification extends StatelessWidget {
                   )),
                 ),
                 SizedBox(
-                  height: 64,
+                  height: 40,
                 ),
                 SizedBox(
                   height: 52,
                   width: 382,
                   child: MainButton(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => Informationfill()),
+                        );
+                      },
                       title: "Continue",
                       textStyleColor: Colors.white,
                       backgroundColor: ThemeColor.primarycolor),
                 ),
+                SizedBox(height: 56),
               ],
             ),
           ),

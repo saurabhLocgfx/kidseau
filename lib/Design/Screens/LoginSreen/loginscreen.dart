@@ -55,11 +55,8 @@ class LoginScreen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.only(top: 1.0),
-                      child:
-                          Text("Account", style: FontConstant.k24w500brownText),
-                    ),
+                    SizedBox(height: 25),
+                    Text("Account", style: FontConstant.k24w500brownText),
                     GestureDetector(
                       onTap: () {
                         Navigator.of(context).push(MaterialPageRoute(
@@ -67,14 +64,15 @@ class LoginScreen extends StatelessWidget {
                       },
                       child: Text(
                         "Login/create a new account to track your kids’ activities.",
-                        style: FontConstant.k16w400B7A4Text,
+                        style:
+                            FontConstant.k16w400B7A4Text.copyWith(fontSize: 15),
                         textAlign: TextAlign.start,
                       ),
                     ),
-                    SizedBox(height: 10),
+                    SizedBox(height: 24),
                     Text("Email/Phone number",
                         style: FontConstant.k16w500331FText),
-                    SizedBox(height: 5),
+                    SizedBox(height: 6),
                     textfield(context, "Enter Password"),
                     SizedBox(height: 32),
                     SizedBox(
@@ -93,7 +91,7 @@ class LoginScreen extends StatelessWidget {
                     Text(
                       "By proceeding you agree to our Privacy Policy an& Terms and Conditions",
                       style: FontConstant.k14w500B7A4Text,
-                      textAlign: TextAlign.center,
+                      textAlign: TextAlign.start,
                     ),
                     SizedBox(height: 26),
                   ],

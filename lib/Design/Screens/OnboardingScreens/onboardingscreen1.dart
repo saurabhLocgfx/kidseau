@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:kidseau/Design/Screens/OnboardingScreens/onboardingscreencontroller.dart';
 import 'package:kidseau/Theme.dart';
@@ -12,13 +13,12 @@ class Onboarding1Screen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Color(0xff8267ac),
       body: Container(
-        height: 896,
-        width: 414,
+        height: 896.h,
+        width: 414.w,
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Image.asset("images/Artboard 1 1.png"),
               Container(
                 height: 229,
                 width: Get.size.width,
@@ -115,8 +115,8 @@ class Onboarding1Screen extends StatelessWidget {
                                   ),
                                 );
                               }),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 400.0),
+                          Align(
+                            alignment: Alignment.bottomCenter,
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
