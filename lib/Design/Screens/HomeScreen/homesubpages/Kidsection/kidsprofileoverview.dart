@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kidseau/Theme.dart';
+import 'package:kidseau/Widgets/Calender/calendermodel.dart';
 import 'package:kidseau/Widgets/buttons.dart';
 
 class KidsProfileOverview extends StatefulWidget {
@@ -380,10 +381,10 @@ class _KidsProfileOverviewState extends State<KidsProfileOverview> {
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(30))),
                 onPressed: () {
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(builder: (context) => CalendarPage2()),
-                  // );
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => CalendarPage2()),
+                  );
                 },
                 child: Center(
                   child: Text(

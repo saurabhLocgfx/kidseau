@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kidseau/Design/Screens/dashboard.dart';
 import 'package:kidseau/Theme.dart';
 import 'package:kidseau/Widgets/buttons.dart';
@@ -130,7 +131,7 @@ class LoginOtp extends StatelessWidget {
                       style: FontConstant.k14w500B7A4Text,
                       textAlign: TextAlign.start,
                     ),
-                    SizedBox(height: 26),
+                    SizedBox(height: 13.h),
                   ],
                 ),
               ),

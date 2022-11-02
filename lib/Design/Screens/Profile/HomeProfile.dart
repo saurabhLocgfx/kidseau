@@ -1,32 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:kidseau/Design/Screens/Messages/Messages.dart';
-import 'package:kidseau/Design/Screens/Messages/Teachers.dart';
-import 'package:kidseau/Design/Screens/ReminderScreens/ReminderScreen.dart';
+import 'package:kidseau/Design/Screens/Profile/ParentsProfile.dart';
+import 'package:kidseau/Design/Screens/Profile/profilebody.dart';
+import 'package:kidseau/Design/Screens/Profile/school.dart';
 import 'package:kidseau/Theme.dart';
 
-class MessageScreen extends StatefulWidget {
-  const MessageScreen({Key? key}) : super(key: key);
+class HomeProfile extends StatefulWidget {
+  const HomeProfile({Key? key}) : super(key: key);
 
   @override
-  State<MessageScreen> createState() => _MessageScreenState();
+  State<HomeProfile> createState() => _HomeProfileState();
 }
 
-class _MessageScreenState extends State<MessageScreen> {
-  List<String> imageicon = [
-    "assets/images/micon.png",
-    "assets/images/ticon.png",
-  ];
-
-  List<String> items = [
-    "Message",
-    "Teacher",
-  ];
-  // final List screen = [Messagebody(),];
-
-  int current = 0;
-
+class _HomeProfileState extends State<HomeProfile> {
   final controller = PageController(initialPage: 1);
 
   @override
@@ -52,6 +39,7 @@ class _MessageScreenState extends State<MessageScreen> {
         ], begin: Alignment.topCenter, end: Alignment.bottomCenter),
       ),
       child: Scaffold(
+        extendBodyBehindAppBar: true,
         appBar: AppBar(
           automaticallyImplyLeading: false,
           elevation: 0,
@@ -60,85 +48,55 @@ class _MessageScreenState extends State<MessageScreen> {
           ),
           backgroundColor: Color(0xff8267AC).withOpacity(0.16),
           title: Padding(
-            padding: const EdgeInsets.only(top: 0.0),
-            child: GestureDetector(
-              onTap: () {
-                // Navigator.of(context).push(MaterialPageRoute(
-                //     builder: (context) => NotificationScreen()));
-              },
-              child: Text("Messages",
-                  style: FontConstant.k32w5008267Text.copyWith(fontSize: 25)),
+              padding: const EdgeInsets.only(top: 0.0),
+              child: GestureDetector(
+                  onTap: () {
+                    // Navigator.of(context).push(MaterialPageRoute(
+                    //     builder: (context) => NotificationScreen()));
+                  },
+                  child: Text("Profile",
+                      style: FontConstant2.k32w5008267text
+                          .copyWith(fontSize: 28)))),
+          actions: [profilepopup()],
+        ),
+        body: Stack(children: [
+          Container(
+            child: Image.asset(
+              "assets/images/postsbackground.png",
+              height: 414.h,
+              width: 414.w,
             ),
           ),
-          actions: [
-            Padding(
-              padding: const EdgeInsets.only(right: 16.0),
-              child: Row(
-                children: [
-                  Image.asset(
-                    "assets/images/appbaricon1.png",
-                    height: 48,
-                    width: 48,
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => ReminderScreen(),
-                        ),
-                      );
-                    },
-                    child: Image.asset(
-                      "assets/images/appbarclock.png",
-                      height: 24,
-                      width: 24,
-                    ),
-                  ),
-                ],
+          Column(
+            children: [
+              SizedBox(height: 100.h),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [SizedBox(height: 40), Pageviewtabprofile()],
               ),
-            ),
-          ],
-        ),
-        body: Column(
-          children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                SizedBox(height: 40),
-                PageviewTab(
-                    "assets/images/messageiconfill.png",
-                    "assets/images/messageicon.png",
-                    "Message",
-                    "Teacher",
-                    "assets/images/Teachericonfill.png",
-                    "assets/images/Teachericon.png")
-              ],
-            ),
-            SizedBox(height: 24.h),
-            Expanded(
-              child: PageView(
-                controller: _pageController,
-                onPageChanged: (page) {
-                  setState(
-                    () {
-                      pageIndex = page;
-                    },
-                  );
-                },
-                children: <Widget>[
-                  Messages(),
-                  Teachers(),
-                ],
+              SizedBox(height: 24.h),
+              Expanded(
+                child: PageView(
+                  physics: PageScrollPhysics(),
+                  controller: _pageController,
+                  onPageChanged: (page) {
+                    setState(
+                      () {
+                        pageIndex = page;
+                      },
+                    );
+                  },
+                  children: <Widget>[ParentsProfile(), School()],
+                ),
               ),
-            ),
-          ],
-        ),
+            ],
+          )
+        ]),
       ),
     );
   }
 
-  Container PageviewTab(
-      imageone1, imageone2, text1, text2, imagetwo1, imagetwo2) {
+  Container Pageviewtabprofile() {
     return Container(
       height: 56.h,
       width: 248.w,
@@ -166,13 +124,16 @@ class _MessageScreenState extends State<MessageScreen> {
                         color:
                             pageIndex == 0 ? Color(0xffEBE6F2) : Colors.white),
                     child: Center(
-                      child: Image.asset(pageIndex == 0 ? imageone1 : imageone2,
+                      child: Image.asset(
+                          pageIndex == 0
+                              ? "assets/images/person2iconfill.png"
+                              : "assets/images/person2icon.png",
                           height: 24),
                     ),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(left: 4.0),
-                    child: Text(text1,
+                    child: Text("Parents",
                         style: FontConstant.k14w500B7A4Text.copyWith(
                             color: pageIndex == 0
                                 ? Color(0xff8267AC)
@@ -191,7 +152,7 @@ class _MessageScreenState extends State<MessageScreen> {
             },
             child: Row(
               children: [
-                Text(text2,
+                Text("School",
                     style: FontConstant.k14w500B7A4Text.copyWith(
                         color: pageIndex == 1
                             ? Color(0xff8267AC)
@@ -206,7 +167,10 @@ class _MessageScreenState extends State<MessageScreen> {
                         color:
                             pageIndex == 1 ? Color(0xffEBE6F2) : Colors.white),
                     child: Center(
-                      child: Image.asset(pageIndex == 1 ? imagetwo1 : imagetwo2,
+                      child: Image.asset(
+                          pageIndex == 1
+                              ? "assets/images/schooliconfill.png"
+                              : "assets/images/schoolicon.png",
                           height: 24),
                     ),
                   ),

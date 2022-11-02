@@ -13,6 +13,7 @@ class CalendarPage2 extends StatefulWidget {
 
 List<DateTime> presentDates = [
   DateTime(2022, 11, 1),
+  DateTime(2022, 11, 2),
   DateTime(2022, 11, 3),
   DateTime(2022, 11, 4),
   DateTime(2022, 11, 5),
@@ -31,24 +32,24 @@ List<DateTime> absentDates = [
 
 class _CalendarPage2State extends State<CalendarPage2> {
   DateTime _currentDate2 = DateTime.now();
-  static Widget _presentIcon(String day) => CircleAvatar(
-        backgroundColor: Colors.green,
-        child: Text(
-          day,
-          style: TextStyle(
-            color: Colors.black,
-          ),
-        ),
-      );
-  static Widget _absentIcon(String day) => CircleAvatar(
-        backgroundColor: Colors.red,
-        child: Text(
-          day,
-          style: TextStyle(
-            color: Colors.black,
-          ),
-        ),
-      );
+  // static Widget _presentIcon(String day) => CircleAvatar(
+  //       backgroundColor: Colors.white,
+  //       child: Text(
+  //         day,
+  //         style: TextStyle(
+  //           color: Colors.black,
+  //         ),
+  //       ),
+  //     );
+  // static Widget _absentIcon(String day) => CircleAvatar(
+  //       backgroundColor: Colors.white,
+  //       child: Text(
+  //         day,
+  //         style: TextStyle(
+  //           color: Colors.red,
+  //         ),
+  //       ),
+  //     );
 
   EventList<Event> _markedDateMap = new EventList<Event>(
     events: {},
@@ -62,36 +63,24 @@ class _CalendarPage2State extends State<CalendarPage2> {
   @override
   Widget build(BuildContext context) {
     cHeight = MediaQuery.of(context).size.height;
-    for (int i = 0; i < len!; i++) {
-      _markedDateMap.add(
-        presentDates[i],
-        new Event(
-          date: presentDates[i],
-          title: 'Event 5',
-          icon: _presentIcon(
-            presentDates[i].day.toString(),
-          ),
-        ),
-      );
-    }
 
-    for (int i = 0; i < len!; i++) {
-      _markedDateMap.add(
-        absentDates[i],
-        new Event(
-          date: absentDates[i],
-          title: 'Event 5',
-          icon: _absentIcon(
-            absentDates[i].day.toString(),
-          ),
-        ),
-      );
-    }
+    // for (int i = 0; i < len!; i++) {
+    //   _markedDateMap.add(
+    //     absentDates[i],
+    //     new Event(
+    //       date: absentDates[i],
+    //       title: 'Event 5',
+    //       icon: _absentIcon(
+    //         absentDates[i].day.toString(),
+    //       ),
+    //     ),
+    //   );
+    // }
 
     _calendarCarouselNoHeader = CalendarCarousel<Event>(
       height: cHeight * 0.54,
       weekendTextStyle: TextStyle(
-        color: Colors.red,
+        color: Colors.black,
       ),
       todayButtonColor: Colors.blue,
       markedDatesMap: _markedDateMap,
@@ -104,18 +93,15 @@ class _CalendarPage2State extends State<CalendarPage2> {
       },
     );
 
-    return Material(
-      child: new Container(
-        color: Colors.transparent,
-        margin: EdgeInsets.all(40),
+    return Scaffold(
+      body: Container(
+        margin: EdgeInsets.all(20),
         child: SingleChildScrollView(
           child: Container(
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 _calendarCarouselNoHeader,
-                markerRepresent(Colors.red, "Absent"),
-                markerRepresent(Colors.green, "Present"),
+                circlemarker(Colors.red, "Holidays"),
               ],
             ),
           ),
@@ -124,11 +110,11 @@ class _CalendarPage2State extends State<CalendarPage2> {
     );
   }
 
-  Widget markerRepresent(Color color, String data) {
+  Widget circlemarker(Color color, String data) {
     return new ListTile(
       leading: new CircleAvatar(
         backgroundColor: color,
-        radius: cHeight * 0.022,
+        radius: 22,
       ),
       title: new Text(
         data,

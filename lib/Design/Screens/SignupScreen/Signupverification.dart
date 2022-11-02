@@ -86,7 +86,7 @@ class Signupverification extends StatelessWidget {
                       textStyleColor: Colors.white,
                       backgroundColor: ThemeColor.primarycolor),
                 ),
-                SizedBox(height: 56),
+                SizedBox(height: 13.h),
               ],
             ),
           ),

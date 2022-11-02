@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kidseau/Design/Screens/HomeScreen/homescreen.dart';
 import 'package:kidseau/Design/Screens/Messages/MessageScreen.dart';
 import 'package:kidseau/Design/Screens/Notifications/notifications.dart';
 import 'package:kidseau/Design/Screens/Posts/posts.dart';
-import 'package:kidseau/Design/Screens/Profile/ProfileScreen.dart';
+import 'package:kidseau/Design/Screens/Profile/HomeProfile.dart';
+import 'package:kidseau/Theme.dart';
 
 // class Dashboard extends StatefulWidget {
 //   const Dashboard({Key? key}) : super(key: key);
@@ -247,7 +249,7 @@ class _DashboardState extends State<Dashboard> {
         },
         children: <Widget>[
           HomeScreen(),
-          ProfileScreen(),
+          HomeProfile(),
           Posts(),
           NotificationScreen(),
           MessageScreen()
@@ -256,65 +258,65 @@ class _DashboardState extends State<Dashboard> {
     );
   }
 
-  Padding Bottombar() {
-    return Padding(
-      padding: const EdgeInsets.all(20),
-      child: Material(
-        elevation: 10,
-        borderRadius: BorderRadius.circular(131),
-        color: Colors.white,
-        child: Container(
-          height: 64,
-          width: 382,
-          child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              physics: NeverScrollableScrollPhysics(),
-              itemCount: imagedata.length,
-              itemBuilder: (ctx, i) {
-                return GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      selectedIndex = i;
-                    });
-                  },
-                  child: Container(
-                    height: 62,
-                    width: 68,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Image.asset(
-                              imagedata[i],
-                              height: 24,
-                              width: 24,
-                              color: i == selectedIndex
-                                  ? Color(0xffB7A4B2)
-                                  : Color(0xffB7A4B2),
-                            ),
-                            Text(
-                              txt[i],
-                              style: TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.w400,
-                                color: i == selectedIndex
-                                    ? Color(0xffB7A4B2)
-                                    : Color(0xffB7A4B2),
-                              ),
-                            )
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                );
-              }),
-        ),
-      ),
-    );
-  }
+  // Padding Bottombar() {
+  //   return Padding(
+  //     padding: const EdgeInsets.all(20),
+  //     child: Material(
+  //       elevation: 10,
+  //       borderRadius: BorderRadius.circular(131),
+  //       color: Colors.white,
+  //       child: Container(
+  //         height: 64,
+  //         width: 382,
+  //         child: ListView.builder(
+  //             scrollDirection: Axis.horizontal,
+  //             physics: NeverScrollableScrollPhysics(),
+  //             itemCount: imagedata.length,
+  //             itemBuilder: (ctx, i) {
+  //               return GestureDetector(
+  //                 onTap: () {
+  //                   setState(() {
+  //                     selectedIndex = i;
+  //                   });
+  //                 },
+  //                 child: Container(
+  //                   height: 62,
+  //                   width: 68,
+  //                   child: Row(
+  //                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+  //                     children: [
+  //                       Column(
+  //                         mainAxisAlignment: MainAxisAlignment.center,
+  //                         children: [
+  //                           Image.asset(
+  //                             imagedata[i],
+  //                             height: 24,
+  //                             width: 24,
+  //                             color: i == selectedIndex
+  //                                 ? Color(0xffB7A4B2)
+  //                                 : Color(0xffB7A4B2),
+  //                           ),
+  //                           Text(
+  //                             txt[i],
+  //                             style: TextStyle(
+  //                               fontSize: 12,
+  //                               fontWeight: FontWeight.w400,
+  //                               color: i == selectedIndex
+  //                                   ? Color(0xffB7A4B2)
+  //                                   : Color(0xffB7A4B2),
+  //                             ),
+  //                           )
+  //                         ],
+  //                       ),
+  //                     ],
+  //                   ),
+  //                 ),
+  //               );
+  //             }),
+  //       ),
+  //     ),
+  //   );
+  // }
 
   // Container buildBottomNavigationBar(BuildContext context) {
   //   return Container(
@@ -374,16 +376,19 @@ class _DashboardState extends State<Dashboard> {
   //     ),
   //   );
   // }
-  Container buildMyNavBar(BuildContext context) {
+  Container buildMyNavBar(
+    BuildContext context,
+  ) {
     return Container(
-      height: 64,
-      width: 382,
+      margin: EdgeInsets.all(20),
+      height: 56.h,
+      width: 382.w,
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(126),
       ),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           GestureDetector(
             onTap: () {
@@ -391,26 +396,115 @@ class _DashboardState extends State<Dashboard> {
                 pageIndex = 0;
               });
             },
-            child: Image.asset(
-              "assets/images/galleryicon.png",
-              color: pageIndex == 0 ? Colors.green : Colors.grey,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image.asset(
+                  pageIndex == 0
+                      ? "assets/images/homeiconfill.png"
+                      : "assets/images/iconhome.png",
+                  height: 24,
+                  // color: pageIndex == 0 ? Colors.green : Colors.grey,
+                ),
+                Text("Home",
+                    style: FontConstant.k12w400B7A4Text.copyWith(
+                        color: pageIndex == 0
+                            ? Color(0xff8267AC)
+                            : Color(0xffB7A4B2)))
+              ],
             ),
           ),
-          Image.asset(
-            "assets/images/galleryicon.png",
-            color: pageIndex == 1 ? Colors.green : Colors.grey,
+          GestureDetector(
+            onTap: () {
+              setState(() {
+                pageIndex = 1;
+              });
+            },
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image.asset(
+                  pageIndex == 1
+                      ? "assets/images/profileiconfill.png"
+                      : "assets/images/profileicon.png",
+                  height: 24,
+                ),
+                Text("Profile",
+                    style: FontConstant.k12w400B7A4Text.copyWith(
+                        color: pageIndex == 1
+                            ? Color(0xff8267AC)
+                            : Color(0xffB7A4B2)))
+              ],
+            ),
           ),
-          Image.asset(
-            "assets/images/galleryicon.png",
-            color: pageIndex == 2 ? Colors.green : Colors.grey,
+          GestureDetector(
+            onTap: () {
+              setState(() {
+                pageIndex = 2;
+              });
+            },
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image.asset(
+                  pageIndex == 2
+                      ? "assets/images/postsiconfill.png"
+                      : "assets/images/Postsicon.png",
+                  height: 24,
+                ),
+                Text("Posts",
+                    style: FontConstant.k12w400B7A4Text.copyWith(
+                        color: pageIndex == 2
+                            ? Color(0xff8267AC)
+                            : Color(0xffB7A4B2)))
+              ],
+            ),
           ),
-          Image.asset(
-            "assets/images/galleryicon.png",
-            color: pageIndex == 3 ? Colors.green : Colors.grey,
+          GestureDetector(
+            onTap: () {
+              setState(() {
+                pageIndex = 3;
+              });
+            },
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image.asset(
+                  pageIndex == 3
+                      ? "assets/images/notificationiconfill.png"
+                      : "assets/images/notificationicon.png",
+                  height: 24,
+                ),
+                Text("Notification",
+                    style: FontConstant.k12w400B7A4Text.copyWith(
+                        color: pageIndex == 3
+                            ? Color(0xff8267AC)
+                            : Color(0xffB7A4B2)))
+              ],
+            ),
           ),
-          Image.asset(
-            "assets/images/galleryicon.png",
-            color: pageIndex == 4 ? Colors.green : Colors.grey,
+          GestureDetector(
+            onTap: () {
+              setState(() {
+                pageIndex = 4;
+              });
+            },
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image.asset(
+                  pageIndex == 4
+                      ? "assets/images/messageiconfill.png"
+                      : "assets/images/messageicon.png",
+                  height: 24,
+                ),
+                Text("Message",
+                    style: FontConstant.k12w400B7A4Text.copyWith(
+                        color: pageIndex == 4
+                            ? Color(0xff8267AC)
+                            : Color(0xffB7A4B2)))
+              ],
+            ),
           ),
 
           // IconButton(
@@ -431,7 +525,7 @@ class _DashboardState extends State<Dashboard> {
           //             color: Color(0xffB7A4B2),
           //             size: 35,
           //           )),
-          // IconButton(
+          // IconButt on(
           //     // enableFeedback: false,
           //     onPressed: () {
           //       setState(() {

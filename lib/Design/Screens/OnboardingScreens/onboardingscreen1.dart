@@ -31,7 +31,7 @@ class Onboarding1Screen extends StatelessWidget {
                 ),
               ),
               Container(
-                height: 667,
+                height: 498.h,
                 width: Get.size.width,
                 decoration: BoxDecoration(
                   color: Colors.white,

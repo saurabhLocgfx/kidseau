@@ -20,8 +20,8 @@ class StartScreen extends StatelessWidget {
           child: Column(
             children: [
               Container(
-                height: 229.h,
-                width: 414.w,
+                height: 229,
+                width: Get.size.width,
                 decoration: BoxDecoration(
                   color: Colors.transparent,
                 ),
@@ -31,7 +31,7 @@ class StartScreen extends StatelessWidget {
                 ),
               ),
               Container(
-                height: 667,
+                height: 498.h,
                 width: 414,
                 decoration: BoxDecoration(
                   color: Colors.white,

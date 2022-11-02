@@ -3,8 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:kidseau/Design/Screens/HomeScreen/homebody/activity.dart';
 import 'package:kidseau/Design/Screens/HomeScreen/homebody/tutorials.dart';
-import 'package:kidseau/Design/Screens/HomeScreen/homesubpages/Kidsection/addkid.dart';
 import 'package:kidseau/Design/Screens/HomeScreen/homesubpages/Kidsection/kidshomeprofile.dart';
+import 'package:kidseau/Design/Screens/HomeScreen/homesubpages/Kidsection/kidsoverviewandgallery.dart';
 import 'package:kidseau/Design/Screens/Posts/posts.dart';
 import 'package:kidseau/Theme.dart';
 
@@ -46,7 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
         body: SingleChildScrollView(
           child: Column(
             children: [
-              SizedBox(height: 20.h),
+              SizedBox(height: 30.h),
               Column(
                 children: [
                   Row(
@@ -57,13 +57,14 @@ class _HomeScreenState extends State<HomeScreen> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => KidsHomeProfile()),
+                                  builder: (context) =>
+                                      Kidsoverviewandgallery()),
                             );
                           },
                           child: Studentcard()),
                       GestureDetector(
                         onTap: () {
-                          Get.to(() => Addkid());
+                          Get.to(() => KidsHomeProfile());
                         },
                         child: Container(
                           height: 128,
@@ -92,9 +93,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ],
                   ),
-                  SizedBox(
-                    height: Get.size.height * 0.01,
-                  ),
+                  SizedBox(height: Get.size.height * 0.01),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 15.0),
                     child: Column(
@@ -125,7 +124,7 @@ class _HomeScreenState extends State<HomeScreen> {
               //Tutorials card
 
               SizedBox(
-                height: 50,
+                height: 124,
               )
             ],
           ),

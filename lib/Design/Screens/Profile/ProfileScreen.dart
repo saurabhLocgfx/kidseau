@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:kidseau/Design/Screens/HomeScreen/homescreen.dart';
-import 'package:kidseau/Design/Screens/Profile/kidsprofile.dart';
+import 'package:kidseau/Design/Screens/Profile/ParentsProfile.dart';
 import 'package:kidseau/Design/Screens/Profile/profilebody.dart';
+import 'package:kidseau/Design/Screens/Profile/school.dart';
 import 'package:kidseau/Theme.dart';
-import 'package:kidseau/Widgets/buttons.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -15,21 +14,17 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  var infocategory = [
-    "Mother’s name",
-    "Occupation",
-    "Email address",
-    "Phone number",
-    "Address",
-  ];
+  final controller = PageController(initialPage: 1);
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
 
-  var infocategorydata = [
-    "Lucy Bravo",
-    "House Wife",
-    "Ab@gmail.com",
-    "9876543210",
-    "6391 Elgin St. Celina,"
-  ];
+  PageController _pageController = PageController(
+    initialPage: 0,
+  );
+  int pageIndex = 0;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -79,134 +74,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
                 Column(
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.only(top: 144.0),
-                      child: Customtabs(),
-                    ),
-                    SizedBox(height: 24),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Container(
-                            height: 128.h,
-                            width: 96.2.w,
-                            decoration: BoxDecoration(
-                                image: DecorationImage(
-                                    image: AssetImage(
-                                        "assets/images/profileperson.png"))),
-                          ),
-                          SizedBox(width: 24),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                "Johnny Bravo",
-                                style: FontConstant.k24w500brownText,
-                              ),
-                              Text(
-                                "Occupation",
-                                style: FontConstant.k16w400B7A4Text,
-                              ),
-                              Text("9876543210",
-                                  style: FontConstant.k16w5008471Text),
-                              Text("xyz@gmail.com",
-                                  style: FontConstant.k16w5008471Text),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                    SizedBox(height: 35),
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) => Kidsprofile(),
-                          ),
+                    PageView(
+                      controller: _pageController,
+                      onPageChanged: (page) {
+                        setState(
+                          () {
+                            pageIndex = page;
+                          },
                         );
                       },
-                      child: Container(
-                        height: 132,
-                        width: 414,
-                        child: ListView(
-                            scrollDirection: Axis.horizontal,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 16.0),
-                                child: Studentcard(),
-                              ),
-                              Studentcard()
-                            ]),
-                      ),
+                      children: <Widget>[ParentsProfile(), School()],
                     ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "info",
-                            style: FontConstant2.k22w5008471text,
-                          ),
-                          Container(
-                            height: 150,
-                            child: ListView.builder(
-                              padding: EdgeInsets.zero,
-                              physics: NeverScrollableScrollPhysics(),
-                              itemCount: infocategory.length,
-                              itemBuilder: (BuildContext context, int index) {
-                                return Row(
-                                  children: [
-                                    Container(
-                                      height: 27,
-                                      width: 104,
-                                      child: Align(
-                                        alignment: Alignment.centerLeft,
-                                        child: Column(
-                                          children: [
-                                            Text(
-                                              infocategory[index],
-                                              style:
-                                                  FontConstant.k16w500331FText,
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                    SizedBox(width: 16),
-                                    Column(
-                                      children: [
-                                        Text(
-                                          infocategorydata[index],
-                                          style: FontConstant.k16w5008471Text,
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                );
-                              },
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    SizedBox(height: 32),
-                    SizedBox(
-                      height: 52,
-                      width: 382,
-                      child: MainButton(
-                          onTap: () {},
-                          title: "Edit",
-                          textStyleColor: Colors.white,
-                          backgroundColor: ThemeColor.primarycolor),
-                    ),
-                    SizedBox(
-                      height: 100,
-                    )
                   ],
                 ),
               ]),
@@ -216,101 +94,85 @@ class _ProfileScreenState extends State<ProfileScreen> {
       ),
     );
   }
-}
 
-class Customtabs extends StatefulWidget {
-  // final String txt;
-  // final String image;
-  const Customtabs({
-    Key? key,
-    // required this.txt,
-    // required this.image,
-  }) : super(key: key);
-
-  @override
-  State<Customtabs> createState() => _CustomtabsState();
-}
-
-class _CustomtabsState extends State<Customtabs> {
-  var category = ['Parents', 'School'];
-  List<String> categoryicon = [
-    "assets/images/profile-2user.png",
-    "assets/images/buildings.png",
-  ];
-
-  int current = 0;
-
-  @override
-  Widget build(BuildContext context) {
+  Container PageviewTabProfile(
+      imageone1, imageone2, text1, text2, imagetwo1, imagetwo2) {
     return Container(
-      height: 56,
-      width: 248,
+      height: 56.h,
+      width: 248.w,
       decoration: BoxDecoration(
-          color: Colors.white, borderRadius: BorderRadius.circular(76)),
-      child: Container(
-        child: ListView.builder(
-            itemCount: 2,
-            scrollDirection: Axis.horizontal,
-            itemBuilder: (ctx, index) {
-              return Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      current = index;
-                    });
-                  },
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(76),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          GestureDetector(
+            onTap: () {
+              setState(() {
+                pageIndex = 0;
+              });
+            },
+            child: Container(
+              child: Row(
+                children: [
+                  Container(
+                    height: 50,
+                    width: 50,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(93),
+                        color:
+                            pageIndex == 0 ? Color(0xffEBE6F2) : Colors.white),
+                    child: Center(
+                      child: Image.asset(pageIndex == 0 ? imageone1 : imageone2,
+                          height: 24),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 4.0),
+                    child: Text(text1,
+                        style: FontConstant.k14w500B7A4Text.copyWith(
+                            color: pageIndex == 0
+                                ? Color(0xff8267AC)
+                                : Color(0xffB7A4B2))),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          SizedBox(width: 10),
+          GestureDetector(
+            onTap: () {
+              setState(() {
+                pageIndex = 1;
+              });
+            },
+            child: Row(
+              children: [
+                Text(text2,
+                    style: FontConstant.k14w500B7A4Text.copyWith(
+                        color: pageIndex == 1
+                            ? Color(0xff8267AC)
+                            : Color(0xffB7A4B2))),
+                Padding(
+                  padding: const EdgeInsets.only(left: 4.0),
                   child: Container(
-                    height: 56,
-                    width: 108,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Row(
-                          children: [
-                            Stack(children: [
-                              Visibility(
-                                visible: current == index,
-                                child: Container(
-                                  width: 40,
-                                  height: 40,
-                                  decoration: const BoxDecoration(
-                                      color: Color(0xffEBE6F2),
-                                      shape: BoxShape.circle),
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Image.asset(
-                                  categoryicon[index],
-                                  height: 24,
-                                  width: 24,
-                                  color: current == index
-                                      ? Color(0xff8267AC)
-                                      : Color(0xffB7A4B2),
-                                ),
-                              ),
-                            ]),
-                            SizedBox(width: 8),
-                            Text(
-                              category[index],
-                              style: TextStyle(
-                                fontWeight: FontWeight.w500,
-                                fontSize: 14,
-                                color: current == index
-                                    ? Color(0xff8267AC)
-                                    : Color(0xffB7A4B2),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
+                    height: 50,
+                    width: 50,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(93),
+                        color:
+                            pageIndex == 1 ? Color(0xffEBE6F2) : Colors.white),
+                    child: Center(
+                      child: Image.asset(pageIndex == 1 ? imagetwo1 : imagetwo2,
+                          height: 24),
                     ),
                   ),
                 ),
-              );
-            }),
+              ],
+            ),
+          )
+        ],
       ),
     );
   }

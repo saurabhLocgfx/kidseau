@@ -131,7 +131,7 @@ class SignupOtp extends StatelessWidget {
                       style: FontConstant.k14w500B7A4Text,
                       textAlign: TextAlign.start,
                     ),
-                    SizedBox(height: 26),
+                    SizedBox(height: 13.h),
                   ],
                 ),
               ),
