@@ -1,29 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kidseau/Design/Screens/HomeScreen/homebody/activity.dart';
+import 'package:kidseau/Design/Screens/HomeScreen/homescreen.dart';
+import 'package:kidseau/TeachersPanel/Screens/THomeScreen/TAllStudentsScreen.dart';
 import 'package:kidseau/Theme.dart';
+import 'package:kidseau/Widgets/buttons.dart';
 
-class Syllabus extends StatefulWidget {
-  const Syllabus({Key? key}) : super(key: key);
+class TGroupScreen extends StatefulWidget {
+  const TGroupScreen({Key? key}) : super(key: key);
 
   @override
-  State<Syllabus> createState() => _SyllabusState();
+  State<TGroupScreen> createState() => _TGroupScreenState();
 }
 
-class _SyllabusState extends State<Syllabus> {
-  List<String> items = [
-    "Group A",
-    "Group B",
-    "Group C",
-    "Group D",
-    "Group E",
-  ];
-
-  int current = 0;
+class _TGroupScreenState extends State<TGroupScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      extendBodyBehindAppBar: true,
       appBar: AppBar(
         automaticallyImplyLeading: false,
         elevation: 0,
@@ -32,7 +26,7 @@ class _SyllabusState extends State<Syllabus> {
         ),
         backgroundColor: Color(0xff8267AC).withOpacity(0.16),
         title: Text(
-          "Syllabus",
+          "Groups",
           style: FontConstant.k18w5008471Text,
         ),
         leading: Row(
@@ -53,49 +47,80 @@ class _SyllabusState extends State<Syllabus> {
           ],
         ),
       ),
-      body: Stack(
-        children: [
-          Image.asset(
-            "assets/images/postsbackground.png",
-            height: 414,
-            width: 414,
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: Column(
+            children: [
+              SizedBox(height: 30.h),
+              GroupTab(),
+              SizedBox(height: 15.h),
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  "Schedule",
+                  style: FontConstant2.baloothampifont,
+                ),
+              ),
+              SizedBox(
+                height: 5.h,
+              ),
+              Activity(),
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  "Students",
+                  style: FontConstant2.baloothampifont,
+                ),
+              ),
+              SizedBox(height: 8),
+              ListView.builder(
+                  physics: NeverScrollableScrollPhysics(),
+                  itemCount: 3,
+                  shrinkWrap: true,
+                  itemBuilder: (BuildContext context, int index) {
+                    return Padding(
+                      padding: const EdgeInsets.only(bottom: 16.0),
+                      child: SizedBox(
+                          height: 128, width: 382, child: Studentcard()),
+                    );
+                  }),
+              SizedBox(height: 32),
+              SizedBox(
+                height: 52,
+                width: 382,
+                child: MainButton(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => TAllStudents()),
+                      );
+                    },
+                    title: "View all students",
+                    textStyleColor: Colors.white,
+                    backgroundColor: ThemeColor.primarycolor),
+              ),
+              SizedBox(height: 52),
+            ],
           ),
-          Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: Column(
-                children: [
-                  SizedBox(height: 110),
-                  GroupTab(),
-                  SizedBox(height: 15),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        "Today",
-                        style: FontConstant.k18w5008471Text,
-                      ),
-                      Image.asset(
-                        "assets/images/arrowdown.png",
-                        width: 24,
-                        height: 24,
-                        color: Color(0xff84717F),
-                      )
-                    ],
-                  ),
-                  SizedBox(height: 20),
-                  Container(height: 304, child: Activity())
-                ],
-              ))
-        ],
+        ),
       ),
     );
   }
 
   Container GroupTab() {
+    List<String> items = [
+      "Group A",
+      "Group B",
+      "Group C",
+      "Group D",
+      "Group E",
+    ];
+
+    int current = 0;
     return Container(
       width: 414,
       height: 62,
-      margin: const EdgeInsets.all(10),
       decoration: BoxDecoration(
           color: Colors.white, borderRadius: BorderRadius.circular(81)),
       child: ListView.builder(

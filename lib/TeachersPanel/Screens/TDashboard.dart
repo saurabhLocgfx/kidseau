@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:kidseau/Design/Screens/HomeScreen/homescreen.dart';
-import 'package:kidseau/Design/Screens/Messages/MessageScreen.dart';
-import 'package:kidseau/Design/Screens/Notifications/notifications.dart';
-import 'package:kidseau/Design/Screens/Posts/posts.dart';
-import 'package:kidseau/Design/Screens/Profile/HomeProfile.dart';
+import 'package:kidseau/TeachersPanel/Screens/THomeScreen/THomeScreen.dart';
+import 'package:kidseau/TeachersPanel/Screens/TSignupScreen/TSignupCode.dart';
+import 'package:kidseau/TeachersPanel/TMessages/TMessagesDashboard.dart';
+import 'package:kidseau/TeachersPanel/TPostsScreen/TPostsScreen.dart';
+import 'package:kidseau/TeachersPanel/TProfileScreen/TProfileDashboard.dart';
 import 'package:kidseau/Theme.dart';
 
 // class Dashboard extends StatefulWidget {
@@ -126,12 +126,12 @@ import 'package:kidseau/Theme.dart';
 // }
 // }
 
-class Dashboard extends StatefulWidget {
+class TDashboard extends StatefulWidget {
   @override
-  _DashboardState createState() => _DashboardState();
+  _TDashboardState createState() => _TDashboardState();
 }
 
-class _DashboardState extends State<Dashboard> {
+class _TDashboardState extends State<TDashboard> {
   PageController _pageController = PageController(
     initialPage: 0,
   );
@@ -234,11 +234,11 @@ class _DashboardState extends State<Dashboard> {
           );
         },
         children: <Widget>[
-          HomeScreen(),
-          HomeProfile(),
-          Posts(),
-          NotificationScreen(),
-          MessageScreen()
+          THomeScreen(),
+          TProfileDashBoard(),
+          TPostsScreen(),
+          TSignupCode(),
+          TMessageDashboard()
         ],
       ),
     );

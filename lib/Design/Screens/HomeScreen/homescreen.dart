@@ -61,7 +61,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                       Kidsoverviewandgallery()),
                             );
                           },
-                          child: Studentcard()),
+                          child: SizedBox(
+                              height: 128, width: 280, child: Studentcard())),
                       GestureDetector(
                         onTap: () {
                           Get.to(() => KidsHomeProfile());
@@ -100,9 +101,15 @@ class _HomeScreenState extends State<HomeScreen> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        SizedBox(
+                          height: 15.h,
+                        ),
                         Text(
                           "Activity",
                           style: FontConstant2.baloothampifont,
+                        ),
+                        SizedBox(
+                          height: 5.h,
                         ),
                         Activity(),
                         Center(
@@ -111,9 +118,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                 fontSize: 18,
                               )),
                         ),
+                        SizedBox(height: 20.h),
                         Text(
                           "Tutorials",
                           style: FontConstant2.baloothampifont,
+                        ),
+                        SizedBox(
+                          height: 10.h,
                         ),
                       ],
                     ),
@@ -124,7 +135,7 @@ class _HomeScreenState extends State<HomeScreen> {
               //Tutorials card
 
               SizedBox(
-                height: 124,
+                height: 100.h,
               )
             ],
           ),
@@ -142,8 +153,6 @@ class Studentcard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 128,
-      width: 283,
       decoration: BoxDecoration(
           color: Colors.transparent,
           boxShadow: [
@@ -156,7 +165,8 @@ class Studentcard extends StatelessWidget {
           ],
           borderRadius: BorderRadius.circular(16),
           image: DecorationImage(
-              image: AssetImage("assets/images/Student_Card-remove.png"))),
+              image: AssetImage("assets/images/Student_Card-remove.png"),
+              fit: BoxFit.cover)),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20.0),
         child: Row(

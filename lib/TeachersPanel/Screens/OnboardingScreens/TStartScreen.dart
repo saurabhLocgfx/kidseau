@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:kidseau/Design/Screens/OnboardingScreens/onboardingscreen1.dart';
-import 'package:kidseau/TeachersPanel/Screens/OnboardingScreens/SplashScreen.dart';
+import 'package:kidseau/TeachersPanel/Screens/OnboardingScreens/TOnboardingScreen.dart';
 import 'package:kidseau/Theme.dart';
 import 'package:kidseau/Widgets/buttons.dart';
 import 'package:kidseau/Widgets/widgets.dart';
 
-class StartScreen extends StatelessWidget {
-  const StartScreen({Key? key}) : super(key: key);
+class TStartScreen extends StatelessWidget {
+  const TStartScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +61,7 @@ class StartScreen extends StatelessWidget {
                         child: MainButton(
                             onTap: () {
                               Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) => TSplashScreen()));
+                                  builder: (context) => TOnboardingScreen()));
                             },
                             title: "i'm a Teacher",
                             textStyleColor: Colors.white,

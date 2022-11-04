@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:kidseau/Design/Screens/HomeScreen/homesubpages/Kidsection/kidsinformation.dart';
 import 'package:kidseau/Theme.dart';
@@ -64,7 +65,7 @@ class _AddkidState extends State<Addkid> {
                   height: 53,
                   width: 63,
                 )),
-                SizedBox(height: 40),
+                SizedBox(height: 20.h),
                 Text(
                   "Add Kid",
                   style: FontConstant.k16w500brownText.copyWith(fontSize: 24),
@@ -83,7 +84,6 @@ class _AddkidState extends State<Addkid> {
                     style: FontConstant.k14w400lightpurpleText,
                   ),
                 ),
-                SizedBox(height: 40),
                 Stack(children: [
                   Container(
                     height: 214,
@@ -103,7 +103,7 @@ class _AddkidState extends State<Addkid> {
                     )),
                   ),
                 ]),
-                SizedBox(height: 70),
+                SizedBox(height: 60),
                 materialButton(context, () {
                   Get.to(() => KidsInformation());
                 }, "Continue", ThemeColor.primarycolor, 52.0),

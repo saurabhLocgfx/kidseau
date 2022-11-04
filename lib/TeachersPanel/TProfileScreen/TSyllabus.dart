@@ -3,14 +3,14 @@ import 'package:flutter/services.dart';
 import 'package:kidseau/Design/Screens/HomeScreen/homebody/activity.dart';
 import 'package:kidseau/Theme.dart';
 
-class Syllabus extends StatefulWidget {
-  const Syllabus({Key? key}) : super(key: key);
+class TSyllabus extends StatefulWidget {
+  const TSyllabus({Key? key}) : super(key: key);
 
   @override
-  State<Syllabus> createState() => _SyllabusState();
+  State<TSyllabus> createState() => _TSyllabusState();
 }
 
-class _SyllabusState extends State<Syllabus> {
+class _TSyllabusState extends State<TSyllabus> {
   List<String> items = [
     "Group A",
     "Group B",
@@ -64,7 +64,7 @@ class _SyllabusState extends State<Syllabus> {
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Column(
                 children: [
-                  SizedBox(height: 110),
+                  SizedBox(height: 130),
                   GroupTab(),
                   SizedBox(height: 15),
                   Row(

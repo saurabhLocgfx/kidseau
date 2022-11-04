@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:kidseau/Design/Screens/HomeScreen/homescreen.dart';
+import 'package:kidseau/TeachersPanel/Screens/THomeScreen/TAttendanceScreen.dart';
 import 'package:kidseau/Theme.dart';
-import 'package:kidseau/Widgets/buttons.dart';
 
-class LearningAplphabets extends StatefulWidget {
-  const LearningAplphabets({Key? key}) : super(key: key);
+class TActivityScreen extends StatefulWidget {
+  const TActivityScreen({Key? key}) : super(key: key);
 
   @override
-  State<LearningAplphabets> createState() => _LearningAplphabetsState();
+  State<TActivityScreen> createState() => _TActivityScreenState();
 }
 
-class _LearningAplphabetsState extends State<LearningAplphabets> {
+class _TActivityScreenState extends State<TActivityScreen> {
   // bool _flag = true;
   @override
   Widget build(BuildContext context) {
@@ -52,41 +53,6 @@ class _LearningAplphabetsState extends State<LearningAplphabets> {
             ],
           ),
         ),
-        /*appBar: PreferredSize(
-          preferredSize: Size.fromHeight(104.0), // here the desired height
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                AppBar(
-                  backgroundColor: Color(0x2a8267ac),
-                  automaticallyImplyLeading: false,
-                  elevation: 0,
-                  title: Row(
-                    children: [
-                      GestureDetector(
-                          onTap: () {
-                            Get.back();
-                          },
-                          child: Image.asset(
-                            "assets/images/arrow-left.png",
-                            height: 24,
-                            width: 24,
-                          )),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 17.93),
-                        child: Text("Good Morning",
-                            style: FontConstant.k14w400lightpurpleText.copyWith(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w400,
-                                color: Color(0xff84717F))),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),*/
         body: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -139,16 +105,30 @@ class _LearningAplphabetsState extends State<LearningAplphabets> {
                 Align(
                     alignment: Alignment.centerLeft,
                     child: Text(
-                      "Who is taking this class",
+                      "Weak students",
                       style: FontConstant2.baloothampifont,
                     )),
-                SizedBox(height: 24),
-                TeacherCard(),
-                SizedBox(
-                  height: 32,
-                ),
-                materialButton(context, () {}, "Ask Question",
-                    ThemeColor.primarycolor, 52.0),
+                SizedBox(height: 10),
+                ListView.builder(
+                    physics: NeverScrollableScrollPhysics(),
+                    itemCount: 5,
+                    shrinkWrap: true,
+                    itemBuilder: (BuildContext context, int index) {
+                      return Padding(
+                        padding: const EdgeInsets.only(bottom: 16.0),
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => TAttendanceScreen()),
+                            );
+                          },
+                          child: SizedBox(
+                              height: 128, width: 382, child: Studentcard()),
+                        ),
+                      );
+                    }),
                 SizedBox(height: 40.h),
               ],
             ),

@@ -1,21 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:kidseau/Design/Screens/Messages/Messages.dart';
-import 'package:kidseau/Design/Screens/Messages/Teachers.dart';
-import 'package:kidseau/Design/Screens/ReminderScreens/ReminderScreen.dart';
+import 'package:kidseau/TeachersPanel/TProfileScreen/TParentProfile.dart';
+import 'package:kidseau/TeachersPanel/TProfileScreen/TSchoolProfile.dart';
+import 'package:kidseau/TeachersPanel/Widgets/Tpopup.dart';
 import 'package:kidseau/Theme.dart';
 
-class MessageScreen extends StatefulWidget {
-  const MessageScreen({Key? key}) : super(key: key);
+class TProfileDashBoard extends StatefulWidget {
+  const TProfileDashBoard({Key? key}) : super(key: key);
 
   @override
-  State<MessageScreen> createState() => _MessageScreenState();
+  State<TProfileDashBoard> createState() => _TProfileDashBoardState();
 }
 
-class _MessageScreenState extends State<MessageScreen> {
-  int selectedIndex = 0;
-
+class _TProfileDashBoardState extends State<TProfileDashBoard> {
   final controller = PageController(initialPage: 1);
 
   @override
@@ -41,6 +39,7 @@ class _MessageScreenState extends State<MessageScreen> {
         ], begin: Alignment.topCenter, end: Alignment.bottomCenter),
       ),
       child: Scaffold(
+        extendBodyBehindAppBar: true,
         appBar: AppBar(
           automaticallyImplyLeading: false,
           elevation: 0,
@@ -49,75 +48,55 @@ class _MessageScreenState extends State<MessageScreen> {
           ),
           backgroundColor: Color(0xff8267AC).withOpacity(0.16),
           title: Padding(
-            padding: const EdgeInsets.only(top: 0.0),
-            child: GestureDetector(
-              onTap: () {
-                // Navigator.of(context).push(MaterialPageRoute(
-                //     builder: (context) => NotificationScreen()));
-              },
-              child: Text("Messages",
-                  style: FontConstant.k32w5008267Text.copyWith(fontSize: 25)),
+              padding: const EdgeInsets.only(top: 0.0),
+              child: GestureDetector(
+                  onTap: () {
+                    // Navigator.of(context).push(MaterialPageRoute(
+                    //     builder: (context) => NotificationScreen()));
+                  },
+                  child: Text("Profile",
+                      style: FontConstant2.k32w5008267text
+                          .copyWith(fontSize: 28)))),
+          actions: [TProfilepopup()],
+        ),
+        body: Stack(children: [
+          Container(
+            child: Image.asset(
+              "assets/images/postsbackground.png",
+              height: 414.h,
+              width: 414.w,
             ),
           ),
-          actions: [
-            Padding(
-              padding: const EdgeInsets.only(right: 16.0),
-              child: Row(
-                children: [
-                  Image.asset(
-                    "assets/images/appbaricon1.png",
-                    height: 48,
-                    width: 48,
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => ReminderScreen(),
-                        ),
-                      );
-                    },
-                    child: Image.asset(
-                      "assets/images/appbarclock.png",
-                      height: 24,
-                      width: 24,
-                    ),
-                  ),
-                ],
+          Column(
+            children: [
+              SizedBox(height: 100.h),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [SizedBox(height: 40), Pageviewtabprofile()],
               ),
-            ),
-          ],
-        ),
-        body: Column(
-          children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [SizedBox(height: 40), PageviewTab()],
-            ),
-            SizedBox(height: 24.h),
-            Expanded(
-              child: PageView(
-                controller: _pageController,
-                onPageChanged: (page) {
-                  setState(
-                    () {
-                      pageIndex = page;
-                    },
-                  );
-                },
-                children: <Widget>[
-                  Messages(),
-                  Teachers(),
-                ],
+              SizedBox(height: 24.h),
+              Expanded(
+                child: PageView(
+                  physics: PageScrollPhysics(),
+                  controller: _pageController,
+                  onPageChanged: (page) {
+                    setState(
+                      () {
+                        pageIndex = page;
+                      },
+                    );
+                  },
+                  children: <Widget>[TParentProfile(), TSchoolProfile()],
+                ),
               ),
-            ),
-          ],
-        ),
+            ],
+          )
+        ]),
       ),
     );
   }
 
-  Container PageviewTab() {
+  Container Pageviewtabprofile() {
     return Container(
       height: 56.h,
       width: 248.w,
@@ -130,13 +109,9 @@ class _MessageScreenState extends State<MessageScreen> {
         children: [
           GestureDetector(
             onTap: () {
-              selectedIndex = pageIndex;
-              _pageController.animateToPage(
-                pageIndex,
-                duration: Duration(milliseconds: 100),
-                curve: Curves.linear,
-              );
-              pageIndex = 0;
+              setState(() {
+                pageIndex = 0;
+              });
             },
             child: Container(
               child: Row(
@@ -151,16 +126,16 @@ class _MessageScreenState extends State<MessageScreen> {
                     child: Center(
                       child: Image.asset(
                           pageIndex == 0
-                              ? "assets/images/messageiconfill.png"
-                              : "assets/images/messageicon.png",
+                              ? "assets/images/person2iconfill.png"
+                              : "assets/images/person2icon.png",
                           height: 24),
                     ),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(left: 4.0),
-                    child: Text("Message",
+                    child: Text("Parents",
                         style: FontConstant.k14w500B7A4Text.copyWith(
-                            color: pageIndex == 1
+                            color: pageIndex == 0
                                 ? Color(0xff8267AC)
                                 : Color(0xffB7A4B2))),
                   ),
@@ -172,18 +147,12 @@ class _MessageScreenState extends State<MessageScreen> {
           GestureDetector(
             onTap: () {
               setState(() {
-                selectedIndex = pageIndex;
-                _pageController.animateToPage(
-                  pageIndex,
-                  duration: Duration(milliseconds: 100),
-                  curve: Curves.linear,
-                );
                 pageIndex = 1;
               });
             },
             child: Row(
               children: [
-                Text("Teacher",
+                Text("School",
                     style: FontConstant.k14w500B7A4Text.copyWith(
                         color: pageIndex == 1
                             ? Color(0xff8267AC)
@@ -200,8 +169,8 @@ class _MessageScreenState extends State<MessageScreen> {
                     child: Center(
                       child: Image.asset(
                           pageIndex == 1
-                              ? "assets/images/Teachericonfill.png"
-                              : "assets/images/Teachericon.png",
+                              ? "assets/images/schooliconfill.png"
+                              : "assets/images/schoolicon.png",
                           height: 24),
                     ),
                   ),

@@ -35,7 +35,7 @@ class _ActivityState extends State<Activity> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: Get.size.height * 0.40,
+      height: Get.size.height * 0.38,
       width: Get.size.width * 0.95,
       child: ListView.builder(
           padding: EdgeInsets.zero,

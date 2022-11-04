@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:kidseau/Design/Screens/Messages/Messages.dart';
-import 'package:kidseau/Design/Screens/Messages/Teachers.dart';
-import 'package:kidseau/Design/Screens/ReminderScreens/ReminderScreen.dart';
+import 'package:kidseau/TeachersPanel/TMessages/TMessages.dart';
+import 'package:kidseau/TeachersPanel/TMessages/TParents.dart';
+import 'package:kidseau/TeachersPanel/TReminder/TReminderScreen.dart';
 import 'package:kidseau/Theme.dart';
 
-class MessageScreen extends StatefulWidget {
-  const MessageScreen({Key? key}) : super(key: key);
+class TMessageDashboard extends StatefulWidget {
+  const TMessageDashboard({Key? key}) : super(key: key);
 
   @override
-  State<MessageScreen> createState() => _MessageScreenState();
+  State<TMessageDashboard> createState() => _TMessageDashboardState();
 }
 
-class _MessageScreenState extends State<MessageScreen> {
+class _TMessageDashboardState extends State<TMessageDashboard> {
   int selectedIndex = 0;
 
   final controller = PageController(initialPage: 1);
@@ -73,7 +73,7 @@ class _MessageScreenState extends State<MessageScreen> {
                     onTap: () {
                       Navigator.of(context).push(
                         MaterialPageRoute(
-                          builder: (context) => ReminderScreen(),
+                          builder: (context) => TReminderScreen(),
                         ),
                       );
                     },
@@ -106,8 +106,8 @@ class _MessageScreenState extends State<MessageScreen> {
                   );
                 },
                 children: <Widget>[
-                  Messages(),
-                  Teachers(),
+                  TMessages(),
+                  TParents(),
                 ],
               ),
             ),
