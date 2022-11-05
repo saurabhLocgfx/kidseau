@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -26,6 +28,7 @@ class _TProfileDashBoardState extends State<TProfileDashBoard> {
     initialPage: 0,
   );
   int pageIndex = 0;
+  int selectedIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -41,6 +44,15 @@ class _TProfileDashBoardState extends State<TProfileDashBoard> {
       child: Scaffold(
         extendBodyBehindAppBar: true,
         appBar: AppBar(
+          toolbarHeight: 70.0,
+          flexibleSpace: ClipRect(
+            child: BackdropFilter(
+              filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+              child: Container(
+                color: Colors.transparent,
+              ),
+            ),
+          ),
           automaticallyImplyLeading: false,
           elevation: 0,
           systemOverlayStyle: SystemUiOverlayStyle(
@@ -109,9 +121,14 @@ class _TProfileDashBoardState extends State<TProfileDashBoard> {
         children: [
           GestureDetector(
             onTap: () {
-              setState(() {
-                pageIndex = 0;
-              });
+              selectedIndex = pageIndex = 0;
+              _pageController.animateToPage(
+                pageIndex,
+                duration: Duration(milliseconds: 100),
+                curve: Curves.linear,
+              );
+              pageIndex = 0;
+              setState(() {});
             },
             child: Container(
               child: Row(
@@ -146,9 +163,14 @@ class _TProfileDashBoardState extends State<TProfileDashBoard> {
           SizedBox(width: 10),
           GestureDetector(
             onTap: () {
-              setState(() {
-                pageIndex = 1;
-              });
+              selectedIndex = pageIndex = 1;
+              _pageController.animateToPage(
+                pageIndex,
+                duration: Duration(milliseconds: 100),
+                curve: Curves.linear,
+              );
+              pageIndex = 1;
+              setState(() {});
             },
             child: Row(
               children: [

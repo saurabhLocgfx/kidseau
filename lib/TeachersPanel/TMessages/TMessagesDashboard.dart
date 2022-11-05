@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -42,6 +44,15 @@ class _TMessageDashboardState extends State<TMessageDashboard> {
       ),
       child: Scaffold(
         appBar: AppBar(
+          toolbarHeight: 70.0,
+          flexibleSpace: ClipRect(
+            child: BackdropFilter(
+              filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+              child: Container(
+                color: Colors.transparent,
+              ),
+            ),
+          ),
           automaticallyImplyLeading: false,
           elevation: 0,
           systemOverlayStyle: SystemUiOverlayStyle(
@@ -130,7 +141,7 @@ class _TMessageDashboardState extends State<TMessageDashboard> {
         children: [
           GestureDetector(
             onTap: () {
-              selectedIndex = pageIndex;
+              selectedIndex = pageIndex = 0;
               _pageController.animateToPage(
                 pageIndex,
                 duration: Duration(milliseconds: 100),
@@ -172,7 +183,7 @@ class _TMessageDashboardState extends State<TMessageDashboard> {
           GestureDetector(
             onTap: () {
               setState(() {
-                selectedIndex = pageIndex;
+                selectedIndex = pageIndex = 1;
                 _pageController.animateToPage(
                   pageIndex,
                   duration: Duration(milliseconds: 100),

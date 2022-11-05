@@ -1,7 +1,9 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:kidseau/Design/Screens/Profile/Settings/aboutus.dart';
-import 'package:kidseau/Design/Screens/Profile/Settings/privacypolicy.dart';
+import 'package:kidseau/ParentsPanel/PProfileScreens/PSettings/PAboutus.dart';
+import 'package:kidseau/ParentsPanel/PProfileScreens/PSettings/PPrivacyPolicy.dart';
 import 'package:kidseau/TeachersPanel/TProfileScreen/TNotificationSetttings.dart';
 import 'package:kidseau/Theme.dart';
 
@@ -18,6 +20,15 @@ class _TSettingsState extends State<TSettings> {
     return Scaffold(
         extendBodyBehindAppBar: true,
         appBar: AppBar(
+          toolbarHeight: 70.0,
+          flexibleSpace: ClipRect(
+            child: BackdropFilter(
+              filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+              child: Container(
+                color: Colors.transparent,
+              ),
+            ),
+          ),
           automaticallyImplyLeading: false,
           elevation: 0,
           systemOverlayStyle: SystemUiOverlayStyle(
@@ -82,7 +93,7 @@ class _TSettingsState extends State<TSettings> {
                 onTap: () {
                   Navigator.of(context).push(
                     MaterialPageRoute(
-                      builder: (context) => privacypolicy(),
+                      builder: (context) => PPrivacypolicy(),
                     ),
                   );
                 },
@@ -105,7 +116,7 @@ class _TSettingsState extends State<TSettings> {
                 onTap: () {
                   Navigator.of(context).push(
                     MaterialPageRoute(
-                      builder: (context) => aboutus(),
+                      builder: (context) => PAboutus(),
                     ),
                   );
                 },

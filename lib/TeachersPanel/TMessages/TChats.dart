@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -46,6 +48,15 @@ class _TChatsState extends State<TChats> {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
+        toolbarHeight: 70.0,
+        flexibleSpace: ClipRect(
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+            child: Container(
+              color: Colors.transparent,
+            ),
+          ),
+        ),
         automaticallyImplyLeading: false,
         elevation: 0,
         systemOverlayStyle: SystemUiOverlayStyle(

@@ -293,8 +293,16 @@ Future<Object?> AnnouncementDialog(BuildContext context) {
 }
 
 class Notificationpopup extends StatelessWidget {
+  final String image;
+  final String image2;
+  final String title;
+  final String title2;
   const Notificationpopup({
     Key? key,
+    required this.image,
+    required this.title,
+    required this.image2,
+    required this.title2,
   }) : super(key: key);
 
   @override
@@ -324,12 +332,12 @@ class Notificationpopup extends StatelessWidget {
                       Row(
                         children: [
                           Image.asset(
-                            "assets/images/markicon.png",
+                            image,
                             height: 24,
                           ),
                           SizedBox(width: 24),
                           Text(
-                            "Mark all as read",
+                            title,
                             style: FontConstant.k18w5008471Text,
                           )
                         ],
@@ -338,12 +346,12 @@ class Notificationpopup extends StatelessWidget {
                       Row(
                         children: [
                           Image.asset(
-                            "assets/images/gearicon.png",
+                            image2,
                             height: 24,
                           ),
                           SizedBox(width: 24),
                           Text(
-                            "Notification setting",
+                            title2,
                             style: FontConstant.k18w5008471Text,
                           )
                         ],

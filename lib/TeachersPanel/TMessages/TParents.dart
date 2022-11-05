@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:kidseau/Design/Screens/Messages/OpenMessages.dart';
+import 'package:kidseau/ParentsPanel/PMessageScreen/PChats.dart';
 import 'package:kidseau/Theme.dart';
 
 class TParents extends StatefulWidget {
@@ -47,8 +47,8 @@ class _TParentsState extends State<TParents> {
               padding: const EdgeInsets.only(left: 16.0, right: 16),
               child: GestureDetector(
                 onTap: () {
-                  Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => OpenMessages()));
+                  Navigator.of(context)
+                      .push(MaterialPageRoute(builder: (context) => PChats()));
                 },
                 child: Container(
                   height: 128.h,

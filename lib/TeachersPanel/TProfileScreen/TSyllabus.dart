@@ -1,6 +1,8 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:kidseau/Design/Screens/HomeScreen/homebody/activity.dart';
+import 'package:kidseau/ParentsPanel/PHomeScreen/PHomebody.dart';
 import 'package:kidseau/Theme.dart';
 
 class TSyllabus extends StatefulWidget {
@@ -25,6 +27,15 @@ class _TSyllabusState extends State<TSyllabus> {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
+        toolbarHeight: 70.0,
+        flexibleSpace: ClipRect(
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+            child: Container(
+              color: Colors.transparent,
+            ),
+          ),
+        ),
         automaticallyImplyLeading: false,
         elevation: 0,
         systemOverlayStyle: SystemUiOverlayStyle(

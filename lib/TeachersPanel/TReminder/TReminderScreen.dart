@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -44,6 +46,15 @@ class _TReminderScreenState extends State<TReminderScreen> {
       color: ThemeColor.primarycolor.withOpacity(.06),
       child: Scaffold(
         appBar: AppBar(
+          toolbarHeight: 70.0,
+          flexibleSpace: ClipRect(
+            child: BackdropFilter(
+              filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+              child: Container(
+                color: Colors.transparent,
+              ),
+            ),
+          ),
           automaticallyImplyLeading: false,
           elevation: 0,
           systemOverlayStyle: SystemUiOverlayStyle(

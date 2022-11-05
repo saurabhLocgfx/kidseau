@@ -1,6 +1,8 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:kidseau/Design/Screens/ReminderScreens/ReminderScreen.dart';
+import 'package:kidseau/TeachersPanel/TReminder/TReminderScreen.dart';
 import 'package:kidseau/Theme.dart';
 
 class TNotificationsettings extends StatefulWidget {
@@ -47,6 +49,15 @@ class _TNotificationsettingsState extends State<TNotificationsettings> {
     return Scaffold(
         extendBodyBehindAppBar: true,
         appBar: AppBar(
+          toolbarHeight: 70.0,
+          flexibleSpace: ClipRect(
+            child: BackdropFilter(
+              filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+              child: Container(
+                color: Colors.transparent,
+              ),
+            ),
+          ),
           automaticallyImplyLeading: false,
           elevation: 0,
           systemOverlayStyle: SystemUiOverlayStyle(

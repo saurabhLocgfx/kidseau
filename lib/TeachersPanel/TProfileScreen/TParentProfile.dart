@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:kidseau/TeachersPanel/Screens/THomeScreen/THomeScreen.dart';
+import 'package:kidseau/TeachersPanel/THomeScreen/THomeScreen.dart';
 import 'package:kidseau/Theme.dart';
 import 'package:kidseau/Widgets/buttons.dart';
 
