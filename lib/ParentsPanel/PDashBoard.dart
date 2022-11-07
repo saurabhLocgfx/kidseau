@@ -132,7 +132,7 @@ class PDashboard extends StatefulWidget {
 }
 
 class _PDashboardState extends State<PDashboard> {
-  PageController _pageController = PageController(
+  final PageController _pageController = PageController(
     initialPage: 0,
   );
   int pageIndex = 0;
@@ -383,146 +383,151 @@ class _PDashboardState extends State<PDashboard> {
             onTap: () {
               setState(() {
                 selectedIndex = pageIndex = 0;
-                _pageController.animateToPage(
+                _pageController.jumpToPage(
                   pageIndex,
-                  duration: Duration(milliseconds: 100),
-                  curve: Curves.linear,
                 );
                 pageIndex = 0;
               });
             },
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Image.asset(
-                  pageIndex == 0
-                      ? "assets/images/homeiconfill.png"
-                      : "assets/images/iconhome.png",
-                  height: 24,
-                  // color: pageIndex == 0 ? Colors.green : Colors.grey,
-                ),
-                Text("Home",
-                    style: FontConstant.k12w400B7A4Text.copyWith(
-                        color: pageIndex == 0
-                            ? Color(0xff8267AC)
-                            : Color(0xffB7A4B2)))
-              ],
+            child: Container(
+              color: Colors.transparent,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset(
+                    pageIndex == 0
+                        ? "assets/images/homeiconfill.png"
+                        : "assets/images/iconhome.png",
+                    height: 24,
+                    // color: pageIndex == 0 ? Colors.green : Colors.grey,
+                  ),
+                  Text("Home",
+                      style: FontConstant.k12w400B7A4Text.copyWith(
+                          color: pageIndex == 0
+                              ? Color(0xff8267AC)
+                              : Color(0xffB7A4B2)))
+                ],
+              ),
             ),
           ),
           InkWell(
             onTap: () {
               setState(() {
                 selectedIndex = pageIndex = 1;
-                _pageController.animateToPage(
+                _pageController.jumpToPage(
                   pageIndex,
-                  duration: Duration(milliseconds: 100),
-                  curve: Curves.linear,
                 );
                 pageIndex = 1;
               });
             },
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Image.asset(
-                  pageIndex == 1
-                      ? "assets/images/profileiconfill.png"
-                      : "assets/images/profileicon.png",
-                  height: 24,
-                ),
-                Text("Profile",
-                    style: FontConstant.k12w400B7A4Text.copyWith(
-                        color: pageIndex == 1
-                            ? Color(0xff8267AC)
-                            : Color(0xffB7A4B2)))
-              ],
+            child: Container(
+              color: Colors.transparent,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset(
+                    pageIndex == 1
+                        ? "assets/images/profileiconfill.png"
+                        : "assets/images/profileicon.png",
+                    height: 24,
+                  ),
+                  Text("Profile",
+                      style: FontConstant.k12w400B7A4Text.copyWith(
+                          color: pageIndex == 1
+                              ? Color(0xff8267AC)
+                              : Color(0xffB7A4B2)))
+                ],
+              ),
             ),
           ),
           GestureDetector(
             onTap: () {
               setState(() {
                 selectedIndex = pageIndex = 2;
-                _pageController.animateToPage(
+                _pageController.jumpToPage(
                   pageIndex,
-                  duration: Duration(milliseconds: 100),
-                  curve: Curves.linear,
                 );
                 pageIndex = 2;
               });
             },
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Image.asset(
-                  pageIndex == 2
-                      ? "assets/images/postsiconfill.png"
-                      : "assets/images/Postsicon.png",
-                  height: 24,
-                ),
-                Text("Posts",
-                    style: FontConstant.k12w400B7A4Text.copyWith(
-                        color: pageIndex == 2
-                            ? Color(0xff8267AC)
-                            : Color(0xffB7A4B2)))
-              ],
+            child: Container(
+              color: Colors.transparent,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset(
+                    pageIndex == 2
+                        ? "assets/images/postsiconfill.png"
+                        : "assets/images/Postsicon.png",
+                    height: 24,
+                  ),
+                  Text("Posts",
+                      style: FontConstant.k12w400B7A4Text.copyWith(
+                          color: pageIndex == 2
+                              ? Color(0xff8267AC)
+                              : Color(0xffB7A4B2)))
+                ],
+              ),
             ),
           ),
           GestureDetector(
             onTap: () {
               setState(() {
                 selectedIndex = pageIndex = 3;
-                _pageController.animateToPage(
+                _pageController.jumpToPage(
                   pageIndex,
-                  duration: Duration(milliseconds: 100),
-                  curve: Curves.linear,
                 );
                 pageIndex = 3;
               });
             },
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Image.asset(
-                  pageIndex == 3
-                      ? "assets/images/notificationiconfill.png"
-                      : "assets/images/notificationicon.png",
-                  height: 24,
-                ),
-                Text("Notification",
-                    style: FontConstant.k12w400B7A4Text.copyWith(
-                        color: pageIndex == 3
-                            ? Color(0xff8267AC)
-                            : Color(0xffB7A4B2)))
-              ],
+            child: Container(
+              color: Colors.transparent,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset(
+                    pageIndex == 3
+                        ? "assets/images/notificationiconfill.png"
+                        : "assets/images/notificationicon.png",
+                    height: 24,
+                  ),
+                  Text("Notification",
+                      style: FontConstant.k12w400B7A4Text.copyWith(
+                          color: pageIndex == 3
+                              ? Color(0xff8267AC)
+                              : Color(0xffB7A4B2)))
+                ],
+              ),
             ),
           ),
           GestureDetector(
             onTap: () {
               setState(() {
                 selectedIndex = pageIndex = 4;
-                _pageController.animateToPage(
+                _pageController.jumpToPage(
                   pageIndex,
-                  duration: Duration(milliseconds: 100),
-                  curve: Curves.linear,
                 );
                 pageIndex = 4;
               });
             },
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Image.asset(
-                  pageIndex == 4
-                      ? "assets/images/messageiconfill.png"
-                      : "assets/images/messageicon.png",
-                  height: 24,
-                ),
-                Text("Message",
-                    style: FontConstant.k12w400B7A4Text.copyWith(
-                        color: pageIndex == 4
-                            ? Color(0xff8267AC)
-                            : Color(0xffB7A4B2)))
-              ],
+            child: Container(
+              color: Colors.transparent,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset(
+                    pageIndex == 4
+                        ? "assets/images/messageiconfill.png"
+                        : "assets/images/messageicon.png",
+                    height: 24,
+                  ),
+                  Text("Message",
+                      style: FontConstant.k12w400B7A4Text.copyWith(
+                          color: pageIndex == 4
+                              ? Color(0xff8267AC)
+                              : Color(0xffB7A4B2)))
+                ],
+              ),
             ),
           ),
 

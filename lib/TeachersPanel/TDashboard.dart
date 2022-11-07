@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kidseau/TeachersPanel/THomeScreen/THomeScreen.dart';
 import 'package:kidseau/TeachersPanel/TMessages/TMessagesDashboard.dart';
@@ -148,6 +149,14 @@ class _TDashboardState extends State<TDashboard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        toolbarHeight: 0,
+        elevation: 0,
+        systemOverlayStyle: SystemUiOverlayStyle(
+          statusBarBrightness: Brightness.light,
+        ),
+        backgroundColor: Colors.transparent,
+      ),
       extendBody: true,
       bottomNavigationBar: buildMyNavBar(context),
       // bottomNavigationBar: Padding(
@@ -377,145 +386,150 @@ class _TDashboardState extends State<TDashboard> {
           InkWell(
             onTap: () {
               selectedIndex = pageIndex = 0;
-              _pageController.animateToPage(
+              _pageController.jumpToPage(
                 pageIndex,
-                duration: Duration(milliseconds: 100),
-                curve: Curves.linear,
               );
               pageIndex = 0;
               setState(() {});
             },
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Image.asset(
-                  pageIndex == 0
-                      ? "assets/images/homeiconfill.png"
-                      : "assets/images/iconhome.png",
-                  height: 24,
-                ),
-                Text("Home",
-                    style: FontConstant.k12w400B7A4Text.copyWith(
-                        color: pageIndex == 0
-                            ? Color(0xff8267AC)
-                            : Color(0xffB7A4B2)))
-              ],
+            child: Container(
+              color: Colors.transparent,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset(
+                    pageIndex == 0
+                        ? "assets/images/homeiconfill.png"
+                        : "assets/images/iconhome.png",
+                    height: 24,
+                  ),
+                  Text("Home",
+                      style: FontConstant.k12w400B7A4Text.copyWith(
+                          color: pageIndex == 0
+                              ? Color(0xff8267AC)
+                              : Color(0xffB7A4B2)))
+                ],
+              ),
             ),
           ),
           InkWell(
             onTap: () {
               setState(() {
                 selectedIndex = pageIndex = 1;
-                _pageController.animateToPage(
+                _pageController.jumpToPage(
                   pageIndex,
-                  duration: Duration(milliseconds: 100),
-                  curve: Curves.linear,
                 );
                 pageIndex = 1;
               });
             },
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Image.asset(
-                  pageIndex == 1
-                      ? "assets/images/profileiconfill.png"
-                      : "assets/images/profileicon.png",
-                  height: 24,
-                ),
-                Text("Profile",
-                    style: FontConstant.k12w400B7A4Text.copyWith(
-                        color: pageIndex == 1
-                            ? Color(0xff8267AC)
-                            : Color(0xffB7A4B2)))
-              ],
+            child: Container(
+              color: Colors.transparent,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset(
+                    pageIndex == 1
+                        ? "assets/images/profileiconfill.png"
+                        : "assets/images/profileicon.png",
+                    height: 24,
+                  ),
+                  Text("Profile",
+                      style: FontConstant.k12w400B7A4Text.copyWith(
+                          color: pageIndex == 1
+                              ? Color(0xff8267AC)
+                              : Color(0xffB7A4B2)))
+                ],
+              ),
             ),
           ),
           GestureDetector(
             onTap: () {
               setState(() {
                 selectedIndex = pageIndex = 2;
-                _pageController.animateToPage(
+                _pageController.jumpToPage(
                   pageIndex,
-                  duration: Duration(milliseconds: 100),
-                  curve: Curves.linear,
                 );
                 pageIndex = 2;
               });
             },
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Image.asset(
-                  pageIndex == 2
-                      ? "assets/images/postsiconfill.png"
-                      : "assets/images/Postsicon.png",
-                  height: 24,
-                ),
-                Text("Posts",
-                    style: FontConstant.k12w400B7A4Text.copyWith(
-                        color: pageIndex == 2
-                            ? Color(0xff8267AC)
-                            : Color(0xffB7A4B2)))
-              ],
+            child: Container(
+              color: Colors.transparent,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset(
+                    pageIndex == 2
+                        ? "assets/images/postsiconfill.png"
+                        : "assets/images/Postsicon.png",
+                    height: 24,
+                  ),
+                  Text("Posts",
+                      style: FontConstant.k12w400B7A4Text.copyWith(
+                          color: pageIndex == 2
+                              ? Color(0xff8267AC)
+                              : Color(0xffB7A4B2)))
+                ],
+              ),
             ),
           ),
           GestureDetector(
             onTap: () {
               setState(() {
                 selectedIndex = pageIndex = 3;
-                _pageController.animateToPage(
+                _pageController.jumpToPage(
                   pageIndex,
-                  duration: Duration(milliseconds: 100),
-                  curve: Curves.linear,
                 );
                 pageIndex = 3;
               });
             },
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Image.asset(
-                  pageIndex == 3
-                      ? "assets/images/studioniconfill.png"
-                      : "assets/images/studenticon.png",
-                  height: 24,
-                ),
-                Text("Students",
-                    style: FontConstant.k12w400B7A4Text.copyWith(
-                        color: pageIndex == 3
-                            ? Color(0xff8267AC)
-                            : Color(0xffB7A4B2)))
-              ],
+            child: Container(
+              color: Colors.transparent,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset(
+                    pageIndex == 3
+                        ? "assets/images/studioniconfill.png"
+                        : "assets/images/studenticon.png",
+                    height: 24,
+                  ),
+                  Text("Students",
+                      style: FontConstant.k12w400B7A4Text.copyWith(
+                          color: pageIndex == 3
+                              ? Color(0xff8267AC)
+                              : Color(0xffB7A4B2)))
+                ],
+              ),
             ),
           ),
           GestureDetector(
             onTap: () {
               setState(() {
                 selectedIndex = pageIndex = 4;
-                _pageController.animateToPage(
+                _pageController.jumpToPage(
                   pageIndex,
-                  duration: Duration(milliseconds: 100),
-                  curve: Curves.linear,
                 );
                 pageIndex = 4;
               });
             },
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Image.asset(
-                  pageIndex == 4
-                      ? "assets/images/messageiconfill.png"
-                      : "assets/images/messageicon.png",
-                  height: 24,
-                ),
-                Text("Message",
-                    style: FontConstant.k12w400B7A4Text.copyWith(
-                        color: pageIndex == 4
-                            ? Color(0xff8267AC)
-                            : Color(0xffB7A4B2)))
-              ],
+            child: Container(
+              color: Colors.transparent,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset(
+                    pageIndex == 4
+                        ? "assets/images/messageiconfill.png"
+                        : "assets/images/messageicon.png",
+                    height: 24,
+                  ),
+                  Text("Message",
+                      style: FontConstant.k12w400B7A4Text.copyWith(
+                          color: pageIndex == 4
+                              ? Color(0xff8267AC)
+                              : Color(0xffB7A4B2)))
+                ],
+              ),
             ),
           ),
         ],

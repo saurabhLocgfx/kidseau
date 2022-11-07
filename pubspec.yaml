@@ -45,7 +45,7 @@ dependencies:
   bottom_bar: ^2.0.2
   floating_bottom_navigation_bar: ^1.5.2
   custom_navigation_bar: ^0.8.2
-
+  dotted_border:
 
 
 dev_dependencies:

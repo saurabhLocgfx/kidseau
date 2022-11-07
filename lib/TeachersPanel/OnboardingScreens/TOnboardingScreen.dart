@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:kidseau/TeachersPanel/OnboardingScreens/Onboardingmodel.dart';
 import 'package:kidseau/TeachersPanel/TLoginScreen/TLoginScreen.dart';
@@ -30,23 +29,22 @@ class _TOnboardingScreenState extends State<TOnboardingScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ThemeColor.primarycolor,
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              height: 229,
-              width: Get.size.width,
-              decoration: BoxDecoration(
-                color: ThemeColor.primarycolor,
-              ),
-              child: Image.asset(
-                "assets/images/Artboard 1 1.png",
-                fit: BoxFit.cover,
-              ),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            height: 229,
+            width: Get.size.width,
+            decoration: BoxDecoration(
+              color: ThemeColor.primarycolor,
             ),
-            Container(
-              height: 498.h,
+            child: Image.asset(
+              "assets/images/Artboard 1 1.png",
+              fit: BoxFit.cover,
+            ),
+          ),
+          Expanded(
+            child: Container(
               width: Get.size.width,
               decoration: BoxDecoration(
                 color: Colors.white,
@@ -159,8 +157,8 @@ class _TOnboardingScreenState extends State<TOnboardingScreen> {
                 ],
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

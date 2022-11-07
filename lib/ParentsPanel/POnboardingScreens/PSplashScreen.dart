@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kidseau/ParentsPanel/POnboardingScreens/PStartScreen.dart';
 import 'package:kidseau/Widgets/widgets.dart';
@@ -22,14 +23,24 @@ class _PSplashScreenState extends State<PSplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 896.h,
-      width: 414.w,
-      decoration: BoxDecoration(
-          color: Colors.white,
-          image: DecorationImage(
-              image: AssetImage("assets/images/splashbackground.png"))),
-      child: mainlogo(),
+    return Scaffold(
+      appBar: AppBar(
+        toolbarHeight: 0,
+        elevation: 0,
+        systemOverlayStyle: SystemUiOverlayStyle(
+          statusBarBrightness: Brightness.light,
+        ),
+        backgroundColor: Colors.transparent,
+      ),
+      body: Container(
+        height: 1.sh,
+        width: 1.sw,
+        decoration: BoxDecoration(
+            color: Colors.white,
+            image: DecorationImage(
+                image: AssetImage("assets/images/splashbackground.png"))),
+        child: mainlogo(),
+      ),
     );
   }
 }
