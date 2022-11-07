@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:kidseau/Design/Screens/HomeScreen/homescreen.dart';
-import 'package:kidseau/Design/Screens/Profile/kidsprofile.dart';
 import 'package:kidseau/Theme.dart';
 import 'package:kidseau/Widgets/buttons.dart';
+
+import '../../ParentsPanel/PHomeScreen/PHomeScreen.dart';
+import '../THomeScreen/TKidsDetails.dart';
 
 class TParentsProfile extends StatefulWidget {
   const TParentsProfile({Key? key}) : super(key: key);
@@ -74,7 +75,7 @@ class _TParentsProfileState extends State<TParentsProfile> {
               onTap: () {
                 Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (context) => Kidsprofile(),
+                    builder: (context) => TKidsOverview(),
                   ),
                 );
               },
