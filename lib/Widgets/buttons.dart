@@ -9,7 +9,6 @@ class MainButton extends StatelessWidget {
   final String title;
   const MainButton({
     Key? key,
-    // required this.backgroundColor,
     required this.onTap,
     required this.title,
     required this.textStyleColor,
