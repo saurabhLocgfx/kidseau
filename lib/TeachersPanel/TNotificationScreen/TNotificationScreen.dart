@@ -81,7 +81,7 @@ class _TNotificationScreenState extends State<TNotificationScreen> {
               image: "assets/images/markicon.png",
               title: "Mark all as read",
               image2: "assets/images/gearicon.png",
-              title2: "Notification setting",
+              title2: "Notification settings",
             ),
           ],
         ),
@@ -136,63 +136,63 @@ class _TNotificationScreenState extends State<TNotificationScreen> {
               ),
             ),
             SizedBox(height: 2),
-            Container(
-              height: 99,
-              width: 414,
-              color: ThemeColor.primarycolor.withOpacity(0.16),
-              child: Padding(
-                padding: const EdgeInsets.only(left: 16.0),
-                child: Row(
-                  children: [
-                    Container(
-                      height: 67,
-                      width: 50,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(08),
-                          image: DecorationImage(
-                              image:
-                                  AssetImage("assets/images/person4fm.png"))),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(top: 10.0, left: 12),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Tomorrow will be holiday",
-                            style: FontConstant.k16w500331FText,
-                          ),
-                          Row(
-                            children: [
-                              GestureDetector(
-                                onTap: () {
-                                  notificationdialog(context);
-                                  // AnnouncementDialog(context);
-                                },
-                                child: Text(
-                                  "Anouncement",
+            GestureDetector(
+              onTap: () {
+                notificationdialog(context);
+                // AnnouncementDialog(context);
+              },
+              child: Container(
+                height: 99,
+                width: 414,
+                color: ThemeColor.primarycolor.withOpacity(0.16),
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 16.0),
+                  child: Row(
+                    children: [
+                      Container(
+                        height: 67,
+                        width: 50,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(08),
+                            image: DecorationImage(
+                                image:
+                                    AssetImage("assets/images/person4fm.png"))),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(top: 10.0, left: 12),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Tomorrow will be holiday",
+                              style: FontConstant.k16w500331FText,
+                            ),
+                            Row(
+                              children: [
+                                Text(
+                                  "Announcement",
                                   style: FontConstant.k14w5008471Text,
                                 ),
-                              ),
-                              SizedBox(width: 08),
-                              Center(
-                                child: Icon(
-                                  Icons.circle,
-                                  size: 3,
-                                  color: Color(0xffB7A4B2),
+                                SizedBox(width: 08),
+                                Center(
+                                  child: Icon(
+                                    Icons.circle,
+                                    size: 3,
+                                    color: Color(0xffB7A4B2),
+                                  ),
                                 ),
-                              ),
-                              SizedBox(width: 06),
-                              Text(
-                                "Director",
-                                style: FontConstant.k14w5008471Text,
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    )
-                  ],
+                                SizedBox(width: 06),
+                                Text(
+                                  "Director",
+                                  style: FontConstant.k14w5008471Text,
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
                 ),
               ),
             ),

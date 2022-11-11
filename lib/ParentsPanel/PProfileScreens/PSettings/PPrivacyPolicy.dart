@@ -21,6 +21,7 @@ class _PPrivacypolicyState extends State<PPrivacypolicy> {
       child: Scaffold(
         extendBodyBehindAppBar: true,
         appBar: AppBar(
+          centerTitle: false,
           toolbarHeight: 70.0,
           flexibleSpace: ClipRect(
             child: BackdropFilter(
@@ -37,7 +38,7 @@ class _PPrivacypolicyState extends State<PPrivacypolicy> {
           ),
           backgroundColor: Color(0xff8267AC).withOpacity(0.16),
           title: Text(
-            "Change Voucher code",
+            "Privacy Policy",
             style: FontConstant.k18w5008471Text,
           ),
           leading: Row(

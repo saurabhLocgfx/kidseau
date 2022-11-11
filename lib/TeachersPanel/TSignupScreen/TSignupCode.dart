@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:kidseau/TeachersPanel/TSignupScreen/TPersonalDetails.dart';
 import 'package:kidseau/Theme.dart';
 import 'package:kidseau/Widgets/buttons.dart';
@@ -34,22 +35,21 @@ class _TSignupCodeState extends State<TSignupCode> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 199.0),
-                  child: Container(
-                    child: Column(
-                      children: [
-                        Image.asset(
-                          "assets/images/logo.png",
-                          height: 172,
-                          width: 173,
-                        ),
-                        Text(
-                          "We offers a new way to track your children and watch them grow.",
-                          style: FontConstant.k16w4008471Text,
-                          textAlign: TextAlign.center,
-                        ),
-                      ],
-                    ),
+                  padding:
+                      const EdgeInsets.only(top: 199.0, left: 16, right: 16),
+                  child: Column(
+                    children: [
+                      Image.asset(
+                        "assets/images/logo.png",
+                        height: 172,
+                        width: 173,
+                      ),
+                      Text(
+                        "We offer a new way to mark the children and shape them for better future.",
+                        style: FontConstant.k16w4008471Text,
+                        textAlign: TextAlign.center,
+                      ),
+                    ],
                   ),
                 )
               ]),
@@ -85,14 +85,37 @@ class _TSignupCodeState extends State<TSignupCode> {
                     SizedBox(
                       height: 52,
                       width: 382,
-                      child: MainButton(
-                          onTap: () {
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => TPersonalDetails()));
-                          },
-                          title: "Continue",
-                          textStyleColor: Colors.white,
-                          backgroundColor: ThemeColor.primarycolor),
+                      child: loading
+                          ? MaterialButton(
+                              elevation: 1,
+                              color: ThemeColor.primarycolor,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(30))),
+                              onPressed: () {},
+                              child: Center(
+                                child: SpinKitThreeBounce(
+                                  color: Colors.white,
+                                ),
+                              ),
+                            )
+                          : MainButton(
+                              onTap: () {
+                                setState(() {
+                                  loading = true;
+                                });
+                                Future.delayed(Duration(seconds: 3), () {
+                                  setState(() {
+                                    loading = false;
+                                  });
+                                  Navigator.of(context).push(MaterialPageRoute(
+                                      builder: (context) =>
+                                          TPersonalDetails()));
+                                });
+                              },
+                              title: "Continue",
+                              textStyleColor: Colors.white,
+                              backgroundColor: ThemeColor.primarycolor),
                     ),
                   ],
                 ),
@@ -103,4 +126,6 @@ class _TSignupCodeState extends State<TSignupCode> {
       ),
     );
   }
+
+  bool loading = false;
 }

@@ -70,22 +70,21 @@ class _TSettingsState extends State<TSettings> {
                     ),
                   );
                 },
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Container(
-                      height: 30,
-                      width: 156,
-                      child: Text(
-                        "Notification Setting",
+                child: Container(
+                  color: Colors.transparent,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "Notification Settings",
                         style: FontConstant.k18w500331FText,
                       ),
-                    ),
-                    Image.asset(
-                      "assets/images/rightarrow.png",
-                      height: 20,
-                    ),
-                  ],
+                      Image.asset(
+                        "assets/images/rightarrow.png",
+                        height: 20,
+                      ),
+                    ],
+                  ),
                 ),
               ),
               SizedBox(height: 20),
@@ -97,18 +96,21 @@ class _TSettingsState extends State<TSettings> {
                     ),
                   );
                 },
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "Privacy Policy",
-                      style: FontConstant.k18w500331FText,
-                    ),
-                    Image.asset(
-                      "assets/images/rightarrow.png",
-                      height: 20,
-                    ),
-                  ],
+                child: Container(
+                  color: Colors.transparent,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "Privacy Policy",
+                        style: FontConstant.k18w500331FText,
+                      ),
+                      Image.asset(
+                        "assets/images/rightarrow.png",
+                        height: 20,
+                      ),
+                    ],
+                  ),
                 ),
               ),
               SizedBox(height: 20),
@@ -120,18 +122,21 @@ class _TSettingsState extends State<TSettings> {
                     ),
                   );
                 },
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "About Us",
-                      style: FontConstant.k18w500331FText,
-                    ),
-                    Image.asset(
-                      "assets/images/rightarrow.png",
-                      height: 20,
-                    ),
-                  ],
+                child: Container(
+                  color: Colors.transparent,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "About Us",
+                        style: FontConstant.k18w500331FText,
+                      ),
+                      Image.asset(
+                        "assets/images/rightarrow.png",
+                        height: 20,
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ],

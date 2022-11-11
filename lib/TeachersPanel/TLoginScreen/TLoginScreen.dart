@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:kidseau/ParentsPanel/PSignUpScreen/PSignupScreen.dart';
 import 'package:kidseau/TeachersPanel/TLoginScreen/TLoginOtpVerification.dart';
+import 'package:kidseau/TeachersPanel/TSignupScreen/TSignupScreen.dart';
 import 'package:kidseau/Theme.dart';
 import 'package:kidseau/Widgets/buttons.dart';
 import 'package:kidseau/Widgets/textfields.dart';
@@ -11,7 +11,7 @@ class TLoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 896.h,
       width: 414.w,
       child: Scaffold(
@@ -31,22 +31,21 @@ class TLoginScreen extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 199.0),
-                  child: Container(
-                    child: Column(
-                      children: [
-                        Image.asset(
-                          "assets/images/logo.png",
-                          height: 172,
-                          width: 173,
-                        ),
-                        Text(
-                          "We offers a new way to track your children and watch them grow.",
-                          style: FontConstant.k16w4008471Text,
-                          textAlign: TextAlign.center,
-                        ),
-                      ],
-                    ),
+                  padding:
+                      const EdgeInsets.only(top: 199.0, left: 16, right: 16),
+                  child: Column(
+                    children: [
+                      Image.asset(
+                        "assets/images/logo.png",
+                        height: 172,
+                        width: 173,
+                      ),
+                      Text(
+                        "We offer a new way to mark the children and shape them for better future.",
+                        style: FontConstant.k16w4008471Text,
+                        textAlign: TextAlign.center,
+                      ),
+                    ],
                   ),
                 )
               ]),
@@ -60,10 +59,10 @@ class TLoginScreen extends StatelessWidget {
                     GestureDetector(
                       onTap: () {
                         Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => PSignupScreen()));
+                            builder: (context) => TSignupScreen()));
                       },
                       child: Text(
-                        "Login/create a new account to track your kids’ activities.",
+                        "Login/create a new account.",
                         style:
                             FontConstant.k16w400B7A4Text.copyWith(fontSize: 15),
                         textAlign: TextAlign.start,

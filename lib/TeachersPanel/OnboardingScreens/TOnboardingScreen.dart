@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:kidseau/TeachersPanel/OnboardingScreens/Onboardingmodel.dart';
 import 'package:kidseau/TeachersPanel/TLoginScreen/TLoginScreen.dart';
@@ -13,17 +14,13 @@ class TOnboardingScreen extends StatefulWidget {
 
 class _TOnboardingScreenState extends State<TOnboardingScreen> {
   int currentIndex = 0;
-  final controller = PageController(initialPage: 1);
+  final controller = PageController(initialPage: 0);
 
   @override
   void dispose() {
     controller.dispose();
     super.dispose();
   }
-
-  PageController _pageController = PageController(
-    initialPage: 0,
-  );
 
   @override
   Widget build(BuildContext context) {
@@ -66,32 +63,34 @@ class _TOnboardingScreenState extends State<TOnboardingScreen> {
                           });
                         },
                         itemBuilder: (_, i) {
-                          return Container(
-                            child: Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 16.0),
-                              child: Column(
-                                children: [
-                                  SizedBox(height: 34),
-                                  Image.asset(
-                                    contents[i].image,
-                                    height: 290,
-                                    width: 334,
-                                  ),
-                                  SizedBox(height: 25),
-                                  Align(
-                                    alignment: Alignment.centerLeft,
-                                    child: Text(contents[i].title,
-                                        style: FontConstant2.k32w500331Ftext),
-                                  ),
-                                  Align(
-                                    alignment: Alignment.centerLeft,
+                          return Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 16.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                SizedBox(height: 34),
+                                Image.asset(
+                                  contents[i].image,
+                                  height: 290,
+                                  width: 334,
+                                ),
+                                SizedBox(height: 10),
+                                Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: Text(contents[i].title,
+                                      style: FontConstant2.k32w500331Ftext),
+                                ),
+                                Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: SizedBox(
+                                    width: 200.w,
                                     child: Text(contents[i].discription,
-                                        textAlign: TextAlign.center,
+                                        maxLines: 2,
                                         style: FontConstant.k16w4008471Text),
-                                  )
-                                ],
-                              ),
+                                  ),
+                                )
+                              ],
                             ),
                           );
                         },
@@ -102,7 +101,7 @@ class _TOnboardingScreenState extends State<TOnboardingScreen> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Padding(
-                              padding: const EdgeInsets.only(left: 28),
+                              padding: const EdgeInsets.only(left: 16, top: 10),
                               child: Row(
                                 children: List.generate(
                                   contents.length,
@@ -122,10 +121,6 @@ class _TOnboardingScreenState extends State<TOnboardingScreen> {
                                       padding: const EdgeInsets.only(
                                           top: 85.0, left: 28),
                                       child: MaterialButton(
-                                        child: Icon(
-                                          Icons.arrow_forward,
-                                          color: Colors.white,
-                                        ),
                                         minWidth: 25,
                                         onPressed: () {
                                           if (currentIndex ==
@@ -139,10 +134,14 @@ class _TOnboardingScreenState extends State<TOnboardingScreen> {
                                           }
                                           controller.nextPage(
                                             duration:
-                                                Duration(milliseconds: 100),
-                                            curve: Curves.bounceIn,
+                                                Duration(milliseconds: 300),
+                                            curve: Curves.fastOutSlowIn,
                                           );
                                         },
+                                        child: Icon(
+                                          Icons.arrow_forward,
+                                          color: Colors.white,
+                                        ),
                                       ),
                                     ),
                                   ],

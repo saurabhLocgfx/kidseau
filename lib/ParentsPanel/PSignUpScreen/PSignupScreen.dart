@@ -41,7 +41,7 @@ class PSignupScreen extends StatelessWidget {
                           width: 173,
                         ),
                         Text(
-                          "We offers a new way to track your children and watch them grow.",
+                          "We offer a new way to track your children and watch them grow.",
                           style: FontConstant.k16w4008471Text,
                           textAlign: TextAlign.center,
                         ),

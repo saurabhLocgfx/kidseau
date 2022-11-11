@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kidseau/Theme.dart';
 
 class PFees extends StatefulWidget {
@@ -120,76 +121,71 @@ class _PFeesState extends State<PFees> {
                       style:
                           FontConstant.k22w5008471Text.copyWith(fontSize: 22),
                     ),
-                    Container(
-                      height: 316,
+                    SizedBox(
+                      width: 300.w,
+                      height: 400.h,
                       child: ListView.builder(
                           padding: EdgeInsets.zero,
+                          shrinkWrap: true,
                           itemCount: 4,
                           physics: NeverScrollableScrollPhysics(),
                           itemBuilder: (BuildContext context, int index) {
                             return Padding(
                               padding:
                                   const EdgeInsets.symmetric(vertical: 8.0),
-                              child: Container(
-                                height: 67,
-                                child: Column(
-                                  children: [
-                                    Row(
+                              child: Row(
+                                children: [
+                                  Container(
+                                    height: 67,
+                                    width: 50,
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(8),
+                                        image: DecorationImage(
+                                            image: AssetImage(
+                                                "assets/images/feesimage1.png"))),
+                                  ),
+                                  SizedBox(width: 16),
+                                  Expanded(
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
                                       children: [
-                                        Container(
-                                          height: 67,
-                                          width: 50,
-                                          decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(8),
-                                              image: DecorationImage(
-                                                  image: AssetImage(
-                                                      "assets/images/feesimage1.png"))),
-                                        ),
-                                        SizedBox(width: 16),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
                                           children: [
-                                            Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Text(
-                                                  "Paid to",
-                                                  style: FontConstant
-                                                      .k16w400B7A4Text,
-                                                ),
-                                                Text(
-                                                  "Paid to",
-                                                  style: FontConstant
-                                                      .k18w500331FText,
-                                                ),
-                                              ],
+                                            Text(
+                                              "Paid to",
+                                              style:
+                                                  FontConstant.k16w400B7A4Text,
                                             ),
-                                            SizedBox(width: 160),
-                                            Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.end,
-                                              children: [
-                                                Text(
-                                                  "24/09/2022",
-                                                  style: FontConstant
-                                                      .k16w400B7A4Text,
-                                                ),
-                                                Text(
-                                                  "\$98",
-                                                  style: FontConstant
-                                                      .k18w500331FText,
-                                                ),
-                                              ],
-                                            )
+                                            Text(
+                                              "Paid to",
+                                              style:
+                                                  FontConstant.k18w500331FText,
+                                            ),
                                           ],
                                         ),
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.end,
+                                          children: [
+                                            Text(
+                                              "24/09/2022",
+                                              style:
+                                                  FontConstant.k16w400B7A4Text,
+                                            ),
+                                            Text(
+                                              "\$98",
+                                              style:
+                                                  FontConstant.k18w500331FText,
+                                            ),
+                                          ],
+                                        )
                                       ],
                                     ),
-                                  ],
-                                ),
+                                  ),
+                                ],
                               ),
                             );
                           }),

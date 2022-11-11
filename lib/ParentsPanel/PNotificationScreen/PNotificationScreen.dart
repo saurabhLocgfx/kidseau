@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kidseau/ParentsPanel/PNotificationScreen/PNotificationbody.dart';
 import 'package:kidseau/Theme.dart';
 import 'package:kidseau/Widgets/widgets.dart';
@@ -81,7 +82,7 @@ class _PNotificationScreenState extends State<PNotificationScreen> {
               image: "assets/images/markicon.png",
               title: "Mark all as read",
               image2: "assets/images/markicon.png",
-              title2: "Notification setting",
+              title2: "Notification settings",
             ),
           ],
         ),
@@ -136,63 +137,66 @@ class _PNotificationScreenState extends State<PNotificationScreen> {
               ),
             ),
             SizedBox(height: 2),
-            Container(
-              height: 99,
-              width: 414,
-              color: ThemeColor.primarycolor.withOpacity(0.16),
-              child: Padding(
-                padding: const EdgeInsets.only(left: 16.0),
-                child: Row(
-                  children: [
-                    Container(
-                      height: 67,
-                      width: 50,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(08),
-                          image: DecorationImage(
-                              image:
-                                  AssetImage("assets/images/person4fm.png"))),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(top: 10.0, left: 12),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Please bring Alphabet notebook tomorrow.",
-                            style: FontConstant.k16w500331FText,
-                          ),
-                          Row(
-                            children: [
-                              GestureDetector(
-                                onTap: () {
-                                  notificationdialog(context);
-                                  // AnnouncementDialog(context);
-                                },
-                                child: Text(
-                                  "Anouncement",
+            GestureDetector(
+              onTap: () {
+                notificationdialog(context);
+                // AnnouncementDialog(context);
+              },
+              child: Container(
+                height: 99,
+                width: 414,
+                color: ThemeColor.primarycolor.withOpacity(0.16),
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 16.0),
+                  child: Row(
+                    children: [
+                      Container(
+                        height: 67,
+                        width: 50,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(08),
+                            image: DecorationImage(
+                                image:
+                                    AssetImage("assets/images/person4fm.png"))),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(top: 10.0, left: 12),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            SizedBox(
+                              width: 200.w,
+                              child: Text(
+                                "Please bring Alphabet notebook tomorrow.",
+                                style: FontConstant.k16w500331FText,
+                              ),
+                            ),
+                            Row(
+                              children: [
+                                Text(
+                                  "Announcement",
                                   style: FontConstant.k14w5008471Text,
                                 ),
-                              ),
-                              SizedBox(width: 08),
-                              Center(
-                                child: Icon(
-                                  Icons.circle,
-                                  size: 3,
-                                  color: Color(0xffB7A4B2),
+                                SizedBox(width: 08),
+                                Center(
+                                  child: Icon(
+                                    Icons.circle,
+                                    size: 3,
+                                    color: Color(0xffB7A4B2),
+                                  ),
                                 ),
-                              ),
-                              SizedBox(width: 06),
-                              Text(
-                                "2 hours ago.",
-                                style: FontConstant.k14w5008471Text,
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    )
-                  ],
+                                SizedBox(width: 06),
+                                Text(
+                                  "2 hours ago.",
+                                  style: FontConstant.k14w5008471Text,
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
                 ),
               ),
             ),

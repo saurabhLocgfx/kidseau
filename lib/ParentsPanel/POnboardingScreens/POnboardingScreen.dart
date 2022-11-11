@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:kidseau/ParentsPanel/PLoginScreen/PLoginScreen.dart';
 import 'package:kidseau/ParentsPanel/POnboardingScreens/POnboardingmodel.dart';
@@ -13,7 +14,7 @@ class POnboardingScreen extends StatefulWidget {
 
 class _POnboardingScreenState extends State<POnboardingScreen> {
   int currentIndex = 0;
-  final controller = PageController(initialPage: 1);
+  final controller = PageController(initialPage: 0);
 
   @override
   void dispose() {
@@ -86,9 +87,13 @@ class _POnboardingScreenState extends State<POnboardingScreen> {
                                   ),
                                   Align(
                                     alignment: Alignment.centerLeft,
-                                    child: Text(Pcontents[i].discription,
-                                        textAlign: TextAlign.center,
-                                        style: FontConstant.k16w4008471Text),
+                                    child: SizedBox(
+                                      width: 200.w,
+                                      child: Text(Pcontents[i].discription,
+                                          maxLines: 2,
+                                          textAlign: TextAlign.left,
+                                          style: FontConstant.k16w4008471Text),
+                                    ),
                                   )
                                 ],
                               ),
@@ -102,7 +107,7 @@ class _POnboardingScreenState extends State<POnboardingScreen> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Padding(
-                              padding: const EdgeInsets.only(left: 28),
+                              padding: const EdgeInsets.only(left: 16, top: 40),
                               child: Row(
                                 children: List.generate(
                                   Pcontents.length,
@@ -139,8 +144,8 @@ class _POnboardingScreenState extends State<POnboardingScreen> {
                                           }
                                           controller.nextPage(
                                             duration:
-                                                Duration(milliseconds: 100),
-                                            curve: Curves.bounceIn,
+                                                Duration(milliseconds: 300),
+                                            curve: Curves.fastOutSlowIn,
                                           );
                                         },
                                       ),

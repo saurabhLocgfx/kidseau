@@ -26,7 +26,7 @@ class _TMessageDashboardState extends State<TMessageDashboard> {
     super.dispose();
   }
 
-  PageController _pageController = PageController(
+  final PageController _pageController = PageController(
     initialPage: 0,
   );
   int pageIndex = 0;
@@ -37,7 +37,7 @@ class _TMessageDashboardState extends State<TMessageDashboard> {
       height: 896.h,
       width: 414.w,
       decoration: BoxDecoration(
-        gradient: new LinearGradient(colors: [
+        gradient: LinearGradient(colors: [
           Color(0xffFFFFFF),
           Color(0xff8267AC).withOpacity(0.6),
         ], begin: Alignment.topCenter, end: Alignment.bottomCenter),
@@ -54,6 +54,7 @@ class _TMessageDashboardState extends State<TMessageDashboard> {
             ),
           ),
           automaticallyImplyLeading: false,
+          centerTitle: false,
           elevation: 0,
           systemOverlayStyle: SystemUiOverlayStyle(
             statusBarColor: ThemeColor.lightpurple.withOpacity(0.16),
@@ -66,7 +67,7 @@ class _TMessageDashboardState extends State<TMessageDashboard> {
                 // Navigator.of(context).push(MaterialPageRoute(
                 //     builder: (context) => NotificationScreen()));
               },
-              child: Text("Messages",
+              child: Text("Message",
                   style: FontConstant.k32w5008267Text.copyWith(fontSize: 25)),
             ),
           ),
@@ -149,34 +150,31 @@ class _TMessageDashboardState extends State<TMessageDashboard> {
               );
               pageIndex = 0;
             },
-            child: Container(
-              child: Row(
-                children: [
-                  Container(
-                    height: 50,
-                    width: 50,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(93),
-                        color:
-                            pageIndex == 0 ? Color(0xffEBE6F2) : Colors.white),
-                    child: Center(
-                      child: Image.asset(
-                          pageIndex == 0
-                              ? "assets/images/messageiconfill.png"
-                              : "assets/images/messageicon.png",
-                          height: 24),
-                    ),
+            child: Row(
+              children: [
+                Container(
+                  height: 50,
+                  width: 50,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(93),
+                      color: pageIndex == 0 ? Color(0xffEBE6F2) : Colors.white),
+                  child: Center(
+                    child: Image.asset(
+                        pageIndex == 0
+                            ? "assets/images/messageiconfill.png"
+                            : "assets/images/messageicon.png",
+                        height: 24),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 4.0),
-                    child: Text("Message",
-                        style: FontConstant.k14w500B7A4Text.copyWith(
-                            color: pageIndex == 1
-                                ? Color(0xff8267AC)
-                                : Color(0xffB7A4B2))),
-                  ),
-                ],
-              ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 4.0),
+                  child: Text("Message",
+                      style: FontConstant.k14w500B7A4Text.copyWith(
+                          color: pageIndex == 1
+                              ? Color(0xff8267AC)
+                              : Color(0xffB7A4B2))),
+                ),
+              ],
             ),
           ),
           SizedBox(width: 10),

@@ -24,7 +24,7 @@ class _TProfileDashBoardState extends State<TProfileDashBoard> {
     super.dispose();
   }
 
-  PageController _pageController = PageController(
+  final PageController _pageController = PageController(
     initialPage: 0,
   );
   int pageIndex = 0;
@@ -36,7 +36,7 @@ class _TProfileDashBoardState extends State<TProfileDashBoard> {
       height: 896.h,
       width: 414.w,
       decoration: BoxDecoration(
-        gradient: new LinearGradient(colors: [
+        gradient: LinearGradient(colors: [
           Color(0xffFFFFFF),
           Color(0xff8267AC).withOpacity(0.6),
         ], begin: Alignment.topCenter, end: Alignment.bottomCenter),
@@ -59,6 +59,7 @@ class _TProfileDashBoardState extends State<TProfileDashBoard> {
             statusBarColor: ThemeColor.lightpurple.withOpacity(0.16),
           ),
           backgroundColor: Color(0xff8267AC).withOpacity(0.16),
+          centerTitle: false,
           title: Padding(
               padding: const EdgeInsets.only(top: 0.0),
               child: GestureDetector(
@@ -72,7 +73,7 @@ class _TProfileDashBoardState extends State<TProfileDashBoard> {
           actions: [TProfilepopup()],
         ),
         body: Stack(children: [
-          Container(
+          SizedBox(
             child: Image.asset(
               "assets/images/postsbackground.png",
               height: 414.h,
@@ -81,10 +82,10 @@ class _TProfileDashBoardState extends State<TProfileDashBoard> {
           ),
           Column(
             children: [
-              SizedBox(height: 100.h),
+              SizedBox(height: 50.h),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
-                children: [SizedBox(height: 40), Pageviewtabprofile()],
+                children: [SizedBox(height: 40), pageViewTabProfile()],
               ),
               SizedBox(height: 24.h),
               Expanded(
@@ -108,7 +109,7 @@ class _TProfileDashBoardState extends State<TProfileDashBoard> {
     );
   }
 
-  Container Pageviewtabprofile() {
+  Container pageViewTabProfile() {
     return Container(
       height: 56.h,
       width: 248.w,
@@ -130,34 +131,31 @@ class _TProfileDashBoardState extends State<TProfileDashBoard> {
               pageIndex = 0;
               setState(() {});
             },
-            child: Container(
-              child: Row(
-                children: [
-                  Container(
-                    height: 50,
-                    width: 50,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(93),
-                        color:
-                            pageIndex == 0 ? Color(0xffEBE6F2) : Colors.white),
-                    child: Center(
-                      child: Image.asset(
-                          pageIndex == 0
-                              ? "assets/images/person2iconfill.png"
-                              : "assets/images/person2icon.png",
-                          height: 24),
-                    ),
+            child: Row(
+              children: [
+                Container(
+                  height: 50,
+                  width: 50,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(93),
+                      color: pageIndex == 0 ? Color(0xffEBE6F2) : Colors.white),
+                  child: Center(
+                    child: Image.asset(
+                        pageIndex == 0
+                            ? "assets/images/person2iconfill.png"
+                            : "assets/images/person2icon.png",
+                        height: 24),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 4.0),
-                    child: Text("Parents",
-                        style: FontConstant.k14w500B7A4Text.copyWith(
-                            color: pageIndex == 0
-                                ? Color(0xff8267AC)
-                                : Color(0xffB7A4B2))),
-                  ),
-                ],
-              ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 4.0),
+                  child: Text("Parents",
+                      style: FontConstant.k14w500B7A4Text.copyWith(
+                          color: pageIndex == 0
+                              ? Color(0xff8267AC)
+                              : Color(0xffB7A4B2))),
+                ),
+              ],
             ),
           ),
           SizedBox(width: 10),

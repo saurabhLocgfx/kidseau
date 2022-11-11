@@ -133,14 +133,17 @@ class _TParentProfileState extends State<TParentProfile> {
               ),
             ),
             SizedBox(height: 50),
-            SizedBox(
-              height: 52,
-              width: 382,
-              child: MainButton(
-                  onTap: () {},
-                  title: "Edit",
-                  textStyleColor: Colors.white,
-                  backgroundColor: ThemeColor.primarycolor),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: SizedBox(
+                height: 52,
+                width: 382,
+                child: MainButton(
+                    onTap: () {},
+                    title: "Edit",
+                    textStyleColor: Colors.white,
+                    backgroundColor: ThemeColor.primarycolor),
+              ),
             ),
             SizedBox(
               height: 128,

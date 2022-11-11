@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_switch/flutter_switch.dart';
 import 'package:kidseau/TeachersPanel/TReminder/AddReminder.dart';
 import 'package:kidseau/Theme.dart';
 import 'package:kidseau/Widgets/buttons.dart';
@@ -89,77 +90,103 @@ class _TReminderScreenState extends State<TReminderScreen> {
           child: Column(
             children: [
               SizedBox(height: 10),
-              Container(
-                height: 96,
-                width: 382,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          "Tomorrow is holiday",
-                          style: FontConstant2.k24w500331Ftext,
-                        ),
-                        Text(
-                          "Scheduled  at 08:00 am - 30/09/2022",
-                          style: FontConstant.k16w4008471Text,
-                        ),
-                      ],
-                    ),
-                    customSwitch(val1, onChangedFunction1)
-                  ],
-                ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "Tomorrow is holiday",
+                        style: FontConstant2.k24w500331Ftext,
+                      ),
+                      Text(
+                        "Scheduled  at 08:00 am - 30/09/2022",
+                        style: FontConstant.k16w4008471Text,
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                      width: 48.w,
+                      height: 24.w,
+                      child: FlutterSwitch(
+                          toggleSize: 18,
+                          inactiveColor: ThemeColor.b7A4B2,
+                          activeColor: ThemeColor.primarycolor,
+                          value: val1,
+                          onToggle: (v) {
+                            setState(() {
+                              val1 = v;
+                            });
+                          })),
+                ],
               ),
-              Container(
-                height: 96,
-                width: 382,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          "Tomorrow is holiday",
-                          style: FontConstant2.k24w500331Ftext,
-                        ),
-                        Text(
-                          "Scheduled  at 08:00 am - 30/09/2022",
-                          style: FontConstant.k16w4008471Text,
-                        ),
-                      ],
-                    ),
-                    customSwitch(val2, onChangedFunction2)
-                  ],
-                ),
+              SizedBox(height: 12),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "Tomorrow is holiday",
+                        style: FontConstant2.k24w500331Ftext,
+                      ),
+                      Text(
+                        "Scheduled  at 08:00 am - 30/09/2022",
+                        style: FontConstant.k16w4008471Text,
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                      width: 48.w,
+                      height: 24.w,
+                      child: FlutterSwitch(
+                          toggleSize: 18,
+                          inactiveColor: ThemeColor.b7A4B2,
+                          activeColor: ThemeColor.primarycolor,
+                          value: val2,
+                          onToggle: (v) {
+                            setState(() {
+                              val2 = v;
+                            });
+                          })),
+                ],
               ),
-              Container(
-                height: 96,
-                width: 382,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          "Bring notebook",
-                          style: FontConstant2.k24w500331Ftext,
-                        ),
-                        Text(
-                          "Expired",
-                          style: FontConstant.k16w4008471Text,
-                        ),
-                      ],
-                    ),
-                    customSwitch(val3, onChangedFunction3)
-                  ],
-                ),
+              SizedBox(height: 12),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "Bring notebook",
+                        style: FontConstant2.k24w500331Ftext,
+                      ),
+                      Text(
+                        "Expired",
+                        style: FontConstant.k16w4008471Text,
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                      width: 48.w,
+                      height: 24.w,
+                      child: FlutterSwitch(
+                          toggleSize: 18,
+                          inactiveColor: ThemeColor.b7A4B2,
+                          activeColor: ThemeColor.primarycolor,
+                          value: val3,
+                          onToggle: (v) {
+                            setState(() {
+                              val3 = v;
+                            });
+                          })),
+                ],
               ),
               Expanded(
                 child: Align(
@@ -190,17 +217,4 @@ class _TReminderScreenState extends State<TReminderScreen> {
       ),
     );
   }
-}
-
-Widget customSwitch(bool val, Function OnChangedMethod) {
-  return Container(
-    height: 24.h,
-    width: 48.w,
-    child: CupertinoSwitch(
-        activeColor: ThemeColor.primarycolor,
-        value: val,
-        onChanged: (newValue) {
-          OnChangedMethod(newValue);
-        }),
-  );
 }

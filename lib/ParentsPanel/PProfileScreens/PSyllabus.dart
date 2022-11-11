@@ -27,6 +27,7 @@ class _PSyllabusState extends State<PSyllabus> {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
+        centerTitle: false,
         toolbarHeight: 70.0,
         flexibleSpace: ClipRect(
           child: BackdropFilter(

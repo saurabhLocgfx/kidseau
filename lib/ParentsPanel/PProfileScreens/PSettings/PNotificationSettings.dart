@@ -2,7 +2,8 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:kidseau/ParentsPanel/PReminderScreen/PReminderScreen.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_switch/flutter_switch.dart';
 import 'package:kidseau/Theme.dart';
 
 class PNotificationsettings extends StatefulWidget {
@@ -65,7 +66,7 @@ class _PNotificationsettingsState extends State<PNotificationsettings> {
           ),
           backgroundColor: Color(0xff8267AC).withOpacity(0.16),
           title: Text(
-            "Notification setting",
+            "Notification settings",
             style: FontConstant.k18w5008471Text,
           ),
           leading: Row(
@@ -106,11 +107,26 @@ class _PNotificationsettingsState extends State<PNotificationsettings> {
                       height: 30,
                       width: 156,
                       child: Text(
-                        "Notification Setting",
+                        "Notification Settings",
                         style: FontConstant.k18w500331FText,
                       ),
                     ),
-                    customSwitch(val1, onChangedFunction1)
+                    SizedBox(
+                        width: 48.w,
+                        height: 24.w,
+                        child: FlutterSwitch(
+                            toggleSize: 18,
+                            inactiveColor: ThemeColor.b7A4B2,
+                            activeColor: ThemeColor.primarycolor,
+                            value: val1,
+                            onToggle: (v) {
+                              setState(() {
+                                val1 = v;
+                                val2 = v;
+                                val3 = v;
+                                val4 = v;
+                              });
+                            })),
                   ],
                 ),
               ),
@@ -128,7 +144,19 @@ class _PNotificationsettingsState extends State<PNotificationsettings> {
                       ),
                     ],
                   ),
-                  customSwitch(val2, onChangedFunction2)
+                  SizedBox(
+                      width: 48.w,
+                      height: 24.w,
+                      child: FlutterSwitch(
+                          toggleSize: 18,
+                          inactiveColor: ThemeColor.b7A4B2,
+                          activeColor: ThemeColor.primarycolor,
+                          value: val2,
+                          onToggle: (v) {
+                            setState(() {
+                              val2 = v;
+                            });
+                          })),
                 ],
               ),
               SizedBox(height: 20),
@@ -145,7 +173,19 @@ class _PNotificationsettingsState extends State<PNotificationsettings> {
                       ),
                     ],
                   ),
-                  customSwitch(val3, onChangedFunction3)
+                  SizedBox(
+                      width: 48.w,
+                      height: 24.w,
+                      child: FlutterSwitch(
+                          toggleSize: 18,
+                          inactiveColor: ThemeColor.b7A4B2,
+                          activeColor: ThemeColor.primarycolor,
+                          value: val3,
+                          onToggle: (v) {
+                            setState(() {
+                              val3 = v;
+                            });
+                          })),
                 ],
               ),
               SizedBox(height: 20),
@@ -162,7 +202,19 @@ class _PNotificationsettingsState extends State<PNotificationsettings> {
                       ),
                     ],
                   ),
-                  customSwitch(val4, onChangedFunction4)
+                  SizedBox(
+                      width: 48.w,
+                      height: 24.w,
+                      child: FlutterSwitch(
+                          toggleSize: 18,
+                          inactiveColor: ThemeColor.b7A4B2,
+                          activeColor: ThemeColor.primarycolor,
+                          value: val4,
+                          onToggle: (v) {
+                            setState(() {
+                              val4 = v;
+                            });
+                          })),
                 ],
               ),
             ],

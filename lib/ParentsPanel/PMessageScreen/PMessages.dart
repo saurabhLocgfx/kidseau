@@ -104,7 +104,7 @@ class _PMessagesState extends State<PMessages> {
                                 Text(title[index],
                                     style: FontConstant.k14w4008471Text),
                                 Text("last message - 2 days ago",
-                                    style: FontConstant.k14w400B7A4Text),
+                                    style: FontConstant.k12w4008267Text),
                               ],
                             ),
                           ],

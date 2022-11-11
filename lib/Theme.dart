@@ -9,6 +9,8 @@ class ThemeColor {
   static const Color primaryorange = Color(0xffF0AD56);
   static const Color lightpurple = Color(0xff8267AC);
   static const Color darkpurple = Color(0xff84717F);
+  static const Color b7A4B2 = Color(0xFFB7A4B2);
+  static const Color ebe6F2 = Color(0xFFebe6F2);
 }
 
 // ------------------FONTS-------------------
@@ -28,6 +30,8 @@ class FontConstant {
 
   static TextStyle k18w500whiteText = GoogleFonts.balooDa2(
       fontWeight: FontWeight.w500, fontSize: 18, color: Colors.white);
+  static TextStyle k16w400whiteText = GoogleFonts.balooDa2(
+      fontWeight: FontWeight.w400, fontSize: 16, color: Colors.white);
   static TextStyle k18w5008471Text = GoogleFonts.balooDa2(
       fontWeight: FontWeight.w500, fontSize: 18, color: Color(0xff84717F));
   static TextStyle k18w5008267Text = GoogleFonts.balooDa2(
@@ -38,6 +42,8 @@ class FontConstant {
       fontWeight: FontWeight.w500, fontSize: 18, color: Color(0xff331F2D));
   static TextStyle k14w400lightText = GoogleFonts.balooDa2(
       fontWeight: FontWeight.w400, fontSize: 14, color: Color(0xffbeb1b9));
+  static TextStyle k14w400White = GoogleFonts.balooDa2(
+      fontWeight: FontWeight.w400, fontSize: 14, color: Colors.white);
   static TextStyle k22w5008471Text = GoogleFonts.balooDa2(
       fontWeight: FontWeight.w500, fontSize: 22, color: Color(0xff84717F));
   static TextStyle k16blackboldText = GoogleFonts.balooDa2(
@@ -96,9 +102,12 @@ class FontConstant {
       fontWeight: FontWeight.w500, fontSize: 16, color: Color(0xff331F2D));
   static TextStyle k16w500331FText = GoogleFonts.balooDa2(
       fontWeight: FontWeight.w500, fontSize: 16, color: Color(0xff331F2D));
+  static TextStyle k16w500White = GoogleFonts.balooDa2(
+      fontWeight: FontWeight.w500, fontSize: 16, color: Colors.white);
   static TextStyle k16w500B7A4Text = GoogleFonts.balooDa2(
       fontWeight: FontWeight.w500, fontSize: 16, color: Color(0xffB7A4B2));
-
+  static TextStyle k22w500brownText = GoogleFonts.balooDa2(
+      fontWeight: FontWeight.w500, fontSize: 22, color: Color(0xff331F2D));
   static TextStyle k24w500brownText = GoogleFonts.balooDa2(
       fontWeight: FontWeight.w500, fontSize: 24, color: Color(0xff331F2D));
   static TextStyle k16w400greyText = GoogleFonts.balooDa2(
@@ -107,6 +116,8 @@ class FontConstant {
       fontWeight: FontWeight.w400, fontSize: 16, color: Color(0xff84717F));
   static TextStyle k12w400B7A4Text = GoogleFonts.balooDa2(
       fontWeight: FontWeight.w400, fontSize: 12, color: Color(0xffB7A4B2));
+  static TextStyle k12w400White = GoogleFonts.balooDa2(
+      fontWeight: FontWeight.w400, fontSize: 12, color: Colors.white);
   static TextStyle k18w500B7A4Text = GoogleFonts.balooDa2(
       fontWeight: FontWeight.w500, fontSize: 18, color: Color(0xffB7A4B2));
   static TextStyle k12w4008267Text = GoogleFonts.balooDa2(
@@ -117,6 +128,8 @@ class FontConstant {
       fontWeight: FontWeight.w500, fontSize: 16, color: Color(0xff84717F));
   static TextStyle k14w5008471Text = GoogleFonts.balooDa2(
       fontWeight: FontWeight.w500, fontSize: 14, color: Color(0xff84717F));
+  static TextStyle k12w5008471Text = GoogleFonts.balooDa2(
+      fontWeight: FontWeight.w500, fontSize: 12, color: Color(0xff84717F));
 }
 
 class FontConstant2 {
@@ -150,4 +163,40 @@ class FontConstant2 {
       fontWeight: FontWeight.w400, fontSize: 16, color: Color(0xffB7A4B2));
   static TextStyle k24w500331Ftext = GoogleFonts.balooThambi2(
       fontWeight: FontWeight.w500, fontSize: 24, color: Color(0xff331F2D));
+  static TextStyle k24w500WhiteText = GoogleFonts.balooThambi2(
+      fontWeight: FontWeight.w500, fontSize: 24, color: Colors.white);
+}
+
+class TextFieldDecoration {
+  InputDecoration curvedWhiteDecoration({
+    required String label,
+    required bool curved,
+  }) {
+    return InputDecoration(
+      fillColor: Colors.white,
+      filled: true,
+      hintText: label,
+      hintStyle: FontConstant.k16w400B7A4Text,
+      enabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(curved ? 90 : 24),
+        borderSide: BorderSide(color: Colors.white, width: 1),
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(curved ? 90 : 24),
+        borderSide: BorderSide(color: Colors.white, width: 1),
+      ),
+      errorBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(curved ? 90 : 24),
+        borderSide: BorderSide(color: Colors.redAccent, width: 1),
+      ),
+      focusedErrorBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(curved ? 90 : 24),
+        borderSide: BorderSide(color: Colors.white, width: 1),
+      ),
+      disabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(curved ? 90 : 24),
+        borderSide: BorderSide(color: Colors.white, width: 1),
+      ),
+    );
+  }
 }

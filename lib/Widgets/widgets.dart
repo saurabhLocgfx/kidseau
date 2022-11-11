@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:kidseau/Theme.dart';
 
+import '../TeachersPanel/TProfileScreen/TNotificationSetttings.dart';
+
 Center mainlogo() {
   return Center(
       child: SizedBox(
@@ -41,6 +43,7 @@ Future<dynamic> notificationdialog(BuildContext context) {
                         height: 52,
                         width: 170,
                         child: MaterialButton(
+                          elevation: 0,
                           onPressed: () {
                             Navigator.pop(context);
                           },
@@ -62,6 +65,7 @@ Future<dynamic> notificationdialog(BuildContext context) {
                         width: 170,
                         child: MaterialButton(
                           onPressed: () {},
+                          elevation: 0,
                           color: ThemeColor.primarycolor,
                           shape: RoundedRectangleBorder(
                               side: BorderSide(
@@ -73,6 +77,7 @@ Future<dynamic> notificationdialog(BuildContext context) {
                               Image.asset(
                                 "assets/images/clockicon.png",
                                 height: 24,
+                                color: Colors.white,
                               ),
                               SizedBox(width: 14),
                               Text("Add reminder ",
@@ -320,44 +325,61 @@ class Notificationpopup extends StatelessWidget {
           return [
             PopupMenuItem(
               enabled: false,
-              child: Container(
-                height: 160,
-                width: 258,
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 32.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Row(
-                        children: [
-                          Image.asset(
-                            image,
-                            height: 24,
-                          ),
-                          SizedBox(width: 24),
-                          Text(
-                            title,
-                            style: FontConstant.k18w5008471Text,
-                          )
-                        ],
+              child: Padding(
+                padding: const EdgeInsets.only(left: 32, top: 40, bottom: 40),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                      child: Container(
+                        color: Colors.transparent,
+                        child: Row(
+                          children: [
+                            Image.asset(
+                              image,
+                              height: 24,
+                            ),
+                            SizedBox(width: 24),
+                            Text(
+                              title,
+                              style: FontConstant.k18w5008471Text,
+                            )
+                          ],
+                        ),
                       ),
-                      SizedBox(height: 26),
-                      Row(
-                        children: [
-                          Image.asset(
-                            image2,
-                            height: 24,
+                    ),
+                    SizedBox(height: 26),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.pop(context);
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => TNotificationsettings(),
                           ),
-                          SizedBox(width: 24),
-                          Text(
-                            title2,
-                            style: FontConstant.k18w5008471Text,
-                          )
-                        ],
-                      )
-                    ],
-                  ),
+                        );
+                      },
+                      child: Container(
+                        color: Colors.transparent,
+                        child: Row(
+                          children: [
+                            Image.asset(
+                              image2,
+                              height: 24,
+                            ),
+                            SizedBox(width: 24),
+                            Text(
+                              title2,
+                              style: FontConstant.k18w5008471Text,
+                            )
+                          ],
+                        ),
+                      ),
+                    )
+                  ],
                 ),
               ),
             ),

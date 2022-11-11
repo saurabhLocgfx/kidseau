@@ -371,7 +371,7 @@ class Pprofilepopup extends StatelessWidget {
                             ),
                             SizedBox(width: 15),
                             Text(
-                              "Setting",
+                              "Settings",
                               style: FontConstant.k18w5008471Text,
                             )
                           ],

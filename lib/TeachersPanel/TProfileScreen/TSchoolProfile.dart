@@ -48,7 +48,7 @@ class _TSchoolProfileState extends State<TSchoolProfile> {
                         children: [
                           Text(
                             "ABC Nursery School",
-                            style: FontConstant.k24w500brownText,
+                            style: FontConstant.k22w500brownText,
                           ),
                           Row(
                             children: [
@@ -56,7 +56,7 @@ class _TSchoolProfileState extends State<TSchoolProfile> {
                                 "assets/images/clockicon.png",
                                 height: 24,
                               ),
-                              SizedBox(width: 10),
+                              SizedBox(width: 4),
                               Text("08:00 am to 02:00 pm",
                                   style: FontConstant.k16w5008471Text),
                             ],

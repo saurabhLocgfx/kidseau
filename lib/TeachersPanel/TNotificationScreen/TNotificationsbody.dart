@@ -17,61 +17,61 @@ class Tnotificationlist2 extends StatelessWidget {
         itemBuilder: (BuildContext context, int index) {
           return Padding(
             padding: const EdgeInsets.only(top: 2.0),
-            child: Container(
-              height: 99,
-              width: 414,
-              color: Colors.white,
-              child: Padding(
-                padding: const EdgeInsets.only(left: 16.0),
-                child: Row(
-                  children: [
-                    Container(
-                      height: 67,
-                      width: 50,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(08),
-                          image: DecorationImage(
-                              image: AssetImage(images2[index]))),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(top: 10.0, left: 12),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Mohammad Umar has added new post",
-                            style: FontConstant.k16w500331FText,
-                          ),
-                          Row(
-                            children: [
-                              GestureDetector(
-                                onTap: () {
-                                  Tnotificationdialog(context);
-                                },
-                                child: Text(
+            child: GestureDetector(
+              onTap: () {
+                Tnotificationdialog(context);
+              },
+              child: Container(
+                height: 99,
+                width: 414,
+                color: Colors.white,
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 16.0),
+                  child: Row(
+                    children: [
+                      Container(
+                        height: 67,
+                        width: 50,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(08),
+                            image: DecorationImage(
+                                image: AssetImage(images2[index]))),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(top: 10.0, left: 12),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Mohammad Umar has added new post",
+                              style: FontConstant.k16w500331FText,
+                            ),
+                            Row(
+                              children: [
+                                Text(
                                   "Announcement",
                                   style: FontConstant.k14w5008471Text,
                                 ),
-                              ),
-                              SizedBox(width: 08),
-                              Center(
-                                child: Icon(
-                                  Icons.circle,
-                                  size: 3,
-                                  color: Color(0xffB7A4B2),
+                                SizedBox(width: 08),
+                                Center(
+                                  child: Icon(
+                                    Icons.circle,
+                                    size: 3,
+                                    color: Color(0xffB7A4B2),
+                                  ),
                                 ),
-                              ),
-                              SizedBox(width: 06),
-                              Text(
-                                "2 hours ago.",
-                                style: FontConstant.k14w5008471Text,
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    )
-                  ],
+                                SizedBox(width: 06),
+                                Text(
+                                  "2 hours ago.",
+                                  style: FontConstant.k14w5008471Text,
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -96,61 +96,61 @@ class Tnotificationlist1 extends StatelessWidget {
           itemBuilder: (BuildContext context, int index) {
             return Padding(
               padding: const EdgeInsets.all(2.0),
-              child: Container(
-                height: 99,
-                width: 414,
-                color: Colors.white,
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 16.0),
-                  child: Row(
-                    children: [
-                      Container(
-                        height: 67,
-                        width: 50,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(08),
-                            image: DecorationImage(
-                                image: AssetImage(images[index]))),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(top: 10.0, left: 12),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "Mohammad Umar has added new post",
-                              style: FontConstant.k16w500331FText,
-                            ),
-                            Row(
-                              children: [
-                                GestureDetector(
-                                  onTap: () {
-                                    Tnotificationdialog(context);
-                                  },
-                                  child: Text(
+              child: GestureDetector(
+                onTap: () {
+                  Tnotificationdialog(context);
+                },
+                child: Container(
+                  height: 99,
+                  width: 414,
+                  color: Colors.white,
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 16.0),
+                    child: Row(
+                      children: [
+                        Container(
+                          height: 67,
+                          width: 50,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(08),
+                              image: DecorationImage(
+                                  image: AssetImage(images[index]))),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(top: 10.0, left: 12),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "Mohammad Umar has added new post",
+                                style: FontConstant.k16w500331FText,
+                              ),
+                              Row(
+                                children: [
+                                  Text(
                                     "Announcement",
                                     style: FontConstant.k14w5008471Text,
                                   ),
-                                ),
-                                SizedBox(width: 08),
-                                Center(
-                                  child: Icon(
-                                    Icons.circle,
-                                    size: 3,
-                                    color: Color(0xffB7A4B2),
+                                  SizedBox(width: 08),
+                                  Center(
+                                    child: Icon(
+                                      Icons.circle,
+                                      size: 3,
+                                      color: Color(0xffB7A4B2),
+                                    ),
                                   ),
-                                ),
-                                SizedBox(width: 06),
-                                Text(
-                                  "2 hours ago.",
-                                  style: FontConstant.k14w5008471Text,
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      )
-                    ],
+                                  SizedBox(width: 06),
+                                  Text(
+                                    "2 hours ago.",
+                                    style: FontConstant.k14w5008471Text,
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -192,6 +192,7 @@ Future<dynamic> Tnotificationdialog(BuildContext context) {
                         height: 52,
                         width: 170,
                         child: MaterialButton(
+                          elevation: 0,
                           onPressed: () {
                             Navigator.pop(context);
                           },
@@ -212,6 +213,7 @@ Future<dynamic> Tnotificationdialog(BuildContext context) {
                         height: 52,
                         width: 170,
                         child: MaterialButton(
+                          elevation: 0,
                           onPressed: () {},
                           color: ThemeColor.primarycolor,
                           shape: RoundedRectangleBorder(

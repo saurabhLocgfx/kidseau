@@ -97,7 +97,7 @@ class _PHomeScreenState extends State<PHomeScreen> {
                             );
                           },
                           child: SizedBox(
-                              height: 128, width: 280, child: Studentcard())),
+                              height: 128, width: 250.w, child: Studentcard())),
                       GestureDetector(
                         onTap: () {
                           Navigator.push(
@@ -151,8 +151,9 @@ class _PHomeScreenState extends State<PHomeScreen> {
                           height: 5.h,
                         ),
                         Activity(),
+                        SizedBox(height: 10),
                         Center(
-                          child: Text("see more",
+                          child: Text("See more",
                               style: FontConstant.k16w500purpleText.copyWith(
                                 fontSize: 18,
                               )),
@@ -193,59 +194,54 @@ class Studentcard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-          color: Colors.transparent,
-          boxShadow: [
-            BoxShadow(
-              color: Color(0xffAD9CC9),
-              spreadRadius: 1,
-              blurRadius: 8,
-              offset: Offset(0, 3), // changes position of shadow
-            ),
-          ],
-          borderRadius: BorderRadius.circular(16),
-          image: DecorationImage(
-              image: AssetImage("assets/images/Student_Card-remove.png"),
-              fit: BoxFit.cover)),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20.0),
-        child: Row(
-          children: [
-            Container(
-              height: 96,
-              width: 72,
-              decoration: BoxDecoration(
-                  image: DecorationImage(
-                      image: AssetImage("assets/images/Rectangle 2715.png"))),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 16.0, top: 10),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Nobite",
-                    style: FontConstant.k18w500whiteText,
-                  ),
-                  Text("Nursary sec A",
-                      style: FontConstant.k18w500whiteText.copyWith(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w400,
-                          color: Colors.white.withOpacity(0.5))),
-                  Text("08:00 am to 01:00 pm",
-                      style: FontConstant.k18w500whiteText.copyWith(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w400,
-                          color: Colors.white.withOpacity(0.5))),
-                  Text("2nd rank",
-                      style: FontConstant.k18w500whiteText.copyWith(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500,
-                          color: Colors.white.withOpacity(0.5))),
-                ],
-              ),
-            ),
-          ],
+        color: Colors.transparent,
+        boxShadow: [
+          BoxShadow(
+            color: Color(0xffAD9CC9),
+            spreadRadius: 1,
+            blurRadius: 8,
+            offset: Offset(0, 3), // changes position of shadow
+          ),
+        ],
+        borderRadius: BorderRadius.circular(16),
+        image: DecorationImage(
+          image: AssetImage("assets/images/sc.png"),
+          fit: BoxFit.fitHeight,
         ),
+      ),
+      padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 16),
+      child: Row(
+        children: [
+          Container(
+            height: 96,
+            width: 72,
+            decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage("assets/images/Rectangle 2715.png"))),
+          ),
+          SizedBox(width: 16.w),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "Nobite",
+                style: FontConstant.k16w500White,
+              ),
+              Text(
+                "Nursery sec A",
+                style: FontConstant.k14w400White,
+              ),
+              Text(
+                "08:00 am to 01:00 pm",
+                style: FontConstant.k12w400White,
+              ),
+              Text(
+                "2nd rank",
+                style: FontConstant.k12w400White,
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }

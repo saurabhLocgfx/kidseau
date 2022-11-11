@@ -110,74 +110,69 @@ class _TChatsState extends State<TChats> {
                     ),
                   );
                 },
-                child: Container(
-                  child: Row(
-                    children: [
-                      Container(
-                        height: 112.h,
-                        width: 84.w,
-                        decoration: BoxDecoration(
-                            image: DecorationImage(
-                                image:
-                                    AssetImage("assets/images/teacher1.png"))),
-                      ),
-                      SizedBox(
-                        width: 16.w,
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text("Mohammad Umar",
-                              style: FontConstant.k24w500brownText
-                                  .copyWith(color: ThemeColor.primarycolor)),
-                          Text(
-                            "Class teacher",
-                            style: FontConstant.k16w400B7A4Text,
-                          ),
-                          Text(
-                            "English, French, Arabic",
-                            style: FontConstant.k16w4008471Text,
-                          )
-                        ],
-                      )
-                    ],
-                  ),
+                child: Row(
+                  children: [
+                    Container(
+                      height: 112.h,
+                      width: 84.w,
+                      decoration: BoxDecoration(
+                          image: DecorationImage(
+                              image: AssetImage("assets/images/teacher1.png"))),
+                    ),
+                    SizedBox(
+                      width: 16.w,
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text("Mohammad Umar",
+                            style: FontConstant.k24w500brownText
+                                .copyWith(color: ThemeColor.primarycolor)),
+                        Text(
+                          "Class teacher",
+                          style: FontConstant.k16w400B7A4Text,
+                        ),
+                        Text(
+                          "English, French, Arabic",
+                          style: FontConstant.k16w4008471Text,
+                        )
+                      ],
+                    )
+                  ],
                 ),
               ),
               Expanded(
-                  child: Container(
-                child: GroupedListView<Messages, DateTime>(
-                  reverse: true,
-                  order: GroupedListOrder.DESC,
-                  padding: EdgeInsets.all(20),
-                  elements: messages,
-                  groupBy: (messages) => DateTime(messages.date.year,
-                      messages.date.month, messages.date.day),
-                  groupHeaderBuilder: (Messages messages) => SizedBox(),
-                  itemBuilder: (context, Messages messages) => Align(
+                  child: GroupedListView<Messages, DateTime>(
+                reverse: true,
+                order: GroupedListOrder.DESC,
+                padding: EdgeInsets.all(20),
+                elements: messages,
+                groupBy: (messages) => DateTime(
+                    messages.date.year, messages.date.month, messages.date.day),
+                groupHeaderBuilder: (Messages messages) => SizedBox(),
+                itemBuilder: (context, Messages messages) => Align(
+                  alignment: messages.isSentByme
+                      ? Alignment.centerRight
+                      : Alignment.centerLeft,
+                  child: Align(
                     alignment: messages.isSentByme
                         ? Alignment.centerRight
                         : Alignment.centerLeft,
-                    child: Align(
-                      alignment: messages.isSentByme
-                          ? Alignment.centerRight
-                          : Alignment.centerLeft,
-                      child: Padding(
-                        padding: const EdgeInsets.only(bottom: 32.0),
-                        child: Container(
-                          decoration: BoxDecoration(
-                              color: messages.isSentByme
-                                  ? Color(0xffF2F1F8)
-                                  : Color(0xffDBE8FA),
-                              borderRadius: BorderRadius.circular(6)),
-                          child: Padding(
-                            padding: EdgeInsets.all(12),
-                            child: Text(
-                              messages.text,
-                              style: FontConstant.k16w4008471Text
-                                  .copyWith(color: Color(0xff5E5C70)),
-                            ),
+                    child: Padding(
+                      padding: const EdgeInsets.only(bottom: 32.0),
+                      child: Container(
+                        decoration: BoxDecoration(
+                            color: messages.isSentByme
+                                ? Color(0xffF2F1F8)
+                                : Color(0xffDBE8FA),
+                            borderRadius: BorderRadius.circular(6)),
+                        child: Padding(
+                          padding: EdgeInsets.all(12),
+                          child: Text(
+                            messages.text,
+                            style: FontConstant.k16w4008471Text
+                                .copyWith(color: Color(0xff5E5C70)),
                           ),
                         ),
                       ),
@@ -189,7 +184,7 @@ class _TChatsState extends State<TChats> {
               SizedBox(
                 height: 8.h,
               ),
-              Container(
+              SizedBox(
                 height: 52.h,
                 width: 382.w,
                 child: TextField(
@@ -236,7 +231,7 @@ class _TChatsState extends State<TChats> {
                 ),
               ),
               SizedBox(
-                height: 32.h,
+                height: !_isVisible ? 32.h : 20.h,
               ),
             ],
           ),

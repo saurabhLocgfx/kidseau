@@ -32,6 +32,7 @@ class _TGroupScreenState extends State<TGroupScreen> {
         ),
         automaticallyImplyLeading: false,
         elevation: 0,
+        centerTitle: false,
         systemOverlayStyle: SystemUiOverlayStyle(
           statusBarColor: Color(0xff8267AC).withOpacity(0.16),
         ),

@@ -71,6 +71,7 @@ class _TMessagesState extends State<TMessages> {
               child: Container(
                   height: 67.h,
                   width: 382.w,
+                  color: Colors.transparent,
                   child: Padding(
                     padding: const EdgeInsets.only(left: 16, right: 16),
                     child: Row(
@@ -104,7 +105,7 @@ class _TMessagesState extends State<TMessages> {
                                 Text(title[index],
                                     style: FontConstant.k14w4008471Text),
                                 Text("last message - 2 days ago",
-                                    style: FontConstant.k14w400B7A4Text),
+                                    style: FontConstant.k12w400B7A4Text),
                               ],
                             ),
                           ],

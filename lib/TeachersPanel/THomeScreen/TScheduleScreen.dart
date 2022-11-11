@@ -3,24 +3,22 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:kidseau/ParentsPanel/PHomeScreen/PHomeScreen.dart';
-import 'package:kidseau/TeachersPanel/THomeScreen/TKidsDetails.dart';
-import 'package:kidseau/Theme.dart';
 
-class TAllStudents extends StatefulWidget {
-  const TAllStudents({Key? key}) : super(key: key);
+import '../../ParentsPanel/PHomeScreen/PHomebody.dart';
+import '../../Theme.dart';
+
+class ScheduleScreen extends StatefulWidget {
+  const ScheduleScreen({Key? key}) : super(key: key);
 
   @override
-  State<TAllStudents> createState() => _TAllStudentsState();
+  State<ScheduleScreen> createState() => _ScheduleScreenState();
 }
 
-class _TAllStudentsState extends State<TAllStudents> {
+class _ScheduleScreenState extends State<ScheduleScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading: false,
-        elevation: 0,
         toolbarHeight: 70.0,
         flexibleSpace: ClipRect(
           child: BackdropFilter(
@@ -30,13 +28,15 @@ class _TAllStudentsState extends State<TAllStudents> {
             ),
           ),
         ),
+        automaticallyImplyLeading: false,
+        elevation: 0,
+        centerTitle: false,
         systemOverlayStyle: SystemUiOverlayStyle(
           statusBarColor: Color(0xff8267AC).withOpacity(0.16),
         ),
         backgroundColor: Color(0xff8267AC).withOpacity(0.16),
-        centerTitle: false,
         title: Text(
-          "Students",
+          "Back",
           style: FontConstant.k18w5008471Text,
         ),
         leading: Row(
@@ -57,40 +57,23 @@ class _TAllStudentsState extends State<TAllStudents> {
           ],
         ),
       ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      body: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 16, vertical: 40),
+        child: SingleChildScrollView(
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: 20.h),
               Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  "Students",
+                  "Schedule",
                   style: FontConstant2.baloothampifont,
                 ),
               ),
-              SizedBox(height: 8),
-              ListView.builder(
-                  physics: NeverScrollableScrollPhysics(),
-                  itemCount: 10,
-                  shrinkWrap: true,
-                  itemBuilder: (BuildContext context, int index) {
-                    return Padding(
-                      padding: const EdgeInsets.only(bottom: 16.0),
-                      child: GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => TKidsOverview()),
-                          );
-                        },
-                        child: SizedBox(
-                            height: 128, width: 382, child: Studentcard()),
-                      ),
-                    );
-                  }),
+              SizedBox(
+                height: 5.h,
+              ),
+              Activity(),
             ],
           ),
         ),

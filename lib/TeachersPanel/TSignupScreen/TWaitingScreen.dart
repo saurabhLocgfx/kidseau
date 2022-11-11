@@ -16,6 +16,23 @@ class _TWaitingScreenState extends State<TWaitingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.all(16),
+        child: SizedBox(
+          height: 52,
+          width: 382,
+          child: MainButton(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => TLoginScreen()),
+                );
+              },
+              title: "Close",
+              textStyleColor: Colors.white,
+              backgroundColor: ThemeColor.primarycolor),
+        ),
+      ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16.0),
         child: Column(
@@ -36,21 +53,6 @@ class _TWaitingScreenState extends State<TWaitingScreen> {
             Text(
               "Thank you for your patience",
               style: FontConstant.k16w5008471Text,
-            ),
-            SizedBox(height: 70.h),
-            SizedBox(
-              height: 52,
-              width: 382,
-              child: MainButton(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => TLoginScreen()),
-                    );
-                  },
-                  title: "Close",
-                  textStyleColor: Colors.white,
-                  backgroundColor: ThemeColor.primarycolor),
             ),
           ],
         ),

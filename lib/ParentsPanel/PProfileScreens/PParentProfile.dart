@@ -108,29 +108,21 @@ class _PParentsProfileState extends State<PParentsProfile> {
                       itemBuilder: (BuildContext context, int index) {
                         return Row(
                           children: [
-                            Container(
-                              height: 27,
-                              width: 104,
-                              child: Align(
-                                alignment: Alignment.centerLeft,
-                                child: Column(
-                                  children: [
-                                    Text(
-                                      infocategory[index],
-                                      style: FontConstant.k16w500331FText,
-                                    ),
-                                  ],
-                                ),
+                            SizedBox(
+                              width: 130.w,
+                              child: Text(
+                                infocategory[index],
+                                style: FontConstant.k16w500331FText,
                               ),
                             ),
                             SizedBox(width: 16),
-                            Column(
-                              children: [
-                                Text(
-                                  infocategorydata[index],
-                                  style: FontConstant.k16w5008471Text,
-                                ),
-                              ],
+                            Expanded(
+                              child: Text(
+                                infocategorydata[index],
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: FontConstant.k16w5008471Text,
+                              ),
                             ),
                           ],
                         );
@@ -141,14 +133,17 @@ class _PParentsProfileState extends State<PParentsProfile> {
               ),
             ),
             SizedBox(height: 32),
-            SizedBox(
-              height: 52,
-              width: 382,
-              child: MainButton(
-                  onTap: () {},
-                  title: "Edit",
-                  textStyleColor: Colors.white,
-                  backgroundColor: ThemeColor.primarycolor),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: SizedBox(
+                height: 52,
+                width: 382,
+                child: MainButton(
+                    onTap: () {},
+                    title: "Edit",
+                    textStyleColor: Colors.white,
+                    backgroundColor: ThemeColor.primarycolor),
+              ),
             ),
             SizedBox(
               height: 125,

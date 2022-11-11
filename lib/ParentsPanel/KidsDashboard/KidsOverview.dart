@@ -140,7 +140,7 @@ class _PKidsOverviewState extends State<PKidsOverview> {
                       borderRadius: BorderRadius.circular(16),
                       child: Container(
                         height: 116,
-                        width: 175,
+                        width: 150.w,
                         decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(16)),
@@ -186,7 +186,7 @@ class _PKidsOverviewState extends State<PKidsOverview> {
                       borderRadius: BorderRadius.circular(16),
                       child: Container(
                         height: 116,
-                        width: 175,
+                        width: 150.w,
                         decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(16)),
@@ -274,40 +274,33 @@ class _PKidsOverviewState extends State<PKidsOverview> {
                           "assets/images/bar4.png",
                           height: 130,
                         ),
-                        Container(
-                          height: 140,
-                          width: 159,
-                          child: ListView.builder(
-                              padding: EdgeInsets.zero,
-                              itemCount: shortnames.length,
-                              itemBuilder: (BuildContext context, int index) {
-                                return Row(
-                                  children: [
-                                    Column(
-                                      children: [
-                                        Text(shortnames[index],
-                                            style: FontConstant.k14w4008471Text
-                                                .copyWith(
-                                                    color: Color(0xff331F2D))),
-                                      ],
-                                    ),
-                                    SizedBox(width: 10),
-                                    Icon(
-                                      Icons.circle,
-                                      size: 4,
-                                      color: Color(0xff84717F),
-                                    ),
-                                    SizedBox(width: 10),
-                                    Column(
-                                      children: [
-                                        Text(fullnames[index],
-                                            style:
-                                                FontConstant.k14w5008471Text),
-                                      ],
-                                    ),
-                                  ],
-                                );
-                              }),
+                        Expanded(
+                          child: SizedBox(
+                            height: 140,
+                            child: ListView.builder(
+                                padding: EdgeInsets.zero,
+                                physics: NeverScrollableScrollPhysics(),
+                                itemCount: shortnames.length,
+                                itemBuilder: (BuildContext context, int index) {
+                                  return Row(
+                                    children: [
+                                      Text(shortnames[index],
+                                          style: FontConstant.k14w4008471Text
+                                              .copyWith(
+                                                  color: Color(0xff331F2D))),
+                                      SizedBox(width: 10),
+                                      Icon(
+                                        Icons.circle,
+                                        size: 4,
+                                        color: Color(0xff84717F),
+                                      ),
+                                      SizedBox(width: 10),
+                                      Text(fullnames[index],
+                                          style: FontConstant.k12w5008471Text),
+                                    ],
+                                  );
+                                }),
+                          ),
                         )
                       ],
                     )

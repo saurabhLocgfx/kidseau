@@ -74,13 +74,9 @@ class _PSettingsState extends State<PSettings> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Container(
-                      height: 30,
-                      width: 156,
-                      child: Text(
-                        "Notification Setting",
-                        style: FontConstant.k18w500331FText,
-                      ),
+                    Text(
+                      "Notification Settings",
+                      style: FontConstant.k18w500331FText,
                     ),
                     Image.asset(
                       "assets/images/rightarrow.png",

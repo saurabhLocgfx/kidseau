@@ -1,7 +1,10 @@
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kidseau/Theme.dart';
 import 'package:kidseau/Widgets/buttons.dart';
+
+import 'TAddAnnouncement.dart';
 
 class TAddPostsScreen extends StatefulWidget {
   const TAddPostsScreen({Key? key}) : super(key: key);
@@ -25,8 +28,8 @@ class _TAddPostsScreenState extends State<TAddPostsScreen> {
             dashPattern: [10, 10],
             child: Container(
               color: Colors.transparent,
-              width: 250,
-              height: 333,
+              width: 200.w,
+              height: 250.w,
               child: Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -42,12 +45,19 @@ class _TAddPostsScreenState extends State<TAddPostsScreen> {
               ),
             ),
           ),
-          SizedBox(height: 40),
+          SizedBox(height: 20),
           Text('OR', style: FontConstant.k18w500B7A4Text),
-          SizedBox(height: 40),
+          SizedBox(height: 20),
           materialButton(
             context,
-            () {},
+            () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => AddAnnouncement(),
+                ),
+              );
+            },
             'Add Announcement',
             Color(0xFFF0AD56),
             52.0,

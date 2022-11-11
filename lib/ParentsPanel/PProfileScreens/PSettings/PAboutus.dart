@@ -30,6 +30,7 @@ class _PAboutusState extends State<PAboutus> {
               ),
             ),
           ),
+          centerTitle: false,
           automaticallyImplyLeading: false,
           elevation: 0,
           systemOverlayStyle: SystemUiOverlayStyle(

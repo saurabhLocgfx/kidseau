@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:kidseau/ParentsPanel/PHomeScreen/PLearningAlphabets.dart';
 import 'package:kidseau/Theme.dart';
@@ -18,6 +19,13 @@ class _ActivityState extends State<Activity> {
     "Rest"
   ];
 
+  var groups = [
+    "A",
+    "B",
+    "C",
+    "D",
+  ];
+
   var time = [
     "From 08:00 - 09:00 am",
     "From 09:15 - 10:00 am",
@@ -34,9 +42,9 @@ class _ActivityState extends State<Activity> {
   ];
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: Get.size.height * 0.38,
-      width: Get.size.width * 0.95,
+    return SizedBox(
+      height: 270.h,
+      width: 1.sw,
       child: ListView.builder(
           padding: EdgeInsets.zero,
           physics: NeverScrollableScrollPhysics(),
@@ -56,6 +64,7 @@ class _ActivityState extends State<Activity> {
                 child: Container(
                   height: 64,
                   width: Get.size.width * 0.93,
+                  margin: EdgeInsets.symmetric(horizontal: 16),
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(16),
@@ -82,7 +91,7 @@ class _ActivityState extends State<Activity> {
                                     .copyWith(fontSize: 16),
                               ),
                               Text(
-                                time[index],
+                                '${groups[index]} . ${time[index]}',
                                 style: FontConstant.k14w400lightpurpleText
                                     .copyWith(
                                         fontWeight: FontWeight.w400,

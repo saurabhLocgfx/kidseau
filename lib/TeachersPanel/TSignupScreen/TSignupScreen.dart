@@ -10,7 +10,7 @@ class TSignupScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 896.h,
       width: 414.w,
       child: Scaffold(
@@ -30,22 +30,21 @@ class TSignupScreen extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 199.0),
-                  child: Container(
-                    child: Column(
-                      children: [
-                        Image.asset(
-                          "assets/images/logo.png",
-                          height: 172,
-                          width: 173,
-                        ),
-                        Text(
-                          "We offers a new way to track your children and watch them grow.",
-                          style: FontConstant.k16w4008471Text,
-                          textAlign: TextAlign.center,
-                        ),
-                      ],
-                    ),
+                  padding:
+                      const EdgeInsets.only(top: 199.0, left: 16, right: 16),
+                  child: Column(
+                    children: [
+                      Image.asset(
+                        "assets/images/logo.png",
+                        height: 172,
+                        width: 173,
+                      ),
+                      Text(
+                        "We offer a new way to mark the children and shape them for better future.",
+                        style: FontConstant.k16w4008471Text,
+                        textAlign: TextAlign.center,
+                      ),
+                    ],
                   ),
                 )
               ]),
@@ -62,7 +61,7 @@ class TSignupScreen extends StatelessWidget {
                         //     builder: (context) => SignupScreen()));
                       },
                       child: Text(
-                        "Login/create a new account to track your kids’ activities.",
+                        "Login/create a new account.",
                         style:
                             FontConstant.k16w400B7A4Text.copyWith(fontSize: 15),
                         textAlign: TextAlign.start,

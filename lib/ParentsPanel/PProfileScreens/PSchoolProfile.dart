@@ -39,7 +39,7 @@ class _PSchoolProfileState extends State<PSchoolProfile> {
                               image: AssetImage(
                                   "assets/images/profileperson.png"))),
                     ),
-                    SizedBox(width: 25),
+                    SizedBox(width: 20),
                     Align(
                       alignment: Alignment.center,
                       child: Column(

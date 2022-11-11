@@ -1,8 +1,12 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_switch/flutter_switch.dart';
 import 'package:kidseau/TeachersPanel/TNotificationScreen/TNotificationScreen.dart';
 import 'package:kidseau/Theme.dart';
+
+import 'TStudentDetailScreen.dart';
 
 class TStudentScreen extends StatefulWidget {
   const TStudentScreen({Key? key}) : super(key: key);
@@ -12,6 +16,7 @@ class TStudentScreen extends StatefulWidget {
 }
 
 class _TStudentScreenState extends State<TStudentScreen> {
+  bool toggle1 = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -102,9 +107,157 @@ class _TStudentScreenState extends State<TStudentScreen> {
                         style: FontConstant.k16w500B7A4Text,
                       ),
                     ],
-                  )
+                  ),
                 ],
-              )
+              ),
+              SizedBox(height: 44),
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => TStudentDetailScreen()));
+                },
+                child: Container(
+                  width: 1.sw,
+                  height: 151,
+                  padding: EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(16),
+                    color: Colors.white,
+                    image: DecorationImage(
+                      fit: BoxFit.fill,
+                      image: AssetImage(
+                        'assets/images/sp.png',
+                      ),
+                    ),
+                  ),
+                  child: Row(
+                    children: [
+                      Container(
+                        width: 80,
+                        height: 105,
+                        clipBehavior: Clip.hardEdge,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: Image.asset('assets/images/Rectangle 2715.png'),
+                      ),
+                      SizedBox(width: 12),
+                      Expanded(
+                        child: Column(
+                          children: [
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        'Child Name',
+                                        style: FontConstant.k18w500331FText,
+                                      ),
+                                      SizedBox(height: 4),
+                                      Text(
+                                        'S/O - Father Name',
+                                        style: FontConstant.k16w4008471Text,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                FlutterSwitch(
+                                  width: 56.w,
+                                  height: 32.w,
+                                  toggleSize: 30,
+                                  inactiveColor: ThemeColor.b7A4B2,
+                                  activeColor: ThemeColor.primarycolor,
+                                  inactiveIcon:
+                                      Image.asset('assets/images/sf.png'),
+                                  activeIcon:
+                                      Image.asset('assets/images/baby.png'),
+                                  value: toggle1,
+                                  onToggle: (v) {
+                                    setState(() {
+                                      toggle1 = v;
+                                    });
+                                  },
+                                ),
+                              ],
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                for (int i = 0; i < 5; i++)
+                                  GestureDetector(
+                                    onTap: () {},
+                                    child: Container(
+                                      padding: EdgeInsets.all(5),
+                                      color: Colors.transparent,
+                                      child: Text(
+                                        '${i + 1}',
+                                        style: FontConstant.k14w400B7A4Text,
+                                      ),
+                                    ),
+                                  ),
+                              ],
+                            ),
+                            Stack(
+                              clipBehavior: Clip.none,
+                              alignment: Alignment.center,
+                              children: [
+                                Container(
+                                  width: 1.sw,
+                                  height: 10,
+                                  decoration: BoxDecoration(
+                                    color: ThemeColor.ebe6F2,
+                                    borderRadius: BorderRadius.circular(12),
+                                  ),
+                                ),
+                                Positioned(
+                                  left: 0,
+                                  child: Stack(
+                                    alignment: Alignment.centerRight,
+                                    children: [
+                                      AnimatedContainer(
+                                        duration: Duration(milliseconds: 300),
+                                        curve: Curves.fastOutSlowIn,
+                                        width: 1.sw / 5.5,
+                                        height: 10,
+                                        decoration: BoxDecoration(
+                                          gradient: LinearGradient(
+                                            colors: [
+                                              Color(0xFFF5C88E),
+                                              Color(0xFFF0AD56),
+                                            ],
+                                            begin: Alignment.centerLeft,
+                                            end: Alignment.centerRight,
+                                          ),
+                                          borderRadius:
+                                              BorderRadius.circular(12),
+                                        ),
+                                      ),
+                                      Container(
+                                        width: 24,
+                                        height: 24,
+                                        decoration: BoxDecoration(
+                                          color: Color(0xFFF0AD56),
+                                          shape: BoxShape.circle,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
             ],
           ),
         ),

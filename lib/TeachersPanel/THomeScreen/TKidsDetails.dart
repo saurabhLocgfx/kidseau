@@ -13,12 +13,9 @@ class TKidsOverview extends StatefulWidget {
   State<TKidsOverview> createState() => _TKidsOverviewState();
 }
 
-bool isChecked = false;
-bool isChecked2 = false;
-bool isChecked3 = false;
-bool isChecked4 = false;
-
 class _TKidsOverviewState extends State<TKidsOverview> {
+  List<bool> isChecked = [false, false, false, false];
+  List<String> time = ['Birth', '2 Months', '4 Months', '11 Months'];
   var parentcategory = [
     "Mother's name",
     "Occupation",
@@ -62,6 +59,7 @@ class _TKidsOverviewState extends State<TKidsOverview> {
           statusBarColor: Color(0xff8267AC).withOpacity(0.16),
         ),
         backgroundColor: Color(0xff8267AC).withOpacity(0.16),
+        centerTitle: false,
         title: Text(
           "Kid’s Profile",
           style: FontConstant.k18w5008471Text,
@@ -94,7 +92,7 @@ class _TKidsOverviewState extends State<TKidsOverview> {
             ),
             Column(
               children: [
-                SizedBox(height: 110),
+                SizedBox(height: 140),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
                   child: Row(
@@ -152,8 +150,8 @@ class _TKidsOverviewState extends State<TKidsOverview> {
                         ),
                       ),
                       SizedBox(height: 10),
-                      Container(
-                        height: 120.h,
+                      SizedBox(
+                        height: 100.h,
                         child: ListView.builder(
                             physics: NeverScrollableScrollPhysics(),
                             padding: EdgeInsets.zero,
@@ -264,7 +262,7 @@ class _TKidsOverviewState extends State<TKidsOverview> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text("View's Father info",
+                        Text("View Father\'s info",
                             style: FontConstant2.k24w5008267text
                                 .copyWith(fontSize: 18)),
                         SizedBox(width: 10),
@@ -278,7 +276,7 @@ class _TKidsOverviewState extends State<TKidsOverview> {
                   )
                 ]),
                 Container(
-                  height: 205,
+                  height: 210,
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16.0),
                     child: Column(
@@ -338,8 +336,8 @@ class _TKidsOverviewState extends State<TKidsOverview> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text("Current treatment",
-                          style: FontConstant2.k22w5008471text),
-                      SizedBox(height: 8),
+                          style: FontConstant.k16w500331FText),
+                      SizedBox(height: 4),
                       Text(
                         "Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.",
                         style: FontConstant.k16w5008471Text,
@@ -351,130 +349,50 @@ class _TKidsOverviewState extends State<TKidsOverview> {
                           Text("Vaccinations",
                               style: FontConstant2.k22w5008471text),
                           SizedBox(height: 4),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Row(
-                                children: [
-                                  Text(
-                                    "BCG/AVB",
-                                    style: FontConstant.k16w500331FText,
-                                  ),
-                                  SizedBox(width: 16),
-                                  Text("Birth",
-                                      style: FontConstant.k16w400B7A4Text
-                                          .copyWith(
-                                              fontWeight: FontWeight.w500)),
-                                ],
-                              ),
-                              Checkbox(
-                                activeColor: Color(0xffBE74AA),
-                                checkColor: Colors.white,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(5),
+                          for (int i = 0; i < 4; i++)
+                            GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  isChecked[i] = !isChecked[i];
+                                });
+                              },
+                              child: Container(
+                                color: Colors.transparent,
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Text(
+                                          "Vaccine Name",
+                                          style: FontConstant.k16w500331FText,
+                                        ),
+                                        SizedBox(width: 16),
+                                        Text(time[i],
+                                            style: FontConstant.k16w400B7A4Text
+                                                .copyWith(
+                                                    fontWeight:
+                                                        FontWeight.w500)),
+                                      ],
+                                    ),
+                                    Checkbox(
+                                      activeColor: Color(0xffBE74AA),
+                                      checkColor: Colors.white,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(5),
+                                      ),
+                                      value: isChecked[i],
+                                      onChanged: (bool? value) {
+                                        setState(() {
+                                          isChecked[i] = value!;
+                                        });
+                                      },
+                                    ),
+                                  ],
                                 ),
-                                value: isChecked,
-                                onChanged: (bool? value) {
-                                  setState(() {
-                                    isChecked = value!;
-                                  });
-                                },
                               ),
-                            ],
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Row(
-                                children: [
-                                  Text(
-                                    "VPI-HVB",
-                                    style: FontConstant.k16w500331FText,
-                                  ),
-                                  SizedBox(width: 16),
-                                  Text("2 Months",
-                                      style: FontConstant.k16w400B7A4Text
-                                          .copyWith(
-                                              fontWeight: FontWeight.w500)),
-                                ],
-                              ),
-                              Checkbox(
-                                activeColor: Color(0xffBE74AA),
-                                checkColor: Colors.white,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(5),
-                                ),
-                                value: isChecked2,
-                                onChanged: (bool? value) {
-                                  setState(() {
-                                    isChecked2 = value!;
-                                  });
-                                },
-                              ),
-                            ],
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Row(
-                                children: [
-                                  Text(
-                                    "VPI-AVB",
-                                    style: FontConstant.k16w500331FText,
-                                  ),
-                                  SizedBox(width: 16),
-                                  Text("4 Months",
-                                      style: FontConstant.k16w400B7A4Text
-                                          .copyWith(
-                                              fontWeight: FontWeight.w500)),
-                                ],
-                              ),
-                              Checkbox(
-                                activeColor: Color(0xffBE74AA),
-                                checkColor: Colors.white,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(5),
-                                ),
-                                value: isChecked3,
-                                onChanged: (bool? value) {
-                                  setState(() {
-                                    isChecked3 = value!;
-                                  });
-                                },
-                              ),
-                            ],
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Row(
-                                children: [
-                                  Text(
-                                    "ROR",
-                                    style: FontConstant.k16w500331FText,
-                                  ),
-                                  SizedBox(width: 16),
-                                  Text("11 Months",
-                                      style: FontConstant.k16w400B7A4Text
-                                          .copyWith(
-                                              fontWeight: FontWeight.w500)),
-                                ],
-                              ),
-                              Checkbox(
-                                activeColor: Color(0xffBE74AA),
-                                checkColor: Colors.white,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(5),
-                                ),
-                                value: isChecked4,
-                                onChanged: (bool? value) {
-                                  setState(() {
-                                    isChecked4 = value!;
-                                  });
-                                },
-                              ),
-                            ],
-                          ),
+                            ),
                           SizedBox(height: 20),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,

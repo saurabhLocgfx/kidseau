@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:kidseau/ParentsPanel/POnboardingScreens/POnboardingScreen.dart';
 import 'package:kidseau/Theme.dart';
@@ -17,7 +18,7 @@ class PStartScreen extends StatelessWidget {
       body: Column(
         children: [
           Container(
-            height: 229,
+            height: 180.h,
             width: Get.size.width,
             decoration: BoxDecoration(
               color: Colors.transparent,
