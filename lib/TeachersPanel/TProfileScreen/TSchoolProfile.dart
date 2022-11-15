@@ -142,7 +142,7 @@ class _TSchoolProfileState extends State<TSchoolProfile> {
               ),
               SizedBox(height: 32),
               TeacherCard(),
-              SizedBox(height: 68),
+              SizedBox(height: 38),
               SizedBox(
                 height: 52,
                 width: 382,
@@ -152,9 +152,6 @@ class _TSchoolProfileState extends State<TSchoolProfile> {
                     textStyleColor: Colors.white,
                     backgroundColor: ThemeColor.primarycolor),
               ),
-              SizedBox(
-                height: 125,
-              )
             ],
           ),
         ),

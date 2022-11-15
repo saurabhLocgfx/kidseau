@@ -62,19 +62,38 @@ class _TNotificationScreenState extends State<TNotificationScreen> {
               ),
             ),
           ),
-          automaticallyImplyLeading: false,
+          centerTitle: false,
           elevation: 0,
           systemOverlayStyle: SystemUiOverlayStyle(
             statusBarColor: ThemeColor.lightpurple.withOpacity(0.16),
           ),
           backgroundColor: Color(0xff8267AC).withOpacity(0.16),
+          leading: Row(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(left: 16.0),
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                  child: Image.asset(
+                    "assets/images/backarrow.png",
+                    height: 24,
+                    width: 24,
+                  ),
+                ),
+              ),
+            ],
+          ),
           title: GestureDetector(
             onTap: () {
               // Navigator.of(context).push(
               //     MaterialPageRoute(builder: (context) => MessageScreen()));
             },
-            child: Text("Notifications",
-                style: FontConstant2.k32w5008267text.copyWith(fontSize: 25)),
+            child: Text(
+              "Notifications",
+              style: FontConstant.k18w5008471Text,
+            ),
           ),
           actions: [
             Notificationpopup(

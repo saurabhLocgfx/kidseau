@@ -369,7 +369,7 @@ class _PKidsOverviewState extends State<PKidsOverview> {
               height: 52,
               width: 382,
               child: MaterialButton(
-                elevation: 1,
+                elevation: 0,
                 color: Colors.white,
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(30))),

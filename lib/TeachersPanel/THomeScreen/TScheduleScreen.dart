@@ -57,25 +57,23 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
           ],
         ),
       ),
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16, vertical: 40),
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  "Schedule",
-                  style: FontConstant2.baloothampifont,
-                ),
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(height: 24),
+            Padding(
+              padding: EdgeInsets.all(16),
+              child: Text(
+                "Schedule",
+                style: FontConstant2.baloothampifont,
               ),
-              SizedBox(
-                height: 5.h,
-              ),
-              Activity(),
-            ],
-          ),
+            ),
+            SizedBox(
+              height: 5.h,
+            ),
+            Activity(),
+          ],
         ),
       ),
     );

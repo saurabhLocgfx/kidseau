@@ -48,6 +48,7 @@ dependencies:
   dotted_border:
   flutter_spinkit: ^5.1.0
   flutter_switch: ^0.3.2
+  table_calendar:
 
 
 dev_dependencies:

@@ -58,6 +58,7 @@ class _TReminderScreenState extends State<TReminderScreen> {
           ),
           automaticallyImplyLeading: false,
           elevation: 0,
+          centerTitle: false,
           systemOverlayStyle: SystemUiOverlayStyle(
             statusBarColor: Color(0xff8267AC).withOpacity(0.16),
           ),
@@ -99,7 +100,7 @@ class _TReminderScreenState extends State<TReminderScreen> {
                     children: [
                       Text(
                         "Tomorrow is holiday",
-                        style: FontConstant2.k24w500331Ftext,
+                        style: FontConstant2.k18w500331Ftext,
                       ),
                       Text(
                         "Scheduled  at 08:00 am - 30/09/2022",
@@ -132,7 +133,7 @@ class _TReminderScreenState extends State<TReminderScreen> {
                     children: [
                       Text(
                         "Tomorrow is holiday",
-                        style: FontConstant2.k24w500331Ftext,
+                        style: FontConstant2.k18w500331Ftext,
                       ),
                       Text(
                         "Scheduled  at 08:00 am - 30/09/2022",
@@ -165,7 +166,7 @@ class _TReminderScreenState extends State<TReminderScreen> {
                     children: [
                       Text(
                         "Bring notebook",
-                        style: FontConstant2.k24w500331Ftext,
+                        style: FontConstant2.k18w500331Ftext,
                       ),
                       Text(
                         "Expired",

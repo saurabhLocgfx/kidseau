@@ -67,10 +67,9 @@ class _TStudentDetailScreenState extends State<TStudentDetailScreen> {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Color(0xff8267AC).withOpacity(.06),
+        color: Color(0xffF8F6FA),
       ),
       child: Scaffold(
-        extendBodyBehindAppBar: true,
         appBar: AppBar(
           toolbarHeight: 70.0,
           flexibleSpace: ClipRect(
@@ -116,27 +115,33 @@ class _TStudentDetailScreenState extends State<TStudentDetailScreen> {
         body: SingleChildScrollView(
           child: Stack(
             children: [
+              SizedBox(
+                width: 1.sw,
+                child: Image.asset(
+                  'assets/images/topbackground.png',
+                  fit: BoxFit.fitWidth,
+                ),
+              ),
               Container(
-                height: 414.h,
-                width: 414.w,
+                width: 1.sw,
+                height: 455,
                 decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      colors: [
-                        Color(0xffD9D9D9).withOpacity(.100),
-                        Color(0xffD9D9D9).withOpacity(.0),
-                      ],
-                    ),
-                    image: DecorationImage(
-                        image:
-                            AssetImage("assets/images/postsbackground.png"))),
+                  gradient: LinearGradient(
+                    colors: [
+                      Color(0xffF8F6FA).withOpacity(0.6),
+                      Color(0xffF8F6FA)
+                    ],
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    stops: [0.01, 1.0],
+                  ),
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
                 child: Column(
                   children: [
-                    SizedBox(height: 110),
+                    SizedBox(height: 30),
                     Row(
                       children: [
                         Container(
@@ -179,77 +184,75 @@ class _TStudentDetailScreenState extends State<TStudentDetailScreen> {
                                   style: FontConstant2.k22w5008471text,
                                 ),
                                 Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
+                                  crossAxisAlignment: CrossAxisAlignment.end,
                                   children: [
-                                    Text(
-                                      "Class Section",
-                                      style: FontConstant.k16w500331FText,
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          "Class Section",
+                                          style: FontConstant.k16w500331FText,
+                                        ),
+                                        SizedBox(height: 16),
+                                        Text(
+                                          "Group",
+                                          style: FontConstant.k16w500331FText,
+                                        ),
+                                        SizedBox(height: 16),
+                                        Text(
+                                          "Age",
+                                          style: FontConstant.k16w500331FText,
+                                        ),
+                                        SizedBox(height: 16),
+                                        Text(
+                                          "Birthday",
+                                          style: FontConstant.k16w500331FText,
+                                        ),
+                                        SizedBox(height: 16),
+                                        Text(
+                                          "Gender",
+                                          style: FontConstant.k16w500331FText,
+                                        ),
+                                      ],
                                     ),
-                                    Text(
-                                      "Nursery Sec A",
-                                      style: FontConstant.k16w5008471Text,
-                                    )
-                                  ],
-                                ),
-                                SizedBox(height: 10),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      "Group",
-                                      style: FontConstant.k16w500331FText,
+                                    SizedBox(width: 16),
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          "Nursery Sec A",
+                                          style: FontConstant.k16w5008471Text,
+                                        ),
+                                        SizedBox(height: 16),
+                                        Text(
+                                          "Group A",
+                                          style: FontConstant.k16w5008471Text,
+                                        ),
+                                        SizedBox(height: 16),
+                                        Text(
+                                          "4 years old",
+                                          style: FontConstant.k16w5008471Text,
+                                        ),
+                                        SizedBox(height: 16),
+                                        Text(
+                                          "29/09/2020",
+                                          style: FontConstant.k16w5008471Text,
+                                        ),
+                                        SizedBox(height: 16),
+                                        Text(
+                                          "Male",
+                                          style: FontConstant.k16w5008471Text,
+                                        )
+                                      ],
                                     ),
-                                    Text(
-                                      "Group A",
-                                      style: FontConstant.k16w5008471Text,
-                                    )
-                                  ],
-                                ),
-                                SizedBox(height: 10),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      "Age",
-                                      style: FontConstant.k16w500331FText,
+                                    Spacer(),
+                                    SizedBox(
+                                      width: 134,
+                                      child: Image.asset(
+                                          'assets/images/birds.png'),
                                     ),
-                                    Text(
-                                      "4 years old",
-                                      style: FontConstant.k16w5008471Text,
-                                    )
-                                  ],
-                                ),
-                                SizedBox(height: 10),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      "Birthday",
-                                      style: FontConstant.k16w500331FText,
-                                    ),
-                                    Text(
-                                      "29/09/2020",
-                                      style: FontConstant.k16w5008471Text,
-                                    )
-                                  ],
-                                ),
-                                SizedBox(height: 10),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      "Gender",
-                                      style: FontConstant.k16w500331FText,
-                                    ),
-                                    Text(
-                                      "Male",
-                                      style: FontConstant.k16w5008471Text,
-                                    )
                                   ],
                                 ),
                               ],
@@ -266,14 +269,10 @@ class _TStudentDetailScreenState extends State<TStudentDetailScreen> {
                             ),
                             SizedBox(height: 16),
                             Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Material(
-                                  elevation: 1,
-                                  borderRadius: BorderRadius.circular(16),
+                                Expanded(
                                   child: Container(
                                     height: 116,
-                                    width: 150.w,
                                     decoration: BoxDecoration(
                                         color: Colors.white,
                                         borderRadius:
@@ -321,12 +320,10 @@ class _TStudentDetailScreenState extends State<TStudentDetailScreen> {
                                     ),
                                   ),
                                 ),
-                                Material(
-                                  elevation: 1,
-                                  borderRadius: BorderRadius.circular(16),
+                                SizedBox(width: 16),
+                                Expanded(
                                   child: Container(
                                     height: 116,
-                                    width: 150.w,
                                     decoration: BoxDecoration(
                                         color: Colors.white,
                                         borderRadius:
@@ -361,7 +358,7 @@ class _TStudentDetailScreenState extends State<TStudentDetailScreen> {
                                             children: [
                                               Image.asset(
                                                 "assets/images/bars2.png",
-                                                height: 24,
+                                                width: 70,
                                               ),
                                               Column(
                                                 children: [
@@ -418,13 +415,12 @@ class _TStudentDetailScreenState extends State<TStudentDetailScreen> {
                                 ),
                                 SizedBox(height: 15),
                                 Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Image.asset(
                                       "assets/images/bar4.png",
                                       height: 130,
                                     ),
+                                    SizedBox(width: 16),
                                     Expanded(
                                       child: SizedBox(
                                         height: 140,
@@ -525,16 +521,15 @@ class _TStudentDetailScreenState extends State<TStudentDetailScreen> {
                           height: 52,
                           width: 382,
                           child: MaterialButton(
-                            elevation: 1,
+                            elevation: 0,
                             color: Colors.white,
                             shape: RoundedRectangleBorder(
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(30))),
                             onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => CalendarPage2()),
+                              showDialog(
+                                context: context,
+                                builder: (_) => CalendarPage2(),
                               );
                             },
                             child: Center(

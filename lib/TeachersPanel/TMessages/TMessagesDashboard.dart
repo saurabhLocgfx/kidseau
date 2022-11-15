@@ -5,8 +5,10 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kidseau/TeachersPanel/TMessages/TMessages.dart';
 import 'package:kidseau/TeachersPanel/TMessages/TParents.dart';
-import 'package:kidseau/TeachersPanel/TReminder/TReminderScreen.dart';
+import 'package:kidseau/TeachersPanel/TNotificationScreen/TNotificationScreen.dart';
 import 'package:kidseau/Theme.dart';
+
+import '../TReminder/TReminderScreen.dart';
 
 class TMessageDashboard extends StatefulWidget {
   const TMessageDashboard({Key? key}) : super(key: key);
@@ -53,51 +55,65 @@ class _TMessageDashboardState extends State<TMessageDashboard> {
               ),
             ),
           ),
+          backgroundColor: Color(0xff8267AC).withAlpha(16),
           automaticallyImplyLeading: false,
-          centerTitle: false,
           elevation: 0,
-          systemOverlayStyle: SystemUiOverlayStyle(
-            statusBarColor: ThemeColor.lightpurple.withOpacity(0.16),
-          ),
-          backgroundColor: Color(0xff8267AC).withOpacity(0.16),
-          title: Padding(
-            padding: const EdgeInsets.only(top: 0.0),
-            child: GestureDetector(
-              onTap: () {
-                // Navigator.of(context).push(MaterialPageRoute(
-                //     builder: (context) => NotificationScreen()));
-              },
-              child: Text("Message",
-                  style: FontConstant.k32w5008267Text.copyWith(fontSize: 25)),
-            ),
+          title: Row(
+            children: [
+              GestureDetector(
+                onTap: () {},
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 15.0),
+                  child: Text("Messages",
+                      style:
+                          FontConstant2.k32w5008267text.copyWith(fontSize: 25)),
+                ),
+              ),
+            ],
           ),
           actions: [
-            Padding(
-              padding: const EdgeInsets.only(right: 16.0),
-              child: Row(
-                children: [
-                  Image.asset(
-                    "assets/images/appbaricon1.png",
-                    height: 48,
-                    width: 48,
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => TReminderScreen(),
-                        ),
-                      );
-                    },
-                    child: Image.asset(
-                      "assets/images/appbarclock.png",
+            Container(
+              width: 144,
+              child: Padding(
+                padding: const EdgeInsets.only(top: 15.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Image.asset(
+                      "assets/images/Languageicon.png",
                       height: 24,
-                      width: 24,
                     ),
-                  ),
-                ],
+                    InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => TReminderScreen(),
+                          ),
+                        );
+                      },
+                      child: Image.asset(
+                        "assets/images/clockicon.png",
+                        height: 24,
+                      ),
+                    ),
+                    InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => TNotificationScreen()),
+                        );
+                      },
+                      child: Image.asset(
+                        "assets/images/iconbell.png",
+                        height: 24,
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
+            )
           ],
         ),
         body: Column(
@@ -170,7 +186,7 @@ class _TMessageDashboardState extends State<TMessageDashboard> {
                   padding: const EdgeInsets.only(left: 4.0),
                   child: Text("Message",
                       style: FontConstant.k14w500B7A4Text.copyWith(
-                          color: pageIndex == 1
+                          color: pageIndex == 0
                               ? Color(0xff8267AC)
                               : Color(0xffB7A4B2))),
                 ),
@@ -192,7 +208,7 @@ class _TMessageDashboardState extends State<TMessageDashboard> {
             },
             child: Row(
               children: [
-                Text("Teacher",
+                Text("Parent",
                     style: FontConstant.k14w500B7A4Text.copyWith(
                         color: pageIndex == 1
                             ? Color(0xff8267AC)
@@ -209,8 +225,8 @@ class _TMessageDashboardState extends State<TMessageDashboard> {
                     child: Center(
                       child: Image.asset(
                           pageIndex == 1
-                              ? "assets/images/Teachericonfill.png"
-                              : "assets/images/Teachericon.png",
+                              ? "assets/images/pFilled.png"
+                              : "assets/images/p.png",
                           height: 24),
                     ),
                   ),

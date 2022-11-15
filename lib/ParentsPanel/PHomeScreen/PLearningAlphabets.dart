@@ -6,6 +6,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kidseau/Theme.dart';
 import 'package:kidseau/Widgets/buttons.dart';
 
+import '../../TeachersPanel/TMessages/TChats.dart';
+
 class PLearningAplphabets extends StatefulWidget {
   const PLearningAplphabets({Key? key}) : super(key: key);
 
@@ -121,6 +123,7 @@ class _PLearningAplphabetsState extends State<PLearningAplphabets> {
                               image: AssetImage(
                                   "assets/images/Rectangle for la.png"))),
                     ),
+                    SizedBox(height: 16),
                     Row(
                       children: [
                         Image.asset(
@@ -143,7 +146,7 @@ class _PLearningAplphabetsState extends State<PLearningAplphabets> {
                 SizedBox(height: 24),
                 Text(
                     "Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet. Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud.",
-                    style: FontConstant.k14w400lightpurpleText
+                    style: FontConstant.k14w4008471Text
                         .copyWith(fontWeight: FontWeight.w400, fontSize: 18)),
                 SizedBox(height: 30),
                 Align(
@@ -157,8 +160,13 @@ class _PLearningAplphabetsState extends State<PLearningAplphabets> {
                 SizedBox(
                   height: 32,
                 ),
-                materialButton(context, () {}, "Ask Question",
-                    ThemeColor.primarycolor, 52.0),
+                materialButton(context, () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => TChats(),
+                    ),
+                  );
+                }, "Ask Question", ThemeColor.primarycolor, 52.0),
                 SizedBox(height: 40.h),
               ],
             ),

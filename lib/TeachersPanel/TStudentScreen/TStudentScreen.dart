@@ -5,7 +5,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:kidseau/TeachersPanel/TNotificationScreen/TNotificationScreen.dart';
 import 'package:kidseau/Theme.dart';
+import 'package:kidseau/Widgets/Calender/calendermodel.dart';
 
+import '../TReminder/TReminderScreen.dart';
 import 'TStudentDetailScreen.dart';
 
 class TStudentScreen extends StatefulWidget {
@@ -58,9 +60,19 @@ class _TStudentScreenState extends State<TStudentScreen> {
                     "assets/images/Languageicon.png",
                     height: 24,
                   ),
-                  Image.asset(
-                    "assets/images/clockicon.png",
-                    height: 24,
+                  InkWell(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => TReminderScreen(),
+                        ),
+                      );
+                    },
+                    child: Image.asset(
+                      "assets/images/clockicon.png",
+                      height: 24,
+                    ),
                   ),
                   InkWell(
                     onTap: () {
@@ -94,23 +106,35 @@ class _TStudentScreenState extends State<TStudentScreen> {
                 children: [
                   Text(
                     "Activity A",
-                    style: FontConstant2.k24w4008267text,
+                    style: FontConstant2.k24w5008267text,
                   ),
-                  Row(
-                    children: [
-                      Image.asset(
-                        "assets/images/calendericon.png",
-                        height: 16,
+                  GestureDetector(
+                    onTap: () {
+                      showDialog(
+                        context: context,
+                        builder: (_) => CalendarPage2(),
+                      );
+                    },
+                    child: Container(
+                      color: Colors.transparent,
+                      child: Row(
+                        children: [
+                          Image.asset(
+                            "assets/images/calendericon.png",
+                            height: 16,
+                          ),
+                          SizedBox(width: 8),
+                          Text(
+                            "Today",
+                            style: FontConstant.k16w500B7A4Text,
+                          ),
+                        ],
                       ),
-                      Text(
-                        "Today",
-                        style: FontConstant.k16w500B7A4Text,
-                      ),
-                    ],
+                    ),
                   ),
                 ],
               ),
-              SizedBox(height: 44),
+              SizedBox(height: 24),
               GestureDetector(
                 onTap: () {
                   Navigator.push(

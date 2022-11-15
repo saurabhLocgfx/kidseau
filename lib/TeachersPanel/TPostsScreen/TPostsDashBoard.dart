@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kidseau/TeachersPanel/TNotificationScreen/TNotificationScreen.dart';
+import 'package:kidseau/TeachersPanel/TPostsScreen/TMyPosts.dart';
 import 'package:kidseau/TeachersPanel/TPostsScreen/TPostsScreen.dart';
+import 'package:kidseau/TeachersPanel/TReminder/TReminderScreen.dart';
 import 'package:kidseau/Theme.dart';
 
 import 'TAddPostsScreen.dart';
@@ -44,48 +46,68 @@ class _TPostsDashBoardState extends State<TPostsDashBoard> {
             ),
           ),
         ),
+        backgroundColor: Color(0xff8267AC).withAlpha(16),
         automaticallyImplyLeading: false,
         elevation: 0,
-        systemOverlayStyle: SystemUiOverlayStyle(
-          statusBarColor: ThemeColor.lightpurple.withOpacity(0.16),
-        ),
-        backgroundColor: Color(0xff8267AC).withOpacity(0.16),
-        centerTitle: false,
-        title: GestureDetector(
-          onTap: () {
-            Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => TNotificationScreen()));
-          },
-          child: Text("Post",
-              style: FontConstant.k32w5008267Text.copyWith(fontSize: 25)),
+        title: Row(
+          children: [
+            GestureDetector(
+              onTap: () {},
+              child: Padding(
+                padding: const EdgeInsets.only(top: 15.0),
+                child: Text("Posts",
+                    style:
+                        FontConstant2.k32w5008267text.copyWith(fontSize: 25)),
+              ),
+            ),
+          ],
         ),
         actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 10.0),
-            child: Container(
-              width: 124,
+          Container(
+            width: 144,
+            child: Padding(
+              padding: const EdgeInsets.only(top: 15.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Image.asset(
-                    "assets/images/appbaricon1.png",
-                    height: 48,
+                  InkWell(
+                    onTap: () {},
+                    child: Image.asset(
+                      "assets/images/Languageicon.png",
+                      height: 24,
+                    ),
                   ),
-                  Image.asset(
-                    "assets/images/appbarclock.png",
-                    height: 24,
-                    width: 24,
+                  InkWell(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => TReminderScreen(),
+                        ),
+                      );
+                    },
+                    child: Image.asset(
+                      "assets/images/clockicon.png",
+                      height: 24,
+                    ),
                   ),
-                  SizedBox(width: 2),
-                  Image.asset(
-                    "assets/images/iconbell.png",
-                    height: 24,
-                    width: 24,
+                  InkWell(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => TNotificationScreen()),
+                      );
+                    },
+                    child: Image.asset(
+                      "assets/images/iconbell.png",
+                      height: 24,
+                    ),
                   ),
                 ],
               ),
             ),
-          ),
+          )
         ],
       ),
       body: Stack(
@@ -126,7 +148,7 @@ class _TPostsDashBoardState extends State<TPostsDashBoard> {
                   children: <Widget>[
                     TAddPostsScreen(),
                     TPostsScreen(),
-                    TPostsScreen(),
+                    TMyPosts(),
                   ],
                 ),
               ),

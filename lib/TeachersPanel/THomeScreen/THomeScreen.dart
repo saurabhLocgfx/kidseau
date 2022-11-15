@@ -7,6 +7,8 @@ import 'package:kidseau/TeachersPanel/THomeScreen/TGroupScreen.dart';
 import 'package:kidseau/TeachersPanel/TNotificationScreen/TNotificationScreen.dart';
 import 'package:kidseau/Theme.dart';
 
+import '../TReminder/TReminderScreen.dart';
+import 'TAttendanceScreen.dart';
 import 'TScheduleScreen.dart';
 
 class THomeScreen extends StatefulWidget {
@@ -20,7 +22,6 @@ class _THomeScreenState extends State<THomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      extendBodyBehindAppBar: true,
       appBar: AppBar(
         toolbarHeight: 70.0,
         flexibleSpace: ClipRect(
@@ -59,9 +60,19 @@ class _THomeScreenState extends State<THomeScreen> {
                     "assets/images/Languageicon.png",
                     height: 24,
                   ),
-                  Image.asset(
-                    "assets/images/clockicon.png",
-                    height: 24,
+                  InkWell(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => TReminderScreen(),
+                        ),
+                      );
+                    },
+                    child: Image.asset(
+                      "assets/images/clockicon.png",
+                      height: 24,
+                    ),
                   ),
                   InkWell(
                     onTap: () {
@@ -90,8 +101,7 @@ class _THomeScreenState extends State<THomeScreen> {
           ),
           child: Column(
             children: [
-              SizedBox(height: 60.h),
-              Container(
+              SizedBox(
                 height: 150,
                 child: ListView.builder(
                   shrinkWrap: true,
@@ -127,7 +137,6 @@ class _THomeScreenState extends State<THomeScreen> {
                 height: 5.h,
               ),
               Activity(),
-              SizedBox(height: 16),
               Center(
                 child: GestureDetector(
                   onTap: () {
@@ -159,8 +168,17 @@ class _THomeScreenState extends State<THomeScreen> {
                   ),
                 ),
               ),
-              Attendancecard(
-                image: "assets/images/groupcard2.png",
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => TAttendanceScreen()),
+                  );
+                },
+                child: Attendancecard(
+                  image: "assets/images/groupcard2.png",
+                ),
               ),
               SizedBox(height: 80.h)
             ],
@@ -239,6 +257,98 @@ class Groupcard extends StatelessWidget {
                 ),
               ),
             ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class SchoolCard extends StatelessWidget {
+  const SchoolCard({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 128,
+      width: 1.sw,
+      margin: EdgeInsets.symmetric(horizontal: 16),
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage('assets/images/scard.png'),
+          fit: BoxFit.fill,
+        ),
+        color: Colors.transparent,
+        boxShadow: [
+          BoxShadow(
+            offset: Offset(0, 0),
+            color: ThemeColor.primarycolor.withOpacity(0.4),
+            spreadRadius: 0,
+            blurRadius: 16,
+          ),
+        ],
+        borderRadius: BorderRadius.circular(16),
+      ),
+      padding: EdgeInsets.only(left: 16.0, right: 16, top: 16),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            height: 96,
+            width: 72,
+            decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage("assets/images/groupimage.png"))),
+          ),
+          SizedBox(width: 12),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "ABC School",
+                  style: FontConstant2.k18w500Black,
+                ),
+                Row(
+                  children: [
+                    SizedBox(
+                        width: 20,
+                        child: Image.asset(
+                          'assets/images/clockicon.png',
+                          color: Color(0xFFB7A4B2),
+                        )),
+                    SizedBox(width: 8),
+                    Text(
+                      "08:00 am to 02:00 pm",
+                      style: FontConstant.k18w500whiteText.copyWith(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w400,
+                        color: Color(0xFFB7A4B2),
+                      ),
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    SizedBox(
+                        width: 20,
+                        child: Image.asset(
+                          'assets/images/call.png',
+                          color: Color(0xFFB7A4B2),
+                        )),
+                    SizedBox(width: 8),
+                    Text(
+                      "9876543210",
+                      style: FontConstant.k18w500whiteText.copyWith(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w400,
+                        color: Color(0xFFB7A4B2),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ],
       ),

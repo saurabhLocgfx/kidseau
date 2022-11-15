@@ -34,6 +34,8 @@ class FontConstant {
       fontWeight: FontWeight.w400, fontSize: 16, color: Colors.white);
   static TextStyle k18w5008471Text = GoogleFonts.balooDa2(
       fontWeight: FontWeight.w500, fontSize: 18, color: Color(0xff84717F));
+  static TextStyle k18w500F970Text = GoogleFonts.balooDa2(
+      fontWeight: FontWeight.w500, fontSize: 18, color: Color(0xffF97070));
   static TextStyle k18w5008267Text = GoogleFonts.balooDa2(
       fontWeight: FontWeight.w500, fontSize: 18, color: Color(0xff8267AC));
   static TextStyle k32w500blackText = GoogleFonts.balooDa2(
@@ -98,6 +100,8 @@ class FontConstant {
 
   static TextStyle k18w500materialbuttonText = GoogleFonts.balooDa2(
       fontWeight: FontWeight.w500, fontSize: 18, color: Colors.white);
+  static TextStyle k18w500BlackText = GoogleFonts.balooDa2(
+      fontWeight: FontWeight.w500, fontSize: 18, color: Colors.black);
   static TextStyle k16w500brownText = GoogleFonts.balooDa2(
       fontWeight: FontWeight.w500, fontSize: 16, color: Color(0xff331F2D));
   static TextStyle k16w500331FText = GoogleFonts.balooDa2(
@@ -149,6 +153,8 @@ class FontConstant2 {
       fontWeight: FontWeight.w500, fontSize: 24, color: Color(0xff84717F));
   static TextStyle k22w5008471text = GoogleFonts.balooThambi2(
       fontWeight: FontWeight.w500, fontSize: 22, color: Color(0xff84717F));
+  static TextStyle k24w5008471text = GoogleFonts.balooThambi2(
+      fontWeight: FontWeight.w500, fontSize: 24, color: Color(0xff84717F));
   static TextStyle k24w5008267text = GoogleFonts.balooThambi2(
       fontWeight: FontWeight.w500, fontSize: 24, color: Color(0xff8267AC));
   static TextStyle k24w4008267text = GoogleFonts.balooThambi2(
@@ -163,6 +169,10 @@ class FontConstant2 {
       fontWeight: FontWeight.w400, fontSize: 16, color: Color(0xffB7A4B2));
   static TextStyle k24w500331Ftext = GoogleFonts.balooThambi2(
       fontWeight: FontWeight.w500, fontSize: 24, color: Color(0xff331F2D));
+  static TextStyle k18w500331Ftext = GoogleFonts.balooThambi2(
+      fontWeight: FontWeight.w500, fontSize: 18, color: Color(0xff331F2D));
+  static TextStyle k18w500Black = GoogleFonts.balooThambi2(
+      fontWeight: FontWeight.w500, fontSize: 18, color: Colors.black);
   static TextStyle k24w500WhiteText = GoogleFonts.balooThambi2(
       fontWeight: FontWeight.w500, fontSize: 24, color: Colors.white);
 }

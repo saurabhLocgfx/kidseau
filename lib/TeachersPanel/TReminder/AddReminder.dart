@@ -159,7 +159,7 @@ class _TAddReminderState extends State<TAddReminder> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Image.asset(
-                    "assets/images/ticklogo.png",
+                    "assets/images/done.gif",
                     height: 136,
                     width: 240,
                   ),

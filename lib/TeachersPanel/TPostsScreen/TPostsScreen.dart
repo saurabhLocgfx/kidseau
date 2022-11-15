@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kidseau/Theme.dart';
+import 'package:kidseau/Widgets/dialogs.dart';
 
 class TPostsScreen extends StatefulWidget {
   const TPostsScreen({Key? key}) : super(key: key);
@@ -39,10 +41,17 @@ class _TPostsScreenState extends State<TPostsScreen> {
                           ),
                         ],
                       ),
-                      Image.asset(
-                        "assets/images/dots.png",
-                        height: 40,
-                      ),
+                      PostOptionsDialog(),
+                      /*GestureDetector(
+                        onTap: () {},
+                        child: Container(
+                          color: Colors.transparent,
+                          child: Image.asset(
+                            "assets/images/dots.png",
+                            height: 40,
+                          ),
+                        ),
+                      ),*/
                     ],
                   ),
                   SizedBox(height: 08),
@@ -86,6 +95,13 @@ class _TPostsScreenState extends State<TPostsScreen> {
                       ],
                     ),
                   ),
+                  SizedBox(height: 16),
+                  Container(
+                    width: 1.sw,
+                    height: 3,
+                    color: Colors.white,
+                  ),
+                  SizedBox(height: 5),
                 ],
               ),
             ),

@@ -3,10 +3,10 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:kidseau/TeachersPanel/TProfileScreen/TParentProfile.dart';
-import 'package:kidseau/TeachersPanel/TProfileScreen/TSchoolProfile.dart';
 import 'package:kidseau/TeachersPanel/Widgets/Tpopup.dart';
 import 'package:kidseau/Theme.dart';
+
+import 'TParentProfile.dart';
 
 class TProfileDashBoard extends StatefulWidget {
   const TProfileDashBoard({Key? key}) : super(key: key);
@@ -42,7 +42,6 @@ class _TProfileDashBoardState extends State<TProfileDashBoard> {
         ], begin: Alignment.topCenter, end: Alignment.bottomCenter),
       ),
       child: Scaffold(
-        extendBodyBehindAppBar: true,
         appBar: AppBar(
           toolbarHeight: 70.0,
           flexibleSpace: ClipRect(
@@ -53,23 +52,22 @@ class _TProfileDashBoardState extends State<TProfileDashBoard> {
               ),
             ),
           ),
+          backgroundColor: Color(0xff8267AC).withAlpha(16),
           automaticallyImplyLeading: false,
           elevation: 0,
-          systemOverlayStyle: SystemUiOverlayStyle(
-            statusBarColor: ThemeColor.lightpurple.withOpacity(0.16),
-          ),
-          backgroundColor: Color(0xff8267AC).withOpacity(0.16),
-          centerTitle: false,
-          title: Padding(
-              padding: const EdgeInsets.only(top: 0.0),
-              child: GestureDetector(
-                  onTap: () {
-                    // Navigator.of(context).push(MaterialPageRoute(
-                    //     builder: (context) => NotificationScreen()));
-                  },
+          title: Row(
+            children: [
+              GestureDetector(
+                onTap: () {},
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 15.0),
                   child: Text("Profile",
-                      style: FontConstant2.k32w5008267text
-                          .copyWith(fontSize: 28)))),
+                      style:
+                          FontConstant2.k32w5008267text.copyWith(fontSize: 25)),
+                ),
+              ),
+            ],
+          ),
           actions: [TProfilepopup()],
         ),
         body: Stack(children: [
@@ -82,26 +80,12 @@ class _TProfileDashBoardState extends State<TProfileDashBoard> {
           ),
           Column(
             children: [
-              SizedBox(height: 50.h),
-              Column(
+              /*Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [SizedBox(height: 40), pageViewTabProfile()],
               ),
-              SizedBox(height: 24.h),
-              Expanded(
-                child: PageView(
-                  physics: PageScrollPhysics(),
-                  controller: _pageController,
-                  onPageChanged: (page) {
-                    setState(
-                      () {
-                        pageIndex = page;
-                      },
-                    );
-                  },
-                  children: <Widget>[TParentProfile(), TSchoolProfile()],
-                ),
-              ),
+              SizedBox(height: 24.h),*/
+              Expanded(child: TParentProfile()),
             ],
           )
         ]),

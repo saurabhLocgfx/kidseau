@@ -4,8 +4,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:kidseau/TeachersPanel/THomeScreen/TWeeklyAttendanceScreen.dart';
+import 'package:flutter_switch/flutter_switch.dart';
 import 'package:kidseau/Theme.dart';
+import 'package:kidseau/Widgets/Calender/calendermodel.dart';
 
 class TAttendanceScreen extends StatefulWidget {
   const TAttendanceScreen({Key? key}) : super(key: key);
@@ -16,6 +17,7 @@ class TAttendanceScreen extends StatefulWidget {
 
 class _TAttendanceScreenState extends State<TAttendanceScreen> {
   bool isSwitched = false;
+  bool val2 = false;
 
   var image = [
     "assets/images/kidsimage.png",
@@ -103,16 +105,20 @@ class _TAttendanceScreenState extends State<TAttendanceScreen> {
                   child: Center(
                     child: TextFormField(
                       decoration: InputDecoration(
+                        filled: true,
+                        fillColor: Colors.white,
+                        contentPadding: EdgeInsets.symmetric(horizontal: 16),
                         hintText: "Search student",
-                        hintStyle: FontConstant.k16w400B7A4Text, // TextStyle
-                        suffixIcon: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Image.asset(
-                              "assets/images/searhcicon.png",
-                              height: 30,
-                            ),
-                          ],
+                        hintStyle: FontConstant.k16w400B7A4Text, // Tex
+                        suffixIconConstraints: BoxConstraints(
+                          maxWidth: 60,
+                          maxHeight: 25,
+                        ), // tStyle
+                        suffixIcon: Padding(
+                          padding: const EdgeInsets.only(right: 16),
+                          child: Image.asset(
+                            "assets/images/searhcicon.png",
+                          ),
                         ),
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(67.0),
@@ -137,62 +143,66 @@ class _TAttendanceScreenState extends State<TAttendanceScreen> {
                 height: 16,
               ),
               Container(
-                height: 139,
-                width: 414,
-                decoration: BoxDecoration(),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                  child: Center(
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                width: 1.sw,
+                decoration: BoxDecoration(
+                    color: Colors.transparent,
+                    image: DecorationImage(
+                        image: AssetImage('assets/images/acard.png'))),
+                padding: EdgeInsets.symmetric(horizontal: 16, vertical: 32),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                        GestureDetector(
+                          onTap: () {
+                            showDialog(
+                                context: context,
+                                builder: (_) => CalendarPage2());
+                          },
+                          child: Text("Today’s attendance",
+                              style: FontConstant2.k24w5008267text),
+                        ),
+                        Row(
                           children: [
-                            GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            TWeeklyAttendanceScreen()));
-                              },
-                              child: Text("Today’s attendance",
-                                  style: FontConstant2.k24w5008267text),
+                            Text(
+                              "Sunday 17 Oct - 2022",
+                              style: FontConstant.k16w500B7A4Text,
                             ),
-                            Row(
-                              children: [
-                                Text(
-                                  "Sunday 17 Oct - 2022",
-                                  style: FontConstant.k16w500B7A4Text,
-                                ),
-                                Image.asset(
-                                  "assets/images/calendericon.png",
-                                  height: 24,
-                                )
-                              ],
+                            SizedBox(width: 8),
+                            Image.asset(
+                              "assets/images/calendericon.png",
+                              height: 24,
                             )
                           ],
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 15.0),
-                          child: Column(
-                            children: [
-                              Text(
-                                "All Present",
-                                style: FontConstant.k16w400B7A4Text,
-                              )
-                            ],
-                          ),
-                        ),
-                        Divider(
-                          height: 50,
-                          thickness: 1,
-                        ),
+                        )
                       ],
                     ),
-                  ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        SizedBox(
+                            width: 48.w,
+                            height: 32.w,
+                            child: FlutterSwitch(
+                                toggleSize: 25,
+                                inactiveColor: ThemeColor.b7A4B2,
+                                activeColor: ThemeColor.primarycolor,
+                                value: val2,
+                                onToggle: (v) {
+                                  setState(() {
+                                    val2 = v;
+                                  });
+                                })),
+                        SizedBox(height: 4),
+                        Text(
+                          "All Present",
+                          style: FontConstant.k16w400B7A4Text,
+                        )
+                      ],
+                    ),
+                  ],
                 ),
               ),
               Padding(
@@ -248,20 +258,19 @@ class _TAttendanceScreenState extends State<TAttendanceScreen> {
                                     ),
                                   ],
                                 ),
-                                Container(
-                                  height: 24.h,
-                                  width: 48.w,
-                                  child: CupertinoSwitch(
-                                      activeColor: ThemeColor.primarycolor,
-                                      value: isSwitched,
-                                      onChanged: (value) {
-                                        setState(
-                                          () {
-                                            isSwitched = value;
-                                          },
-                                        );
-                                      }),
-                                ),
+                                SizedBox(
+                                    width: 48.w,
+                                    height: 24.w,
+                                    child: FlutterSwitch(
+                                        toggleSize: 20,
+                                        inactiveColor: ThemeColor.b7A4B2,
+                                        activeColor: ThemeColor.primarycolor,
+                                        value: val2,
+                                        onToggle: (v) {
+                                          setState(() {
+                                            val2 = v;
+                                          });
+                                        })),
                                 // Container(
                                 //   height: 24.h,
                                 //   width: 48.w,

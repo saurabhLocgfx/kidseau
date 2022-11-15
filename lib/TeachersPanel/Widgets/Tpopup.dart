@@ -17,7 +17,7 @@ class TProfilepopup extends StatelessWidget {
           AssetImage(
             "assets/images/optionicon.png",
           ),
-          color: ThemeColor.primarycolor,
+          color: ThemeColor.darkpurple,
         ),
         itemBuilder: (context) {
           return [
