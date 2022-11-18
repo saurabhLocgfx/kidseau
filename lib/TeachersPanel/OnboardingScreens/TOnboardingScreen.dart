@@ -70,11 +70,11 @@ class _TOnboardingScreenState extends State<TOnboardingScreen> {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  SizedBox(height: 34),
+                                  SizedBox(height: 30),
                                   Image.asset(
                                     contents[i].image,
-                                    height: 290,
-                                    width: 334,
+                                    height: 290.h,
+                                    width: 334.w,
                                   ),
                                   SizedBox(height: 10),
                                   Align(
@@ -96,14 +96,17 @@ class _TOnboardingScreenState extends State<TOnboardingScreen> {
                             );
                           },
                         ),
-                        Align(
-                          alignment: Alignment.bottomCenter,
+                        Positioned(
+                          bottom: 0,
+                          left: 0,
+                          right: 0,
                           child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.end,
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Padding(
                                 padding:
-                                    const EdgeInsets.only(left: 16, top: 10),
+                                    const EdgeInsets.only(left: 16, top: 10, bottom: 50),
                                 child: Row(
                                   children: List.generate(
                                     contents.length,
@@ -169,8 +172,8 @@ class _TOnboardingScreenState extends State<TOnboardingScreen> {
 
   Container buildDot(int index, BuildContext context) {
     return Container(
-      height: 10,
-      width: currentIndex == index ? 25 : 10,
+      height: 4,
+      width: currentIndex == index ? 20 : 9,
       margin: EdgeInsets.only(right: 5),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),

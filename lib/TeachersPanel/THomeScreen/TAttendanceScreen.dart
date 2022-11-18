@@ -93,205 +93,194 @@ class _TAttendanceScreenState extends State<TAttendanceScreen> {
         ),
       ),
       body: SingleChildScrollView(
-        child: Container(
-          child: Column(
-            children: [
-              SizedBox(height: 40),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                child: SizedBox(
-                  height: 56,
-                  width: 382,
-                  child: Center(
-                    child: TextFormField(
-                      decoration: InputDecoration(
-                        filled: true,
-                        fillColor: Colors.white,
-                        contentPadding: EdgeInsets.symmetric(horizontal: 16),
-                        hintText: "Search student",
-                        hintStyle: FontConstant.k16w400B7A4Text, // Tex
-                        suffixIconConstraints: BoxConstraints(
-                          maxWidth: 60,
-                          maxHeight: 25,
-                        ), // tStyle
-                        suffixIcon: Padding(
-                          padding: const EdgeInsets.only(right: 16),
-                          child: Image.asset(
-                            "assets/images/searhcicon.png",
-                          ),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(67.0),
-                          borderSide: BorderSide(
-                            width: 2.0,
-                            color: ThemeColor.primarycolor.withOpacity(0.16),
-                          ), // BorderSide
-                        ), // OutlineInputBorder
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(67.0),
-                          borderSide: BorderSide(
-                            width: 2.0,
-                            color: ThemeColor.primarycolor.withOpacity(0.16),
-                          ), // BorderSide
-                        ), // OutlineInputBorder
-                      ), // InputDecoration
+        child: Column(
+          children: [
+            SizedBox(height: 40),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: TextFormField(
+                decoration: InputDecoration(
+                  filled: true,
+                  fillColor: Colors.white,
+                  contentPadding: EdgeInsets.symmetric(horizontal: 16),
+                  hintText: "Search student",
+                  hintStyle: FontConstant.k16w400B7A4Text, // Tex
+                  suffixIconConstraints: BoxConstraints(
+                    maxWidth: 60,
+                    maxHeight: 25,
+                  ), // tStyle
+                  suffixIcon: Padding(
+                    padding: const EdgeInsets.only(right: 16),
+                    child: Image.asset(
+                      "assets/images/searhcicon.png",
                     ),
                   ),
-                ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(67.0),
+                    borderSide: BorderSide(
+                      width: 2.0,
+                      color: ThemeColor.primarycolor.withOpacity(0.16),
+                    ), // BorderSide
+                  ), // OutlineInputBorder
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(67.0),
+                    borderSide: BorderSide(
+                      width: 2.0,
+                      color: ThemeColor.primarycolor.withOpacity(0.16),
+                    ), // BorderSide
+                  ), // OutlineInputBorder
+                ), // InputDecoration
               ),
-              SizedBox(
-                height: 16,
+            ),
+            SizedBox(
+              height: 16,
+            ),
+            Container(
+              width: 1.sw,
+              decoration: BoxDecoration(
+                  color: Colors.transparent,
+                  image: DecorationImage(
+                      image: AssetImage('assets/images/acard.png'))),
+              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 32),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          showDialog(
+                              context: context,
+                              builder: (_) => CalendarPage2());
+                        },
+                        child: Text("Today’s attendance",
+                            style: FontConstant2.k24w5008267text),
+                      ),
+                      Row(
+                        children: [
+                          Text(
+                            "Sunday 17 Oct - 2022",
+                            style: FontConstant.k16w500B7A4Text,
+                          ),
+                          SizedBox(width: 8),
+                          Image.asset(
+                            "assets/images/calendericon.png",
+                            height: 24,
+                          )
+                        ],
+                      )
+                    ],
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      SizedBox(
+                          width: 56.w,
+                          height: 32.w,
+                          child: FlutterSwitch(
+                             // toggleSize: 25,
+                              inactiveColor: ThemeColor.b7A4B2,
+                              activeColor: ThemeColor.primarycolor,
+                              value: val2,
+                              onToggle: (v) {
+                                setState(() {
+                                  val2 = v;
+                                });
+                              })),
+                      SizedBox(height: 4),
+                      Text(
+                        "All Present",
+                        style: FontConstant.k16w400B7A4Text,
+                      )
+                    ],
+                  ),
+                ],
               ),
-              Container(
-                width: 1.sw,
-                decoration: BoxDecoration(
-                    color: Colors.transparent,
-                    image: DecorationImage(
-                        image: AssetImage('assets/images/acard.png'))),
-                padding: EdgeInsets.symmetric(horizontal: 16, vertical: 32),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        GestureDetector(
-                          onTap: () {
-                            showDialog(
-                                context: context,
-                                builder: (_) => CalendarPage2());
-                          },
-                          child: Text("Today’s attendance",
-                              style: FontConstant2.k24w5008267text),
-                        ),
-                        Row(
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text("74 students",
+                          style: FontConstant.k16w4008471Text),
+                      Text("Present", style: FontConstant.k16w4008471Text),
+                    ],
+                  ),
+                  SizedBox(height: 10),
+                  ListView.separated(
+                      physics: NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      itemCount: image.length,
+                      separatorBuilder: (ctx, ind) => SizedBox(height: 16.h,),
+                      itemBuilder: (BuildContext context, int index) {
+                        return Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(
-                              "Sunday 17 Oct - 2022",
-                              style: FontConstant.k16w500B7A4Text,
-                            ),
-                            SizedBox(width: 8),
-                            Image.asset(
-                              "assets/images/calendericon.png",
-                              height: 24,
-                            )
-                          ],
-                        )
-                      ],
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        SizedBox(
-                            width: 48.w,
-                            height: 32.w,
-                            child: FlutterSwitch(
-                                toggleSize: 25,
-                                inactiveColor: ThemeColor.b7A4B2,
-                                activeColor: ThemeColor.primarycolor,
-                                value: val2,
-                                onToggle: (v) {
-                                  setState(() {
-                                    val2 = v;
-                                  });
-                                })),
-                        SizedBox(height: 4),
-                        Text(
-                          "All Present",
-                          style: FontConstant.k16w400B7A4Text,
-                        )
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                child: Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text("74 students",
-                            style: FontConstant.k16w4008471Text),
-                        Text("Present", style: FontConstant.k16w4008471Text),
-                      ],
-                    ),
-                    SizedBox(height: 10),
-                    ListView.builder(
-                        physics: NeverScrollableScrollPhysics(),
-                        shrinkWrap: true,
-                        itemCount: image.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          return Container(
-                            height: 82,
-                            width: 382,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            Row(
                               children: [
-                                Row(
+                                Container(
+                                  height: 67,
+                                  width: 50,
+                                  decoration: BoxDecoration(
+                                      image: DecorationImage(
+                                          image: AssetImage(image[index]),
+                                          fit: BoxFit.cover)),
+                                ),
+                                SizedBox(width: 16),
+                                Column(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.center,
+                                  crossAxisAlignment:
+                                      CrossAxisAlignment.start,
                                   children: [
-                                    Container(
-                                      height: 67,
-                                      width: 50,
-                                      decoration: BoxDecoration(
-                                          image: DecorationImage(
-                                              image: AssetImage(image[index]),
-                                              fit: BoxFit.cover)),
+                                    Text(
+                                      name[index],
+                                      style: FontConstant.k18w500331FText,
                                     ),
-                                    SizedBox(width: 16),
-                                    Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          name[index],
-                                          style: FontConstant.k18w500331FText,
-                                        ),
-                                        Text(
-                                          desc[index],
-                                          style: FontConstant.k14w4008471Text,
-                                        )
-                                      ],
-                                    ),
+                                    Text(
+                                      desc[index],
+                                      style: FontConstant.k14w4008471Text,
+                                    )
                                   ],
                                 ),
-                                SizedBox(
-                                    width: 48.w,
-                                    height: 24.w,
-                                    child: FlutterSwitch(
-                                        toggleSize: 20,
-                                        inactiveColor: ThemeColor.b7A4B2,
-                                        activeColor: ThemeColor.primarycolor,
-                                        value: val2,
-                                        onToggle: (v) {
-                                          setState(() {
-                                            val2 = v;
-                                          });
-                                        })),
-                                // Container(
-                                //   height: 24.h,
-                                //   width: 48.w,
-                                //   child: CupertinoSwitch(
-                                //     activeColor: ThemeColor.primarycolor,
-                                //     value: value,
-                                //     onChanged: (value) {
-                                //       value = value;
-                                //       setState(() {});
-                                //     },
-                                //   ),
-                                // ),
                               ],
                             ),
-                          );
-                        })
-                  ],
-                ),
+                            SizedBox(
+                                width: 48.w,
+                                height: 24.w,
+                                child: FlutterSwitch(
+                                    toggleSize: 20,
+                                    inactiveColor: ThemeColor.b7A4B2,
+                                    activeColor: ThemeColor.primarycolor,
+                                    value: val2,
+                                    onToggle: (v) {
+                                      setState(() {
+                                        val2 = v;
+                                      });
+                                    })),
+                            // Container(
+                            //   height: 24.h,
+                            //   width: 48.w,
+                            //   child: CupertinoSwitch(
+                            //     activeColor: ThemeColor.primarycolor,
+                            //     value: value,
+                            //     onChanged: (value) {
+                            //       value = value;
+                            //       setState(() {});
+                            //     },
+                            //   ),
+                            // ),
+                          ],
+                        );
+                      })
+                ],
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

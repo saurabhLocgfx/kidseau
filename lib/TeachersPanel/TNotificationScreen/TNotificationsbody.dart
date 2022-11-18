@@ -188,51 +188,55 @@ Future<dynamic> Tnotificationdialog(BuildContext context) {
                   SizedBox(height: 24),
                   Row(
                     children: [
-                      SizedBox(
-                        height: 52,
-                        width: 170,
-                        child: MaterialButton(
-                          elevation: 0,
-                          onPressed: () {
-                            Navigator.pop(context);
-                          },
-                          color: Colors.white,
-                          shape: RoundedRectangleBorder(
-                              side: BorderSide(
-                                  color: ThemeColor.lightpurple, width: 1),
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(94))),
-                          child: Text(
-                            "Close",
-                            style: FontConstant.k16w5008267Text,
+                      Expanded(
+                        child: SizedBox(
+                          height: 52,
+                          //width: 170,
+                          child: MaterialButton(
+                            elevation: 0,
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            color: Colors.white,
+                            shape: RoundedRectangleBorder(
+                                side: BorderSide(
+                                    color: ThemeColor.lightpurple, width: 1),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(94))),
+                            child: Text(
+                              "Close",
+                              style: FontConstant.k16w5008267Text,
+                            ),
                           ),
                         ),
                       ),
                       SizedBox(width: 8),
-                      SizedBox(
-                        height: 52,
-                        width: 170,
-                        child: MaterialButton(
-                          elevation: 0,
-                          onPressed: () {},
-                          color: ThemeColor.primarycolor,
-                          shape: RoundedRectangleBorder(
-                              side: BorderSide(
-                                  color: ThemeColor.lightpurple, width: 1),
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(94))),
-                          child: Row(
-                            children: [
-                              Image.asset(
-                                "assets/images/clockicon.png",
-                                height: 24,
-                                color: Colors.white,
-                              ),
-                              SizedBox(width: 14),
-                              Text("Add reminder ",
-                                  style: FontConstant.k16w5008267Text
-                                      .copyWith(color: Colors.white)),
-                            ],
+                      Expanded(
+                        child: SizedBox(
+                          height: 52,
+                          //width: 170,
+                          child: MaterialButton(
+                            elevation: 0,
+                            onPressed: () {},
+                            color: ThemeColor.primarycolor,
+                            shape: RoundedRectangleBorder(
+                                side: BorderSide(
+                                    color: ThemeColor.lightpurple, width: 1),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(94))),
+                            child: Row(
+                              children: [
+                                Image.asset(
+                                  "assets/images/clockicon.png",
+                                  height: 24,
+                                  color: Colors.white,
+                                ),
+                                SizedBox(width: 8),
+                                Text("Add reminder ",
+                                    style: FontConstant.k16w5008267Text
+                                        .copyWith(color: Colors.white)),
+                              ],
+                            ),
                           ),
                         ),
                       ),

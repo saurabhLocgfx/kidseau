@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:kidseau/Constants/colors.dart';
 import 'package:kidseau/TeachersPanel/TDashboard.dart';
 import 'package:kidseau/Theme.dart';
 import 'package:kidseau/Widgets/buttons.dart';
 import 'package:kidseau/Widgets/textfields.dart';
+import 'package:pin_code_fields/pin_code_fields.dart';
 
 class TLoginOtpVerification extends StatefulWidget {
   const TLoginOtpVerification({Key? key}) : super(key: key);
@@ -16,8 +19,8 @@ class _TLoginOtpVerificationState extends State<TLoginOtpVerification> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 896,
-      width: 414,
+      /*height: 896,
+      width: 414,*/
       child: Scaffold(
         backgroundColor: Color(0xfff7f6fa),
         body: SingleChildScrollView(
@@ -26,7 +29,7 @@ class _TLoginOtpVerificationState extends State<TLoginOtpVerification> {
               Stack(children: [
                 Container(
                   height: 414,
-                  width: 414,
+                  width: 1.sw,
                   decoration: BoxDecoration(
                     image: DecorationImage(
                       image: AssetImage("assets/images/postsbackground.png"),
@@ -35,22 +38,20 @@ class _TLoginOtpVerificationState extends State<TLoginOtpVerification> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 199.0),
-                  child: Container(
-                    child: Column(
-                      children: [
-                        Image.asset(
-                          "assets/images/logo.png",
-                          height: 172,
-                          width: 173,
-                        ),
-                        Text(
-                          "We offer a new way to track your children and watch them grow.",
-                          style: FontConstant.k16w4008471Text,
-                          textAlign: TextAlign.center,
-                        ),
-                      ],
-                    ),
+                  padding: const EdgeInsets.only(top: 180.0, left: 16, right: 16),
+                  child: Column(
+                    children: [
+                      Image.asset(
+                        "assets/images/logo.png",
+                        height: 172.h,
+                        width: 173.w,
+                      ),
+                      Text(
+                        "We offer a new way to track your children and watch them grow.",
+                        style: FontConstant.k16w4008471Text,
+                        textAlign: TextAlign.center,
+                      ),
+                    ],
                   ),
                 )
               ]),
@@ -69,7 +70,17 @@ class _TLoginOtpVerificationState extends State<TLoginOtpVerification> {
                       textAlign: TextAlign.start,
                     ),
                     SizedBox(height: 43),
-                    Container(
+                   PinCodeTextField(
+                     keyboardType: TextInputType.number,
+                       appContext: context,
+                       length: 4,
+                       onChanged: (val){},
+                     pinTheme: PinTheme(
+                       activeColor: AppColors().k8267AC,
+                       inactiveColor: AppColors().k8267AC,
+                     ),
+                   ),
+                   /* Container(
                       height: 50,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -116,26 +127,47 @@ class _TLoginOtpVerificationState extends State<TLoginOtpVerification> {
                           ),
                         ],
                       ),
-                    ),
+                    ),*/
                     SizedBox(height: 32),
-                    SizedBox(
-                      height: 52,
-                      width: 382,
-                      child: MainButton(
-                          onTap: () {
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => TDashboard()));
-                          },
-                          title: "Continue",
-                          textStyleColor: Colors.white,
-                          backgroundColor: ThemeColor.primarycolor),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: SizedBox(
+                            height: 52,
+                            //width: 382,
+                            child: MainButton(
+                                onTap: () {
+                                  Navigator.of(context).push(MaterialPageRoute(
+                                      builder: (context) => TDashboard()));
+                                },
+                                title: "Continue",
+                                textStyleColor: Colors.white,
+                                backgroundColor: ThemeColor.primarycolor),
+                          ),
+                        ),
+                      ],
                     ),
                     SizedBox(height: 40),
-                    Text(
-                      "By proceeding you agree to our Privacy Policy an& Terms and Conditions",
-                      style: FontConstant.k14w500B7A4Text,
-                      textAlign: TextAlign.start,
-                    ),
+                    RichText(
+                        text: TextSpan(
+                            children: [
+                              TextSpan(
+                                text: "By proceeding you agree to our ",
+                                style: FontConstant.k14w400B7A4Text,
+                              ),TextSpan(
+                                text: "Privacy Policy",
+                                style: FontConstant.k14w500B7A4TextU,
+                              ),
+                              TextSpan(
+                                text: " & ",
+                                style: FontConstant.k14w400B7A4Text,
+                              ),
+                              TextSpan(
+                                text: "Terms and Conditions",
+                                style: FontConstant.k14w500B7A4TextU,
+                              ),
+                            ]
+                        ) ),
                     SizedBox(height: 13.h),
                   ],
                 ),

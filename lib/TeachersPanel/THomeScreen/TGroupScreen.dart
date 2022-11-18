@@ -7,6 +7,7 @@ import 'package:kidseau/ParentsPanel/PHomeScreen/PHomeScreen.dart';
 import 'package:kidseau/ParentsPanel/PHomeScreen/PHomebody.dart';
 import 'package:kidseau/TeachersPanel/THomeScreen/TAllStudentsScreen.dart';
 import 'package:kidseau/Theme.dart';
+import 'package:kidseau/Widgets/THomeScreenWidgets/t_activity.dart';
 import 'package:kidseau/Widgets/buttons.dart';
 
 class TGroupScreen extends StatefulWidget {
@@ -77,7 +78,7 @@ class _TGroupScreenState extends State<TGroupScreen> {
               SizedBox(
                 height: 5.h,
               ),
-              Activity(),
+              TActivity(),
               Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
@@ -120,18 +121,18 @@ class _TGroupScreenState extends State<TGroupScreen> {
     );
   }
 
-  Container GroupTab() {
-    List<String> items = [
-      "Group A",
-      "Group B",
-      "Group C",
-      "Group D",
-      "Group E",
-    ];
+  List<String> items = [
+    "Group A",
+    "Group B",
+    "Group C",
+    "Group D",
+    "Group E",
+  ];
+  int current = 0;
 
-    int current = 0;
+  Container GroupTab() {
     return Container(
-      width: 414,
+      //width: 414,
       height: 62,
       decoration: BoxDecoration(
           color: Colors.white, borderRadius: BorderRadius.circular(81)),
@@ -151,6 +152,7 @@ class _TGroupScreenState extends State<TGroupScreen> {
                     });
                   },
                   child: AnimatedContainer(
+                    curve: Curves.easeIn,
                     duration: const Duration(milliseconds: 200),
                     margin: const EdgeInsets.all(5),
                     width: 72,

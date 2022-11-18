@@ -148,11 +148,16 @@ class _TEditProfileScreenState extends State<TEditProfileScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text('dd/mm/yyyy', style: FontConstant.k16w400B7A4Text),
-                        SizedBox(
-                          width: 30,
-                          child: Image.asset(
-                            'assets/images/calendericon.png',
-                            color: ThemeColor.b7A4B2,
+                        InkWell(
+                          onTap: (){
+                            showDatePicker(context: context, initialDate: DateTime.now(), firstDate: DateTime(1960), lastDate: DateTime(2100));
+                          },
+                          child: SizedBox(
+                            width: 30,
+                            child: Image.asset(
+                              'assets/images/calendericon.png',
+                              color: ThemeColor.b7A4B2,
+                            ),
                           ),
                         ),
                       ],

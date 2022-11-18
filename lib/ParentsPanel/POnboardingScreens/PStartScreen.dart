@@ -30,7 +30,7 @@ class PStartScreen extends StatelessWidget {
           ),
           Expanded(
             child: Container(
-              width: 414,
+              width: 414.w,
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.only(
@@ -43,7 +43,7 @@ class PStartScreen extends StatelessWidget {
                 child: Column(
                   children: [
                     SizedBox(
-                      height: 59,
+                      height: 59.h,
                     ),
                     Padding(
                       padding: EdgeInsets.only(left: 120, right: 120),
@@ -52,32 +52,44 @@ class PStartScreen extends StatelessWidget {
                     SizedBox(
                       height: Get.size.height * 0.05,
                     ),
-                    SizedBox(
-                      height: 56,
-                      width: 382,
-                      child: MainButton(
-                          onTap: () {
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => TOnboardingScreen()));
-                          },
-                          title: "i'm a Teacher",
-                          textStyleColor: Colors.white,
-                          backgroundColor: ThemeColor.primaryorange),
+                    Row(
+                      children: [
+                        Expanded(
+                         // width: 382,
+                          child: SizedBox(
+                            height: 56,
+                            child: MainButton(
+                                onTap: () {
+                                  Navigator.of(context).push(MaterialPageRoute(
+                                      builder: (context) => TOnboardingScreen()));
+                                },
+                                title: "i'm a Teacher",
+                                textStyleColor: Colors.white,
+                                backgroundColor: ThemeColor.primaryorange),
+                          ),
+                        ),
+                      ],
                     ),
                     SizedBox(
-                      height: Get.size.height * 0.02,
+                      height: 16.h,
                     ),
-                    SizedBox(
-                      height: 56,
-                      width: 382,
-                      child: MainButton(
-                          onTap: () {
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => POnboardingScreen()));
-                          },
-                          title: "i'm a Parent",
-                          textStyleColor: Colors.white,
-                          backgroundColor: ThemeColor.primarycolor),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: SizedBox(
+                            height: 56,
+                            //width: 382,
+                            child: MainButton(
+                                onTap: () {
+                                  Navigator.of(context).push(MaterialPageRoute(
+                                      builder: (context) => POnboardingScreen()));
+                                },
+                                title: "i'm a Parent",
+                                textStyleColor: Colors.white,
+                                backgroundColor: ThemeColor.primarycolor),
+                          ),
+                        ),
+                      ],
                     ),
                     SizedBox(
                       height: Get.size.height * 0.18,

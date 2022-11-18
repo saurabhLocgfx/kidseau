@@ -88,7 +88,7 @@ class _TKidsOverviewState extends State<TKidsOverview> {
             Image.asset(
               "assets/images/postsbackground.png",
               height: 414,
-              width: 414,
+              width: 1.sw,
             ),
             Column(
               children: [
@@ -105,7 +105,7 @@ class _TKidsOverviewState extends State<TKidsOverview> {
                                 image: AssetImage(
                                     "assets/images/profileperson.png"))),
                       ),
-                      SizedBox(width: 24),
+                      SizedBox(width: 24.w),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -151,7 +151,7 @@ class _TKidsOverviewState extends State<TKidsOverview> {
                       ),
                       SizedBox(height: 10),
                       SizedBox(
-                        height: 100.h,
+                       // height: 100.h,
                         child: ListView.builder(
                             physics: NeverScrollableScrollPhysics(),
                             padding: EdgeInsets.zero,
@@ -196,7 +196,7 @@ class _TKidsOverviewState extends State<TKidsOverview> {
                 Stack(children: [
                   Container(
                     height: 280,
-                    width: 414,
+                    width: 1.sw,
                     decoration: BoxDecoration(
                         image: DecorationImage(
                             image: AssetImage(
@@ -210,49 +210,50 @@ class _TKidsOverviewState extends State<TKidsOverview> {
                           SizedBox(height: 24),
                           Text("Parent", style: FontConstant2.k22w5008471text),
                           SizedBox(height: 10),
-                          Expanded(
-                            child: Container(
-                              child: ListView.builder(
-                                  physics: NeverScrollableScrollPhysics(),
-                                  padding: EdgeInsets.zero,
-                                  itemCount: parentcategory.length,
-                                  shrinkWrap: true,
-                                  itemBuilder:
-                                      (BuildContext context, int index) {
-                                    return Row(
-                                      children: [
-                                        Container(
-                                          width: 104.w,
-                                          height: 27.h,
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                parentcategory[index],
-                                                style: FontConstant
-                                                    .k16w500331FText,
-                                              ),
-                                            ],
+                          ListView.builder(
+                              physics: NeverScrollableScrollPhysics(),
+                              padding: EdgeInsets.zero,
+                              itemCount: parentcategory.length,
+                              shrinkWrap: true,
+                              itemBuilder:
+                                  (BuildContext context, int index) {
+                                return Row(
+                                  children: [
+                                    Expanded(
+                                      /*width: 104.w,
+                                      height: 27.h,*/
+                                      child: Column(
+                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            parentcategory[index],
+                                            style: FontConstant
+                                                .k16w500331FText,
                                           ),
-                                        ),
-                                        SizedBox(width: 16.w),
-                                        Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              parentcategorydata[index],
-                                              style:
-                                                  FontConstant.k16w5008471Text,
-                                            )
-                                          ],
-                                        ),
-                                      ],
-                                    );
-                                  }),
-                            ),
-                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    SizedBox(width: 16.w),
+                                    Expanded(
+                                      flex: 2,
+                                      child: Column(
+                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            parentcategorydata[index],
+                                            style:
+                                                FontConstant.k16w5008471Text,
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                );
+                              }),
                         ],
                       ),
                     ),
@@ -285,47 +286,46 @@ class _TKidsOverviewState extends State<TKidsOverview> {
                         SizedBox(height: 24),
                         Text("Medical", style: FontConstant2.k22w5008471text),
                         SizedBox(height: 10),
-                        Expanded(
-                          child: Container(
-                            child: ListView.builder(
-                                physics: NeverScrollableScrollPhysics(),
-                                padding: EdgeInsets.zero,
-                                itemCount: parentcategory.length,
-                                shrinkWrap: true,
-                                itemBuilder: (BuildContext context, int index) {
-                                  return Row(
-                                    children: [
-                                      Container(
-                                        width: 104.w,
-                                        height: 27.h,
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              medicalcategory[index],
-                                              style:
-                                                  FontConstant.k16w500331FText,
-                                            ),
-                                          ],
+                        ListView.builder(
+                            physics: NeverScrollableScrollPhysics(),
+                            padding: EdgeInsets.zero,
+                            itemCount: parentcategory.length,
+                            shrinkWrap: true,
+                            itemBuilder: (BuildContext context, int index) {
+                              return Row(
+                                children: [
+                                  Expanded(
+                                    /*width: 104.w,
+                                    height: 27.h,*/
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          medicalcategory[index],
+                                          style:
+                                              FontConstant.k16w500331FText,
                                         ),
-                                      ),
-                                      SizedBox(width: 16.w),
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            medicalcategorydata[index],
-                                            style: FontConstant.k16w5008471Text,
-                                          )
-                                        ],
-                                      ),
-                                    ],
-                                  );
-                                }),
-                          ),
-                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  SizedBox(width: 16.w),
+                                  Expanded(
+                                    flex:2,
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          medicalcategorydata[index],
+                                          style: FontConstant.k16w5008471Text,
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              );
+                            }),
                       ],
                     ),
                   ),

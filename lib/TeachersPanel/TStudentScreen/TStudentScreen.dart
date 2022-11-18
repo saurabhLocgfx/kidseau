@@ -18,6 +18,7 @@ class TStudentScreen extends StatefulWidget {
 }
 
 class _TStudentScreenState extends State<TStudentScreen> {
+  double value =2;
   bool toggle1 = false;
   @override
   Widget build(BuildContext context) {
@@ -135,153 +136,188 @@ class _TStudentScreenState extends State<TStudentScreen> {
                 ],
               ),
               SizedBox(height: 24),
-              GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => TStudentDetailScreen()));
-                },
-                child: Container(
-                  width: 1.sw,
-                  height: 151,
-                  padding: EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(16),
-                    color: Colors.white,
-                    image: DecorationImage(
-                      fit: BoxFit.fill,
-                      image: AssetImage(
-                        'assets/images/sp.png',
+              ListView.separated(
+                shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
+                  itemBuilder: (context, index){
+                return GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => TStudentDetailScreen()));
+                  },
+                  child: Container(
+                    width: 1.sw,
+                    height: 151,
+                    padding: EdgeInsets.all(16),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(16),
+                      color: Colors.white,
+                      image: DecorationImage(
+                        fit: BoxFit.fill,
+                        image: AssetImage(
+                          'assets/images/sp.png',
+                        ),
                       ),
                     ),
-                  ),
-                  child: Row(
-                    children: [
-                      Container(
-                        width: 80,
-                        height: 105,
-                        clipBehavior: Clip.hardEdge,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(8),
+                    child: Row(
+                      children: [
+                        Container(
+                          width: 80,
+                          height: 105,
+                          clipBehavior: Clip.hardEdge,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: Image.asset('assets/images/Rectangle 2715.png'),
                         ),
-                        child: Image.asset('assets/images/Rectangle 2715.png'),
-                      ),
-                      SizedBox(width: 12),
-                      Expanded(
-                        child: Column(
-                          children: [
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Expanded(
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        'Child Name',
-                                        style: FontConstant.k18w500331FText,
-                                      ),
-                                      SizedBox(height: 4),
-                                      Text(
-                                        'S/O - Father Name',
-                                        style: FontConstant.k16w4008471Text,
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                FlutterSwitch(
-                                  width: 56.w,
-                                  height: 32.w,
-                                  toggleSize: 30,
-                                  inactiveColor: ThemeColor.b7A4B2,
-                                  activeColor: ThemeColor.primarycolor,
-                                  inactiveIcon:
-                                      Image.asset('assets/images/sf.png'),
-                                  activeIcon:
-                                      Image.asset('assets/images/baby.png'),
-                                  value: toggle1,
-                                  onToggle: (v) {
-                                    setState(() {
-                                      toggle1 = v;
-                                    });
-                                  },
-                                ),
-                              ],
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                for (int i = 0; i < 5; i++)
-                                  GestureDetector(
-                                    onTap: () {},
-                                    child: Container(
-                                      padding: EdgeInsets.all(5),
-                                      color: Colors.transparent,
-                                      child: Text(
-                                        '${i + 1}',
-                                        style: FontConstant.k14w400B7A4Text,
-                                      ),
+                        SizedBox(width: 12),
+                        Expanded(
+                          child: Column(
+                            children: [
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Expanded(
+                                    child: Column(
+                                      crossAxisAlignment:
+                                      CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          'Child Name',
+                                          style: FontConstant.k18w500331FText,
+                                        ),
+                                        SizedBox(height: 4),
+                                        Text(
+                                          'S/O - Father Name',
+                                          style: FontConstant.k16w4008471Text,
+                                        ),
+                                      ],
                                     ),
                                   ),
-                              ],
-                            ),
-                            Stack(
-                              clipBehavior: Clip.none,
-                              alignment: Alignment.center,
-                              children: [
-                                Container(
-                                  width: 1.sw,
-                                  height: 10,
-                                  decoration: BoxDecoration(
-                                    color: ThemeColor.ebe6F2,
-                                    borderRadius: BorderRadius.circular(12),
+                                  FlutterSwitch(
+                                    width: 56.w,
+                                    height: 32.w,
+                                    toggleSize: 30,
+                                    inactiveColor: ThemeColor.b7A4B2,
+                                    activeColor: ThemeColor.primarycolor,
+                                    inactiveIcon:
+                                    Image.asset('assets/images/sf.png'),
+                                    activeIcon:
+                                    Image.asset('assets/images/baby.png'),
+                                    value: toggle1,
+                                    onToggle: (v) {
+                                      setState(() {
+                                        toggle1 = v;
+                                      });
+                                    },
                                   ),
-                                ),
-                                Positioned(
-                                  left: 0,
-                                  child: Stack(
-                                    alignment: Alignment.centerRight,
-                                    children: [
-                                      AnimatedContainer(
-                                        duration: Duration(milliseconds: 300),
-                                        curve: Curves.fastOutSlowIn,
-                                        width: 1.sw / 5.5,
-                                        height: 10,
-                                        decoration: BoxDecoration(
-                                          gradient: LinearGradient(
-                                            colors: [
-                                              Color(0xFFF5C88E),
-                                              Color(0xFFF0AD56),
-                                            ],
-                                            begin: Alignment.centerLeft,
-                                            end: Alignment.centerRight,
+                                ],
+                              ),
+                              /*Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  for (int i = 0; i < 5; i++)
+                                    GestureDetector(
+                                      onTap: () {},
+                                      child: Container(
+                                        padding: EdgeInsets.all(5),
+                                        color: Colors.transparent,
+                                        child: Text(
+                                          '${i + 1}',
+                                          style: FontConstant.k14w400B7A4Text,
+                                        ),
+                                      ),
+                                    ),
+                                ],
+                              ),*/
+                              Slider(divisions: 4,
+                                  label: value.round().toString(),
+                                  activeColor: Color(0xFFF5C88E),
+                                inactiveColor: ThemeColor.ebe6F2,
+                                thumbColor: Color(0xFFF0AD56),
+                                min: 1,
+                                  max: 5,
+                                  value: value.round().toDouble(), onChanged: (val){
+                                setState(() {
+                                  value = val;
+                                });
+                              }),
+                             /* Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  for (int i = 0; i < 5; i++)
+                                    GestureDetector(
+                                      onTap: () {},
+                                      child: Container(
+                                        padding: EdgeInsets.all(5),
+                                        color: Colors.transparent,
+                                        child: Text(
+                                          '${i + 1}',
+                                          style: FontConstant.k14w400B7A4Text,
+                                        ),
+                                      ),
+                                    ),
+                                ],
+                              ),
+                              Stack(
+                                clipBehavior: Clip.none,
+                                alignment: Alignment.center,
+                                children: [
+                                  Container(
+                                    width: 1.sw,
+                                    height: 10,
+                                    decoration: BoxDecoration(
+                                      color: ThemeColor.ebe6F2,
+                                      borderRadius: BorderRadius.circular(12),
+                                    ),
+                                  ),
+                                  Positioned(
+                                    left: 0,
+                                    child: Stack(
+                                      alignment: Alignment.centerRight,
+                                      children: [
+                                        AnimatedContainer(
+                                          duration: Duration(milliseconds: 300),
+                                          curve: Curves.fastOutSlowIn,
+                                          width: 1.sw / 5.5,
+                                          height: 10,
+                                          decoration: BoxDecoration(
+                                            gradient: LinearGradient(
+                                              colors: [
+                                                Color(0xFFF5C88E),
+                                                Color(0xFFF0AD56),
+                                              ],
+                                              begin: Alignment.centerLeft,
+                                              end: Alignment.centerRight,
+                                            ),
+                                            borderRadius:
+                                            BorderRadius.circular(12),
                                           ),
-                                          borderRadius:
-                                              BorderRadius.circular(12),
                                         ),
-                                      ),
-                                      Container(
-                                        width: 24,
-                                        height: 24,
-                                        decoration: BoxDecoration(
-                                          color: Color(0xFFF0AD56),
-                                          shape: BoxShape.circle,
+                                        Container(
+                                          width: 24,
+                                          height: 24,
+                                          decoration: BoxDecoration(
+                                            color: Color(0xFFF0AD56),
+                                            shape: BoxShape.circle,
+                                          ),
                                         ),
-                                      ),
-                                    ],
+                                      ],
+                                    ),
                                   ),
-                                ),
-                              ],
-                            ),
-                          ],
+                                ],
+                              ),*/
+                            ],
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
-              ),
+                );
+              }, separatorBuilder: (ctx, ind) => SizedBox(height: 16.h,), itemCount: 5),
+
             ],
           ),
         ),
@@ -289,18 +325,19 @@ class _TStudentScreenState extends State<TStudentScreen> {
     );
   }
 
-  Container GroupTab() {
-    List<String> items = [
-      "Group A",
-      "Group B",
-      "Group C",
-      "Group D",
-      "Group E",
-    ];
+  List<String> items = [
+    "Group A",
+    "Group B",
+    "Group C",
+    "Group D",
+    "Group E",
+  ];
 
-    int current = 0;
+  int current = 0;
+  Container GroupTab() {
+
     return Container(
-      width: 414,
+      //width: 414,
       height: 62,
       decoration: BoxDecoration(
           color: Colors.white, borderRadius: BorderRadius.circular(81)),

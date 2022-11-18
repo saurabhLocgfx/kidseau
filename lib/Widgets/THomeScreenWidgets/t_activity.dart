@@ -2,16 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:kidseau/ParentsPanel/PHomeScreen/PLearningAlphabets.dart';
+import 'package:kidseau/TeachersPanel/THomeScreen/TLearningAlphabets.dart';
 import 'package:kidseau/Theme.dart';
 
-class Activity extends StatefulWidget {
-  Activity({Key? key}) : super(key: key);
+class TActivity extends StatefulWidget {
+  TActivity({Key? key}) : super(key: key);
 
   @override
-  State<Activity> createState() => _ActivityState();
+  State<TActivity> createState() => _TActivityState();
 }
 
-class _ActivityState extends State<Activity> {
+class _TActivityState extends State<TActivity> {
   var title = [
     "learning Alphabets",
     "play game",
@@ -43,11 +44,11 @@ class _ActivityState extends State<Activity> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-     // height: 300.h,
+      // height: 300.h,
       width: 1.sw,
       child: ListView.separated(
-        separatorBuilder: (ctx, ind) => SizedBox(height: 14.h,),
-        shrinkWrap: true,
+          separatorBuilder: (ctx, ind) => SizedBox(height: 14.h,),
+          shrinkWrap: true,
           padding: EdgeInsets.zero,
           physics: NeverScrollableScrollPhysics(),
           itemCount: images.length,
@@ -56,14 +57,14 @@ class _ActivityState extends State<Activity> {
             return InkWell(
               onTap: () {
                 if (index == 0) {
-                  Get.to(() => PLearningAplphabets());
+                  Get.to(() => TLearningAlphabets());
                 } else if (index == 1) {
                 } else if (index == 2) {
                 } else if (index == 3) {}
               },
               child: Container(
                 height: 64.h,
-               // width: Get.size.width * 0.93,
+                // width: Get.size.width * 0.93,
                 margin: EdgeInsets.symmetric(horizontal: 16),
                 decoration: BoxDecoration(
                   color: Colors.white,
@@ -94,9 +95,9 @@ class _ActivityState extends State<Activity> {
                               '${groups[index]} . ${time[index]}',
                               style: FontConstant.k14w400lightpurpleText
                                   .copyWith(
-                                      fontWeight: FontWeight.w400,
-                                      fontSize: 14,
-                                      color: Color(0xffB7A4B2)),
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 14,
+                                  color: Color(0xffB7A4B2)),
                             )
                           ],
                         ),

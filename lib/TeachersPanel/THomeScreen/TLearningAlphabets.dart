@@ -3,19 +3,20 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:kidseau/ParentsPanel/PHomeScreen/PHomeScreen.dart';
 import 'package:kidseau/Theme.dart';
 import 'package:kidseau/Widgets/buttons.dart';
 
 import '../../TeachersPanel/TMessages/TChats.dart';
 
-class PLearningAplphabets extends StatefulWidget {
-  const PLearningAplphabets({Key? key}) : super(key: key);
+class TLearningAlphabets extends StatefulWidget {
+  const TLearningAlphabets({Key? key}) : super(key: key);
 
   @override
-  State<PLearningAplphabets> createState() => _PLearningAplphabetsState();
+  State<TLearningAlphabets> createState() => _TLearningAlphabetsState();
 }
 
-class _PLearningAplphabetsState extends State<PLearningAplphabets> {
+class _TLearningAlphabetsState extends State<TLearningAlphabets> {
   // bool _flag = true;
   @override
   Widget build(BuildContext context) {
@@ -136,8 +137,8 @@ class _PLearningAplphabetsState extends State<PLearningAplphabets> {
                           child: Text("09:00am to 11:00am",
                               style: FontConstant.k14w400lightpurpleText
                                   .copyWith(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w500)),
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w500)),
                         ),
                       ],
                     ),
@@ -152,21 +153,24 @@ class _PLearningAplphabetsState extends State<PLearningAplphabets> {
                 Align(
                     alignment: Alignment.centerLeft,
                     child: Text(
-                      "Who is taking this class",
+                      "Weak Students",
                       style: FontConstant2.baloothampifont,
                     )),
                 SizedBox(height: 24),
-                TeacherCard(),
+                ListView.separated(
+                  shrinkWrap: true,
+                    physics: NeverScrollableScrollPhysics(),
+                    itemBuilder: (context, index) => Studentcard(), separatorBuilder: (ctx, ind) => SizedBox(height: 16.h,), itemCount: 5),
                 SizedBox(
                   height: 32,
                 ),
-                materialButton(context, () {
+                /*materialButton(context, () {
                   Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (context) => TChats(),
                     ),
                   );
-                }, "Ask Question", ThemeColor.primarycolor, 52.0),
+                }, "Ask Question", ThemeColor.primarycolor, 52.0),*/
                 SizedBox(height: 40.h),
               ],
             ),
@@ -190,7 +194,7 @@ class TeacherCard extends StatelessWidget {
       decoration: BoxDecoration(
           image: DecorationImage(
               image:
-                  AssetImage("assets/images/Teacher card leaarning ap.png"))),
+              AssetImage("assets/images/Teacher card leaarning ap.png"))),
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Row(

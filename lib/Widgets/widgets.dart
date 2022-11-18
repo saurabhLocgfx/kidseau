@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kidseau/Theme.dart';
 
 import '../TeachersPanel/TProfileScreen/TNotificationSetttings.dart';
@@ -19,9 +20,7 @@ Future<dynamic> notificationdialog(BuildContext context) {
           insetPadding: EdgeInsets.all(0),
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(20.0)), //this right here
-          child: Container(
-            height: 290,
-            width: 382,
+          child: SingleChildScrollView(
             child: Padding(
               padding: const EdgeInsets.all(12.0),
               child: Column(
@@ -39,51 +38,56 @@ Future<dynamic> notificationdialog(BuildContext context) {
                   SizedBox(height: 24),
                   Row(
                     children: [
-                      SizedBox(
-                        height: 52,
-                        width: 170,
-                        child: MaterialButton(
-                          elevation: 0,
-                          onPressed: () {
-                            Navigator.pop(context);
-                          },
-                          color: Colors.white,
-                          shape: RoundedRectangleBorder(
-                              side: BorderSide(
-                                  color: ThemeColor.lightpurple, width: 1),
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(94))),
-                          child: Text(
-                            "Close",
-                            style: FontConstant.k16w5008267Text,
+                      Expanded(
+                        child: SizedBox(
+                          height: 52,
+                          //width: 170,
+                          child: MaterialButton(
+                            elevation: 0,
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            color: Colors.white,
+                            shape: RoundedRectangleBorder(
+                                side: BorderSide(
+                                    color: ThemeColor.lightpurple, width: 1),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(94))),
+                            child: Text(
+                              "Close",
+                              style: FontConstant.k16w5008267Text,
+                            ),
                           ),
                         ),
                       ),
                       SizedBox(width: 8),
-                      SizedBox(
-                        height: 52,
-                        width: 170,
-                        child: MaterialButton(
-                          onPressed: () {},
-                          elevation: 0,
-                          color: ThemeColor.primarycolor,
-                          shape: RoundedRectangleBorder(
-                              side: BorderSide(
-                                  color: ThemeColor.lightpurple, width: 1),
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(94))),
-                          child: Row(
-                            children: [
-                              Image.asset(
-                                "assets/images/clockicon.png",
-                                height: 24,
-                                color: Colors.white,
-                              ),
-                              SizedBox(width: 14),
-                              Text("Add reminder ",
-                                  style: FontConstant.k16w5008267Text
-                                      .copyWith(color: Colors.white)),
-                            ],
+                      Expanded(
+                        child: SizedBox(
+                          height: 52,
+                          //width: 170,
+                          child: MaterialButton(
+                            onPressed: () {},
+                            elevation: 0,
+                            color: ThemeColor.primarycolor,
+                            shape: RoundedRectangleBorder(
+                                side: BorderSide(
+                                    color: ThemeColor.lightpurple, width: 1),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(94))),
+                            child: Row(
+                              children: [
+                                Image.asset(
+                                  "assets/images/clockicon.png",
+                                  height: 24,
+                                  color: Colors.white,
+                                ),
+                                SizedBox(width: 6),
+                                Text("Add reminder ",
+                                    overflow: TextOverflow.ellipsis,
+                                    style: FontConstant.k16w5008267Text
+                                        .copyWith(color: Colors.white)),
+                              ],
+                            ),
                           ),
                         ),
                       ),
@@ -326,7 +330,7 @@ class Notificationpopup extends StatelessWidget {
             PopupMenuItem(
               enabled: false,
               child: Padding(
-                padding: const EdgeInsets.only(left: 32, top: 40, bottom: 40),
+                padding:  EdgeInsets.symmetric(vertical: 24.h, ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,

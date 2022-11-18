@@ -6,6 +6,7 @@ import 'package:kidseau/ParentsPanel/PHomeScreen/PHomebody.dart';
 import 'package:kidseau/TeachersPanel/THomeScreen/TGroupScreen.dart';
 import 'package:kidseau/TeachersPanel/TNotificationScreen/TNotificationScreen.dart';
 import 'package:kidseau/Theme.dart';
+import 'package:kidseau/Widgets/THomeScreenWidgets/t_activity.dart';
 
 import '../TReminder/TReminderScreen.dart';
 import 'TAttendanceScreen.dart';
@@ -37,19 +38,16 @@ class _THomeScreenState extends State<THomeScreen> {
         elevation: 0,
         title: Row(
           children: [
-            GestureDetector(
-              onTap: () {},
-              child: Padding(
-                padding: const EdgeInsets.only(top: 15.0),
-                child: Text("Good Morning",
-                    style:
-                        FontConstant2.k32w5008267text.copyWith(fontSize: 25)),
-              ),
+            Padding(
+              padding: const EdgeInsets.only(top: 15.0),
+              child: Text("Good Morning",
+                  style:
+                      FontConstant2.k32w5008267text.copyWith(fontSize: 25)),
             ),
           ],
         ),
         actions: [
-          Container(
+          SizedBox(
             width: 144,
             child: Padding(
               padding: const EdgeInsets.only(top: 15.0),
@@ -102,7 +100,7 @@ class _THomeScreenState extends State<THomeScreen> {
           child: Column(
             children: [
               SizedBox(
-                height: 150,
+                height: 150.h,
                 child: ListView.builder(
                   shrinkWrap: true,
                   scrollDirection: Axis.horizontal,
@@ -136,7 +134,7 @@ class _THomeScreenState extends State<THomeScreen> {
               SizedBox(
                 height: 5.h,
               ),
-              Activity(),
+              TActivity(),
               Center(
                 child: GestureDetector(
                   onTap: () {

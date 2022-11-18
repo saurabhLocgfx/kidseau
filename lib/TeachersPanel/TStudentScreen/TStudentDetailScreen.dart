@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:kidseau/Constants/colors.dart';
 
 import '../../Theme.dart';
 import '../../Widgets/Calender/calendermodel.dart';
@@ -183,75 +184,82 @@ class _TStudentDetailScreenState extends State<TStudentDetailScreen> {
                                   "Info",
                                   style: FontConstant2.k22w5008471text,
                                 ),
-                                Row(
-                                  crossAxisAlignment: CrossAxisAlignment.end,
+                                Stack(
                                   children: [
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
+                                    Positioned(
+                                      bottom: 0,
+                                      right: 0,
+                                      child: SizedBox(
+                                        width: 134,
+                                        child: Image.asset(
+                                            'assets/images/birds.png'),
+                                      ),),
+                                    Row(
+                                      crossAxisAlignment: CrossAxisAlignment.end,
                                       children: [
-                                        Text(
-                                          "Class Section",
-                                          style: FontConstant.k16w500331FText,
-                                        ),
-                                        SizedBox(height: 16),
-                                        Text(
-                                          "Group",
-                                          style: FontConstant.k16w500331FText,
-                                        ),
-                                        SizedBox(height: 16),
-                                        Text(
-                                          "Age",
-                                          style: FontConstant.k16w500331FText,
-                                        ),
-                                        SizedBox(height: 16),
-                                        Text(
-                                          "Birthday",
-                                          style: FontConstant.k16w500331FText,
-                                        ),
-                                        SizedBox(height: 16),
-                                        Text(
-                                          "Gender",
-                                          style: FontConstant.k16w500331FText,
-                                        ),
-                                      ],
-                                    ),
-                                    SizedBox(width: 16),
-                                    Column(
-                                      crossAxisAlignment:
+                                        Column(
+                                          crossAxisAlignment:
                                           CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          "Nursery Sec A",
-                                          style: FontConstant.k16w5008471Text,
+                                          children: [
+                                            Text(
+                                              "Class Section",
+                                              style: FontConstant.k16w500331FText,
+                                            ),
+                                            SizedBox(height: 16),
+                                            Text(
+                                              "Group",
+                                              style: FontConstant.k16w500331FText,
+                                            ),
+                                            SizedBox(height: 16),
+                                            Text(
+                                              "Age",
+                                              style: FontConstant.k16w500331FText,
+                                            ),
+                                            SizedBox(height: 16),
+                                            Text(
+                                              "Birthday",
+                                              style: FontConstant.k16w500331FText,
+                                            ),
+                                            SizedBox(height: 16),
+                                            Text(
+                                              "Gender",
+                                              style: FontConstant.k16w500331FText,
+                                            ),
+                                          ],
                                         ),
-                                        SizedBox(height: 16),
-                                        Text(
-                                          "Group A",
-                                          style: FontConstant.k16w5008471Text,
+                                        SizedBox(width: 16),
+                                        Column(
+                                          crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              "Nursery Sec A",
+                                              style: FontConstant.k16w5008471Text,
+                                            ),
+                                            SizedBox(height: 16),
+                                            Text(
+                                              "Group A",
+                                              style: FontConstant.k16w5008471Text,
+                                            ),
+                                            SizedBox(height: 16),
+                                            Text(
+                                              "4 years old",
+                                              style: FontConstant.k16w5008471Text,
+                                            ),
+                                            SizedBox(height: 16),
+                                            Text(
+                                              "29/09/2020",
+                                              style: FontConstant.k16w5008471Text,
+                                            ),
+                                            SizedBox(height: 16),
+                                            Text(
+                                              "Male",
+                                              style: FontConstant.k16w5008471Text,
+                                            )
+                                          ],
                                         ),
-                                        SizedBox(height: 16),
-                                        Text(
-                                          "4 years old",
-                                          style: FontConstant.k16w5008471Text,
-                                        ),
-                                        SizedBox(height: 16),
-                                        Text(
-                                          "29/09/2020",
-                                          style: FontConstant.k16w5008471Text,
-                                        ),
-                                        SizedBox(height: 16),
-                                        Text(
-                                          "Male",
-                                          style: FontConstant.k16w5008471Text,
-                                        )
+                                        //Spacer(),
                                       ],
-                                    ),
-                                    Spacer(),
-                                    SizedBox(
-                                      width: 134,
-                                      child: Image.asset(
-                                          'assets/images/birds.png'),
                                     ),
                                   ],
                                 ),
@@ -330,52 +338,101 @@ class _TStudentDetailScreenState extends State<TStudentDetailScreen> {
                                             BorderRadius.circular(16)),
                                     child: Padding(
                                       padding: const EdgeInsets.symmetric(
-                                          horizontal: 16.0),
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
+                                          horizontal: 16.0, vertical: 4),
+                                      child: Row(
                                         children: [
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Text(
-                                                "Attendance",
-                                                style: FontConstant
-                                                    .k16w5008471Text,
-                                              ),
-                                              Image.asset(
-                                                "assets/images/bars1.png",
-                                                height: 24,
-                                              )
-                                            ],
+                                          Expanded(
+                                            flex: 2,
+                                            child: Column(
+                                              mainAxisAlignment: MainAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  "Attendance",
+                                                  style: FontConstant
+                                                      .k14w5008471Text,
+                                                ),
+                                                SizedBox(height: 5.h,),
+                                                Row(
+                                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                  children: [
+                                                    Container(
+                                                      width: 6,
+                                                      height: 44,
+                                                      decoration: BoxDecoration(
+                                                        borderRadius: BorderRadius.circular(18),
+                                                        color: AppColors().k8267AC,
+                                                      ),
+                                                    ),
+                                                    Container(
+                                                      width: 6,
+                                                      height: 44,
+                                                      decoration: BoxDecoration(
+                                                        borderRadius: BorderRadius.circular(18),
+                                                        color: AppColors().k8267AC,
+                                                      ),
+                                                    ), Container(
+                                                      width: 6,
+                                                      height: 24,
+                                                      decoration: BoxDecoration(
+                                                        borderRadius: BorderRadius.circular(18),
+                                                        color: AppColors().k8267AC.withOpacity(0.2),
+                                                      ),
+                                                    ), Container(
+                                                      width: 6,
+                                                      height: 44,
+                                                      decoration: BoxDecoration(
+                                                        borderRadius: BorderRadius.circular(18),
+                                                        color: AppColors().k8267AC,
+                                                      ),
+                                                    ), Container(
+                                                      width: 6,
+                                                      height: 24,
+                                                      decoration: BoxDecoration(
+                                                        borderRadius: BorderRadius.circular(18),
+                                                        color: AppColors().k8267AC.withOpacity(0.2),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                )
+                                              ],
+                                            ),
                                           ),
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Image.asset(
-                                                "assets/images/bars2.png",
-                                                width: 70,
-                                              ),
-                                              Column(
-                                                children: [
-                                                  Text(
-                                                    "3/5",
-                                                    style: FontConstant2
-                                                        .k24w4008267text,
-                                                  ),
-                                                  Text(
-                                                    "days",
-                                                    style: FontConstant2
-                                                        .k16w400B7A4text,
-                                                  ),
-                                                ],
-                                              )
-                                            ],
-                                          )
+                                          SizedBox(width: 3,),
+                                          Expanded(
+                                            child: Column(
+                                              /*mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,*/
+                                              children: [
+                                                Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.spaceBetween,
+                                                  children: [
+                                                    Image.asset(
+                                                      "assets/images/bars1.png",
+                                                      height: 24,
+                                                    )
+                                                  ],
+                                                ),
+                                                Column(
+                                                  mainAxisAlignment: MainAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      "3/5",
+                                                      style: FontConstant2
+                                                          .k24w4008267text,
+                                                    ),
+                                                    Text(
+                                                      "days",
+                                                      style: FontConstant2
+                                                          .k16w400B7A4text,
+                                                    ),
+                                                  ],
+                                                )
+                                              ],
+                                            ),
+                                          ),
                                         ],
                                       ),
                                     ),
@@ -387,14 +444,14 @@ class _TStudentDetailScreenState extends State<TStudentDetailScreen> {
                         ),
                         SizedBox(height: 16),
                         Container(
-                          height: 190.h,
-                          width: 392.w,
+                          /*height: 190.h,
+                          width: 392.w,*/
                           decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(16)),
                           child: Padding(
                             padding:
-                                const EdgeInsets.symmetric(horizontal: 16.0),
+                                const EdgeInsets.symmetric(horizontal: 16.0, vertical: 5),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.center,
@@ -420,11 +477,12 @@ class _TStudentDetailScreenState extends State<TStudentDetailScreen> {
                                       "assets/images/bar4.png",
                                       height: 130,
                                     ),
-                                    SizedBox(width: 16),
+                                    SizedBox(width: 8),
                                     Expanded(
                                       child: SizedBox(
-                                        height: 140,
+                                       // height: 140,
                                         child: ListView.builder(
+                                          shrinkWrap: true,
                                             padding: EdgeInsets.zero,
                                             physics:
                                                 NeverScrollableScrollPhysics(),
@@ -439,13 +497,13 @@ class _TStudentDetailScreenState extends State<TStudentDetailScreen> {
                                                           .copyWith(
                                                               color: Color(
                                                                   0xff331F2D))),
-                                                  SizedBox(width: 10),
+                                                  SizedBox(width: 5),
                                                   Icon(
                                                     Icons.circle,
                                                     size: 4,
                                                     color: Color(0xff84717F),
                                                   ),
-                                                  SizedBox(width: 10),
+                                                  SizedBox(width: 5),
                                                   Text(fullnames[index],
                                                       style: FontConstant
                                                           .k12w5008471Text),

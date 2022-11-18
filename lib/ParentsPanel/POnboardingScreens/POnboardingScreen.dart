@@ -67,36 +67,34 @@ class _POnboardingScreenState extends State<POnboardingScreen> {
                           });
                         },
                         itemBuilder: (_, i) {
-                          return Container(
-                            child: Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 16.0),
-                              child: Column(
-                                children: [
-                                  SizedBox(height: 34),
-                                  Image.asset(
-                                    Pcontents[i].image,
-                                    height: 290,
-                                    width: 334,
+                          return Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 16.0),
+                            child: Column(
+                              children: [
+                                SizedBox(height: 34),
+                                Image.asset(
+                                  Pcontents[i].image,
+                                  height: 290,
+                                  width: 334,
+                                ),
+                                SizedBox(height: 25),
+                                Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: Text(Pcontents[i].title,
+                                      style: FontConstant2.k32w500331Ftext),
+                                ),
+                                Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: SizedBox(
+                                    width: 200.w,
+                                    child: Text(Pcontents[i].discription,
+                                        maxLines: 2,
+                                        textAlign: TextAlign.left,
+                                        style: FontConstant.k16w4008471Text),
                                   ),
-                                  SizedBox(height: 25),
-                                  Align(
-                                    alignment: Alignment.centerLeft,
-                                    child: Text(Pcontents[i].title,
-                                        style: FontConstant2.k32w500331Ftext),
-                                  ),
-                                  Align(
-                                    alignment: Alignment.centerLeft,
-                                    child: SizedBox(
-                                      width: 200.w,
-                                      child: Text(Pcontents[i].discription,
-                                          maxLines: 2,
-                                          textAlign: TextAlign.left,
-                                          style: FontConstant.k16w4008471Text),
-                                    ),
-                                  )
-                                ],
-                              ),
+                                )
+                              ],
                             ),
                           );
                         },
@@ -127,10 +125,6 @@ class _POnboardingScreenState extends State<POnboardingScreen> {
                                       padding: const EdgeInsets.only(
                                           top: 85.0, left: 28),
                                       child: MaterialButton(
-                                        child: Icon(
-                                          Icons.arrow_forward,
-                                          color: Colors.white,
-                                        ),
                                         minWidth: 25,
                                         onPressed: () {
                                           if (currentIndex ==
@@ -148,6 +142,10 @@ class _POnboardingScreenState extends State<POnboardingScreen> {
                                             curve: Curves.fastOutSlowIn,
                                           );
                                         },
+                                        child: Icon(
+                                          Icons.arrow_forward,
+                                          color: Colors.white,
+                                        ),
                                       ),
                                     ),
                                   ],

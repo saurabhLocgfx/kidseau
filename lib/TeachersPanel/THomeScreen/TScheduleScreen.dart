@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:kidseau/Widgets/THomeScreenWidgets/t_activity.dart';
 
 import '../../ParentsPanel/PHomeScreen/PHomebody.dart';
 import '../../Theme.dart';
@@ -72,7 +73,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
             SizedBox(
               height: 5.h,
             ),
-            Activity(),
+            TActivity(),
           ],
         ),
       ),

@@ -12,8 +12,8 @@ class TLoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 896.h,
-      width: 414.w,
+      /*height: 896.h,
+      width: 414.w,*/
       child: Scaffold(
         backgroundColor: Color(0xfff7f6fa),
         body: SingleChildScrollView(
@@ -22,7 +22,7 @@ class TLoginScreen extends StatelessWidget {
               Stack(children: [
                 Container(
                   height: 414,
-                  width: 414,
+                  width: 1.sw,
                   decoration: BoxDecoration(
                     image: DecorationImage(
                       image: AssetImage("assets/images/postsbackground.png"),
@@ -32,13 +32,13 @@ class TLoginScreen extends StatelessWidget {
                 ),
                 Padding(
                   padding:
-                      const EdgeInsets.only(top: 199.0, left: 16, right: 16),
+                      const EdgeInsets.only(top: 180.0, left: 16, right: 16),
                   child: Column(
                     children: [
                       Image.asset(
                         "assets/images/logo.png",
-                        height: 172,
-                        width: 173,
+                        height: 172.h,
+                        width: 173.w,
                       ),
                       Text(
                         "We offer a new way to mark the children and shape them for better future.",
@@ -58,11 +58,11 @@ class TLoginScreen extends StatelessWidget {
                     Text("Account", style: FontConstant.k24w500brownText),
                     GestureDetector(
                       onTap: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => TSignupScreen()));
+                       /* Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => TSignupScreen()));*/
                       },
                       child: Text(
-                        "Login/create a new account.",
+                        "Login/create a new account to track your kids’ activities.",
                         style:
                             FontConstant.k16w400B7A4Text.copyWith(fontSize: 15),
                         textAlign: TextAlign.start,
@@ -74,24 +74,63 @@ class TLoginScreen extends StatelessWidget {
                     SizedBox(height: 6),
                     textfield(context, "Enter Password"),
                     SizedBox(height: 32),
-                    SizedBox(
-                      height: 52,
-                      width: 382,
-                      child: MainButton(
-                          onTap: () {
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => TLoginOtpVerification()));
-                          },
-                          title: "Login with OTP",
-                          textStyleColor: Colors.white,
-                          backgroundColor: ThemeColor.primarycolor),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: SizedBox(
+                            height: 52,
+                            //width: 382,
+                            child: MainButton(
+                                onTap: () {
+                                  Navigator.of(context).push(MaterialPageRoute(
+                                      builder: (context) => TLoginOtpVerification()));
+                                },
+                                title: "Login with OTP",
+                                textStyleColor: Colors.white,
+                                backgroundColor: ThemeColor.primarycolor),
+                          ),
+                        ),
+                      ],
                     ),
                     SizedBox(height: 40),
-                    Text(
-                      "By proceeding you agree to our Privacy Policy an& Terms and Conditions",
-                      style: FontConstant.k14w500B7A4Text,
-                      textAlign: TextAlign.start,
-                    ),
+                    RichText(
+                        text: TextSpan(
+                          children: [
+                            TextSpan(
+                              text: "By proceeding you agree to our ",
+                              style: FontConstant.k14w400B7A4Text,
+                            ),TextSpan(
+                              text: "Privacy Policy",
+                              style: FontConstant.k14w500B7A4TextU,
+                            ),
+                            TextSpan(
+                              text: " & ",
+                              style: FontConstant.k14w400B7A4Text,
+                            ),
+                            TextSpan(
+                              text: "Terms and Conditions",
+                              style: FontConstant.k14w500B7A4TextU,
+                            ),
+                          ]
+                        ) ),
+                    /*Row(
+                      children: [
+                        Text(
+                          "By proceeding you agree to our ",
+                          style: FontConstant.k14w500B7A4Text,
+                          textAlign: TextAlign.start,
+                        ),
+                        Text(
+                          "Privacy Policy & ",
+                          style: FontConstant.k14w500B7A4Text,
+                          textAlign: TextAlign.start,
+                        ),Text(
+                          "Terms and Conditions",
+                          style: FontConstant.k14w500B7A4Text,
+                          textAlign: TextAlign.start,
+                        ),
+                      ],
+                    ),*/
                     SizedBox(height: 13.h),
                   ],
                 ),

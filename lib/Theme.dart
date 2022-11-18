@@ -97,6 +97,12 @@ class FontConstant {
     fontSize: 14,
     color: Color(0xffB7A4B2),
   );
+  static TextStyle k14w500B7A4TextU = GoogleFonts.balooDa2(
+    decoration: TextDecoration.underline,
+    fontWeight: FontWeight.w500,
+    fontSize: 14,
+    color: Color(0xffB7A4B2),
+  );
 
   static TextStyle k18w500materialbuttonText = GoogleFonts.balooDa2(
       fontWeight: FontWeight.w500, fontSize: 18, color: Colors.white);
