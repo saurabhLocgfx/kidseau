@@ -14,10 +14,10 @@ class _TSplashScreenState extends State<TSplashScreen> {
   @override
   void initState() {
     super.initState();
-    Timer(
+    /*Timer(
         Duration(seconds: 3),
         () => Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => TStartScreen())));
+            context, MaterialPageRoute(builder: (context) => TStartScreen())));*/
   }
 
   @override

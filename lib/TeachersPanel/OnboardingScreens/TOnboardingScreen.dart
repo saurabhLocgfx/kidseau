@@ -26,36 +26,46 @@ class _TOnboardingScreenState extends State<TOnboardingScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ThemeColor.primarycolor,
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            height: 229,
-            width: Get.size.width,
-            decoration: BoxDecoration(
-              color: ThemeColor.primarycolor,
-            ),
-            child: Image.asset(
-              "assets/images/Artboard 1 1.png",
-              fit: BoxFit.cover,
-            ),
-          ),
-          Expanded(
-            child: Container(
+      body: SizedBox(
+        width: 1.sw,
+        height: 1.sh,
+        child: Stack(
+          //crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              height: 1.sh,
               width: Get.size.width,
               decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(24.0),
-                  topRight: Radius.circular(24.0),
-                ),
+                //color: ThemeColor.primarycolor,
               ),
-              child: Column(
-                children: [
-                  Expanded(
-                    child: Stack(
-                      children: [
-                        PageView.builder(
+              child: Image.asset(
+                "assets/images/onbbg.png",
+                fit: BoxFit.cover,
+              ),
+            ),
+            Positioned(
+              top: 1.sh/4,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              child: Container(
+                //width: Get.size.width,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(24.0),
+                    topRight: Radius.circular(24.0),
+                  ),
+                ),
+                child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      SizedBox(
+                        //color: Colors.orange,
+                        height: 450.h,
+                        child: PageView.builder(
                           controller: controller,
                           itemCount: contents.length,
                           onPageChanged: (int index) {
@@ -66,106 +76,96 @@ class _TOnboardingScreenState extends State<TOnboardingScreen> {
                           itemBuilder: (_, i) {
                             return Padding(
                               padding:
-                                  const EdgeInsets.symmetric(horizontal: 16.0),
+                              const EdgeInsets.symmetric(horizontal: 16.0),
                               child: Column(
+                                mainAxisSize: MainAxisSize.min,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   SizedBox(height: 30),
-                                  Image.asset(
-                                    contents[i].image,
-                                    height: 290.h,
-                                    width: 334.w,
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Image.asset(
+                                        contents[i].image,
+                                        height: 250.h,
+                                        width: 300.w,
+                                      ),
+                                    ],
                                   ),
                                   SizedBox(height: 10),
-                                  Align(
-                                    alignment: Alignment.centerLeft,
-                                    child: Text(contents[i].title,
-                                        style: FontConstant2.k32w500331Ftext),
-                                  ),
-                                  Align(
-                                    alignment: Alignment.centerLeft,
-                                    child: SizedBox(
-                                      width: 200.w,
-                                      child: Text(contents[i].discription,
-                                          maxLines: 2,
-                                          style: FontConstant.k16w4008471Text),
-                                    ),
+                                  Text(contents[i].title,
+                                      style: FontConstant2.k32w500331Ftext),
+                                  SizedBox(
+                                    width: 200.w,
+                                    child: Text(contents[i].discription,
+                                        maxLines: 2,
+                                        style: FontConstant.k16w4008471Text),
                                   )
                                 ],
                               ),
                             );
                           },
                         ),
-                        Positioned(
-                          bottom: 0,
-                          left: 0,
-                          right: 0,
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Padding(
-                                padding:
-                                    const EdgeInsets.only(left: 16, top: 10, bottom: 50),
-                                child: Row(
-                                  children: List.generate(
-                                    contents.length,
+                      ),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Padding(
+                            padding:
+                            const EdgeInsets.only(left: 16, top: 10, bottom: 50),
+                            child: Row(
+                              children: List.generate(
+                                contents.length,
                                     (index) => buildDot(index, context),
+                              ),
+                            ),
+                          ),
+                          Stack(
+                            children: [
+                              Image.asset(
+                                "assets/images/Vector (1) - Copy.png",
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                    top: 80.0, left: 28),
+                                child: MaterialButton(
+                                  minWidth: 25,
+                                  onPressed: () {
+                                    if (currentIndex ==
+                                        contents.length - 1) {
+                                      Navigator.pushReplacement(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (_) =>
+                                              TLoginScreen(),
+                                        ),
+                                      );
+                                    }
+                                    controller.nextPage(
+                                      duration:
+                                      Duration(milliseconds: 300),
+                                      curve: Curves.fastOutSlowIn,
+                                    );
+                                  },
+                                  child: Icon(
+                                    Icons.arrow_forward,
+                                    color: Colors.white,
                                   ),
                                 ),
                               ),
-                              Stack(
-                                children: [
-                                  Positioned(
-                                    child: Stack(
-                                      children: [
-                                        Image.asset(
-                                          "assets/images/Vector (1) - Copy.png",
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.only(
-                                              top: 85.0, left: 28),
-                                          child: MaterialButton(
-                                            minWidth: 25,
-                                            onPressed: () {
-                                              if (currentIndex ==
-                                                  contents.length - 1) {
-                                                Navigator.pushReplacement(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                    builder: (_) =>
-                                                        TLoginScreen(),
-                                                  ),
-                                                );
-                                              }
-                                              controller.nextPage(
-                                                duration:
-                                                    Duration(milliseconds: 300),
-                                                curve: Curves.fastOutSlowIn,
-                                              );
-                                            },
-                                            child: Icon(
-                                              Icons.arrow_forward,
-                                              color: Colors.white,
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
                             ],
                           ),
-                        ),
-                      ],
-                    ),
+                        ],
+                      ),
+                    ],
                   ),
-                ],
+                ),
               ),
             ),
-          ),
-        ],
+
+          ],
+        ),
       ),
     );
   }

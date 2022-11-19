@@ -38,7 +38,7 @@ class _PSplashScreenState extends State<PSplashScreen> {
         decoration: BoxDecoration(
             color: Colors.white,
             image: DecorationImage(
-                image: AssetImage("assets/images/splashbackground.png"))),
+                image: AssetImage("assets/images/splashbg.png"), fit: BoxFit.cover)),
         child: mainlogo(),
       ),
     );

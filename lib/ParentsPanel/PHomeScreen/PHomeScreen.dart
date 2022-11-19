@@ -20,8 +20,8 @@ class _PHomeScreenState extends State<PHomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 1110,
-      width: 414,
+      /*height: 1110,
+      width: 414,*/
       decoration: BoxDecoration(
         color: Color(0xff8267AC).withOpacity(.06),
       ),
@@ -173,7 +173,6 @@ class _PHomeScreenState extends State<PHomeScreen> {
               ),
               Tutorials(),
               //Tutorials card
-
               SizedBox(
                 height: 100.h,
               )

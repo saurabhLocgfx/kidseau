@@ -12,8 +12,8 @@ class PLoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 896.h,
-      width: 414.w,
+      /*height: 896.h,
+      width: 414.w,*/
       child: Scaffold(
         backgroundColor: Color(0xfff7f6fa),
         body: SingleChildScrollView(
@@ -21,8 +21,8 @@ class PLoginScreen extends StatelessWidget {
             children: [
               Stack(children: [
                 Container(
-                  height: 414,
-                  width: 414,
+                  height: 414.h,
+                  width: 1.sw,
                   decoration: BoxDecoration(
                     image: DecorationImage(
                       image: AssetImage("assets/images/postsbackground.png"),
@@ -31,7 +31,7 @@ class PLoginScreen extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 199.0),
+                  padding: EdgeInsets.only(top: 180.h, left: 16, right: 16),
                   child: Container(
                     child: Column(
                       children: [
@@ -88,11 +88,26 @@ class PLoginScreen extends StatelessWidget {
                           backgroundColor: ThemeColor.primarycolor),
                     ),
                     SizedBox(height: 40),
-                    Text(
-                      "By proceeding you agree to our Privacy Policy an& Terms and Conditions",
-                      style: FontConstant.k14w500B7A4Text,
-                      textAlign: TextAlign.start,
-                    ),
+                    RichText(
+                        text: TextSpan(
+                            children: [
+                              TextSpan(
+                                text: "By proceeding you agree to our ",
+                                style: FontConstant.k14w400B7A4Text,
+                              ),TextSpan(
+                                text: "Privacy Policy",
+                                style: FontConstant.k14w500B7A4TextU,
+                              ),
+                              TextSpan(
+                                text: " & ",
+                                style: FontConstant.k14w400B7A4Text,
+                              ),
+                              TextSpan(
+                                text: "Terms and Conditions",
+                                style: FontConstant.k14w500B7A4TextU,
+                              ),
+                            ]
+                        ) ),
                     SizedBox(height: 13.h),
                   ],
                 ),

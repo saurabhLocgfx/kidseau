@@ -99,8 +99,11 @@ class _POnboardingScreenState extends State<POnboardingScreen> {
                           );
                         },
                       ),
-                      Align(
-                        alignment: Alignment.bottomCenter,
+                      Positioned(
+                        bottom: 0,
+                        left: 0,
+                        right: 0,
+                        //alignment: Alignment.bottomCenter,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -168,8 +171,8 @@ class _POnboardingScreenState extends State<POnboardingScreen> {
 
   Container buildDot(int index, BuildContext context) {
     return Container(
-      height: 10,
-      width: currentIndex == index ? 25 : 10,
+      height: 4,
+      width: currentIndex == index ? 20 : 9,
       margin: EdgeInsets.only(right: 5),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),

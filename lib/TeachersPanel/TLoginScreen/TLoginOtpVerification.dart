@@ -71,6 +71,7 @@ class _TLoginOtpVerificationState extends State<TLoginOtpVerification> {
                     ),
                     SizedBox(height: 43),
                    PinCodeTextField(
+                     cursorColor: AppColors().k8267AC,
                      keyboardType: TextInputType.number,
                        appContext: context,
                        length: 4,
