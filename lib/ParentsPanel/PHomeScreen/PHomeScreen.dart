@@ -205,7 +205,7 @@ class Studentcard extends StatelessWidget {
         borderRadius: BorderRadius.circular(16),
         image: DecorationImage(
           image: AssetImage("assets/images/sc.png"),
-          fit: BoxFit.fitHeight,
+          fit: BoxFit.fitWidth,
         ),
       ),
       padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 16),

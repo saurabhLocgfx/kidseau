@@ -18,8 +18,8 @@ class _TAddReminderState extends State<TAddReminder> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 896.h,
-      width: 414.w,
+      //height: 896.h,
+      width: 1.sw,
       decoration: BoxDecoration(
         gradient: LinearGradient(
           begin: Alignment.topCenter,
@@ -113,9 +113,16 @@ class _TAddReminderState extends State<TAddReminder> {
                   SizedBox(
                     height: 4.h,
                   ),
-                  IconTextfield(
-                      Icon: "assets/images/calendericon.png",
-                      title: "Select date")
+                  InkWell(
+                    onTap: (){
+                      showDatePicker(context: context, initialDate: DateTime.now(), firstDate: DateTime(1970), lastDate: DateTime(2100));
+                    },
+                    child: IgnorePointer(
+                      child: IconTextfield(
+                          Icon: "assets/images/calendericon.png",
+                          title: "Select date"),
+                    ),
+                  )
                 ],
               ),
               Expanded(

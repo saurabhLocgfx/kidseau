@@ -140,7 +140,7 @@ class _TAttendanceScreenState extends State<TAttendanceScreen> {
               decoration: BoxDecoration(
                   color: Colors.transparent,
                   image: DecorationImage(
-                      image: AssetImage('assets/images/acard.png'))),
+                      image: AssetImage('assets/images/attendancebg.png'), fit: BoxFit.fitWidth)),
               padding: EdgeInsets.symmetric(horizontal: 16, vertical: 32),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -167,6 +167,7 @@ class _TAttendanceScreenState extends State<TAttendanceScreen> {
                           Image.asset(
                             "assets/images/calendericon.png",
                             height: 24,
+                            fit: BoxFit.fitWidth,
                           )
                         ],
                       )
@@ -276,10 +277,11 @@ class _TAttendanceScreenState extends State<TAttendanceScreen> {
                             // ),
                           ],
                         );
-                      })
+                      }),
                 ],
               ),
             ),
+            SizedBox(height: 30.h,)
           ],
         ),
       ),

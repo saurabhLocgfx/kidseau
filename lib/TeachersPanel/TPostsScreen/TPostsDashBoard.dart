@@ -110,51 +110,61 @@ class _TPostsDashBoardState extends State<TPostsDashBoard> {
           )
         ],
       ),
-      body: Stack(
-        children: [
-          Container(
-            height: 375,
-            width: 414,
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [
-                  Color(0xffD9D9D9).withOpacity(.100),
-                  Color(0xffD9D9D9).withOpacity(.0),
-                ],
+      body: SizedBox(
+        width: 1.sw,
+        height: 1.sh,
+        child: Stack(
+          children: [
+            Container(
+              height: 375,
+              width: 1.sw,
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    Color(0xffD9D9D9).withOpacity(.100),
+                    Color(0xffD9D9D9).withOpacity(.0),
+                  ],
+                ),
+                image: DecorationImage(
+                    image: AssetImage(
+                      "assets/images/postsbackground.png",
+                    ),
+                    fit: BoxFit.cover),
               ),
-              image: DecorationImage(
-                  image: AssetImage(
-                    "assets/images/postsbackground.png",
-                  ),
-                  fit: BoxFit.cover),
             ),
-          ),
-          Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(top: 40.0),
-                child: PostsTab(),
-              ),
-              Expanded(
-                child: PageView(
-                  controller: _pageController,
-                  onPageChanged: (page) {
-                    setState(() {
-                      pageIndex = page;
-                    });
-                  },
-                  children: <Widget>[
-                    TAddPostsScreen(),
-                    TPostsScreen(),
-                    TMyPosts(),
+            Positioned(
+              top: 20,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    PostsTab(),
+                    SizedBox(
+                      height: 500.h,
+                      child: PageView(
+                        controller: _pageController,
+                        onPageChanged: (page) {
+                          setState(() {
+                            pageIndex = page;
+                          });
+                        },
+                        children: <Widget>[
+                          TAddPostsScreen(),
+                          TPostsScreen(),
+                          TMyPosts(),
+                        ],
+                      ),
+                    ),
                   ],
                 ),
               ),
-            ],
-          ),
-        ],
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -202,7 +212,7 @@ class _TPostsDashBoardState extends State<TPostsDashBoard> {
                     padding: const EdgeInsets.only(left: 4.0),
                     child: Text("Add",
                         style: FontConstant.k14w500B7A4Text.copyWith(
-                            color: pageIndex == 1
+                            color: pageIndex == 0
                                 ? Color(0xff8267AC)
                                 : Color(0xffB7A4B2))),
                   ),

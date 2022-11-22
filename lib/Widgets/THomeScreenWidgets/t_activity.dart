@@ -65,7 +65,7 @@ class _TActivityState extends State<TActivity> {
               child: Container(
                 height: 64.h,
                 // width: Get.size.width * 0.93,
-                margin: EdgeInsets.symmetric(horizontal: 16),
+                //margin: EdgeInsets.symmetric(horizontal: 16),
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(16),

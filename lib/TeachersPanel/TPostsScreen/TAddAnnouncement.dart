@@ -66,7 +66,7 @@ class _AddAnnouncementState extends State<AddAnnouncement> {
                     TextFormField(
                       decoration: TextFieldDecoration().curvedWhiteDecoration(
                         curved: true,
-                        label: 'Enter reminder\'s title',
+                        label: 'Enter announcement\'s title',
                       ),
                     ),
                     SizedBox(height: 16),
@@ -82,51 +82,61 @@ class _AddAnnouncementState extends State<AddAnnouncement> {
                     SizedBox(height: 16),
                     Text('Time', style: FontConstant.k16w500331FText),
                     SizedBox(height: 4),
-                    Container(
-                      width: 1.sw,
-                      height: 56.h,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(90),
-                      ),
-                      padding: EdgeInsets.symmetric(horizontal: 18),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text('8:45 am'),
-                          SizedBox(
-                            width: 30,
-                            child: Image.asset(
-                              'assets/images/appbarclock.png',
-                              color: ThemeColor.b7A4B2,
+                    InkWell(
+                      onTap: (){
+                        showTimePicker(context: context, initialTime: TimeOfDay(hour: 00, minute: 00));
+                      },
+                      child: Container(
+                        width: 1.sw,
+                        height: 56.h,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(90),
+                        ),
+                        padding: EdgeInsets.symmetric(horizontal: 18),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text('8:45 am'),
+                            SizedBox(
+                              width: 30,
+                              child: Image.asset(
+                                'assets/images/appbarclock.png',
+                                color: ThemeColor.b7A4B2,
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                     SizedBox(height: 16),
                     Text('Date', style: FontConstant.k16w500331FText),
                     SizedBox(height: 4),
-                    Container(
-                      width: 1.sw,
-                      height: 56.h,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(90),
-                      ),
-                      padding: EdgeInsets.symmetric(horizontal: 18),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text('dd/mm/yyyy'),
-                          SizedBox(
-                            width: 30,
-                            child: Image.asset(
-                              'assets/images/calendericon.png',
-                              color: ThemeColor.b7A4B2,
+                    InkWell(
+                      onTap: (){
+                        showDatePicker(context: context, initialDate: DateTime.now(), firstDate: DateTime(1970), lastDate: DateTime(2100));
+                      },
+                      child: Container(
+                        width: 1.sw,
+                        height: 56.h,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(90),
+                        ),
+                        padding: EdgeInsets.symmetric(horizontal: 18),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text('dd/mm/yyyy'),
+                            SizedBox(
+                              width: 30,
+                              child: Image.asset(
+                                'assets/images/calendericon.png',
+                                color: ThemeColor.b7A4B2,
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                   ],

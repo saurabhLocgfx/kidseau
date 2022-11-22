@@ -42,8 +42,8 @@ class _TReminderScreenState extends State<TReminderScreen> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 896.h,
-      width: 414.w,
+      //height: 896.h,
+      width: 1.sw,
       color: ThemeColor.primarycolor.withOpacity(.06),
       child: Scaffold(
         appBar: AppBar(
@@ -86,133 +86,137 @@ class _TReminderScreenState extends State<TReminderScreen> {
           ),
           actions: [Image.asset("assets/images/dots2.png")],
         ),
-        body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
-          child: Column(
-            children: [
-              SizedBox(height: 10),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        "Tomorrow is holiday",
-                        style: FontConstant2.k18w500331Ftext,
-                      ),
-                      Text(
-                        "Scheduled  at 08:00 am - 30/09/2022",
-                        style: FontConstant.k16w4008471Text,
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                      width: 48.w,
-                      height: 24.w,
-                      child: FlutterSwitch(
-                          toggleSize: 18,
-                          inactiveColor: ThemeColor.b7A4B2,
-                          activeColor: ThemeColor.primarycolor,
-                          value: val1,
-                          onToggle: (v) {
-                            setState(() {
-                              val1 = v;
-                            });
-                          })),
-                ],
-              ),
-              SizedBox(height: 12),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        "Tomorrow is holiday",
-                        style: FontConstant2.k18w500331Ftext,
-                      ),
-                      Text(
-                        "Scheduled  at 08:00 am - 30/09/2022",
-                        style: FontConstant.k16w4008471Text,
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                      width: 48.w,
-                      height: 24.w,
-                      child: FlutterSwitch(
-                          toggleSize: 18,
-                          inactiveColor: ThemeColor.b7A4B2,
-                          activeColor: ThemeColor.primarycolor,
-                          value: val2,
-                          onToggle: (v) {
-                            setState(() {
-                              val2 = v;
-                            });
-                          })),
-                ],
-              ),
-              SizedBox(height: 12),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        "Bring notebook",
-                        style: FontConstant2.k18w500331Ftext,
-                      ),
-                      Text(
-                        "Expired",
-                        style: FontConstant.k16w4008471Text,
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                      width: 48.w,
-                      height: 24.w,
-                      child: FlutterSwitch(
-                          toggleSize: 18,
-                          inactiveColor: ThemeColor.b7A4B2,
-                          activeColor: ThemeColor.primarycolor,
-                          value: val3,
-                          onToggle: (v) {
-                            setState(() {
-                              val3 = v;
-                            });
-                          })),
-                ],
-              ),
-              Expanded(
-                child: Align(
-                  alignment: FractionalOffset.bottomCenter,
-                  child: SizedBox(
-                    height: 52.h,
-                    width: 382..w,
-                    child: MainButton(
-                        onTap: () {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) => TAddReminder(),
-                            ),
-                          );
-                        },
-                        title: 'Add Reminder',
-                        textStyleColor: Colors.white,
-                        backgroundColor: ThemeColor.primarycolor),
-                  ),
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: Column(
+              children: [
+                SizedBox(height: 10),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "Tomorrow is holiday",
+                          style: FontConstant2.k18w500331Ftext,
+                        ),
+                        Text(
+                          "Scheduled  at 08:00 am - 30/09/2022",
+                          style: FontConstant.k16w4008471Text,
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                        width: 48.w,
+                        height: 24.w,
+                        child: FlutterSwitch(
+                            toggleSize: 18,
+                            inactiveColor: ThemeColor.b7A4B2,
+                            activeColor: ThemeColor.primarycolor,
+                            value: val1,
+                            onToggle: (v) {
+                              setState(() {
+                                val1 = v;
+                              });
+                            })),
+                  ],
                 ),
-              ),
-              SizedBox(
-                height: 30.h,
-              )
-            ],
+                SizedBox(height: 12),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "Tomorrow is holiday",
+                          style: FontConstant2.k18w500331Ftext,
+                        ),
+                        Text(
+                          "Scheduled  at 08:00 am - 30/09/2022",
+                          style: FontConstant.k16w4008471Text,
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                        width: 48.w,
+                        height: 24.w,
+                        child: FlutterSwitch(
+                            toggleSize: 18,
+                            inactiveColor: ThemeColor.b7A4B2,
+                            activeColor: ThemeColor.primarycolor,
+                            value: val2,
+                            onToggle: (v) {
+                              setState(() {
+                                val2 = v;
+                              });
+                            })),
+                  ],
+                ),
+                SizedBox(height: 12),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "Bring notebook",
+                          style: FontConstant2.k18w500331Ftext,
+                        ),
+                        Text(
+                          "Expired",
+                          style: FontConstant.k16w4008471Text,
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                        width: 48.w,
+                        height: 24.w,
+                        child: FlutterSwitch(
+                            toggleSize: 18,
+                            inactiveColor: ThemeColor.b7A4B2,
+                            activeColor: ThemeColor.primarycolor,
+                            value: val3,
+                            onToggle: (v) {
+                              setState(() {
+                                val3 = v;
+                              });
+                            })),
+                  ],
+                ),
+                SizedBox(height: 100,),
+                Row(
+                  children: [
+                    Expanded(
+                      child: SizedBox(
+                        height: 52.h,
+                       // width: 1.sw,
+                        child: MainButton(
+                            onTap: () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) => TAddReminder(),
+                                ),
+                              );
+                            },
+                            title: 'Add Reminder',
+                            textStyleColor: Colors.white,
+                            backgroundColor: ThemeColor.primarycolor),
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 30.h,
+                )
+              ],
+            ),
           ),
         ),
       ),

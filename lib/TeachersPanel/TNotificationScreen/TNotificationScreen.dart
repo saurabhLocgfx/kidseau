@@ -119,11 +119,11 @@ class _TNotificationScreenState extends State<TNotificationScreen> {
             ),
             SizedBox(height: 16),
             Container(
-              height: 99,
-              width: 414,
+              //height: 99,
+              //width: 414,
               color: ThemeColor.primarycolor.withOpacity(0.16),
               child: Padding(
-                padding: const EdgeInsets.only(left: 16.0),
+                padding: EdgeInsets.all(16.0),
                 child: Row(
                   children: [
                     Container(
@@ -161,11 +161,11 @@ class _TNotificationScreenState extends State<TNotificationScreen> {
                 // AnnouncementDialog(context);
               },
               child: Container(
-                height: 99,
-                width: 414,
+               /* height: 99,
+                width: 414,*/
                 color: ThemeColor.primarycolor.withOpacity(0.16),
                 child: Padding(
-                  padding: const EdgeInsets.only(left: 16.0),
+                  padding: EdgeInsets.all(16.0),
                   child: Row(
                     children: [
                       Container(

@@ -18,6 +18,7 @@ class TLoginScreen extends StatelessWidget {
         backgroundColor: Color(0xfff7f6fa),
         body: SingleChildScrollView(
           child: Column(
+            //crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Stack(children: [
                 Container(
@@ -34,6 +35,7 @@ class TLoginScreen extends StatelessWidget {
                   padding:
                       const EdgeInsets.only(top: 180.0, left: 16, right: 16),
                   child: Column(
+                    //crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Image.asset(
                         "assets/images/logo.png",

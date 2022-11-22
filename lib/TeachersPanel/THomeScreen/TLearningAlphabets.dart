@@ -115,14 +115,19 @@ class _TLearningAlphabetsState extends State<TLearningAlphabets> {
                 ),
                 Column(
                   children: [
-                    Container(
-                      height: 286,
-                      width: 382,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(16),
-                          image: DecorationImage(
-                              image: AssetImage(
-                                  "assets/images/Rectangle for la.png"))),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Container(
+                            /*height: 286,
+                            width: 382,*/
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(16),
+                               ),
+                            child: Image.asset("assets/images/Rectangle for la.png"),
+                          ),
+                        ),
+                      ],
                     ),
                     SizedBox(height: 16),
                     Row(

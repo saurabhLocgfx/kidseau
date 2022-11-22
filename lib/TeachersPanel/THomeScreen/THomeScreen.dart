@@ -134,7 +134,7 @@ class _THomeScreenState extends State<THomeScreen> {
               SizedBox(
                 height: 5.h,
               ),
-              TActivity(),
+              Padding(child: TActivity(), padding: EdgeInsets.symmetric(horizontal: 16),),
               Center(
                 child: GestureDetector(
                   onTap: () {
@@ -166,18 +166,25 @@ class _THomeScreenState extends State<THomeScreen> {
                   ),
                 ),
               ),
-              GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => TAttendanceScreen()),
-                  );
-                },
-                child: Attendancecard(
-                  image: "assets/images/groupcard2.png",
-                ),
+              SizedBox(
+                height: 120.h,
+                child: ListView.separated(
+                  shrinkWrap: true,
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context, index)=> GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => TAttendanceScreen()),
+                    );
+                  },
+                  child: Attendancecard(
+                    image: "assets/images/groupcard2.png",
+                  ),
+                ), separatorBuilder: (ctx, ind) => SizedBox(width: 10.w,), itemCount: 3),
               ),
+
               SizedBox(height: 80.h)
             ],
           ),
@@ -365,7 +372,7 @@ class Attendancecard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 128,
-      width: 1.sw,
+      width: 350.w,
       margin: EdgeInsets.symmetric(horizontal: 16),
       decoration: BoxDecoration(
         image: DecorationImage(

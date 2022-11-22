@@ -52,37 +52,40 @@ class _CalendarPage2State extends State<CalendarPage2> {
         child: SingleChildScrollView(
           child: Column(
             children: <Widget>[
-              TableCalendar(
-                headerStyle: HeaderStyle(
-                  formatButtonVisible: false,
-                  titleCentered: true,
-                  titleTextStyle: FontConstant.k18w500BlackText,
-                  titleTextFormatter: (a, b) => DateFormat('MMMM').format(a),
-                  leftChevronMargin: EdgeInsets.zero,
-                  rightChevronMargin: EdgeInsets.zero,
-                ),
-                daysOfWeekHeight: 30,
-                daysOfWeekStyle: DaysOfWeekStyle(
-                  dowTextFormatter: (a, b) => DateFormat('E').format(a),
-                  weekdayStyle: GoogleFonts.balooDa2(
-                    fontWeight: FontWeight.w500,
-                    fontSize: 16,
-                    color: Color(0xFF6FC96F),
+              AbsorbPointer(
+                absorbing: true,
+                child: TableCalendar(
+                  headerStyle: HeaderStyle(
+                    formatButtonVisible: false,
+                    titleCentered: true,
+                    titleTextStyle: FontConstant.k18w500BlackText,
+                    titleTextFormatter: (a, b) => DateFormat('MMMM').format(a),
+                    leftChevronMargin: EdgeInsets.zero,
+                    rightChevronMargin: EdgeInsets.zero,
                   ),
-                  weekendStyle: GoogleFonts.balooDa2(
-                    fontWeight: FontWeight.w500,
-                    fontSize: 16,
-                    color: Color(0xFF6FC96F),
+                  daysOfWeekHeight: 30,
+                  daysOfWeekStyle: DaysOfWeekStyle(
+                    dowTextFormatter: (a, b) => DateFormat('E').format(a),
+                    weekdayStyle: GoogleFonts.balooDa2(
+                      fontWeight: FontWeight.w500,
+                      fontSize: 16,
+                      color: Color(0xFF6FC96F),
+                    ),
+                    weekendStyle: GoogleFonts.balooDa2(
+                      fontWeight: FontWeight.w500,
+                      fontSize: 16,
+                      color: Color(0xFF6FC96F),
+                    ),
                   ),
+                  calendarBuilders: CalendarBuilders(
+                      todayBuilder: (_, a, b) =>
+                          Center(child: Text(DateFormat('d').format(a)))),
+                  selectedDayPredicate: (a) => false,
+                  focusedDay: DateTime.now(),
+                  firstDay:
+                      DateTime(DateTime.now().year, DateTime.now().month, 1),
+                  lastDay: DateTime(3033),
                 ),
-                calendarBuilders: CalendarBuilders(
-                    todayBuilder: (_, a, b) =>
-                        Center(child: Text(DateFormat('d').format(a)))),
-                selectedDayPredicate: (a) => false,
-                focusedDay: DateTime.now(),
-                firstDay:
-                    DateTime(DateTime.now().year, DateTime.now().month, 1),
-                lastDay: DateTime(3033),
               ),
               SizedBox(height: 24),
               circlemarker(Colors.red, "Holidays"),

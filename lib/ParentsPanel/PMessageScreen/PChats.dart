@@ -85,53 +85,56 @@ class _PChatsState extends State<PChats> {
           style: FontConstant.k18w5008471Text,
         ),
       ),
-      body: Container(
-        height: 896.h,
-        width: 414.w,
-        decoration: BoxDecoration(
-          image: DecorationImage(
-              image: AssetImage(
-                "assets/images/framemessages.png",
-              ),
-              colorFilter: ColorFilter.mode(
-                Colors.transparent.withOpacity(0.4),
-                BlendMode.modulate,
-              ),
-              fit: BoxFit.cover),
-        ),
-        child: Column(
-          children: [
-            Expanded(
-              child: GroupedListView<Messages, DateTime>(
-                reverse: true,
-                order: GroupedListOrder.DESC,
-                padding: EdgeInsets.all(20),
-                elements: messages,
-                groupBy: (messages) => DateTime(
-                    messages.date.year, messages.date.month, messages.date.day),
-                groupHeaderBuilder: (Messages messages) => SizedBox(),
-                itemBuilder: (context, Messages messages) => Align(
-                  alignment: messages.isSentByme
-                      ? Alignment.centerRight
-                      : Alignment.centerLeft,
-                  child: Align(
+      body: SingleChildScrollView(
+        child: Container(
+         // height: 896.h,
+          width: 1.sw,
+          decoration: BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage(
+                  "assets/images/framemessages.png",
+                ),
+                colorFilter: ColorFilter.mode(
+                  Colors.transparent.withOpacity(0.4),
+                  BlendMode.modulate,
+                ),
+                fit: BoxFit.cover),
+          ),
+          child: Column(
+            children: [
+              SizedBox(
+                height: 450.h,
+                child: GroupedListView<Messages, DateTime>(
+                  reverse: true,
+                  order: GroupedListOrder.DESC,
+                  padding: EdgeInsets.all(20),
+                  elements: messages,
+                  groupBy: (messages) => DateTime(
+                      messages.date.year, messages.date.month, messages.date.day),
+                  groupHeaderBuilder: (Messages messages) => SizedBox(),
+                  itemBuilder: (context, Messages messages) => Align(
                     alignment: messages.isSentByme
                         ? Alignment.centerRight
                         : Alignment.centerLeft,
-                    child: Padding(
-                      padding: const EdgeInsets.only(bottom: 32.0),
-                      child: Container(
-                        decoration: BoxDecoration(
-                            color: messages.isSentByme
-                                ? Color(0xffF2F1F8)
-                                : Color(0xffDBE8FA),
-                            borderRadius: BorderRadius.circular(6)),
-                        child: Padding(
-                          padding: EdgeInsets.all(12),
-                          child: Text(
-                            messages.text,
-                            style: FontConstant.k16w4008471Text
-                                .copyWith(color: Color(0xff5E5C70)),
+                    child: Align(
+                      alignment: messages.isSentByme
+                          ? Alignment.centerRight
+                          : Alignment.centerLeft,
+                      child: Padding(
+                        padding: const EdgeInsets.only(bottom: 32.0),
+                        child: Container(
+                          decoration: BoxDecoration(
+                              color: messages.isSentByme
+                                  ? Color(0xffF2F1F8)
+                                  : Color(0xffDBE8FA),
+                              borderRadius: BorderRadius.circular(6)),
+                          child: Padding(
+                            padding: EdgeInsets.all(12),
+                            child: Text(
+                              messages.text,
+                              style: FontConstant.k16w4008471Text
+                                  .copyWith(color: Color(0xff5E5C70)),
+                            ),
                           ),
                         ),
                       ),
@@ -139,64 +142,69 @@ class _PChatsState extends State<PChats> {
                   ),
                 ),
               ),
-            ),
-            popuptextfield(isVisible: _isVisible),
-            SizedBox(
-              height: 8.h,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: Container(
-                height: 52.h,
-                width: 382.w,
-                child: TextField(
-                  onSubmitted: (text) {
-                    final message = Messages(
-                        text: text, date: DateTime.now(), isSentByme: true);
-                    setState(() => messages.add(message));
-                  },
-                  decoration: InputDecoration(
-                    enabledBorder: OutlineInputBorder(
-                      borderSide:
-                          BorderSide(width: 2, color: Color(0xffDBE8FA)),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide:
-                          BorderSide(width: 2, color: Color(0xffDBE8FA)),
-                    ),
-                    fillColor: Color(0xffF0F4FA),
-                    hintText: "Type here.",
-                    hintStyle: FontConstant.k16w400B7A4Text,
-                    suffixIcon: GestureDetector(
-                      onTap: () {},
-                      child: Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: ImageIcon(
-                          AssetImage("assets/images/sendicon.png"),
-                          size: 12,
-                          color: ThemeColor.primarycolor,
+              popuptextfield(isVisible: _isVisible),
+              SizedBox(
+                height: 8.h,
+              ),
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: TextField(
+                          onSubmitted: (text) {
+                            final message = Messages(
+                                text: text, date: DateTime.now(), isSentByme: true);
+                            setState(() => messages.add(message));
+                          },
+                          decoration: InputDecoration(
+                            enabledBorder: OutlineInputBorder(
+                              borderSide:
+                                  BorderSide(width: 2, color: Color(0xffDBE8FA)),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide:
+                                  BorderSide(width: 2, color: Color(0xffDBE8FA)),
+                            ),
+                            fillColor: Color(0xffF0F4FA),
+                            hintText: "Type here.",
+                            hintStyle: FontConstant.k16w400B7A4Text,
+                            suffixIcon: GestureDetector(
+                              onTap: () {},
+                              child: Padding(
+                                padding: const EdgeInsets.all(10.0),
+                                child: ImageIcon(
+                                  AssetImage("assets/images/sendicon.png"),
+                                  size: 12,
+                                  color: ThemeColor.primarycolor,
+                                ),
+                              ),
+                            ),
+                            prefixIcon: Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: GestureDetector(
+                                onTap: showToast,
+                                child: ImageIcon(
+                                  AssetImage("assets/images/add-circle.png"),
+                                  size: 12,
+                                  color: ThemeColor.darkpurple,
+                                ),
+                              ),
+                            ),
+                          ),
                         ),
                       ),
-                    ),
-                    prefixIcon: Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: GestureDetector(
-                        onTap: showToast,
-                        child: ImageIcon(
-                          AssetImage("assets/images/add-circle.png"),
-                          size: 12,
-                          color: ThemeColor.darkpurple,
-                        ),
-                      ),
-                    ),
+                    ],
                   ),
                 ),
               ),
-            ),
-            SizedBox(
-              height: 32.h,
-            ),
-          ],
+              SizedBox(
+                height: 32.h,
+              ),
+            ],
+          ),
         ),
       ),
     );

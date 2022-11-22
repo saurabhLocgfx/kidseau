@@ -189,10 +189,10 @@ class messageoptiondialog extends StatelessWidget {
             PopupMenuItem(
               enabled: false,
               child: Container(
-                height: 160,
-                width: 258,
+                /*height: 160,
+                width: 258,*/
                 child: Padding(
-                  padding: const EdgeInsets.only(left: 32.0),
+                  padding: const EdgeInsets.symmetric(vertical: 32.0),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,

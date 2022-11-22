@@ -19,12 +19,16 @@ class _TMessagesState extends State<TMessages> {
     "assets/images/messageperson4.png",
     "assets/images/messageperson5.png",
     "assets/images/messageperson6.png",
+    "assets/images/messageperson6.png",
+    "assets/images/messageperson6.png",
   ];
   List<String> txt = [
     "Mohammad Umar",
     "Mohammad Umar",
     "Monish",
     "Mohammad Ali",
+    "Mohammad Umar",
+    "Mohammad Umar",
     "Mohammad Umar",
     "Mohammad Umar",
   ];
@@ -35,10 +39,14 @@ class _TMessagesState extends State<TMessages> {
     "Mohammad Ali",
     "Mohammad Umar",
     "Mohammad Umar",
+    "Mohammad Umar",
+    "Mohammad Umar",
   ];
   List<String> title = [
     "F/O - Azhar",
     "M/O - Azhar",
+    "F/O - Azhar",
+    "F/O - Azhar",
     "F/O - Azhar",
     "F/O - Azhar",
     "F/O - Azhar",
@@ -69,8 +77,8 @@ class _TMessagesState extends State<TMessages> {
                 );
               },
               child: Container(
-                  height: 67.h,
-                  width: 382.w,
+                 // height: 67.h,
+                  width: 1.sw,
                   color: Colors.transparent,
                   child: Padding(
                     padding: const EdgeInsets.only(left: 16, right: 16),
@@ -110,16 +118,14 @@ class _TMessagesState extends State<TMessages> {
                             ),
                           ],
                         ),
-                        Container(
-                          child: Stack(children: [
-                            Image.asset(
-                              "assets/images/dots2.png",
-                              height: 48.h,
-                              width: 48.w,
-                            ),
-                            messageoptiondialog(),
-                          ]),
-                        ),
+                        Stack(children: [
+                          Image.asset(
+                            "assets/images/dots2.png",
+                            height: 48.h,
+                            width: 48.w,
+                          ),
+                          messageoptiondialog(),
+                        ]),
                       ],
                     ),
                   )),

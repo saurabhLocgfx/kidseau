@@ -21,13 +21,13 @@ class PStartScreen extends StatelessWidget {
         child: Stack(
           children: [
             Container(
-             // height: 180.h,
-             // width: Get.size.width,
+              height: 1.sh,
+              width: Get.size.width,
               decoration: BoxDecoration(
                 color: Colors.transparent,
               ),
               child: Image.asset(
-                "assets/images/Artboard 1 1.png",
+                "assets/images/onbbg.png",
                 fit: BoxFit.cover,
               ),
             ),

@@ -38,8 +38,10 @@ class _TParentsState extends State<TParents> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ListView.builder(
+      body: ListView.separated(
+        separatorBuilder: (ctx,ind) => SizedBox(height: 16.h,),
           shrinkWrap: true,
+          physics: NeverScrollableScrollPhysics(),
           itemCount: bird.length,
           scrollDirection: Axis.vertical,
           itemBuilder: (BuildContext context, int index) {
@@ -49,47 +51,66 @@ class _TParentsState extends State<TParents> {
                     .push(MaterialPageRoute(builder: (context) => PChats()));
               },
               child: Container(
-                height: 128.h,
+                //height: 150.h,
                 margin: EdgeInsets.symmetric(horizontal: 16),
-                clipBehavior: Clip.hardEdge,
+               // clipBehavior: Clip.hardEdge,
                 decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(16),
+                    //color: Colors.blue,
                     image: DecorationImage(
-                        image: AssetImage("assets/images/purplecard.png"))),
-                padding: const EdgeInsets.all(16),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        image: AssetImage("assets/images/purplecard.png"),fit: BoxFit.fill)),
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                child: Stack(
                   children: [
-                    Container(
-                      height: 96.h,
-                      width: 60.w,
-                      decoration: BoxDecoration(
-                          image: DecorationImage(
-                              image: AssetImage(images[index]))),
+                    Positioned(
+                      right: 0,
+                      bottom: 2,
+                      child: SizedBox(
+                        width: 60,
+                        height: 60,
+                        child: Image.asset(
+                          bird[index],
+                          fit: BoxFit.fill,
+                        ),
+                      ),
                     ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.center,
+                    Row(
+                      //mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(name[index],
-                            style: FontConstant.k18w5008471Text.copyWith(
-                              color: Colors.white,
-                            )),
-                        Text(title[index],
-                            style: FontConstant.k14w4008471Text.copyWith(
-                                color: Colors.white.withOpacity(0.74))),
-                        Text("English, French, Arabic",
-                            style: FontConstant.k16w4008471Text.copyWith(
-                                color: Colors.white.withOpacity(0.80))),
+                        Container(
+                          height: 80.h,
+                          width: 60.w,
+                          decoration: BoxDecoration(
+                              image: DecorationImage(
+                                  image: AssetImage(images[index]),fit: BoxFit.fill)),
+                        ),
+                        SizedBox(width: 12.w,),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(name[index],
+                                style: FontConstant.k18w5008471Text.copyWith(
+                                  color: Colors.white,
+                                )),
+                            Text(title[index],
+                                style: FontConstant.k14w4008471Text.copyWith(
+                                    color: Colors.white.withOpacity(0.74))),
+                            Text("English, French, Arabic",
+                                style: FontConstant.k16w4008471Text.copyWith(
+                                    color: Colors.white.withOpacity(0.80))),
+                          ],
+                        ),
+                       /* Padding(
+                          padding: const EdgeInsets.only(top: 30, bottom: 10),
+                          child: Align(
+                              alignment: Alignment.centerRight,
+                              child: Image.asset(
+                                bird[index],
+                                fit: BoxFit.fill,
+                              )),
+                        ),*/
                       ],
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 30, bottom: 10),
-                      child: Align(
-                          alignment: Alignment.centerRight,
-                          child: Image.asset(
-                            bird[index],
-                            fit: BoxFit.fill,
-                          )),
                     ),
                   ],
                 ),

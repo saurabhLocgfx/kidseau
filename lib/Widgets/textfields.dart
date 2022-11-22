@@ -113,7 +113,7 @@ class IconTextfield extends StatelessWidget {
           borderSide: BorderSide(color: Color(0xffBE74AA), width: 1.0),
         ),
         isDense: true,
-        hintText: "Select gender",
+        hintText: title,
         filled: true,
         fillColor: Colors.white,
         hintStyle: FontConstant.k14w400lightText.copyWith(

@@ -116,30 +116,35 @@ class _TMessageDashboardState extends State<TMessageDashboard> {
             )
           ],
         ),
-        body: Column(
-          children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [SizedBox(height: 40), PageviewTab()],
-            ),
-            SizedBox(height: 24.h),
-            Expanded(
-              child: PageView(
-                controller: _pageController,
-                onPageChanged: (page) {
-                  setState(
-                    () {
-                      pageIndex = page;
-                    },
-                  );
-                },
-                children: <Widget>[
-                  TMessages(),
-                  TParents(),
-                ],
+        body: SingleChildScrollView(
+          //clipBehavior: Clip.none,
+          child: Column(
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [SizedBox(height: 40), PageviewTab()],
               ),
-            ),
-          ],
+              SizedBox(height: 24.h),
+              SizedBox(
+                height: 1.sh,
+                child: PageView(
+                  controller: _pageController,
+                  onPageChanged: (page) {
+                    setState(
+                      () {
+                        pageIndex = page;
+                      },
+                    );
+                  },
+                  children: <Widget>[
+                    TMessages(),
+                    TParents(),
+                  ],
+                ),
+              ),
+              //SizedBox(height: 100.h,)
+            ],
+          ),
         ),
       ),
     );

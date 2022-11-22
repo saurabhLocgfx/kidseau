@@ -64,7 +64,7 @@ class _TOnboardingScreenState extends State<TOnboardingScreen> {
                     children: [
                       SizedBox(
                         //color: Colors.orange,
-                        height: 450.h,
+                        height: 420.h,
                         child: PageView.builder(
                           controller: controller,
                           itemCount: contents.length,
@@ -113,7 +113,7 @@ class _TOnboardingScreenState extends State<TOnboardingScreen> {
                         children: [
                           Padding(
                             padding:
-                            const EdgeInsets.only(left: 16, top: 10, bottom: 50),
+                            const EdgeInsets.only(left: 16, top: 10, bottom: 80),
                             child: Row(
                               children: List.generate(
                                 contents.length,
@@ -121,11 +121,36 @@ class _TOnboardingScreenState extends State<TOnboardingScreen> {
                               ),
                             ),
                           ),
-                          Stack(
-                            children: [
-                              Image.asset(
-                                "assets/images/Vector (1) - Copy.png",
+                          SizedBox(
+                            width: 90,
+                            height: 130.h,
+                            child: InkWell(
+                              onTap: (){
+                                if (currentIndex ==
+                                    contents.length - 1) {
+                                  Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (_) =>
+                                          TLoginScreen(),
+                                    ),
+                                  );
+                                }
+                                controller.nextPage(
+                                  duration:
+                                  Duration(milliseconds: 300),
+                                  curve: Curves.fastOutSlowIn,
+                                );
+                              },
+                              child: Image.asset(
+                                "assets/images/onbarrow.png",
+                                fit: BoxFit.fill,
                               ),
+                            ),
+                          ),
+                          /*Stack(
+                            children: [
+
                               Padding(
                                 padding: const EdgeInsets.only(
                                     top: 80.0, left: 28),
@@ -155,7 +180,7 @@ class _TOnboardingScreenState extends State<TOnboardingScreen> {
                                 ),
                               ),
                             ],
-                          ),
+                          ),*/
                         ],
                       ),
                     ],
