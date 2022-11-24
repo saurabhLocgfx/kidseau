@@ -116,12 +116,13 @@ class _PLearningAplphabetsState extends State<PLearningAplphabets> {
                   children: [
                     Container(
                       height: 286,
-                      width: 382,
+                      width: 1.sw,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(16),
                           image: DecorationImage(
                               image: AssetImage(
-                                  "assets/images/Rectangle for la.png"))),
+                                  "assets/images/Rectangle for la.png"),
+                              fit: BoxFit.fitWidth)),
                     ),
                     SizedBox(height: 16),
                     Row(
@@ -178,57 +179,85 @@ class _PLearningAplphabetsState extends State<PLearningAplphabets> {
 }
 
 class TeacherCard extends StatelessWidget {
-  const TeacherCard({
+  TeacherCard({
     Key? key,
   }) : super(key: key);
 
+  List<String> bird = [
+    "assets/images/small bird2.png",
+    "assets/images/bird2.png",
+    "assets/images/birdpink.png",
+    "assets/images/birdorange.png",
+  ];
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 128,
-      width: 382,
+      //height: 150.h,
+      //margin: EdgeInsets.symmetric(horizontal: 16),
+      // clipBehavior: Clip.hardEdge,
       decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(16),
+          //color: Colors.blue,
           image: DecorationImage(
-              image:
-                  AssetImage("assets/images/Teacher card leaarning ap.png"))),
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Row(
-          children: [
-            Container(
-              height: 96,
-              width: 72,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(16),
-                image: DecorationImage(
-                    image: AssetImage("assets/images/leaning alp person.png")),
+              image: AssetImage("assets/images/purplecard.png"),
+              fit: BoxFit.fill)),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+      child: Stack(
+        children: [
+          Positioned(
+            right: 0,
+            bottom: 2,
+            child: SizedBox(
+              width: 60,
+              height: 60,
+              child: Image.asset(
+                bird[0],
+                fit: BoxFit.fill,
               ),
             ),
-            SizedBox(width: 12),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  "Mohammad Umar",
-                  style: FontConstant.k18w500whiteText,
-                ),
-                Text("Class teacher",
-                    style: FontConstant.k18w500whiteText.copyWith(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w400,
-                      color: Colors.white.withOpacity(0.6),
-                    )),
-                Text("Class teacher",
-                    style: FontConstant.k18w500whiteText.copyWith(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w400,
-                      color: Colors.white.withOpacity(0.74),
-                    )),
-              ],
-            )
-          ],
-        ),
+          ),
+          Row(
+            //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Container(
+                height: 80,
+                width: 60,
+                decoration: BoxDecoration(
+                    image: DecorationImage(
+                        image: AssetImage('assets/images/teacher1.png'),
+                        fit: BoxFit.fill)),
+              ),
+              SizedBox(
+                width: 12.w,
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text('Mohammad Umar',
+                      style: FontConstant.k18w5008471Text.copyWith(
+                        color: Colors.white,
+                      )),
+                  Text('Class teacher',
+                      style: FontConstant.k14w4008471Text
+                          .copyWith(color: Colors.white.withOpacity(0.74))),
+                  Text("English, French, Arabic",
+                      style: FontConstant.k16w4008471Text
+                          .copyWith(color: Colors.white.withOpacity(0.80))),
+                ],
+              ),
+              /* Padding(
+                          padding: const EdgeInsets.only(top: 30, bottom: 10),
+                          child: Align(
+                              alignment: Alignment.centerRight,
+                              child: Image.asset(
+                                bird[index],
+                                fit: BoxFit.fill,
+                              )),
+                        ),*/
+            ],
+          ),
+        ],
       ),
     );
   }

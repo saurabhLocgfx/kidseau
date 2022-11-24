@@ -43,11 +43,13 @@ class _ActivityState extends State<Activity> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-     // height: 300.h,
+      // height: 300.h,
       width: 1.sw,
       child: ListView.separated(
-        separatorBuilder: (ctx, ind) => SizedBox(height: 14.h,),
-        shrinkWrap: true,
+          separatorBuilder: (ctx, ind) => SizedBox(
+                height: 14.h,
+              ),
+          shrinkWrap: true,
           padding: EdgeInsets.zero,
           physics: NeverScrollableScrollPhysics(),
           itemCount: images.length,
@@ -63,7 +65,7 @@ class _ActivityState extends State<Activity> {
               },
               child: Container(
                 height: 64.h,
-               // width: Get.size.width * 0.93,
+                // width: Get.size.width * 0.93,
                 margin: EdgeInsets.symmetric(horizontal: 16),
                 decoration: BoxDecoration(
                   color: Colors.white,
@@ -122,6 +124,7 @@ class _TutorialsState extends State<Tutorials> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      width: 350.w,
       child: SingleChildScrollView(
         scrollDirection: Axis.horizontal,
         child: Row(

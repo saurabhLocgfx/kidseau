@@ -4,7 +4,6 @@ import 'package:kidseau/Constants/colors.dart';
 import 'package:kidseau/ParentsPanel/PDashBoard.dart';
 import 'package:kidseau/Theme.dart';
 import 'package:kidseau/Widgets/buttons.dart';
-import 'package:kidseau/Widgets/textfields.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
 class PLoginOtpVerification extends StatelessWidget {
@@ -64,11 +63,12 @@ class PLoginOtpVerification extends StatelessWidget {
                       textAlign: TextAlign.start,
                     ),
                     SizedBox(height: 43),
-                    PinCodeTextField(cursorColor: AppColors().k8267AC,
+                    PinCodeTextField(
+                      cursorColor: AppColors().k8267AC,
                       keyboardType: TextInputType.number,
                       appContext: context,
                       length: 4,
-                      onChanged: (val){},
+                      onChanged: (val) {},
                       pinTheme: PinTheme(
                         activeColor: AppColors().k8267AC,
                         inactiveColor: AppColors().k8267AC,
@@ -77,7 +77,7 @@ class PLoginOtpVerification extends StatelessWidget {
                     SizedBox(height: 32),
                     SizedBox(
                       height: 52,
-                      width: 382,
+                      //width: 382,
                       child: MainButton(
                           onTap: () {
                             Navigator.of(context).push(MaterialPageRoute(
@@ -89,25 +89,24 @@ class PLoginOtpVerification extends StatelessWidget {
                     ),
                     SizedBox(height: 40),
                     RichText(
-                        text: TextSpan(
-                            children: [
-                              TextSpan(
-                                text: "By proceeding you agree to our ",
-                                style: FontConstant.k14w400B7A4Text,
-                              ),TextSpan(
-                                text: "Privacy Policy",
-                                style: FontConstant.k14w500B7A4TextU,
-                              ),
-                              TextSpan(
-                                text: " & ",
-                                style: FontConstant.k14w400B7A4Text,
-                              ),
-                              TextSpan(
-                                text: "Terms and Conditions",
-                                style: FontConstant.k14w500B7A4TextU,
-                              ),
-                            ]
-                        ) ),
+                        text: TextSpan(children: [
+                      TextSpan(
+                        text: "By proceeding you agree to our ",
+                        style: FontConstant.k14w400B7A4Text,
+                      ),
+                      TextSpan(
+                        text: "Privacy Policy",
+                        style: FontConstant.k14w500B7A4TextU,
+                      ),
+                      TextSpan(
+                        text: " & ",
+                        style: FontConstant.k14w400B7A4Text,
+                      ),
+                      TextSpan(
+                        text: "Terms and Conditions",
+                        style: FontConstant.k14w500B7A4TextU,
+                      ),
+                    ])),
                     SizedBox(height: 13.h),
                   ],
                 ),

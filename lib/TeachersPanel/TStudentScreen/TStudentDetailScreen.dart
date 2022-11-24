@@ -193,68 +193,80 @@ class _TStudentDetailScreenState extends State<TStudentDetailScreen> {
                                         width: 134,
                                         child: Image.asset(
                                             'assets/images/birds.png'),
-                                      ),),
+                                      ),
+                                    ),
                                     Row(
-                                      crossAxisAlignment: CrossAxisAlignment.end,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.end,
                                       children: [
                                         Column(
                                           crossAxisAlignment:
-                                          CrossAxisAlignment.start,
+                                              CrossAxisAlignment.start,
                                           children: [
                                             Text(
                                               "Class Section",
-                                              style: FontConstant.k16w500331FText,
+                                              style:
+                                                  FontConstant.k16w500331FText,
                                             ),
                                             SizedBox(height: 16),
                                             Text(
                                               "Group",
-                                              style: FontConstant.k16w500331FText,
+                                              style:
+                                                  FontConstant.k16w500331FText,
                                             ),
                                             SizedBox(height: 16),
                                             Text(
                                               "Age",
-                                              style: FontConstant.k16w500331FText,
+                                              style:
+                                                  FontConstant.k16w500331FText,
                                             ),
                                             SizedBox(height: 16),
                                             Text(
                                               "Birthday",
-                                              style: FontConstant.k16w500331FText,
+                                              style:
+                                                  FontConstant.k16w500331FText,
                                             ),
                                             SizedBox(height: 16),
                                             Text(
                                               "Gender",
-                                              style: FontConstant.k16w500331FText,
+                                              style:
+                                                  FontConstant.k16w500331FText,
                                             ),
                                           ],
                                         ),
                                         SizedBox(width: 16),
                                         Column(
                                           crossAxisAlignment:
-                                          CrossAxisAlignment.start,
+                                              CrossAxisAlignment.start,
                                           children: [
                                             Text(
                                               "Nursery Sec A",
-                                              style: FontConstant.k16w5008471Text,
+                                              style:
+                                                  FontConstant.k16w5008471Text,
                                             ),
                                             SizedBox(height: 16),
                                             Text(
                                               "Group A",
-                                              style: FontConstant.k16w5008471Text,
+                                              style:
+                                                  FontConstant.k16w5008471Text,
                                             ),
                                             SizedBox(height: 16),
                                             Text(
                                               "4 years old",
-                                              style: FontConstant.k16w5008471Text,
+                                              style:
+                                                  FontConstant.k16w5008471Text,
                                             ),
                                             SizedBox(height: 16),
                                             Text(
                                               "29/09/2020",
-                                              style: FontConstant.k16w5008471Text,
+                                              style:
+                                                  FontConstant.k16w5008471Text,
                                             ),
                                             SizedBox(height: 16),
                                             Text(
                                               "Male",
-                                              style: FontConstant.k16w5008471Text,
+                                              style:
+                                                  FontConstant.k16w5008471Text,
                                             )
                                           ],
                                         ),
@@ -344,52 +356,77 @@ class _TStudentDetailScreenState extends State<TStudentDetailScreen> {
                                           Expanded(
                                             flex: 2,
                                             child: Column(
-                                              mainAxisAlignment: MainAxisAlignment.start,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
                                               children: [
                                                 Text(
                                                   "Attendance",
                                                   style: FontConstant
                                                       .k14w5008471Text,
                                                 ),
-                                                SizedBox(height: 5.h,),
+                                                SizedBox(
+                                                  height: 5.h,
+                                                ),
                                                 Row(
-                                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
                                                   children: [
                                                     Container(
                                                       width: 6,
                                                       height: 44,
                                                       decoration: BoxDecoration(
-                                                        borderRadius: BorderRadius.circular(18),
-                                                        color: AppColors().k8267AC,
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(18),
+                                                        color:
+                                                            AppColors().k8267AC,
                                                       ),
                                                     ),
                                                     Container(
                                                       width: 6,
                                                       height: 44,
                                                       decoration: BoxDecoration(
-                                                        borderRadius: BorderRadius.circular(18),
-                                                        color: AppColors().k8267AC,
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(18),
+                                                        color:
+                                                            AppColors().k8267AC,
                                                       ),
-                                                    ), Container(
+                                                    ),
+                                                    Container(
                                                       width: 6,
                                                       height: 24,
                                                       decoration: BoxDecoration(
-                                                        borderRadius: BorderRadius.circular(18),
-                                                        color: AppColors().k8267AC.withOpacity(0.2),
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(18),
+                                                        color: AppColors()
+                                                            .k8267AC
+                                                            .withOpacity(0.2),
                                                       ),
-                                                    ), Container(
+                                                    ),
+                                                    Container(
                                                       width: 6,
                                                       height: 44,
                                                       decoration: BoxDecoration(
-                                                        borderRadius: BorderRadius.circular(18),
-                                                        color: AppColors().k8267AC,
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(18),
+                                                        color:
+                                                            AppColors().k8267AC,
                                                       ),
-                                                    ), Container(
+                                                    ),
+                                                    Container(
                                                       width: 6,
                                                       height: 24,
                                                       decoration: BoxDecoration(
-                                                        borderRadius: BorderRadius.circular(18),
-                                                        color: AppColors().k8267AC.withOpacity(0.2),
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(18),
+                                                        color: AppColors()
+                                                            .k8267AC
+                                                            .withOpacity(0.2),
                                                       ),
                                                     ),
                                                   ],
@@ -397,7 +434,9 @@ class _TStudentDetailScreenState extends State<TStudentDetailScreen> {
                                               ],
                                             ),
                                           ),
-                                          SizedBox(width: 3,),
+                                          SizedBox(
+                                            width: 3,
+                                          ),
                                           Expanded(
                                             child: Column(
                                               /*mainAxisAlignment:
@@ -407,7 +446,8 @@ class _TStudentDetailScreenState extends State<TStudentDetailScreen> {
                                               children: [
                                                 Row(
                                                   mainAxisAlignment:
-                                                      MainAxisAlignment.spaceBetween,
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
                                                   children: [
                                                     Image.asset(
                                                       "assets/images/bars1.png",
@@ -416,7 +456,8 @@ class _TStudentDetailScreenState extends State<TStudentDetailScreen> {
                                                   ],
                                                 ),
                                                 Column(
-                                                  mainAxisAlignment: MainAxisAlignment.start,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.start,
                                                   children: [
                                                     Text(
                                                       "3/5",
@@ -450,8 +491,8 @@ class _TStudentDetailScreenState extends State<TStudentDetailScreen> {
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(16)),
                           child: Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 16.0, vertical: 5),
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 16.0, vertical: 5),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.center,
@@ -480,9 +521,9 @@ class _TStudentDetailScreenState extends State<TStudentDetailScreen> {
                                     SizedBox(width: 8),
                                     Expanded(
                                       child: SizedBox(
-                                       // height: 140,
+                                        // height: 140,
                                         child: ListView.builder(
-                                          shrinkWrap: true,
+                                            shrinkWrap: true,
                                             padding: EdgeInsets.zero,
                                             physics:
                                                 NeverScrollableScrollPhysics(),

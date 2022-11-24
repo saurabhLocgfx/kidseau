@@ -30,141 +30,167 @@ class _POnboardingScreenState extends State<POnboardingScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ThemeColor.primarycolor,
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            height: 229,
-            width: Get.size.width,
-            decoration: BoxDecoration(
-              color: ThemeColor.primarycolor,
-            ),
-            child: Image.asset(
-              "assets/images/Artboard 1 1.png",
-              fit: BoxFit.cover,
-            ),
-          ),
-          Expanded(
-            child: Container(
+      body: SizedBox(
+        width: 1.sw,
+        height: 1.sh,
+        child: Stack(
+          //crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              height: 1.sh,
               width: Get.size.width,
               decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(24.0),
-                  topRight: Radius.circular(24.0),
-                ),
+                  //color: ThemeColor.primarycolor,
+                  ),
+              child: Image.asset(
+                "assets/images/onbbg.png",
+                fit: BoxFit.cover,
               ),
-              child: Column(
-                children: [
-                  Expanded(
-                    child: Stack(children: [
-                      PageView.builder(
-                        controller: controller,
-                        itemCount: Pcontents.length,
-                        onPageChanged: (int index) {
-                          setState(() {
-                            currentIndex = index;
-                          });
-                        },
-                        itemBuilder: (_, i) {
-                          return Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 16.0),
-                            child: Column(
-                              children: [
-                                SizedBox(height: 34),
-                                Image.asset(
-                                  Pcontents[i].image,
-                                  height: 290,
-                                  width: 334,
-                                ),
-                                SizedBox(height: 25),
-                                Align(
-                                  alignment: Alignment.centerLeft,
-                                  child: Text(Pcontents[i].title,
+            ),
+            Positioned(
+              top: 1.sh / 4,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              child: Container(
+                //width: Get.size.width,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(24.0),
+                    topRight: Radius.circular(24.0),
+                  ),
+                ),
+                child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      SizedBox(
+                        //color: Colors.orange,
+                        height: 420.h,
+                        child: PageView.builder(
+                          controller: controller,
+                          itemCount: Pcontents.length,
+                          onPageChanged: (int index) {
+                            setState(() {
+                              currentIndex = index;
+                            });
+                          },
+                          itemBuilder: (_, i) {
+                            return Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 16.0),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  SizedBox(height: 30),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Image.asset(
+                                        Pcontents[i].image,
+                                        height: 250.h,
+                                        width: 300.w,
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(height: 10),
+                                  Text(Pcontents[i].title,
                                       style: FontConstant2.k32w500331Ftext),
-                                ),
-                                Align(
-                                  alignment: Alignment.centerLeft,
-                                  child: SizedBox(
+                                  SizedBox(
                                     width: 200.w,
                                     child: Text(Pcontents[i].discription,
                                         maxLines: 2,
-                                        textAlign: TextAlign.left,
                                         style: FontConstant.k16w4008471Text),
-                                  ),
-                                )
-                              ],
-                            ),
-                          );
-                        },
-                      ),
-                      Positioned(
-                        bottom: 0,
-                        left: 0,
-                        right: 0,
-                        //alignment: Alignment.bottomCenter,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(left: 16, top: 40),
-                              child: Row(
-                                children: List.generate(
-                                  Pcontents.length,
-                                  (index) => buildDot(index, context),
-                                ),
+                                  )
+                                ],
                               ),
-                            ),
-                            Stack(
-                              children: [
-                                Positioned(
-                                    child: Stack(
-                                  children: [
-                                    Image.asset(
-                                      "assets/images/Vector (1) - Copy.png",
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                          top: 85.0, left: 28),
-                                      child: MaterialButton(
-                                        minWidth: 25,
-                                        onPressed: () {
-                                          if (currentIndex ==
-                                              Pcontents.length - 1) {
-                                            Navigator.pushReplacement(
-                                              context,
-                                              MaterialPageRoute(
-                                                builder: (_) => PLoginScreen(),
-                                              ),
-                                            );
-                                          }
-                                          controller.nextPage(
-                                            duration:
-                                                Duration(milliseconds: 300),
-                                            curve: Curves.fastOutSlowIn,
-                                          );
-                                        },
-                                        child: Icon(
-                                          Icons.arrow_forward,
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                )),
-                              ],
-                            ),
-                          ],
+                            );
+                          },
                         ),
                       ),
-                    ]),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(
+                                left: 16, top: 10, bottom: 80),
+                            child: Row(
+                              children: List.generate(
+                                Pcontents.length,
+                                (index) => buildDot(index, context),
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 90,
+                            height: 130.h,
+                            child: InkWell(
+                              onTap: () {
+                                if (currentIndex == Pcontents.length - 1) {
+                                  Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (_) => PLoginScreen(),
+                                    ),
+                                  );
+                                }
+                                controller.nextPage(
+                                  duration: Duration(milliseconds: 300),
+                                  curve: Curves.fastOutSlowIn,
+                                );
+                              },
+                              child: Image.asset(
+                                "assets/images/onbarrow.png",
+                                fit: BoxFit.fill,
+                              ),
+                            ),
+                          ),
+                          /*Stack(
+                            children: [
+
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                    top: 80.0, left: 28),
+                                child: MaterialButton(
+                                  minWidth: 25,
+                                  onPressed: () {
+                                    if (currentIndex ==
+                                        contents.length - 1) {
+                                      Navigator.pushReplacement(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (_) =>
+                                              TLoginScreen(),
+                                        ),
+                                      );
+                                    }
+                                    controller.nextPage(
+                                      duration:
+                                      Duration(milliseconds: 300),
+                                      curve: Curves.fastOutSlowIn,
+                                    );
+                                  },
+                                  child: Icon(
+                                    Icons.arrow_forward,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),*/
+                        ],
+                      ),
+                    ],
                   ),
-                ],
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

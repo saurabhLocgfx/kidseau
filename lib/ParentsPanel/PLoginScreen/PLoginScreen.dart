@@ -77,7 +77,7 @@ class PLoginScreen extends StatelessWidget {
                     SizedBox(height: 32),
                     SizedBox(
                       height: 52,
-                      width: 382,
+                      //width: 382,
                       child: MainButton(
                           onTap: () {
                             Navigator.of(context).push(MaterialPageRoute(
@@ -89,25 +89,24 @@ class PLoginScreen extends StatelessWidget {
                     ),
                     SizedBox(height: 40),
                     RichText(
-                        text: TextSpan(
-                            children: [
-                              TextSpan(
-                                text: "By proceeding you agree to our ",
-                                style: FontConstant.k14w400B7A4Text,
-                              ),TextSpan(
-                                text: "Privacy Policy",
-                                style: FontConstant.k14w500B7A4TextU,
-                              ),
-                              TextSpan(
-                                text: " & ",
-                                style: FontConstant.k14w400B7A4Text,
-                              ),
-                              TextSpan(
-                                text: "Terms and Conditions",
-                                style: FontConstant.k14w500B7A4TextU,
-                              ),
-                            ]
-                        ) ),
+                        text: TextSpan(children: [
+                      TextSpan(
+                        text: "By proceeding you agree to our ",
+                        style: FontConstant.k14w400B7A4Text,
+                      ),
+                      TextSpan(
+                        text: "Privacy Policy",
+                        style: FontConstant.k14w500B7A4TextU,
+                      ),
+                      TextSpan(
+                        text: " & ",
+                        style: FontConstant.k14w400B7A4Text,
+                      ),
+                      TextSpan(
+                        text: "Terms and Conditions",
+                        style: FontConstant.k14w500B7A4TextU,
+                      ),
+                    ])),
                     SizedBox(height: 13.h),
                   ],
                 ),

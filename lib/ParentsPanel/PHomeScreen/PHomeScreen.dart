@@ -134,40 +134,43 @@ class _PHomeScreenState extends State<PHomeScreen> {
                     ],
                   ),
                   SizedBox(height: Get.size.height * 0.01),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 15.0),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(
-                          height: 15.h,
-                        ),
-                        Text(
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        height: 15.h,
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(left: 16.0),
+                        child: Text(
                           "Activity",
                           style: FontConstant2.baloothampifont,
                         ),
-                        SizedBox(
-                          height: 5.h,
-                        ),
-                        Activity(),
-                        SizedBox(height: 10),
-                        Center(
-                          child: Text("See more",
-                              style: FontConstant.k16w500purpleText.copyWith(
-                                fontSize: 18,
-                              )),
-                        ),
-                        SizedBox(height: 20.h),
-                        Text(
+                      ),
+                      SizedBox(
+                        height: 5.h,
+                      ),
+                      Activity(),
+                      SizedBox(height: 10),
+                      Center(
+                        child: Text("See more",
+                            style: FontConstant.k16w500purpleText.copyWith(
+                              fontSize: 18,
+                            )),
+                      ),
+                      SizedBox(height: 20.h),
+                      Padding(
+                        padding: EdgeInsets.only(left: 16.0),
+                        child: Text(
                           "Tutorials",
                           style: FontConstant2.baloothampifont,
                         ),
-                        SizedBox(
-                          height: 10.h,
-                        ),
-                      ],
-                    ),
+                      ),
+                      SizedBox(
+                        height: 10.h,
+                      ),
+                    ],
                   )
                 ],
               ),
@@ -204,7 +207,7 @@ class Studentcard extends StatelessWidget {
         ],
         borderRadius: BorderRadius.circular(16),
         image: DecorationImage(
-          image: AssetImage("assets/images/sc.png"),
+          image: AssetImage("assets/images/Student Card.png"),
           fit: BoxFit.fitWidth,
         ),
       ),
