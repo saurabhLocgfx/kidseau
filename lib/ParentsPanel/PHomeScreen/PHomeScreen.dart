@@ -197,14 +197,14 @@ class Studentcard extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         color: Colors.transparent,
-        boxShadow: [
-          BoxShadow(
-            color: Color(0xffAD9CC9),
-            spreadRadius: 1,
-            blurRadius: 8,
-            offset: Offset(0, 3), // changes position of shadow
-          ),
-        ],
+        // boxShadow: [
+        //   BoxShadow(
+        //     color: Color(0xffAD9CC9),
+        //     spreadRadius: 1,
+        //     blurRadius: 2,
+        //     offset: Offset(0, 2), // changes position of shadow
+        //   ),
+        // ],
         borderRadius: BorderRadius.circular(16),
         image: DecorationImage(
           image: AssetImage("assets/images/Student Card.png"),

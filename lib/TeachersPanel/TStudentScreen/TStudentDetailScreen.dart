@@ -514,9 +514,11 @@ class _TStudentDetailScreenState extends State<TStudentDetailScreen> {
                                 SizedBox(height: 15),
                                 Row(
                                   children: [
-                                    Image.asset(
-                                      "assets/images/bar4.png",
-                                      height: 130,
+                                    Expanded(
+                                      child: Image.asset(
+                                        "assets/images/bar4.png",
+                                        height: 130,
+                                      ),
                                     ),
                                     SizedBox(width: 8),
                                     Expanded(

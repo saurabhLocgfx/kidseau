@@ -81,162 +81,166 @@ class _POpenChatsState extends State<POpenChats> {
           ],
         ),
       ),
-      body: Container(
-        height: 896.h,
-        width: 414.w,
-        decoration: BoxDecoration(
-          image: DecorationImage(
-              image: AssetImage(
-                "assets/images/framemessages.png",
-              ),
-              colorFilter: ColorFilter.mode(
-                Colors.transparent.withOpacity(0.4),
-                BlendMode.modulate,
-              ),
-              fit: BoxFit.cover),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.only(left: 16.0, right: 16),
-          child: Column(
-            children: [
-              SizedBox(
-                height: 140.h,
-              ),
-              GestureDetector(
-                onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => PChats(),
-                    ),
-                  );
-                },
-                child: Container(
-                  child: Row(
-                    children: [
-                      Container(
-                        height: 112.h,
-                        width: 84.w,
-                        decoration: BoxDecoration(
-                            image: DecorationImage(
-                                image:
-                                    AssetImage("assets/images/teacher1.png"))),
-                      ),
-                      SizedBox(
-                        width: 16.w,
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text("Mohammad Umar",
-                              style: FontConstant.k24w500brownText
-                                  .copyWith(color: ThemeColor.primarycolor)),
-                          Text(
-                            "Class teacher",
-                            style: FontConstant.k16w400B7A4Text,
-                          ),
-                          Text(
-                            "English, French, Arabic",
-                            style: FontConstant.k16w4008471Text,
-                          )
-                        ],
-                      )
-                    ],
-                  ),
+      body: SingleChildScrollView(
+        child: Container(
+          // height: 896.h,
+          // width: 414.w,
+          decoration: BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage(
+                  "assets/images/framemessages.png",
                 ),
-              ),
-              Expanded(
-                  child: GroupedListView<Messages, DateTime>(
-                reverse: true,
-                order: GroupedListOrder.DESC,
-                padding: EdgeInsets.all(20),
-                elements: messages,
-                groupBy: (messages) => DateTime(
-                    messages.date.year, messages.date.month, messages.date.day),
-                groupHeaderBuilder: (Messages messages) => SizedBox(),
-                itemBuilder: (context, Messages messages) => Align(
-                  alignment: messages.isSentByme
-                      ? Alignment.centerRight
-                      : Alignment.centerLeft,
-                  child: Align(
-                    alignment: messages.isSentByme
-                        ? Alignment.centerRight
-                        : Alignment.centerLeft,
-                    child: Padding(
-                      padding: const EdgeInsets.only(bottom: 32.0),
-                      child: Container(
-                        decoration: BoxDecoration(
-                            color: messages.isSentByme
-                                ? Color(0xffF2F1F8)
-                                : Color(0xffDBE8FA),
-                            borderRadius: BorderRadius.circular(6)),
-                        child: Padding(
-                          padding: EdgeInsets.all(12),
-                          child: Text(
-                            messages.text,
-                            style: FontConstant.k16w4008471Text
-                                .copyWith(color: Color(0xff5E5C70)),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
+                colorFilter: ColorFilter.mode(
+                  Colors.transparent.withOpacity(0.4),
+                  BlendMode.modulate,
                 ),
-              )),
-              popuptextfield(isVisible: _isVisible),
-              SizedBox(
-                height: 8.h,
-              ),
-              Container(
-                height: 52.h,
-                width: 382.w,
-                child: TextField(
-                  onSubmitted: (text) {
-                    final message = Messages(
-                        text: text, date: DateTime.now(), isSentByme: true);
-                    setState(() => messages.add(message));
+                fit: BoxFit.cover),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.only(left: 16.0, right: 16),
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 100.h,
+                ),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => PChats(),
+                      ),
+                    );
                   },
-                  decoration: InputDecoration(
-                    enabledBorder: OutlineInputBorder(
-                      borderSide:
-                          BorderSide(width: 2, color: Color(0xffDBE8FA)),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide:
-                          BorderSide(width: 2, color: Color(0xffDBE8FA)),
-                    ),
-                    fillColor: Color(0xffF0F4FA),
-                    hintText: "Type here.",
-                    hintStyle: FontConstant.k16w400B7A4Text,
-                    suffixIcon: GestureDetector(
-                      onTap: () {},
-                      child: Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: ImageIcon(
-                          AssetImage("assets/images/sendicon.png"),
-                          size: 12,
-                          color: ThemeColor.primarycolor,
+                  child: Container(
+                    child: Row(
+                      children: [
+                        Container(
+                          height: 112.h,
+                          width: 84.w,
+                          decoration: BoxDecoration(
+                              image: DecorationImage(
+                                  image: AssetImage(
+                                      "assets/images/teacher1.png"))),
                         ),
-                      ),
+                        SizedBox(
+                          width: 16.w,
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text("Mohammad Umar",
+                                style: FontConstant.k24w500brownText
+                                    .copyWith(color: ThemeColor.primarycolor)),
+                            Text(
+                              "Class teacher",
+                              style: FontConstant.k16w400B7A4Text,
+                            ),
+                            Text(
+                              "English, French, Arabic",
+                              style: FontConstant.k16w4008471Text,
+                            )
+                          ],
+                        )
+                      ],
                     ),
-                    prefixIcon: Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: GestureDetector(
-                        onTap: showToast,
-                        child: ImageIcon(
-                          AssetImage("assets/images/add-circle.png"),
-                          size: 12,
-                          color: ThemeColor.darkpurple,
+                  ),
+                ),
+                SizedBox(
+                  height: 500,
+                  child: GroupedListView<Messages, DateTime>(
+                    reverse: true,
+                    order: GroupedListOrder.DESC,
+                    padding: EdgeInsets.all(20),
+                    elements: messages,
+                    groupBy: (messages) => DateTime(messages.date.year,
+                        messages.date.month, messages.date.day),
+                    groupHeaderBuilder: (Messages messages) => SizedBox(),
+                    itemBuilder: (context, Messages messages) => Align(
+                      alignment: messages.isSentByme
+                          ? Alignment.centerRight
+                          : Alignment.centerLeft,
+                      child: Align(
+                        alignment: messages.isSentByme
+                            ? Alignment.centerRight
+                            : Alignment.centerLeft,
+                        child: Padding(
+                          padding: const EdgeInsets.only(bottom: 32.0),
+                          child: Container(
+                            decoration: BoxDecoration(
+                                color: messages.isSentByme
+                                    ? Color(0xffF2F1F8)
+                                    : Color(0xffDBE8FA),
+                                borderRadius: BorderRadius.circular(6)),
+                            child: Padding(
+                              padding: EdgeInsets.all(12),
+                              child: Text(
+                                messages.text,
+                                style: FontConstant.k16w4008471Text
+                                    .copyWith(color: Color(0xff5E5C70)),
+                              ),
+                            ),
+                          ),
                         ),
                       ),
                     ),
                   ),
                 ),
-              ),
-              SizedBox(
-                height: 32.h,
-              ),
-            ],
+                popuptextfield(isVisible: _isVisible),
+                SizedBox(
+                  height: 8.h,
+                ),
+                Container(
+                  height: 52.h,
+                  width: 382.w,
+                  child: TextField(
+                    onSubmitted: (text) {
+                      final message = Messages(
+                          text: text, date: DateTime.now(), isSentByme: true);
+                      setState(() => messages.add(message));
+                    },
+                    decoration: InputDecoration(
+                      enabledBorder: OutlineInputBorder(
+                        borderSide:
+                            BorderSide(width: 2, color: Color(0xffDBE8FA)),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide:
+                            BorderSide(width: 2, color: Color(0xffDBE8FA)),
+                      ),
+                      fillColor: Color(0xffF0F4FA),
+                      hintText: "Type here.",
+                      hintStyle: FontConstant.k16w400B7A4Text,
+                      suffixIcon: GestureDetector(
+                        onTap: () {},
+                        child: Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: ImageIcon(
+                            AssetImage("assets/images/sendicon.png"),
+                            size: 12,
+                            color: ThemeColor.primarycolor,
+                          ),
+                        ),
+                      ),
+                      prefixIcon: Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: GestureDetector(
+                          onTap: showToast,
+                          child: ImageIcon(
+                            AssetImage("assets/images/add-circle.png"),
+                            size: 12,
+                            color: ThemeColor.darkpurple,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 32.h,
+                ),
+              ],
+            ),
           ),
         ),
       ),

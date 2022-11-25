@@ -35,10 +35,10 @@ class _PProfileDashBoardState extends State<PProfileDashBoard> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 896.h,
-      width: 414.w,
+      // height: 896.h,
+      //width: 414.w,
       decoration: BoxDecoration(
-        gradient: new LinearGradient(colors: [
+        gradient: LinearGradient(colors: [
           Color(0xffFFFFFF),
           Color(0xff8267AC).withOpacity(0.6),
         ], begin: Alignment.topCenter, end: Alignment.bottomCenter),
@@ -73,39 +73,53 @@ class _PProfileDashBoardState extends State<PProfileDashBoard> {
                           .copyWith(fontSize: 28)))),
           actions: [Pprofilepopup()],
         ),
-        body: Stack(children: [
-          Container(
-            child: Image.asset(
-              "assets/images/postsbackground.png",
-              height: 414.h,
-              width: 414.w,
-            ),
-          ),
-          Column(
-            children: [
-              SizedBox(height: 100.h),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [SizedBox(height: 40), Pageviewtabprofile()],
+        body: SizedBox(
+          width: 1.sw,
+          height: 1.sh,
+          child: Stack(children: [
+            Container(
+              child: Image.asset(
+                "assets/images/postsbackground.png",
+                height: 414.h,
+                width: 1.sw,
+                fit: BoxFit.fitWidth,
               ),
-              SizedBox(height: 24.h),
-              Expanded(
-                child: PageView(
-                  physics: PageScrollPhysics(),
-                  controller: _pageController,
-                  onPageChanged: (page) {
-                    setState(
-                      () {
-                        pageIndex = page;
-                      },
-                    );
-                  },
-                  children: <Widget>[PParentsProfile(), PSchoolProfile()],
+            ),
+            Positioned(
+              top: 100,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    //SizedBox(height: 100.h),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [SizedBox(height: 40), Pageviewtabprofile()],
+                    ),
+                    SizedBox(height: 24.h),
+                    SizedBox(
+                      height: 1.sh,
+                      child: PageView(
+                        physics: PageScrollPhysics(),
+                        controller: _pageController,
+                        onPageChanged: (page) {
+                          setState(
+                            () {
+                              pageIndex = page;
+                            },
+                          );
+                        },
+                        children: <Widget>[PParentsProfile(), PSchoolProfile()],
+                      ),
+                    ),
+                  ],
                 ),
               ),
-            ],
-          )
-        ]),
+            )
+          ]),
+        ),
       ),
     );
   }

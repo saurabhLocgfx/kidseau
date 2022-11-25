@@ -39,7 +39,9 @@ class _TParentsState extends State<TParents> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: ListView.separated(
-        separatorBuilder: (ctx,ind) => SizedBox(height: 16.h,),
+          separatorBuilder: (ctx, ind) => SizedBox(
+                height: 16.h,
+              ),
           shrinkWrap: true,
           physics: NeverScrollableScrollPhysics(),
           itemCount: bird.length,
@@ -53,13 +55,15 @@ class _TParentsState extends State<TParents> {
               child: Container(
                 //height: 150.h,
                 margin: EdgeInsets.symmetric(horizontal: 16),
-               // clipBehavior: Clip.hardEdge,
+                // clipBehavior: Clip.hardEdge,
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(16),
+                    borderRadius: BorderRadius.circular(16),
                     //color: Colors.blue,
                     image: DecorationImage(
-                        image: AssetImage("assets/images/purplecard.png"),fit: BoxFit.fill)),
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                        image: AssetImage("assets/images/purplecard.png"),
+                        fit: BoxFit.fill)),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
                 child: Stack(
                   children: [
                     Positioned(
@@ -82,9 +86,12 @@ class _TParentsState extends State<TParents> {
                           width: 60.w,
                           decoration: BoxDecoration(
                               image: DecorationImage(
-                                  image: AssetImage(images[index]),fit: BoxFit.fill)),
+                                  image: AssetImage(images[index]),
+                                  fit: BoxFit.fill)),
                         ),
-                        SizedBox(width: 12.w,),
+                        SizedBox(
+                          width: 12.w,
+                        ),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -101,7 +108,7 @@ class _TParentsState extends State<TParents> {
                                     color: Colors.white.withOpacity(0.80))),
                           ],
                         ),
-                       /* Padding(
+                        /* Padding(
                           padding: const EdgeInsets.only(top: 30, bottom: 10),
                           child: Align(
                               alignment: Alignment.centerRight,
