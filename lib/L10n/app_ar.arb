@@ -1,0 +1,58 @@
+{
+"We offer a new way to mark the children and shape them for better future.":"نقدم طريقة جديدة لتقييم الأطفال وتعليمهم من أجل مستقبل أفضل",
+"Account":"حساب"
+"Login/create a new account to track your kids’ activities.":"تسجيل الدخول / إنشاء حساب جديد لتتبع أنشطة طفلك"
+
+"Email/Phone number":"البريد الإلكتروني / رقم الهاتف"
+
+"Login with OTP":"otpتسجيل الدخول باستخدام"
+
+"OTP verification":" OTPالتحقق من"
+
+"A OTP has been sent to “9876543210”. Please enter the OTP here.":"تم إرسال  الرمز على الرقم "9876543210". الرجاء إدخاله"
+
+"Continue":"استمر"
+
+"School code":"كود مدرسة"
+
+"The school code is provided by director.":"يتم توفير كود الحضانة من قبل المدير"
+
+"Personal Details":
+
+"First name":"الاسم"
+
+"Enter your first name":"أدخل اسمك"
+
+"Family name":"اللقب"
+
+"Enter your family name": "أدخل لقبك"
+
+"Email address":"البريد الالكتروني"
+
+ "Enter your email address":" أدخل بريدك الالكتروني"
+
+ "Birthday":"تاريخ الميلاد"
+
+ "Education":"المستوى الدراسي"
+
+ "Enter your highest degree":"أدخل مستواك الدراسي"
+
+ "Year of experiance":"سنوات الخبرة"
+
+ "Enter your highest degree":"أدخل سنوات خبرتك"
+
+ "Gender":"الجنس"
+
+ "Select your gender":"أختر جنسك"
+
+ "Address":"العنوان"
+
+ "Enter your parmanent address":"أدخل عنوانك"
+
+ "Wait for director’s approval":"الإنتظار ريث قبول المدير"
+
+  "Thank you for your patience":"شكرا لانتظاركم"
+
+  "Close":"إغلاق"
+
+}

@@ -5,6 +5,8 @@ import 'package:get/get.dart';
 import 'package:kidseau/ParentsPanel/POnboardingScreens/PSplashScreen.dart';
 import 'package:kidseau/Theme.dart';
 
+import 'L10n/l10n.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -26,6 +28,7 @@ class MyApp extends StatelessWidget {
                     primary: ThemeColor.primarycolor,
                   ),
             ),
+            supportedLocales: L10n.all,
             debugShowCheckedModeBanner: false,
             home: PSplashScreen(),
           );
