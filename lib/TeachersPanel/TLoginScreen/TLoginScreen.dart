@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kidseau/TeachersPanel/TLoginScreen/TLoginOtpVerification.dart';
-import 'package:kidseau/TeachersPanel/TSignupScreen/TSignupScreen.dart';
 import 'package:kidseau/Theme.dart';
 import 'package:kidseau/Widgets/buttons.dart';
 import 'package:kidseau/Widgets/textfields.dart';
+
+import '../../app_localizations/app_localizations.dart';
 
 class TLoginScreen extends StatelessWidget {
   const TLoginScreen({Key? key}) : super(key: key);
@@ -43,7 +44,9 @@ class TLoginScreen extends StatelessWidget {
                         width: 173.w,
                       ),
                       Text(
-                        "We offer a new way to mark the children and shape them for better future.",
+                        AppLoaclizations.of(context)!
+                            .translate('loginText')
+                            .toString(),
                         style: FontConstant.k16w4008471Text,
                         textAlign: TextAlign.center,
                       ),
@@ -60,7 +63,7 @@ class TLoginScreen extends StatelessWidget {
                     Text("Account", style: FontConstant.k24w500brownText),
                     GestureDetector(
                       onTap: () {
-                       /* Navigator.of(context).push(MaterialPageRoute(
+                        /* Navigator.of(context).push(MaterialPageRoute(
                             builder: (context) => TSignupScreen()));*/
                       },
                       child: Text(
@@ -85,7 +88,8 @@ class TLoginScreen extends StatelessWidget {
                             child: MainButton(
                                 onTap: () {
                                   Navigator.of(context).push(MaterialPageRoute(
-                                      builder: (context) => TLoginOtpVerification()));
+                                      builder: (context) =>
+                                          TLoginOtpVerification()));
                                 },
                                 title: "Login with OTP",
                                 textStyleColor: Colors.white,
@@ -96,25 +100,24 @@ class TLoginScreen extends StatelessWidget {
                     ),
                     SizedBox(height: 40),
                     RichText(
-                        text: TextSpan(
-                          children: [
-                            TextSpan(
-                              text: "By proceeding you agree to our ",
-                              style: FontConstant.k14w400B7A4Text,
-                            ),TextSpan(
-                              text: "Privacy Policy",
-                              style: FontConstant.k14w500B7A4TextU,
-                            ),
-                            TextSpan(
-                              text: " & ",
-                              style: FontConstant.k14w400B7A4Text,
-                            ),
-                            TextSpan(
-                              text: "Terms and Conditions",
-                              style: FontConstant.k14w500B7A4TextU,
-                            ),
-                          ]
-                        ) ),
+                        text: TextSpan(children: [
+                      TextSpan(
+                        text: "By proceeding you agree to our ",
+                        style: FontConstant.k14w400B7A4Text,
+                      ),
+                      TextSpan(
+                        text: "Privacy Policy",
+                        style: FontConstant.k14w500B7A4TextU,
+                      ),
+                      TextSpan(
+                        text: " & ",
+                        style: FontConstant.k14w400B7A4Text,
+                      ),
+                      TextSpan(
+                        text: "Terms and Conditions",
+                        style: FontConstant.k14w500B7A4TextU,
+                      ),
+                    ])),
                     /*Row(
                       children: [
                         Text(

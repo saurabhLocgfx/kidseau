@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:kidseau/ParentsPanel/POnboardingScreens/PSplashScreen.dart';
 import 'package:kidseau/Theme.dart';
 
-import 'L10n/l10n.dart';
+import 'app_localizations/app_localizations.dart';
 
 void main() {
   runApp(const MyApp());
@@ -28,7 +29,24 @@ class MyApp extends StatelessWidget {
                     primary: ThemeColor.primarycolor,
                   ),
             ),
-            supportedLocales: L10n.all,
+            supportedLocales: [
+              Locale('en', 'US'),
+              Locale('ar', 'AR'),
+              Locale('fr', 'FR'),
+            ],
+            localizationsDelegates: [
+              AppLoaclizations.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+            ],
+            localeResolutionCallback: (locale, supportedLocales) {
+              for (var supportedLocales in supportedLocales) {
+                if (supportedLocales.languageCode == locale?.languageCode &&
+                    supportedLocales.countryCode == locale?.countryCode) {
+                  return supportedLocales;
+                }
+              }
+            },
             debugShowCheckedModeBanner: false,
             home: PSplashScreen(),
           );

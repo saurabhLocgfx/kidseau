@@ -31,6 +31,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -40,7 +42,9 @@ dependencies:
   flutter_screenutil: ^5.5.4
   floating_navbar: ^2.0.2
   grouped_list: ^5.1.2
+
   intl: ^0.17.0
+
   flutter_calendar_carousel: ^2.4.0
   pin_code_fields: ^7.4.0
   bottom_bar: ^2.0.2
@@ -50,7 +54,7 @@ dependencies:
   flutter_spinkit: ^5.1.0
   flutter_switch: ^0.3.2
   table_calendar:
-  flutter_localization:
+
 
 
 dev_dependencies:
@@ -70,16 +74,19 @@ dev_dependencies:
 
 # The following section is specific to Flutter packages.
 flutter:
-
+  generate: ture
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
-  generate: ture
+
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/images/
+    - lang/en.json
+    - lang/ar.json
+    - lang/fr.json
 
 
 

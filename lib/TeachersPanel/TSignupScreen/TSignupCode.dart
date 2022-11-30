@@ -4,6 +4,7 @@ import 'package:kidseau/TeachersPanel/TSignupScreen/TPersonalDetails.dart';
 import 'package:kidseau/Theme.dart';
 import 'package:kidseau/Widgets/buttons.dart';
 import 'package:kidseau/Widgets/textfields.dart';
+import 'package:kidseau/app_localizations/app_localizations.dart';
 
 class TSignupCode extends StatefulWidget {
   const TSignupCode({Key? key}) : super(key: key);
@@ -45,7 +46,9 @@ class _TSignupCodeState extends State<TSignupCode> {
                         width: 173,
                       ),
                       Text(
-                        "We offer a new way to mark the children and shape them for better future.",
+                        AppLoaclizations.of(context)!
+                            .translate('loginText')
+                            .toString(),
                         style: FontConstant.k16w4008471Text,
                         textAlign: TextAlign.center,
                       ),
