@@ -1,12 +1,14 @@
 import 'dart:ui';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:grouped_list/grouped_list.dart';
-import 'package:kidseau/ParentsPanel/PMessageScreen/PChats.dart';
 import 'package:kidseau/Theme.dart';
 import 'package:kidseau/Widgets/popups.dart';
+
+import 'PChats.dart';
 
 class POpenChats extends StatefulWidget {
   const POpenChats({Key? key}) : super(key: key);
@@ -81,6 +83,58 @@ class _POpenChatsState extends State<POpenChats> {
           ],
         ),
       ),
+      bottomNavigationBar: Padding(
+        padding:
+            EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+        child: Row(
+          children: [
+            Expanded(
+              child: TextField(
+                onSubmitted: (text) {
+                  final message = Messages(
+                      text: text, date: DateTime.now(), isSentByme: true);
+                  setState(() => messages.add(message));
+                },
+                decoration: InputDecoration(
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(width: 2, color: Color(0xffDBE8FA)),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(width: 2, color: Color(0xffDBE8FA)),
+                  ),
+                  fillColor: Color(0xffF0F4FA),
+                  hintText: "Type here.".tr(),
+                  /*AppLoaclizations.of(context)!
+                                .translate("Type here."),*/
+                  hintStyle: FontConstant.k16w400B7A4Text,
+                  suffixIcon: GestureDetector(
+                    onTap: () {},
+                    child: Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: ImageIcon(
+                        AssetImage("assets/images/sendicon.png"),
+                        size: 12,
+                        color: ThemeColor.primarycolor,
+                      ),
+                    ),
+                  ),
+                  prefixIcon: Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: GestureDetector(
+                      onTap: showToast,
+                      child: ImageIcon(
+                        AssetImage("assets/images/add-circle.png"),
+                        size: 12,
+                        color: ThemeColor.darkpurple,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
       body: SingleChildScrollView(
         child: Container(
           // height: 896.h,
@@ -101,7 +155,7 @@ class _POpenChatsState extends State<POpenChats> {
             child: Column(
               children: [
                 SizedBox(
-                  height: 100.h,
+                  height: 140,
                 ),
                 GestureDetector(
                   onTap: () {
@@ -115,15 +169,15 @@ class _POpenChatsState extends State<POpenChats> {
                     child: Row(
                       children: [
                         Container(
-                          height: 112.h,
-                          width: 84.w,
+                          height: 112,
+                          width: 84,
                           decoration: BoxDecoration(
                               image: DecorationImage(
                                   image: AssetImage(
                                       "assets/images/teacher1.png"))),
                         ),
                         SizedBox(
-                          width: 16.w,
+                          width: 16,
                         ),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -151,7 +205,7 @@ class _POpenChatsState extends State<POpenChats> {
                   child: GroupedListView<Messages, DateTime>(
                     reverse: true,
                     order: GroupedListOrder.DESC,
-                    padding: EdgeInsets.all(20),
+                    padding: EdgeInsets.all(16),
                     elements: messages,
                     groupBy: (messages) => DateTime(messages.date.year,
                         messages.date.month, messages.date.day),
@@ -190,7 +244,7 @@ class _POpenChatsState extends State<POpenChats> {
                 SizedBox(
                   height: 8.h,
                 ),
-                Container(
+                /* Container(
                   height: 52.h,
                   width: 382.w,
                   child: TextField(
@@ -209,7 +263,8 @@ class _POpenChatsState extends State<POpenChats> {
                             BorderSide(width: 2, color: Color(0xffDBE8FA)),
                       ),
                       fillColor: Color(0xffF0F4FA),
-                      hintText: "Type here.",
+                      hintText: "Type here.".tr(),
+                      */ /* AppLoaclizations.of(context)!.translate("Type here."),*/ /*
                       hintStyle: FontConstant.k16w400B7A4Text,
                       suffixIcon: GestureDetector(
                         onTap: () {},
@@ -235,7 +290,7 @@ class _POpenChatsState extends State<POpenChats> {
                       ),
                     ),
                   ),
-                ),
+                ),*/
                 SizedBox(
                   height: 32.h,
                 ),

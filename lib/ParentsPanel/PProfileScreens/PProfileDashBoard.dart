@@ -3,12 +3,13 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:kidseau/ParentsPanel/PProfileScreens/PFees.dart';
 import 'package:kidseau/ParentsPanel/PProfileScreens/PParentProfile.dart';
 import 'package:kidseau/ParentsPanel/PProfileScreens/PSchoolProfile.dart';
 import 'package:kidseau/ParentsPanel/PProfileScreens/PSettings/PSettings.dart';
 import 'package:kidseau/ParentsPanel/PProfileScreens/PSyllabus.dart';
 import 'package:kidseau/Theme.dart';
+
+import 'PFees.dart';
 
 class PProfileDashBoard extends StatefulWidget {
   const PProfileDashBoard({Key? key}) : super(key: key);
@@ -68,7 +69,7 @@ class _PProfileDashBoardState extends State<PProfileDashBoard> {
                     // Navigator.of(context).push(MaterialPageRoute(
                     //     builder: (context) => NotificationScreen()));
                   },
-                  child: Text("Profile",
+                  child: Text("Profile ",
                       style: FontConstant2.k32w5008267text
                           .copyWith(fontSize: 28)))),
           actions: [Pprofilepopup()],

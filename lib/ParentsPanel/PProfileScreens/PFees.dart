@@ -122,7 +122,7 @@ class _PFeesState extends State<PFees> {
                           FontConstant.k22w5008471Text.copyWith(fontSize: 22),
                     ),
                     SizedBox(
-                      width: 300.w,
+                      width: 382.w,
                       height: 400.h,
                       child: ListView.builder(
                           padding: EdgeInsets.zero,

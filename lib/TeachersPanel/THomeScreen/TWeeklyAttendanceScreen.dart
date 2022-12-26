@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -150,7 +151,10 @@ class _TWeeklyAttendanceScreenState extends State<TWeeklyAttendanceScreen> {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text("Wednesday’s attendance",
+                            Text("Wednesday’s attendance".tr(),
+                                /* AppLoaclizations.of(context)!
+                                    .translate("Wednesday’s attendance")
+                                    .toString(),*/
                                 style: FontConstant2.k24w5008267text),
                             Row(
                               children: [
@@ -193,9 +197,14 @@ class _TWeeklyAttendanceScreenState extends State<TWeeklyAttendanceScreen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text("74 students",
+                        Text(
+                            "74 ${"students".tr() /*AppLoaclizations.of(context)!.translate("students")*/}",
                             style: FontConstant.k16w4008471Text),
-                        Text("Present", style: FontConstant.k16w4008471Text),
+                        Text("Present1".tr(),
+                            /*AppLoaclizations.of(context)!
+                                .translate("Present1")
+                                .toString(),*/
+                            style: FontConstant.k16w4008471Text),
                       ],
                     ),
                     SizedBox(height: 10),

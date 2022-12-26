@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -54,7 +55,10 @@ class _TActivityScreenState extends State<TActivityScreen> {
               ),
               Padding(
                 padding: const EdgeInsets.only(left: 17.93),
-                child: Text("Activity",
+                child: Text("Activity".tr(),
+                    /*AppLoaclizations.of(context)!
+                        .translate("Activity")
+                        .toString(),*/
                     style: FontConstant.k14w400lightpurpleText.copyWith(
                         fontSize: 16,
                         fontWeight: FontWeight.w400,
@@ -72,7 +76,10 @@ class _TActivityScreenState extends State<TActivityScreen> {
                 Align(
                   alignment: Alignment.topCenter,
                   child: Text(
-                    "Learning Alphabets",
+                    "Learning Alphabets".tr(),
+                    /* AppLoaclizations.of(context)!
+                        .translate("Learning Alphabets")
+                        .toString(),*/
                     style: FontConstant.k16w500brownText.copyWith(fontSize: 32),
                   ),
                 ),
@@ -115,7 +122,10 @@ class _TActivityScreenState extends State<TActivityScreen> {
                 Align(
                     alignment: Alignment.centerLeft,
                     child: Text(
-                      "Weak students",
+                      "Weak students".tr(),
+                      /*AppLoaclizations.of(context)!
+                          .translate("Weak students")
+                          .toString(),*/
                       style: FontConstant2.baloothampifont,
                     )),
                 SizedBox(height: 10),

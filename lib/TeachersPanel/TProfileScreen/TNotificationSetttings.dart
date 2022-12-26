@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -133,7 +134,10 @@ class _TNotificationsettingsState extends State<TNotificationsettings> {
                       Icon(Icons.circle, size: 6, color: Color(0xff331F2D)),
                       SizedBox(width: 10),
                       Text(
-                        "New Post",
+                        "New Post".tr(),
+                        /*AppLoaclizations.of(context)!
+                            .translate("New Post")
+                            .toString(),*/
                         style: FontConstant.k18w500331FText,
                       ),
                     ],
@@ -162,7 +166,10 @@ class _TNotificationsettingsState extends State<TNotificationsettings> {
                       Icon(Icons.circle, size: 6, color: Color(0xff331F2D)),
                       SizedBox(width: 10),
                       Text(
-                        "New Activity",
+                        "New Activity".tr(),
+                        /* AppLoaclizations.of(context)!
+                            .translate("New Activity")
+                            .toString(),*/
                         style: FontConstant.k18w500331FText,
                       ),
                     ],
@@ -191,7 +198,10 @@ class _TNotificationsettingsState extends State<TNotificationsettings> {
                       Icon(Icons.circle, size: 6, color: Color(0xff331F2D)),
                       SizedBox(width: 10),
                       Text(
-                        "New Message ",
+                        "New Message ".tr(),
+                        /*AppLoaclizations.of(context)!
+                            .translate("New Message ")
+                            .toString(),*/
                         style: FontConstant.k18w500331FText,
                       ),
                     ],

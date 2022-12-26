@@ -202,6 +202,9 @@ class _tutorialWidgetState extends State<tutorialWidget> {
                     style: FontConstant.k14w400lightpurpleText,
                   ),
                 ),
+                SizedBox(
+                  width: 10,
+                ),
                 Padding(
                   padding: const EdgeInsets.only(left: 4.0),
                   child: Text(

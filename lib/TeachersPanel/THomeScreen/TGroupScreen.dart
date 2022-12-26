@@ -1,17 +1,18 @@
 import 'dart:ui';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kidseau/ParentsPanel/PHomeScreen/PHomeScreen.dart';
-import 'package:kidseau/ParentsPanel/PHomeScreen/PHomebody.dart';
 import 'package:kidseau/TeachersPanel/THomeScreen/TAllStudentsScreen.dart';
 import 'package:kidseau/Theme.dart';
-import 'package:kidseau/Widgets/THomeScreenWidgets/t_activity.dart';
 import 'package:kidseau/Widgets/buttons.dart';
 
 class TGroupScreen extends StatefulWidget {
-  const TGroupScreen({Key? key}) : super(key: key);
+  TGroupScreen({
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<TGroupScreen> createState() => _TGroupScreenState();
@@ -39,7 +40,8 @@ class _TGroupScreenState extends State<TGroupScreen> {
         ),
         backgroundColor: Color(0xff8267AC).withOpacity(0.16),
         title: Text(
-          "Groups",
+          "Groups".tr(),
+          /* AppLoaclizations.of(context)!.translate("Groups").toString(),*/
           style: FontConstant.k18w5008471Text,
         ),
         leading: Row(
@@ -66,23 +68,91 @@ class _TGroupScreenState extends State<TGroupScreen> {
           child: Column(
             children: [
               SizedBox(height: 30.h),
-              GroupTab(),
+              ClipRRect(
+                borderRadius: BorderRadius.circular(81),
+                child: Container(
+                  //width: 414,
+                  height: 62.h,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                  ),
+
+                  /// borderRadius: BorderRadius.circular(81)),
+                  child: ListView.builder(
+                      shrinkWrap: true,
+                      //  physics: const BouncingScrollPhysics(),
+                      itemCount: items.length,
+                      scrollDirection: Axis.horizontal,
+                      itemBuilder: (ctx, index) {
+                        return Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  current = index;
+                                });
+                              },
+                              child: Container(
+                                // curve: Curves.easeIn,
+                                //duration: const Duration(milliseconds: 200),
+                                margin: const EdgeInsets.all(5),
+                                width: 72,
+                                height: 43,
+                                decoration: BoxDecoration(
+                                  color: current == index
+                                      ? Color(0xff8267AC).withOpacity(.08)
+                                      : Colors.white,
+                                  borderRadius: current == index
+                                      ? BorderRadius.circular(69)
+                                      : BorderRadius.circular(69),
+                                  border: current == index
+                                      ? Border.all(
+                                          color: Color(0xff8267AC)
+                                              .withOpacity(.08),
+                                          width: 0)
+                                      : null,
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    items[index],
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.w500,
+                                        color: current == index
+                                            ? Color(0xff8267AC)
+                                            : Color(0xffB7A4B2)),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        );
+                      }),
+                ),
+              ),
+              // GroupTab(),
               SizedBox(height: 15.h),
               Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  "Schedule",
+                  "Schedule".tr(),
+                  /*AppLoaclizations.of(context)!
+                      .translate("Schedule")
+                      .toString(),*/
                   style: FontConstant2.baloothampifont,
                 ),
               ),
               SizedBox(
                 height: 5.h,
               ),
-              TActivity(),
+              /* TActivity(),*/
+              SizedBox(
+                height: 32,
+              ),
               Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  "Students",
+                  "Students ",
                   style: FontConstant2.baloothampifont,
                 ),
               ),
@@ -100,8 +170,8 @@ class _TGroupScreenState extends State<TGroupScreen> {
                   }),
               SizedBox(height: 32),
               SizedBox(
-                height: 52,
-                width: 382,
+                height: 52.h,
+                width: 382.w,
                 child: MainButton(
                     onTap: () {
                       Navigator.push(
@@ -109,7 +179,10 @@ class _TGroupScreenState extends State<TGroupScreen> {
                         MaterialPageRoute(builder: (context) => TAllStudents()),
                       );
                     },
-                    title: "View all students",
+                    title: "View all students".tr(),
+                    /*AppLoaclizations.of(context)!
+                        .translate("View all students")
+                        .toString(),*/
                     textStyleColor: Colors.white,
                     backgroundColor: ThemeColor.primarycolor),
               ),
@@ -133,7 +206,7 @@ class _TGroupScreenState extends State<TGroupScreen> {
   Container GroupTab() {
     return Container(
       //width: 414,
-      height: 62,
+      height: 62.h,
       decoration: BoxDecoration(
           color: Colors.white, borderRadius: BorderRadius.circular(81)),
       child: ListView.builder(

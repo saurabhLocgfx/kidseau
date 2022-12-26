@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -32,7 +33,8 @@ class _AddAnnouncementState extends State<AddAnnouncement> {
           child: materialButton(
             context,
             () {},
-            'Announce',
+            "Announce".tr(),
+            /*  AppLoaclizations.of(context)!.translate("Announce"),*/
             ThemeColor.primarycolor,
             52.0,
           ),
@@ -61,7 +63,11 @@ class _AddAnnouncementState extends State<AddAnnouncement> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Title', style: FontConstant.k16w500331FText),
+                    Text("Title".tr(),
+                        /* AppLoaclizations.of(context)!
+                            .translate("Title")
+                            .toString(),*/
+                        style: FontConstant.k16w500331FText),
                     SizedBox(height: 4),
                     TextFormField(
                       decoration: TextFieldDecoration().curvedWhiteDecoration(
@@ -70,7 +76,11 @@ class _AddAnnouncementState extends State<AddAnnouncement> {
                       ),
                     ),
                     SizedBox(height: 16),
-                    Text('Description', style: FontConstant.k16w500331FText),
+                    Text("Description".tr(),
+                        /*AppLoaclizations.of(context)!
+                            .translate("Description")
+                            .toString(),*/
+                        style: FontConstant.k16w500331FText),
                     SizedBox(height: 4),
                     TextFormField(
                       maxLines: 6,
@@ -80,11 +90,17 @@ class _AddAnnouncementState extends State<AddAnnouncement> {
                       ),
                     ),
                     SizedBox(height: 16),
-                    Text('Time', style: FontConstant.k16w500331FText),
+                    Text("Time".tr(),
+                        /*AppLoaclizations.of(context)!
+                            .translate("Time")
+                            .toString(),*/
+                        style: FontConstant.k16w500331FText),
                     SizedBox(height: 4),
                     InkWell(
-                      onTap: (){
-                        showTimePicker(context: context, initialTime: TimeOfDay(hour: 00, minute: 00));
+                      onTap: () {
+                        showTimePicker(
+                            context: context,
+                            initialTime: TimeOfDay(hour: 00, minute: 00));
                       },
                       child: Container(
                         width: 1.sw,
@@ -97,7 +113,10 @@ class _AddAnnouncementState extends State<AddAnnouncement> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text('8:45 am'),
+                            Text('8:45 am',
+                                style: TextStyle(
+                                  color: Colors.grey,
+                                )),
                             SizedBox(
                               width: 30,
                               child: Image.asset(
@@ -110,11 +129,19 @@ class _AddAnnouncementState extends State<AddAnnouncement> {
                       ),
                     ),
                     SizedBox(height: 16),
-                    Text('Date', style: FontConstant.k16w500331FText),
+                    Text("Date".tr(),
+                        /*AppLoaclizations.of(context)!
+                            .translate("Date")
+                            .toString(),*/
+                        style: FontConstant.k16w500331FText),
                     SizedBox(height: 4),
                     InkWell(
-                      onTap: (){
-                        showDatePicker(context: context, initialDate: DateTime.now(), firstDate: DateTime(1970), lastDate: DateTime(2100));
+                      onTap: () {
+                        showDatePicker(
+                            context: context,
+                            initialDate: DateTime.now(),
+                            firstDate: DateTime(1970),
+                            lastDate: DateTime(2100));
                       },
                       child: Container(
                         width: 1.sw,
@@ -127,7 +154,10 @@ class _AddAnnouncementState extends State<AddAnnouncement> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text('dd/mm/yyyy'),
+                            Text('dd/mm/yyyy',
+                                style: TextStyle(
+                                  color: Colors.grey,
+                                )),
                             SizedBox(
                               width: 30,
                               child: Image.asset(

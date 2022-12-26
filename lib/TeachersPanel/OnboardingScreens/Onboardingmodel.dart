@@ -11,7 +11,7 @@ List<UnbordingContent> contents = [
   UnbordingContent(
       title: 'kkm',
       image: 'assets/images/owlreadingimage.png',
-      discription: "Know what your kid is doing in school  "),
+      discription: "Know what your kid is doing in school   "),
   UnbordingContent(
       title: 'Build the Future',
       image: 'assets/images/owlcalculatorimage.png',

@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -8,6 +9,7 @@ import 'package:kidseau/TeachersPanel/TMessages/TParents.dart';
 import 'package:kidseau/TeachersPanel/TNotificationScreen/TNotificationScreen.dart';
 import 'package:kidseau/Theme.dart';
 
+import '../../restartappwidget/restartwidgets.dart';
 import '../TReminder/TReminderScreen.dart';
 
 class TMessageDashboard extends StatefulWidget {
@@ -19,7 +21,7 @@ class TMessageDashboard extends StatefulWidget {
 
 class _TMessageDashboardState extends State<TMessageDashboard> {
   int selectedIndex = 0;
-
+  bool colorChange = false;
   final controller = PageController(initialPage: 1);
 
   @override
@@ -73,16 +75,120 @@ class _TMessageDashboardState extends State<TMessageDashboard> {
           ),
           actions: [
             Container(
-              width: 144,
+              width: 164,
               child: Padding(
                 padding: const EdgeInsets.only(top: 15.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    Image.asset(
-                      "assets/images/Languageicon.png",
-                      height: 24,
-                    ),
+                    Padding(
+                        padding: const EdgeInsets.all(15.0),
+                        child: PopupMenuButton(
+                            child: Image.asset(
+                              "assets/images/Languageicon.png",
+                              height: 24,
+                            ),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(16)),
+                            itemBuilder: (context) {
+                              return [
+                                PopupMenuItem(
+                                  enabled: true,
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(
+                                        left: 15.0, top: 15, bottom: 15),
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        GestureDetector(
+                                          onTap: () {
+                                            context.locale = Locale('en', 'US');
+                                            RestartWidget.restartApp(context);
+
+                                            setState(() {
+                                              colorChange;
+                                            });
+                                          },
+                                          child: Row(
+                                            children: [
+                                              Text(
+                                                ("English"),
+                                                style: colorChange
+                                                    ? FontConstant
+                                                        .k16w5008267Text
+                                                    : FontConstant
+                                                        .k18w5008471Text,
+                                              )
+                                            ],
+                                          ),
+                                        ),
+                                        SizedBox(height: 20),
+                                        GestureDetector(
+                                          onTap: () {
+                                            context.locale = Locale('fr', 'FR');
+                                            RestartWidget.restartApp(context);
+
+                                            setState(() {
+                                              colorChange;
+                                            });
+                                            // Navigator.of(context).push(
+                                            //   MaterialPageRoute(
+                                            //     builder: (context) => Fees(),
+                                            //   ),
+                                            // );
+                                          },
+                                          child: Row(
+                                            children: [
+                                              Text(
+                                                ("French"),
+                                                style: colorChange
+                                                    ? FontConstant
+                                                        .k16w5008267Text
+                                                    : FontConstant
+                                                        .k18w5008471Text,
+                                              )
+                                            ],
+                                          ),
+                                        ),
+                                        SizedBox(height: 20),
+                                        GestureDetector(
+                                          onTap: () {
+                                            context.locale = Locale('ar', 'AR');
+                                            RestartWidget.restartApp(context);
+
+                                            setState(() {
+                                              colorChange;
+                                            });
+                                            /* Navigator.pop(context);
+                                            Navigator.of(context).push(
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    TSettings(),
+                                              ),
+                                            );*/
+                                          },
+                                          child: Row(
+                                            children: [
+                                              Text(
+                                                ("Arabic"),
+                                                style: colorChange
+                                                    ? FontConstant
+                                                        .k16w5008267Text
+                                                    : FontConstant
+                                                        .k18w5008471Text,
+                                              )
+                                            ],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ];
+                            })),
                     InkWell(
                       onTap: () {
                         Navigator.push(
@@ -92,9 +198,12 @@ class _TMessageDashboardState extends State<TMessageDashboard> {
                           ),
                         );
                       },
-                      child: Image.asset(
-                        "assets/images/clockicon.png",
-                        height: 24,
+                      child: Padding(
+                        padding: const EdgeInsets.all(15),
+                        child: Image.asset(
+                          "assets/images/clockicon.png",
+                          height: 24,
+                        ),
                       ),
                     ),
                     InkWell(
@@ -105,9 +214,12 @@ class _TMessageDashboardState extends State<TMessageDashboard> {
                               builder: (context) => TNotificationScreen()),
                         );
                       },
-                      child: Image.asset(
-                        "assets/images/iconbell.png",
-                        height: 24,
+                      child: Padding(
+                        padding: const EdgeInsets.all(15.0),
+                        child: Image.asset(
+                          "assets/images/iconbell.png",
+                          height: 24,
+                        ),
                       ),
                     ),
                   ],

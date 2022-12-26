@@ -1,12 +1,14 @@
 import 'dart:ui';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:kidseau/Tmodel/TScheduleModel.dart';
 import 'package:kidseau/Widgets/THomeScreenWidgets/t_activity.dart';
 
-import '../../ParentsPanel/PHomeScreen/PHomebody.dart';
 import '../../Theme.dart';
+import '../../api/Tschedule_api/schedule_api.dart';
 
 class ScheduleScreen extends StatefulWidget {
   const ScheduleScreen({Key? key}) : super(key: key);
@@ -16,6 +18,36 @@ class ScheduleScreen extends StatefulWidget {
 }
 
 class _ScheduleScreenState extends State<ScheduleScreen> {
+  bool loading = false;
+  @override
+  void initState() {
+    getSchedule();
+
+    super.initState();
+  }
+
+  getSchedule() {
+    final rsp = TScheduleApi().get();
+    rsp.then((value) {
+      print(value);
+      try {
+        _schedule = value;
+        setState(() {
+          loading = false;
+        });
+      } catch (e) {
+        setState(() {
+          loading = false;
+        });
+      }
+      //print(_schedule.schedule!.length);
+      print(_schedule.schedule!.length);
+      print(_schedule.schedule![0].actTitle);
+    });
+  }
+
+  TScheduleModel _schedule = TScheduleModel();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,7 +69,8 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
         ),
         backgroundColor: Color(0xff8267AC).withOpacity(0.16),
         title: Text(
-          "Back",
+          "Back".tr(),
+          /* AppLoaclizations.of(context)!.translate("Back").toString(),*/
           style: FontConstant.k18w5008471Text,
         ),
         leading: Row(
@@ -59,22 +92,33 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
         ),
       ),
       body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(height: 24),
-            Padding(
-              padding: EdgeInsets.all(16),
-              child: Text(
-                "Schedule",
-                style: FontConstant2.baloothampifont,
+        child: Container(
+          color: Color(0xff8267AC).withOpacity(.06),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(height: 24),
+              Padding(
+                padding: EdgeInsets.all(16),
+                child: Text(
+                  "Schedule".tr(),
+                  /* AppLoaclizations.of(context)!.translate("Schedule").toString(),*/
+                  style: FontConstant2.baloothampifont,
+                ),
               ),
-            ),
-            SizedBox(
-              height: 5.h,
-            ),
-            TActivity(),
-          ],
+              SizedBox(
+                height: 5.h,
+              ),
+              loading
+                  ? CircularProgressIndicator()
+                  : Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      child: TActivity(
+                        schedule: _schedule,
+                      ),
+                    ),
+            ],
+          ),
         ),
       ),
     );

@@ -1,6 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:kidseau/TeachersPanel/TLoginScreen/TLoginScreen.dart';
 import 'package:kidseau/Theme.dart';
 import 'package:kidseau/Widgets/buttons.dart';
 import 'package:kidseau/Widgets/widgets.dart';
@@ -23,12 +23,13 @@ class _TWaitingScreenState extends State<TWaitingScreen> {
           width: 382,
           child: MainButton(
               onTap: () {
-                Navigator.push(
+                /*Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => TLoginScreen()),
-                );
+                );*/
               },
-              title: "Close",
+              title: "Close".tr(),
+              /*AppLoaclizations.of(context)!.translate("Close").toString(),*/
               textStyleColor: Colors.white,
               backgroundColor: ThemeColor.primarycolor),
         ),
@@ -47,11 +48,11 @@ class _TWaitingScreenState extends State<TWaitingScreen> {
             ),
             SizedBox(height: 20.h),
             Text(
-              "Wait for director’s approval",
+              "Wait for director’s approval".tr(),
               style: FontConstant2.k32w5008267text.copyWith(fontSize: 28),
             ),
             Text(
-              "Thank you for your patience",
+              "Thank you for your patience".tr(),
               style: FontConstant.k16w5008471Text,
             ),
           ],

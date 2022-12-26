@@ -1,0 +1,266 @@
+{
+  "We offer a new way to mark the children and shape them for better future.":"Nous offrons une nouvelle méthode de noter les enfants et de les former pour un avenir meilleur",
+  "Account":"Compte",
+
+  "Login/create a new account to track your kids’ activities.":"Connectez-vous/créez un nouveau compte pour suivre les activités de votre enfant",
+
+  "Email/Phone number":"E-mail/Numéro de téléphone",
+
+  "Enter your email/phone number": "Entrez votre email/numéro de téléphone",
+
+  "Login with OTP": "se connecter avec OTP",
+
+  "OTP verification":"Vérification OTP",
+
+  "A OTP has been sent to “9876543210”. Please enter the OTP here.":"Un OTP a été envoyé au “9876543210”. Veuillez entrer l'OTP",
+
+  "Continue":"Continuez",
+
+  "Nursery code": "Code de la crèche",
+
+  "The school code is provided by director.":"le code de la crèche est fourni par le directeur",
+
+  "Enter your nursery code":"Entrez votre code crèche",
+
+  "Good Morning":"Bonjour",
+
+  "Schedule":"Emploi du temps",
+
+  "See more":"Voir plus",
+
+  "Attendance":"Présence",
+
+  "present":"Présent",
+
+  "Home":"Accueil",
+
+  "Profile":"Profil",
+
+  "Posts":"Publications",
+
+  "Kids":"Enfants",
+
+  "Message":"Message",
+
+  "Back":"Retour",
+
+  "Groups":"Groupes",
+
+  "View all students":"Voir tous les enfants",
+
+  "Search student":"Rechercher des enfants ",
+
+  "Today’s attendance":"Présence aujourd’hui ",
+
+  "74 students":"74 enfants ",
+
+  "Present1": "la présence  ",
+
+  "S/O": "Fils",
+
+  "Holidays":"les jours fériés ",
+
+  "5 years":"5 ans",
+
+  "kid":"Enfant",
+
+  "Class":"Groupe",
+
+  "Age":"Âge",
+
+  "Birthday":"Date de naisance",
+
+  "Gender":"Le genre",
+
+  "Address":"Adresse",
+
+  "Nursery":"Garderie",
+
+  "years":"ans",
+
+  "Female":"Femelle",
+
+  "Parent":"Parent",
+
+  "Mother's name":"Nom de la mère",
+
+  "Occupation":"Profession",
+
+  "Email address":"Adresse e-mail",
+
+  "Phone Number":"Numéro de téléphone",
+
+  "Medical":"Informations Médical",
+
+  "Blood group":"Groupe sanguin",
+
+  "Allergy":"Allergie",
+
+  "Weight":"Poids",
+
+  "Height":"Taille",
+
+  "Current treatment":"Traitement actuel",
+
+  "Vaccinations":"Vaccination",
+
+  "view all":"Voir tout",
+
+  "Activity":"Activité",
+
+  "Learning Alphabets":"Voir toutalphabet d'apprentissage",
+
+  "Weak students":"Enfants faibles",
+
+  "Class Section":"section de classe",
+
+  "Performance":"performance",
+
+  "Growth Rank":"rang de croissance",
+
+  "Playing Games":"jouer aux jeux",
+
+  "Recognizing Sound": "recognize sound ",
+
+  "Resting":"repos",
+
+  "Voice Practice": "pratique de la voix",
+
+  "Working Days": "Jour de travail ",
+
+  "Attended days": "Journée de présence ",
+
+  "Open Calendar": "calendrier ",
+
+  "Close": "fermer ",
+
+  "Notification":"Notification",
+
+  "Mark all as read": "Marquer tout comme lu",
+
+  "Notification settings": "Paramètre de notification",
+
+  "Add":"Ajouter",
+
+  "My Posts": "Mes pub",
+
+  "likes": "j'aime",
+
+  "Edit": "Modifier",
+
+  "Hide": "Masquer",
+
+  "Download": "Télécharger",
+
+  "Delete": "Supprimer",
+
+  "Report": "Signaler",
+
+  "Add Photos":"Ajouter des photos",
+
+  "OR": "Ou",
+
+  "Add Announcement": "Ajouter une annonce",
+
+  "Title": "Titre ",
+
+  "Description": "Description",
+
+  "Time":"Heure",
+
+  "Date": "Date",
+
+  "Announce":"Annoncer",
+
+  "Syllabus": "Programme",
+
+  "Fees":"Frais",
+
+  "Settings":"Paramètres",
+
+  "Reception Info":"infos réception",
+
+  "Locate us": "localisez-nous",
+
+  "Privacy Policy":"Politique de confidentialité",
+
+  "New Post": "Nouveau poste",
+
+  "New Activity":"Nouvelle activité",
+
+  "New Message ":"Nouveau message",
+
+  "Mark as unread":"Marquer comme non lu",
+
+  "Delete chat": "Supprimer la discutions",
+
+  "Type here.": "Taper ici",
+
+  "Voice note":"MSG vocal",
+
+  "Gallery": "Galerie",
+
+  "Contact": "Contact",
+
+  "Reminder":"Rappel",
+
+  "Tomorrow is holiday":"Demain c'est férié",
+
+  "Scheduled  at": "Programmé à",
+
+  "Bring notebook":"Apporter un cahier",
+
+  "Expired":"Expiré",
+
+  "Add Reminder": "Ajouter un rappel",
+
+  "Save": "enregistrer",
+
+  "students":"enfants",
+
+  "Wednesday’s attendance": "Présence du mercredi",
+
+  "Personal details"  :"Détails personnels",
+
+  "First name": "Prénom",
+
+  "Enter your first name": "Entrez votre prénom",
+
+  "Family name": "Nom",
+
+  "Enter your family name": "Entrez votre nom",
+
+  "Enter your email address":"Entrez votre Adresse mail",
+
+  "yyyy/mm/dd": "aaaa/mm/jj",
+
+  "Education":"Etude/Diplome",
+
+  "Enter your highest degree": "Entrez votre niveau d'étude",
+
+  "Year of experiance":"Année d'expérience",
+
+  "Select your gender": "Selectionnez votre genre ",
+
+  "Enter your parmanent address": "Entrez votre adresse ",
+
+  "All Present": "tous présents",
+
+  "Wrong nursery code": "Mauvais code crèche",
+
+  "Wait for director’s approval": "Attendez l'approbation de directeur",
+
+  "Thank you for your patience": "Merci pour votre patience",
+
+  "info": "info",
+
+  "Group":"Groupe",
+
+  "Activity Tracker":"Suivi d'activité",
+
+  "Talk to class teacher":"Parlez au professeur de la classe",
+
+  "Kid’s Profile":"Profil de l'enfant"
+
+
+}

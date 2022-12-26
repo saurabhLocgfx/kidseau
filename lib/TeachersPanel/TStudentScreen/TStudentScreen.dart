@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_switch/flutter_switch.dart';
@@ -7,6 +8,7 @@ import 'package:kidseau/TeachersPanel/TNotificationScreen/TNotificationScreen.da
 import 'package:kidseau/Theme.dart';
 import 'package:kidseau/Widgets/Calender/calendermodel.dart';
 
+import '../../restartappwidget/restartwidgets.dart';
 import '../TReminder/TReminderScreen.dart';
 import 'TStudentDetailScreen.dart';
 
@@ -18,8 +20,9 @@ class TStudentScreen extends StatefulWidget {
 }
 
 class _TStudentScreenState extends State<TStudentScreen> {
-  double value =2;
+  double value = 2;
   bool toggle1 = false;
+  bool colorChange = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,7 +45,7 @@ class _TStudentScreenState extends State<TStudentScreen> {
               onTap: () {},
               child: Padding(
                 padding: const EdgeInsets.only(top: 15.0),
-                child: Text("Students",
+                child: Text("students".tr(),
                     style:
                         FontConstant2.k32w5008267text.copyWith(fontSize: 25)),
               ),
@@ -51,16 +54,116 @@ class _TStudentScreenState extends State<TStudentScreen> {
         ),
         actions: [
           Container(
-            width: 144,
+            width: 164,
             child: Padding(
               padding: const EdgeInsets.only(top: 15.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Image.asset(
-                    "assets/images/Languageicon.png",
-                    height: 24,
-                  ),
+                  Padding(
+                      padding: const EdgeInsets.all(15.0),
+                      child: PopupMenuButton(
+                          child: Image.asset(
+                            "assets/images/Languageicon.png",
+                            height: 24,
+                          ),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(16)),
+                          itemBuilder: (context) {
+                            return [
+                              PopupMenuItem(
+                                enabled: true,
+                                child: Padding(
+                                  padding: const EdgeInsets.only(
+                                      left: 15.0, top: 15, bottom: 15),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      GestureDetector(
+                                        onTap: () {
+                                          context.locale = Locale('en', 'US');
+                                          RestartWidget.restartApp(context);
+
+                                          setState(() {
+                                            colorChange;
+                                          });
+                                        },
+                                        child: Row(
+                                          children: [
+                                            Text(
+                                              ("English"),
+                                              style: colorChange
+                                                  ? FontConstant.k16w5008267Text
+                                                  : FontConstant
+                                                      .k18w5008471Text,
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                      SizedBox(height: 20),
+                                      GestureDetector(
+                                        onTap: () {
+                                          context.locale = Locale('fr', 'FR');
+                                          RestartWidget.restartApp(context);
+
+                                          setState(() {
+                                            colorChange;
+                                          });
+                                          // Navigator.of(context).push(
+                                          //   MaterialPageRoute(
+                                          //     builder: (context) => Fees(),
+                                          //   ),
+                                          // );
+                                        },
+                                        child: Row(
+                                          children: [
+                                            Text(
+                                              ("French"),
+                                              style: colorChange
+                                                  ? FontConstant.k16w5008267Text
+                                                  : FontConstant
+                                                      .k18w5008471Text,
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                      SizedBox(height: 20),
+                                      GestureDetector(
+                                        onTap: () {
+                                          context.locale = Locale('ar', 'AR');
+                                          RestartWidget.restartApp(context);
+
+                                          setState(() {
+                                            colorChange;
+                                          });
+                                          /* Navigator.pop(context);
+                                            Navigator.of(context).push(
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    TSettings(),
+                                              ),
+                                            );*/
+                                        },
+                                        child: Row(
+                                          children: [
+                                            Text(
+                                              ("Arabic"),
+                                              style: colorChange
+                                                  ? FontConstant.k16w5008267Text
+                                                  : FontConstant
+                                                      .k18w5008471Text,
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ];
+                          })),
                   InkWell(
                     onTap: () {
                       Navigator.push(
@@ -70,9 +173,12 @@ class _TStudentScreenState extends State<TStudentScreen> {
                         ),
                       );
                     },
-                    child: Image.asset(
-                      "assets/images/clockicon.png",
-                      height: 24,
+                    child: Padding(
+                      padding: const EdgeInsets.all(15),
+                      child: Image.asset(
+                        "assets/images/clockicon.png",
+                        height: 24,
+                      ),
                     ),
                   ),
                   InkWell(
@@ -83,9 +189,12 @@ class _TStudentScreenState extends State<TStudentScreen> {
                             builder: (context) => TNotificationScreen()),
                       );
                     },
-                    child: Image.asset(
-                      "assets/images/iconbell.png",
-                      height: 24,
+                    child: Padding(
+                      padding: const EdgeInsets.all(15),
+                      child: Image.asset(
+                        "assets/images/iconbell.png",
+                        height: 24,
+                      ),
                     ),
                   ),
                 ],
@@ -106,7 +215,7 @@ class _TStudentScreenState extends State<TStudentScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "Activity A",
+                    "${"Activity".tr()} A",
                     style: FontConstant2.k24w5008267text,
                   ),
                   GestureDetector(
@@ -137,85 +246,89 @@ class _TStudentScreenState extends State<TStudentScreen> {
               ),
               SizedBox(height: 24),
               ListView.separated(
-                shrinkWrap: true,
+                  shrinkWrap: true,
                   physics: NeverScrollableScrollPhysics(),
-                  itemBuilder: (context, index){
-                return GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => TStudentDetailScreen()));
-                  },
-                  child: Container(
-                    width: 1.sw,
-                    height: 151,
-                    padding: EdgeInsets.all(16),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(16),
-                      color: Colors.white,
-                      image: DecorationImage(
-                        fit: BoxFit.fill,
-                        image: AssetImage(
-                          'assets/images/sp.png',
-                        ),
-                      ),
-                    ),
-                    child: Row(
-                      children: [
-                        Container(
-                          width: 80,
-                          height: 105,
-                          clipBehavior: Clip.hardEdge,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8),
+                  itemBuilder: (context, index) {
+                    return GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => TStudentDetailScreen()));
+                      },
+                      child: Container(
+                        width: 1.sw,
+                        height: 148,
+                        padding: EdgeInsets.all(16),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(16),
+                          color: Colors.white,
+                          image: DecorationImage(
+                            fit: BoxFit.fill,
+                            image: AssetImage(
+                              'assets/images/sp.png',
+                            ),
                           ),
-                          child: Image.asset('assets/images/Rectangle 2715.png'),
                         ),
-                        SizedBox(width: 12),
-                        Expanded(
-                          child: Column(
-                            children: [
-                              Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Expanded(
-                                    child: Column(
-                                      crossAxisAlignment:
-                                      CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          'Child Name',
-                                          style: FontConstant.k18w500331FText,
-                                        ),
-                                        SizedBox(height: 4),
-                                        Text(
-                                          'S/O - Father Name',
-                                          style: FontConstant.k16w4008471Text,
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  FlutterSwitch(
-                                    width: 56.w,
-                                    height: 32.w,
-                                    toggleSize: 30,
-                                    inactiveColor: ThemeColor.b7A4B2,
-                                    activeColor: ThemeColor.primarycolor,
-                                    inactiveIcon:
-                                    Image.asset('assets/images/sf.png'),
-                                    activeIcon:
-                                    Image.asset('assets/images/baby.png'),
-                                    value: toggle1,
-                                    onToggle: (v) {
-                                      setState(() {
-                                        toggle1 = v;
-                                      });
-                                    },
-                                  ),
-                                ],
+                        child: Row(
+                          children: [
+                            Container(
+                              width: 80,
+                              height: 105,
+                              clipBehavior: Clip.hardEdge,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8),
                               ),
-                              /*Row(
+                              child: Image.asset(
+                                  'assets/images/Rectangle 2715.png'),
+                            ),
+                            SizedBox(width: 12),
+                            Expanded(
+                              child: Column(
+                                children: [
+                                  Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Expanded(
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              'Child Name',
+                                              style:
+                                                  FontConstant.k18w500331FText,
+                                            ),
+                                            SizedBox(height: 0),
+                                            Text(
+                                              'S/O - Father Name',
+                                              style: FontConstant
+                                                  .k16w400B7A4B2Text,
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      FlutterSwitch(
+                                        width: 56,
+                                        height: 32,
+                                        toggleSize: 30,
+                                        inactiveColor: ThemeColor.b7A4B2,
+                                        activeColor: ThemeColor.primarycolor,
+                                        inactiveIcon:
+                                            Image.asset('assets/images/sf.png'),
+                                        activeIcon: Image.asset(
+                                            'assets/images/baby.png'),
+                                        value: toggle1,
+                                        onToggle: (v) {
+                                          setState(() {
+                                            toggle1 = v;
+                                          });
+                                        },
+                                      ),
+                                    ],
+                                  ),
+                                  /*Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
                                   for (int i = 0; i < 5; i++)
@@ -232,19 +345,21 @@ class _TStudentScreenState extends State<TStudentScreen> {
                                     ),
                                 ],
                               ),*/
-                              Slider(divisions: 4,
-                                  label: value.round().toString(),
-                                  activeColor: Color(0xFFF5C88E),
-                                inactiveColor: ThemeColor.ebe6F2,
-                                thumbColor: Color(0xFFF0AD56),
-                                min: 1,
-                                  max: 5,
-                                  value: value.round().toDouble(), onChanged: (val){
-                                setState(() {
-                                  value = val;
-                                });
-                              }),
-                             /* Row(
+                                  Slider(
+                                      divisions: 4,
+                                      label: value.round().toString(),
+                                      activeColor: Color(0xFFF5C88E),
+                                      inactiveColor: ThemeColor.ebe6F2,
+                                      thumbColor: Color(0xFFF0AD56),
+                                      min: 1,
+                                      max: 5,
+                                      value: value.round().toDouble(),
+                                      onChanged: (val) {
+                                        setState(() {
+                                          value = val;
+                                        });
+                                      }),
+                                  /* Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
                                   for (int i = 0; i < 5; i++)
@@ -309,15 +424,18 @@ class _TStudentScreenState extends State<TStudentScreen> {
                                   ),
                                 ],
                               ),*/
-                            ],
-                          ),
+                                ],
+                              ),
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
-                  ),
-                );
-              }, separatorBuilder: (ctx, ind) => SizedBox(height: 16.h,), itemCount: 5),
-
+                      ),
+                    );
+                  },
+                  separatorBuilder: (ctx, ind) => SizedBox(
+                        height: 16.h,
+                      ),
+                  itemCount: 5),
             ],
           ),
         ),
@@ -335,7 +453,6 @@ class _TStudentScreenState extends State<TStudentScreen> {
 
   int current = 0;
   Container GroupTab() {
-
     return Container(
       //width: 414,
       height: 62,

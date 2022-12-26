@@ -1,25 +1,87 @@
 import 'dart:ui';
 
+import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:kidseau/ParentsPanel/PHomeScreen/PHomebody.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:kidseau/TeachersPanel/THomeScreen/TGroupScreen.dart';
 import 'package:kidseau/TeachersPanel/TNotificationScreen/TNotificationScreen.dart';
 import 'package:kidseau/Theme.dart';
-import 'package:kidseau/Widgets/THomeScreenWidgets/t_activity.dart';
+import 'package:kidseau/api/teacher_home_api/THomeApi.dart';
 
+import '../../Tmodel/THomemodel.dart';
+import '../../Tmodel/TScheduleModel.dart';
+import '../../api/Tschedule_api/schedule_api.dart';
+import '../../restartappwidget/restartwidgets.dart';
 import '../TReminder/TReminderScreen.dart';
 import 'TAttendanceScreen.dart';
+import 'TLearningAlphabets.dart';
 import 'TScheduleScreen.dart';
 
 class THomeScreen extends StatefulWidget {
-  const THomeScreen({Key? key}) : super(key: key);
+  THomeScreen({
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<THomeScreen> createState() => _THomeScreenState();
 }
 
 class _THomeScreenState extends State<THomeScreen> {
+  bool colorChange = false;
+  /*Locale localelang =Locale('fr','FR');
+  Locale englocale = Locale('en', 'US');
+  Locale franchlocal = Locale('fr', 'FR');
+  Locale aribiclocal = Locale('ar', 'AR');*/
+  bool loadingData = false;
+  bool loadingsch = false;
+  @override
+  void initState() {
+    getData();
+    super.initState();
+  }
+
+  getData() {
+    loadingData = true;
+    final rsp = THomeApi().get();
+    rsp.then((value) {
+      try {
+        setState(() {
+          loadingData = false;
+        });
+        _name = value;
+      } catch (e) {
+        setState(() {
+          loadingData = false;
+        });
+      }
+      print(_name.hello);
+    });
+  }
+
+  getSchedule() {
+    loadingsch = true;
+    final rsp = TScheduleApi().get();
+    rsp.then((value) {
+      try {
+        _schedule = value;
+        setState(() {
+          loadingsch = false;
+        });
+      } catch (e) {
+        setState(() {
+          loadingsch = false;
+        });
+      }
+      print(_schedule.schedule);
+    });
+  }
+
+  TScheduleModel _schedule = TScheduleModel();
+  THomeModel _name = THomeModel();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,24 +102,127 @@ class _THomeScreenState extends State<THomeScreen> {
           children: [
             Padding(
               padding: const EdgeInsets.only(top: 15.0),
-              child: Text("Good Morning",
-                  style:
-                      FontConstant2.k32w5008267text.copyWith(fontSize: 25)),
+              child: Text(_name.hello.toString(),
+                  /*"Good Morning".tr()*/
+                  /*AppLoaclizations.of(context)!
+                      .translate("Good Morning")
+                      .toString(),*/
+                  style: FontConstant2.k32w5008267text.copyWith(fontSize: 25)),
             ),
           ],
         ),
         actions: [
           SizedBox(
-            width: 144,
+            width: 164,
             child: Padding(
               padding: const EdgeInsets.only(top: 15.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Image.asset(
-                    "assets/images/Languageicon.png",
-                    height: 24,
-                  ),
+                  Padding(
+                      padding: const EdgeInsets.all(15.0),
+                      child: PopupMenuButton(
+                          child: Image.asset(
+                            "assets/images/Languageicon.png",
+                            height: 24,
+                          ),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(16)),
+                          itemBuilder: (context) {
+                            return [
+                              PopupMenuItem(
+                                enabled: true,
+                                child: Padding(
+                                  padding: const EdgeInsets.only(
+                                      left: 15.0, top: 15, bottom: 15),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      GestureDetector(
+                                        onTap: () {
+                                          context.locale = Locale('en', 'US');
+                                          RestartWidget.restartApp(context);
+
+                                          setState(() {
+                                            colorChange;
+                                          });
+                                        },
+                                        child: Row(
+                                          children: [
+                                            Text(
+                                              ("English"),
+                                              style: colorChange
+                                                  ? FontConstant.k16w5008267Text
+                                                  : FontConstant
+                                                      .k18w5008471Text,
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                      SizedBox(height: 20),
+                                      GestureDetector(
+                                        onTap: () {
+                                          context.locale = Locale('fr', 'FR');
+                                          RestartWidget.restartApp(context);
+
+                                          setState(() {
+                                            colorChange;
+                                          });
+                                          // Navigator.of(context).push(
+                                          //   MaterialPageRoute(
+                                          //     builder: (context) => Fees(),
+                                          //   ),
+                                          // );
+                                        },
+                                        child: Row(
+                                          children: [
+                                            Text(
+                                              ("French"),
+                                              style: colorChange
+                                                  ? FontConstant.k16w5008267Text
+                                                  : FontConstant
+                                                      .k18w5008471Text,
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                      SizedBox(height: 20),
+                                      GestureDetector(
+                                        onTap: () {
+                                          context.locale = Locale('ar', 'AR');
+                                          RestartWidget.restartApp(context);
+
+                                          setState(() {
+                                            colorChange;
+                                          });
+                                          /* Navigator.pop(context);
+                                            Navigator.of(context).push(
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    TSettings(),
+                                              ),
+                                            );*/
+                                        },
+                                        child: Row(
+                                          children: [
+                                            Text(
+                                              ("Arabic"),
+                                              style: colorChange
+                                                  ? FontConstant.k16w5008267Text
+                                                  : FontConstant
+                                                      .k18w5008471Text,
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ];
+                          })),
                   InkWell(
                     onTap: () {
                       Navigator.push(
@@ -67,9 +232,12 @@ class _THomeScreenState extends State<THomeScreen> {
                         ),
                       );
                     },
-                    child: Image.asset(
-                      "assets/images/clockicon.png",
-                      height: 24,
+                    child: Padding(
+                      padding: const EdgeInsets.all(15.0),
+                      child: Image.asset(
+                        "assets/images/clockicon.png",
+                        height: 24,
+                      ),
                     ),
                   ),
                   InkWell(
@@ -80,9 +248,12 @@ class _THomeScreenState extends State<THomeScreen> {
                             builder: (context) => TNotificationScreen()),
                       );
                     },
-                    child: Image.asset(
-                      "assets/images/iconbell.png",
-                      height: 24,
+                    child: Padding(
+                      padding: const EdgeInsets.all(15.0),
+                      child: Image.asset(
+                        "assets/images/iconbell.png",
+                        height: 24,
+                      ),
                     ),
                   ),
                 ],
@@ -100,11 +271,14 @@ class _THomeScreenState extends State<THomeScreen> {
           child: Column(
             children: [
               SizedBox(
-                height: 150.h,
+                height: 40,
+              ),
+              SizedBox(
+                height: 128,
                 child: ListView.builder(
                   shrinkWrap: true,
                   scrollDirection: Axis.horizontal,
-                  itemCount: 3,
+                  itemCount: _name.group!.length,
                   itemBuilder: (BuildContext context, int index) {
                     return GestureDetector(
                         onTap: () {
@@ -114,7 +288,12 @@ class _THomeScreenState extends State<THomeScreen> {
                                 builder: (context) => TGroupScreen()),
                           );
                         },
-                        child: Groupcard());
+                        child: loadingData
+                            ? CircularProgressIndicator()
+                            : Groupcard(
+                                nameData: _name,
+                                index: index,
+                              ));
                   },
                 ),
               ),
@@ -122,19 +301,130 @@ class _THomeScreenState extends State<THomeScreen> {
                 height: 15.h,
               ),
               Padding(
-                padding: const EdgeInsets.only(left: 16.0),
+                padding: const EdgeInsets.only(left: 16.0, right: 16),
                 child: Align(
                   alignment: Alignment.centerLeft,
-                  child: Text(
-                    "Schedule",
-                    style: FontConstant2.baloothampifont,
+                  child: SizedBox(
+                    width: 1.sw,
+                    child: Text(
+                      "Schedule".tr(),
+                      /*  AppLoaclizations.of(context)!
+                          .translate(
+                            "Schedule",
+                          )
+                          .toString(),*/
+                      style: FontConstant2.baloothampifont,
+                    ),
                   ),
                 ),
               ),
               SizedBox(
-                height: 5.h,
+                height: 5,
               ),
-              Padding(child: TActivity(), padding: EdgeInsets.symmetric(horizontal: 16),),
+              Padding(
+                child: loadingsch
+                    ? CircularProgressIndicator()
+                    : SizedBox(
+                        // height: 300.h,
+
+                        width: 1.sw,
+                        child: ListView.separated(
+                            separatorBuilder: (ctx, ind) => SizedBox(
+                                  height: 14.h,
+                                ),
+                            shrinkWrap: true,
+                            padding: EdgeInsets.zero,
+                            physics: NeverScrollableScrollPhysics(),
+                            itemCount: _name.schdule!.length,
+                            scrollDirection: Axis.vertical,
+                            itemBuilder: (BuildContext context, int index) {
+                              return InkWell(
+                                onTap: () {
+                                  if (index == 0) {
+                                    Get.to(() => TLearningAlphabets());
+                                  } else if (index == 1) {
+                                  } else if (index == 2) {
+                                  } else if (index == 3) {}
+                                },
+                                child: Container(
+                                  height: 64,
+                                  // width: Get.size.width * 0.93,
+                                  //margin: EdgeInsets.symmetric(horizontal: 16),
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(16),
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 15.0),
+                                    child: Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        Image.asset(
+                                          _name.schdule![index].icon.toString(),
+                                          errorBuilder: (q, w, e) {
+                                            return Text('Image not loaded');
+                                          },
+                                          height: 40,
+                                          width: 40,
+                                        ),
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(left: 15.0),
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              Text(
+                                                _name.schdule![index].title
+                                                    .toString(),
+                                                style: FontConstant
+                                                    .k32w500blackText
+                                                    .copyWith(fontSize: 16),
+                                              ),
+                                              Row(
+                                                children: [
+                                                  Text(
+                                                    "From ${DateFormat.jm().format(DateFormat("hh:mm:ss").parse('${_name.schdule![index].time}'))} ",
+                                                    // '${groups[index]} . ${time[index]}',
+                                                    style: FontConstant
+                                                        .k14w400lightpurpleText
+                                                        .copyWith(
+                                                            fontWeight:
+                                                                FontWeight.w400,
+                                                            fontSize: 14,
+                                                            color: Color(
+                                                                0xffB7A4B2)),
+                                                  ),
+                                                  Text(
+                                                    "To ${DateFormat.jm().format(DateFormat("hh:mm:ss").parse('${_name.schdule![index].time}'))} ",
+                                                    // '${groups[index]} . ${time[index]}',
+                                                    style: FontConstant
+                                                        .k14w400lightpurpleText
+                                                        .copyWith(
+                                                            fontWeight:
+                                                                FontWeight.w400,
+                                                            fontSize: 14,
+                                                            color: Color(
+                                                                0xffB7A4B2)),
+                                                  ),
+                                                ],
+                                              )
+                                            ],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              );
+                            }),
+                      ),
+                padding: EdgeInsets.symmetric(horizontal: 16),
+              ),
               Center(
                 child: GestureDetector(
                   onTap: () {
@@ -147,8 +437,11 @@ class _THomeScreenState extends State<THomeScreen> {
                   },
                   child: Container(
                     color: Colors.transparent,
-                    padding: EdgeInsets.all(5),
-                    child: Text("See more",
+                    padding: EdgeInsets.all(16),
+                    child: Text("See more".tr(),
+                        /*AppLoaclizations.of(context)!
+                        .translate("See more")
+                        .toString(),*/
                         style: FontConstant.k16w500purpleText.copyWith(
                           fontSize: 18,
                         )),
@@ -157,35 +450,52 @@ class _THomeScreenState extends State<THomeScreen> {
               ),
               SizedBox(height: 10),
               Padding(
-                padding: const EdgeInsets.only(left: 16.0, bottom: 10),
+                padding:
+                    const EdgeInsets.only(left: 16.0, bottom: 10, right: 16),
                 child: Align(
                   alignment: Alignment.centerLeft,
-                  child: Text(
-                    "Attendance",
-                    style: FontConstant2.baloothampifont,
+                  child: SizedBox(
+                    width: 1.sw,
+                    child: Text(
+                      "Attendance".tr(),
+                      /*AppLoaclizations.of(context)!
+                          .translate("Attendance")
+                          .toString(),*/
+                      style: FontConstant2.baloothampifont,
+                    ),
                   ),
                 ),
               ),
+              /* Container(
+                height: 50,
+                color: Colors.black,
+              ),*/
               SizedBox(
-                height: 120.h,
-                child: ListView.separated(
-                  shrinkWrap: true,
-                    scrollDirection: Axis.horizontal,
-                    itemBuilder: (context, index)=> GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => TAttendanceScreen()),
-                    );
-                  },
-                  child: Attendancecard(
-                    image: "assets/images/groupcard2.png",
-                  ),
-                ), separatorBuilder: (ctx, ind) => SizedBox(width: 10.w,), itemCount: 3),
+                height: 128,
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 16),
+                  child: ListView.separated(
+                      shrinkWrap: true,
+                      scrollDirection: Axis.horizontal,
+                      itemBuilder: (context, index) => GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => TAttendanceScreen()),
+                              );
+                            },
+                            child: Attendancecard(
+                              image: "assets/images/groupcard2.png",
+                            ),
+                          ),
+                      separatorBuilder: (ctx, ind) => SizedBox(
+                            width: 16,
+                          ),
+                      itemCount: 3),
+                ),
               ),
-
-              SizedBox(height: 80.h)
+              SizedBox(height: 112.h)
             ],
           ),
         ),
@@ -195,30 +505,32 @@ class _THomeScreenState extends State<THomeScreen> {
 }
 
 class Groupcard extends StatelessWidget {
-  const Groupcard({
-    Key? key,
-  }) : super(key: key);
+  THomeModel nameData;
+  int index;
+  Groupcard({Key? key, required this.nameData, required this.index})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: 283,
-      margin: EdgeInsets.only(top: 16, bottom: 16, left: 16),
+      height: 128,
+      margin: EdgeInsets.only(left: 16),
       padding: EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: Colors.transparent,
-        boxShadow: [
+        /*boxShadow: [
           BoxShadow(
             offset: Offset(0, 0),
             color: ThemeColor.primarycolor.withOpacity(0.4),
             spreadRadius: 0,
             blurRadius: 16,
           ),
-        ],
+        ],*/
         borderRadius: BorderRadius.circular(16),
         image: DecorationImage(
           image: AssetImage(
-            "assets/images/gc.png",
+            "assets/images/groupc.png",
           ),
           fit: BoxFit.cover,
         ),
@@ -232,9 +544,13 @@ class Groupcard extends StatelessWidget {
             clipBehavior: Clip.hardEdge,
             width: 72,
             height: 96,
-            child: Image.asset(
-              "assets/images/groupimage1.png",
-              fit: BoxFit.cover,
+            child: Image.network(
+              "nameData.group![index].image",
+              errorBuilder: (q, w, e) {
+                return Text('Image not loaded');
+              },
+              // "assets/images/groupimage1.png",
+              // fit: BoxFit.cover,
             ),
           ),
           SizedBox(width: 12),
@@ -242,11 +558,13 @@ class Groupcard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "Group A",
+                nameData.group![index].name.toString(),
+                //"Group A",
                 style: FontConstant.k18w500whiteText,
               ),
               Text(
-                "Nursery",
+                nameData.group![index].section.toString(),
+                //"Nursery",
                 style: FontConstant.k18w500whiteText.copyWith(
                   fontSize: 14,
                   fontWeight: FontWeight.w400,
@@ -254,7 +572,7 @@ class Groupcard extends StatelessWidget {
                 ),
               ),
               Text(
-                "24 Students",
+                "${nameData.group![index].students.toString()} Students",
                 style: FontConstant.k18w500whiteText.copyWith(
                   fontSize: 16,
                   fontWeight: FontWeight.w500,
@@ -284,14 +602,14 @@ class SchoolCard extends StatelessWidget {
           fit: BoxFit.fill,
         ),
         color: Colors.transparent,
-        boxShadow: [
+        /* boxShadow: [
           BoxShadow(
             offset: Offset(0, 0),
             color: ThemeColor.primarycolor.withOpacity(0.4),
             spreadRadius: 0,
             blurRadius: 16,
           ),
-        ],
+        ],*/
         borderRadius: BorderRadius.circular(16),
       ),
       padding: EdgeInsets.only(left: 16.0, right: 16, top: 16),
@@ -372,25 +690,26 @@ class Attendancecard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 128,
-      width: 350.w,
-      margin: EdgeInsets.symmetric(horizontal: 16),
+      width: 350,
+
+      // margin: EdgeInsets.only(left: 8),
       decoration: BoxDecoration(
         image: DecorationImage(
-          image: AssetImage('assets/images/ac.png'),
+          image: AssetImage('assets/images/Attendancec.png'),
           fit: BoxFit.fill,
         ),
         color: Colors.transparent,
-        boxShadow: [
+        /* boxShadow: [
           BoxShadow(
             offset: Offset(0, 0),
             color: ThemeColor.primarycolor.withOpacity(0.4),
             spreadRadius: 0,
             blurRadius: 16,
           ),
-        ],
+        ],*/
         borderRadius: BorderRadius.circular(16),
       ),
-      padding: EdgeInsets.only(left: 16.0, right: 16, top: 16),
+      padding: EdgeInsets.only(left: 16.0, right: 16, top: 13, bottom: 13),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -437,7 +756,9 @@ class Attendancecard extends StatelessWidget {
           Row(
             children: [
               Text('51 ', style: FontConstant2.k24w500WhiteText),
-              Text('present', style: FontConstant.k16w400whiteText),
+              Text('present'.tr(),
+                  /*AppLoaclizations.of(context)!.translate('present').toString(),*/
+                  style: FontConstant.k16w400whiteText),
             ],
           ),
         ],

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kidseau/Theme.dart';
@@ -17,12 +18,12 @@ Future<dynamic> notificationdialog(BuildContext context) {
       context: context,
       builder: (BuildContext context) {
         return Dialog(
-          insetPadding: EdgeInsets.all(0),
+          insetPadding: EdgeInsets.all(15),
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(20.0)), //this right here
           child: SingleChildScrollView(
             child: Padding(
-              padding: const EdgeInsets.all(12.0),
+              padding: const EdgeInsets.all(16.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -54,7 +55,10 @@ Future<dynamic> notificationdialog(BuildContext context) {
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(94))),
                             child: Text(
-                              "Close",
+                              "Close".tr(),
+                              /*AppLoaclizations.of(context)!
+                                  .translate("Close")
+                                  .toString(),*/
                               style: FontConstant.k16w5008267Text,
                             ),
                           ),
@@ -81,8 +85,11 @@ Future<dynamic> notificationdialog(BuildContext context) {
                                   height: 24,
                                   color: Colors.white,
                                 ),
-                                SizedBox(width: 6),
-                                Text("Add reminder ",
+                                SizedBox(width: 3),
+                                Text("Add Reminder".tr(),
+                                    /*AppLoaclizations.of(context)!
+                                        .translate("Add Reminder")
+                                        .toString(),*/
                                     overflow: TextOverflow.ellipsis,
                                     style: FontConstant.k16w5008267Text
                                         .copyWith(color: Colors.white)),
@@ -259,7 +266,10 @@ Future<Object?> AnnouncementDialog(BuildContext context) {
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(94))),
                             child: Text(
-                              "Close",
+                              "Close".tr(),
+                              /*AppLoaclizations.of(context)!
+                                  .translate("Close")
+                                  .toString(),*/
                               style: FontConstant.k16w5008267Text,
                             ),
                           ),
@@ -283,7 +293,10 @@ Future<Object?> AnnouncementDialog(BuildContext context) {
                                   height: 24,
                                 ),
                                 SizedBox(width: 14),
-                                Text("Add reminder ",
+                                Text("Add Reminder".tr(),
+                                    /*AppLoaclizations.of(context)!
+                                        .translate("Add Reminder")
+                                        .toString(),*/
                                     style: FontConstant.k16w5008267Text
                                         .copyWith(color: Colors.white)),
                               ],
@@ -330,7 +343,9 @@ class Notificationpopup extends StatelessWidget {
             PopupMenuItem(
               enabled: false,
               child: Padding(
-                padding:  EdgeInsets.symmetric(vertical: 24.h, ),
+                padding: EdgeInsets.symmetric(
+                  vertical: 24.h,
+                ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,

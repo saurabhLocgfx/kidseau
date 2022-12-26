@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:kidseau/TeachersPanel/TProfileScreen/TSettings.dart';
 import 'package:kidseau/TeachersPanel/TProfileScreen/TSyllabus.dart';
@@ -44,13 +45,16 @@ class TProfilepopup extends StatelessWidget {
                           ),
                           SizedBox(width: 15),
                           Text(
-                            "Syllabus",
+                            "Syllabus".tr(),
+                            /*AppLoaclizations.of(context)!
+                                .translate("Syllabus")
+                                .toString(),*/
                             style: FontConstant.k18w5008471Text,
                           )
                         ],
                       ),
                     ),
-                    SizedBox(height: 20),
+                    /*SizedBox(height: 20),
                     GestureDetector(
                       onTap: () {
                         Navigator.pop(context);
@@ -68,12 +72,14 @@ class TProfilepopup extends StatelessWidget {
                           ),
                           SizedBox(width: 15),
                           Text(
-                            "Fees",
+                            AppLoaclizations.of(context)!
+                                .translate("Fees")
+                                .toString(),
                             style: FontConstant.k18w5008471Text,
                           )
                         ],
                       ),
-                    ),
+                    ),*/
                     SizedBox(height: 20),
                     GestureDetector(
                       onTap: () {
@@ -92,7 +98,10 @@ class TProfilepopup extends StatelessWidget {
                           ),
                           SizedBox(width: 15),
                           Text(
-                            "Settings",
+                            "Settings".tr(),
+                            /*AppLoaclizations.of(context)!
+                                .translate("Settings")
+                                .toString(),*/
                             style: FontConstant.k18w5008471Text,
                           )
                         ],

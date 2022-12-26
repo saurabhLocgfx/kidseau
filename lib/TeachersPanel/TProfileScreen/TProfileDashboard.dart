@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -33,15 +34,16 @@ class _TProfileDashBoardState extends State<TProfileDashBoard> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 896.h,
-      width: 414.w,
+      height: 1.sh,
+      width: 1.sw,
       decoration: BoxDecoration(
-        gradient: LinearGradient(colors: [
+          /*gradient: LinearGradient(colors: [
           Color(0xffFFFFFF),
           Color(0xff8267AC).withOpacity(0.6),
-        ], begin: Alignment.topCenter, end: Alignment.bottomCenter),
-      ),
+        ], begin: Alignment.topCenter, end: Alignment.bottomCenter),*/
+          ),
       child: Scaffold(
+        // backgroundColor: Colors.black,
         appBar: AppBar(
           toolbarHeight: 70.0,
           flexibleSpace: ClipRect(
@@ -61,7 +63,7 @@ class _TProfileDashBoardState extends State<TProfileDashBoard> {
                 onTap: () {},
                 child: Padding(
                   padding: const EdgeInsets.only(top: 15.0),
-                  child: Text("Profile",
+                  child: Text("Profile".tr(),
                       style:
                           FontConstant2.k32w5008267text.copyWith(fontSize: 25)),
                 ),
@@ -70,25 +72,41 @@ class _TProfileDashBoardState extends State<TProfileDashBoard> {
           ),
           actions: [TProfilepopup()],
         ),
-        body: Stack(children: [
-          SizedBox(
-            child: Image.asset(
-              "assets/images/postsbackground.png",
-              height: 414.h,
-              width: 414.w,
-            ),
-          ),
-          Column(
-            children: [
-              /*Column(
+        backgroundColor: Color(0xffF8F6FA),
+        body: SingleChildScrollView(
+          child: Container(
+            decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage(
+                      "assets/images/Group8270.png",
+                    ),
+                    fit: BoxFit.cover)),
+            child: Container(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [
+                    Color(0xffF8F6FA).withOpacity(0.7),
+                    Color(0xffF8F6FA),
+                    Color(0xffF8F6FA)
+                  ],
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  stops: [0.3, 0.6, 0.9],
+                ),
+              ),
+              child: Column(
+                children: [
+                  /*Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [SizedBox(height: 40), pageViewTabProfile()],
               ),
               SizedBox(height: 24.h),*/
-              Expanded(child: TParentProfile()),
-            ],
-          )
-        ]),
+                  TParentProfile(),
+                ],
+              ),
+            ),
+          ),
+        ),
       ),
     );
   }
@@ -98,7 +116,7 @@ class _TProfileDashBoardState extends State<TProfileDashBoard> {
       height: 56.h,
       width: 248.w,
       decoration: BoxDecoration(
-        color: Colors.white,
+        //  color: Colors.white,
         borderRadius: BorderRadius.circular(76),
       ),
       child: Row(

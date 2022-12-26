@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:kidseau/ParentsPanel/PHomeScreen/PLearningAlphabets.dart';
+import 'package:intl/intl.dart';
 import 'package:kidseau/TeachersPanel/THomeScreen/TLearningAlphabets.dart';
 import 'package:kidseau/Theme.dart';
+import 'package:kidseau/Tmodel/TScheduleModel.dart';
 
 class TActivity extends StatefulWidget {
-  TActivity({Key? key}) : super(key: key);
+  TScheduleModel schedule;
+  TActivity({Key? key, required this.schedule}) : super(key: key);
 
   @override
   State<TActivity> createState() => _TActivityState();
@@ -45,13 +47,16 @@ class _TActivityState extends State<TActivity> {
   Widget build(BuildContext context) {
     return SizedBox(
       // height: 300.h,
+
       width: 1.sw,
       child: ListView.separated(
-          separatorBuilder: (ctx, ind) => SizedBox(height: 14.h,),
+          separatorBuilder: (ctx, ind) => SizedBox(
+                height: 14.h,
+              ),
           shrinkWrap: true,
           padding: EdgeInsets.zero,
           physics: NeverScrollableScrollPhysics(),
-          itemCount: images.length,
+          itemCount: widget.schedule.schedule!.length,
           scrollDirection: Axis.vertical,
           itemBuilder: (BuildContext context, int index) {
             return InkWell(
@@ -63,7 +68,7 @@ class _TActivityState extends State<TActivity> {
                 } else if (index == 3) {}
               },
               child: Container(
-                height: 64.h,
+                height: 64,
                 // width: Get.size.width * 0.93,
                 //margin: EdgeInsets.symmetric(horizontal: 16),
                 decoration: BoxDecoration(
@@ -76,7 +81,10 @@ class _TActivityState extends State<TActivity> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Image.asset(
-                        images[index],
+                        widget.schedule.schedule![index].actIcon.toString(),
+                        errorBuilder: (q, w, e) {
+                          return Text('Image not loaded');
+                        },
                         height: 40,
                         width: 40,
                       ),
@@ -87,17 +95,32 @@ class _TActivityState extends State<TActivity> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              title[index],
+                              widget.schedule.schedule![index].actTitle
+                                  .toString(),
                               style: FontConstant.k32w500blackText
                                   .copyWith(fontSize: 16),
                             ),
-                            Text(
-                              '${groups[index]} . ${time[index]}',
-                              style: FontConstant.k14w400lightpurpleText
-                                  .copyWith(
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 14,
-                                  color: Color(0xffB7A4B2)),
+                            Row(
+                              children: [
+                                Text(
+                                  "From ${DateFormat.jm().format(DateFormat("hh:mm:ss").parse('${widget.schedule.schedule![index].actTimeStart}'))} ",
+                                  // '${groups[index]} . ${time[index]}',
+                                  style: FontConstant.k14w400lightpurpleText
+                                      .copyWith(
+                                          fontWeight: FontWeight.w400,
+                                          fontSize: 14,
+                                          color: Color(0xffB7A4B2)),
+                                ),
+                                Text(
+                                  "To ${DateFormat.jm().format(DateFormat("hh:mm:ss").parse('${widget.schedule.schedule![index].actTimeEnd}'))} ",
+                                  // '${groups[index]} . ${time[index]}',
+                                  style: FontConstant.k14w400lightpurpleText
+                                      .copyWith(
+                                          fontWeight: FontWeight.w400,
+                                          fontSize: 14,
+                                          color: Color(0xffB7A4B2)),
+                                ),
+                              ],
                             )
                           ],
                         ),

@@ -101,8 +101,8 @@ class _PNotificationScreenState extends State<PNotificationScreen> {
             ),
             SizedBox(height: 16),
             Container(
-              height: 99,
-              width: 414,
+              // height: 99,
+              // width: 414,
               color: ThemeColor.primarycolor.withOpacity(0.16),
               child: Padding(
                 padding: const EdgeInsets.only(left: 16.0),
@@ -121,9 +121,12 @@ class _PNotificationScreenState extends State<PNotificationScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            "Mohammad Umar has added new post",
-                            style: FontConstant.k16w500331FText,
+                          SizedBox(
+                            height: 50,
+                            child: Text(
+                              "Mohammad Umar has added new post",
+                              style: FontConstant.k16w500331FText,
+                            ),
                           ),
                           Text(
                             "2 hours ago.",
@@ -143,8 +146,8 @@ class _PNotificationScreenState extends State<PNotificationScreen> {
                 // AnnouncementDialog(context);
               },
               child: Container(
-                height: 99,
-                width: 414,
+                /* height: 99,
+                width: 414,*/
                 color: ThemeColor.primarycolor.withOpacity(0.16),
                 child: Padding(
                   padding: const EdgeInsets.only(left: 16.0),

@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -43,10 +44,12 @@ class _TChatsState extends State<TChats> {
     });
   }
 
+  // final bottom = MediaQuery.of(context).viewInsets.bottom;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
+      resizeToAvoidBottomInset: true,
       appBar: AppBar(
         toolbarHeight: 70.0,
         flexibleSpace: ClipRect(
@@ -75,6 +78,58 @@ class _TChatsState extends State<TChats> {
                   "assets/images/backarrow.png",
                   height: 24,
                   width: 24,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+      bottomNavigationBar: Padding(
+        padding:
+            EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+        child: Row(
+          children: [
+            Expanded(
+              child: TextField(
+                onSubmitted: (text) {
+                  final message = Messages(
+                      text: text, date: DateTime.now(), isSentByme: true);
+                  setState(() => messages.add(message));
+                },
+                decoration: InputDecoration(
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(width: 2, color: Color(0xffDBE8FA)),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(width: 2, color: Color(0xffDBE8FA)),
+                  ),
+                  fillColor: Color(0xffF0F4FA),
+                  hintText: "Type here.".tr(),
+                  /*AppLoaclizations.of(context)!
+                                .translate("Type here."),*/
+                  hintStyle: FontConstant.k16w400B7A4Text,
+                  suffixIcon: GestureDetector(
+                    onTap: () {},
+                    child: Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: ImageIcon(
+                        AssetImage("assets/images/sendicon.png"),
+                        size: 12,
+                        color: ThemeColor.primarycolor,
+                      ),
+                    ),
+                  ),
+                  prefixIcon: Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: GestureDetector(
+                      onTap: showToast,
+                      child: ImageIcon(
+                        AssetImage("assets/images/add-circle.png"),
+                        size: 12,
+                        color: ThemeColor.darkpurple,
+                      ),
+                    ),
+                  ),
                 ),
               ),
             ),
@@ -118,7 +173,8 @@ class _TChatsState extends State<TChats> {
                         width: 84.w,
                         decoration: BoxDecoration(
                             image: DecorationImage(
-                                image: AssetImage("assets/images/teacher1.png"))),
+                                image:
+                                    AssetImage("assets/images/teacher1.png"))),
                       ),
                       SizedBox(
                         width: 16.w,
@@ -144,42 +200,42 @@ class _TChatsState extends State<TChats> {
                   ),
                 ),
                 SizedBox(
-                  height: 400.h,
+                  height: 500,
                   child: GroupedListView<Messages, DateTime>(
                     reverse: true,
                     order: GroupedListOrder.DESC,
                     padding: EdgeInsets.all(20),
                     elements: messages,
-                    groupBy: (messages) => DateTime(
-                    messages.date.year, messages.date.month, messages.date.day),
+                    groupBy: (messages) => DateTime(messages.date.year,
+                        messages.date.month, messages.date.day),
                     groupHeaderBuilder: (Messages messages) => SizedBox(),
                     itemBuilder: (context, Messages messages) => Align(
-                  alignment: messages.isSentByme
-                      ? Alignment.centerRight
-                      : Alignment.centerLeft,
-                  child: Align(
-                    alignment: messages.isSentByme
-                        ? Alignment.centerRight
-                        : Alignment.centerLeft,
-                    child: Padding(
-                      padding: const EdgeInsets.only(bottom: 32.0),
-                      child: Container(
-                        decoration: BoxDecoration(
-                            color: messages.isSentByme
-                                ? Color(0xffF2F1F8)
-                                : Color(0xffDBE8FA),
-                            borderRadius: BorderRadius.circular(6)),
+                      alignment: messages.isSentByme
+                          ? Alignment.centerRight
+                          : Alignment.centerLeft,
+                      child: Align(
+                        alignment: messages.isSentByme
+                            ? Alignment.centerRight
+                            : Alignment.centerLeft,
                         child: Padding(
-                          padding: EdgeInsets.all(12),
-                          child: Text(
-                            messages.text,
-                            style: FontConstant.k16w4008471Text
-                                .copyWith(color: Color(0xff5E5C70)),
+                          padding: const EdgeInsets.only(bottom: 32.0),
+                          child: Container(
+                            decoration: BoxDecoration(
+                                color: messages.isSentByme
+                                    ? Color(0xffF2F1F8)
+                                    : Color(0xffDBE8FA),
+                                borderRadius: BorderRadius.circular(6)),
+                            child: Padding(
+                              padding: EdgeInsets.all(12),
+                              child: Text(
+                                messages.text,
+                                style: FontConstant.k16w4008471Text
+                                    .copyWith(color: Color(0xff5E5C70)),
+                              ),
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                  ),
                     ),
                   ),
                 ),
@@ -187,13 +243,15 @@ class _TChatsState extends State<TChats> {
                 SizedBox(
                   height: 8.h,
                 ),
-                Row(
+                /* Row(
                   children: [
                     Expanded(
                       child: TextField(
                         onSubmitted: (text) {
                           final message = Messages(
-                              text: text, date: DateTime.now(), isSentByme: true);
+                              text: text,
+                              date: DateTime.now(),
+                              isSentByme: true);
                           setState(() => messages.add(message));
                         },
                         decoration: InputDecoration(
@@ -206,7 +264,9 @@ class _TChatsState extends State<TChats> {
                                 BorderSide(width: 2, color: Color(0xffDBE8FA)),
                           ),
                           fillColor: Color(0xffF0F4FA),
-                          hintText: "Type here.",
+                          hintText: "Type here.".tr(),
+                          */ /*AppLoaclizations.of(context)!
+                              .translate("Type here."),*/ /*
                           hintStyle: FontConstant.k16w400B7A4Text,
                           suffixIcon: GestureDetector(
                             onTap: () {},
@@ -234,7 +294,7 @@ class _TChatsState extends State<TChats> {
                       ),
                     ),
                   ],
-                ),
+                ),*/
                 SizedBox(
                   height: !_isVisible ? 32.h : 20.h,
                 ),

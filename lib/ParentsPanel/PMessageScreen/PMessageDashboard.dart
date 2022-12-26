@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -7,6 +8,8 @@ import 'package:kidseau/ParentsPanel/PMessageScreen/PMessages.dart';
 import 'package:kidseau/ParentsPanel/PMessageScreen/PTeachers.dart';
 import 'package:kidseau/ParentsPanel/PReminderScreen/PReminderScreen.dart';
 import 'package:kidseau/Theme.dart';
+
+import '../../restartappwidget/restartwidgets.dart';
 
 class PMessageDashboard extends StatefulWidget {
   const PMessageDashboard({Key? key}) : super(key: key);
@@ -19,7 +22,7 @@ class _PMessageDashboardState extends State<PMessageDashboard> {
   int selectedIndex = 0;
 
   final controller = PageController(initialPage: 1);
-
+  bool colorChange = false;
   @override
   void dispose() {
     controller.dispose();
@@ -75,11 +78,110 @@ class _PMessageDashboardState extends State<PMessageDashboard> {
               padding: const EdgeInsets.only(right: 16.0),
               child: Row(
                 children: [
-                  Image.asset(
-                    "assets/images/appbaricon1.png",
-                    height: 48,
-                    width: 48,
-                  ),
+                  Padding(
+                      padding: const EdgeInsets.all(15.0),
+                      child: PopupMenuButton(
+                          child: Image.asset(
+                            "assets/images/Languageicon.png",
+                            height: 24,
+                          ),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(16)),
+                          itemBuilder: (context) {
+                            return [
+                              PopupMenuItem(
+                                enabled: true,
+                                child: Padding(
+                                  padding: const EdgeInsets.only(
+                                      left: 15.0, top: 15, bottom: 15),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      GestureDetector(
+                                        onTap: () {
+                                          context.locale = Locale('en', 'US');
+                                          RestartWidget.restartApp(context);
+
+                                          setState(() {
+                                            colorChange;
+                                          });
+                                        },
+                                        child: Row(
+                                          children: [
+                                            Text(
+                                              ("English"),
+                                              style: colorChange
+                                                  ? FontConstant.k16w5008267Text
+                                                  : FontConstant
+                                                      .k18w5008471Text,
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                      SizedBox(height: 20),
+                                      GestureDetector(
+                                        onTap: () {
+                                          context.locale = Locale('fr', 'FR');
+                                          RestartWidget.restartApp(context);
+
+                                          setState(() {
+                                            colorChange;
+                                          });
+                                          // Navigator.of(context).push(
+                                          //   MaterialPageRoute(
+                                          //     builder: (context) => Fees(),
+                                          //   ),
+                                          // );
+                                        },
+                                        child: Row(
+                                          children: [
+                                            Text(
+                                              ("French"),
+                                              style: colorChange
+                                                  ? FontConstant.k16w5008267Text
+                                                  : FontConstant
+                                                      .k18w5008471Text,
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                      SizedBox(height: 20),
+                                      GestureDetector(
+                                        onTap: () {
+                                          context.locale = Locale('ar', 'AR');
+                                          RestartWidget.restartApp(context);
+
+                                          setState(() {
+                                            colorChange;
+                                          });
+                                          /* Navigator.pop(context);
+                                            Navigator.of(context).push(
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    TSettings(),
+                                              ),
+                                            );*/
+                                        },
+                                        child: Row(
+                                          children: [
+                                            Text(
+                                              ("Arabic"),
+                                              style: colorChange
+                                                  ? FontConstant.k16w5008267Text
+                                                  : FontConstant
+                                                      .k18w5008471Text,
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ];
+                          })),
                   GestureDetector(
                     onTap: () {
                       Navigator.of(context).push(
@@ -169,7 +271,7 @@ class _PMessageDashboardState extends State<PMessageDashboard> {
                   padding: const EdgeInsets.only(left: 4.0),
                   child: Text("Message",
                       style: FontConstant.k14w500B7A4Text.copyWith(
-                          color: pageIndex == 1
+                          color: pageIndex == 0
                               ? Color(0xff8267AC)
                               : Color(0xffB7A4B2))),
                 ),

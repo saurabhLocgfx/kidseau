@@ -96,8 +96,8 @@ class _PAddkidScreenState extends State<PAddkidScreen> {
                 ),
                 Stack(children: [
                   Container(
-                    height: 214,
-                    width: 382,
+                    height: 214.h,
+                    width: 382.w,
                     decoration: BoxDecoration(
                         image: DecorationImage(
                             image: AssetImage(

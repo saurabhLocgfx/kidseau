@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -88,14 +89,21 @@ class _CalendarPage2State extends State<CalendarPage2> {
                 ),
               ),
               SizedBox(height: 24),
-              circlemarker(Colors.red, "Holidays"),
+              circlemarker(
+                Colors.red,
+                "Holidays".tr(),
+              ),
+              /*AppLoaclizations.of(context)!
+                      .translate("Holidays")
+                      .toString()),*/
               SizedBox(height: 32),
               materialButton(
                 context,
                 () {
                   Navigator.pop(context);
                 },
-                'Close',
+                "Close".tr(),
+                /* AppLoaclizations.of(context)!.translate("Close").toString(),*/
                 ThemeColor.primarycolor,
                 44.0,
               ),

@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -82,7 +83,7 @@ class _PReminderScreenState extends State<PReminderScreen> {
             "Reminder",
             style: FontConstant.k18w5008471Text,
           ),
-          actions: [Image.asset("assets/images/dots2.png")],
+          actions: [/*Image.asset("assets/images/dots2.png")*/],
         ),
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -91,7 +92,7 @@ class _PReminderScreenState extends State<PReminderScreen> {
               SizedBox(height: 10),
               Container(
                 height: 96,
-                width: 382,
+                width: 382.w,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -101,7 +102,7 @@ class _PReminderScreenState extends State<PReminderScreen> {
                       children: [
                         Text(
                           "Tomorrow is holiday",
-                          style: FontConstant2.k24w500331Ftext,
+                          style: FontConstant2.k18w500331Ftext,
                         ),
                         Text(
                           "Scheduled  at 08:00 am - 30/09/2022",
@@ -113,9 +114,10 @@ class _PReminderScreenState extends State<PReminderScreen> {
                   ],
                 ),
               ),
+              // SizedBox(height: 12),
               Container(
                 height: 96,
-                width: 382,
+                width: 382.w,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -125,7 +127,7 @@ class _PReminderScreenState extends State<PReminderScreen> {
                       children: [
                         Text(
                           "Tomorrow is holiday",
-                          style: FontConstant2.k24w500331Ftext,
+                          style: FontConstant2.k18w500331Ftext,
                         ),
                         Text(
                           "Scheduled  at 08:00 am - 30/09/2022",
@@ -137,9 +139,10 @@ class _PReminderScreenState extends State<PReminderScreen> {
                   ],
                 ),
               ),
+              //SizedBox(height: 12),
               Container(
                 height: 96,
-                width: 382,
+                width: 382.w,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -149,7 +152,7 @@ class _PReminderScreenState extends State<PReminderScreen> {
                       children: [
                         Text(
                           "Bring notebook",
-                          style: FontConstant2.k24w500331Ftext,
+                          style: FontConstant2.k18w500331Ftext,
                         ),
                         Text(
                           "Expired",
@@ -166,7 +169,7 @@ class _PReminderScreenState extends State<PReminderScreen> {
                   alignment: FractionalOffset.bottomCenter,
                   child: SizedBox(
                     height: 52.h,
-                    width: 382..w,
+                    width: 382.w,
                     child: MainButton(
                         onTap: () {
                           Navigator.of(context).push(
@@ -175,7 +178,10 @@ class _PReminderScreenState extends State<PReminderScreen> {
                             ),
                           );
                         },
-                        title: 'Add Reminder',
+                        title: "Add Reminder".tr(),
+                        /*AppLoaclizations.of(context)!
+                            .translate("Add Reminder")
+                            .toString(),*/
                         textStyleColor: Colors.white,
                         backgroundColor: ThemeColor.primarycolor),
                   ),

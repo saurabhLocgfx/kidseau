@@ -1,4 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kidseau/Theme.dart';
 
 class MyPostOptionsDialog extends StatelessWidget {
@@ -13,7 +15,7 @@ class MyPostOptionsDialog extends StatelessWidget {
         iconSize: 40,
         icon: ImageIcon(
           AssetImage(
-            "assets/images/dots.png",
+            "assets/images/dots2.png",
           ),
         ),
         itemBuilder: (context) {
@@ -34,7 +36,10 @@ class MyPostOptionsDialog extends StatelessWidget {
                         ),
                         SizedBox(width: 24),
                         Text(
-                          "Edit",
+                          "Edit".tr(),
+                          /* AppLoaclizations.of(context)!
+                              .translate("Edit")
+                              .toString(),*/
                           style: FontConstant.k18w5008471Text,
                         )
                       ],
@@ -48,7 +53,10 @@ class MyPostOptionsDialog extends StatelessWidget {
                         ),
                         SizedBox(width: 24),
                         Text(
-                          "Hide",
+                          "Hide".tr(),
+                          /* AppLoaclizations.of(context)!
+                              .translate("Hide")
+                              .toString(),*/
                           style: FontConstant.k18w5008471Text,
                         )
                       ],
@@ -62,7 +70,10 @@ class MyPostOptionsDialog extends StatelessWidget {
                         ),
                         SizedBox(width: 24),
                         Text(
-                          "Download",
+                          "Download".tr(),
+                          /*AppLoaclizations.of(context)!
+                              .translate("Download")
+                              .toString(),*/
                           style: FontConstant.k18w5008471Text,
                         )
                       ],
@@ -77,7 +88,10 @@ class MyPostOptionsDialog extends StatelessWidget {
                         ),
                         SizedBox(width: 24),
                         Text(
-                          "Delete",
+                          "Delete".tr(),
+                          /*AppLoaclizations.of(context)!
+                              .translate("Delete")
+                              .toString(),*/
                           style: FontConstant.k18w500F970Text,
                         )
                       ],
@@ -103,7 +117,7 @@ class PostOptionsDialog extends StatelessWidget {
         iconSize: 40,
         icon: ImageIcon(
           AssetImage(
-            "assets/images/dots.png",
+            "assets/images/dots2.png",
           ),
         ),
         itemBuilder: (context) {
@@ -126,24 +140,107 @@ class PostOptionsDialog extends StatelessWidget {
                           ),
                           SizedBox(width: 24),
                           Text(
-                            "Hide",
+                            "Hide".tr(),
+                            /* AppLoaclizations.of(context)!
+                                .translate("Hide")
+                                .toString(),*/
                             style: FontConstant.k18w5008471Text,
                           )
                         ],
                       ),
                       SizedBox(height: 26),
-                      Row(
-                        children: [
-                          Image.asset(
-                            "assets/images/reportlogo.png",
-                            height: 24,
-                          ),
-                          SizedBox(width: 24),
-                          Text(
-                            "Report",
-                            style: FontConstant.k18w5008471Text,
-                          )
-                        ],
+                      InkWell(
+                        onTap: () {
+                          showModalBottomSheet(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.only(
+                                      topLeft: const Radius.circular(20.0),
+                                      topRight: const Radius.circular(20.0))),
+                              context: context,
+                              builder: (builder) {
+                                return Container(
+                                    height: 298,
+                                    decoration: new BoxDecoration(
+                                        // color: Colors.transparent,
+                                        borderRadius: new BorderRadius.only(
+                                            topLeft:
+                                                const Radius.circular(20.0),
+                                            topRight:
+                                                const Radius.circular(20.0))),
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(left: 16),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          SizedBox(
+                                            height: 10,
+                                          ),
+                                          Text(
+                                            "Report ",
+                                            style:
+                                                FontConstant.k24w50084717FText,
+                                          ),
+                                          SizedBox(
+                                            height: 34,
+                                          ),
+                                          Text(
+                                            "I don’t like this",
+                                            style: FontConstant.k16w500331FText,
+                                          ),
+                                          SizedBox(
+                                            height: 34,
+                                          ),
+                                          Text(
+                                            "Not from the same group",
+                                            style: FontConstant.k16w500331FText,
+                                          ),
+                                          SizedBox(
+                                            height: 34,
+                                          ),
+                                          Text(
+                                            "Inappropriate content",
+                                            style: FontConstant.k16w500331FText,
+                                          ),
+                                          SizedBox(
+                                            height: 34,
+                                          ),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              Container(
+                                                width: 100.w,
+                                                height: 3,
+                                                decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            20),
+                                                    color: Color(0xff331F2D)),
+                                              ),
+                                            ],
+                                          )
+                                        ],
+                                      ),
+                                    ));
+                              });
+                        },
+                        child: Row(
+                          children: [
+                            Image.asset(
+                              "assets/images/reportlogo.png",
+                              height: 24,
+                            ),
+                            SizedBox(width: 24),
+                            Text(
+                              "Report".tr(),
+                              /* AppLoaclizations.of(context)!
+                                  .translate("Report")
+                                  .toString(),*/
+                              style: FontConstant.k18w5008471Text,
+                            )
+                          ],
+                        ),
                       ),
                       SizedBox(height: 26),
                       Row(
@@ -154,7 +251,10 @@ class PostOptionsDialog extends StatelessWidget {
                           ),
                           SizedBox(width: 24),
                           Text(
-                            "Download",
+                            "Download".tr(),
+                            /*AppLoaclizations.of(context)!
+                                .translate("Download")
+                                .toString(),*/
                             style: FontConstant.k18w5008471Text,
                           )
                         ],
@@ -205,7 +305,10 @@ class messageoptiondialog extends StatelessWidget {
                           ),
                           SizedBox(width: 24),
                           Text(
-                            "Mark as unread",
+                            "Mark as unread".tr(),
+                            /*AppLoaclizations.of(context)!
+                                .translate("Mark as unread")
+                                .toString(),*/
                             style: FontConstant.k18w5008471Text,
                           )
                         ],
@@ -219,7 +322,10 @@ class messageoptiondialog extends StatelessWidget {
                           ),
                           SizedBox(width: 24),
                           Text(
-                            "Delete chat",
+                            "Delete chat".tr(),
+                            /*AppLoaclizations.of(context)!
+                                .translate("Delete chat")
+                                .toString(),*/
                             style: FontConstant.k18w5008471Text,
                           )
                         ],

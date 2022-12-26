@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -9,6 +10,8 @@ import 'package:kidseau/ParentsPanel/PHomeScreen/PHomebody.dart';
 import 'package:kidseau/ParentsPanel/PReminderScreen/PReminderScreen.dart';
 import 'package:kidseau/Theme.dart';
 
+import '../../restartappwidget/restartwidgets.dart';
+
 class PHomeScreen extends StatefulWidget {
   PHomeScreen({Key? key}) : super(key: key);
 
@@ -17,6 +20,7 @@ class PHomeScreen extends StatefulWidget {
 }
 
 class _PHomeScreenState extends State<PHomeScreen> {
+  bool colorChange = false;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -55,12 +59,128 @@ class _PHomeScreenState extends State<PHomeScreen> {
               padding: const EdgeInsets.only(right: 16.0),
               child: Row(
                 children: [
-                  Image.asset(
-                    "assets/images/appbaricon1.png",
-                    height: 48,
-                    width: 48,
+                  Padding(
+                      padding: const EdgeInsets.all(15.0),
+                      child: PopupMenuButton(
+                          child: Image.asset(
+                            "assets/images/Languageicon.png",
+                            height: 24,
+                          ),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(16)),
+                          itemBuilder: (context) {
+                            return [
+                              PopupMenuItem(
+                                enabled: true,
+                                child: Padding(
+                                  padding: const EdgeInsets.only(
+                                      left: 15.0, top: 15, bottom: 15),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      GestureDetector(
+                                        onTap: () {
+                                          context.locale = Locale('en', 'US');
+                                          RestartWidget.restartApp(context);
+
+                                          setState(() {
+                                            colorChange;
+                                          });
+                                        },
+                                        child: Row(
+                                          children: [
+                                            Text(
+                                              ("English"),
+                                              style: colorChange
+                                                  ? FontConstant.k16w5008267Text
+                                                  : FontConstant
+                                                      .k18w5008471Text,
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                      SizedBox(height: 20),
+                                      GestureDetector(
+                                        onTap: () {
+                                          context.locale = Locale('fr', 'FR');
+                                          RestartWidget.restartApp(context);
+
+                                          setState(() {
+                                            colorChange;
+                                          });
+                                          // Navigator.of(context).push(
+                                          //   MaterialPageRoute(
+                                          //     builder: (context) => Fees(),
+                                          //   ),
+                                          // );
+                                        },
+                                        child: Row(
+                                          children: [
+                                            Text(
+                                              ("French"),
+                                              style: colorChange
+                                                  ? FontConstant.k16w5008267Text
+                                                  : FontConstant
+                                                      .k18w5008471Text,
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                      SizedBox(height: 20),
+                                      GestureDetector(
+                                        onTap: () {
+                                          context.locale = Locale('ar', 'AR');
+                                          RestartWidget.restartApp(context);
+
+                                          setState(() {
+                                            colorChange;
+                                          });
+                                          /* Navigator.pop(context);
+                                            Navigator.of(context).push(
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    TSettings(),
+                                              ),
+                                            );*/
+                                        },
+                                        child: Row(
+                                          children: [
+                                            Text(
+                                              ("Arabic"),
+                                              style: colorChange
+                                                  ? FontConstant.k16w5008267Text
+                                                  : FontConstant
+                                                      .k18w5008471Text,
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ];
+                          })),
+                  InkWell(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => PReminderScreen(),
+                        ),
+                      );
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.all(15.0),
+                      child: Image.asset(
+                        "assets/images/clockicon.png",
+                        height: 24,
+                      ),
+                    ),
                   ),
-                  GestureDetector(
+                  /*GestureDetector(
                     onTap: () {
                       Navigator.of(context).push(
                         MaterialPageRoute(
@@ -73,7 +193,7 @@ class _PHomeScreenState extends State<PHomeScreen> {
                       height: 24,
                       width: 24,
                     ),
-                  ),
+                  ),*/
                 ],
               ),
             ),
@@ -82,56 +202,61 @@ class _PHomeScreenState extends State<PHomeScreen> {
         body: SingleChildScrollView(
           child: Column(
             children: [
-              SizedBox(height: 30.h),
+              SizedBox(height: 30),
               Column(
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      GestureDetector(
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: Row(
+                      //mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => PKidsDashboard()),
+                              );
+                            },
+                            child: SizedBox(height: 128, child: Studentcard())),
+                        GestureDetector(
                           onTap: () {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => PKidsDashboard()),
+                                  builder: (context) => PAddkidScreen()),
                             );
                           },
-                          child: SizedBox(
-                              height: 128, width: 250.w, child: Studentcard())),
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => PAddkidScreen()),
-                          );
-                        },
-                        child: Container(
-                          height: 128,
-                          width: 83,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(16),
-                              image: DecorationImage(
-                                  image: AssetImage(
-                                      "assets/images/Rectangle 2716.png"))),
-                          child: Column(
-                            children: [
-                              SizedBox(
-                                height: Get.size.height * 0.05,
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 16),
+                            child: Container(
+                              height: 116,
+                              width: 83,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(16),
+                                  image: DecorationImage(
+                                      image: AssetImage(
+                                          "assets/images/Rectangle 2716.png"))),
+                              child: Column(
+                                children: [
+                                  SizedBox(
+                                    height: Get.size.height * 0.05,
+                                  ),
+                                  Icon(
+                                    Icons.add,
+                                    size: 25,
+                                    color: Colors.white,
+                                  ),
+                                  Text("Add",
+                                      style: FontConstant.k18w500whiteText
+                                          .copyWith(fontSize: 16)),
+                                ],
                               ),
-                              Icon(
-                                Icons.add,
-                                size: 25,
-                                color: Colors.white,
-                              ),
-                              Text("Add",
-                                  style: FontConstant.k18w500whiteText
-                                      .copyWith(fontSize: 16)),
-                            ],
+                            ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                   SizedBox(height: Get.size.height * 0.01),
                   Column(
@@ -174,7 +299,11 @@ class _PHomeScreenState extends State<PHomeScreen> {
                   )
                 ],
               ),
-              Tutorials(),
+              Row(
+                children: [
+                  Expanded(child: Tutorials()),
+                ],
+              ),
               //Tutorials card
               SizedBox(
                 height: 100.h,
@@ -211,7 +340,7 @@ class Studentcard extends StatelessWidget {
           fit: BoxFit.fitWidth,
         ),
       ),
-      padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 16),
+      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
       child: Row(
         children: [
           Container(
@@ -221,12 +350,15 @@ class Studentcard extends StatelessWidget {
                 image: DecorationImage(
                     image: AssetImage("assets/images/Rectangle 2715.png"))),
           ),
-          SizedBox(width: 16.w),
+          SizedBox(width: 16),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              SizedBox(
+                height: 8,
+              ),
               Text(
-                "Nobite",
+                "Nobite ",
                 style: FontConstant.k16w500White,
               ),
               Text(

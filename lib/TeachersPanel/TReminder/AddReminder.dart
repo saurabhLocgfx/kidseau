@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -66,7 +67,8 @@ class _TAddReminderState extends State<TAddReminder> {
             ],
           ),
           title: Text(
-            "Reminder",
+            "Add Reminder".tr(),
+            /*AppLoaclizations.of(context)!.translate("Add Reminder").toString(),*/
             style: FontConstant.k18w5008471Text,
           ),
         ),
@@ -79,7 +81,8 @@ class _TAddReminderState extends State<TAddReminder> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Title",
+                    "Title".tr(),
+                    /*AppLoaclizations.of(context)!.translate("Title").toString(),*/
                     style: FontConstant.k16w500331FText,
                   ),
                   SizedBox(
@@ -93,7 +96,8 @@ class _TAddReminderState extends State<TAddReminder> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Time",
+                    "Time".tr(),
+                    /*AppLoaclizations.of(context)!.translate("Time").toString(),*/
                     style: FontConstant.k16w500331FText,
                   ),
                   SizedBox(
@@ -107,15 +111,20 @@ class _TAddReminderState extends State<TAddReminder> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Date",
+                    "Date".tr(),
+                    /*  AppLoaclizations.of(context)!.translate("Date").toString(),*/
                     style: FontConstant.k16w500331FText,
                   ),
                   SizedBox(
                     height: 4.h,
                   ),
                   InkWell(
-                    onTap: (){
-                      showDatePicker(context: context, initialDate: DateTime.now(), firstDate: DateTime(1970), lastDate: DateTime(2100));
+                    onTap: () {
+                      showDatePicker(
+                          context: context,
+                          initialDate: DateTime.now(),
+                          firstDate: DateTime(1970),
+                          lastDate: DateTime(2100));
                     },
                     child: IgnorePointer(
                       child: IconTextfield(
@@ -130,12 +139,15 @@ class _TAddReminderState extends State<TAddReminder> {
                   alignment: FractionalOffset.bottomCenter,
                   child: SizedBox(
                     height: 52.h,
-                    width: 382..w,
+                    width: 382.w,
                     child: MainButton(
                         onTap: () {
                           Reminderaddeddialog(context);
                         },
-                        title: 'Save',
+                        title: "Save".tr(),
+                        /*AppLoaclizations.of(context)!
+                            .translate("Save")
+                            .toString(),*/
                         textStyleColor: Colors.white,
                         backgroundColor: ThemeColor.primarycolor),
                   ),
@@ -182,7 +194,10 @@ class _TAddReminderState extends State<TAddReminder> {
                           onTap: () {
                             Navigator.pop(context);
                           },
-                          title: 'Close',
+                          title: "Close".tr(),
+                          /*AppLoaclizations.of(context)!
+                              .translate("Close")
+                              .toString(),*/
                           textStyleColor: Colors.white,
                           backgroundColor: ThemeColor.primarycolor))
                 ],

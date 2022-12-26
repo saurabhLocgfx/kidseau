@@ -20,12 +20,12 @@ class _PKidsDashboardState extends State<PKidsDashboard> {
     "assets/images/galleryicon.png",
   ];
 
-  List<String> items = [
+  List<String> _items = [
     "Overview",
     "Gallery",
   ];
   // final List screen = [Messagebody(),];
-  int selectedIndex = 0;
+  //int selectedIndex = 0;
 
   final controller = PageController(initialPage: 1);
 
@@ -35,10 +35,10 @@ class _PKidsDashboardState extends State<PKidsDashboard> {
     super.dispose();
   }
 
-  final PageController _pageController = PageController(
+  /* final PageController _pageController = PageController(
     initialPage: 0,
   );
-
+*/
   int pageIndex = 0;
   @override
   Widget build(BuildContext context) {
@@ -91,10 +91,10 @@ class _PKidsDashboardState extends State<PKidsDashboard> {
           ),
         ),
         body: SingleChildScrollView(
-          child: Stack(
+          child: Column(
             children: [
               Container(
-                height: 414.h,
+                //height: 414.h,
                 //width: 414.w,
                 decoration: BoxDecoration(
                     gradient: LinearGradient(
@@ -106,47 +106,48 @@ class _PKidsDashboardState extends State<PKidsDashboard> {
                       ],
                     ),
                     image: DecorationImage(
+                        opacity: 0.2,
                         image: AssetImage("assets/images/postsbackground.png"),
                         fit: BoxFit.fill)),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                child: Column(
-                  children: [
-                    SizedBox(height: 110),
-                    Row(
-                      children: [
-                        Container(
-                          height: 128.h,
-                          width: 96.w,
-                          decoration: BoxDecoration(
-                              image: DecorationImage(
-                                  image: AssetImage(
-                                      "assets/images/profileperson.png"))),
-                        ),
-                        SizedBox(width: 24),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "Nobita",
-                              style: FontConstant2.k32w500331Ftext,
-                            ),
-                            Text(
-                              "S/O -  Akbar",
-                              style: FontConstant.k16w5008471Text,
-                            ),
-                            Text("xyz@gmail.com",
-                                style: FontConstant.k16w5008471Text),
-                          ],
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: 40),
-                    Pageviewtabprofile(),
-                    SizedBox(height: 20),
-                    SizedBox(
-                      height: 1000.h,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  child: Column(
+                    children: [
+                      SizedBox(height: 110),
+                      Row(
+                        children: [
+                          Container(
+                            height: 128.h,
+                            width: 96.w,
+                            decoration: BoxDecoration(
+                                image: DecorationImage(
+                                    image: AssetImage(
+                                        "assets/images/profileperson.png"))),
+                          ),
+                          SizedBox(width: 24),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "Nobita ",
+                                style: FontConstant2.k32w500331Ftext,
+                              ),
+                              Text(
+                                "S/O -  Akbar",
+                                style: FontConstant.k16w5008471Text,
+                              ),
+                              Text("xyz@gmail.com",
+                                  style: FontConstant.k16w5008471Text),
+                            ],
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 40),
+                      Pageviewtabprofile(),
+                      SizedBox(height: 20),
+                      pageIndex == 0 ? PKidsOverview() : PKidsGallery()
+                      /* SizedBox(
+                      height: 1350.h,
                       child: PageView(
                         controller: _pageController,
                         onPageChanged: (page) {
@@ -156,10 +157,11 @@ class _PKidsDashboardState extends State<PKidsDashboard> {
                             },
                           );
                         },
-                        children: [PKidsOverview(), PKidsGallery()],
+                        children: [],
                       ),
-                    ),
-                  ],
+                    ),*/
+                    ],
+                  ),
                 ),
               ),
             ],
@@ -192,12 +194,12 @@ class _PKidsDashboardState extends State<PKidsDashboard> {
                   GestureDetector(
                     onTap: () {
                       setState(() {
-                        selectedIndex = pageIndex = 0;
-                        _pageController.animateToPage(
+                        // selectedIndex = pageIndex = 0;
+                        /* _pageController.animateToPage(
                           pageIndex,
                           duration: Duration(milliseconds: 100),
                           curve: Curves.linear,
-                        );
+                        );*/
                         pageIndex = 0;
                       });
                     },
@@ -234,12 +236,12 @@ class _PKidsDashboardState extends State<PKidsDashboard> {
           GestureDetector(
             onTap: () {
               setState(() {
-                selectedIndex = pageIndex = 1;
-                _pageController.animateToPage(
+                //selectedIndex = pageIndex = 1;
+                /* _pageController.animateToPage(
                   pageIndex,
                   duration: Duration(milliseconds: 100),
                   curve: Curves.linear,
-                );
+                );*/
                 pageIndex = 1;
               });
             },

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kidseau/Theme.dart';
@@ -53,7 +54,10 @@ class _popuptextfieldState extends State<popuptextfield> {
                         height: 24.h,
                       ),
                       Text(
-                        "Voice note",
+                        "Voice note".tr(),
+                        /*AppLoaclizations.of(context)!
+                            .translate("Voice note")
+                            .toString(),*/
                         style: FontConstant.k16w5008471Text,
                       ),
                     ],
@@ -65,7 +69,10 @@ class _popuptextfieldState extends State<popuptextfield> {
                         height: 24.h,
                       ),
                       Text(
-                        "Gallery",
+                        "Gallery".tr(),
+                        /*AppLoaclizations.of(context)!
+                            .translate("Gallery")
+                            .toString(),*/
                         style: FontConstant.k16w5008471Text,
                       ),
                     ],
@@ -77,7 +84,10 @@ class _popuptextfieldState extends State<popuptextfield> {
                         height: 24.h,
                       ),
                       Text(
-                        "Contact",
+                        "Contact".tr(),
+                        /* AppLoaclizations.of(context)!
+                            .translate("Contact")
+                            .toString(),*/
                         style: FontConstant.k16w5008471Text,
                       ),
                     ],

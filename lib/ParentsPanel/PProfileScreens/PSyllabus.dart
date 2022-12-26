@@ -73,7 +73,7 @@ class _PSyllabusState extends State<PSyllabus> {
             width: 414,
           ),
           Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
               child: Column(
                 children: [
                   SizedBox(height: 110),
@@ -82,7 +82,30 @@ class _PSyllabusState extends State<PSyllabus> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(
+                      DropdownButton<String>(
+                        icon: Image.asset(
+                          "assets/images/arrowdown.png",
+                          width: 24,
+                          height: 24,
+                          color: Color(0xff84717F),
+                        ),
+                        hint: Text('  Today'),
+                        items: <String>[
+                          'Sunday',
+                          'Monday',
+                          'Tuesday',
+                          'Wednesday',
+                          'Thursday',
+                          'Friday'
+                        ].map((String value) {
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(value),
+                          );
+                        }).toList(),
+                        onChanged: (_) {},
+                      ),
+                      /*Text(
                         "Today",
                         style: FontConstant.k18w5008471Text,
                       ),
@@ -91,7 +114,7 @@ class _PSyllabusState extends State<PSyllabus> {
                         width: 24,
                         height: 24,
                         color: Color(0xff84717F),
-                      )
+                      )*/
                     ],
                   ),
                   SizedBox(height: 20),

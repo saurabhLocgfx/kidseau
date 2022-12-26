@@ -1,10 +1,13 @@
 import 'dart:ui';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:kidseau/TeachersPanel/TNotificationScreen/TNotificationsbody.dart';
 import 'package:kidseau/Theme.dart';
 import 'package:kidseau/Widgets/widgets.dart';
+
+import '../TPostsScreen/TPostsScreen.dart';
 
 class TNotificationScreen extends StatefulWidget {
   const TNotificationScreen({Key? key}) : super(key: key);
@@ -91,16 +94,25 @@ class _TNotificationScreenState extends State<TNotificationScreen> {
               //     MaterialPageRoute(builder: (context) => MessageScreen()));
             },
             child: Text(
-              "Notifications",
+              "Notification".tr(),
+              /*AppLoaclizations.of(context)!
+                  .translate("Notification")
+                  .toString(),*/
               style: FontConstant.k18w5008471Text,
             ),
           ),
           actions: [
             Notificationpopup(
               image: "assets/images/markicon.png",
-              title: "Mark all as read",
+              title: "Mark all as read".tr(),
+              /* AppLoaclizations.of(context)!
+                  .translate("Mark all as read")
+                  .toString(),*/
               image2: "assets/images/gearicon.png",
-              title2: "Notification settings",
+              title2: "Notification settings".tr(),
+              /*AppLoaclizations.of(context)!
+                  .translate("Notification settings")
+                  .toString(),*/
             ),
           ],
         ),
@@ -118,39 +130,46 @@ class _TNotificationScreenState extends State<TNotificationScreen> {
               ),
             ),
             SizedBox(height: 16),
-            Container(
-              //height: 99,
-              //width: 414,
-              color: ThemeColor.primarycolor.withOpacity(0.16),
-              child: Padding(
-                padding: EdgeInsets.all(16.0),
-                child: Row(
-                  children: [
-                    Container(
-                      height: 67,
-                      width: 50,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(08),
-                          image: DecorationImage(
-                              image: AssetImage("assets/images/person3.png"))),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(top: 10.0, left: 12),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Mohammad Umar has added new post",
-                            style: FontConstant.k16w500331FText,
-                          ),
-                          Text(
-                            "2 hours ago.",
-                            style: FontConstant.k14w5008471Text,
-                          ),
-                        ],
+            InkWell(
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => TPostsScreen()));
+              },
+              child: Container(
+                //height: 99,
+                //width: 414,
+                color: ThemeColor.primarycolor.withOpacity(0.16),
+                child: Padding(
+                  padding: EdgeInsets.all(16.0),
+                  child: Row(
+                    children: [
+                      Container(
+                        height: 67,
+                        width: 50,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(08),
+                            image: DecorationImage(
+                                image:
+                                    AssetImage("assets/images/person3.png"))),
                       ),
-                    )
-                  ],
+                      Padding(
+                        padding: EdgeInsets.only(top: 10.0, left: 12),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Mohammad Umar has added new post",
+                              style: FontConstant.k16w500331FText,
+                            ),
+                            Text(
+                              "2 hours ago.",
+                              style: FontConstant.k14w5008471Text,
+                            ),
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -161,7 +180,7 @@ class _TNotificationScreenState extends State<TNotificationScreen> {
                 // AnnouncementDialog(context);
               },
               child: Container(
-               /* height: 99,
+                /* height: 99,
                 width: 414,*/
                 color: ThemeColor.primarycolor.withOpacity(0.16),
                 child: Padding(

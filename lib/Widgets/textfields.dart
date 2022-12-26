@@ -29,6 +29,7 @@ textfield(context, txt) {
             fontSize: 16.0,
             fontWeight: FontWeight.w400),
       ),
+      /*  controller: controller,*/
     ),
   );
 }

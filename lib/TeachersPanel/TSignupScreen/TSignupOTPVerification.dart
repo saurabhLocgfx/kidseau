@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kidseau/TeachersPanel/TSignupScreen/TSignupCode.dart';
@@ -6,7 +7,11 @@ import 'package:kidseau/Widgets/buttons.dart';
 import 'package:kidseau/Widgets/textfields.dart';
 
 class TSignupOtpVerification extends StatefulWidget {
-  const TSignupOtpVerification({Key? key}) : super(key: key);
+  final bool isEmail;
+  String mobileText;
+  TSignupOtpVerification(
+      {Key? key, required this.isEmail, required this.mobileText})
+      : super(key: key);
 
   @override
   State<TSignupOtpVerification> createState() => _TSignupOtpVerificationState();
@@ -59,10 +64,18 @@ class _TSignupOtpVerificationState extends State<TSignupOtpVerification> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     SizedBox(height: 25),
-                    Text("OTP verification",
+                    Text("OTP verification".tr(),
+                        /*AppLoaclizations.of(context)!
+                            .translate("OTP verification")
+                            .toString(),*/
                         style: FontConstant.k24w500brownText),
                     Text(
-                      "A OTP has been sent to “9876543210”. Please enter the OTP here.",
+                      "A OTP has been sent to “9876543210”. Please enter the OTP here."
+                          .tr(),
+                      /*AppLoaclizations.of(context)!
+                          .translate(
+                              "A OTP has been sent to “9876543210”. Please enter the OTP here.")
+                          .toString(),*/
                       style:
                           FontConstant.k16w400B7A4Text.copyWith(fontSize: 15),
                       textAlign: TextAlign.start,
@@ -123,9 +136,15 @@ class _TSignupOtpVerificationState extends State<TSignupOtpVerification> {
                       child: MainButton(
                           onTap: () {
                             Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => TSignupCode()));
+                                builder: (context) => TSignupCode(
+                                      mobileText: widget.mobileText,
+                                      isEmail: widget.isEmail,
+                                    )));
                           },
-                          title: "Continue",
+                          title: "Continue".tr(),
+                          /* AppLoaclizations.of(context)!
+                              .translate("Continue")
+                              .toString(),*/
                           textStyleColor: Colors.white,
                           backgroundColor: ThemeColor.primarycolor),
                     ),

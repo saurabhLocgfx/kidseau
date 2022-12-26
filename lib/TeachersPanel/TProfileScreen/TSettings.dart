@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:kidseau/ParentsPanel/PProfileScreens/PSettings/PAboutus.dart';
@@ -102,7 +103,10 @@ class _TSettingsState extends State<TSettings> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        "Privacy Policy",
+                        "Privacy Policy".tr(),
+                        /*AppLoaclizations.of(context)!
+                            .translate("Privacy Policy")
+                            .toString(),*/
                         style: FontConstant.k18w500331FText,
                       ),
                       Image.asset(

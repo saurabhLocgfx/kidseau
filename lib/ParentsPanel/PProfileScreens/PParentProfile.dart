@@ -40,8 +40,8 @@ class _PParentsProfileState extends State<PParentsProfile> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
-                  height: 128.h,
-                  width: 96.2.w,
+                  height: 140,
+                  width: 96.2,
                   decoration: BoxDecoration(
                       image: DecorationImage(
                           image:
@@ -91,6 +91,9 @@ class _PParentsProfileState extends State<PParentsProfile> {
                   itemCount: 3),
             ),
           ),
+          SizedBox(
+            height: 32,
+          ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: Column(
@@ -101,8 +104,12 @@ class _PParentsProfileState extends State<PParentsProfile> {
                   style: FontConstant2.k22w5008471text,
                 ),
                 Container(
-                  height: 150,
-                  child: ListView.builder(
+                  //height: 180,
+                  child: ListView.separated(
+                    separatorBuilder: (ctx, ind) => SizedBox(
+                      height: 16.h,
+                    ),
+                    shrinkWrap: true,
                     padding: EdgeInsets.zero,
                     physics: NeverScrollableScrollPhysics(),
                     itemCount: infocategory.length,
@@ -137,8 +144,8 @@ class _PParentsProfileState extends State<PParentsProfile> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: SizedBox(
-              height: 52,
-              width: 382,
+              height: 52.h,
+              width: 382.w,
               child: MainButton(
                   onTap: () {},
                   title: "Edit",

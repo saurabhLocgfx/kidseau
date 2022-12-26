@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -128,6 +129,7 @@ import 'package:kidseau/Theme.dart';
 // }
 
 class TDashboard extends StatefulWidget {
+  TDashboard({Key? key}) : super(key: key);
   @override
   _TDashboardState createState() => _TDashboardState();
 }
@@ -301,11 +303,19 @@ class _TDashboardState extends State<TDashboard> {
   Container buildMyNavBar(BuildContext context) {
     return Container(
       margin: EdgeInsets.all(20),
-      height: 56.h,
+      height: 56,
       width: 382.w,
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(126),
+        boxShadow: [
+          BoxShadow(
+            color: Color(0xff5D3D8F).withOpacity(0.3),
+            spreadRadius: 0,
+            blurRadius: 16,
+            offset: Offset(0, 0), // changes position of shadow
+          ),
+        ],
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -320,6 +330,7 @@ class _TDashboardState extends State<TDashboard> {
               setState(() {});
             },
             child: Container(
+              height: 48,
               color: Colors.transparent,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -328,9 +339,13 @@ class _TDashboardState extends State<TDashboard> {
                     pageIndex == 0
                         ? "assets/images/homeiconfill.png"
                         : "assets/images/iconhome.png",
-                    height: 24,
+                    height: 24.h,
+                    width: 24.w,
                   ),
-                  Text("Home",
+                  Text("Home".tr(),
+                      /*AppLoaclizations.of(context)!
+                          .translate("Home")
+                          .toString(),*/
                       style: FontConstant.k12w400B7A4Text.copyWith(
                           color: pageIndex == 0
                               ? Color(0xff8267AC)
@@ -350,6 +365,7 @@ class _TDashboardState extends State<TDashboard> {
               });
             },
             child: Container(
+              height: 48,
               color: Colors.transparent,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -358,9 +374,13 @@ class _TDashboardState extends State<TDashboard> {
                     pageIndex == 1
                         ? "assets/images/profileiconfill.png"
                         : "assets/images/profileicon.png",
-                    height: 24,
+                    height: 24.h,
+                    width: 24.w,
                   ),
-                  Text("Profile",
+                  Text("Profile".tr(),
+                      /*AppLoaclizations.of(context)!
+                          .translate("Profile")
+                          .toString(),*/
                       style: FontConstant.k12w400B7A4Text.copyWith(
                           color: pageIndex == 1
                               ? Color(0xff8267AC)
@@ -380,6 +400,7 @@ class _TDashboardState extends State<TDashboard> {
               });
             },
             child: Container(
+              height: 48,
               color: Colors.transparent,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -388,9 +409,13 @@ class _TDashboardState extends State<TDashboard> {
                     pageIndex == 2
                         ? "assets/images/postsiconfill.png"
                         : "assets/images/Postsicon.png",
-                    height: 24,
+                    height: 24.h,
+                    width: 24.w,
                   ),
-                  Text("Posts",
+                  Text("Posts".tr(),
+                      /*AppLoaclizations.of(context)!
+                          .translate("Posts")
+                          .toString(),*/
                       style: FontConstant.k12w400B7A4Text.copyWith(
                           color: pageIndex == 2
                               ? Color(0xff8267AC)
@@ -410,6 +435,7 @@ class _TDashboardState extends State<TDashboard> {
               });
             },
             child: Container(
+              height: 48,
               color: Colors.transparent,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -418,9 +444,13 @@ class _TDashboardState extends State<TDashboard> {
                     pageIndex == 3
                         ? "assets/images/studioniconfill.png"
                         : "assets/images/studenticon.png",
-                    height: 24,
+                    height: 24.h,
+                    width: 24.w,
                   ),
-                  Text("Students",
+                  Text("Kids".tr(),
+                      /*AppLoaclizations.of(context)!
+                          .translate("Kids")
+                          .toString(),*/
                       style: FontConstant.k12w400B7A4Text.copyWith(
                           color: pageIndex == 3
                               ? Color(0xff8267AC)
@@ -440,6 +470,7 @@ class _TDashboardState extends State<TDashboard> {
               });
             },
             child: Container(
+              height: 48,
               color: Colors.transparent,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -448,9 +479,13 @@ class _TDashboardState extends State<TDashboard> {
                     pageIndex == 4
                         ? "assets/images/messageiconfill.png"
                         : "assets/images/messageicon.png",
-                    height: 24,
+                    height: 24.h,
+                    width: 24.w,
                   ),
-                  Text("Message",
+                  Text("Message".tr(),
+                      /*AppLoaclizations.of(context)!
+                          .translate("Message")
+                          .toString(),*/
                       style: FontConstant.k12w400B7A4Text.copyWith(
                           color: pageIndex == 4
                               ? Color(0xff8267AC)

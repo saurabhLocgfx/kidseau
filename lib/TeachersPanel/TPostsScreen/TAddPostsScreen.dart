@@ -1,4 +1,5 @@
 import 'package:dotted_border/dotted_border.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kidseau/Theme.dart';
@@ -39,29 +40,34 @@ class _TAddPostsScreenState extends State<TAddPostsScreen> {
                       width: 100,
                     ),
                     SizedBox(height: 24),
-                    Text('Add Photo', style: FontConstant.k18w500B7A4Text),
+                    Text("Add Photos".tr(),
+                        style: FontConstant.k18w500B7A4Text),
                   ],
                 ),
               ),
             ),
           ),
           SizedBox(height: 20),
-          Text('OR', style: FontConstant.k18w500B7A4Text),
+          Text("OR".tr(), style: FontConstant.k18w500B7A4Text),
           SizedBox(height: 20),
-          materialButton(
-            context,
-            () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (_) => AddAnnouncement(),
-                ),
-              );
-            },
-            'Add Announcement',
-            Color(0xFFF0AD56),
-            52.0,
-          ),
+          SizedBox(
+            width: 382.w,
+            height: 52.h,
+            child: materialButton(
+              context,
+              () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => AddAnnouncement(),
+                  ),
+                );
+              },
+              "Add Announcement".tr(),
+              Color(0xFFF0AD56),
+              52.0,
+            ),
+          )
         ],
       ),
     );

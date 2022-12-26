@@ -1,14 +1,18 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:kidseau/Constants/colors.dart';
-import 'package:kidseau/ParentsPanel/PDashBoard.dart';
 import 'package:kidseau/Theme.dart';
 import 'package:kidseau/Widgets/buttons.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
-class PLoginOtpVerification extends StatelessWidget {
-  const PLoginOtpVerification({Key? key}) : super(key: key);
+import '../../api/parent_login_apis/parent_login_otp_api.dart';
+import '../PDashBoard.dart';
 
+class PLoginOtpVerification extends StatelessWidget {
+  PLoginOtpVerification({Key? key}) : super(key: key);
+  final TextEditingController pinTextController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -54,16 +58,25 @@ class PLoginOtpVerification extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     SizedBox(height: 25),
-                    Text("OTP verification",
+                    Text("OTP verification".tr(),
+                        /* AppLoaclizations.of(context)!
+                            .translate("OTP verification")
+                            .toString(),*/
                         style: FontConstant.k24w500brownText),
                     Text(
-                      "A OTP has been sent to “9876543210”. Please enter the OTP here.",
+                      "A OTP has been sent to “9876543210”. Please enter the OTP here."
+                          .tr(),
+                      /*AppLoaclizations.of(context)!
+                          .translate(
+                              "A OTP has been sent to “9876543210”. Please enter the OTP here.")
+                          .toString(),*/
                       style:
                           FontConstant.k16w400B7A4Text.copyWith(fontSize: 15),
                       textAlign: TextAlign.start,
                     ),
                     SizedBox(height: 43),
                     PinCodeTextField(
+                      controller: pinTextController,
                       cursorColor: AppColors().k8267AC,
                       keyboardType: TextInputType.number,
                       appContext: context,
@@ -80,10 +93,22 @@ class PLoginOtpVerification extends StatelessWidget {
                       //width: 382,
                       child: MainButton(
                           onTap: () {
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => PDashboard()));
+                            final resp = ParentLoginOtp()
+                                .get(code: int.parse(pinTextController.text));
+                            resp.then((value) {
+                              print(value);
+                              if (value['status'] == 0) {
+                                Fluttertoast.showToast(msg: value['msg']);
+                              } else {
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (context) => PDashboard()));
+                              }
+                            });
                           },
-                          title: "Continue",
+                          title: "Continue".tr(),
+                          /*AppLoaclizations.of(context)!
+                              .translate("Continue")
+                              .toString(),*/
                           textStyleColor: Colors.white,
                           backgroundColor: ThemeColor.primarycolor),
                     ),

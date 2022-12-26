@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -165,7 +166,8 @@ class _TOpenChatsState extends State<TOpenChats> {
                           BorderSide(width: 2, color: Color(0xffDBE8FA)),
                     ),
                     fillColor: Color(0xffF0F4FA),
-                    hintText: "Type here.",
+                    hintText: "Type here.".tr(),
+                    /*AppLoaclizations.of(context)!.translate("Type here."),*/
                     hintStyle: FontConstant.k16w400B7A4Text,
                     suffixIcon: GestureDetector(
                       onTap: () {},

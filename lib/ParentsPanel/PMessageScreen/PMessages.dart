@@ -69,7 +69,7 @@ class _PMessagesState extends State<PMessages> {
                 );
               },
               child: Container(
-                  height: 67.h,
+                  height: 90,
                   width: 382.w,
                   child: Padding(
                     padding: const EdgeInsets.only(left: 16, right: 16),
@@ -79,13 +79,13 @@ class _PMessagesState extends State<PMessages> {
                         Row(
                           children: [
                             Container(
-                              height: 60.h,
-                              width: 50.w,
+                              height: 70,
+                              width: 50,
                               decoration: BoxDecoration(
                                   image: DecorationImage(
                                       image: AssetImage(images[index]))),
                             ),
-                            SizedBox(width: 16.w),
+                            SizedBox(width: 16),
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [

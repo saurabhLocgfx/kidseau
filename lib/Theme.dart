@@ -120,6 +120,9 @@ class FontConstant {
       fontWeight: FontWeight.w500, fontSize: 22, color: Color(0xff331F2D));
   static TextStyle k24w500brownText = GoogleFonts.balooDa2(
       fontWeight: FontWeight.w500, fontSize: 24, color: Color(0xff331F2D));
+
+  static TextStyle k24w50084717FText = GoogleFonts.balooDa2(
+      fontWeight: FontWeight.w500, fontSize: 24, color: Color(0xff84717F));
   static TextStyle k16w400greyText = GoogleFonts.balooDa2(
       fontWeight: FontWeight.w500, fontSize: 16, color: Color(0xff666666));
   static TextStyle k16w4008471Text = GoogleFonts.balooDa2(
@@ -140,6 +143,8 @@ class FontConstant {
       fontWeight: FontWeight.w500, fontSize: 14, color: Color(0xff84717F));
   static TextStyle k12w5008471Text = GoogleFonts.balooDa2(
       fontWeight: FontWeight.w500, fontSize: 12, color: Color(0xff84717F));
+  static TextStyle k16w400B7A4B2Text = GoogleFonts.balooDa2(
+      fontWeight: FontWeight.w400, fontSize: 16, color: Color(0xffB7A4B2));
 }
 
 class FontConstant2 {

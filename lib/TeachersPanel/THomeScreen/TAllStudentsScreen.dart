@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -36,7 +37,8 @@ class _TAllStudentsState extends State<TAllStudents> {
         backgroundColor: Color(0xff8267AC).withOpacity(0.16),
         centerTitle: false,
         title: Text(
-          "Students",
+          "Kids".tr(),
+          /*AppLoaclizations.of(context)!.translate("Kids").toString(),*/
           style: FontConstant.k18w5008471Text,
         ),
         leading: Row(
@@ -66,7 +68,8 @@ class _TAllStudentsState extends State<TAllStudents> {
               Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  "Students",
+                  "Kids".tr(),
+                  /* AppLoaclizations.of(context)!.translate("Kids").toString(),*/
                   style: FontConstant2.baloothampifont,
                 ),
               ),

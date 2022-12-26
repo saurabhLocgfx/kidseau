@@ -6,7 +6,10 @@ import 'package:kidseau/Widgets/buttons.dart';
 import 'package:kidseau/Widgets/textfields.dart';
 
 class TSignupScreen extends StatelessWidget {
-  const TSignupScreen({Key? key}) : super(key: key);
+  final bool isEmail;
+  String mobileText;
+  TSignupScreen({Key? key, required this.isEmail, required this.mobileText})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -78,9 +81,10 @@ class TSignupScreen extends StatelessWidget {
                       width: 382,
                       child: MainButton(
                           onTap: () {
+                            print(mobileText);
                             Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) =>
-                                    TSignupOtpVerification()));
+                                builder: (context) => TSignupOtpVerification(
+                                    isEmail: isEmail, mobileText: mobileText)));
                           },
                           title: "Signup with OTP",
                           textStyleColor: Colors.white,

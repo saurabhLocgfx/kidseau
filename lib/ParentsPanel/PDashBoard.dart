@@ -370,11 +370,19 @@ class _PDashboardState extends State<PDashboard> {
   Container buildMyNavBar(BuildContext context) {
     return Container(
       margin: EdgeInsets.all(20),
-      height: 56.h,
+      height: 56,
       width: 382.w,
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(126),
+        boxShadow: [
+          BoxShadow(
+            color: Color(0xff5D3D8F).withOpacity(0.3),
+            spreadRadius: 0,
+            blurRadius: 16,
+            offset: Offset(0, 0), // changes position of shadow
+          ),
+        ],
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,

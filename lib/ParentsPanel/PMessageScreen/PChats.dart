@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -85,9 +86,61 @@ class _PChatsState extends State<PChats> {
           style: FontConstant.k18w5008471Text,
         ),
       ),
+      bottomNavigationBar: Padding(
+        padding:
+            EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+        child: Row(
+          children: [
+            Expanded(
+              child: TextField(
+                onSubmitted: (text) {
+                  final message = Messages(
+                      text: text, date: DateTime.now(), isSentByme: true);
+                  setState(() => messages.add(message));
+                },
+                decoration: InputDecoration(
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(width: 2, color: Color(0xffDBE8FA)),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(width: 2, color: Color(0xffDBE8FA)),
+                  ),
+                  fillColor: Color(0xffF0F4FA),
+                  hintText: "Type here.".tr(),
+                  /*AppLoaclizations.of(context)!
+                                .translate("Type here."),*/
+                  hintStyle: FontConstant.k16w400B7A4Text,
+                  suffixIcon: GestureDetector(
+                    onTap: () {},
+                    child: Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: ImageIcon(
+                        AssetImage("assets/images/sendicon.png"),
+                        size: 12,
+                        color: ThemeColor.primarycolor,
+                      ),
+                    ),
+                  ),
+                  prefixIcon: Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: GestureDetector(
+                      onTap: showToast,
+                      child: ImageIcon(
+                        AssetImage("assets/images/add-circle.png"),
+                        size: 12,
+                        color: ThemeColor.darkpurple,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
       body: SingleChildScrollView(
         child: Container(
-         // height: 896.h,
+          // height: 896.h,
           width: 1.sw,
           decoration: BoxDecoration(
             image: DecorationImage(
@@ -109,8 +162,8 @@ class _PChatsState extends State<PChats> {
                   order: GroupedListOrder.DESC,
                   padding: EdgeInsets.all(20),
                   elements: messages,
-                  groupBy: (messages) => DateTime(
-                      messages.date.year, messages.date.month, messages.date.day),
+                  groupBy: (messages) => DateTime(messages.date.year,
+                      messages.date.month, messages.date.day),
                   groupHeaderBuilder: (Messages messages) => SizedBox(),
                   itemBuilder: (context, Messages messages) => Align(
                     alignment: messages.isSentByme
@@ -146,7 +199,7 @@ class _PChatsState extends State<PChats> {
               SizedBox(
                 height: 8.h,
               ),
-              Align(
+              /* Align(
                 alignment: Alignment.bottomCenter,
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -156,20 +209,24 @@ class _PChatsState extends State<PChats> {
                         child: TextField(
                           onSubmitted: (text) {
                             final message = Messages(
-                                text: text, date: DateTime.now(), isSentByme: true);
+                                text: text,
+                                date: DateTime.now(),
+                                isSentByme: true);
                             setState(() => messages.add(message));
                           },
                           decoration: InputDecoration(
                             enabledBorder: OutlineInputBorder(
-                              borderSide:
-                                  BorderSide(width: 2, color: Color(0xffDBE8FA)),
+                              borderSide: BorderSide(
+                                  width: 2, color: Color(0xffDBE8FA)),
                             ),
                             focusedBorder: OutlineInputBorder(
-                              borderSide:
-                                  BorderSide(width: 2, color: Color(0xffDBE8FA)),
+                              borderSide: BorderSide(
+                                  width: 2, color: Color(0xffDBE8FA)),
                             ),
                             fillColor: Color(0xffF0F4FA),
-                            hintText: "Type here.",
+                            hintText: "Type here.".tr(),
+                            */ /*AppLoaclizations.of(context)!
+                                .translate("Type here."),*/ /*
                             hintStyle: FontConstant.k16w400B7A4Text,
                             suffixIcon: GestureDetector(
                               onTap: () {},
@@ -199,7 +256,7 @@ class _PChatsState extends State<PChats> {
                     ],
                   ),
                 ),
-              ),
+              ),*/
               SizedBox(
                 height: 32.h,
               ),

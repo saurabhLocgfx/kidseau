@@ -31,99 +31,104 @@ class PStartScreen extends StatelessWidget {
                 fit: BoxFit.cover,
               ),
             ),
-            Positioned(
-              bottom: 0,
+            /*Positioned(
+                bottom: 0,
                 left: 0,
                 right: 0,
                 child: Container(
-              color: Colors.white,
-              width: 1.sw,
-              height: 200.h,
-            )),
+                  color: Colors.white,
+                  width: 1.sw,
+                  height: 200.h,
+                )),*/
             Positioned(
-              top: 1.sh/4,
+              top: 1.sh / 4,
               left: 0,
               right: 0,
               bottom: 0,
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    Container(
-                      //width: 414.w,
-                      //height: 1.sh,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.only(
-                          topLeft: const Radius.circular(24.0),
-                          topRight: const Radius.circular(24.0),
+              child: Container(
+                height: 1.sh / 4,
+                child: Container(
+                  //width: 414.w,
+                  //height: 1.sh,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                      topLeft: const Radius.circular(24.0),
+                      topRight: const Radius.circular(24.0),
+                    ),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 16, right: 16),
+                    child: Column(
+                      children: [
+                        SizedBox(
+                          height: 59.h,
                         ),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 16, right: 16),
-                        child: Column(
+                        Padding(
+                          padding: EdgeInsets.only(left: 120, right: 120),
+                          child: mainlogo(),
+                        ),
+                        SizedBox(
+                          height: Get.size.height * 0.05,
+                        ),
+                        Row(
                           children: [
-                            SizedBox(
-                              height: 59.h,
-                            ),
-                            Padding(
-                              padding: EdgeInsets.only(left: 120, right: 120),
-                              child: mainlogo(),
-                            ),
-                            SizedBox(
-                              height: Get.size.height * 0.05,
-                            ),
-                            Row(
-                              children: [
-                                Expanded(
-                                 // width: 382,
-                                  child: SizedBox(
-                                    height: 56,
-                                    child: MainButton(
-                                        onTap: () {
-                                          Navigator.of(context).push(MaterialPageRoute(
-                                              builder: (context) => TOnboardingScreen()));
-                                        },
-                                        title: "i'm a Teacher",
-                                        textStyleColor: Colors.white,
-                                        backgroundColor: ThemeColor.primaryorange),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              height: 16.h,
-                            ),
-                            Row(
-                              children: [
-                                Expanded(
-                                  child: SizedBox(
-                                    height: 56,
-                                    //width: 382,
-                                    child: MainButton(
-                                        onTap: () {
-                                          Navigator.of(context).push(MaterialPageRoute(
-                                              builder: (context) => POnboardingScreen()));
-                                        },
-                                        title: "i'm a Parent",
-                                        textStyleColor: Colors.white,
-                                        backgroundColor: ThemeColor.primarycolor),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              height: Get.size.height * 0.18,
-                            ),
-                            //Image.asset("assets/images/Made with ❤️ Locgfx.png"),
-                            Text(
-                              'Made with ❤️ by Locgfx',
-                              style: FontConstant.k16w400greyText,
+                            Expanded(
+                              // width: 382,
+                              child: SizedBox(
+                                height: 56,
+                                child: MainButton(
+                                    onTap: () {
+                                      Navigator.of(context).push(
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  TOnboardingScreen()));
+                                    },
+                                    title: "i'm a Teacher",
+                                    textStyleColor: Colors.white,
+                                    backgroundColor: ThemeColor.primaryorange),
+                              ),
                             ),
                           ],
                         ),
-                      ),
+                        SizedBox(
+                          height: 16.h,
+                        ),
+                        Row(
+                          children: [
+                            Expanded(
+                              child: SizedBox(
+                                height: 56,
+                                //width: 382,
+                                child: MainButton(
+                                    onTap: () {
+                                      Navigator.of(context).push(
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  POnboardingScreen()));
+                                    },
+                                    title: "i'm a Parent",
+                                    textStyleColor: Colors.white,
+                                    backgroundColor: ThemeColor.primarycolor),
+                              ),
+                            ),
+                          ],
+                        ),
+                        Spacer(),
+                        /*SizedBox(
+                          height: 150,
+                        ),*/
+                        /*SizedBox(
+                          height: Get.size.height * 0.18,
+                        ),*/
+                        //Image.asset("assets/images/Made with ❤️ Locgfx.png"),
+                        Text(
+                          'Made with ❤️ by Locgfx',
+                          style: FontConstant.k16w400greyText,
+                        ),
+                      ],
                     ),
-                  ],
+                  ),
                 ),
               ),
             ),

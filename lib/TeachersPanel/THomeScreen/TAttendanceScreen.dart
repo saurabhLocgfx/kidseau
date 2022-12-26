@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -18,6 +19,8 @@ class TAttendanceScreen extends StatefulWidget {
 class _TAttendanceScreenState extends State<TAttendanceScreen> {
   bool isSwitched = false;
   bool val2 = false;
+  bool val1 = false;
+  List<bool> values = [];
 
   var image = [
     "assets/images/kidsimage.png",
@@ -32,10 +35,16 @@ class _TAttendanceScreenState extends State<TAttendanceScreen> {
     "Mohammad Umar",
   ];
   var desc = [
-    "S/O - Azhar",
-    "S/O - Azhar",
-    "S/O - Azhar",
-    "S/O - Azhar",
+    "S/O -",
+    "S/O -",
+    "S/O - ",
+    "S/O -",
+  ];
+  var desc1 = [
+    "Azhar",
+    "Azhar",
+    "Azhar",
+    "Azhar",
   ];
 
   List<AttendanceModel> contacts = [
@@ -49,6 +58,15 @@ class _TAttendanceScreenState extends State<TAttendanceScreen> {
   ];
 
   List<AttendanceModel> selectedAttendance = [];
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    for (var v in image) {
+      values.add(false);
+    }
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -83,7 +101,10 @@ class _TAttendanceScreenState extends State<TAttendanceScreen> {
             ),
             Padding(
               padding: const EdgeInsets.only(left: 17.93),
-              child: Text("Attendance",
+              child: Text("Attendance".tr(),
+                  /* AppLoaclizations.of(context)!
+                      .translate("Attendance")
+                      .toString(),*/
                   style: FontConstant.k14w400lightpurpleText.copyWith(
                       fontSize: 16,
                       fontWeight: FontWeight.w400,
@@ -103,7 +124,10 @@ class _TAttendanceScreenState extends State<TAttendanceScreen> {
                   filled: true,
                   fillColor: Colors.white,
                   contentPadding: EdgeInsets.symmetric(horizontal: 16),
-                  hintText: "Search student",
+                  hintText: "Search student".tr(),
+                  /*AppLoaclizations.of(context)!
+                      .translate("Search student")
+                      .toString(),*/
                   hintStyle: FontConstant.k16w400B7A4Text, // Tex
                   suffixIconConstraints: BoxConstraints(
                     maxWidth: 60,
@@ -140,7 +164,8 @@ class _TAttendanceScreenState extends State<TAttendanceScreen> {
               decoration: BoxDecoration(
                   color: Colors.transparent,
                   image: DecorationImage(
-                      image: AssetImage('assets/images/attendancebg.png'), fit: BoxFit.fitWidth)),
+                      image: AssetImage('assets/images/attendancebg.png'),
+                      fit: BoxFit.fitWidth)),
               padding: EdgeInsets.symmetric(horizontal: 16, vertical: 32),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -154,7 +179,10 @@ class _TAttendanceScreenState extends State<TAttendanceScreen> {
                               context: context,
                               builder: (_) => CalendarPage2());
                         },
-                        child: Text("Today’s attendance",
+                        child: Text("Today’s attendance".tr(),
+                            /* AppLoaclizations.of(context)!
+                                .translate("Today’s attendance")
+                                .toString(),*/
                             style: FontConstant2.k24w5008267text),
                       ),
                       Row(
@@ -180,18 +208,18 @@ class _TAttendanceScreenState extends State<TAttendanceScreen> {
                           width: 56.w,
                           height: 32.w,
                           child: FlutterSwitch(
-                             // toggleSize: 25,
+                              // toggleSize: 25,
                               inactiveColor: ThemeColor.b7A4B2,
                               activeColor: ThemeColor.primarycolor,
-                              value: val2,
+                              value: val1,
                               onToggle: (v) {
                                 setState(() {
-                                  val2 = v;
+                                  val1 = v;
                                 });
                               })),
                       SizedBox(height: 4),
                       Text(
-                        "All Present",
+                        "All Present".tr(),
                         style: FontConstant.k16w400B7A4Text,
                       )
                     ],
@@ -206,9 +234,14 @@ class _TAttendanceScreenState extends State<TAttendanceScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text("74 students",
+                      Text(
+                          "74 ${"students".tr() /*AppLoaclizations.of(context)!.translate("students")*/}",
                           style: FontConstant.k16w4008471Text),
-                      Text("Present", style: FontConstant.k16w4008471Text),
+                      Text("Present1".tr(),
+                          /*AppLoaclizations.of(context)!
+                              .translate("Present1")
+                              .toString(),*/
+                          style: FontConstant.k16w4008471Text),
                     ],
                   ),
                   SizedBox(height: 10),
@@ -216,7 +249,9 @@ class _TAttendanceScreenState extends State<TAttendanceScreen> {
                       physics: NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
                       itemCount: image.length,
-                      separatorBuilder: (ctx, ind) => SizedBox(height: 16.h,),
+                      separatorBuilder: (ctx, ind) => SizedBox(
+                            height: 16.h,
+                          ),
                       itemBuilder: (BuildContext context, int index) {
                         return Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -233,18 +268,27 @@ class _TAttendanceScreenState extends State<TAttendanceScreen> {
                                 ),
                                 SizedBox(width: 16),
                                 Column(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.center,
-                                  crossAxisAlignment:
-                                      CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
                                       name[index],
                                       style: FontConstant.k18w500331FText,
                                     ),
-                                    Text(
-                                      desc[index],
-                                      style: FontConstant.k14w4008471Text,
+                                    Row(
+                                      children: [
+                                        Text(
+                                          "desc".tr()[index],
+                                          /* AppLoaclizations.of(context)!
+                                              .translate("desc"[index])
+                                              .toString(),*/
+                                          style: FontConstant.k14w4008471Text,
+                                        ),
+                                        Text(
+                                          desc1[index],
+                                          style: FontConstant.k14w4008471Text,
+                                        ),
+                                      ],
                                     )
                                   ],
                                 ),
@@ -257,10 +301,10 @@ class _TAttendanceScreenState extends State<TAttendanceScreen> {
                                     toggleSize: 20,
                                     inactiveColor: ThemeColor.b7A4B2,
                                     activeColor: ThemeColor.primarycolor,
-                                    value: val2,
+                                    value: values[index],
                                     onToggle: (v) {
                                       setState(() {
-                                        val2 = v;
+                                        values[index] = v;
                                       });
                                     })),
                             // Container(
@@ -281,7 +325,9 @@ class _TAttendanceScreenState extends State<TAttendanceScreen> {
                 ],
               ),
             ),
-            SizedBox(height: 30.h,)
+            SizedBox(
+              height: 30.h,
+            )
           ],
         ),
       ),

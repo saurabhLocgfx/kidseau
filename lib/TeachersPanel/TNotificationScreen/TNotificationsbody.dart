@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:kidseau/TeachersPanel/TNotificationScreen/TNotificationScreen.dart';
 import 'package:kidseau/Theme.dart';
@@ -204,7 +205,10 @@ Future<dynamic> Tnotificationdialog(BuildContext context) {
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(94))),
                             child: Text(
-                              "Close",
+                              "Close".tr(),
+                              /*AppLoaclizations.of(context)!
+                                  .translate("Close")
+                                  .toString(),*/
                               style: FontConstant.k16w5008267Text,
                             ),
                           ),
@@ -232,7 +236,10 @@ Future<dynamic> Tnotificationdialog(BuildContext context) {
                                   color: Colors.white,
                                 ),
                                 SizedBox(width: 8),
-                                Text("Add reminder ",
+                                Text("Add Reminder".tr(),
+                                    /* AppLoaclizations.of(context)!
+                                        .translate("Add Reminder")
+                                        .toString(),*/
                                     style: FontConstant.k16w5008267Text
                                         .copyWith(color: Colors.white)),
                               ],
