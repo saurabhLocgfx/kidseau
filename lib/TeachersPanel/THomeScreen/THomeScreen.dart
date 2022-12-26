@@ -122,10 +122,6 @@ class _THomeScreenState extends State<THomeScreen> {
                   Padding(
                       padding: const EdgeInsets.all(15.0),
                       child: PopupMenuButton(
-                          child: Image.asset(
-                            "assets/images/Languageicon.png",
-                            height: 24,
-                          ),
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(16)),
                           itemBuilder: (context) {
@@ -222,7 +218,11 @@ class _THomeScreenState extends State<THomeScreen> {
                                 ),
                               ),
                             ];
-                          })),
+                          },
+                          child: Image.asset(
+                            "assets/images/Languageicon.png",
+                            height: 24,
+                          ))),
                   InkWell(
                     onTap: () {
                       Navigator.push(
@@ -322,6 +322,7 @@ class _THomeScreenState extends State<THomeScreen> {
                 height: 5,
               ),
               Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16),
                 child: loadingsch
                     ? CircularProgressIndicator()
                     : SizedBox(
@@ -423,7 +424,6 @@ class _THomeScreenState extends State<THomeScreen> {
                               );
                             }),
                       ),
-                padding: EdgeInsets.symmetric(horizontal: 16),
               ),
               Center(
                 child: GestureDetector(
@@ -756,7 +756,7 @@ class Attendancecard extends StatelessWidget {
           Row(
             children: [
               Text('51 ', style: FontConstant2.k24w500WhiteText),
-              Text('present'.tr(),
+              Text("present".tr(),
                   /*AppLoaclizations.of(context)!.translate('present').toString(),*/
                   style: FontConstant.k16w400whiteText),
             ],
