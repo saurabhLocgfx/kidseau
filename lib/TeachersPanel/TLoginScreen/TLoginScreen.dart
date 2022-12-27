@@ -4,8 +4,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:kidseau/Theme.dart';
 import 'package:kidseau/Widgets/buttons.dart';
+import 'package:kidseau/api/Teacherpanelapi/teacher_login_apis/teacher_login_api.dart';
 
-import '../../api/teacher_login_apis/teacher_login_api.dart';
 import '../../shard_prefs/shared_prefs.dart';
 import 'TLoginOtpVerification.dart';
 

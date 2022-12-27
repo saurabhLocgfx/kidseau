@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kidseau/ParentsPanel/PLoginScreen/PLoginScreen.dart';
@@ -107,11 +108,11 @@ class _POnboardingScreenState extends State<POnboardingScreen> {
                                   ],
                                 ),
                                 Spacer(),
-                                Text(Pcontents[i].title,
+                                Text(Pcontents[i].title.tr(),
                                     style: FontConstant2.k32w500331Ftext),
                                 SizedBox(
                                   width: 200.w,
-                                  child: Text(Pcontents[i].discription,
+                                  child: Text(Pcontents[i].discription.tr(),
                                       maxLines: 2,
                                       style: FontConstant.k16w4008471Text),
                                 ),
@@ -132,7 +133,7 @@ class _POnboardingScreenState extends State<POnboardingScreen> {
                                 child: InkWell(
                                   onTap: () {
                                     if (currentIndex == Pcontents.length - 1) {
-                                      Navigator.pushReplacement(
+                                      Navigator.push(
                                         context,
                                         MaterialPageRoute(
                                           builder: (_) => PLoginScreen(),
@@ -216,7 +217,7 @@ class _POnboardingScreenState extends State<POnboardingScreen> {
                                 child: InkWell(
                                   onTap: () {
                                     if (currentIndex == Pcontents.length - 1) {
-                                      Navigator.pushReplacement(
+                                      Navigator.push(
                                         context,
                                         MaterialPageRoute(
                                           builder: (_) => PLoginScreen(),

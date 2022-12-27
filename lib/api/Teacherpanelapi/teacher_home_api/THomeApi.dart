@@ -2,9 +2,8 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:kidseau/Constants/string_const.dart';
-
-import '../../Tmodel/THomemodel.dart';
-import '../../shard_prefs/shared_prefs.dart';
+import 'package:kidseau/api/Teacherpanelapi/Tmodel/THomemodel.dart';
+import 'package:kidseau/shard_prefs/shared_prefs.dart';
 
 class THomeApi {
   Future<THomeModel> get() async {

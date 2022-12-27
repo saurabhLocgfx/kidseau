@@ -7,9 +7,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:kidseau/Theme.dart';
 import 'package:kidseau/Widgets/buttons.dart';
+import 'package:kidseau/api/Teacherpanelapi/teacher_lang_api/teacherlang.dart';
+import 'package:kidseau/api/Teacherpanelapi/teacher_login_apis/teacher_info_fill.dart';
 
-import '../../api/teacher_lang_api/teacherlang.dart';
-import '../../api/teacher_login_apis/teacher_info_fill.dart';
 import 'TWaitingScreen.dart';
 
 class TPersonalDetails extends StatefulWidget {

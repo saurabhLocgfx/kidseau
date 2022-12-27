@@ -1,9 +1,8 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-
-import '../../Constants/string_const.dart';
-import '../../shard_prefs/shared_prefs.dart';
+import 'package:kidseau/Constants/string_const.dart';
+import 'package:kidseau/shard_prefs/shared_prefs.dart';
 
 class TeacherLanguage {
   Future<dynamic> get() async {

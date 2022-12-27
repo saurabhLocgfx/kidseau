@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:kidseau/TeachersPanel/THomeScreen/TLearningAlphabets.dart';
 import 'package:kidseau/Theme.dart';
-import 'package:kidseau/Tmodel/TScheduleModel.dart';
+import 'package:kidseau/api/Teacherpanelapi/Tmodel/TScheduleModel.dart';
 
 class TActivity extends StatefulWidget {
   TScheduleModel schedule;

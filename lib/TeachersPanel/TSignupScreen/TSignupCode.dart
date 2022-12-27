@@ -5,8 +5,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:kidseau/TeachersPanel/TSignupScreen/TPersonalDetails.dart';
 import 'package:kidseau/Theme.dart';
 import 'package:kidseau/Widgets/buttons.dart';
-
-import '../../api/teacher_login_apis/teacher_sch_code.dart';
+import 'package:kidseau/api/Teacherpanelapi/teacher_login_apis/teacher_sch_code.dart';
 
 class TSignupCode extends StatefulWidget {
   final bool isEmail;

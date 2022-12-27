@@ -4,11 +4,11 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:kidseau/Tmodel/TScheduleModel.dart';
 import 'package:kidseau/Widgets/THomeScreenWidgets/t_activity.dart';
+import 'package:kidseau/api/Teacherpanelapi/Tmodel/TScheduleModel.dart';
+import 'package:kidseau/api/Teacherpanelapi/Tschedule_api/schedule_api.dart';
 
 import '../../Theme.dart';
-import '../../api/Tschedule_api/schedule_api.dart';
 
 class ScheduleScreen extends StatefulWidget {
   const ScheduleScreen({Key? key}) : super(key: key);

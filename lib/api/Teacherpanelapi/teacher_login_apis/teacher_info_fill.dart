@@ -1,8 +1,7 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-
-import '../../shard_prefs/shared_prefs.dart';
+import 'package:kidseau/shard_prefs/shared_prefs.dart';
 
 class TeacherInfoFill {
   Future<dynamic> get(

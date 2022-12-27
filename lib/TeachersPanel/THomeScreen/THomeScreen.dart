@@ -8,11 +8,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kidseau/TeachersPanel/THomeScreen/TGroupScreen.dart';
 import 'package:kidseau/TeachersPanel/TNotificationScreen/TNotificationScreen.dart';
 import 'package:kidseau/Theme.dart';
-import 'package:kidseau/api/teacher_home_api/THomeApi.dart';
+import 'package:kidseau/api/Teacherpanelapi/Tmodel/THomemodel.dart';
+import 'package:kidseau/api/Teacherpanelapi/Tmodel/TScheduleModel.dart';
+import 'package:kidseau/api/Teacherpanelapi/Tschedule_api/schedule_api.dart';
+import 'package:kidseau/api/Teacherpanelapi/teacher_home_api/THomeApi.dart';
 
-import '../../Tmodel/THomemodel.dart';
-import '../../Tmodel/TScheduleModel.dart';
-import '../../api/Tschedule_api/schedule_api.dart';
 import '../../restartappwidget/restartwidgets.dart';
 import '../TReminder/TReminderScreen.dart';
 import 'TAttendanceScreen.dart';

@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 // import 'package:get/get.dart';
 import 'package:kidseau/ParentsPanel/KidsDashboard/KidsDashboard.dart';
-import 'package:kidseau/ParentsPanel/PHomeScreen/PAddkidScreen.dart';
 import 'package:kidseau/ParentsPanel/PHomeScreen/PHomebody.dart';
 import 'package:kidseau/ParentsPanel/PReminderScreen/PReminderScreen.dart';
 import 'package:kidseau/Theme.dart';
@@ -74,95 +73,87 @@ class _PHomeScreenState extends State<PHomeScreen> {
                             return [
                               PopupMenuItem(
                                 enabled: true,
-                                child: Padding(
-                                  padding: const EdgeInsets.only(
-                                      left: 15.0, top: 15, bottom: 15),
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      GestureDetector(
-                                        onTap: () {
-                                          UserPrefs.setEArbBool(false);
-                                          context.locale = Locale('en', 'US');
-                                          RestartWidget.restartApp(context);
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    GestureDetector(
+                                      onTap: () {
+                                        UserPrefs.setEArbBool(false);
+                                        context.locale = Locale('en', 'US');
+                                        RestartWidget.restartApp(context);
 
-                                          setState(() {
-                                            colorChange;
-                                          });
-                                        },
-                                        child: Row(
-                                          children: [
-                                            Text(
-                                              ("English"),
-                                              style: colorChange
-                                                  ? FontConstant.k16w5008267Text
-                                                  : FontConstant
-                                                      .k18w5008471Text,
-                                            )
-                                          ],
-                                        ),
+                                        setState(() {
+                                          colorChange;
+                                        });
+                                      },
+                                      child: Row(
+                                        children: [
+                                          Text(
+                                            ("English"),
+                                            style: colorChange
+                                                ? FontConstant.k16w5008267Text
+                                                : FontConstant.k18w5008471Text,
+                                          )
+                                        ],
                                       ),
-                                      SizedBox(height: 20),
-                                      GestureDetector(
-                                        onTap: () {
-                                          UserPrefs.setEArbBool(false);
-                                          context.locale = Locale('fr', 'FR');
-                                          RestartWidget.restartApp(context);
+                                    ),
+                                    SizedBox(height: 20),
+                                    GestureDetector(
+                                      onTap: () {
+                                        UserPrefs.setEArbBool(false);
+                                        context.locale = Locale('fr', 'FR');
+                                        RestartWidget.restartApp(context);
 
-                                          setState(() {
-                                            colorChange;
-                                          });
-                                          // Navigator.of(context).push(
-                                          //   MaterialPageRoute(
-                                          //     builder: (context) => Fees(),
-                                          //   ),
-                                          // );
-                                        },
-                                        child: Row(
-                                          children: [
-                                            Text(
-                                              ("French"),
-                                              style: colorChange
-                                                  ? FontConstant.k16w5008267Text
-                                                  : FontConstant
-                                                      .k18w5008471Text,
-                                            )
-                                          ],
-                                        ),
+                                        setState(() {
+                                          colorChange;
+                                        });
+                                        // Navigator.of(context).push(
+                                        //   MaterialPageRoute(
+                                        //     builder: (context) => Fees(),
+                                        //   ),
+                                        // );
+                                      },
+                                      child: Row(
+                                        children: [
+                                          Text(
+                                            ("French"),
+                                            style: colorChange
+                                                ? FontConstant.k16w5008267Text
+                                                : FontConstant.k18w5008471Text,
+                                          )
+                                        ],
                                       ),
-                                      SizedBox(height: 20),
-                                      GestureDetector(
-                                        onTap: () {
-                                          UserPrefs.setEArbBool(true);
-                                          context.locale = Locale('ar', 'AR');
-                                          RestartWidget.restartApp(context);
-                                          setState(() {
-                                            colorChange;
-                                          });
-                                          /* Navigator.pop(context);
-                                            Navigator.of(context).push(
-                                              MaterialPageRoute(
-                                                builder: (context) =>
-                                                    TSettings(),
-                                              ),
-                                            );*/
-                                        },
-                                        child: Row(
-                                          children: [
-                                            Text(
-                                              ("Arabic"),
-                                              style: colorChange
-                                                  ? FontConstant.k16w5008267Text
-                                                  : FontConstant
-                                                      .k18w5008471Text,
-                                            )
-                                          ],
-                                        ),
+                                    ),
+                                    SizedBox(height: 20),
+                                    GestureDetector(
+                                      onTap: () {
+                                        UserPrefs.setEArbBool(true);
+                                        context.locale = Locale('ar', 'AR');
+                                        RestartWidget.restartApp(context);
+                                        setState(() {
+                                          colorChange;
+                                        });
+                                        /* Navigator.pop(context);
+                                          Navigator.of(context).push(
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  TSettings(),
+                                            ),
+                                          );*/
+                                      },
+                                      child: Row(
+                                        children: [
+                                          Text(
+                                            ("Arabic"),
+                                            style: colorChange
+                                                ? FontConstant.k16w5008267Text
+                                                : FontConstant.k18w5008471Text,
+                                          )
+                                        ],
                                       ),
-                                    ],
-                                  ),
+                                    ),
+                                  ],
                                 ),
                               ),
                             ];
@@ -224,43 +215,43 @@ class _PHomeScreenState extends State<PHomeScreen> {
                             },
                             child: SizedBox(height: 128, child: Studentcard())),
                         SizedBox(width: 5),
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => PAddkidScreen()),
-                            );
-                          },
-                          child: Padding(
-                            padding: const EdgeInsets.only(left: 16),
-                            child: Container(
-                              height: 120.h,
-                              width: 80.w,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(16),
-                                  image: DecorationImage(
-                                      image: AssetImage(
-                                          "assets/images/Rectangle 2716.png"))),
-                              child: Column(
-                                children: [
-                                  SizedBox(
-                                    height: MediaQuery.of(context).size.height *
-                                        0.05,
-                                  ),
-                                  Icon(
-                                    Icons.add,
-                                    size: 25,
-                                    color: Colors.white,
-                                  ),
-                                  Text("Add".tr(),
-                                      style: FontConstant.k18w500whiteText
-                                          .copyWith(fontSize: 16)),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
+                        // GestureDetector(
+                        //   onTap: () {
+                        //     Navigator.push(
+                        //       context,
+                        //       MaterialPageRoute(
+                        //           builder: (context) => PAddkidScreen()),
+                        //     );
+                        //   },
+                        //   child: Padding(
+                        //     padding: const EdgeInsets.only(left: 16),
+                        //     child: Container(
+                        //       height: 120.h,
+                        //       width: 80.w,
+                        //       decoration: BoxDecoration(
+                        //           borderRadius: BorderRadius.circular(16),
+                        //           image: DecorationImage(
+                        //               image: AssetImage(
+                        //                   "assets/images/Rectangle 2716.png"))),
+                        //       child: Column(
+                        //         children: [
+                        //           SizedBox(
+                        //             height: MediaQuery.of(context).size.height *
+                        //                 0.05,
+                        //           ),
+                        //           Icon(
+                        //             Icons.add,
+                        //             size: 25,
+                        //             color: Colors.white,
+                        //           ),
+                        //           Text("Add".tr(),
+                        //               style: FontConstant.k18w500whiteText
+                        //                   .copyWith(fontSize: 16)),
+                        //         ],
+                        //       ),
+                        //     ),
+                        //   ),
+                        // ),
                       ],
                     ),
                   ),

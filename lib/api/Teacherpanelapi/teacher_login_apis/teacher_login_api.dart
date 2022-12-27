@@ -1,8 +1,7 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-
-import '../../Constants/string_const.dart';
+import 'package:kidseau/Constants/string_const.dart';
 
 class TeacherLogin {
   Future<dynamic> get({required String email}) async {
