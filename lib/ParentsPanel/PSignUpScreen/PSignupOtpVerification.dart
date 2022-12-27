@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -144,49 +145,56 @@ class _PSignupOtpVerificationState extends State<PSignupOtpVerification> {
                         ),
                       ),*/
                       SizedBox(height: 32),
-                      SizedBox(
-                        height: 52,
-                        width: 382,
-                        child: MainButton(
-                            onTap: () {
-                              if (_formKey.currentState!.validate()) {
-                                final resp = ParentSignUpOtp().get(
-                                    code:
-                                        int.parse(pinSignTextController.text));
-                                print(pinSignTextController.text);
-                                resp.then((value) {
-                                  print(value);
-                                  if (value['status'] == 0) {
-                                    Fluttertoast.showToast(msg: value['msg']);
-                                  } else {
-                                    //change for apk use
-                                    /* Navigator.of(context).push(MaterialPageRoute(
-                                      builder: (context) => PDashboard()));*/
-                                    // voucher use this
-                                    /* Navigator.of(context).push(
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                PDashboard()));*/
-                                    Navigator.of(context).push(
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                PSignupCode()));
+                      Center(
+                        child: SizedBox(
+                          height: 52.h,
+                          width: 382.w,
+                          child: Center(
+                            child: MainButton(
+                                onTap: () {
+                                  if (_formKey.currentState!.validate()) {
+                                    final resp = ParentSignUpOtp().get(
+                                        code: int.parse(
+                                            pinSignTextController.text));
+                                    print(pinSignTextController.text);
+                                    resp.then((value) {
+                                      print(value);
+                                      if (value['status'] == 0) {
+                                        Fluttertoast.showToast(
+                                            msg: value['msg']);
+                                      } else {
+                                        //change for apk use
+                                        /* Navigator.of(context).push(MaterialPageRoute(
+                                          builder: (context) => PDashboard()));*/
+                                        // voucher use this
+                                        /* Navigator.of(context).push(
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    PDashboard()));*/
+                                        Navigator.of(context).push(
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    PSignupCode()));
 
-                                    /*Fluttertoast.showToast(
-                                      msg: 'Your Voucher is ${value['voucher']}');*/
+                                        /*Fluttertoast.showToast(
+                                          msg: 'Your Voucher is ${value['voucher']}');*/
+                                      }
+                                    });
                                   }
-                                });
-                              }
-                            },
-                            title: "Continue",
-                            textStyleColor: Colors.white,
-                            backgroundColor: ThemeColor.primarycolor),
+                                },
+                                title: "Continue".tr(),
+                                textStyleColor: Colors.white,
+                                backgroundColor: ThemeColor.primarycolor),
+                          ),
+                        ),
                       ),
                       SizedBox(height: 40),
-                      Text(
-                        "By proceeding you agree to our Privacy Policy an& Terms and Conditions",
-                        style: FontConstant.k14w500B7A4Text,
-                        textAlign: TextAlign.start,
+                      Center(
+                        child: Text(
+                          "By proceeding you agree to our Privacy Policy and & Terms and Conditions",
+                          style: FontConstant.k14w500B7A4Text,
+                          textAlign: TextAlign.start,
+                        ),
                       ),
                       SizedBox(height: 13.h),
                     ],

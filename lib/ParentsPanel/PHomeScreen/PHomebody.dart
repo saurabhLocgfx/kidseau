@@ -123,25 +123,28 @@ class Tutorials extends StatefulWidget {
 class _TutorialsState extends State<Tutorials> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 350.w,
-      child: SingleChildScrollView(
-        scrollDirection: Axis.horizontal,
-        child: Row(
-          children: [
-            tutorialWidget(
-                image: "assets/images/tutorial1.png",
-                title: "How to add a new kid ",
-                press: () {},
-                minutes: "16 mins",
-                hours: "2 hours ago"),
-            tutorialWidget(
-                image: "assets/images/Rectangle 2713.png",
-                title: "How to add a new kid ",
-                press: () {},
-                minutes: "16 mins",
-                hours: "2 hours ago"),
-          ],
+    return Padding(
+      padding: const EdgeInsets.only(right: 5.0, left: 5),
+      child: Container(
+        width: 350.w,
+        child: SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Row(
+            children: [
+              tutorialWidget(
+                  image: "assets/images/tutorial1.png",
+                  title: "How to add a new kid ",
+                  press: () {},
+                  minutes: "16 mins",
+                  hours: "2 hours ago"),
+              tutorialWidget(
+                  image: "assets/images/Rectangle 2713.png",
+                  title: "How to add a new kid ",
+                  press: () {},
+                  minutes: "16 mins",
+                  hours: "2 hours ago"),
+            ],
+          ),
         ),
       ),
     );

@@ -1,6 +1,7 @@
 {
   "We offer a new way to mark the children and shape them for better future.":"نقدم طريقة جديدة لتقييم الأطفال وتعليمهم من أجل مستقبل أفضل",
   "Account":"حساب",
+
   "Login/create a new account to track your kids’ activities.":"تسجيل الدخول / إنشاء حساب جديد لتتبع أنشطة طفلك",
 
   "Email/Phone number":"البريد الإلكتروني / رقم الهاتف",
@@ -85,6 +86,8 @@
 
   "Occupation":"الوظيفة",
 
+  "Signup with OTP": "التسجيل مع OTP",
+
   "Email address":"البريد الالكتروني",
 
   "Phone Number": "رقم الهاتف",
@@ -95,13 +98,56 @@
 
   "Allergy": "الحساسية ",
 
+  "Messages": "رسائل",
+
+  "Teacher" : "مدرس",
+
+  "Add Kid" : "أضف كيد",
+
   "Weight": "الميزان",
 
   "Height": "الطول",
 
+   "Today" : "اليوم",
+
+  "Talk to the parents": "تحدث إلى الوالدين",
+
+  "Build the Future": "نبني المستقبل",
+
+  "Give the marks to the kid to help them grow faster.": "امنح الطفل العلامات لمساعدته على النمو بشكل أسرع.",
+
+  "Chat with Parents": "الدردشة مع أولياء الأمور",
+
+  "Know what your kid is doing in school track their activities": "تعرف على ما يفعله طفلك في المدرسة وتتبع أنشطته",
+
+
+  "Watch Your kid grow": "شاهد طفلك ينمو",
+
+  "Save all photos of your kid and save memories": "احفظ جميع صور طفلك واحفظ الذكريات",
+
+  "Create memories": "اصنع ذكريات",
+
+  "Voucher’s code": "كود القسيمة",
+
+  "Vouchers are given by kid’s school": "يتم تقديم القسائم من قبل مدرسة الأطفال",
+
+  "Enter your Voucher’s code": "أدخل رمز القسيمة الخاصة بك",
+
+  "Enter Voucher code": "أدخل رمز القسيمة",
+
+  "Chat with Teachers":"الدردشة مع المعلمين",
+
+  "Terms and Conditions": "الأحكام والشروط",
+
+  "We offer a new way to track your children and watch them grow" : "نحن نقدم طريقة جديدة لتتبع أطفالك ومشاهدتهم وهم يكبرون",
+
+  "By proceeding you agree to our ": "بالمتابعة فإنك توافق على",
+
   "Current treatment": "العلاج الحالي",
 
   "Vaccinations": "تلقيح",
+
+  "Privacy Policy & ":"سياسة الخصوصية",
 
   "view all": "مشاهدة الكل ",
 
@@ -248,6 +294,11 @@
   "Wait for director’s approval": "الإنتظار ريث قبول المدير",
 
   "Thank you for your patience": "شكرا لانتظاركم",
+
+  "i'm a Teacher": "انا مدرس",
+
+  "i'm a Parent": "أنا والد",
+
 
   "info": "معلومات",
 

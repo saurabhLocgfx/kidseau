@@ -3,12 +3,13 @@ import 'dart:ui';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
+// import 'package:get/get.dart';
 import 'package:kidseau/ParentsPanel/KidsDashboard/KidsDashboard.dart';
 import 'package:kidseau/ParentsPanel/PHomeScreen/PAddkidScreen.dart';
 import 'package:kidseau/ParentsPanel/PHomeScreen/PHomebody.dart';
 import 'package:kidseau/ParentsPanel/PReminderScreen/PReminderScreen.dart';
 import 'package:kidseau/Theme.dart';
+import 'package:kidseau/shard_prefs/shared_prefs.dart';
 
 import '../../restartappwidget/restartwidgets.dart';
 
@@ -21,6 +22,7 @@ class PHomeScreen extends StatefulWidget {
 
 class _PHomeScreenState extends State<PHomeScreen> {
   bool colorChange = false;
+  bool Ezarabic = false;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -49,8 +51,8 @@ class _PHomeScreenState extends State<PHomeScreen> {
                 onTap: () {
                   // Get.to(() => Posts());
                 },
-                child:
-                    Text("Good Morning", style: FontConstant2.k32w5008267text),
+                child: Text("Good Morning".tr(),
+                    style: FontConstant2.k32w5008267text),
               ),
             ],
           ),
@@ -82,6 +84,7 @@ class _PHomeScreenState extends State<PHomeScreen> {
                                     children: [
                                       GestureDetector(
                                         onTap: () {
+                                          UserPrefs.setEArbBool(false);
                                           context.locale = Locale('en', 'US');
                                           RestartWidget.restartApp(context);
 
@@ -104,6 +107,7 @@ class _PHomeScreenState extends State<PHomeScreen> {
                                       SizedBox(height: 20),
                                       GestureDetector(
                                         onTap: () {
+                                          UserPrefs.setEArbBool(false);
                                           context.locale = Locale('fr', 'FR');
                                           RestartWidget.restartApp(context);
 
@@ -131,9 +135,9 @@ class _PHomeScreenState extends State<PHomeScreen> {
                                       SizedBox(height: 20),
                                       GestureDetector(
                                         onTap: () {
+                                          UserPrefs.setEArbBool(true);
                                           context.locale = Locale('ar', 'AR');
                                           RestartWidget.restartApp(context);
-
                                           setState(() {
                                             colorChange;
                                           });
@@ -219,6 +223,7 @@ class _PHomeScreenState extends State<PHomeScreen> {
                               );
                             },
                             child: SizedBox(height: 128, child: Studentcard())),
+                        SizedBox(width: 5),
                         GestureDetector(
                           onTap: () {
                             Navigator.push(
@@ -230,8 +235,8 @@ class _PHomeScreenState extends State<PHomeScreen> {
                           child: Padding(
                             padding: const EdgeInsets.only(left: 16),
                             child: Container(
-                              height: 116,
-                              width: 83,
+                              height: 120.h,
+                              width: 80.w,
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(16),
                                   image: DecorationImage(
@@ -240,14 +245,15 @@ class _PHomeScreenState extends State<PHomeScreen> {
                               child: Column(
                                 children: [
                                   SizedBox(
-                                    height: Get.size.height * 0.05,
+                                    height: MediaQuery.of(context).size.height *
+                                        0.05,
                                   ),
                                   Icon(
                                     Icons.add,
                                     size: 25,
                                     color: Colors.white,
                                   ),
-                                  Text("Add",
+                                  Text("Add".tr(),
                                       style: FontConstant.k18w500whiteText
                                           .copyWith(fontSize: 16)),
                                 ],
@@ -258,7 +264,7 @@ class _PHomeScreenState extends State<PHomeScreen> {
                       ],
                     ),
                   ),
-                  SizedBox(height: Get.size.height * 0.01),
+                  SizedBox(height: MediaQuery.of(context).size.height * 0.01),
                   Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -269,7 +275,7 @@ class _PHomeScreenState extends State<PHomeScreen> {
                       Padding(
                         padding: EdgeInsets.only(left: 16.0),
                         child: Text(
-                          "Activity",
+                          "Activity".tr(),
                           style: FontConstant2.baloothampifont,
                         ),
                       ),
@@ -279,7 +285,7 @@ class _PHomeScreenState extends State<PHomeScreen> {
                       Activity(),
                       SizedBox(height: 10),
                       Center(
-                        child: Text("See more",
+                        child: Text("See more".tr(),
                             style: FontConstant.k16w500purpleText.copyWith(
                               fontSize: 18,
                             )),
@@ -288,7 +294,7 @@ class _PHomeScreenState extends State<PHomeScreen> {
                       Padding(
                         padding: EdgeInsets.only(left: 16.0),
                         child: Text(
-                          "Tutorials",
+                          "Tutorials".tr(),
                           style: FontConstant2.baloothampifont,
                         ),
                       ),
@@ -324,6 +330,7 @@ class Studentcard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      width: 260.w,
       decoration: BoxDecoration(
         color: Colors.transparent,
         // boxShadow: [
@@ -370,7 +377,7 @@ class Studentcard extends StatelessWidget {
                 style: FontConstant.k12w400White,
               ),
               Text(
-                "2nd rank",
+                "2nd rank".tr(),
                 style: FontConstant.k12w400White,
               ),
             ],

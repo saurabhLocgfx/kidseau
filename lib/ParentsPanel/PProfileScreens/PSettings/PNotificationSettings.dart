@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -66,7 +67,7 @@ class _PNotificationsettingsState extends State<PNotificationsettings> {
           ),
           backgroundColor: Color(0xff8267AC).withOpacity(0.16),
           title: Text(
-            "Notification settings",
+            "Notification settings".tr(),
             style: FontConstant.k18w5008471Text,
           ),
           leading: Row(
@@ -139,7 +140,7 @@ class _PNotificationsettingsState extends State<PNotificationsettings> {
                       Icon(Icons.circle, size: 6, color: Color(0xff331F2D)),
                       SizedBox(width: 10),
                       Text(
-                        "New Post",
+                        "New Post".tr(),
                         style: FontConstant.k18w500331FText,
                       ),
                     ],
@@ -168,7 +169,7 @@ class _PNotificationsettingsState extends State<PNotificationsettings> {
                       Icon(Icons.circle, size: 6, color: Color(0xff331F2D)),
                       SizedBox(width: 10),
                       Text(
-                        "Privacy Policy",
+                        "New Activity".tr(),
                         style: FontConstant.k18w500331FText,
                       ),
                     ],
@@ -197,7 +198,7 @@ class _PNotificationsettingsState extends State<PNotificationsettings> {
                       Icon(Icons.circle, size: 6, color: Color(0xff331F2D)),
                       SizedBox(width: 10),
                       Text(
-                        "About Us",
+                        "New Message".tr(),
                         style: FontConstant.k18w500331FText,
                       ),
                     ],

@@ -69,7 +69,7 @@ class _PMessageDashboardState extends State<PMessageDashboard> {
                 // Navigator.of(context).push(MaterialPageRoute(
                 //     builder: (context) => NotificationScreen()));
               },
-              child: Text("Messages",
+              child: Text("Messages".tr(),
                   style: FontConstant.k32w5008267Text.copyWith(fontSize: 25)),
             ),
           ),
@@ -269,7 +269,7 @@ class _PMessageDashboardState extends State<PMessageDashboard> {
                 ),
                 Padding(
                   padding: const EdgeInsets.only(left: 4.0),
-                  child: Text("Message",
+                  child: Text("Message".tr(),
                       style: FontConstant.k14w500B7A4Text.copyWith(
                           color: pageIndex == 0
                               ? Color(0xff8267AC)
@@ -293,7 +293,7 @@ class _PMessageDashboardState extends State<PMessageDashboard> {
             },
             child: Row(
               children: [
-                Text("Teacher",
+                Text("Teacher".tr(),
                     style: FontConstant.k14w500B7A4Text.copyWith(
                         color: pageIndex == 1
                             ? Color(0xff8267AC)

@@ -4,11 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:kidseau/ParentsPanel/POnboardingScreens/PSplashScreen.dart';
 import 'package:kidseau/Theme.dart';
 import 'package:kidseau/restartappwidget/restartwidgets.dart';
 import 'package:kidseau/shard_prefs/shared_prefs.dart';
-
-import 'TeachersPanel/TDashboard.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -66,7 +65,6 @@ class _MyAppState extends State<MyApp> {
     return Locale(languageCode, countryCode);
   }*/
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     SystemChrome.setPreferredOrientations([
@@ -112,9 +110,10 @@ class _MyAppState extends State<MyApp> {
             home: /*TPersonalDetails(
               isEmail: false,
             ),*/
-                TDashboard(),
-            //PDashboard(),
-            // PSplashScreen(),
+                // PSignupCode()
+                // TDashboard(),
+                // PDashboard(),
+                PSplashScreen(),
           );
         });
   }

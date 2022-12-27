@@ -45,7 +45,7 @@ class _PKidsOverviewState extends State<PKidsOverview> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "Info",
+              "Info".tr(),
               style: FontConstant2.k22w5008471text,
             ),
             Stack(
@@ -73,22 +73,22 @@ class _PKidsOverviewState extends State<PKidsOverview> {
                         ),
                         SizedBox(height: 16),
                         Text(
-                          "Group",
+                          "Group".tr(),
                           style: FontConstant.k16w500331FText,
                         ),
                         SizedBox(height: 16),
                         Text(
-                          "Age",
+                          "Age".tr(),
                           style: FontConstant.k16w500331FText,
                         ),
                         SizedBox(height: 16),
                         Text(
-                          "Birthday",
+                          "Birthday".tr(),
                           style: FontConstant.k16w500331FText,
                         ),
                         SizedBox(height: 16),
                         Text(
-                          "Gender",
+                          "Gender".tr(),
                           style: FontConstant.k16w500331FText,
                         ),
                       ],
@@ -98,27 +98,27 @@ class _PKidsOverviewState extends State<PKidsOverview> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Nursery Sec A",
+                          "Nursery Sec A".tr(),
                           style: FontConstant.k16w5008471Text,
                         ),
                         SizedBox(height: 16),
                         Text(
-                          "Group A",
+                          "Group A".tr(),
                           style: FontConstant.k16w5008471Text,
                         ),
                         SizedBox(height: 16),
                         Text(
-                          "4 years old",
+                          "4 years old".tr(),
                           style: FontConstant.k16w5008471Text,
                         ),
                         SizedBox(height: 16),
                         Text(
-                          "29/09/2020",
+                          "29/09/2020".tr(),
                           style: FontConstant.k16w5008471Text,
                         ),
                         SizedBox(height: 16),
                         Text(
-                          "Male",
+                          "Male".tr(),
                           style: FontConstant.k16w5008471Text,
                         )
                       ],
@@ -160,7 +160,7 @@ class _PKidsOverviewState extends State<PKidsOverview> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                "Growth Rank",
+                                "Growth Rank".tr(),
                                 style: FontConstant.k16w5008471Text,
                               ),
                               Image.asset(
@@ -176,7 +176,7 @@ class _PKidsOverviewState extends State<PKidsOverview> {
                                 style: FontConstant2.k32w5008267text,
                               ),
                               Text(
-                                "nd Place",
+                                "nd Place".tr(),
                                 style: FontConstant.k16w400B7A4Text,
                               )
                             ],
@@ -204,7 +204,7 @@ class _PKidsOverviewState extends State<PKidsOverview> {
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                                 Text(
-                                  "Attendance",
+                                  "Attendance".tr(),
                                   style: FontConstant.k16w5008471Text,
                                 ),
                                 SizedBox(
@@ -324,7 +324,7 @@ class _PKidsOverviewState extends State<PKidsOverview> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "Activity Tracker",
+                      "Activity Tracker".tr(),
                       style: FontConstant.k16w5008471Text,
                     ),
                     Image.asset(
@@ -594,7 +594,7 @@ class _PKidsOverviewState extends State<PKidsOverview> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "Attendance",
+              "Attendance".tr(),
               style: FontConstant2.k22w5008471text,
             ),
             SizedBox(height: 10),
@@ -603,12 +603,12 @@ class _PKidsOverviewState extends State<PKidsOverview> {
                 Row(
                   children: [
                     Text(
-                      "Working Days",
+                      "Working Days".tr(),
                       style: FontConstant.k16w500331FText,
                     ),
                     SizedBox(width: 16),
                     Text(
-                      "70 days",
+                      "70 days".tr(),
                       style: FontConstant.k16w5008471Text,
                     )
                   ],
@@ -617,7 +617,7 @@ class _PKidsOverviewState extends State<PKidsOverview> {
                 Row(
                   children: [
                     Text(
-                      "Attended days",
+                      "Attended days".tr(),
                       style: FontConstant.k16w500331FText,
                     ),
                     SizedBox(width: 16),
@@ -631,7 +631,7 @@ class _PKidsOverviewState extends State<PKidsOverview> {
                 Row(
                   children: [
                     Text(
-                      "Working Days",
+                      "Working Days".tr(),
                       style: FontConstant.k16w500331FText,
                     ),
                     SizedBox(width: 16),
@@ -662,7 +662,7 @@ class _PKidsOverviewState extends State<PKidsOverview> {
             },
             child: Center(
               child: Text(
-                "Open Calendar",
+                "Open Calendar".tr(),
                 style: FontConstant.k18w500materialbuttonText
                     .copyWith(color: ThemeColor.primarycolor),
               ),
@@ -675,7 +675,7 @@ class _PKidsOverviewState extends State<PKidsOverview> {
             width: 382,
             child: MainButton(
                 onTap: () {},
-                title: "Talk to class teacher",
+                title: "Talk to class teacher".tr(),
                 textStyleColor: Colors.white,
                 backgroundColor: ThemeColor.primarycolor)),
         SizedBox(

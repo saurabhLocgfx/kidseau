@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -74,15 +75,15 @@ class _PNotificationScreenState extends State<PNotificationScreen> {
               // Navigator.of(context).push(
               //     MaterialPageRoute(builder: (context) => MessageScreen()));
             },
-            child: Text("Notifications",
+            child: Text("Notifications".tr(),
                 style: FontConstant2.k32w5008267text.copyWith(fontSize: 25)),
           ),
           actions: [
             Notificationpopup(
               image: "assets/images/markicon.png",
-              title: "Mark all as read",
+              title: "Mark all as read".tr(),
               image2: "assets/images/markicon.png",
-              title2: "Notification settings",
+              title2: "Notification settings".tr(),
             ),
           ],
         ),
@@ -95,7 +96,7 @@ class _PNotificationScreenState extends State<PNotificationScreen> {
             Align(
               alignment: Alignment.center,
               child: Text(
-                "Today",
+                "Today".tr(),
                 style: FontConstant.k14w500B7A4Text,
               ),
             ),
@@ -213,7 +214,10 @@ class _PNotificationScreenState extends State<PNotificationScreen> {
               ),
             ),
             SizedBox(height: 24),
-            Plist2()
+            Padding(
+              padding: const EdgeInsets.only(bottom: 30.0),
+              child: Plist2(),
+            ),
           ],
         )),
       ),

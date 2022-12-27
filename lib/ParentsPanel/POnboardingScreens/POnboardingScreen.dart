@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
 import 'package:kidseau/ParentsPanel/PLoginScreen/PLoginScreen.dart';
 import 'package:kidseau/ParentsPanel/POnboardingScreens/POnboardingmodel.dart';
 import 'package:kidseau/Theme.dart';
+import 'package:kidseau/shard_prefs/shared_prefs.dart';
 
 class POnboardingScreen extends StatefulWidget {
   const POnboardingScreen({Key? key}) : super(key: key);
@@ -22,6 +22,15 @@ class _POnboardingScreenState extends State<POnboardingScreen> {
     super.dispose();
   }
 
+  @override
+  void initState() {
+    ezarabic2 = UserPrefs.getArbBool() ?? false;
+
+    super.initState();
+  }
+
+  bool ezarabic2 = false;
+
   PageController _pageController = PageController(
     initialPage: 0,
   );
@@ -38,7 +47,7 @@ class _POnboardingScreenState extends State<POnboardingScreen> {
           children: [
             Container(
               height: 1.sh,
-              width: Get.size.width,
+              width: MediaQuery.of(context).size.width,
               decoration: BoxDecoration(
                   //color: ThemeColor.primarycolor,
                   ),
@@ -88,10 +97,12 @@ class _POnboardingScreenState extends State<POnboardingScreen> {
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Image.asset(
-                                      Pcontents[i].image,
-                                      height: 200.h,
-                                      width: 250.w,
+                                    SizedBox(
+                                      height: 300.h,
+                                      width: 350.w,
+                                      child: Image.asset(
+                                        Pcontents[i].image,
+                                      ),
                                     ),
                                   ],
                                 ),
@@ -103,52 +114,54 @@ class _POnboardingScreenState extends State<POnboardingScreen> {
                                   child: Text(Pcontents[i].discription,
                                       maxLines: 2,
                                       style: FontConstant.k16w4008471Text),
-                                )
+                                ),
                               ],
                             ),
                           );
                         },
                       ),
                     ),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(
-                              left: 16, top: 10, bottom: 80),
-                          child: Row(
-                            children: List.generate(
-                              Pcontents.length,
-                              (index) => buildDot(index, context),
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          width: 90,
-                          height: 130.h,
-                          child: InkWell(
-                            onTap: () {
-                              if (currentIndex == Pcontents.length - 1) {
-                                Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (_) => PLoginScreen(),
+                    ezarabic2
+                        ? Row(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              SizedBox(
+                                width: 90,
+                                height: 130.h,
+                                child: InkWell(
+                                  onTap: () {
+                                    if (currentIndex == Pcontents.length - 1) {
+                                      Navigator.pushReplacement(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (_) => PLoginScreen(),
+                                        ),
+                                      );
+                                    }
+                                    controller.nextPage(
+                                      duration: Duration(milliseconds: 300),
+                                      curve: Curves.fastOutSlowIn,
+                                    );
+                                  },
+                                  child: Image.asset(
+                                    "assets/images/onbarrow.png",
+                                    fit: BoxFit.fill,
                                   ),
-                                );
-                              }
-                              controller.nextPage(
-                                duration: Duration(milliseconds: 300),
-                                curve: Curves.fastOutSlowIn,
-                              );
-                            },
-                            child: Image.asset(
-                              "assets/images/onbarrow.png",
-                              fit: BoxFit.fill,
-                            ),
-                          ),
-                        ),
-                        /*Stack(
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                    left: 16, top: 10, bottom: 80),
+                                child: Row(
+                                  children: List.generate(
+                                    Pcontents.length,
+                                    (index) => buildDot(index, context),
+                                  ),
+                                ),
+                              ),
+
+                              /*Stack(
                           children: [
 
                             Padding(
@@ -181,8 +194,82 @@ class _POnboardingScreenState extends State<POnboardingScreen> {
                             ),
                           ],
                         ),*/
-                      ],
-                    ),
+                            ],
+                          )
+                        : Row(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                    left: 16, top: 10, bottom: 80),
+                                child: Row(
+                                  children: List.generate(
+                                    Pcontents.length,
+                                    (index) => buildDot(index, context),
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                width: 90,
+                                height: 130.h,
+                                child: InkWell(
+                                  onTap: () {
+                                    if (currentIndex == Pcontents.length - 1) {
+                                      Navigator.pushReplacement(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (_) => PLoginScreen(),
+                                        ),
+                                      );
+                                    }
+                                    controller.nextPage(
+                                      duration: Duration(milliseconds: 300),
+                                      curve: Curves.fastOutSlowIn,
+                                    );
+                                  },
+                                  child: Image.asset(
+                                    "assets/images/onbarrow.png",
+                                    fit: BoxFit.fill,
+                                  ),
+                                ),
+                              ),
+
+                              /*Stack(
+                          children: [
+
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                  top: 80.0, left: 28),
+                              child: MaterialButton(
+                                minWidth: 25,
+                                onPressed: () {
+                                  if (currentIndex ==
+                                      contents.length - 1) {
+                                    Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (_) =>
+                                            TLoginScreen(),
+                                      ),
+                                    );
+                                  }
+                                  controller.nextPage(
+                                    duration:
+                                    Duration(milliseconds: 300),
+                                    curve: Curves.fastOutSlowIn,
+                                  );
+                                },
+                                child: Icon(
+                                  Icons.arrow_forward,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),*/
+                            ],
+                          ),
                   ],
                 ),
               ),

@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -69,7 +70,7 @@ class _PProfileDashBoardState extends State<PProfileDashBoard> {
                     // Navigator.of(context).push(MaterialPageRoute(
                     //     builder: (context) => NotificationScreen()));
                   },
-                  child: Text("Profile ",
+                  child: Text("Profile".tr(),
                       style: FontConstant2.k32w5008267text
                           .copyWith(fontSize: 28)))),
           actions: [Pprofilepopup()],
@@ -167,7 +168,7 @@ class _PProfileDashBoardState extends State<PProfileDashBoard> {
                   ),
                   Padding(
                     padding: const EdgeInsets.only(left: 4.0),
-                    child: Text("Parents",
+                    child: Text("Parents".tr(),
                         style: FontConstant.k14w500B7A4Text.copyWith(
                             color: pageIndex == 0
                                 ? Color(0xff8267AC)
@@ -191,7 +192,7 @@ class _PProfileDashBoardState extends State<PProfileDashBoard> {
             },
             child: Row(
               children: [
-                Text("School",
+                Text("School".tr(),
                     style: FontConstant.k14w500B7A4Text.copyWith(
                         color: pageIndex == 1
                             ? Color(0xff8267AC)
@@ -340,7 +341,7 @@ class Pprofilepopup extends StatelessWidget {
                             ),
                             SizedBox(width: 15),
                             Text(
-                              "Syllabus",
+                              "Syllabus".tr(),
                               style: FontConstant.k18w5008471Text,
                             )
                           ],
@@ -363,7 +364,7 @@ class Pprofilepopup extends StatelessWidget {
                             ),
                             SizedBox(width: 15),
                             Text(
-                              "Fees",
+                              "Fees".tr(),
                               style: FontConstant.k18w5008471Text,
                             )
                           ],
@@ -386,7 +387,7 @@ class Pprofilepopup extends StatelessWidget {
                             ),
                             SizedBox(width: 15),
                             Text(
-                              "Settings",
+                              "Settings".tr(),
                               style: FontConstant.k18w5008471Text,
                             )
                           ],

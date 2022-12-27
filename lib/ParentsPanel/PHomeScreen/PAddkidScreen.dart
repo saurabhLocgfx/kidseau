@@ -1,9 +1,10 @@
 import 'dart:ui';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
+// import 'package:get/get.dart';
 import 'package:kidseau/Theme.dart';
 import 'package:kidseau/Widgets/buttons.dart';
 import 'package:kidseau/Widgets/textfields.dart';
@@ -19,7 +20,7 @@ class _PAddkidScreenState extends State<PAddkidScreen> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: Get.size.height,
+      height: MediaQuery.of(context).size.height,
       decoration: BoxDecoration(
         color: Color.fromRGBO(190, 116, 170, 0.08),
       ),
@@ -41,7 +42,7 @@ class _PAddkidScreenState extends State<PAddkidScreen> {
           ),
           backgroundColor: Color(0xff8267AC).withOpacity(0.16),
           title: Text(
-            "Add Kid",
+            "Add Kid".tr(),
             style: FontConstant.k18w5008471Text,
           ),
           leading: Row(
@@ -77,12 +78,12 @@ class _PAddkidScreenState extends State<PAddkidScreen> {
                 )),
                 SizedBox(height: 20.h),
                 Text(
-                  "Add Kid",
+                  "Add Kid".tr(),
                   style: FontConstant.k16w500brownText.copyWith(fontSize: 24),
                 ),
                 SizedBox(height: 24),
                 Text(
-                  "Voucher's code",
+                  "Voucher's code".tr(),
                   style: FontConstant.k16w500brownText.copyWith(fontSize: 16),
                 ),
                 SizedBox(height: 08),

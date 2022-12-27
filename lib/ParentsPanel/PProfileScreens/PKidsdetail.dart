@@ -65,7 +65,7 @@ class _PKidsDetailsState extends State<PKidsDetails> {
           ),
           backgroundColor: Color(0xff8267AC).withOpacity(0.16),
           title: Text(
-            "Kid’s Profile",
+            "Kid’s Profile".tr(),
             style: FontConstant.k18w5008471Text,
           ),
           leading: Row(
@@ -493,7 +493,7 @@ class _PKidsDetailsState extends State<PKidsDetails> {
                                 width: 382.w,
                                 child: MainButton(
                                     onTap: () {},
-                                    title: "Edit",
+                                    title: "Edit".tr(),
                                     textStyleColor: Colors.white,
                                     backgroundColor: ThemeColor.primarycolor),
                               ),

@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -55,7 +56,7 @@ class _PLearningAplphabetsState extends State<PLearningAplphabets> {
               ),
               Padding(
                 padding: const EdgeInsets.only(left: 17.93),
-                child: Text("Activity",
+                child: Text("Activity".tr(),
                     style: FontConstant.k14w400lightpurpleText.copyWith(
                         fontSize: 16,
                         fontWeight: FontWeight.w400,
@@ -167,7 +168,7 @@ class _PLearningAplphabetsState extends State<PLearningAplphabets> {
                       builder: (context) => TChats(),
                     ),
                   );
-                }, "Ask Question", ThemeColor.primarycolor, 52.0),
+                }, "Ask Question".tr(), ThemeColor.primarycolor, 52.0),
                 SizedBox(height: 40.h),
               ],
             ),

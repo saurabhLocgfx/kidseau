@@ -1,3 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
+
 class PUnbordingContent {
   String image;
   String title;
@@ -9,15 +11,17 @@ class PUnbordingContent {
 
 List<PUnbordingContent> Pcontents = [
   PUnbordingContent(
-      title: 'kkm',
-      image: 'assets/images/parentonboard1.png',
-      discription: "Know what your kid is doing in school  "),
+      title: "Watch Your kid grow".tr(),
+      image: 'assets/images/parentonboard1.png'.tr(),
+      discription:
+          "Know what your kid is doing in school track their activities".tr()),
   PUnbordingContent(
-      title: 'Build the Future',
+      title: 'Create memories'.tr(),
       image: 'assets/images/parentonboard2.png',
-      discription: "Give the marks to the kid to help them grow faster. "),
+      discription: "Save all photos of your kid and save memories.".tr()),
   PUnbordingContent(
-      title: 'Chat with Parents',
+      title: 'Chat with Teachers'.tr(),
       image: 'assets/images/parenonboard3.png',
-      discription: "Talk to the parents  "),
+      discription:
+          "Know what your kid is doing in school track their activities".tr()),
 ];

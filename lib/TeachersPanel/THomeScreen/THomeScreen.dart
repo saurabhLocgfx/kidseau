@@ -5,8 +5,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:kidseau/TeachersPanel/THomeScreen/TGroupScreen.dart';
 import 'package:kidseau/TeachersPanel/TNotificationScreen/TNotificationScreen.dart';
 import 'package:kidseau/Theme.dart';
@@ -52,13 +50,15 @@ class _THomeScreenState extends State<THomeScreen> {
         setState(() {
           loadingData = false;
         });
-        _name = value;
+        _name = value as THomeModel;
       } catch (e) {
         setState(() {
           loadingData = false;
         });
       }
       print(_name.hello);
+      print(_name.group);
+      //print(_name.group!.length);
     });
   }
 
@@ -82,6 +82,8 @@ class _THomeScreenState extends State<THomeScreen> {
 
   TScheduleModel _schedule = TScheduleModel();
   THomeModel _name = THomeModel();
+  // THomeModel _attend = THomeModel();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -273,30 +275,32 @@ class _THomeScreenState extends State<THomeScreen> {
               SizedBox(
                 height: 40,
               ),
-              SizedBox(
-                height: 128,
-                child: ListView.builder(
-                  shrinkWrap: true,
-                  scrollDirection: Axis.horizontal,
-                  itemCount: _name.group!.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    return GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => TGroupScreen()),
-                          );
+              loadingData
+                  ? CircularProgressIndicator()
+                  : SizedBox(
+                      height: 128,
+                      child: ListView.builder(
+                        shrinkWrap: true,
+                        scrollDirection: Axis.horizontal,
+                        itemCount: _name.group!.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          return GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => TGroupScreen()),
+                                );
+                              },
+                              child: loadingData
+                                  ? CircularProgressIndicator()
+                                  : Groupcard(
+                                      nameData: _name,
+                                      index: index,
+                                    ));
                         },
-                        child: loadingData
-                            ? CircularProgressIndicator()
-                            : Groupcard(
-                                nameData: _name,
-                                index: index,
-                              ));
-                  },
-                ),
-              ),
+                      ),
+                    ),
               SizedBox(
                 height: 15.h,
               ),
@@ -323,11 +327,10 @@ class _THomeScreenState extends State<THomeScreen> {
               ),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 16),
-                child: loadingsch
+                child: loadingData
                     ? CircularProgressIndicator()
                     : SizedBox(
                         // height: 300.h,
-
                         width: 1.sw,
                         child: ListView.separated(
                             separatorBuilder: (ctx, ind) => SizedBox(
@@ -342,85 +345,99 @@ class _THomeScreenState extends State<THomeScreen> {
                               return InkWell(
                                 onTap: () {
                                   if (index == 0) {
-                                    Get.to(() => TLearningAlphabets());
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              const TLearningAlphabets()),
+                                    );
                                   } else if (index == 1) {
                                   } else if (index == 2) {
                                   } else if (index == 3) {}
                                 },
-                                child: Container(
-                                  height: 64,
-                                  // width: Get.size.width * 0.93,
-                                  //margin: EdgeInsets.symmetric(horizontal: 16),
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.circular(16),
-                                  ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 15.0),
-                                    child: Row(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        Image.asset(
-                                          _name.schdule![index].icon.toString(),
-                                          errorBuilder: (q, w, e) {
-                                            return Text('Image not loaded');
-                                          },
-                                          height: 40,
-                                          width: 40,
+                                child: loadingData
+                                    ? CircularProgressIndicator()
+                                    : Container(
+                                        height: 64,
+                                        // width: Get.size.width * 0.93,
+                                        //margin: EdgeInsets.symmetric(horizontal: 16),
+                                        decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius:
+                                              BorderRadius.circular(16),
                                         ),
-                                        Padding(
-                                          padding:
-                                              const EdgeInsets.only(left: 15.0),
-                                          child: Column(
+                                        child: Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 15.0),
+                                          child: Row(
                                             crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
+                                                CrossAxisAlignment.center,
                                             children: [
-                                              Text(
-                                                _name.schdule![index].title
+                                              Image.asset(
+                                                _name.schdule![index].icon
                                                     .toString(),
-                                                style: FontConstant
-                                                    .k32w500blackText
-                                                    .copyWith(fontSize: 16),
+                                                errorBuilder: (q, w, e) {
+                                                  return Text(
+                                                      'Image not loaded');
+                                                },
+                                                height: 40,
+                                                width: 40,
                                               ),
-                                              Row(
-                                                children: [
-                                                  Text(
-                                                    "From ${DateFormat.jm().format(DateFormat("hh:mm:ss").parse('${_name.schdule![index].time}'))} ",
-                                                    // '${groups[index]} . ${time[index]}',
-                                                    style: FontConstant
-                                                        .k14w400lightpurpleText
-                                                        .copyWith(
-                                                            fontWeight:
-                                                                FontWeight.w400,
-                                                            fontSize: 14,
-                                                            color: Color(
-                                                                0xffB7A4B2)),
-                                                  ),
-                                                  Text(
-                                                    "To ${DateFormat.jm().format(DateFormat("hh:mm:ss").parse('${_name.schdule![index].time}'))} ",
-                                                    // '${groups[index]} . ${time[index]}',
-                                                    style: FontConstant
-                                                        .k14w400lightpurpleText
-                                                        .copyWith(
-                                                            fontWeight:
-                                                                FontWeight.w400,
-                                                            fontSize: 14,
-                                                            color: Color(
-                                                                0xffB7A4B2)),
-                                                  ),
-                                                ],
-                                              )
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                    left: 15.0),
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    Text(
+                                                      _name
+                                                          .schdule![index].title
+                                                          .toString(),
+                                                      style: FontConstant
+                                                          .k32w500blackText
+                                                          .copyWith(
+                                                              fontSize: 16),
+                                                    ),
+                                                    Row(
+                                                      children: [
+                                                        Text(
+                                                          "From ${DateFormat.jm().format(DateFormat("hh:mm:ss").parse('${_name.schdule![index].time}'))} ",
+                                                          // '${groups[index]} . ${time[index]}',
+                                                          style: FontConstant
+                                                              .k14w400lightpurpleText
+                                                              .copyWith(
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w400,
+                                                                  fontSize: 14,
+                                                                  color: Color(
+                                                                      0xffB7A4B2)),
+                                                        ),
+                                                        Text(
+                                                          "To ${DateFormat.jm().format(DateFormat("hh:mm:ss").parse('${_name.schdule![index].time}'))} ",
+                                                          // '${groups[index]} . ${time[index]}',
+                                                          style: FontConstant
+                                                              .k14w400lightpurpleText
+                                                              .copyWith(
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w400,
+                                                                  fontSize: 14,
+                                                                  color: Color(
+                                                                      0xffB7A4B2)),
+                                                        ),
+                                                      ],
+                                                    )
+                                                  ],
+                                                ),
+                                              ),
                                             ],
                                           ),
                                         ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
+                                      ),
                               );
                             }),
                       ),
@@ -475,24 +492,29 @@ class _THomeScreenState extends State<THomeScreen> {
                 child: Padding(
                   padding: const EdgeInsets.only(left: 16),
                   child: ListView.separated(
-                      shrinkWrap: true,
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (context, index) => GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => TAttendanceScreen()),
-                              );
-                            },
-                            child: Attendancecard(
+                    shrinkWrap: true,
+                    scrollDirection: Axis.horizontal,
+                    itemCount: 3,
+                    itemBuilder: (context, index) => GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => TAttendanceScreen()),
+                        );
+                      },
+                      child: loadingData
+                          ? CircularProgressIndicator()
+                          : Attendancecard(
                               image: "assets/images/groupcard2.png",
+                              // nameData: _attend,
+                              // index: index,
                             ),
-                          ),
-                      separatorBuilder: (ctx, ind) => SizedBox(
-                            width: 16,
-                          ),
-                      itemCount: 3),
+                    ),
+                    separatorBuilder: (ctx, ind) => SizedBox(
+                      width: 16,
+                    ),
+                  ),
                 ),
               ),
               SizedBox(height: 112.h)
@@ -545,7 +567,7 @@ class Groupcard extends StatelessWidget {
             width: 72,
             height: 96,
             child: Image.network(
-              "nameData.group![index].image",
+              nameData.group![index].image.toString(),
               errorBuilder: (q, w, e) {
                 return Text('Image not loaded');
               },
@@ -680,9 +702,13 @@ class SchoolCard extends StatelessWidget {
 }
 
 class Attendancecard extends StatelessWidget {
+  // THomeModel nameData;
+  // int index;
   final String image;
-  const Attendancecard({
+  Attendancecard({
     Key? key,
+    // required this.nameData,
+    // required this.index,
     required this.image,
   }) : super(key: key);
 
@@ -718,7 +744,9 @@ class Attendancecard extends StatelessWidget {
             width: 72,
             decoration: BoxDecoration(
                 image: DecorationImage(
-                    image: AssetImage("assets/images/groupimage.png"))),
+                    image: AssetImage("assets/images/person10.png"
+                        // nameData.group![index].image.toString(),
+                        ))),
           ),
           SizedBox(width: 12),
           Expanded(
@@ -726,10 +754,12 @@ class Attendancecard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
+                  // nameData.attendance![index].name.toString(),
                   "Group A",
                   style: FontConstant.k18w500whiteText,
                 ),
                 Text(
+                  // nameData.attendance![index].section.toString(),
                   "Nursery",
                   style: FontConstant.k18w500whiteText.copyWith(
                     fontSize: 14,
@@ -743,6 +773,7 @@ class Attendancecard extends StatelessWidget {
                         fontWeight: FontWeight.w400,
                         color: Colors.white.withOpacity(0.5))),*/
                 Text(
+                  // "${nameData.attendance![index].students.toString()}Students",
                   "24 Students",
                   style: FontConstant.k18w500whiteText.copyWith(
                     fontSize: 16,
@@ -755,7 +786,10 @@ class Attendancecard extends StatelessWidget {
           ),
           Row(
             children: [
-              Text('51 ', style: FontConstant2.k24w500WhiteText),
+              Text(
+                  // nameData.attendance![index].status.toString(),
+                  '51 ',
+                  style: FontConstant2.k24w500WhiteText),
               Text("present".tr(),
                   /*AppLoaclizations.of(context)!.translate('present').toString(),*/
                   style: FontConstant.k16w400whiteText),

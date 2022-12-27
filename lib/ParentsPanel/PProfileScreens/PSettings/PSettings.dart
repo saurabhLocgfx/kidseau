@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:kidseau/ParentsPanel/PProfileScreens/PSettings/PAboutus.dart';
@@ -37,7 +38,7 @@ class _PSettingsState extends State<PSettings> {
           ),
           backgroundColor: Color(0xff8267AC).withOpacity(0.16),
           title: Text(
-            "Settings",
+            "Settings".tr(),
             style: FontConstant.k18w5008471Text,
           ),
           leading: Row(
@@ -75,7 +76,7 @@ class _PSettingsState extends State<PSettings> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "Notification Settings",
+                      "Notification Settings".tr(),
                       style: FontConstant.k18w500331FText,
                     ),
                     Image.asset(
@@ -98,7 +99,7 @@ class _PSettingsState extends State<PSettings> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "Voucher Code",
+                      "Voucher Code".tr(),
                       style: FontConstant.k18w500331FText,
                     ),
                     Image.asset(
@@ -121,7 +122,7 @@ class _PSettingsState extends State<PSettings> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "Privacy Policy",
+                      "Privacy Policy".tr(),
                       style: FontConstant.k18w500331FText,
                     ),
                     Image.asset(
@@ -144,7 +145,7 @@ class _PSettingsState extends State<PSettings> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "About Us",
+                      "About Us".tr(),
                       style: FontConstant.k18w500331FText,
                     ),
                     Image.asset(

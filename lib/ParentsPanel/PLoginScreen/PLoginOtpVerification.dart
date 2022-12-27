@@ -36,19 +36,21 @@ class PLoginOtpVerification extends StatelessWidget {
                 ),
                 Padding(
                   padding: EdgeInsets.only(top: 180.h, left: 16, right: 16),
-                  child: Column(
-                    children: [
-                      Image.asset(
-                        "assets/images/logo.png",
-                        height: 172,
-                        width: 173,
-                      ),
-                      Text(
-                        "We offer a new way to track your children and watch them grow.",
-                        style: FontConstant.k16w4008471Text,
-                        textAlign: TextAlign.center,
-                      ),
-                    ],
+                  child: Center(
+                    child: Column(
+                      children: [
+                        Image.asset(
+                          "assets/images/logo.png",
+                          height: 172,
+                          width: 173,
+                        ),
+                        Text(
+                          "We offer a new way to track your children and watch them grow.",
+                          style: FontConstant.k16w4008471Text,
+                          textAlign: TextAlign.center,
+                        ),
+                      ],
+                    ),
                   ),
                 )
               ]),
@@ -113,25 +115,27 @@ class PLoginOtpVerification extends StatelessWidget {
                           backgroundColor: ThemeColor.primarycolor),
                     ),
                     SizedBox(height: 40),
-                    RichText(
-                        text: TextSpan(children: [
-                      TextSpan(
-                        text: "By proceeding you agree to our ",
-                        style: FontConstant.k14w400B7A4Text,
-                      ),
-                      TextSpan(
-                        text: "Privacy Policy",
-                        style: FontConstant.k14w500B7A4TextU,
-                      ),
-                      TextSpan(
-                        text: " & ",
-                        style: FontConstant.k14w400B7A4Text,
-                      ),
-                      TextSpan(
-                        text: "Terms and Conditions",
-                        style: FontConstant.k14w500B7A4TextU,
-                      ),
-                    ])),
+                    Center(
+                      child: RichText(
+                          text: TextSpan(children: [
+                        TextSpan(
+                          text: "By proceeding you agree to our ".tr(),
+                          style: FontConstant.k14w400B7A4Text,
+                        ),
+                        TextSpan(
+                          text: "Privacy Policy".tr(),
+                          style: FontConstant.k14w500B7A4TextU,
+                        ),
+                        TextSpan(
+                          text: " & ",
+                          style: FontConstant.k14w400B7A4Text,
+                        ),
+                        TextSpan(
+                          text: "Terms and Conditions".tr(),
+                          style: FontConstant.k14w500B7A4TextU,
+                        ),
+                      ])),
+                    ),
                     SizedBox(height: 13.h),
                   ],
                 ),

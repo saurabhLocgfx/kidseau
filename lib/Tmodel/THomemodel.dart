@@ -2,9 +2,11 @@ class THomeModel {
   int? status;
   String? hello;
   List<Group>? group;
-  List<Schdule>? schdule;
-  String? attendance;
+  List<Attendance>? attendance;
 
+  List<Schdule>? schdule;
+  // String? attendance;
+  //
   THomeModel(
       {this.status, this.hello, this.group, this.schdule, this.attendance});
 
@@ -23,7 +25,13 @@ class THomeModel {
         schdule!.add(new Schdule.fromJson(v));
       });
     }
-    attendance = json['attendance'];
+    if (json['Attendance'] != null) {
+      attendance = <Attendance>[];
+      json['Attendance'].forEach((v) {
+        attendance!.add(new Attendance.fromJson(v));
+      });
+    }
+    // attendance = json['attendance'];
   }
 
   Map<String, dynamic> toJson() {
@@ -36,7 +44,10 @@ class THomeModel {
     if (this.schdule != null) {
       data['Schdule'] = this.schdule!.map((v) => v.toJson()).toList();
     }
-    data['attendance'] = this.attendance;
+    if (this.attendance != null) {
+      data['Attendance'] = this.attendance!.map((v) => v.toJson()).toList();
+    }
+    // data['attendance'] = this.attendance;
     return data;
   }
 }
@@ -65,6 +76,43 @@ class Group {
     data['Section'] = this.section;
     data['image'] = this.image;
     data['students'] = this.students;
+    return data;
+  }
+}
+
+class Attendance {
+  String? id;
+  String? name;
+  String? section;
+  String? image;
+  int? students;
+  int? status;
+
+  Attendance(
+      {this.id,
+      this.name,
+      this.section,
+      this.image,
+      this.students,
+      this.status});
+
+  Attendance.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    name = json['name'];
+    section = json['Section'];
+    image = json['image'];
+    students = json['students'];
+    status = json['status'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['name'] = this.name;
+    data['Section'] = this.section;
+    data['image'] = this.image;
+    data['students'] = this.students;
+    data['status'] = this.status;
     return data;
   }
 }

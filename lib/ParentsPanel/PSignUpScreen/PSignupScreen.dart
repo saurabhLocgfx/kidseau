@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -6,7 +7,6 @@ import 'package:kidseau/Widgets/buttons.dart';
 import 'package:kidseau/shard_prefs/shared_prefs.dart';
 
 import '../../api/parent_signup_apis/parent_signup_api.dart';
-import '../PLoginScreen/PLoginScreen.dart';
 import 'PSignupOtpVerification.dart';
 
 class PSignupScreen extends StatefulWidget {
@@ -193,52 +193,29 @@ class _PSignupScreenState extends State<PSignupScreen> {
                                       });
                                     }
                                   },
-                                  title: "Signup with OTP",
+                                  title: "Signup with OTP".tr(),
                                   textStyleColor: Colors.white,
                                   backgroundColor: ThemeColor.primarycolor),
                             ),
                             SizedBox(height: 20),
-                            Row(
-                              children: [
-                                SizedBox(
-                                  width: 50,
-                                ),
-                                Text("Already have account?",
-                                    style: FontConstant.k16w4008471Text),
-                                SizedBox(
-                                  width: 20,
-                                ),
-                                GestureDetector(
-                                    onTap: () {
-                                      Navigator.of(context).push(
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  PLoginScreen()));
-                                    },
-                                    child: Text("Login",
-                                        style: FontConstant.k16w500purpleText))
-                              ],
-                            ),
                             SizedBox(height: 20),
-                            RichText(
-                                text: TextSpan(children: [
-                              TextSpan(
-                                text: "By proceeding you agree to our ",
-                                style: FontConstant.k14w400B7A4Text,
-                              ),
-                              TextSpan(
-                                text: "Privacy Policy",
-                                style: FontConstant.k14w500B7A4TextU,
-                              ),
-                              TextSpan(
-                                text: " & ",
-                                style: FontConstant.k14w400B7A4Text,
-                              ),
-                              TextSpan(
-                                text: "Terms and Conditions",
-                                style: FontConstant.k14w500B7A4TextU,
-                              ),
-                            ])),
+                            Center(
+                              child: RichText(
+                                  text: TextSpan(children: [
+                                TextSpan(
+                                  text: "By proceeding you agree to our ".tr(),
+                                  style: FontConstant.k14w400B7A4Text,
+                                ),
+                                TextSpan(
+                                  text: "Privacy Policy & ".tr(),
+                                  style: FontConstant.k14w500B7A4TextU,
+                                ),
+                                TextSpan(
+                                  text: "Terms and Conditions".tr(),
+                                  style: FontConstant.k14w500B7A4TextU,
+                                ),
+                              ])),
+                            ),
                             SizedBox(height: 13.h),
                           ],
                         ),

@@ -363,10 +363,9 @@ class Notificationpopup extends StatelessWidget {
                               height: 24,
                             ),
                             SizedBox(width: 24),
-                            Text(
-                              title,
-                              style: FontConstant.k18w5008471Text,
-                            )
+                            Text(title,
+                                style: FontConstant.k18w5008471Text
+                                    .copyWith(fontSize: 15))
                           ],
                         ),
                       ),
@@ -392,7 +391,8 @@ class Notificationpopup extends StatelessWidget {
                             SizedBox(width: 24),
                             Text(
                               title2,
-                              style: FontConstant.k18w5008471Text,
+                              style: FontConstant.k18w5008471Text
+                                  .copyWith(fontSize: 15),
                             )
                           ],
                         ),

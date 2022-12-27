@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kidseau/ParentsPanel/PHomeScreen/PHomeScreen.dart';
@@ -148,7 +149,7 @@ class _PParentsProfileState extends State<PParentsProfile> {
               width: 382.w,
               child: MainButton(
                   onTap: () {},
-                  title: "Edit",
+                  title: "Edit".tr(),
                   textStyleColor: Colors.white,
                   backgroundColor: ThemeColor.primarycolor),
             ),

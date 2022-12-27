@@ -42,9 +42,7 @@ dependencies:
   flutter_screenutil: ^5.5.4
   floating_navbar: ^2.0.2
   grouped_list: ^5.1.2
-
   intl: ^0.17.0
-
   flutter_calendar_carousel: ^2.4.0
   pin_code_fields: ^7.4.0
   bottom_bar: ^2.0.2

@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -38,7 +39,7 @@ class _PVouchercodeState extends State<PVouchercode> {
             ),
             backgroundColor: Color(0xff8267AC).withOpacity(0.16),
             title: Text(
-              "Voucher Code",
+              "Voucher Code".tr(),
               style: FontConstant.k18w5008471Text,
             ),
             leading: Row(
@@ -79,10 +80,10 @@ class _PVouchercodeState extends State<PVouchercode> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text("Current Code",
+                            Text("Current Code".tr(),
                                 style: FontConstant.k16w4008471Text
                                     .copyWith(color: Colors.white)),
-                            Text("Valid till",
+                            Text("Valid till".tr(),
                                 style: FontConstant.k16w4008471Text
                                     .copyWith(color: Colors.white)),
                           ],
@@ -111,11 +112,11 @@ class _PVouchercodeState extends State<PVouchercode> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "Issued by ",
+                      "Issued by".tr(),
                       style: FontConstant.k16w400331FText,
                     ),
                     Text(
-                      "ABC Nursery School",
+                      "ABC Nursery School".tr(),
                       style: FontConstant.k16w4008471Text,
                     ),
                   ],
@@ -125,7 +126,7 @@ class _PVouchercodeState extends State<PVouchercode> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "Issued date ",
+                      "Issued date".tr(),
                       style: FontConstant.k16w400331FText,
                     ),
                     Text(
@@ -139,7 +140,7 @@ class _PVouchercodeState extends State<PVouchercode> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "Issued by ",
+                      "Issued by".tr(),
                       style: FontConstant.k16w400331FText,
                     ),
                     Text(
@@ -162,7 +163,7 @@ class _PVouchercodeState extends State<PVouchercode> {
                             //   ),
                             // );
                           },
-                          title: "Change Voucher Code",
+                          title: "Change Voucher Code".tr(),
                           textStyleColor: Colors.white,
                           backgroundColor: ThemeColor.primarycolor),
                     ),

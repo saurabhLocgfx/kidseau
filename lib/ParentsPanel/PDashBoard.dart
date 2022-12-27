@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kidseau/ParentsPanel/PHomeScreen/PHomeScreen.dart';
@@ -409,7 +410,7 @@ class _PDashboardState extends State<PDashboard> {
                     height: 24,
                     // color: pageIndex == 0 ? Colors.green : Colors.grey,
                   ),
-                  Text("Home",
+                  Text("Home".tr(),
                       style: FontConstant.k12w400B7A4Text.copyWith(
                           color: pageIndex == 0
                               ? Color(0xff8267AC)
@@ -439,7 +440,7 @@ class _PDashboardState extends State<PDashboard> {
                         : "assets/images/profileicon.png",
                     height: 24,
                   ),
-                  Text("Profile",
+                  Text("Profile".tr(),
                       style: FontConstant.k12w400B7A4Text.copyWith(
                           color: pageIndex == 1
                               ? Color(0xff8267AC)
@@ -469,7 +470,7 @@ class _PDashboardState extends State<PDashboard> {
                         : "assets/images/Postsicon.png",
                     height: 24,
                   ),
-                  Text("Posts",
+                  Text("Posts".tr(),
                       style: FontConstant.k12w400B7A4Text.copyWith(
                           color: pageIndex == 2
                               ? Color(0xff8267AC)
@@ -499,7 +500,7 @@ class _PDashboardState extends State<PDashboard> {
                         : "assets/images/notificationicon.png",
                     height: 24,
                   ),
-                  Text("Notification",
+                  Text("Notification".tr(),
                       style: FontConstant.k12w400B7A4Text.copyWith(
                           color: pageIndex == 3
                               ? Color(0xff8267AC)
@@ -529,7 +530,7 @@ class _PDashboardState extends State<PDashboard> {
                         : "assets/images/messageicon.png",
                     height: 24,
                   ),
-                  Text("Message",
+                  Text("Message".tr(),
                       style: FontConstant.k12w400B7A4Text.copyWith(
                           color: pageIndex == 4
                               ? Color(0xff8267AC)

@@ -67,7 +67,7 @@ class _PAddReminderState extends State<PAddReminder> {
             ],
           ),
           title: Text(
-            "Reminder",
+            "Reminder".tr(),
             style: FontConstant.k18w5008471Text,
           ),
         ),
@@ -80,13 +80,13 @@ class _PAddReminderState extends State<PAddReminder> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Title",
+                    "Title".tr(),
                     style: FontConstant.k16w500331FText,
                   ),
                   SizedBox(
                     height: 4.h,
                   ),
-                  textfield(context, "Enter Reminder’s title")
+                  textfield(context, "Enter Reminder’s title".tr())
                 ],
               ),
               SizedBox(height: 8.h),
@@ -94,13 +94,13 @@ class _PAddReminderState extends State<PAddReminder> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Time",
+                    "Time".tr(),
                     style: FontConstant.k16w500331FText,
                   ),
                   SizedBox(
                     height: 4.h,
                   ),
-                  textfield(context, "Enter Reminder’s time")
+                  textfield(context, "Enter Reminder’s time".tr())
                 ],
               ),
               SizedBox(height: 8.h),
@@ -108,7 +108,7 @@ class _PAddReminderState extends State<PAddReminder> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Date",
+                    "Date".tr(),
                     style: FontConstant.k16w500331FText,
                   ),
                   SizedBox(
@@ -116,7 +116,7 @@ class _PAddReminderState extends State<PAddReminder> {
                   ),
                   IconTextfield(
                       Icon: "assets/images/calendericon.png",
-                      title: "Select date")
+                      title: "Select date".tr())
                 ],
               ),
               Expanded(
@@ -129,7 +129,7 @@ class _PAddReminderState extends State<PAddReminder> {
                         onTap: () {
                           Reminderaddeddialog(context);
                         },
-                        title: 'Save',
+                        title: 'Save'.tr(),
                         textStyleColor: Colors.white,
                         backgroundColor: ThemeColor.primarycolor),
                   ),
@@ -165,7 +165,7 @@ class _PAddReminderState extends State<PAddReminder> {
                     width: 240,
                   ),
                   Text(
-                    "Reminder Added",
+                    "Reminder Added".tr(),
                     style: FontConstant2.k24w500331Ftext,
                   ),
                   SizedBox(height: 20),

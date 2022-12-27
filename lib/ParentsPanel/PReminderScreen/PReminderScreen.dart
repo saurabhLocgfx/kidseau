@@ -80,7 +80,7 @@ class _PReminderScreenState extends State<PReminderScreen> {
             ],
           ),
           title: Text(
-            "Reminder",
+            "Reminder".tr(),
             style: FontConstant.k18w5008471Text,
           ),
           actions: [/*Image.asset("assets/images/dots2.png")*/],
@@ -105,7 +105,7 @@ class _PReminderScreenState extends State<PReminderScreen> {
                           style: FontConstant2.k18w500331Ftext,
                         ),
                         Text(
-                          "Scheduled  at 08:00 am - 30/09/2022",
+                          "Scheduled  at 08:00 am - 30/09/2022".tr(),
                           style: FontConstant.k16w4008471Text,
                         ),
                       ],
@@ -155,7 +155,7 @@ class _PReminderScreenState extends State<PReminderScreen> {
                           style: FontConstant2.k18w500331Ftext,
                         ),
                         Text(
-                          "Expired",
+                          "Expired".tr(),
                           style: FontConstant.k16w4008471Text,
                         ),
                       ],

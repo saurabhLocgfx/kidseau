@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -85,7 +86,7 @@ class _PKidsDashboardState extends State<PKidsDashboard> {
           title: GestureDetector(
             onTap: () {},
             child: Text(
-              "Kid’s Profile",
+              "Kid’s Profile".tr(),
               style: FontConstant.k18w5008471Text,
             ),
           ),
@@ -222,7 +223,7 @@ class _PKidsDashboardState extends State<PKidsDashboard> {
                   ),
                   Padding(
                     padding: const EdgeInsets.only(left: 4.0),
-                    child: Text("OverView",
+                    child: Text("OverView".tr(),
                         style: FontConstant.k14w500B7A4Text.copyWith(
                             color: pageIndex == 0
                                 ? Color(0xff8267AC)
@@ -247,7 +248,7 @@ class _PKidsDashboardState extends State<PKidsDashboard> {
             },
             child: Row(
               children: [
-                Text("Gallery",
+                Text("Gallery".tr(),
                     style: FontConstant.k14w500B7A4Text.copyWith(
                         color: pageIndex == 1
                             ? Color(0xff8267AC)

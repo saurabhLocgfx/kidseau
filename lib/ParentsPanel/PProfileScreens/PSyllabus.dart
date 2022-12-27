@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:kidseau/ParentsPanel/PHomeScreen/PHomebody.dart';
@@ -44,7 +45,7 @@ class _PSyllabusState extends State<PSyllabus> {
         ),
         backgroundColor: Color(0xff8267AC).withOpacity(0.16),
         title: Text(
-          "Syllabus",
+          "Syllabus".tr(),
           style: FontConstant.k18w5008471Text,
         ),
         leading: Row(
@@ -89,7 +90,7 @@ class _PSyllabusState extends State<PSyllabus> {
                           height: 24,
                           color: Color(0xff84717F),
                         ),
-                        hint: Text('  Today'),
+                        hint: Text('Today'.tr()),
                         items: <String>[
                           'Sunday',
                           'Monday',

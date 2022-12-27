@@ -11,6 +11,7 @@ class Plist2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
+        padding: EdgeInsets.zero,
         physics: NeverScrollableScrollPhysics(),
         itemCount: images2.length,
         shrinkWrap: true,
@@ -91,6 +92,7 @@ class Plist1 extends StatelessWidget {
     return Container(
       height: MediaQuery.of(context).size.height * 0.40,
       child: ListView.builder(
+          padding: EdgeInsets.zero,
           physics: NeverScrollableScrollPhysics(),
           shrinkWrap: true,
           itemCount: images.length,
@@ -98,7 +100,6 @@ class Plist1 extends StatelessWidget {
             return Padding(
               padding: const EdgeInsets.all(2.0),
               child: Container(
-                height: 99,
                 width: 414,
                 color: Colors.white,
                 child: Padding(
@@ -114,7 +115,7 @@ class Plist1 extends StatelessWidget {
                                 image: AssetImage(images[index]))),
                       ),
                       Padding(
-                        padding: EdgeInsets.only(top: 10.0, left: 12),
+                        padding: EdgeInsets.only(top: 20.0, left: 12),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [

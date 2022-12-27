@@ -1,6 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
 import 'package:kidseau/ParentsPanel/POnboardingScreens/POnboardingScreen.dart';
 import 'package:kidseau/Theme.dart';
 import 'package:kidseau/Widgets/buttons.dart';
@@ -22,7 +22,7 @@ class PStartScreen extends StatelessWidget {
           children: [
             Container(
               height: 1.sh,
-              width: Get.size.width,
+              width: MediaQuery.of(context).size.height,
               decoration: BoxDecoration(
                 color: Colors.transparent,
               ),
@@ -69,7 +69,7 @@ class PStartScreen extends StatelessWidget {
                           child: mainlogo(),
                         ),
                         SizedBox(
-                          height: Get.size.height * 0.05,
+                          height: MediaQuery.of(context).size.height * 0.05,
                         ),
                         Row(
                           children: [
@@ -84,7 +84,7 @@ class PStartScreen extends StatelessWidget {
                                               builder: (context) =>
                                                   TOnboardingScreen()));
                                     },
-                                    title: "i'm a Teacher",
+                                    title: "i'm a Teacher".tr(),
                                     textStyleColor: Colors.white,
                                     backgroundColor: ThemeColor.primaryorange),
                               ),
@@ -107,7 +107,7 @@ class PStartScreen extends StatelessWidget {
                                               builder: (context) =>
                                                   POnboardingScreen()));
                                     },
-                                    title: "i'm a Parent",
+                                    title: "i'm a Parent".tr(),
                                     textStyleColor: Colors.white,
                                     backgroundColor: ThemeColor.primarycolor),
                               ),

@@ -18,7 +18,7 @@ class ScheduleScreen extends StatefulWidget {
 }
 
 class _ScheduleScreenState extends State<ScheduleScreen> {
-  bool loading = false;
+  bool loading = true;
   @override
   void initState() {
     getSchedule();
@@ -31,7 +31,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
     rsp.then((value) {
       print(value);
       try {
-        _schedule = value;
+        _schedule = value as TScheduleModel;
         setState(() {
           loading = false;
         });
@@ -110,7 +110,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                 height: 5.h,
               ),
               loading
-                  ? CircularProgressIndicator()
+                  ? Center(child: CircularProgressIndicator())
                   : Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 16),
                       child: TActivity(

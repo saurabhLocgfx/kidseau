@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -42,7 +43,7 @@ class _PFeesState extends State<PFees> {
         ),
         backgroundColor: Color(0xff8267AC).withOpacity(0.16),
         title: Text(
-          "Kid’s Profile",
+          "Fees".tr(),
           style: FontConstant.k18w5008471Text,
         ),
         leading: Row(
@@ -108,7 +109,7 @@ class _PFeesState extends State<PFees> {
                 Align(
                   alignment: Alignment.center,
                   child: Text(
-                    "View Fees Structure",
+                    "View Fees Structure".tr(),
                     style: FontConstant.k18w5008267Text,
                   ),
                 ),

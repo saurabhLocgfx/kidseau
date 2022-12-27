@@ -55,7 +55,11 @@ class _AddAnnouncementState extends State<AddAnnouncement> {
                   height: 24,
                   padding: EdgeInsets.symmetric(horizontal: 15),
                   color: Colors.transparent,
-                  child: Image.asset('assets/images/backarrow.png'),
+                  child: GestureDetector(
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                      child: Image.asset('assets/images/backarrow.png')),
                 ),
               ),
               Padding(
