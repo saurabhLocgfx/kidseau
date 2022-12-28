@@ -1,9 +1,11 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
+import 'package:kidseau/ParentsPanel/POnboardingScreens/POnboardingmodel.dart';
 import 'package:kidseau/TeachersPanel/OnboardingScreens/Onboardingmodel.dart';
 import 'package:kidseau/TeachersPanel/TLoginScreen/TLoginScreen.dart';
 import 'package:kidseau/Theme.dart';
+import 'package:kidseau/shard_prefs/shared_prefs.dart';
 
 class TOnboardingScreen extends StatefulWidget {
   const TOnboardingScreen({Key? key}) : super(key: key);
@@ -23,6 +25,16 @@ class _TOnboardingScreenState extends State<TOnboardingScreen> {
   }
 
   @override
+  void initState() {
+    ezarabic2 = UserPrefs.getArbBool() ?? false;
+
+    super.initState();
+    // print();
+  }
+
+  bool ezarabic2 = false;
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ThemeColor.primarycolor,
@@ -34,7 +46,7 @@ class _TOnboardingScreenState extends State<TOnboardingScreen> {
           children: [
             Container(
               height: 1.sh,
-              width: Get.size.width,
+              width: MediaQuery.of(context).size.width,
               decoration: BoxDecoration(
                   //color: ThemeColor.primarycolor,
                   ),
@@ -94,60 +106,61 @@ class _TOnboardingScreenState extends State<TOnboardingScreen> {
                                   ],
                                 ),
                                 Spacer(),
-                                //  SizedBox(height: 60),
-                                Text(contents[i].title,
+                                Text(contents[i].title.tr(),
                                     style: FontConstant2.k32w500331Ftext),
                                 SizedBox(
-                                  // width: 200.w,
-                                  child: Text(contents[i].discription,
+                                  width: 200.w,
+                                  child: Text(contents[i].discription.tr(),
                                       maxLines: 2,
                                       style: FontConstant.k16w4008471Text),
-                                )
+                                ),
                               ],
                             ),
                           );
                         },
                       ),
                     ),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(
-                              left: 16, top: 10, bottom: 80),
-                          child: Row(
-                            children: List.generate(
-                              contents.length,
-                              (index) => buildDot(index, context),
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          width: 90,
-                          height: 130.h,
-                          child: InkWell(
-                            onTap: () {
-                              if (currentIndex == contents.length - 1) {
-                                Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (_) => TLoginScreen(),
+                    ezarabic2
+                        ? Row(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              SizedBox(
+                                width: 90,
+                                height: 130.h,
+                                child: InkWell(
+                                  onTap: () {
+                                    if (currentIndex == Pcontents.length - 1) {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (_) => TLoginScreen(),
+                                        ),
+                                      );
+                                    }
+                                    controller.nextPage(
+                                      duration: Duration(milliseconds: 300),
+                                      curve: Curves.fastOutSlowIn,
+                                    );
+                                  },
+                                  child: Image.asset(
+                                    "assets/images/onbarrow.png",
+                                    fit: BoxFit.fill,
                                   ),
-                                );
-                              }
-                              controller.nextPage(
-                                duration: Duration(milliseconds: 300),
-                                curve: Curves.fastOutSlowIn,
-                              );
-                            },
-                            child: Image.asset(
-                              "assets/images/onbarrow.png",
-                              fit: BoxFit.fill,
-                            ),
-                          ),
-                        ),
-                        /*Stack(
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                    left: 16, top: 10, bottom: 80),
+                                child: Row(
+                                  children: List.generate(
+                                    Pcontents.length,
+                                    (index) => buildDot(index, context),
+                                  ),
+                                ),
+                              ),
+
+                              /*Stack(
                           children: [
 
                             Padding(
@@ -180,8 +193,82 @@ class _TOnboardingScreenState extends State<TOnboardingScreen> {
                             ),
                           ],
                         ),*/
-                      ],
-                    ),
+                            ],
+                          )
+                        : Row(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                    left: 16, top: 10, bottom: 80),
+                                child: Row(
+                                  children: List.generate(
+                                    Pcontents.length,
+                                    (index) => buildDot(index, context),
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                width: 90,
+                                height: 130.h,
+                                child: InkWell(
+                                  onTap: () {
+                                    if (currentIndex == Pcontents.length - 1) {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (_) => TLoginScreen(),
+                                        ),
+                                      );
+                                    }
+                                    controller.nextPage(
+                                      duration: Duration(milliseconds: 300),
+                                      curve: Curves.fastOutSlowIn,
+                                    );
+                                  },
+                                  child: Image.asset(
+                                    "assets/images/onbarrow.png",
+                                    fit: BoxFit.fill,
+                                  ),
+                                ),
+                              ),
+
+                              /*Stack(
+                          children: [
+
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                  top: 80.0, left: 28),
+                              child: MaterialButton(
+                                minWidth: 25,
+                                onPressed: () {
+                                  if (currentIndex ==
+                                      contents.length - 1) {
+                                    Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (_) =>
+                                            TLoginScreen(),
+                                      ),
+                                    );
+                                  }
+                                  controller.nextPage(
+                                    duration:
+                                    Duration(milliseconds: 300),
+                                    curve: Curves.fastOutSlowIn,
+                                  );
+                                },
+                                child: Icon(
+                                  Icons.arrow_forward,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),*/
+                            ],
+                          ),
                   ],
                 ),
               ),

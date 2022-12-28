@@ -1,5 +1,3 @@
-import 'package:easy_localization/easy_localization.dart';
-
 class UnbordingContent {
   String image;
   String title;
@@ -11,16 +9,16 @@ class UnbordingContent {
 
 List<UnbordingContent> contents = [
   UnbordingContent(
-      title: 'kkm'.tr(),
+      title: 'kkm',
       image: 'assets/images/owlreadingimage.png',
       discription:
-          "Know what your kid is doing in school track their activities".tr()),
+          "Know what your kid is doing in school and track their activities"),
   UnbordingContent(
-      title: 'Build the Future'.tr(),
+      title: 'Build the Future',
       image: 'assets/images/owlcalculatorimage.png',
-      discription: "Give the marks to the kid to help them grow faster.".tr()),
+      discription: "Give the marks to the kid to help them grow faster."),
   UnbordingContent(
-      title: 'Chat with Parents'.tr(),
+      title: 'Chat with Parents',
       image: 'assets/images/owlmobileimage.png',
-      discription: "Talk to the parents".tr()),
+      discription: "Talk to the parents"),
 ];

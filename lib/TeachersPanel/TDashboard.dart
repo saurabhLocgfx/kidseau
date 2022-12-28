@@ -303,7 +303,7 @@ class _TDashboardState extends State<TDashboard> {
   Container buildMyNavBar(BuildContext context) {
     return Container(
       margin: EdgeInsets.all(20),
-      height: 56,
+      height: 56.h,
       width: 382.w,
       decoration: BoxDecoration(
         color: Colors.white,
@@ -322,15 +322,15 @@ class _TDashboardState extends State<TDashboard> {
         children: [
           InkWell(
             onTap: () {
-              selectedIndex = pageIndex = 0;
-              _pageController.jumpToPage(
-                pageIndex,
-              );
-              pageIndex = 0;
-              setState(() {});
+              setState(() {
+                selectedIndex = pageIndex = 0;
+                _pageController.jumpToPage(
+                  pageIndex,
+                );
+                pageIndex = 0;
+              });
             },
             child: Container(
-              height: 48,
               color: Colors.transparent,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -339,13 +339,10 @@ class _TDashboardState extends State<TDashboard> {
                     pageIndex == 0
                         ? "assets/images/homeiconfill.png"
                         : "assets/images/iconhome.png",
-                    height: 24.h,
-                    width: 24.w,
+                    height: 24,
+                    // color: pageIndex == 0 ? Colors.green : Colors.grey,
                   ),
                   Text("Home".tr(),
-                      /*AppLoaclizations.of(context)!
-                          .translate("Home")
-                          .toString(),*/
                       style: FontConstant.k12w400B7A4Text.copyWith(
                           color: pageIndex == 0
                               ? Color(0xff8267AC)
@@ -365,7 +362,6 @@ class _TDashboardState extends State<TDashboard> {
               });
             },
             child: Container(
-              height: 48,
               color: Colors.transparent,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -374,13 +370,9 @@ class _TDashboardState extends State<TDashboard> {
                     pageIndex == 1
                         ? "assets/images/profileiconfill.png"
                         : "assets/images/profileicon.png",
-                    height: 24.h,
-                    width: 24.w,
+                    height: 24,
                   ),
                   Text("Profile".tr(),
-                      /*AppLoaclizations.of(context)!
-                          .translate("Profile")
-                          .toString(),*/
                       style: FontConstant.k12w400B7A4Text.copyWith(
                           color: pageIndex == 1
                               ? Color(0xff8267AC)
@@ -400,7 +392,6 @@ class _TDashboardState extends State<TDashboard> {
               });
             },
             child: Container(
-              height: 48,
               color: Colors.transparent,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -409,13 +400,9 @@ class _TDashboardState extends State<TDashboard> {
                     pageIndex == 2
                         ? "assets/images/postsiconfill.png"
                         : "assets/images/Postsicon.png",
-                    height: 24.h,
-                    width: 24.w,
+                    height: 24,
                   ),
                   Text("Posts".tr(),
-                      /*AppLoaclizations.of(context)!
-                          .translate("Posts")
-                          .toString(),*/
                       style: FontConstant.k12w400B7A4Text.copyWith(
                           color: pageIndex == 2
                               ? Color(0xff8267AC)
@@ -435,22 +422,17 @@ class _TDashboardState extends State<TDashboard> {
               });
             },
             child: Container(
-              height: 48,
               color: Colors.transparent,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Image.asset(
                     pageIndex == 3
-                        ? "assets/images/studioniconfill.png"
-                        : "assets/images/studenticon.png",
-                    height: 24.h,
-                    width: 24.w,
+                        ? "assets/images/notificationiconfill.png"
+                        : "assets/images/notificationicon.png",
+                    height: 24,
                   ),
-                  Text("Kids".tr(),
-                      /*AppLoaclizations.of(context)!
-                          .translate("Kids")
-                          .toString(),*/
+                  Text("Notification".tr(),
                       style: FontConstant.k12w400B7A4Text.copyWith(
                           color: pageIndex == 3
                               ? Color(0xff8267AC)
@@ -470,7 +452,6 @@ class _TDashboardState extends State<TDashboard> {
               });
             },
             child: Container(
-              height: 48,
               color: Colors.transparent,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -479,13 +460,9 @@ class _TDashboardState extends State<TDashboard> {
                     pageIndex == 4
                         ? "assets/images/messageiconfill.png"
                         : "assets/images/messageicon.png",
-                    height: 24.h,
-                    width: 24.w,
+                    height: 24,
                   ),
                   Text("Message".tr(),
-                      /*AppLoaclizations.of(context)!
-                          .translate("Message")
-                          .toString(),*/
                       style: FontConstant.k12w400B7A4Text.copyWith(
                           color: pageIndex == 4
                               ? Color(0xff8267AC)
@@ -494,6 +471,97 @@ class _TDashboardState extends State<TDashboard> {
               ),
             ),
           ),
+
+          // IconButton(
+          //     // enableFeedback: false,
+          //     onPressed: () {
+          //       setState(() {
+          //         pageIndex = 0;
+          //       });
+          //     },
+          //     icon: pageIndex == 0
+          //         ? const ImageIcon(
+          //             AssetImage("assets/images/Galleryfill.png"),
+          //             color: Color(0xffB7A4B2),
+          //             size: 35,
+          //           )
+          //         : const ImageIcon(
+          //             AssetImage("assets/images/galleryicon.png"),
+          //             color: Color(0xffB7A4B2),
+          //             size: 35,
+          //           )),
+          // IconButt on(
+          //     // enableFeedback: false,
+          //     onPressed: () {
+          //       setState(() {
+          //         pageIndex = 1;
+          //       });
+          //     },
+          //     icon: pageIndex == 1
+          //         ? const ImageIcon(
+          //             AssetImage("assets/images/Galleryfill.png"),
+          //             color: Color(0xff8267AC),
+          //             size: 35,
+          //           )
+          //         : const ImageIcon(
+          //             AssetImage("assets/images/galleryicon.png"),
+          //             color: Color(0xffB7A4B2),
+          //             size: 35,
+          //           )),
+          // IconButton(
+          //     // enableFeedback: false,
+          //     onPressed: () {
+          //       setState(() {
+          //         pageIndex = 2;
+          //       });
+          //     },
+          //     icon: pageIndex == 2
+          //         ? const ImageIcon(
+          //             AssetImage("assets/images/Galleryfill.png"),
+          //             color: Color(0xff8267AC),
+          //             size: 35,
+          //           )
+          //         : const ImageIcon(
+          //             AssetImage("assets/images/galleryicon.png"),
+          //             color: Color(0xffB7A4B2),
+          //             size: 35,
+          //           )),
+          // IconButton(
+          //     // enableFeedback: false,
+          //     onPressed: () {
+          //       setState(() {
+          //         pageIndex = 3;
+          //       });
+          //     },
+          //     icon: pageIndex == 3
+          //         ? const ImageIcon(
+          //             AssetImage("assets/images/Galleryfill.png"),
+          //             color: Color(0xff8267AC),
+          //             size: 35,
+          //           )
+          //         : const ImageIcon(
+          //             AssetImage("assets/images/galleryicon.png"),
+          //             color: Color(0xffB7A4B2),
+          //             size: 35,
+          //           )),
+          // IconButton(
+          //     // enableFeedback: false,
+          //     onPressed: () {
+          //       setState(() {
+          //         pageIndex = 4;
+          //       });
+          //     },
+          //     icon: pageIndex == 4
+          //         ? const ImageIcon(
+          //             AssetImage("assets/images/Galleryfill.png"),
+          //             color: Color(0xffB7A4B2),
+          //             size: 35,
+          //           )
+          //         : const ImageIcon(
+          //             AssetImage("assets/images/galleryicon.png"),
+          //             color: Colors.white,
+          //             size: 35,
+          //           )),
         ],
       ),
     );

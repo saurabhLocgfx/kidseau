@@ -12,6 +12,7 @@ import 'package:kidseau/api/Teacherpanelapi/Tmodel/THomemodel.dart';
 import 'package:kidseau/api/Teacherpanelapi/Tmodel/TScheduleModel.dart';
 import 'package:kidseau/api/Teacherpanelapi/Tschedule_api/schedule_api.dart';
 import 'package:kidseau/api/Teacherpanelapi/teacher_home_api/THomeApi.dart';
+import 'package:kidseau/shard_prefs/shared_prefs.dart';
 
 import '../../restartappwidget/restartwidgets.dart';
 import '../TReminder/TReminderScreen.dart';
@@ -20,6 +21,7 @@ import 'TLearningAlphabets.dart';
 import 'TScheduleScreen.dart';
 
 class THomeScreen extends StatefulWidget {
+  bool Ezarabic = false;
   THomeScreen({
     Key? key,
   }) : super(key: key);
@@ -130,93 +132,88 @@ class _THomeScreenState extends State<THomeScreen> {
                             return [
                               PopupMenuItem(
                                 enabled: true,
-                                child: Padding(
-                                  padding: const EdgeInsets.only(
-                                      left: 15.0, top: 15, bottom: 15),
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      GestureDetector(
-                                        onTap: () {
-                                          context.locale = Locale('en', 'US');
-                                          RestartWidget.restartApp(context);
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    GestureDetector(
+                                      onTap: () {
+                                        UserPrefs.setEArbBool(false);
+                                        context.locale = Locale('en', 'US');
+                                        RestartWidget.restartApp(context);
 
-                                          setState(() {
-                                            colorChange;
-                                          });
-                                        },
-                                        child: Row(
-                                          children: [
-                                            Text(
-                                              ("English"),
-                                              style: colorChange
-                                                  ? FontConstant.k16w5008267Text
-                                                  : FontConstant
-                                                      .k18w5008471Text,
-                                            )
-                                          ],
-                                        ),
+                                        setState(() {
+                                          colorChange;
+                                        });
+                                      },
+                                      child: Row(
+                                        children: [
+                                          Text(
+                                            ("English"),
+                                            style: colorChange
+                                                ? FontConstant.k16w5008267Text
+                                                : FontConstant.k18w5008471Text,
+                                          )
+                                        ],
                                       ),
-                                      SizedBox(height: 20),
-                                      GestureDetector(
-                                        onTap: () {
-                                          context.locale = Locale('fr', 'FR');
-                                          RestartWidget.restartApp(context);
+                                    ),
+                                    SizedBox(height: 20),
+                                    GestureDetector(
+                                      onTap: () {
+                                        UserPrefs.setEArbBool(false);
+                                        context.locale = Locale('fr', 'FR');
+                                        RestartWidget.restartApp(context);
 
-                                          setState(() {
-                                            colorChange;
-                                          });
-                                          // Navigator.of(context).push(
-                                          //   MaterialPageRoute(
-                                          //     builder: (context) => Fees(),
-                                          //   ),
-                                          // );
-                                        },
-                                        child: Row(
-                                          children: [
-                                            Text(
-                                              ("French"),
-                                              style: colorChange
-                                                  ? FontConstant.k16w5008267Text
-                                                  : FontConstant
-                                                      .k18w5008471Text,
-                                            )
-                                          ],
-                                        ),
+                                        setState(() {
+                                          colorChange;
+                                        });
+                                        // Navigator.of(context).push(
+                                        //   MaterialPageRoute(
+                                        //     builder: (context) => Fees(),
+                                        //   ),
+                                        // );
+                                      },
+                                      child: Row(
+                                        children: [
+                                          Text(
+                                            ("French"),
+                                            style: colorChange
+                                                ? FontConstant.k16w5008267Text
+                                                : FontConstant.k18w5008471Text,
+                                          )
+                                        ],
                                       ),
-                                      SizedBox(height: 20),
-                                      GestureDetector(
-                                        onTap: () {
-                                          context.locale = Locale('ar', 'AR');
-                                          RestartWidget.restartApp(context);
+                                    ),
+                                    SizedBox(height: 20),
+                                    GestureDetector(
+                                      onTap: () {
+                                        UserPrefs.setEArbBool(true);
+                                        context.locale = Locale('ar', 'AR');
+                                        RestartWidget.restartApp(context);
 
-                                          setState(() {
-                                            colorChange;
-                                          });
-                                          /* Navigator.pop(context);
-                                            Navigator.of(context).push(
-                                              MaterialPageRoute(
-                                                builder: (context) =>
-                                                    TSettings(),
-                                              ),
-                                            );*/
-                                        },
-                                        child: Row(
-                                          children: [
-                                            Text(
-                                              ("Arabic"),
-                                              style: colorChange
-                                                  ? FontConstant.k16w5008267Text
-                                                  : FontConstant
-                                                      .k18w5008471Text,
-                                            )
-                                          ],
-                                        ),
+                                        setState(() {
+                                          colorChange;
+                                        });
+                                        /* Navigator.pop(context);
+                                          Navigator.of(context).push(
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  TSettings(),
+                                            ),
+                                          );*/
+                                      },
+                                      child: Row(
+                                        children: [
+                                          Text(
+                                            ("Arabic"),
+                                            style: colorChange
+                                                ? FontConstant.k16w5008267Text
+                                                : FontConstant.k18w5008471Text,
+                                          )
+                                        ],
                                       ),
-                                    ],
-                                  ),
+                                    ),
+                                  ],
                                 ),
                               ),
                             ];
