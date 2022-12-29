@@ -11,6 +11,8 @@ class ThemeColor {
   static const Color darkpurple = Color(0xff84717F);
   static const Color b7A4B2 = Color(0xFFB7A4B2);
   static const Color ebe6F2 = Color(0xFFebe6F2);
+  static const Color be74aa = Color(0xFFBE74AA);
+  static const Color f0e0ec = Color(0xFFF0E0EC);
 }
 
 // ------------------FONTS-------------------
@@ -103,6 +105,8 @@ class FontConstant {
     fontSize: 14,
     color: Color(0xffB7A4B2),
   );
+  static TextStyle k14w5008267AC = GoogleFonts.balooDa2(
+      fontWeight: FontWeight.w500, fontSize: 14, color: Color(0xff8267AC));
 
   static TextStyle k18w500materialbuttonText = GoogleFonts.balooDa2(
       fontWeight: FontWeight.w500, fontSize: 18, color: Colors.white);

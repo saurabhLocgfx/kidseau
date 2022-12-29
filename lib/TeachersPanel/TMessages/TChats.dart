@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:grouped_list/grouped_list.dart';
-import 'package:kidseau/TeachersPanel/TMessages/TOpenChats.dart';
 import 'package:kidseau/Theme.dart';
 import 'package:kidseau/Widgets/popups.dart';
 
@@ -156,15 +155,15 @@ class _TChatsState extends State<TChats> {
             child: Column(
               children: [
                 SizedBox(
-                  height: 110.h,
+                  height: 130.h,
                 ),
                 GestureDetector(
                   onTap: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => TOpenChats(),
-                      ),
-                    );
+                    // Navigator.of(context).push(
+                    //   MaterialPageRoute(
+                    //     builder: (context) => TOpenChats(),
+                    //   ),
+                    // );
                   },
                   child: Row(
                     children: [

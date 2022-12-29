@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kidseau/ParentsPanel/PHomeScreen/PHomeScreen.dart';
 import 'package:kidseau/TeachersPanel/THomeScreen/TAllStudentsScreen.dart';
+import 'package:kidseau/TeachersPanel/THomeScreen/THomeScreen.dart';
 import 'package:kidseau/Theme.dart';
 import 'package:kidseau/Widgets/buttons.dart';
 import 'package:kidseau/api/Teacherpanelapi/Tmodel/TScheduleModel.dart';
@@ -174,6 +175,8 @@ class _TGroupScreenState extends State<TGroupScreen> {
                   style: FontConstant2.baloothampifont,
                 ),
               ),
+              schedulewidgetapi(),
+
               // Padding(
               //   padding: EdgeInsets.symmetric(horizontal: 16),
               //   child: loadingData

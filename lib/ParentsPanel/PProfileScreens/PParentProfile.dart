@@ -48,7 +48,7 @@ class _PParentsProfileState extends State<PParentsProfile> {
                           image:
                               AssetImage("assets/images/profileperson.png"))),
                 ),
-                SizedBox(width: 24),
+                SizedBox(width: 16),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -77,19 +77,22 @@ class _PParentsProfileState extends State<PParentsProfile> {
                 ),
               );
             },
-            child: Container(
-              height: 132,
-              padding: EdgeInsets.only(left: 16),
-              child: ListView.separated(
-                  shrinkWrap: true,
-                  scrollDirection: Axis.horizontal,
-                  itemBuilder: (context, index) {
-                    return Studentcard();
-                  },
-                  separatorBuilder: (ctx, ind) => SizedBox(
-                        width: 10,
-                      ),
-                  itemCount: 3),
+            child: Padding(
+              padding: const EdgeInsets.only(right: 10.0),
+              child: Container(
+                height: 132,
+                padding: EdgeInsets.only(left: 16),
+                child: ListView.separated(
+                    shrinkWrap: true,
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context, index) {
+                      return Studentcard();
+                    },
+                    separatorBuilder: (ctx, ind) => SizedBox(
+                          width: 10,
+                        ),
+                    itemCount: 3),
+              ),
             ),
           ),
           SizedBox(

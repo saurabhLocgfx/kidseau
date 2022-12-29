@@ -251,10 +251,10 @@ class _TStudentScreenState extends State<TStudentScreen> {
                   itemBuilder: (context, index) {
                     return GestureDetector(
                       onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => TStudentDetailScreen()));
+                        // Navigator.push(
+                        //     context,
+                        //     MaterialPageRoute(
+                        //         builder: (context) => TStudentDetailScreen()));
                       },
                       child: Container(
                         width: 1.sw,
@@ -272,15 +272,25 @@ class _TStudentScreenState extends State<TStudentScreen> {
                         ),
                         child: Row(
                           children: [
-                            Container(
-                              width: 80,
-                              height: 105,
-                              clipBehavior: Clip.hardEdge,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(8),
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          TStudentDetailScreen()),
+                                );
+                              },
+                              child: Container(
+                                width: 80,
+                                height: 105,
+                                clipBehavior: Clip.hardEdge,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                child: Image.asset(
+                                    'assets/images/Rectangle 2715.png'),
                               ),
-                              child: Image.asset(
-                                  'assets/images/Rectangle 2715.png'),
                             ),
                             SizedBox(width: 12),
                             Expanded(

@@ -38,6 +38,8 @@ Future<dynamic> notificationdialog(BuildContext context) {
                   ),
                   SizedBox(height: 24),
                   Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Expanded(
                         child: SizedBox(

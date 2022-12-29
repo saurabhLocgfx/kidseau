@@ -80,7 +80,7 @@ class _TParentProfileState extends State<TParentProfile> {
                               image: AssetImage(
                                   "assets/images/profileperson.png"))),
                     ),
-                    SizedBox(width: 24),
+                    SizedBox(width: 16),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.center,

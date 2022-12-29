@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kidseau/ParentsPanel/PNotificationScreen/PNotificationScreen.dart';
 import 'package:kidseau/Theme.dart';
 import 'package:kidseau/Widgets/widgets.dart';
@@ -90,7 +91,7 @@ class Plist1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height * 0.40,
+      height: MediaQuery.of(context).size.height * 0.30.h,
       child: ListView.builder(
           padding: EdgeInsets.zero,
           physics: NeverScrollableScrollPhysics(),

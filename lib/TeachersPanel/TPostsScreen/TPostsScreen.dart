@@ -100,6 +100,14 @@ class _TPostsScreenState extends State<TPostsScreen> {
                               ),
                               SizedBox(width: 10),
                               Text(
+                                "2.4k".tr(),
+                                /*AppLoaclizations.of(context)!
+                                    .translate("likes")
+                                    .toString(),*/
+                                style: FontConstant.k16w4008471Text,
+                              ),
+                              SizedBox(width: 5),
+                              Text(
                                 "likes".tr(),
                                 /*AppLoaclizations.of(context)!
                                     .translate("likes")

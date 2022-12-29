@@ -19,7 +19,7 @@ class _TEditProfileScreenState extends State<TEditProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFF8F6FA),
+      // backgroundColor: Color(0xFF8267AC),
       appBar: AppBar(
         toolbarHeight: 70.0,
         flexibleSpace: ClipRect(
@@ -61,6 +61,7 @@ class _TEditProfileScreenState extends State<TEditProfileScreen> {
       ),
       body: SingleChildScrollView(
         child: Container(
+          // height: 414,
           decoration: BoxDecoration(
               image: DecorationImage(
                   image: AssetImage(

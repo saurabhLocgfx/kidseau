@@ -185,7 +185,7 @@ class _TStudentDetailScreenState extends State<TStudentDetailScreen> {
                                         image: AssetImage(
                                             "assets/images/profileperson.png"))),
                               ),
-                              SizedBox(width: 24),
+                              SizedBox(width: 16),
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -398,9 +398,6 @@ class _TStudentDetailScreenState extends State<TStudentDetailScreen> {
                                                         "Attendance".tr(),
                                                         style: FontConstant
                                                             .k16w5008471Text,
-                                                      ),
-                                                      SizedBox(
-                                                        height: 5.h,
                                                       ),
                                                       Row(
                                                         mainAxisAlignment:

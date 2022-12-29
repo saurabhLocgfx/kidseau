@@ -2,12 +2,11 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:kidseau/ParentsPanel/PSignUpScreen/Parentinfodashboard.dart';
 import 'package:kidseau/Theme.dart';
 import 'package:kidseau/Widgets/buttons.dart';
 import 'package:kidseau/Widgets/widgets.dart';
 import 'package:kidseau/api/parent_signup_apis/voucher_code_api.dart';
-
-import '../../Parentinfo.dart';
 
 class PSignupCode extends StatelessWidget {
   PSignupCode({Key? key}) : super(key: key);
@@ -33,11 +32,13 @@ class PSignupCode extends StatelessWidget {
                     SizedBox(height: 80),
                     mainlogo(),
                     SizedBox(height: 08),
-                    Text(
-                      "We offer a new way to track your children and watch them grow"
-                          .tr(),
-                      style: FontConstant.k16w4008471Text,
-                      textAlign: TextAlign.center,
+                    Center(
+                      child: Text(
+                        "We offer a new way to track your children and watch them grow"
+                            .tr(),
+                        style: FontConstant.k16w4008471Text,
+                        textAlign: TextAlign.center,
+                      ),
                     ),
                     SizedBox(height: 35),
                     Text(
@@ -116,44 +117,49 @@ class PSignupCode extends StatelessWidget {
                     SizedBox(
                       height: 40,
                     ),
-                    SizedBox(
-                      height: 52.h,
-                      width: 382.w,
-                      child: MainButton(
-                          onTap: () {
-                            if (_formKey.currentState!.validate()) {
-                              final resp = VoucherCode()
-                                  .get(Vouchercode: voucherCodeText.text);
-                              resp.then((value) {
-                                print(value);
-                                if (value['status'] == 0) {
-                                  Fluttertoast.showToast(msg: value['msg']);
-                                } else {
-                                  //navigate to
-                                  //UserPrefs.setCookies(value['key']);
-                                  Navigator.of(context).push(MaterialPageRoute(
-                                      builder: (context) => ParentInfo()));
-                                  /* Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => PDashboard()),
-                                );*/
-                                  /*Fluttertoast.showToast(
-                                    msg: 'Your OTP is ${value['voucher']}');*/
-                                }
-                              });
-                              print(voucherCodeText.text);
+                    Align(
+                      alignment: Alignment.bottomCenter,
+                      child: SizedBox(
+                        height: 52.h,
+                        width: 382.w,
+                        child: MainButton(
+                            onTap: () {
+                              if (_formKey.currentState!.validate()) {
+                                final resp = VoucherCode()
+                                    .get(Vouchercode: voucherCodeText.text);
+                                resp.then((value) {
+                                  print(value);
+                                  if (value['status'] == 0) {
+                                    Fluttertoast.showToast(msg: value['msg']);
+                                  } else {
+                                    //navigate to
+                                    //UserPrefs.setCookies(value['key']);
+                                    Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                Parentinfodashboard()));
+                                    /* Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => PDashboard()),
+                                  );*/
+                                    /*Fluttertoast.showToast(
+                                      msg: 'Your OTP is ${value['voucher']}');*/
+                                  }
+                                });
+                                print(voucherCodeText.text);
+                              }
                             }
-                          }
-                          // Navigator.push(
-                          //   context,
-                          // MaterialPageRoute(
-                          //     builder: (context) => Informationfill()),
-                          // );
-                          ,
-                          title: "Continue".tr(),
-                          textStyleColor: Colors.white,
-                          backgroundColor: ThemeColor.primarycolor),
+                            // Navigator.push(
+                            //   context,
+                            // MaterialPageRoute(
+                            //     builder: (context) => Informationfill()),
+                            // );
+                            ,
+                            title: "Continue".tr(),
+                            textStyleColor: Colors.white,
+                            backgroundColor: ThemeColor.primarycolor),
+                      ),
                     ),
                     SizedBox(height: 13.h),
                   ],

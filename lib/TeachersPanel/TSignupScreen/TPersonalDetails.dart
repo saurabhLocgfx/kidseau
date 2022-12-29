@@ -154,6 +154,7 @@ class _TPersonalDetailsState extends State<TPersonalDetails> {
                     )
                   ],
                 ),
+                SizedBox(height: 10),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -209,6 +210,7 @@ class _TPersonalDetailsState extends State<TPersonalDetails> {
                     )
                   ],
                 ),
+                SizedBox(height: 10),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -319,6 +321,7 @@ class _TPersonalDetailsState extends State<TPersonalDetails> {
                           )
                   ],
                 ),
+                SizedBox(height: 10),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -328,6 +331,31 @@ class _TPersonalDetailsState extends State<TPersonalDetails> {
                     ),
                     SizedBox(height: 4),
                     TextFormField(
+                      onTap: () async {
+                        DateTime? pickedDate = await showDatePicker(
+                            context: context,
+                            initialDate: DateTime.now(),
+                            firstDate: DateTime(1970),
+                            lastDate: DateTime(2100));
+
+                        if (pickedDate != null) {
+                          print(
+                              pickedDate); //pickedDate output format => 2021-03-10 00:00:00.000
+                          String formattedDate =
+                              DateFormat('yyyy-MM-dd').format(pickedDate);
+                          print(
+                              formattedDate); //formatted date output using intl package =>  2021-03-16
+                          //you can implement different kind of Date Format here according to your requirement
+
+                          setState(() {
+                            dateController.text =
+                                formattedDate; //set output date to TextField value.
+                          });
+                        } else {
+                          print("Date is not selected");
+                        }
+                      },
+                      readOnly: true,
                       validator: (birth) {
                         if (birth == null || birth.isEmpty) {
                           return 'Enter date of birth';
@@ -341,9 +369,42 @@ class _TPersonalDetailsState extends State<TPersonalDetails> {
                             BoxConstraints(minHeight: 21, minWidth: 21),
                         suffixIcon: Padding(
                           padding: const EdgeInsets.only(right: 15),
-                          child: ImageIcon(
-                            AssetImage("assets/images/calendericon.png"),
-                            size: 21,
+                          child: GestureDetector(
+                            onTap: () async {
+                              DateTime? pickedDate = await showDatePicker(
+                                  context: context,
+                                  initialDate: DateTime.now(),
+                                  firstDate: DateTime(1970),
+                                  lastDate: DateTime(2100));
+
+                              if (pickedDate != null) {
+                                print(
+                                    pickedDate); //pickedDate output format => 2021-03-10 00:00:00.000
+                                String formattedDate =
+                                    DateFormat('yyyy-MM-dd').format(pickedDate);
+                                print(
+                                    formattedDate); //formatted date output using intl package =>  2021-03-16
+                                //you can implement different kind of Date Format here according to your requirement
+
+                                setState(() {
+                                  dateController.text =
+                                      formattedDate; //set output date to TextField value.
+                                });
+                              } else {
+                                print("Date is not selected");
+                              }
+                            },
+                            // onTap: () {
+                            //   showDatePicker(
+                            //       context: context,
+                            //       initialDate: DateTime.now(),
+                            //       firstDate: DateTime(1970),
+                            //       lastDate: DateTime(2100));
+                            // },
+                            child: ImageIcon(
+                              AssetImage("assets/images/calendericon.png"),
+                              size: 21,
+                            ),
                           ),
                         ),
                         suffixIconColor: Color(0xffB7A4B2),
@@ -358,7 +419,7 @@ class _TPersonalDetailsState extends State<TPersonalDetails> {
                               BorderSide(color: Color(0xffBE74AA), width: 1.0),
                         ),
                         isDense: true,
-                        hintText: "yyyy/mm/jj".tr(),
+                        hintText: "yyyy/mm/dd".tr(),
                         filled: true,
                         fillColor: Colors.white,
                         hintStyle: FontConstant.k14w400lightText.copyWith(
@@ -372,6 +433,7 @@ class _TPersonalDetailsState extends State<TPersonalDetails> {
                         title: "dd/mm/yyyy")*/
                   ],
                 ),
+                SizedBox(height: 10),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -414,6 +476,7 @@ class _TPersonalDetailsState extends State<TPersonalDetails> {
                     //textfield(context, "Enter your highest degree")
                   ],
                 ),
+                SizedBox(height: 10),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -456,6 +519,7 @@ class _TPersonalDetailsState extends State<TPersonalDetails> {
                     //textfield(context, "Enter your highest degree")
                   ],
                 ),
+                SizedBox(height: 10),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -466,36 +530,47 @@ class _TPersonalDetailsState extends State<TPersonalDetails> {
                     SizedBox(height: 4),
                     Container(
                       padding: EdgeInsets.only(left: 20),
-                      height: 56.h,
-                      width: 382.w,
+                      height: 60.h,
+                      width: 1.sw,
                       decoration: BoxDecoration(
                           color: Color(0xffFFFFFF),
-                          borderRadius: BorderRadius.all(Radius.circular(20))),
-                      child: DropdownButton<String>(
-                        hint: Text(
-                          "Select your gender".tr(),
+                          borderRadius: BorderRadius.all(Radius.circular(30))),
+                      child: Center(
+                        child: Container(
+                          color: Colors.white,
+                          child: DropdownButton<String>(
+                            alignment: Alignment.topRight,
+                            borderRadius: BorderRadius.circular(30),
+                            dropdownColor: Color(0xffffffff),
+                            hint: Text(
+                              "Select your gender".tr(),
+                            ),
+                            icon: Padding(
+                              padding: const EdgeInsets.only(right: 15.0),
+                              child: Image.asset(
+                                "assets/images/downarrow.png",
+                                height: 15,
+                                width: 15,
+                              ),
+                            ),
+                            elevation: 0,
+                            isExpanded: true,
+                            underline: SizedBox(),
+                            value: _selectedText,
+                            items: <String>['male', 'female', 'other']
+                                .map((String value) {
+                              return DropdownMenuItem<String>(
+                                value: value,
+                                child: Text(value),
+                              );
+                            }).toList(),
+                            onChanged: (String? val) {
+                              setState(() {
+                                _selectedText = val!;
+                              });
+                            },
+                          ),
                         ),
-                        icon: Image.asset(
-                          "assets/images/downarrow.png",
-                          height: 15,
-                          width: 15,
-                        ),
-                        elevation: 0,
-                        isExpanded: true,
-                        underline: SizedBox(),
-                        value: _selectedText,
-                        items: <String>['male', 'female', 'other']
-                            .map((String value) {
-                          return DropdownMenuItem<String>(
-                            value: value,
-                            child: Text(value),
-                          );
-                        }).toList(),
-                        onChanged: (String? val) {
-                          setState(() {
-                            _selectedText = val!;
-                          });
-                        },
                       ),
                     ),
                     /*  IconTextfield(
@@ -503,7 +578,7 @@ class _TPersonalDetailsState extends State<TPersonalDetails> {
                         title: "Select your gender")*/
                   ],
                 ),
-                SizedBox(height: 32),
+                SizedBox(height: 10),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -546,6 +621,7 @@ class _TPersonalDetailsState extends State<TPersonalDetails> {
                     //textfield(context, "Enter your parmanent address")
                   ],
                 ),
+                SizedBox(height: 10),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -556,20 +632,28 @@ class _TPersonalDetailsState extends State<TPersonalDetails> {
                     SizedBox(height: 4),
                     Container(
                       padding: EdgeInsets.only(left: 20),
-                      height: 56.h,
-                      width: 382.w,
+                      height: 62.h,
+                      width: 1.sw,
                       decoration: BoxDecoration(
                           color: Color(0xffFFFFFF),
-                          borderRadius: BorderRadius.all(Radius.circular(20))),
+                          borderRadius: BorderRadius.all(Radius.circular(30))),
                       child: DropdownButton<String>(
+                        alignment: Alignment.topCenter,
+                        borderRadius: BorderRadius.circular(30),
+                        dropdownColor: Color(0xffffffff),
                         isExpanded: true,
                         hint: Text(
                           "Choose Language",
                         ),
-                        icon: Image.asset(
-                          "assets/images/downarrow.png",
-                          height: 15,
-                          width: 15,
+                        icon: Center(
+                          child: Padding(
+                            padding: const EdgeInsets.only(right: 16.0),
+                            child: Image.asset(
+                              "assets/images/downarrow.png",
+                              height: 15,
+                              width: 15,
+                            ),
+                          ),
                         ),
                         elevation: 0,
                         underline: SizedBox(),
@@ -601,39 +685,52 @@ class _TPersonalDetailsState extends State<TPersonalDetails> {
                         title: "Select your gender")*/
                   ],
                 ),
-                SizedBox(
-                  height: 40,
-                  child: ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: languageList.length,
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (context, i) {
-                        return Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 10),
-                          child: Container(
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(40),
-                                border: Border.all(
-                                    color: ThemeColor.primarycolor, width: 1)),
-                            child: Row(
-                              children: [
-                                SizedBox(
-                                  width: 5,
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      height: 40,
+                      child: ListView.builder(
+                          shrinkWrap: true,
+                          itemCount: languageList.length,
+                          scrollDirection: Axis.horizontal,
+                          itemBuilder: (context, i) {
+                            return Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 10),
+                              child: Container(
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(40),
+                                    border: Border.all(
+                                        color: ThemeColor.primarycolor,
+                                        width: 1)),
+                                child: Row(
+                                  children: [
+                                    SizedBox(
+                                      width: 5,
+                                    ),
+                                    Text(languageList[i]),
+                                    InkWell(
+                                        onTap: () {
+                                          setState(() {
+                                            languageList.removeAt(i);
+                                          });
+                                        },
+                                        child: Icon(Icons.close))
+                                  ],
                                 ),
-                                Text(languageList[i]),
-                                Icon(Icons.close)
-                              ],
-                            ),
-                          ),
-                        );
-                      }),
+                              ),
+                            );
+                          }),
+                    ),
+                  ],
                 ),
                 SizedBox(
-                  height: 40,
+                  height: 65.h,
                 ),
                 SizedBox(
                   height: 52,
-                  width: 382,
+                  width: 1.sw,
                   child: MainButton(
                       onTap: () {
                         print(langListId);

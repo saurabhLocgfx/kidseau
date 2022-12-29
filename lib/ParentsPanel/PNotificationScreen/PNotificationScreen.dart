@@ -82,7 +82,7 @@ class _PNotificationScreenState extends State<PNotificationScreen> {
             Notificationpopup(
               image: "assets/images/markicon.png",
               title: "Mark all as read".tr(),
-              image2: "assets/images/markicon.png",
+              image2: "assets/images/gearicon.png",
               title2: "Notification settings".tr(),
             ),
           ],

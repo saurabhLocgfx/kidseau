@@ -7,6 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kidseau/ParentsPanel/PReminderScreen/PReminderScreen.dart';
 import 'package:kidseau/Theme.dart';
 import 'package:kidseau/restartappwidget/restartwidgets.dart';
+import 'package:kidseau/shard_prefs/shared_prefs.dart';
 
 class PPostScreen extends StatefulWidget {
   const PPostScreen({Key? key}) : super(key: key);
@@ -66,107 +67,122 @@ class _PPostScreenState extends State<PPostScreen> {
                           return [
                             PopupMenuItem(
                               enabled: true,
-                              child: Padding(
-                                padding: const EdgeInsets.only(
-                                    left: 15.0, top: 15, bottom: 15),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    GestureDetector(
-                                      onTap: () {
-                                        context.locale = Locale('en', 'US');
-                                        RestartWidget.restartApp(context);
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  GestureDetector(
+                                    onTap: () {
+                                      UserPrefs.setEArbBool(false);
+                                      context.locale = Locale('en', 'US');
+                                      RestartWidget.restartApp(context);
 
-                                        setState(() {
-                                          colorChange;
-                                        });
-                                      },
-                                      child: Row(
-                                        children: [
-                                          Text(
-                                            ("English"),
-                                            style: colorChange
-                                                ? FontConstant.k16w5008267Text
-                                                : FontConstant.k18w5008471Text,
-                                          )
-                                        ],
-                                      ),
+                                      setState(() {
+                                        colorChange;
+                                      });
+                                    },
+                                    child: Row(
+                                      children: [
+                                        Text(
+                                          ("English"),
+                                          style: colorChange
+                                              ? FontConstant.k16w5008267Text
+                                              : FontConstant.k18w5008471Text,
+                                        )
+                                      ],
                                     ),
-                                    SizedBox(height: 20),
-                                    GestureDetector(
-                                      onTap: () {
-                                        context.locale = Locale('fr', 'FR');
-                                        RestartWidget.restartApp(context);
+                                  ),
+                                  SizedBox(height: 20),
+                                  GestureDetector(
+                                    onTap: () {
+                                      UserPrefs.setEArbBool(false);
+                                      context.locale = Locale('fr', 'FR');
+                                      RestartWidget.restartApp(context);
 
-                                        setState(() {
-                                          colorChange;
-                                        });
-                                        // Navigator.of(context).push(
-                                        //   MaterialPageRoute(
-                                        //     builder: (context) => Fees(),
-                                        //   ),
-                                        // );
-                                      },
-                                      child: Row(
-                                        children: [
-                                          Text(
-                                            ("French"),
-                                            style: colorChange
-                                                ? FontConstant.k16w5008267Text
-                                                : FontConstant.k18w5008471Text,
-                                          )
-                                        ],
-                                      ),
+                                      setState(() {
+                                        colorChange;
+                                      });
+                                      // Navigator.of(context).push(
+                                      //   MaterialPageRoute(
+                                      //     builder: (context) => Fees(),
+                                      //   ),
+                                      // );
+                                    },
+                                    child: Row(
+                                      children: [
+                                        Text(
+                                          ("French"),
+                                          style: colorChange
+                                              ? FontConstant.k16w5008267Text
+                                              : FontConstant.k18w5008471Text,
+                                        )
+                                      ],
                                     ),
-                                    SizedBox(height: 20),
-                                    GestureDetector(
-                                      onTap: () {
-                                        context.locale = Locale('ar', 'AR');
-                                        RestartWidget.restartApp(context);
-
-                                        setState(() {
-                                          colorChange;
-                                        });
-                                        /* Navigator.pop(context);
-                                            Navigator.of(context).push(
-                                              MaterialPageRoute(
-                                                builder: (context) =>
-                                                    TSettings(),
-                                              ),
-                                            );*/
-                                      },
-                                      child: Row(
-                                        children: [
-                                          Text(
-                                            ("Arabic"),
-                                            style: colorChange
-                                                ? FontConstant.k16w5008267Text
-                                                : FontConstant.k18w5008471Text,
-                                          )
-                                        ],
-                                      ),
+                                  ),
+                                  SizedBox(height: 20),
+                                  GestureDetector(
+                                    onTap: () {
+                                      UserPrefs.setEArbBool(true);
+                                      context.locale = Locale('ar', 'AR');
+                                      RestartWidget.restartApp(context);
+                                      setState(() {
+                                        colorChange;
+                                      });
+                                      /* Navigator.pop(context);
+                                          Navigator.of(context).push(
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  TSettings(),
+                                            ),
+                                          );*/
+                                    },
+                                    child: Row(
+                                      children: [
+                                        Text(
+                                          ("Arabic"),
+                                          style: colorChange
+                                              ? FontConstant.k16w5008267Text
+                                              : FontConstant.k18w5008471Text,
+                                        )
+                                      ],
                                     ),
-                                  ],
-                                ),
+                                  ),
+                                ],
                               ),
                             ),
                           ];
                         })),
-                GestureDetector(
+                InkWell(
                   onTap: () {
-                    Navigator.of(context).push(
+                    Navigator.push(
+                      context,
                       MaterialPageRoute(
-                        builder: (context) => PReminderScreen(),
+                        builder: (_) => PReminderScreen(),
                       ),
                     );
                   },
-                  child: Image.asset(
-                    "assets/images/appbarclock.png",
-                    height: 24,
-                    width: 24,
+                  child: Padding(
+                    padding: const EdgeInsets.all(15.0),
+                    child: Image.asset(
+                      "assets/images/clockicon.png",
+                      height: 24,
+                    ),
                   ),
                 ),
+                /*GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => PReminderScreen(),
+                        ),
+                      );
+                    },
+                    child: Image.asset(
+                      "assets/images/appbarclock.png",
+                      height: 24,
+                      width: 24,
+                    ),
+                  ),*/
               ],
             ),
           ),
@@ -186,11 +202,11 @@ class _PPostScreenState extends State<PPostScreen> {
                     Color(0xffF8F6FA).withOpacity(.0),
                   ],
                 ),
-                image: DecorationImage(
-                    image: AssetImage(
-                      "assets/images/postsbackground.png",
-                    ),
-                    fit: BoxFit.cover),
+                // image: DecorationImage(
+                //     image: AssetImage(
+                //       "assets/images/postsbackground.png",
+                //     ),
+                //     fit: BoxFit.cover),
               ),
               child: Column(
                 children: [
@@ -226,8 +242,13 @@ class _PPostScreenState extends State<PPostScreen> {
                   ),
                   SizedBox(height: 38),
                   Container(
+                    height: 5,
                     width: 1.sw,
                     color: Colors.white,
+                  ),
+                  Container(
+                    width: 1.sw,
+                    color: Colors.white.withOpacity(0.0),
                     child: MediaQuery.removePadding(
                       removeTop: true,
                       context: context,
@@ -236,96 +257,112 @@ class _PPostScreenState extends State<PPostScreen> {
                           physics: NeverScrollableScrollPhysics(),
                           shrinkWrap: true,
                           itemBuilder: (context, i) {
-                            return Padding(
-                              padding: const EdgeInsets.only(
-                                  left: 16, right: 16, top: 5),
-                              child: Column(
-                                children: [
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Row(
-                                        children: [
-                                          Image.asset(
-                                            "assets/images/person2.png",
-                                            height: 40,
-                                            width: 40,
-                                          ),
-                                          SizedBox(
-                                            width: 08,
-                                          ),
-                                          Text(
-                                            "Mohammad Umar",
-                                            style:
-                                                FontConstant2.k16w5008267text,
-                                          ),
-                                        ],
-                                      ),
-                                      Image.asset(
-                                        "assets/images/dots.png",
-                                        height: 40,
-                                      ),
-                                    ],
-                                  ),
-                                  SizedBox(height: 08),
-                                  Row(
-                                    children: [
-                                      Expanded(
-                                        child: Text(
-                                          "Today we had small music activity with all kids and teachers. ",
-                                          style: FontConstant.k16w4008471Text,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  Row(
-                                    children: [
-                                      Expanded(
-                                          child: Image.asset(
-                                              "assets/images/childrenposts.png")),
-                                      /* Container(
-                          height: 213.h,
-                          width: 379.w,
-                          decoration: BoxDecoration(
-                                image: DecorationImage(
-                                    image: AssetImage(
-                                        "assets/images/childrenposts.png"))),
-                        ),*/
-                                    ],
-                                  ),
-                                  Padding(
+                            return Column(
+                              children: [
+                                Container(
+                                  child: Padding(
                                     padding: const EdgeInsets.only(
-                                        left: 8.0, right: 8),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
+                                        left: 16,
+                                        right: 16,
+                                        top: 5,
+                                        bottom: 15),
+                                    child: Column(
                                       children: [
                                         Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
                                           children: [
-                                            Image.asset(
-                                              "assets/images/heart2.png",
-                                              height: 24,
+                                            Row(
+                                              children: [
+                                                Image.asset(
+                                                  "assets/images/person2.png",
+                                                  height: 40,
+                                                  width: 40,
+                                                ),
+                                                SizedBox(
+                                                  width: 08,
+                                                ),
+                                                Text(
+                                                  "Mohammad Umar",
+                                                  style: FontConstant2
+                                                      .k16w5008267text,
+                                                ),
+                                              ],
                                             ),
-                                            SizedBox(width: 10),
-                                            Text(
-                                              "likes".tr(),
-                                              /*AppLoaclizations.of(context)!
-                                      .translate("likes")
-                                      .toString(),*/
-                                              style:
-                                                  FontConstant.k16w4008471Text,
+                                            Image.asset(
+                                              "assets/images/dots.png",
+                                              height: 40,
                                             ),
                                           ],
                                         ),
-                                        Text("2 min ago",
-                                            style: FontConstant.k16w4008471Text
-                                                .copyWith(fontSize: 14))
+                                        SizedBox(height: 08),
+                                        Row(
+                                          children: [
+                                            Expanded(
+                                              child: Text(
+                                                "Today we had small music activity with all kids and teachers. ",
+                                                style: FontConstant
+                                                    .k16w4008471Text,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        Row(
+                                          children: [
+                                            Expanded(
+                                                child: Image.asset(
+                                                    "assets/images/childrenposts.png")),
+                                            /* Container(
+                          height: 213.h,
+                          width: 379.w,
+                          decoration: BoxDecoration(
+                                      image: DecorationImage(
+                                          image: AssetImage(
+                                              "assets/images/childrenposts.png"))),
+                        ),*/
+                                          ],
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.only(
+                                              left: 8.0, right: 8),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Row(
+                                                children: [
+                                                  Image.asset(
+                                                    "assets/images/heart2.png",
+                                                    height: 24,
+                                                  ),
+                                                  SizedBox(width: 10),
+                                                  Text(
+                                                    "likes".tr(),
+                                                    /*AppLoaclizations.of(context)!
+                                            .translate("likes")
+                                            .toString(),*/
+                                                    style: FontConstant
+                                                        .k16w4008471Text,
+                                                  ),
+                                                ],
+                                              ),
+                                              Text("2 min ago",
+                                                  style: FontConstant
+                                                      .k16w4008471Text
+                                                      .copyWith(fontSize: 14))
+                                            ],
+                                          ),
+                                        ),
                                       ],
                                     ),
                                   ),
-                                ],
-                              ),
+                                ),
+                                Container(
+                                  height: 5,
+                                  width: 1.sw,
+                                  color: Colors.white,
+                                ),
+                              ],
                             );
                           }),
                     ),
@@ -334,7 +371,7 @@ class _PPostScreenState extends State<PPostScreen> {
               ),
             ),
             SizedBox(
-              height: 16.5,
+              height: 10,
             ),
             /*Padding(
               padding: const EdgeInsets.only(left: 16.0, right: 16),
@@ -456,8 +493,8 @@ class _PPostScreenState extends State<PPostScreen> {
               ),
             ),*/
             SizedBox(
-              height: 80,
-            )
+              height: 10,
+            ),
           ],
         ),
       ),

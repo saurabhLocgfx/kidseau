@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:kidseau/TeachersPanel/TLoginScreen/TLoginScreen.dart';
 import 'package:kidseau/Theme.dart';
 import 'package:kidseau/Widgets/buttons.dart';
 import 'package:kidseau/Widgets/widgets.dart';
@@ -16,6 +17,7 @@ class _TWaitingScreenState extends State<TWaitingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.all(16),
         child: SizedBox(
@@ -23,10 +25,10 @@ class _TWaitingScreenState extends State<TWaitingScreen> {
           width: 382,
           child: MainButton(
               onTap: () {
-                /*Navigator.push(
+                Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => TLoginScreen()),
-                );*/
+                );
               },
               title: "Close".tr(),
               /*AppLoaclizations.of(context)!.translate("Close").toString(),*/
@@ -39,21 +41,27 @@ class _TWaitingScreenState extends State<TWaitingScreen> {
         child: Column(
           children: [
             SizedBox(height: 111),
-            SizedBox(height: 160, child: mainlogo()),
+            Center(child: SizedBox(height: 160, child: mainlogo())),
             SizedBox(height: 32),
-            Image.asset(
-              "assets/images/owlwithbook.png",
-              height: 188.h,
-              width: 286.w,
+            Center(
+              child: Image.asset(
+                "assets/images/owlwithbook.png",
+                height: 188.h,
+                width: 286.w,
+              ),
             ),
             SizedBox(height: 20.h),
-            Text(
-              "Wait for director’s approval".tr(),
-              style: FontConstant2.k32w5008267text.copyWith(fontSize: 28),
+            Center(
+              child: Text(
+                "Wait for director’s approval".tr(),
+                style: FontConstant2.k32w5008267text.copyWith(fontSize: 28),
+              ),
             ),
-            Text(
-              "Thank you for your patience".tr(),
-              style: FontConstant.k16w5008471Text,
+            Center(
+              child: Text(
+                "Thank you for your patience".tr(),
+                style: FontConstant.k16w5008471Text,
+              ),
             ),
           ],
         ),

@@ -428,11 +428,11 @@ class _TDashboardState extends State<TDashboard> {
                 children: [
                   Image.asset(
                     pageIndex == 3
-                        ? "assets/images/notificationiconfill.png"
-                        : "assets/images/notificationicon.png",
+                        ? "assets/images/studioniconfill.png"
+                        : "assets/images/studenticon.png",
                     height: 24,
                   ),
-                  Text("Notification".tr(),
+                  Text("Students".tr(),
                       style: FontConstant.k12w400B7A4Text.copyWith(
                           color: pageIndex == 3
                               ? Color(0xff8267AC)

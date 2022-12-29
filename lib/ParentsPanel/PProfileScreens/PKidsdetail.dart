@@ -76,10 +76,14 @@ class _PKidsDetailsState extends State<PKidsDetails> {
                   onTap: () {
                     Navigator.pop(context);
                   },
-                  child: Image.asset(
-                    "assets/images/backarrow.png",
-                    height: 24,
-                    width: 24,
+                  child: SizedBox(
+                    height: 30,
+                    width: 30,
+                    child: Image.asset(
+                      "assets/images/backarrow.png",
+                      height: 24,
+                      width: 24,
+                    ),
                   ),
                 ),
               ),

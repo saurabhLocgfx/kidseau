@@ -4,14 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:kidseau/Kidsdetails.dart';
 import 'package:kidseau/Theme.dart';
 import 'package:kidseau/Widgets/buttons.dart';
 
 import 'api/parent_signup_apis/parent_signup_info_api.dart';
 
 class ParentInfo extends StatefulWidget {
-  const ParentInfo({Key? key}) : super(key: key);
+  final Function onContinue;
+  const ParentInfo({Key? key, required this.onContinue}) : super(key: key);
 
   @override
   State<ParentInfo> createState() => _ParentInfoState();
@@ -44,16 +44,13 @@ class _ParentInfoState extends State<ParentInfo> {
       body: SingleChildScrollView(
         child: Container(
           color: ThemeColor.primarycolor.withOpacity(.06),
-          width: 414.h,
+          width: 1.sw,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: Form(
               key: _formKey,
               child: Column(
                 children: [
-                  SizedBox(height: 72.h),
-                  SizedBox(height: 40),
-                  SizedBox(height: 40),
                   Align(
                     alignment: Alignment.bottomLeft,
                     child: Text(
@@ -598,23 +595,26 @@ class _ParentInfoState extends State<ParentInfo> {
                           }
                         },
                         child: Container(
-                            height: 50,
+                            height: 56.h,
+                            width: 382.w,
                             decoration: BoxDecoration(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(30.0)),
                               color: Color(0xffFFFFFF),
                             ),
                             child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                SizedBox(
-                                  width: 20,
-                                ),
-                                Text(
-                                  "Upload primary photo",
-                                  style: FontConstant.k14w400lightText.copyWith(
-                                      color: Color(0xffB7A4B2),
-                                      fontSize: 16.0,
-                                      fontWeight: FontWeight.w400),
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 10.0),
+                                  child: Text(
+                                    "Upload primary photo",
+                                    style: FontConstant.k14w400lightText
+                                        .copyWith(
+                                            color: Color(0xffB7A4B2),
+                                            fontSize: 16.0,
+                                            fontWeight: FontWeight.w400),
+                                  ),
                                 ),
                                 SizedBox(
                                   width: 120,
@@ -661,8 +661,8 @@ class _ParentInfoState extends State<ParentInfo> {
                   ),
                   SizedBox(height: 35),
                   SizedBox(
-                      height: 52,
-                      width: 382,
+                      height: 52.h,
+                      width: 382.w,
                       child: MainButton(
                           onTap: () {
                             if (_formKey.currentState!.validate()) {
@@ -687,9 +687,9 @@ class _ParentInfoState extends State<ParentInfo> {
                                 } else {
                                   //navigate to
                                   //UserPrefs.setCookies(value['key']);
-
-                                  Navigator.of(context).push(MaterialPageRoute(
-                                      builder: (context) => KidsDetails()));
+                                  widget.onContinue();
+                                  /*Navigator.of(context).push(MaterialPageRoute(
+                                      builder: (context) => KidsDetails()));*/
                                 }
                               });
                               /*Navigator.of(context).push(MaterialPageRoute(
@@ -700,7 +700,7 @@ class _ParentInfoState extends State<ParentInfo> {
                           textStyleColor: Colors.white,
                           backgroundColor: ThemeColor.primarycolor)),
                   SizedBox(
-                    height: 53,
+                    height: 300,
                   )
                 ],
               ),

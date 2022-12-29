@@ -66,12 +66,13 @@ class _PVouchercodeState extends State<PVouchercode> {
               children: [
                 SizedBox(height: 110),
                 Container(
-                  height: 93,
-                  width: 382,
+                  height: 93.h,
+                  width: 1.sw,
                   decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
                       image: DecorationImage(
                           image: AssetImage("assets/images/vouchercard.png"),
-                          fit: BoxFit.contain)),
+                          fit: BoxFit.cover)),
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16.0),
                     child: Column(

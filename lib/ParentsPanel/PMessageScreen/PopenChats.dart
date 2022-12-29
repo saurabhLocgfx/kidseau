@@ -8,8 +8,6 @@ import 'package:grouped_list/grouped_list.dart';
 import 'package:kidseau/Theme.dart';
 import 'package:kidseau/Widgets/popups.dart';
 
-import 'PChats.dart';
-
 class POpenChats extends StatefulWidget {
   const POpenChats({Key? key}) : super(key: key);
 
@@ -159,11 +157,11 @@ class _POpenChatsState extends State<POpenChats> {
                 ),
                 GestureDetector(
                   onTap: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => PChats(),
-                      ),
-                    );
+                    // Navigator.of(context).push(
+                    //   MaterialPageRoute(
+                    //     builder: (context) => PChats(),
+                    //   ),
+                    // );
                   },
                   child: Container(
                     child: Row(

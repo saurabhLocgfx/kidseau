@@ -51,14 +51,14 @@ class _TLoginOtpVerificationState extends State<TLoginOtpVerification> {
                   child: Column(
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(
-                            top: 100.0, left: 16, right: 16),
+                        padding:
+                            EdgeInsets.only(top: 180.h, left: 16, right: 16),
                         child: Column(
                           children: [
                             Image.asset(
                               "assets/images/logo.png",
-                              height: 120.h,
-                              width: 120.w,
+                              height: 172.h,
+                              width: 173.w,
                             ),
                             Text(
                               "We offer a new way to track your children and watch them grow.",
@@ -181,80 +181,87 @@ class _TLoginOtpVerificationState extends State<TLoginOtpVerification> {
                       ),
                     ),*/
                             SizedBox(height: 32),
-                            Row(
-                              children: [
-                                Expanded(
-                                  child: SizedBox(
-                                    height: 52,
-                                    //width: 382,
-                                    child: MainButton(
-                                        onTap: () {
-                                          /*Navigator.of(context).push(
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      TDashboard()));*/
-                                          if (_formKey.currentState!
-                                              .validate()) {
-                                            final resp = TeacherOtpCheck().get(
-                                                code: int.parse(
-                                                    pinTextController.text));
-                                            resp.then((value) {
-                                              print(value);
-                                              if (value['status'] == 0) {
-                                                Fluttertoast.showToast(
-                                                    msg: value['msg']);
-                                              } else if (value['status'] == 2) {
-                                                print(widget.mobileText);
-                                                Navigator.of(context).push(
-                                                    MaterialPageRoute(
-                                                        builder: (context) =>
-                                                            TSignupCode(
-                                                                isEmail: widget
-                                                                    .isEmail,
-                                                                mobileText: widget
-                                                                    .mobileText)));
-                                              }
-                                              if (value['status'] == 1) {
-                                                print(widget.mobileText);
-                                                Navigator.of(context).push(
-                                                    MaterialPageRoute(
-                                                        builder: (context) =>
-                                                            TDashboard()));
-                                              }
-                                            });
-                                          }
-                                        },
-                                        title: "Continue".tr(),
-                                        /*AppLoaclizations.of(context)!
-                                            .translate("Continue")
-                                            .toString(),*/
-                                        textStyleColor: Colors.white,
-                                        backgroundColor:
-                                            ThemeColor.primarycolor),
+                            Center(
+                              child: Row(
+                                children: [
+                                  Expanded(
+                                    child: SizedBox(
+                                      height: 52,
+                                      //width: 382,
+                                      child: MainButton(
+                                          onTap: () {
+                                            /*Navigator.of(context).push(
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        TDashboard()));*/
+                                            if (_formKey.currentState!
+                                                .validate()) {
+                                              final resp = TeacherOtpCheck()
+                                                  .get(
+                                                      code: int.parse(
+                                                          pinTextController
+                                                              .text));
+                                              resp.then((value) {
+                                                print(value);
+                                                if (value['status'] == 0) {
+                                                  Fluttertoast.showToast(
+                                                      msg: value['msg']);
+                                                } else if (value['status'] ==
+                                                    2) {
+                                                  print(widget.mobileText);
+                                                  Navigator.of(context).push(
+                                                      MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              TSignupCode(
+                                                                  isEmail: widget
+                                                                      .isEmail,
+                                                                  mobileText: widget
+                                                                      .mobileText)));
+                                                }
+                                                if (value['status'] == 1) {
+                                                  print(widget.mobileText);
+                                                  Navigator.of(context).push(
+                                                      MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              TDashboard()));
+                                                }
+                                              });
+                                            }
+                                          },
+                                          title: "Continue".tr(),
+                                          /*AppLoaclizations.of(context)!
+                                              .translate("Continue")
+                                              .toString(),*/
+                                          textStyleColor: Colors.white,
+                                          backgroundColor:
+                                              ThemeColor.primarycolor),
+                                    ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                             SizedBox(height: 30),
-                            RichText(
-                                text: TextSpan(children: [
-                              TextSpan(
-                                text: "By proceeding you agree to our ",
-                                style: FontConstant.k14w400B7A4Text,
-                              ),
-                              TextSpan(
-                                text: "Privacy Policy",
-                                style: FontConstant.k14w500B7A4TextU,
-                              ),
-                              TextSpan(
-                                text: " & ",
-                                style: FontConstant.k14w400B7A4Text,
-                              ),
-                              TextSpan(
-                                text: "Terms and Conditions",
-                                style: FontConstant.k14w500B7A4TextU,
-                              ),
-                            ])),
+                            Center(
+                              child: RichText(
+                                  text: TextSpan(children: [
+                                TextSpan(
+                                  text: "By proceeding you agree to our ",
+                                  style: FontConstant.k14w400B7A4Text,
+                                ),
+                                TextSpan(
+                                  text: "Privacy Policy",
+                                  style: FontConstant.k14w500B7A4TextU,
+                                ),
+                                TextSpan(
+                                  text: " & ",
+                                  style: FontConstant.k14w400B7A4Text,
+                                ),
+                                TextSpan(
+                                  text: "Terms and Conditions",
+                                  style: FontConstant.k14w500B7A4TextU,
+                                ),
+                              ])),
+                            ),
                             // SizedBox(height: 13.h),
                           ],
                         ),

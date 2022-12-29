@@ -48,14 +48,15 @@ class _PSignupScreenState extends State<PSignupScreen> {
                   child: Column(
                     children: [
                       Padding(
-                        padding: EdgeInsets.only(top: 20, left: 16, right: 16),
+                        padding:
+                            EdgeInsets.only(top: 180.h, left: 16, right: 16),
                         child: Container(
                           child: Column(
                             children: [
                               Image.asset(
                                 "assets/images/logo.png",
-                                height: 120,
-                                width: 120,
+                                height: 172,
+                                width: 173,
                               ),
                               /*Text(
                                 "We offer a new way to track your children and watch them grow.",

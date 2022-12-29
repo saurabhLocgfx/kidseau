@@ -200,60 +200,73 @@ class _PHomeScreenState extends State<PHomeScreen> {
               SizedBox(height: 30),
               Column(
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    child: Row(
-                      //mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => PKidsDashboard()),
-                              );
-                            },
-                            child: SizedBox(height: 128, child: Studentcard())),
-                        SizedBox(width: 5),
-                        // GestureDetector(
-                        //   onTap: () {
-                        //     Navigator.push(
-                        //       context,
-                        //       MaterialPageRoute(
-                        //           builder: (context) => PAddkidScreen()),
-                        //     );
-                        //   },
-                        //   child: Padding(
-                        //     padding: const EdgeInsets.only(left: 16),
-                        //     child: Container(
-                        //       height: 120.h,
-                        //       width: 80.w,
-                        //       decoration: BoxDecoration(
-                        //           borderRadius: BorderRadius.circular(16),
-                        //           image: DecorationImage(
-                        //               image: AssetImage(
-                        //                   "assets/images/Rectangle 2716.png"))),
-                        //       child: Column(
-                        //         children: [
-                        //           SizedBox(
-                        //             height: MediaQuery.of(context).size.height *
-                        //                 0.05,
-                        //           ),
-                        //           Icon(
-                        //             Icons.add,
-                        //             size: 25,
-                        //             color: Colors.white,
-                        //           ),
-                        //           Text("Add".tr(),
-                        //               style: FontConstant.k18w500whiteText
-                        //                   .copyWith(fontSize: 16)),
-                        //         ],
-                        //       ),
-                        //     ),
-                        //   ),
-                        // ),
-                      ],
-                    ),
+                  Row(
+                    //mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => PKidsDashboard()),
+                          );
+                        },
+                        child: Container(
+                          height: 132,
+                          width: MediaQuery.of(context).size.width * 0.98,
+                          padding: EdgeInsets.only(left: 16),
+                          child: ListView.builder(
+                              shrinkWrap: true,
+                              scrollDirection: Axis.horizontal,
+                              itemBuilder: (context, index) {
+                                return Padding(
+                                  padding: const EdgeInsets.only(right: 15.0),
+                                  child: Studentcard(),
+                                );
+                              },
+                              itemCount: 3),
+                        ),
+                      ),
+                      SizedBox(width: 5),
+                      // GestureDetector(
+                      //   onTap: () {
+                      //     Navigator.push(
+                      //       context,
+                      //       MaterialPageRoute(
+                      //           builder: (context) => PAddkidScreen()),
+                      //     );
+                      //   },
+                      //   child: Padding(
+                      //     padding: const EdgeInsets.only(left: 16),
+                      //     child: Container(
+                      //       height: 128.h,
+                      //       width: 80.w,
+                      //       decoration: BoxDecoration(
+                      //           borderRadius: BorderRadius.circular(16),
+                      //           image: DecorationImage(
+                      //               image: AssetImage(
+                      //                   "assets/images/Rectangle 2716.png"),
+                      //               fit: BoxFit.cover)),
+                      //       child: Column(
+                      //         children: [
+                      //           SizedBox(
+                      //             height: MediaQuery.of(context).size.height *
+                      //                 0.05,
+                      //           ),
+                      //           Icon(
+                      //             Icons.add,
+                      //             size: 25,
+                      //             color: Colors.white,
+                      //           ),
+                      //           Text("Add".tr(),
+                      //               style: FontConstant.k18w500whiteText
+                      //                   .copyWith(fontSize: 16)),
+                      //         ],
+                      //       ),
+                      //     ),
+                      //   ),
+                      // ),
+                    ],
                   ),
                   SizedBox(height: MediaQuery.of(context).size.height * 0.01),
                   Column(

@@ -19,6 +19,30 @@ class PLoginOtpVerification extends StatelessWidget {
       /*height: 896,
       width: 414,*/
       child: Scaffold(
+        bottomNavigationBar: Container(
+          height: 50.h,
+          child: Center(
+            child: RichText(
+                text: TextSpan(children: [
+              TextSpan(
+                text: "By proceeding you agree to our ".tr(),
+                style: FontConstant.k14w400B7A4Text,
+              ),
+              TextSpan(
+                text: "Privacy Policy".tr(),
+                style: FontConstant.k14w500B7A4TextU,
+              ),
+              TextSpan(
+                text: " & ",
+                style: FontConstant.k14w400B7A4Text,
+              ),
+              TextSpan(
+                text: "Terms and Conditions".tr(),
+                style: FontConstant.k14w500B7A4TextU,
+              ),
+            ])),
+          ),
+        ),
         backgroundColor: Color(0xfff7f6fa),
         body: SingleChildScrollView(
           child: Column(
@@ -113,28 +137,6 @@ class PLoginOtpVerification extends StatelessWidget {
                               .toString(),*/
                           textStyleColor: Colors.white,
                           backgroundColor: ThemeColor.primarycolor),
-                    ),
-                    SizedBox(height: 40),
-                    Center(
-                      child: RichText(
-                          text: TextSpan(children: [
-                        TextSpan(
-                          text: "By proceeding you agree to our ".tr(),
-                          style: FontConstant.k14w400B7A4Text,
-                        ),
-                        TextSpan(
-                          text: "Privacy Policy".tr(),
-                          style: FontConstant.k14w500B7A4TextU,
-                        ),
-                        TextSpan(
-                          text: " & ",
-                          style: FontConstant.k14w400B7A4Text,
-                        ),
-                        TextSpan(
-                          text: "Terms and Conditions".tr(),
-                          style: FontConstant.k14w500B7A4TextU,
-                        ),
-                      ])),
                     ),
                     SizedBox(height: 13.h),
                   ],

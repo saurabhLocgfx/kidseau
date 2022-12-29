@@ -8,6 +8,7 @@ import 'package:kidseau/ParentsPanel/PMessageScreen/PMessages.dart';
 import 'package:kidseau/ParentsPanel/PMessageScreen/PTeachers.dart';
 import 'package:kidseau/ParentsPanel/PReminderScreen/PReminderScreen.dart';
 import 'package:kidseau/Theme.dart';
+import 'package:kidseau/shard_prefs/shared_prefs.dart';
 
 import '../../restartappwidget/restartwidgets.dart';
 
@@ -74,26 +75,22 @@ class _PMessageDashboardState extends State<PMessageDashboard> {
             ),
           ),
           actions: [
-            Padding(
-              padding: const EdgeInsets.only(right: 16.0),
-              child: Row(
-                children: [
-                  Padding(
-                      padding: const EdgeInsets.all(15.0),
-                      child: PopupMenuButton(
-                          child: Image.asset(
-                            "assets/images/Languageicon.png",
-                            height: 24,
-                          ),
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(16)),
-                          itemBuilder: (context) {
-                            return [
-                              PopupMenuItem(
-                                enabled: true,
-                                child: Padding(
-                                  padding: const EdgeInsets.only(
-                                      left: 15.0, top: 15, bottom: 15),
+            SizedBox(
+              width: 164,
+              child: Padding(
+                padding: const EdgeInsets.only(top: 15.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Padding(
+                        padding: const EdgeInsets.all(15.0),
+                        child: PopupMenuButton(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(16)),
+                            itemBuilder: (context) {
+                              return [
+                                PopupMenuItem(
+                                  enabled: true,
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     crossAxisAlignment:
@@ -101,6 +98,7 @@ class _PMessageDashboardState extends State<PMessageDashboard> {
                                     children: [
                                       GestureDetector(
                                         onTap: () {
+                                          UserPrefs.setEArbBool(false);
                                           context.locale = Locale('en', 'US');
                                           RestartWidget.restartApp(context);
 
@@ -123,6 +121,7 @@ class _PMessageDashboardState extends State<PMessageDashboard> {
                                       SizedBox(height: 20),
                                       GestureDetector(
                                         onTap: () {
+                                          UserPrefs.setEArbBool(false);
                                           context.locale = Locale('fr', 'FR');
                                           RestartWidget.restartApp(context);
 
@@ -150,6 +149,7 @@ class _PMessageDashboardState extends State<PMessageDashboard> {
                                       SizedBox(height: 20),
                                       GestureDetector(
                                         onTap: () {
+                                          UserPrefs.setEArbBool(true);
                                           context.locale = Locale('ar', 'AR');
                                           RestartWidget.restartApp(context);
 
@@ -157,12 +157,12 @@ class _PMessageDashboardState extends State<PMessageDashboard> {
                                             colorChange;
                                           });
                                           /* Navigator.pop(context);
-                                            Navigator.of(context).push(
-                                              MaterialPageRoute(
-                                                builder: (context) =>
-                                                    TSettings(),
-                                              ),
-                                            );*/
+                                          Navigator.of(context).push(
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  TSettings(),
+                                            ),
+                                          );*/
                                         },
                                         child: Row(
                                           children: [
@@ -179,26 +179,33 @@ class _PMessageDashboardState extends State<PMessageDashboard> {
                                     ],
                                   ),
                                 ),
-                              ),
-                            ];
-                          })),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => PReminderScreen(),
+                              ];
+                            },
+                            child: Image.asset(
+                              "assets/images/Languageicon.png",
+                              height: 24,
+                            ))),
+                    InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => PReminderScreen(),
+                          ),
+                        );
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.all(15.0),
+                        child: Image.asset(
+                          "assets/images/clockicon.png",
+                          height: 24,
                         ),
-                      );
-                    },
-                    child: Image.asset(
-                      "assets/images/appbarclock.png",
-                      height: 24,
-                      width: 24,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
+            )
           ],
         ),
         body: Column(

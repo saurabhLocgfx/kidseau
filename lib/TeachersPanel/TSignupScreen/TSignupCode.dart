@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:kidseau/TeachersPanel/TSignupScreen/TPersonalDetails.dart';
@@ -135,7 +136,7 @@ class _TSignupCodeState extends State<TSignupCode> {
                       SizedBox(height: 24),
                       SizedBox(
                         height: 52,
-                        width: 382,
+                        width: 382.w,
                         child: loading
                             ? MaterialButton(
                                 elevation: 1,

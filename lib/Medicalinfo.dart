@@ -15,31 +15,19 @@ enum SingingCharacter { father, mother }
 
 class _MedicalInfoState extends State<MedicalInfo> {
   SingingCharacter? _character = SingingCharacter.father;
+
+  String _selectedText = "A";
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Container(
-          color: ThemeColor.primarycolor.withOpacity(.06),
-          width: 414.h,
+      body: Container(
+        color: ThemeColor.primarycolor.withOpacity(.06),
+        child: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: Column(
               children: [
-                SizedBox(height: 72.h),
-                Center(
-                    child: Image.asset(
-                  "assets/images/onlylogo.png",
-                  height: 53,
-                  width: 63,
-                )),
-                SizedBox(height: 40),
-                Image.asset(
-                  "assets/images/3dotprogression.png",
-                  height: 68,
-                  width: 332,
-                ),
-                SizedBox(height: 40),
                 Align(
                   alignment: Alignment.bottomLeft,
                   child: Text(
@@ -53,11 +41,11 @@ class _MedicalInfoState extends State<MedicalInfo> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Mother’s name",
+                      "Blood group",
                       style: FontConstant.k16w500331FText,
                     ),
                     SizedBox(height: 5),
-                    textfield(context, "Enter kid’s mother name")
+                    textfield(context, "Enter kid’s blood group")
                   ],
                 ),
                 SizedBox(height: 4),
@@ -65,11 +53,11 @@ class _MedicalInfoState extends State<MedicalInfo> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Mother’s Occupation",
+                      "Weight",
                       style: FontConstant.k16w500331FText,
                     ),
                     SizedBox(height: 5),
-                    textfield(context, "Enter occupation")
+                    textfield(context, "Enter kid’s weight in kg")
                   ],
                 ),
                 SizedBox(height: 4),
@@ -77,31 +65,114 @@ class _MedicalInfoState extends State<MedicalInfo> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Mother’s email",
+                      "Height",
                       style: FontConstant.k16w500331FText,
                     ),
                     SizedBox(height: 5),
-                    textfield(context, "Enter mother’s email")
+                    textfield(context, "Enter kid’s height in ft")
                   ],
                 ),
+                SizedBox(height: 4),
+                // Column(
+                //   crossAxisAlignment: CrossAxisAlignment.start,
+                //   children: [
+                //     Text(
+                //       "Kid’s medical status",
+                //       style: FontConstant.k16w500331FText,
+                //     ),
+                //     Container(
+                //       padding: EdgeInsets.only(left: 20),
+                //       height: 60.h,
+                //       width: 1.sw,
+                //       decoration: BoxDecoration(
+                //           color: Color(0xffFFFFFF),
+                //           borderRadius: BorderRadius.all(Radius.circular(30))),
+                //       child: Center(
+                //         child: DropdownButton<String>(
+                //           alignment: Alignment.topRight,
+                //           borderRadius: BorderRadius.circular(30),
+                //           dropdownColor: Color(0xffffffff),
+                //           hint: Text(
+                //             "Select your gender".tr(),
+                //           ),
+                //           icon: Padding(
+                //             padding: const EdgeInsets.only(right: 15.0),
+                //             child: Image.asset(
+                //               "assets/images/downarrow.png",
+                //               height: 15,
+                //               width: 15,
+                //             ),
+                //           ),
+                //           elevation: 0,
+                //           isExpanded: true,
+                //           underline: SizedBox(),
+                //           value: _selectedText,
+                //           items: <String>['A', 'B', 'C'].map((String value) {
+                //             return DropdownMenuItem<String>(
+                //               value: value,
+                //               child: Text(value),
+                //             );
+                //           }).toList(),
+                //           onChanged: (String? val) {
+                //             setState(() {
+                //               _selectedText = val!;
+                //             });
+                //           },
+                //         ),
+                //       ),
+                //     ),
+                //   ],
+                // ),
+                // Column(
+                //   crossAxisAlignment: CrossAxisAlignment.start,
+                //   children: [
+                //     Text(
+                //       "Any extra to take care",
+                //       style: FontConstant.k16w500331FText,
+                //     ),
+                //     SizedBox(height: 5),
+                //     // Container(
+                //     //   height: 138.h,
+                //     //   width: 382.w,
+                //     //   child: TextFormField(
+                //     //     style: FontConstant.k18w5008471Text,
+                //     //     decoration: InputDecoration(
+                //     //       contentPadding: EdgeInsets.all(14.0),
+                //     //       enabledBorder: OutlineInputBorder(
+                //     //           borderRadius:
+                //     //               BorderRadius.all(Radius.circular(30.0)),
+                //     //           borderSide:
+                //     //               BorderSide(color: Colors.white, width: 1.0)),
+                //     //       disabledBorder: OutlineInputBorder(
+                //     //         borderSide:
+                //     //             BorderSide(color: Colors.white, width: 1.0),
+                //     //       ),
+                //     //       focusedBorder: OutlineInputBorder(
+                //     //         borderRadius:
+                //     //             BorderRadius.all(Radius.circular(30.0)),
+                //     //         borderSide: BorderSide(
+                //     //             color: Color(0xffBE74AA), width: 1.0),
+                //     //       ),
+                //     //       isDense: true,
+                //     //       hintText: "Write here....",
+                //     //       filled: true,
+                //     //       fillColor: Colors.white,
+                //     //       hintStyle: FontConstant.k14w400lightText.copyWith(
+                //     //           color: Color(0xffB7A4B2),
+                //     //           fontSize: 16.0,
+                //     //           fontWeight: FontWeight.w400),
+                //     //     ),
+                //     //     /*  controller: controller,*/
+                //     //   ),
+                //     // ),
+                //   ],
+                // ),
                 SizedBox(height: 4),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Father’s name",
-                      style: FontConstant.k16w500331FText,
-                    ),
-                    SizedBox(height: 5),
-                    textfield(context, "Enter kid’s father name")
-                  ],
-                ),
-                SizedBox(height: 4),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Father’s Occupation",
+                      "Kid’s medical status",
                       style: FontConstant.k16w500331FText,
                     ),
                     SizedBox(height: 5),
@@ -202,15 +273,15 @@ class _MedicalInfoState extends State<MedicalInfo> {
                 ),
                 SizedBox(height: 35),
                 SizedBox(
-                    height: 52,
-                    width: 382,
+                    height: 52.h,
+                    width: 384.w,
                     child: MainButton(
                         onTap: () {},
                         title: "Continue",
                         textStyleColor: Colors.white,
                         backgroundColor: ThemeColor.primarycolor)),
                 SizedBox(
-                  height: 53,
+                  height: 300,
                 )
               ],
             ),

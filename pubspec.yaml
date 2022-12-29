@@ -58,6 +58,7 @@ dependencies:
   image_picker: ^0.8.6
   easy_localization: ^3.0.1
   restart_app: ^1.1.1
+  percent_indicator:
 
 
 dev_dependencies:

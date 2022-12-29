@@ -50,8 +50,8 @@ class TLoginScreen extends StatelessWidget {
                     child: Column(
                       children: [
                         Padding(
-                          padding: const EdgeInsets.only(
-                              top: 100, left: 16, right: 16),
+                          padding:
+                              EdgeInsets.only(top: 180.h, left: 16, right: 16),
                           child: Column(
                             //crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
@@ -59,8 +59,8 @@ class TLoginScreen extends StatelessWidget {
                               //Spacer(),
                               Image.asset(
                                 "assets/images/logo.png",
-                                height: 120.h,
-                                width: 120.w,
+                                height: 172.h,
+                                width: 173.w,
                               ),
                               Text(
                                 'We offer a new way to mark the children and shape them for better future.'
@@ -151,85 +151,90 @@ class TLoginScreen extends StatelessWidget {
                                 controller: controller,
                               ),
                               SizedBox(height: 32),
-                              Row(
-                                children: [
-                                  Expanded(
-                                    child: SizedBox(
-                                      height: 52,
-                                      //width: 382,
-                                      child: MainButton(
-                                          onTap: () {
-                                            if (_formKey.currentState!
-                                                .validate()) {
-                                              final resp = TeacherLogin()
-                                                  .get(email: controller.text);
-                                              resp.then((value) {
-                                                print(value);
-                                                if (value['status'] == 0) {
-                                                  Fluttertoast.showToast(
-                                                      msg: value['msg']);
-                                                } else {
-                                                  UserPrefs.setCookies(
-                                                      value['key']);
-                                                  if (controller.text
-                                                      .contains('@')) {
-                                                    isEmail = true;
+                              Center(
+                                child: Row(
+                                  children: [
+                                    Expanded(
+                                      child: SizedBox(
+                                        height: 52,
+                                        //width: 382,
+                                        child: MainButton(
+                                            onTap: () {
+                                              if (_formKey.currentState!
+                                                  .validate()) {
+                                                final resp = TeacherLogin().get(
+                                                    email: controller.text);
+                                                resp.then((value) {
+                                                  print(value);
+                                                  if (value['status'] == 0) {
+                                                    Fluttertoast.showToast(
+                                                        msg: value['msg']);
                                                   } else {
-                                                    isEmail = false;
-                                                  }
+                                                    UserPrefs.setCookies(
+                                                        value['key']);
+                                                    if (controller.text
+                                                        .contains('@')) {
+                                                      isEmail = true;
+                                                    } else {
+                                                      isEmail = false;
+                                                    }
 
-                                                  print(isEmail);
-                                                  mobileText = controller.text;
-                                                  print(mobileText);
-                                                  Navigator.of(context).push(
-                                                      MaterialPageRoute(
-                                                          builder: (context) =>
-                                                              TLoginOtpVerification(
-                                                                isEmail:
-                                                                    isEmail,
-                                                                mobileText:
-                                                                    mobileText,
-                                                              )));
-                                                  Fluttertoast.showToast(
-                                                      msg:
-                                                          'Your OTP is ${value['OTP']}');
-                                                }
-                                              });
-                                              print(controller.text);
-                                            }
-                                            /* */
-                                          },
-                                          title: "Login with OTP".tr(),
-                                          /*AppLoaclizations.of(context)!
-                                              .translate("Login with OTP")
-                                              .toString(),*/
-                                          textStyleColor: Colors.white,
-                                          backgroundColor:
-                                              ThemeColor.primarycolor),
+                                                    print(isEmail);
+                                                    mobileText =
+                                                        controller.text;
+                                                    print(mobileText);
+                                                    Navigator.of(context).push(
+                                                        MaterialPageRoute(
+                                                            builder: (context) =>
+                                                                TLoginOtpVerification(
+                                                                  isEmail:
+                                                                      isEmail,
+                                                                  mobileText:
+                                                                      mobileText,
+                                                                )));
+                                                    Fluttertoast.showToast(
+                                                        msg:
+                                                            'Your OTP is ${value['OTP']}');
+                                                  }
+                                                });
+                                                print(controller.text);
+                                              }
+                                              /* */
+                                            },
+                                            title: "Login with OTP".tr(),
+                                            /*AppLoaclizations.of(context)!
+                                                .translate("Login with OTP")
+                                                .toString(),*/
+                                            textStyleColor: Colors.white,
+                                            backgroundColor:
+                                                ThemeColor.primarycolor),
+                                      ),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
                               SizedBox(height: 40.h),
-                              RichText(
-                                  text: TextSpan(children: [
-                                TextSpan(
-                                  text: ("By proceeding you agree to our "),
-                                  style: FontConstant.k14w400B7A4Text,
-                                ),
-                                TextSpan(
-                                  text: ("Privacy Policy"),
-                                  style: FontConstant.k14w500B7A4TextU,
-                                ),
-                                TextSpan(
-                                  text: " & ",
-                                  style: FontConstant.k14w400B7A4Text,
-                                ),
-                                TextSpan(
-                                  text: ("Terms and Conditions"),
-                                  style: FontConstant.k14w500B7A4TextU,
-                                ),
-                              ])),
+                              Center(
+                                child: RichText(
+                                    text: TextSpan(children: [
+                                  TextSpan(
+                                    text: ("By proceeding you agree to our "),
+                                    style: FontConstant.k14w400B7A4Text,
+                                  ),
+                                  TextSpan(
+                                    text: ("Privacy Policy"),
+                                    style: FontConstant.k14w500B7A4TextU,
+                                  ),
+                                  TextSpan(
+                                    text: " & ",
+                                    style: FontConstant.k14w400B7A4Text,
+                                  ),
+                                  TextSpan(
+                                    text: ("Terms and Conditions"),
+                                    style: FontConstant.k14w500B7A4TextU,
+                                  ),
+                                ])),
+                              ),
                               /*Row(
                   children: [
                   Text(

@@ -134,24 +134,19 @@ class _TAddReminderState extends State<TAddReminder> {
                   )
                 ],
               ),
-              Expanded(
-                child: Align(
-                  alignment: FractionalOffset.bottomCenter,
-                  child: SizedBox(
-                    height: 52.h,
-                    width: 382.w,
-                    child: MainButton(
-                        onTap: () {
-                          Reminderaddeddialog(context);
-                        },
-                        title: "Save".tr(),
-                        /*AppLoaclizations.of(context)!
-                            .translate("Save")
-                            .toString(),*/
-                        textStyleColor: Colors.white,
-                        backgroundColor: ThemeColor.primarycolor),
-                  ),
-                ),
+              SizedBox(
+                height: 52.h,
+                width: 382.w,
+                child: MainButton(
+                    onTap: () {
+                      Reminderaddeddialog(context);
+                    },
+                    title: "Save".tr(),
+                    /*AppLoaclizations.of(context)!
+                        .translate("Save")
+                        .toString(),*/
+                    textStyleColor: Colors.white,
+                    backgroundColor: ThemeColor.primarycolor),
               ),
               SizedBox(
                 height: 30.h,

@@ -100,7 +100,19 @@ class _PAddReminderState extends State<PAddReminder> {
                   SizedBox(
                     height: 4.h,
                   ),
-                  textfield(context, "Enter Reminder’s time".tr())
+                  InkWell(
+                    onTap: () {
+                      showTimePicker(
+                        context: context,
+                        initialTime: TimeOfDay.now(),
+                      );
+                    },
+                    child: IgnorePointer(
+                      child: IconTextfield(
+                          Icon: "assets/images/clockicon.png",
+                          title: "Select time"),
+                    ),
+                  ),
                 ],
               ),
               SizedBox(height: 8.h),
@@ -109,14 +121,26 @@ class _PAddReminderState extends State<PAddReminder> {
                 children: [
                   Text(
                     "Date".tr(),
+                    /*  AppLoaclizations.of(context)!.translate("Date").toString(),*/
                     style: FontConstant.k16w500331FText,
                   ),
                   SizedBox(
                     height: 4.h,
                   ),
-                  IconTextfield(
-                      Icon: "assets/images/calendericon.png",
-                      title: "Select date".tr())
+                  InkWell(
+                    onTap: () {
+                      showDatePicker(
+                          context: context,
+                          initialDate: DateTime.now(),
+                          firstDate: DateTime(1970),
+                          lastDate: DateTime(2100));
+                    },
+                    child: IgnorePointer(
+                      child: IconTextfield(
+                          Icon: "assets/images/calendericon.png",
+                          title: "Select date"),
+                    ),
+                  )
                 ],
               ),
               Expanded(
@@ -124,7 +148,7 @@ class _PAddReminderState extends State<PAddReminder> {
                   alignment: FractionalOffset.bottomCenter,
                   child: SizedBox(
                     height: 52.h,
-                    width: 382..w,
+                    width: 382.w,
                     child: MainButton(
                         onTap: () {
                           Reminderaddeddialog(context);
