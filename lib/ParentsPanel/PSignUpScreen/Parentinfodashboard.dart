@@ -13,7 +13,11 @@ class Parentinfodashboard extends StatefulWidget {
   State<Parentinfodashboard> createState() => _ParentinfodashboardState();
 }
 
-class _ParentinfodashboardState extends State<Parentinfodashboard> {
+class _ParentinfodashboardState extends State<Parentinfodashboard>
+    with AutomaticKeepAliveClientMixin {
+  @override
+  bool get wantKeepAlive => true;
+  // bool get wantKeepAlive => true;
   final PageController _pageController = PageController(
     initialPage: 0,
   );
@@ -21,67 +25,86 @@ class _ParentinfodashboardState extends State<Parentinfodashboard> {
 
   @override
   void dispose() {
-    _pageController.dispose();
+    //_pageController.dispose();
     super.dispose();
   }
 
   int selectedIndex = 0;
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        color: ThemeColor.primarycolor.withOpacity(.06),
-        child: SingleChildScrollView(
-          //physics: NeverScrollableScrollPhysics(),
-          child: Column(
-            children: [
-              SizedBox(height: 72.h),
-              Center(
-                child: Image.asset(
-                  "assets/images/logo without text.png",
-                  height: 63,
-                  width: 52,
+    return WillPopScope(
+      onWillPop: () async {
+        if (_pageController.page!.round() == 0) {
+          Navigator.pop(context);
+        } else {
+          _pageController
+              .previousPage(
+            duration: Duration(milliseconds: 300),
+            curve: Curves.fastOutSlowIn,
+          )
+              .then((value) {
+            setState(() {
+              pageIndex = _pageController.page!.round();
+            });
+          });
+        }
+        return false;
+      },
+      child: Scaffold(
+        body: Container(
+          color: ThemeColor.primarycolor.withOpacity(.06),
+          child: SingleChildScrollView(
+            physics: NeverScrollableScrollPhysics(),
+            child: Column(
+              children: [
+                SizedBox(height: 72.h),
+                Center(
+                  child: Image.asset(
+                    "assets/images/logo without text.png",
+                    height: 63,
+                    width: 52,
+                  ),
                 ),
-              ),
-              SizedBox(height: 40),
-              dottab(),
-              SizedBox(height: 40),
-              SizedBox(
-                height: 1.sh,
-                child: PageView(
-                  physics: NeverScrollableScrollPhysics(),
-                  controller: _pageController,
-                  onPageChanged: (page) {
-                    setState(
-                      () {
-                        pageIndex = page;
-                      },
-                    );
-                  },
-                  children: <Widget>[
-                    ParentInfo(
-                      onContinue: () {
-                        _pageController.animateToPage(
-                          1,
-                          duration: Duration(milliseconds: 300),
-                          curve: Curves.fastOutSlowIn,
-                        );
-                      },
-                    ),
-                    KidsDetails(
-                      onContinue: () {
-                        _pageController.animateToPage(
-                          2,
-                          duration: Duration(milliseconds: 300),
-                          curve: Curves.fastOutSlowIn,
-                        );
-                      },
-                    ),
-                    MedicalInfo()
-                  ],
+                SizedBox(height: 40),
+                dottab(),
+                SizedBox(height: 40),
+                SizedBox(
+                  height: 1.sh,
+                  child: PageView(
+                    //physics: NeverScrollableScrollPhysics(),
+                    controller: _pageController,
+                    onPageChanged: (page) {
+                      setState(
+                        () {
+                          pageIndex = page;
+                        },
+                      );
+                    },
+                    children: <Widget>[
+                      ParentInfo(
+                        onContinue: () {
+                          _pageController.animateToPage(
+                            1,
+                            duration: Duration(milliseconds: 300),
+                            curve: Curves.fastOutSlowIn,
+                          );
+                        },
+                      ),
+                      KidsDetails(
+                        onContinue: () {
+                          _pageController.animateToPage(
+                            2,
+                            duration: Duration(milliseconds: 300),
+                            curve: Curves.fastOutSlowIn,
+                          );
+                        },
+                      ),
+                      MedicalInfo()
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
@@ -164,6 +187,9 @@ class _ParentinfodashboardState extends State<Parentinfodashboard> {
       ),
     );
   }
+
+  // @override
+  // bool get wantKeepAlive => true;
 }
 
 class DotCircleTab extends StatelessWidget {

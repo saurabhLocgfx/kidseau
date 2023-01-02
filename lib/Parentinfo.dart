@@ -21,7 +21,7 @@ enum SingingCharacter { father, mother }
 
 class _ParentInfoState extends State<ParentInfo> {
   SingingCharacter? _character = SingingCharacter.father;
-  String parent = '';
+  // String parent = '';
 
   TextEditingController motherNameController = TextEditingController();
   TextEditingController motherOccupation = TextEditingController();
@@ -466,7 +466,7 @@ class _ParentInfoState extends State<ParentInfo> {
                           controller: fatherEmailController,
                           /*  controller: controller,*/
                         ),
-                      )
+                      ),
                     ],
                   ),
                   SizedBox(height: 4),
@@ -522,58 +522,58 @@ class _ParentInfoState extends State<ParentInfo> {
                     ],
                   ),
                   SizedBox(height: 4),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "You are",
-                        style: FontConstant.k16w500331FText,
-                      ),
-                      SizedBox(height: 5),
-                      ListTile(
-                        title: Text(
-                          'father',
-                          style: FontConstant.k16w4008471Text,
-                        ),
-                        leading: Radio<SingingCharacter>(
-                          activeColor: ThemeColor.primarycolor,
-                          value: SingingCharacter.father,
-                          groupValue: _character,
-                          onChanged: (SingingCharacter? value) {
-                            setState(() {
-                              _character = value;
-                              if (value == true) {
-                                parent = 'Mother';
-                              } else {
-                                parent = 'Father';
-                              }
-                            });
-                          },
-                        ),
-                      ),
-                      ListTile(
-                        title: Text(
-                          'mother',
-                          style: FontConstant.k16w4008471Text,
-                        ),
-                        leading: Radio<SingingCharacter>(
-                          activeColor: ThemeColor.primarycolor,
-                          value: SingingCharacter.mother,
-                          groupValue: _character,
-                          onChanged: (SingingCharacter? value) {
-                            setState(() {
-                              _character = value;
-                              if (value == true) {
-                                parent = 'Mother';
-                              } else {
-                                parent = 'Father';
-                              }
-                            });
-                          },
-                        ),
-                      ),
-                    ],
-                  ),
+                  // Column(
+                  //   crossAxisAlignment: CrossAxisAlignment.start,
+                  //   children: [
+                  //     Text(
+                  //       "You are",
+                  //       style: FontConstant.k16w500331FText,
+                  //     ),
+                  //     SizedBox(height: 5),
+                  //     ListTile(
+                  //       title: Text(
+                  //         'father',
+                  //         style: FontConstant.k16w4008471Text,
+                  //       ),
+                  //       leading: Radio<SingingCharacter>(
+                  //         activeColor: ThemeColor.primarycolor,
+                  //         value: SingingCharacter.father,
+                  //         groupValue: _character,
+                  //         onChanged: (SingingCharacter? value) {
+                  //           setState(() {
+                  //             _character = value;
+                  //             if (value == true) {
+                  //               parent = 'Mother';
+                  //             } else {
+                  //               parent = 'Father';
+                  //             }
+                  //           });
+                  //         },
+                  //       ),
+                  //     ),
+                  //     ListTile(
+                  //       title: Text(
+                  //         'mother',
+                  //         style: FontConstant.k16w4008471Text,
+                  //       ),
+                  //       leading: Radio<SingingCharacter>(
+                  //         activeColor: ThemeColor.primarycolor,
+                  //         value: SingingCharacter.mother,
+                  //         groupValue: _character,
+                  //         onChanged: (SingingCharacter? value) {
+                  //           setState(() {
+                  //             _character = value;
+                  //             if (value == true) {
+                  //               parent = 'Mother';
+                  //             } else {
+                  //               parent = 'Father';
+                  //             }
+                  //           });
+                  //         },
+                  //       ),
+                  //     ),
+                  //   ],
+                  // ),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -586,13 +586,17 @@ class _ParentInfoState extends State<ParentInfo> {
                         onTap: () async {
                           XFile? image = await _picker.pickImage(
                             source: ImageSource.gallery,
+                            //imageQuality: 75,
                           );
+                          print('tyuio');
+                          print('tyuio');
                           print(_pickedImage.path);
-                          if (_pickedImage.isAbsolute) {
-                            setState(() {
-                              _pickedImage = File(image!.path);
-                            });
-                          }
+                          /*if (_pickedImage.isAbsolute) {*/
+                          setState(() {
+                            _pickedImage = File(image!.path);
+                          });
+                          /*}*/
+                          print(_pickedImage.path);
                         },
                         child: Container(
                             height: 56.h,
@@ -677,7 +681,7 @@ class _ParentInfoState extends State<ParentInfo> {
                                 fatherContact: fatherPhoneController.text,
                                 fatherEmail: fatherEmailController.text,
                                 address: addressController.text,
-                                parents: parent,
+                                // parents: parent,
                                 pickedImage: _pickedImage.path,
                               );
                               resp.then((value) {

@@ -11,6 +11,7 @@ class Tnotificationlist2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
+        // padding: EdgeInsets.zero,
         physics: NeverScrollableScrollPhysics(),
         itemCount: images2.length,
         shrinkWrap: true,
@@ -91,6 +92,7 @@ class Tnotificationlist1 extends StatelessWidget {
     return Container(
       height: MediaQuery.of(context).size.height * 0.40,
       child: ListView.builder(
+          padding: EdgeInsets.zero,
           physics: NeverScrollableScrollPhysics(),
           shrinkWrap: true,
           itemCount: images.length,

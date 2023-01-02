@@ -242,7 +242,7 @@ class _TNotificationScreenState extends State<TNotificationScreen> {
                 style: FontConstant.k14w500B7A4Text,
               ),
             ),
-            SizedBox(height: 24),
+            SizedBox(height: 10),
             Tnotificationlist2(),
           ],
         )),

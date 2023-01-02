@@ -277,36 +277,34 @@ class _THomeScreenState extends State<THomeScreen> {
 ////////////////////////
               Padding(
                 padding: const EdgeInsets.only(right: 16.0),
-                child:
-                    // loadingData
-                    //     ? CircularProgressIndicator()
-                    //     :
-                    SizedBox(
-                  height: 128,
-                  child: ListView.builder(
-                    shrinkWrap: true,
-                    scrollDirection: Axis.horizontal,
-                    itemCount: _name.group!.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => TGroupScreen()),
-                            );
+                child: loadingData
+                    ? CircularProgressIndicator()
+                    : SizedBox(
+                        height: 128,
+                        child: ListView.builder(
+                          shrinkWrap: true,
+                          scrollDirection: Axis.horizontal,
+                          itemCount: _name.group!.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            return GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => TGroupScreen()),
+                                  );
+                                },
+                                child:
+                                    // loadingData
+                                    //     ? CircularProgressIndicator()
+                                    //     :
+                                    Groupcard(
+                                  nameData: _name,
+                                  index: index,
+                                ));
                           },
-                          child:
-                              // loadingData
-                              //     ? CircularProgressIndicator()
-                              //     :
-                              Groupcard(
-                            nameData: _name,
-                            index: index,
-                          ));
-                    },
-                  ),
-                ),
+                        ),
+                      ),
               ),
               SizedBox(
                 height: 15.h,

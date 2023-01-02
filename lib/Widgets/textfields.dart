@@ -125,3 +125,128 @@ class IconTextfield extends StatelessWidget {
     );
   }
 }
+
+class Texticonfield extends StatelessWidget {
+  final String Icon;
+  final String title;
+  final String hinttext;
+
+  Texticonfield({
+    Key? key,
+    required this.Icon,
+    required this.title,
+    required this.hinttext,
+  }) : super(key: key);
+
+  @override
+  Widget build(
+    BuildContext context,
+  ) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          title,
+          style: FontConstant.k16w500331FText,
+        ),
+        SizedBox(height: 4),
+        TextFormField(
+          style: FontConstant.k18w5008471Text,
+          decoration: InputDecoration(
+            suffixIconConstraints: BoxConstraints(minHeight: 21, minWidth: 21),
+            suffixIcon: Padding(
+              padding: const EdgeInsets.only(right: 15),
+              child: ImageIcon(
+                AssetImage(Icon),
+                size: 21,
+              ),
+            ),
+            suffixIconColor: Color(0xffB7A4B2),
+            contentPadding: EdgeInsets.all(14.0),
+            enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.all(Radius.circular(30.0)),
+                borderSide: BorderSide(color: Colors.white, width: 1.0)),
+            disabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: Colors.white, width: 1.0),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.all(Radius.circular(30.0)),
+              borderSide: BorderSide(color: Color(0xffBE74AA), width: 1.0),
+            ),
+            isDense: true,
+            hintText: hinttext,
+            filled: true,
+            fillColor: Colors.white,
+            hintStyle: FontConstant.k14w400lightText.copyWith(
+                color: Color(0xffB7A4B2),
+                fontSize: 16.0,
+                fontWeight: FontWeight.w400),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class Primarytextfield extends StatelessWidget {
+  final String text;
+  final String desc;
+  final TextEditingController controller;
+
+  // final String text;
+  const Primarytextfield({
+    Key? key,
+    required this.text,
+    required this.desc,
+    required this.controller,
+
+    // required this.text
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          text,
+          style: FontConstant.k16w500331FText,
+        ),
+        Container(
+          height: 60.h,
+          width: 1.sw,
+          child: Container(
+            height: 56.h,
+            width: 382.w,
+            child: TextFormField(
+              controller: controller,
+              style: FontConstant.k18w5008471Text,
+              decoration: InputDecoration(
+                contentPadding: EdgeInsets.all(14.0),
+                enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(30.0)),
+                    borderSide: BorderSide(color: Colors.white, width: 1.0)),
+                disabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.white, width: 1.0),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(30.0)),
+                  borderSide: BorderSide(color: Color(0xffBE74AA), width: 1.0),
+                ),
+                isDense: true,
+                hintText: desc,
+                filled: true,
+                fillColor: Colors.white,
+                hintStyle: FontConstant.k14w400lightText.copyWith(
+                    color: Color(0xffB7A4B2),
+                    fontSize: 16.0,
+                    fontWeight: FontWeight.w400),
+              ),
+              /*  controller: controller,*/
+            ),
+          ),
+        )
+      ],
+    );
+  }
+}
