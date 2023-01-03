@@ -4,12 +4,14 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:kidseau/Theme.dart';
 import 'package:kidseau/Widgets/buttons.dart';
 import 'package:kidseau/api/models/group_resp.dart';
 import 'package:kidseau/api/models/section_resp.dart';
 import 'package:kidseau/api/parent_signup_apis/get_sections.dart';
+import 'package:kidseau/api/parent_signup_apis/parent_signup_kidinfo_api.dart';
 
 class KidsDetails extends StatefulWidget {
   final Function onContinue;
@@ -22,7 +24,9 @@ class KidsDetails extends StatefulWidget {
 class _KidsDetailsState extends State<KidsDetails> {
   TextEditingController kidNameController = TextEditingController();
   TextEditingController kidAgeController = TextEditingController();
-  final TextEditingController datepicker = TextEditingController();
+  TextEditingController datepicker = TextEditingController();
+  TextEditingController kidBirthdayController = TextEditingController();
+  // TextEditingController kidGenderController = TextEditingController();
 
   File _pickedImage = File('');
   final _picker = ImagePicker();
@@ -30,7 +34,7 @@ class _KidsDetailsState extends State<KidsDetails> {
   String thumbnail = '';
 
   String groupid = '';
-  String sectionid = '';
+  // String sectionid = '';
   String _selectedText = 'Male';
   String _selectedgroup = '';
   String _selectedsection = '';
@@ -60,6 +64,7 @@ class _KidsDetailsState extends State<KidsDetails> {
           setState(() {
             gresp = value;
             _selectedgroup = gresp.Group.first.grpName.toString();
+            groupid = gresp.Group.first.grpId.toString();
           });
         });
       });
@@ -197,6 +202,11 @@ class _KidsDetailsState extends State<KidsDetails> {
                             onChanged: (val) {
                               setState(() {
                                 _selectedgroup = val.toString();
+                                for (var e in gresp.Group) {
+                                  if (e.grpName == _selectedgroup) {
+                                    groupid = e.grpId;
+                                  }
+                                }
                               });
                             },
                           ),
@@ -236,7 +246,7 @@ class _KidsDetailsState extends State<KidsDetails> {
                             //you can implement different kind of Date Format here according to your requirement
 
                             setState(() {
-                              datepicker.text =
+                              kidBirthdayController.text =
                                   formattedDate; //set output date to TextField value.
                             });
                           } else {
@@ -250,7 +260,7 @@ class _KidsDetailsState extends State<KidsDetails> {
                           }
                           return null;
                         },
-                        controller: datepicker,
+                        controller: kidBirthdayController,
                         style: FontConstant.k18w5008471Text,
                         decoration: InputDecoration(
                           suffixIconConstraints:
@@ -276,34 +286,26 @@ class _KidsDetailsState extends State<KidsDetails> {
                                   //you can implement different kind of Date Format here according to your requirement
 
                                   setState(() {
-                                    datepicker.text =
+                                    kidBirthdayController.text =
                                         formattedDate; //set output date to TextField value.
                                   });
                                 } else {
                                   print("Date is not selected");
                                 }
-                                showDialog(
-                                  context: context,
-                                  builder: (_) => AlertDialog(
-                                    content: Container(
-                                      child: CupertinoDatePicker(
-                                        mode: CupertinoDatePickerMode.date,
-                                        onDateTimeChanged: (v) {},
-                                        initialDateTime: DateTime.now(),
-                                        minimumYear: 1990,
-                                        maximumYear: 2023,
-                                      ),
-                                    ),
-                                  ),
-                                );
+
+                                // showDialog(
+                                //   context: context,
+                                //   builder: (_) => AlertDialog(
+                                //     content: CupertinoDatePicker(
+                                //       mode: CupertinoDatePickerMode.date,
+                                //       onDateTimeChanged: (v) {},
+                                //       initialDateTime: DateTime.now(),
+                                //       minimumYear: 1990,
+                                //       maximumYear: 2023,
+                                //     ),
+                                //   ),
+                                // );
                               },
-                              // onTap: () {
-                              //   showDatePicker(
-                              //       context: context,
-                              //       initialDate: DateTime.now(),
-                              //       firstDate: DateTime(1970),
-                              //       lastDate: DateTime(2100));
-                              // },
                               child: ImageIcon(
                                 AssetImage("assets/images/calendericon.png"),
                                 size: 21,
@@ -404,11 +406,9 @@ class _KidsDetailsState extends State<KidsDetails> {
                             source: ImageSource.gallery,
                           );
                           print(_pickedImage.path);
-                          if (_pickedImage.isAbsolute) {
-                            setState(() {
-                              _pickedImage = File(image!.path);
-                            });
-                          }
+                          setState(() {
+                            _pickedImage = File(image!.path);
+                          });
                         },
                         child: Container(
                           height: 56.h,
@@ -480,12 +480,29 @@ class _KidsDetailsState extends State<KidsDetails> {
                       width: 384.w,
                       child: MainButton(
                           onTap: () {
+                            if (_formKey.currentState!.validate()) {
+                              final resp = KidsSignupInfo().get(
+                                kidName: kidNameController.text,
+                                kidSection: groupid,
+                                kidAge: kidAgeController.text,
+                                kidBirthday: kidBirthdayController.text,
+                                kidGender: _selectedText,
+                                pickedImage: _pickedImage.path,
+                              );
+                              resp.then((value) {
+                                print(value);
+                                if (value['status'] == 0) {
+                                  Fluttertoast.showToast(msg: value['msg']);
+                                } else {
+                                  widget.onContinue();
+                                }
+                              });
+                            }
                             // Navigator.push(
                             //   context,
                             //   MaterialPageRoute(
                             //       builder: (context) => ParentInfo()),
                             // );
-                            widget.onContinue();
                           },
                           title: "Continue",
                           textStyleColor: Colors.white,

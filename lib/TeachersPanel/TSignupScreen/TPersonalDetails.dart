@@ -472,7 +472,7 @@ class _TPersonalDetailsState extends State<TPersonalDetails> {
                             fontWeight: FontWeight.w400),
                       ),
                       /*  controller: controller,*/
-                    )
+                    ),
                     //textfield(context, "Enter your highest degree")
                   ],
                 ),

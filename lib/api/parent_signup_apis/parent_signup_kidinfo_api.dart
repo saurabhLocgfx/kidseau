@@ -8,7 +8,7 @@ class KidsSignupInfo {
   Future<dynamic> get(
       {required String kidName,
       required String kidSection,
-      required String kidGroup,
+      // required String kidGroup,
       required String kidAge,
       required String kidBirthday,
       required String kidGender,
@@ -18,22 +18,27 @@ class KidsSignupInfo {
       'Content-Type': 'application/json',
       'Cookie': 'PHPSESSID=$cookie',
     };
-    var request = http.MultipartRequest(
-        'POST', Uri.parse('$kAPIConst/kids/api_parent_login/pt_sign_up.php'));
+    var request = http.MultipartRequest('POST',
+        Uri.parse('$kAPIConst/kids/api_parent_login/pt_kidinfo_sign_up.php'));
     request.fields.addAll({
       'kid_name': kidName,
       'sec_grp': kidSection,
-      'age': kidGroup,
-      'birth_date': kidAge,
-      'gender': kidGender,
+      'age': kidAge,
+      'birth_date': kidBirthday,
+      'gender': kidGender == 'Male'
+          ? 'M'
+          : kidGender == 'Female'
+              ? 'F'
+              : 'O',
       'profile_pic': "$pickedImage"
     });
+    print(request.fields);
     request.files
         .add(await http.MultipartFile.fromPath('profile_pic', "$pickedImage"));
     request.headers.addAll(headers);
-    print(request.fields);
+
     http.StreamedResponse response = await request.send();
-    //http.StreamedResponse response = await request.send();
+    //print(await response.stream.bytesToString());
     var rsp = jsonDecode(await response.stream.bytesToString());
     if (response.statusCode == 200) {
       return rsp;
