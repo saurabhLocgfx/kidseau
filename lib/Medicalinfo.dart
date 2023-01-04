@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kidseau/Constants/decorations.dart';
 import 'package:kidseau/Theme.dart';
-import 'package:kidseau/Widgets/buttons.dart';
 
 class MedicalInfo extends StatefulWidget {
   const MedicalInfo({Key? key}) : super(key: key);
@@ -85,25 +84,36 @@ class _MedicalInfoState extends State<MedicalInfo> {
                       ),
                 ),
                 SizedBox(height: 16),
-                CustomField(
-                    text: 'Any extra to take care',
-                    child: TextFormField(
-                      style: FontConstant.k18w5008471Text,
-                      decoration: FieldDecoration(
-                        hintText: "Write here....",
-                      ).baseInputDecoration(),
-                    )),
-                SizedBox(height: 28),
-                SizedBox(
-                  height: 52.h,
-                  width: 382.sw,
-                  child: MainButton(
-                      onTap: () {},
-                      title: "",
-                      textStyleColor: Colors.white,
-                      backgroundColor: ThemeColor.primarycolor),
-                ),
-                SizedBox(height: 250),
+                // Container(
+                //   height: 138.h,
+                //   child: TextFormField(
+                //     style: FontConstant.k18w5008471Text,
+                //     decoration: InputDecoration(
+                //       enabledBorder: OutlineInputBorder(
+                //           borderRadius: BorderRadius.all(Radius.circular(30.0)),
+                //           borderSide:
+                //               BorderSide(color: Colors.white, width: 1.0)),
+                //       disabledBorder: OutlineInputBorder(
+                //         borderSide: BorderSide(color: Colors.white, width: 1.0),
+                //       ),
+                //       focusedBorder: OutlineInputBorder(
+                //         borderRadius: BorderRadius.all(Radius.circular(30.0)),
+                //         borderSide:
+                //             BorderSide(color: Color(0xffBE74AA), width: 1.0),
+                //       ),
+                //       isDense: true,
+                //       hintText: "Any extra to take care",
+                //       filled: true,
+                //       fillColor: Colors.white,
+                //       hintStyle: FontConstant.k14w400lightText.copyWith(
+                //           color: Color(0xffB7A4B2),
+                //           fontSize: 16.0,
+                //           fontWeight: FontWeight.w400),
+                //     ),
+                //     /*  controller: controller,*/
+                //   ),
+                // ),
+                SizedBox(height: 400),
               ],
             ),
           ),
@@ -119,9 +129,7 @@ class CustomField extends StatelessWidget {
     required this.text,
     required this.child,
   }) : super(key: key);
-
   final String text;
-
   final Widget child;
 
   @override
@@ -136,35 +144,7 @@ class CustomField extends StatelessWidget {
         SizedBox(height: 4),
         Container(
           height: 56.h,
-          width: 382.sw,
           child: child,
-
-          // TextFormField(
-          //   controller: controller,
-          //   style: FontConstant.k18w5008471Text,
-          //   decoration: InputDecoration(
-          //     contentPadding: EdgeInsets.all(14.0),
-          //     enabledBorder: OutlineInputBorder(
-          //         borderRadius: BorderRadius.all(Radius.circular(30.0)),
-          //         borderSide: BorderSide(color: Colors.white, width: 1.0)),
-          //     disabledBorder: OutlineInputBorder(
-          //       borderSide: BorderSide(color: Colors.white, width: 1.0),
-          //     ),
-          //     focusedBorder: OutlineInputBorder(
-          //       borderRadius: BorderRadius.all(Radius.circular(30.0)),
-          //       borderSide: BorderSide(color: Color(0xffBE74AA), width: 1.0),
-          //     ),
-          //     isDense: true,
-          //     hintText: desc,
-          //     filled: true,
-          //     fillColor: Colors.white,
-          //     hintStyle: FontConstant.k14w400lightText.copyWith(
-          //         color: Color(0xffB7A4B2),
-          //         fontSize: 16.0,
-          //         fontWeight: FontWeight.w400),
-          //   ),
-          //   /*  controller: controller,*/
-          // ),
         ),
       ],
     );
