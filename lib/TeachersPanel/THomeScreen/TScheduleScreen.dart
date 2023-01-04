@@ -18,7 +18,7 @@ class ScheduleScreen extends StatefulWidget {
 }
 
 class _ScheduleScreenState extends State<ScheduleScreen> {
-  bool loading = true;
+  bool loading = false;
   @override
   void initState() {
     getSchedule();
@@ -26,13 +26,16 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
     super.initState();
   }
 
+  TScheduleModel _schedule = TScheduleModel();
+
   getSchedule() {
+    loading = true;
     final rsp = TScheduleApi().get();
     rsp.then((value) {
       print(value);
       try {
-        _schedule = value as TScheduleModel;
         setState(() {
+          _schedule = value;
           loading = false;
         });
       } catch (e) {
@@ -41,12 +44,10 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
         });
       }
       //print(_schedule.schedule!.length);
-      print(_schedule.schedule!.length);
-      print(_schedule.schedule![0].actTitle);
+     // print(_schedule.schedule!.length);
+     // print(_schedule.schedule![0].actTitle);
     });
   }
-
-  TScheduleModel _schedule = TScheduleModel();
 
   @override
   Widget build(BuildContext context) {
@@ -91,7 +92,9 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
           ],
         ),
       ),
-      body: SingleChildScrollView(
+      body: loading
+          ? Center(child: CircularProgressIndicator())
+          :_schedule.schedule!.isEmpty? Center(child: Text('No schedule found')) :SingleChildScrollView(
         child: Container(
           color: Color(0xff8267AC).withOpacity(.06),
           child: Column(
@@ -109,9 +112,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
               SizedBox(
                 height: 5.h,
               ),
-              loading
-                  ? Center(child: CircularProgressIndicator())
-                  : Padding(
+               Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 16),
                       child: TActivity(
                         schedule: _schedule,

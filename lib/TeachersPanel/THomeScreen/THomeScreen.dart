@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -50,9 +51,9 @@ class _THomeScreenState extends State<THomeScreen> {
     rsp.then((value) {
       try {
         setState(() {
+          _name = value;
           loadingData = false;
         });
-        _name = value as THomeModel;
       } catch (e) {
         setState(() {
           loadingData = false;
@@ -62,35 +63,39 @@ class _THomeScreenState extends State<THomeScreen> {
       print(_name.group);
       //print(_name.group!.length);
     }).then((value) {
-      getSchedule();
+     // getSchedule();
     });
   }
 
   getSchedule() {
-    loadingsch = true;
+   // loadingsch = true;
     final rsp = TScheduleApi().get();
     rsp.then((value) {
       try {
         _schedule = value;
-        setState(() {
-          loadingsch = false;
-        });
+        // setState(() {
+        //   loadingsch = false;
+        // });
       } catch (e) {
-        setState(() {
-          loadingsch = false;
-        });
+        // setState(() {
+        //   loadingsch = false;
+        // });
       }
       print(_schedule.schedule);
     });
   }
 
+  final CarouselController _controller = CarouselController();
+
   TScheduleModel _schedule = TScheduleModel();
   THomeModel _name = THomeModel();
   // THomeModel _attend = THomeModel();
+  int _index = 0;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xff8267AC).withOpacity(.06),
       appBar: AppBar(
         toolbarHeight: 70.0,
         flexibleSpace: ClipRect(
@@ -108,7 +113,7 @@ class _THomeScreenState extends State<THomeScreen> {
           children: [
             Padding(
               padding: const EdgeInsets.only(top: 15.0),
-              child: Text(_name.hello.toString(),
+              child: Text(_name.hello ?? '',
                   /*"Good Morning".tr()*/
                   /*AppLoaclizations.of(context)!
                       .translate("Good Morning")
@@ -263,25 +268,61 @@ class _THomeScreenState extends State<THomeScreen> {
           )
         ],
       ),
-      body: SingleChildScrollView(
+      body: loadingData
+          ? Center(child: CircularProgressIndicator())
+          :SingleChildScrollView(
         child: Container(
           width: 1.sw,
-          decoration: BoxDecoration(
-            color: Color(0xff8267AC).withOpacity(.06),
-          ),
+          // decoration: BoxDecoration(
+          //   color: Color(0xff8267AC).withOpacity(.06),
+          // ),
           child: Column(
             children: [
               SizedBox(
                 height: 40,
               ),
-////////////////////////
               Padding(
                 padding: const EdgeInsets.only(right: 16.0),
-                child: loadingData
-                    ? CircularProgressIndicator()
-                    : SizedBox(
+                child:  SizedBox(
                         height: 128,
-                        child: ListView.builder(
+                        width: 1.sw,
+                        //color: Colors.blue,
+                        // child: CarouselSlider.builder(
+                        //   carouselController: _controller,
+                        //   itemCount: _name.group!.length,
+                        //   itemBuilder: (ctx, index, realIndex) {
+                        //     return GestureDetector(
+                        //         onTap: () {
+                        //           Navigator.push(
+                        //             context,
+                        //             MaterialPageRoute(
+                        //                 builder: (context) => TGroupScreen()),
+                        //           );
+                        //         },
+                        //         child:
+                        //         // loadingData
+                        //         //     ? CircularProgressIndicator()
+                        //         //     :
+                        //         Groupcard(
+                        //           nameData: _name,
+                        //           index: index,
+                        //         ));
+                        //   },
+                        //   options: CarouselOptions(
+                        //     //height: 40.h,
+                        //     onPageChanged: (index, reason) {
+                        //       setState(() {
+                        //         _index = index;
+                        //       });
+                        //     },
+                        //     viewportFraction: 0.9,
+                        //     aspectRatio: 20/9,
+                        //     enlargeCenterPage: false,
+                        //     //pageSnapping: false,
+                        //     enableInfiniteScroll: false,
+                        //   ),
+                        // ),
+                       child: ListView.builder(
                           shrinkWrap: true,
                           scrollDirection: Axis.horizontal,
                           itemCount: _name.group!.length,
@@ -330,7 +371,104 @@ class _THomeScreenState extends State<THomeScreen> {
               SizedBox(
                 height: 5,
               ),
-              schedulewidgetapi(),
+             Container(
+                padding: EdgeInsets.symmetric(horizontal: 16),
+                // height: 300.h,
+                width: 1.sw,
+                child: ListView.separated(
+                    separatorBuilder: (ctx, ind) => SizedBox(
+                      height: 14.h,
+                    ),
+                    shrinkWrap: true,
+                    padding: EdgeInsets.zero,
+                    physics: NeverScrollableScrollPhysics(),
+                    itemCount: _name.schdule!.length,
+                    scrollDirection: Axis.vertical,
+                    itemBuilder: (BuildContext context, int index) {
+                        return InkWell(
+                          onTap: () {
+                            if (index == 0) {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                    const TLearningAlphabets()),
+                              );
+                            } else if (index == 1) {
+                            } else if (index == 2) {
+                            } else if (index == 3) {}
+                          },
+                          child:
+                          // loadingData
+                          //     ? CircularProgressIndicator()
+                          //     :
+                          Container(
+                            height: 64,
+                            // width: Get.size.width * 0.93,
+                            //margin: EdgeInsets.symmetric(horizontal: 16),
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(16),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Image.asset(
+                                    _name.schdule![index].icon.toString(),
+                                    errorBuilder: (q, w, e) {
+                                      return Text('Image not loaded');
+                                    },
+                                    height: 40,
+                                    width: 40,
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 15.0),
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          _name.schdule![index].title.toString(),
+                                          style: FontConstant.k32w500blackText
+                                              .copyWith(fontSize: 16),
+                                        ),
+                                        Row(
+                                          children: [
+                                            Text(
+                                              "From ${DateFormat.jm().format(DateFormat("hh:mm:ss").parse('${_name.schdule![index].time}'))} ",
+                                              // '${groups[index]} . ${time[index]}',
+                                              style: FontConstant
+                                                  .k14w400lightpurpleText
+                                                  .copyWith(
+                                                  fontWeight: FontWeight.w400,
+                                                  fontSize: 14,
+                                                  color: Color(0xffB7A4B2)),
+                                            ),
+                                            Text(
+                                              "To ${DateFormat.jm().format(DateFormat("hh:mm:ss").parse('${_name.schdule![index].time}'))} ",
+                                              // '${groups[index]} . ${time[index]}',
+                                              style: FontConstant
+                                                  .k14w400lightpurpleText
+                                                  .copyWith(
+                                                  fontWeight: FontWeight.w400,
+                                                  fontSize: 14,
+                                                  color: Color(0xffB7A4B2)),
+                                            ),
+                                          ],
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        );
+                    }),
+              ),
+             // schedulewidgetapi(),
               // schedulelistapi(),
               Center(
                 child: GestureDetector(
@@ -356,7 +494,7 @@ class _THomeScreenState extends State<THomeScreen> {
                 ),
               ),
               SizedBox(height: 10),
-              Padding(
+              _name.attendance?.isEmpty ?? [].isEmpty ? SizedBox.shrink() :Padding(
                 padding:
                     const EdgeInsets.only(left: 16.0, bottom: 10, right: 16),
                 child: Align(
@@ -377,14 +515,14 @@ class _THomeScreenState extends State<THomeScreen> {
                 height: 50,
                 color: Colors.black,
               ),*/
-              SizedBox(
+              _name.attendance?.isEmpty ?? [].isEmpty? SizedBox.shrink() :SizedBox(
                 height: 128,
                 child: Padding(
                   padding: const EdgeInsets.only(right: 16, left: 16),
                   child: ListView.separated(
                     shrinkWrap: true,
                     scrollDirection: Axis.horizontal,
-                    itemCount: 3,
+                    itemCount: _name.attendance!.length,
                     itemBuilder: (context, index) => GestureDetector(
                       onTap: () {
                         Navigator.push(

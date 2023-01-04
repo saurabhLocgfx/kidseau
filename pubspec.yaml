@@ -59,6 +59,7 @@ dependencies:
   easy_localization: ^3.0.1
   restart_app: ^1.1.1
   percent_indicator:
+  carousel_slider:
 
 
 dev_dependencies:

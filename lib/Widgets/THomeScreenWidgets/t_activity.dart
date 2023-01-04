@@ -47,7 +47,6 @@ class _TActivityState extends State<TActivity> {
   Widget build(BuildContext context) {
     return SizedBox(
       // height: 300.h,
-
       width: 1.sw,
       child: ListView.separated(
           separatorBuilder: (ctx, ind) => SizedBox(
