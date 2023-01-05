@@ -166,6 +166,8 @@ class FontConstant2 {
 
   static TextStyle baloothampifont = GoogleFonts.balooThambi2(
       fontWeight: FontWeight.w500, fontSize: 24, color: Color(0xff84717F));
+  static TextStyle baloo500_18_8267AC = GoogleFonts.balooThambi2(
+      fontWeight: FontWeight.w500, fontSize: 18, color: Color(0xff8267AC));
   static TextStyle k22w5008471text = GoogleFonts.balooThambi2(
       fontWeight: FontWeight.w500, fontSize: 22, color: Color(0xff84717F));
   static TextStyle k24w5008471text = GoogleFonts.balooThambi2(
@@ -201,6 +203,7 @@ class TextFieldDecoration {
       fillColor: Colors.white,
       filled: true,
       hintText: label,
+     // isCollapsed: true,
       hintStyle: FontConstant.k16w400B7A4Text,
       enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(curved ? 90 : 24),

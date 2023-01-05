@@ -1,7 +1,12 @@
+import 'dart:developer';
+import 'dart:io';
+
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:kidseau/Theme.dart';
 import 'package:kidseau/Widgets/buttons.dart';
 
@@ -15,10 +20,15 @@ class TAddPostsScreen extends StatefulWidget {
 }
 
 class _TAddPostsScreenState extends State<TAddPostsScreen> {
+  final _picker = ImagePicker();
+  final CarouselController _controller = CarouselController();
+  List<File> _pickedImages = [];
+  int _index = 0;
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      child: Column(
+      child: _pickedImages.isEmpty?Column(
         children: [
           SizedBox(height: 70),
           DottedBorder(
@@ -27,22 +37,35 @@ class _TAddPostsScreenState extends State<TAddPostsScreen> {
             strokeWidth: 2,
             color: Color(0xffB7A4B2),
             dashPattern: [10, 10],
-            child: Container(
-              color: Colors.transparent,
-              width: 200.w,
-              height: 250.w,
-              child: Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Image.asset(
-                      'assets/images/add.png',
-                      width: 100,
-                    ),
-                    SizedBox(height: 24),
-                    Text("Add Photos".tr(),
-                        style: FontConstant.k18w500B7A4Text),
-                  ],
+            child: InkWell(
+              onTap: ()async{
+                List<XFile> images = await _picker.pickMultiImage();
+                setState(() {
+                  for(var v in images){
+                    _pickedImages.add(File(v.path));
+                  }
+                });
+                if(_pickedImages.isNotEmpty){
+                  log(_pickedImages.toString());
+                }
+              },
+              child: Container(
+                color: Colors.transparent,
+                width: 200.w,
+                height: 250.h,
+                child: Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.asset(
+                        'assets/images/add.png',
+                        width: 100,
+                      ),
+                      SizedBox(height: 24),
+                      Text("Add Photos".tr(),
+                          style: FontConstant.k18w500B7A4Text),
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -68,6 +91,88 @@ class _TAddPostsScreenState extends State<TAddPostsScreen> {
               52.0,
             ),
           )
+        ],
+      ): Column(
+        children: [
+          SizedBox(height: 20,),
+          CarouselSlider.builder(
+            carouselController: _controller,
+            itemCount: _pickedImages.length,
+            itemBuilder: (ctx, index, realIndex) {
+             return Container(
+               color: Colors.red,
+               height: 350,
+               child: Stack(
+                // clipBehavior: Clip.antiAlias,
+                 children: [
+                   Image.file(
+                     _pickedImages[index],
+                     fit: BoxFit.fitWidth,
+                   ),
+                   Positioned(
+                     top: 0,
+                     right: 0,
+                     child: InkWell(
+                       onTap: (){
+                         setState(() {
+                           _pickedImages.removeAt(index);
+                         });
+                       },
+                       child: Container(
+                         padding: EdgeInsets.all(10),
+                         decoration: BoxDecoration(
+                           shape: BoxShape.circle,
+                           color: Colors.red
+                         ),
+                         child: Icon(Icons.delete_rounded, color: Colors.white,),
+                       ),
+                     ),
+                   )
+                 ],
+               ),
+             );
+            },
+            options: CarouselOptions(
+              //height: 40.h,
+              onPageChanged: (index, reason) {
+                setState(() {
+                  _index = index;
+                });
+              },
+              viewportFraction: 0.5,
+              enlargeFactor: 0.3,
+              aspectRatio: 16/9,
+              enlargeCenterPage: true,
+              //pageSnapping: false,
+              enableInfiniteScroll: false,
+            ),
+          ),
+          SizedBox(height: 36,),
+          InkWell(
+            onTap: ()async{
+              List<XFile> images = await _picker.pickMultiImage();
+              setState(() {
+                for(var v in images){
+                  _pickedImages.add(File(v.path));
+                }
+              });
+              if(_pickedImages.isNotEmpty){
+                log(_pickedImages.toString());
+              }
+            },
+            child: Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset('assets/images/addmore.png', width: 24,height: 24,),
+                  SizedBox(width: 16,),
+                  Text('Add more',style: FontConstant2.baloo500_18_8267AC,)
+                ],
+              ),
+            ),
+          ),
         ],
       ),
     );
