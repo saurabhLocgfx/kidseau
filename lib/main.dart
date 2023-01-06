@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_mentions/flutter_mentions.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:kidseau/ParentsPanel/POnboardingScreens/PSplashScreen.dart';
@@ -80,47 +81,49 @@ class MyAppState extends State<MyApp> {
         minTextAdapt: true,
         splitScreenMode: true,
         builder: (context, child) {
-          return GetMaterialApp(
-            theme: ThemeData().copyWith(
-              colorScheme: ThemeData().colorScheme.copyWith(
-                    primary: ThemeColor.primarycolor,
-                  ),
-            ),
-            supportedLocales: context.supportedLocales,
-            /*supportedLocales: [
-              Locale('en', 'US'),
-              Locale('ar', 'AR'),
-              Locale('fr', 'FR'),
-            ],*/
-            /* locale: _locale,*/
-            locale: context.locale,
-            localizationsDelegates: context.localizationDelegates,
-            /* localizationsDelegates: [
-              AppLoaclizations.delegate,
-              GlobalMaterialLocalizations.delegate,
-              GlobalWidgetsLocalizations.delegate,
-              const FallbackCupertinoLocalisationsDelegate(),
-            ],*/
-            /*localeResolutionCallback: (locale, supportedLocales) {
-              for (var supportedLocales in supportedLocales) {
-                if (supportedLocales.languageCode == locale?.languageCode &&
-                    supportedLocales.countryCode == locale?.countryCode) {
-                  return supportedLocales;
+          return Portal(
+            child: GetMaterialApp(
+              theme: ThemeData().copyWith(
+                colorScheme: ThemeData().colorScheme.copyWith(
+                      primary: ThemeColor.primarycolor,
+                    ),
+              ),
+              supportedLocales: context.supportedLocales,
+              /*supportedLocales: [
+                Locale('en', 'US'),
+                Locale('ar', 'AR'),
+                Locale('fr', 'FR'),
+              ],*/
+              /* locale: _locale,*/
+              locale: context.locale,
+              localizationsDelegates: context.localizationDelegates,
+              /* localizationsDelegates: [
+                AppLoaclizations.delegate,
+                GlobalMaterialLocalizations.delegate,
+                GlobalWidgetsLocalizations.delegate,
+                const FallbackCupertinoLocalisationsDelegate(),
+              ],*/
+              /*localeResolutionCallback: (locale, supportedLocales) {
+                for (var supportedLocales in supportedLocales) {
+                  if (supportedLocales.languageCode == locale?.languageCode &&
+                      supportedLocales.countryCode == locale?.countryCode) {
+                    return supportedLocales;
+                  }
                 }
-              }
-            },*/
-            debugShowCheckedModeBanner: false,
-            home: /*TPersonalDetails(
-              isEmail: false,
-            ),*/
-                // Parentinfodashboard()
-                // KidsDetails(),
-                // ParentInfo()
-                // TWaitingScreen()
-                // PSignupCode()
-                 TDashboard(),
-                // PDashboard(),
-                //PSplashScreen(),
+              },*/
+              debugShowCheckedModeBanner: false,
+              home: /*TPersonalDetails(
+                isEmail: false,
+              ),*/
+                  // Parentinfodashboard()
+                  // KidsDetails(),
+                  // ParentInfo()
+                  // TWaitingScreen()
+                  // PSignupCode()
+                   TDashboard(),
+                  // PDashboard(),
+                  //PSplashScreen(),
+            ),
           );
         });
   }

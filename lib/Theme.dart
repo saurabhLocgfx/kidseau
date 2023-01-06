@@ -110,6 +110,8 @@ class FontConstant {
 
   static TextStyle k18w500materialbuttonText = GoogleFonts.balooDa2(
       fontWeight: FontWeight.w500, fontSize: 18, color: Colors.white);
+  static TextStyle k18w500SecondaryMaterialButtonText = GoogleFonts.balooDa2(
+      fontWeight: FontWeight.w500, fontSize: 18, color: ThemeColor.primarycolor);
   static TextStyle k18w500BlackText = GoogleFonts.balooDa2(
       fontWeight: FontWeight.w500, fontSize: 18, color: Colors.black);
   static TextStyle k16w500brownText = GoogleFonts.balooDa2(

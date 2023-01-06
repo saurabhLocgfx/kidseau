@@ -11,6 +11,7 @@ import 'package:kidseau/Theme.dart';
 import 'package:kidseau/Widgets/buttons.dart';
 
 import 'TAddAnnouncement.dart';
+import 'TPostFormScreen.dart';
 
 class TAddPostsScreen extends StatefulWidget {
   const TAddPostsScreen({Key? key}) : super(key: key);
@@ -100,14 +101,17 @@ class _TAddPostsScreenState extends State<TAddPostsScreen> {
             itemCount: _pickedImages.length,
             itemBuilder: (ctx, index, realIndex) {
              return Container(
-               color: Colors.red,
+               //color: Colors.red,
                height: 350,
                child: Stack(
                 // clipBehavior: Clip.antiAlias,
                  children: [
-                   Image.file(
-                     _pickedImages[index],
-                     fit: BoxFit.fitWidth,
+                   ClipRRect(
+               borderRadius: BorderRadius.circular(40),
+                     child: Image.file(
+                       _pickedImages[index],
+                       fit: BoxFit.fitWidth,
+                     ),
                    ),
                    Positioned(
                      top: 0,
@@ -171,6 +175,52 @@ class _TAddPostsScreenState extends State<TAddPostsScreen> {
                   Text('Add more',style: FontConstant2.baloo500_18_8267AC,)
                 ],
               ),
+            ),
+          ),
+          SizedBox(height: 38,),
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 16),
+            height: 54,
+            child: Row(
+              children: [
+                Expanded(
+                  child: MainButton(
+                    onTap: () {
+                      Navigator.of(context).push(MaterialPageRoute(builder: (ctx)=> TPostFormScreen(pickedImages: _pickedImages,)));
+                    },
+                    title: "Continue".tr(),
+                    textStyleColor: Colors.white,
+                    backgroundColor: ThemeColor.primarycolor),
+                )
+              ],
+            ),
+          ),
+          SizedBox(height: 16,),
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 16),
+            height: 54,
+            child: Row(
+              children: [
+                Expanded(
+                  child: MaterialButton(
+                    elevation: 0,
+                    color: Colors.white,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(30))),
+                    onPressed: () {
+                      setState(() {
+                        _pickedImages.clear();
+                      });
+                    },
+                    child: Center(
+                      child: Text(
+                        'Discard',
+                        style: FontConstant.k18w500SecondaryMaterialButtonText,
+                      ),
+                    ),
+                  ),
+                )
+              ],
             ),
           ),
         ],

@@ -60,6 +60,7 @@ dependencies:
   restart_app: ^1.1.1
   percent_indicator:
   carousel_slider:
+  flutter_mentions: ^2.0.1
 
 
 dev_dependencies:
