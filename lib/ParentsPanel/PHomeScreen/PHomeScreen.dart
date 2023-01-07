@@ -63,10 +63,6 @@ class _PHomeScreenState extends State<PHomeScreen> {
                   Padding(
                       padding: const EdgeInsets.all(15.0),
                       child: PopupMenuButton(
-                          child: Image.asset(
-                            "assets/images/Languageicon.png",
-                            height: 24,
-                          ),
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(16)),
                           itemBuilder: (context) {
@@ -157,7 +153,11 @@ class _PHomeScreenState extends State<PHomeScreen> {
                                 ),
                               ),
                             ];
-                          })),
+                          },
+                          child: Image.asset(
+                            "assets/images/Languageicon.png",
+                            height: 24,
+                          ))),
                   InkWell(
                     onTap: () {
                       Navigator.push(
@@ -219,10 +219,10 @@ class _PHomeScreenState extends State<PHomeScreen> {
                               shrinkWrap: true,
                               scrollDirection: Axis.horizontal,
                               itemBuilder: (context, index) {
-                                return Padding(
-                                  padding: const EdgeInsets.only(right: 15.0),
-                                  child: Studentcard(),
-                                );
+                                  return Padding(
+                                    padding: const EdgeInsets.only(right: 15.0),
+                                    child: Studentcard(),
+                                  );
                               },
                               itemCount: 3),
                         ),

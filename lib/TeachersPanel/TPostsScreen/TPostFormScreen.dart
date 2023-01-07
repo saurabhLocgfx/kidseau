@@ -140,7 +140,7 @@ class _TPostFormScreenState extends State<TPostFormScreen> {
                 elevation: 0,
                 automaticallyImplyLeading: false,
                 centerTitle: false,
-                title: Text('Add post',
+                title: Text('Add post'.tr(),
                     style: FontConstant.k16w4008471Text),
                 leading: Container(
                   width: 24,
@@ -195,7 +195,7 @@ class _TPostFormScreenState extends State<TPostFormScreen> {
                         maxLines: 6,
                         decoration: TextFieldDecoration().curvedWhiteDecoration(
                           curved: false,
-                          label: 'Write here...',
+                          label: 'Write here...'.tr(),
                         ),
                       ),
                       SizedBox(height: 16),

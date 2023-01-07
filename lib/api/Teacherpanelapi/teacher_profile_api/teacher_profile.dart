@@ -2,27 +2,25 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:kidseau/Constants/string_const.dart';
+import 'package:kidseau/shard_prefs/shared_prefs.dart';
 
-import '../../shard_prefs/shared_prefs.dart';
-
-class ParentLoginOtp {
-  Future<dynamic> get({required String code}) async {
+class TeacherProfileApi{
+  Future<dynamic> get()async{
     String? cookie = UserPrefs.getCookies();
     var headers = {
-      'Content-Type': 'application/json',
       'Cookie': 'PHPSESSID=$cookie'
     };
-    var request = http.Request(
-        'POST', Uri.parse('$kAPIConst/kids/api_parent_login/login_otp.php'));
-    request.body = json.encode({"enter_otp": code});
+    var request = http.Request('GET', Uri.parse('$kAPIConst/kids/api_teacher_login/teacher_profile/profile_teacher.php'));
+
     request.headers.addAll(headers);
-    print(request.body);
+
     http.StreamedResponse response = await request.send();
 
     var v = jsonDecode(await response.stream.bytesToString());
     if (response.statusCode == 200) {
-      return v;
-    } else {
+     return v;
+    }
+    else {
       print(response.reasonPhrase);
       return v;
     }

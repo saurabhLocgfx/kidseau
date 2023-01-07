@@ -172,7 +172,7 @@ class _TAddPostsScreenState extends State<TAddPostsScreen> {
                 children: [
                   Image.asset('assets/images/addmore.png', width: 24,height: 24,),
                   SizedBox(width: 16,),
-                  Text('Add more',style: FontConstant2.baloo500_18_8267AC,)
+                  Text('Add more'.tr(),style: FontConstant2.baloo500_18_8267AC,)
                 ],
               ),
             ),
@@ -214,7 +214,7 @@ class _TAddPostsScreenState extends State<TAddPostsScreen> {
                     },
                     child: Center(
                       child: Text(
-                        'Discard',
+                        'Discard'.tr(),
                         style: FontConstant.k18w500SecondaryMaterialButtonText,
                       ),
                     ),

@@ -1,10 +1,17 @@
 {
+  "i'm a teacher": "Je suis éducatrice (eur)",
+  "i'm a parent": "Je suis un parent",
   "We offer a new way to mark the children and shape them for better future.":"Nous offrons une nouvelle méthode de noter les enfants et de les former pour un avenir meilleur",
   "Account":"Compte",
+  "We offer a new way to track your children and watch them grow.": "Nous offrons une nouvelle méthode de noter les enfants et de les former pour un avenir meilleur",
 
   "By proceeding you agree to our ": "En continuant, vous acceptez notre ",
 
   "Privacy Policy & ": "Politique de confidentialité & ",
+  "Terms and Conditions": "conditions générales",
+  "Tutorials": "Tutoriels",
+  "Ask Question": "Posez une question",
+  "Overview": "Aperçu",
 
   "Enter your Voucher’s code": "Entrez le code de votre bon",
 
@@ -179,6 +186,12 @@
 
   "Title": "Titre ",
 
+  "Add post": "Ajouter une publication",
+  "Caption": "Sous-titre",
+  "Write here...": "Écrire ici",
+  "Tag": "Mentionner un enfant",
+  "Add more": "Ajouter plus",
+  "Discard": "Abandonner",
   "Description": "Description",
 
   "Time":"Heure",
@@ -209,11 +222,13 @@
 
   "Delete chat": "Supprimer la discutions",
 
-  "Type here.": "Taper ici",
+  "Type here.": "Tapez ici",
 
   "Voice note":"MSG vocal",
 
   "Gallery": "Galerie",
+
+  "Educator": "Éducatrices",
 
   "Contact": "Contact",
 

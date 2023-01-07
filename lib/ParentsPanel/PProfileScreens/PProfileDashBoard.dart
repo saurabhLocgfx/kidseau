@@ -28,7 +28,7 @@ class _PProfileDashBoardState extends State<PProfileDashBoard> {
     super.dispose();
   }
 
-  PageController _pageController = PageController(
+  final PageController _pageController = PageController(
     initialPage: 0,
   );
   int pageIndex = 0;
@@ -192,7 +192,7 @@ class _PProfileDashBoardState extends State<PProfileDashBoard> {
             },
             child: Row(
               children: [
-                Text("School".tr(),
+                Text("Nursery".tr(),
                     style: FontConstant.k14w500B7A4Text.copyWith(
                         color: pageIndex == 1
                             ? Color(0xff8267AC)

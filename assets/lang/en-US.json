@@ -1,25 +1,29 @@
 {
+  "i'm a Teacher": "I'm an educator",
+  "i'm a Parent": "I'm a parent",
   "We offer a new way to mark the children and shape them for better future.":"We offer a new way to mark the children and shape them for better future.",
 
+  "We offer a new way to track your children and watch them grow.": "We offer a new way to track your children and watch them grow.",
   "Account": "Account",
 
   "Students": "Students",
-
+"Ask Question": "Ask Question",
+  "Tutorials": "Tutorials",
   "Login/create a new account to track your kids’ activities.": "Login/create a new account to track your kids’ activities.",
 
+  "Overview": "Overview",
+  "Terms and Conditions": "Terms and Conditions",
   "Email/Phone number": "Email/Phone number",
 
    "Watch Your kid grow": "Watch Your kid grow",
 
   "Chat with Teachers": "Chat with Teachers",
 
-  "Know what your kid is doing in school track their activities":"Know what your kid is doing in school track their activities",
-
   "Save all photos of your kid and save memories": "Save all photos of your kid and save memories",
 
   "Create memories": "Create memories",
 
-  "Know what your kid is doing in school and track their activities": "Know what your kid is doing in school track their activities",
+  "Know what your kid is doing in school and track their activities": "Know what your kid is doing in school and track their activities",
 
   "Enter your email/phone number": "Enter your email/phone number",
 
@@ -172,6 +176,8 @@
   "Report": "Report",
 
   "Add Photos": "Add Photos",
+  "Add post": "Add post",
+
 
   "OR": "OR",
 
@@ -180,6 +186,11 @@
   "Title": "Title",
 
   "Description": "Description",
+  "Add more": "Add more",
+  "Discard": "Discard",
+  "Write here...": "Write here...",
+  "Tag": "Tag",
+  "Caption": "Caption",
 
   "Time": "Time",
 
@@ -263,6 +274,8 @@
 
   "Wrong nursery code": "Wrong nursery code",
 
+  "Educator": "Educator",
+
   "Wait for director’s approval": "Wait for director’s approval",
 
   "Thank you for your patience":  "Thank you for your patience",
@@ -276,8 +289,4 @@
   "Talk to class teacher": "Talk to class teacher",
 
   "Kid’s Profile": "Kid’s Profile"
-
-
-
-
 }

@@ -104,7 +104,7 @@ class _PParentsProfileState extends State<PParentsProfile> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "info",
+                  "Info".tr(),
                   style: FontConstant2.k22w5008471text,
                 ),
                 Container(
@@ -123,7 +123,7 @@ class _PParentsProfileState extends State<PParentsProfile> {
                           SizedBox(
                             width: 130.w,
                             child: Text(
-                              infocategory[index],
+                              infocategory[index].tr(),
                               style: FontConstant.k16w500331FText,
                             ),
                           ),

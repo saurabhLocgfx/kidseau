@@ -98,27 +98,27 @@ class _PKidsOverviewState extends State<PKidsOverview> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Nursery Sec A".tr(),
+                          "Nursery Sec A",
                           style: FontConstant.k16w5008471Text,
                         ),
                         SizedBox(height: 16),
                         Text(
-                          "Group A".tr(),
+                          "Group A",
                           style: FontConstant.k16w5008471Text,
                         ),
                         SizedBox(height: 16),
                         Text(
-                          "4 years old".tr(),
+                          "4 years old",
                           style: FontConstant.k16w5008471Text,
                         ),
                         SizedBox(height: 16),
                         Text(
-                          "29/09/2020".tr(),
+                          "29/09/2020",
                           style: FontConstant.k16w5008471Text,
                         ),
                         SizedBox(height: 16),
                         Text(
-                          "Male".tr(),
+                          "Male",
                           style: FontConstant.k16w5008471Text,
                         )
                       ],

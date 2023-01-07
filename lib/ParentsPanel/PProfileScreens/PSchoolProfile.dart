@@ -120,7 +120,7 @@ class _PSchoolProfileState extends State<PSchoolProfile> {
               Padding(
                 padding: const EdgeInsets.only(right: 50),
                 child: Text(
-                  "Email id",
+                  "Email id".tr(),
                   style: FontConstant.k16w500331FText,
                 ),
               ),

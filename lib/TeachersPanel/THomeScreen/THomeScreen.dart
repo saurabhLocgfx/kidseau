@@ -1,5 +1,5 @@
+import 'dart:developer';
 import 'dart:ui';
-
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
@@ -15,7 +15,6 @@ import 'package:kidseau/api/Teacherpanelapi/Tmodel/TScheduleModel.dart';
 import 'package:kidseau/api/Teacherpanelapi/Tschedule_api/schedule_api.dart';
 import 'package:kidseau/api/Teacherpanelapi/teacher_home_api/THomeApi.dart';
 import 'package:kidseau/shard_prefs/shared_prefs.dart';
-
 import '../../restartappwidget/restartwidgets.dart';
 import '../TReminder/TReminderScreen.dart';
 import 'TAttendanceScreen.dart';
@@ -49,6 +48,7 @@ class _THomeScreenState extends State<THomeScreen> {
     loadingData = true;
     final rsp = THomeApi().get();
     rsp.then((value) {
+      log(value.toString());
       try {
         setState(() {
           _name = value;
@@ -59,8 +59,8 @@ class _THomeScreenState extends State<THomeScreen> {
           loadingData = false;
         });
       }
-      print(_name.hello);
-      print(_name.group);
+      //print(_name.hello);
+      //print(_name.group);
       //print(_name.group!.length);
     }).then((value) {
      // getSchedule();
@@ -170,7 +170,6 @@ class _THomeScreenState extends State<THomeScreen> {
                                         UserPrefs.setEArbBool(false);
                                         context.locale = Locale('fr', 'FR');
                                         RestartWidget.restartApp(context);
-
                                         setState(() {
                                           colorChange;
                                         });
@@ -283,7 +282,7 @@ class _THomeScreenState extends State<THomeScreen> {
               ),
               Padding(
                 padding: const EdgeInsets.only(right: 16.0),
-                child:  SizedBox(
+                child: SizedBox(
                         height: 128,
                         width: 1.sw,
                         //color: Colors.blue,
@@ -325,7 +324,7 @@ class _THomeScreenState extends State<THomeScreen> {
                        child: ListView.builder(
                           shrinkWrap: true,
                           scrollDirection: Axis.horizontal,
-                          itemCount: _name.group!.length,
+                          itemCount: _name.groupInCard!.length,
                           itemBuilder: (BuildContext context, int index) {
                             return GestureDetector(
                                 onTap: () {
@@ -416,7 +415,7 @@ class _THomeScreenState extends State<THomeScreen> {
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Image.asset(
-                                    _name.schdule![index].icon.toString(),
+                                    _name.schdule![index].actIcon.toString(),
                                     errorBuilder: (q, w, e) {
                                       return Text('Image not loaded');
                                     },
@@ -430,14 +429,30 @@ class _THomeScreenState extends State<THomeScreen> {
                                       mainAxisAlignment: MainAxisAlignment.center,
                                       children: [
                                         Text(
-                                          _name.schdule![index].title.toString(),
+                                          _name.schdule![index].actTitle.toString(),
                                           style: FontConstant.k32w500blackText
                                               .copyWith(fontSize: 16),
                                         ),
                                         Row(
                                           children: [
+                                            Text(_name.schdule![index].grpName.toString(),style: FontConstant
+                                                .k14w400lightpurpleText
+                                                .copyWith(
+                                                fontWeight: FontWeight.w400,
+                                                fontSize: 14,
+                                                color: Color(0xffB7A4B2)),),
+                                            SizedBox(width: 5,),
+                                            Container(
+                                              width: 3,
+                                              height: 3,
+                                              decoration: BoxDecoration(
+                                                color: Color(0xffB7A4B2),
+                                                shape: BoxShape.circle
+                                              ),
+                                            ),
+                                            SizedBox(width: 5,),
                                             Text(
-                                              "From ${DateFormat.jm().format(DateFormat("hh:mm:ss").parse('${_name.schdule![index].time}'))} ",
+                                              "From ${_name.schdule![index].timing!.split('-').first} ",
                                               // '${groups[index]} . ${time[index]}',
                                               style: FontConstant
                                                   .k14w400lightpurpleText
@@ -447,7 +462,7 @@ class _THomeScreenState extends State<THomeScreen> {
                                                   color: Color(0xffB7A4B2)),
                                             ),
                                             Text(
-                                              "To ${DateFormat.jm().format(DateFormat("hh:mm:ss").parse('${_name.schdule![index].time}'))} ",
+                                              "To ${_name.schdule![index].timing!.split('-').last}",
                                               // '${groups[index]} . ${time[index]}',
                                               style: FontConstant
                                                   .k14w400lightpurpleText
@@ -494,7 +509,7 @@ class _THomeScreenState extends State<THomeScreen> {
                 ),
               ),
               SizedBox(height: 10),
-              _name.attendance?.isEmpty ?? [].isEmpty ? SizedBox.shrink() :Padding(
+              _name.attendance!.isEmpty ? SizedBox.shrink() :Padding(
                 padding:
                     const EdgeInsets.only(left: 16.0, bottom: 10, right: 16),
                 child: Align(
@@ -603,7 +618,7 @@ class _THomeScreenState extends State<THomeScreen> {
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
                                     Image.asset(
-                                      _name.schdule![index].icon.toString(),
+                                      _name.schdule![index].actIcon.toString(),
                                       errorBuilder: (q, w, e) {
                                         return Text('Image not loaded');
                                       },
@@ -620,12 +635,52 @@ class _THomeScreenState extends State<THomeScreen> {
                                             MainAxisAlignment.center,
                                         children: [
                                           Text(
-                                            _name.schdule![index].title
+                                            _name.schdule![index].actTitle
                                                 .toString(),
                                             style: FontConstant.k32w500blackText
                                                 .copyWith(fontSize: 16),
                                           ),
                                           Row(
+                                            children: [
+                                              Text(_name.schdule![index].grpName.toString(),style: FontConstant
+                                                  .k14w400lightpurpleText
+                                                  .copyWith(
+                                                  fontWeight: FontWeight.w400,
+                                                  fontSize: 14,
+                                                  color: Color(0xffB7A4B2)),),
+                                              SizedBox(width: 5,),
+                                              Container(
+                                                width: 3,
+                                                height: 3,
+                                                decoration: BoxDecoration(
+                                                    color: Color(0xffB7A4B2),
+                                                    shape: BoxShape.circle
+                                                ),
+                                              ),
+                                              SizedBox(width: 5,),
+                                              Text(
+                                                "From ${_name.schdule![index].timing!.split('-').first} ",
+                                                // '${groups[index]} . ${time[index]}',
+                                                style: FontConstant
+                                                    .k14w400lightpurpleText
+                                                    .copyWith(
+                                                    fontWeight: FontWeight.w400,
+                                                    fontSize: 14,
+                                                    color: Color(0xffB7A4B2)),
+                                              ),
+                                              Text(
+                                                "To ${_name.schdule![index].timing!.split('-').last}",
+                                                // '${groups[index]} . ${time[index]}',
+                                                style: FontConstant
+                                                    .k14w400lightpurpleText
+                                                    .copyWith(
+                                                    fontWeight: FontWeight.w400,
+                                                    fontSize: 14,
+                                                    color: Color(0xffB7A4B2)),
+                                              ),
+                                            ],
+                                          )
+                                          /*Row(
                                             children: [
                                               Text(
                                                 "From ${DateFormat.jm().format(DateFormat("hh:mm:ss").parse('${_name.schdule![index].time}'))} ",
@@ -652,7 +707,7 @@ class _THomeScreenState extends State<THomeScreen> {
                                                             Color(0xffB7A4B2)),
                                               ),
                                             ],
-                                          )
+                                          )*/
                                         ],
                                       ),
                                     ),
@@ -695,8 +750,8 @@ class _schedulewidgetapiState extends State<schedulewidgetapi> {
           loadingData = false;
         });
       }
-      print(_name.hello);
-      print(_name.group);
+     // print(_name.hello);
+     // print(_name.group);
       //print(_name.group!.length);
     });
   }
@@ -774,7 +829,7 @@ class _schedulewidgetapiState extends State<schedulewidgetapi> {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Image.asset(
-                                _name.schdule![index].icon.toString(),
+                                _name.schdule![index].actIcon.toString(),
                                 errorBuilder: (q, w, e) {
                                   return Text('Image not loaded');
                                 },
@@ -788,11 +843,51 @@ class _schedulewidgetapiState extends State<schedulewidgetapi> {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Text(
-                                      _name.schdule![index].title.toString(),
+                                      _name.schdule![index].actTitle.toString(),
                                       style: FontConstant.k32w500blackText
                                           .copyWith(fontSize: 16),
                                     ),
                                     Row(
+                                      children: [
+                                        Text(_name.schdule![index].grpName.toString(),style: FontConstant
+                                            .k14w400lightpurpleText
+                                            .copyWith(
+                                            fontWeight: FontWeight.w400,
+                                            fontSize: 14,
+                                            color: Color(0xffB7A4B2)),),
+                                        SizedBox(width: 5,),
+                                        Container(
+                                          width: 3,
+                                          height: 3,
+                                          decoration: BoxDecoration(
+                                              color: Color(0xffB7A4B2),
+                                              shape: BoxShape.circle
+                                          ),
+                                        ),
+                                        SizedBox(width: 5,),
+                                        Text(
+                                          "From ${_name.schdule![index].timing!.split('-').first} ",
+                                          // '${groups[index]} . ${time[index]}',
+                                          style: FontConstant
+                                              .k14w400lightpurpleText
+                                              .copyWith(
+                                              fontWeight: FontWeight.w400,
+                                              fontSize: 14,
+                                              color: Color(0xffB7A4B2)),
+                                        ),
+                                        Text(
+                                          "To ${_name.schdule![index].timing!.split('-').last}",
+                                          // '${groups[index]} . ${time[index]}',
+                                          style: FontConstant
+                                              .k14w400lightpurpleText
+                                              .copyWith(
+                                              fontWeight: FontWeight.w400,
+                                              fontSize: 14,
+                                              color: Color(0xffB7A4B2)),
+                                        ),
+                                      ],
+                                    )
+                                    /*Row(
                                       children: [
                                         Text(
                                           "From ${DateFormat.jm().format(DateFormat("hh:mm:ss").parse('${_name.schdule![index].time}'))} ",
@@ -815,7 +910,7 @@ class _schedulewidgetapiState extends State<schedulewidgetapi> {
                                                   color: Color(0xffB7A4B2)),
                                         ),
                                       ],
-                                    )
+                                    )*/
                                   ],
                                 ),
                               ),
@@ -871,7 +966,7 @@ class Groupcard extends StatelessWidget {
             width: 72,
             height: 96,
             child: Image.network(
-              nameData.group![index].image.toString(),
+              nameData.groupInCard![index].grpImage.toString(),
               errorBuilder: (q, w, e) {
                 return Text('Image not loaded');
               },
@@ -884,12 +979,12 @@ class Groupcard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                nameData.group![index].name.toString(),
+                nameData.groupInCard![index].grpName.toString(),
                 //"Group A",
                 style: FontConstant.k18w500whiteText,
               ),
               Text(
-                nameData.group![index].section.toString(),
+                nameData.groupInCard![index].secName.toString(),
                 //"Nursery",
                 style: FontConstant.k18w500whiteText.copyWith(
                   fontSize: 14,
@@ -898,7 +993,7 @@ class Groupcard extends StatelessWidget {
                 ),
               ),
               Text(
-                "${nameData.group![index].students.toString()} Students",
+                "${nameData.groupInCard![index].allKid.toString()} Students",
                 style: FontConstant.k18w500whiteText.copyWith(
                   fontSize: 16,
                   fontWeight: FontWeight.w500,

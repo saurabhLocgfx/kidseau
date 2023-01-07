@@ -1,7 +1,9 @@
 {
+  "i'm a teacher": "أنا مربي(ة)",
+  "i'm a parent": "أنا ولي(ة) أمر",
   "We offer a new way to mark the children and shape them for better future.":"نقدم طريقة جديدة لتقييم الأطفال وتعليمهم من أجل مستقبل أفضل",
   "Account":"حساب",
-
+  "We offer a new way to track your children and watch them grow.":"نقدم طريقة جديدة لتقييم الأطفال وتعليمهم من أجل مستقبل أفضل",
   "Students" : "طلاب",
 
   "Login/create a new account to track your kids’ activities.":"تسجيل الدخول / إنشاء حساب جديد لتتبع أنشطة طفلك",
@@ -13,6 +15,9 @@
   "Login with OTP":"otpتسجيل الدخول باستخدام",
 
   "OTP verification":" OTPالتحقق من",
+  "Tutorials": "فيديوهات توضيحية",
+  "Ask Question": "إطرح سؤال",
+  "Overview": "ملخص",
 
   "A OTP has been sent to “9876543210”. Please enter the OTP here.":"تم إرسال  الرمز على الرقم ”9876543210“. الرجاء إدخاله",
 
@@ -211,6 +216,12 @@
 
   "Title":"العنوان",
 
+  "Add post": "أضف مشاركة",
+  "Caption": "شرح",
+  "Write here": "أكتب هنا",
+  "Tag": "أضف طفلا",
+  "Add more": "أضف المزيد",
+  "Discard": "إلغاء",
   "Description":"الشرح",
 
   "Time":"الوقت",
@@ -244,6 +255,8 @@
   "Type here.":"أكتب هنا",
 
   "Voice note": "رسالة صوتية",
+
+  "Educator": "المربيات",
 
   "Gallery":"الصور",
 

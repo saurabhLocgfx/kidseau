@@ -49,7 +49,7 @@ class _AddAnnouncementState extends State<AddAnnouncement> {
                 elevation: 0,
                 automaticallyImplyLeading: false,
                 centerTitle: false,
-                title: Text('Add Announcement',
+                title: Text('Add Announcement'.tr(),
                     style: FontConstant.k16w4008471Text),
                 leading: Container(
                   width: 24,

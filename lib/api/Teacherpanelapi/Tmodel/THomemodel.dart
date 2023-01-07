@@ -1,22 +1,24 @@
 class THomeModel {
   int? status;
   String? hello;
-  List<Group>? group;
+  List<GroupInCard>? groupInCard;
+  List<Schdule>? schdule;
   List<Attendance>? attendance;
 
-  List<Schdule>? schdule;
-  // String? attendance;
-  //
   THomeModel(
-      {this.status, this.hello, this.group, this.schdule, this.attendance});
+      {this.status,
+        this.hello,
+        this.groupInCard,
+        this.schdule,
+        this.attendance});
 
   THomeModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     hello = json['Hello'];
-    if (json['Group'] != null) {
-      group = <Group>[];
-      json['Group'].forEach((v) {
-        group!.add(new Group.fromJson(v));
+    if (json['groupInCard'] != null) {
+      groupInCard = <GroupInCard>[];
+      json['groupInCard'].forEach((v) {
+        groupInCard!.add(new GroupInCard.fromJson(v));
       });
     }
     if (json['Schdule'] != null) {
@@ -25,119 +27,121 @@ class THomeModel {
         schdule!.add(new Schdule.fromJson(v));
       });
     }
-    if (json['Attendance'] != null) {
+    if (json['attendance'] != null) {
       attendance = <Attendance>[];
-      json['Attendance'].forEach((v) {
+      json['attendance'].forEach((v) {
         attendance!.add(new Attendance.fromJson(v));
       });
     }
-    // attendance = json['attendance'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['status'] = this.status;
     data['Hello'] = this.hello;
-    if (this.group != null) {
-      data['Group'] = this.group!.map((v) => v.toJson()).toList();
+    if (this.groupInCard != null) {
+      data['groupInCard'] = this.groupInCard!.map((v) => v.toJson()).toList();
     }
     if (this.schdule != null) {
       data['Schdule'] = this.schdule!.map((v) => v.toJson()).toList();
     }
     if (this.attendance != null) {
-      data['Attendance'] = this.attendance!.map((v) => v.toJson()).toList();
+      data['attendance'] = this.attendance!.map((v) => v.toJson()).toList();
     }
-    // data['attendance'] = this.attendance;
     return data;
   }
 }
 
-class Group {
-  String? id;
-  String? name;
-  String? section;
-  String? image;
-  int? students;
+class GroupInCard {
+  String? grpId;
+  String? grpName;
+  String? grpImage;
+  String? secName;
+  String? allKid;
 
-  Group({this.id, this.name, this.section, this.image, this.students});
+  GroupInCard(
+      {this.grpId, this.grpName, this.grpImage, this.secName, this.allKid});
 
-  Group.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    name = json['name'];
-    section = json['Section'];
-    image = json['image'];
-    students = json['students'];
+  GroupInCard.fromJson(Map<String, dynamic> json) {
+    grpId = json['grp_id'];
+    grpName = json['grp_name'];
+    grpImage = json['grp_image'];
+    secName = json['sec_name'];
+    allKid = json['allKid'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['name'] = this.name;
-    data['Section'] = this.section;
-    data['image'] = this.image;
-    data['students'] = this.students;
-    return data;
-  }
-}
-
-class Attendance {
-  String? id;
-  String? name;
-  String? section;
-  String? image;
-  int? students;
-  int? status;
-
-  Attendance(
-      {this.id,
-      this.name,
-      this.section,
-      this.image,
-      this.students,
-      this.status});
-
-  Attendance.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    name = json['name'];
-    section = json['Section'];
-    image = json['image'];
-    students = json['students'];
-    status = json['status'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['name'] = this.name;
-    data['Section'] = this.section;
-    data['image'] = this.image;
-    data['students'] = this.students;
-    data['status'] = this.status;
+    data['grp_id'] = this.grpId;
+    data['grp_name'] = this.grpName;
+    data['grp_image'] = this.grpImage;
+    data['sec_name'] = this.secName;
+    data['allKid'] = this.allKid;
     return data;
   }
 }
 
 class Schdule {
-  String? actId;
-  String? icon;
-  String? title;
-  String? time;
+  String? actTitle;
+  String? actIcon;
+  String? sun;
+  String? timing;
+  String? grpName;
 
-  Schdule({this.actId, this.icon, this.title, this.time});
+  Schdule({this.actTitle, this.actIcon, this.sun, this.timing, this.grpName});
 
   Schdule.fromJson(Map<String, dynamic> json) {
-    actId = json[' act_id'];
-    icon = json['Icon'];
-    title = json['Title'];
-    time = json['Time'];
+    actTitle = json['act_title'];
+    actIcon = json['act_icon'];
+    sun = json['sun'];
+    timing = json['timing'];
+    grpName = json['grp_name'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data[' act_id'] = this.actId;
-    data['Icon'] = this.icon;
-    data['Title'] = this.title;
-    data['Time'] = this.time;
+    data['act_title'] = this.actTitle;
+    data['act_icon'] = this.actIcon;
+    data['sun'] = this.sun;
+    data['timing'] = this.timing;
+    data['grp_name'] = this.grpName;
+    return data;
+  }
+}
+
+class Attendance {
+  String? groupId;
+  String? groupImage;
+  String? groupName;
+  String? sectionName;
+  int? totalStudent;
+  int? studentPresent;
+
+  Attendance(
+      {this.groupId,
+        this.groupImage,
+        this.groupName,
+        this.sectionName,
+        this.totalStudent,
+        this.studentPresent});
+
+  Attendance.fromJson(Map<String, dynamic> json) {
+    groupId = json['groupId'];
+    groupImage = json['groupImage'];
+    groupName = json['groupName'];
+    sectionName = json['sectionName'];
+    totalStudent = json['totalStudent'];
+    studentPresent = json['studentPresent'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['groupId'] = this.groupId;
+    data['groupImage'] = this.groupImage;
+    data['groupName'] = this.groupName;
+    data['sectionName'] = this.sectionName;
+    data['totalStudent'] = this.totalStudent;
+    data['studentPresent'] = this.studentPresent;
     return data;
   }
 }

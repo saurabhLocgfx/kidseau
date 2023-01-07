@@ -53,7 +53,7 @@ class PLoginScreen extends StatelessWidget {
                                     width: 151,
                                   ),
                                   Text(
-                                    "We offer a new way to track your children and watch them grow.",
+                                    "We offer a new way to track your children and watch them grow.".tr(),
                                     style: FontConstant.k16w4008471Text,
                                     textAlign: TextAlign.center,
                                   ),
@@ -69,16 +69,16 @@ class PLoginScreen extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               //SizedBox(height: 10),
-                              Text("Welcome",
+                              Text("Welcome".tr(),
                                   style: FontConstant.k24w500brownText),
                               Text(
-                                "Login/create a new account to track your kids’ activities.",
+                                "Login/create a new account to track your kids’ activities.".tr(),
                                 style: FontConstant.k16w400B7A4Text
                                     .copyWith(fontSize: 15),
                                 textAlign: TextAlign.start,
                               ),
                               SizedBox(height: 24),
-                              Text("Email/Phone number",
+                              Text("Email/Phone number".tr(),
                                   style: FontConstant.k16w500331FText),
                               SizedBox(height: 6),
                               Container(
@@ -112,7 +112,7 @@ class PLoginScreen extends StatelessWidget {
                                           color: Color(0xffBE74AA), width: 1.0),
                                     ),
                                     isDense: true,
-                                    hintText: "Enter Email/Phone number ",
+                                    hintText: "Enter your email/phone number".tr(),
                                     filled: true,
                                     fillColor: Colors.white,
                                     hintStyle: FontConstant.k14w400lightText

@@ -300,7 +300,7 @@ class _PMessageDashboardState extends State<PMessageDashboard> {
             },
             child: Row(
               children: [
-                Text("Teacher".tr(),
+                Text("Educator".tr(),
                     style: FontConstant.k14w500B7A4Text.copyWith(
                         color: pageIndex == 1
                             ? Color(0xff8267AC)

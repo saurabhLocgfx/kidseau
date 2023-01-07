@@ -38,7 +38,7 @@ class _schedulewidgetapiState extends State<schedulewidgetapi> {
         });
       }
       print(_name.hello);
-      print(_name.group);
+      //print(_name.group);
       //print(_name.group!.length);
     });
   }
@@ -115,7 +115,7 @@ class _schedulewidgetapiState extends State<schedulewidgetapi> {
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
                                     Image.asset(
-                                      _name.schdule![index].icon.toString(),
+                                      _name.schdule![index].actIcon.toString(),
                                       errorBuilder: (q, w, e) {
                                         return Text('Image not loaded');
                                       },
@@ -132,12 +132,52 @@ class _schedulewidgetapiState extends State<schedulewidgetapi> {
                                             MainAxisAlignment.center,
                                         children: [
                                           Text(
-                                            _name.schdule![index].title
+                                            _name.schdule![index].actTitle
                                                 .toString(),
                                             style: FontConstant.k32w500blackText
                                                 .copyWith(fontSize: 16),
                                           ),
                                           Row(
+                                            children: [
+                                              Text(_name.schdule![index].grpName.toString(),style: FontConstant
+                                                  .k14w400lightpurpleText
+                                                  .copyWith(
+                                                  fontWeight: FontWeight.w400,
+                                                  fontSize: 14,
+                                                  color: Color(0xffB7A4B2)),),
+                                              SizedBox(width: 5,),
+                                              Container(
+                                                width: 3,
+                                                height: 3,
+                                                decoration: BoxDecoration(
+                                                    color: Color(0xffB7A4B2),
+                                                    shape: BoxShape.circle
+                                                ),
+                                              ),
+                                              SizedBox(width: 5,),
+                                              Text(
+                                                "From ${_name.schdule![index].timing!.split('-').first} ",
+                                                // '${groups[index]} . ${time[index]}',
+                                                style: FontConstant
+                                                    .k14w400lightpurpleText
+                                                    .copyWith(
+                                                    fontWeight: FontWeight.w400,
+                                                    fontSize: 14,
+                                                    color: Color(0xffB7A4B2)),
+                                              ),
+                                              Text(
+                                                "To ${_name.schdule![index].timing!.split('-').last}",
+                                                // '${groups[index]} . ${time[index]}',
+                                                style: FontConstant
+                                                    .k14w400lightpurpleText
+                                                    .copyWith(
+                                                    fontWeight: FontWeight.w400,
+                                                    fontSize: 14,
+                                                    color: Color(0xffB7A4B2)),
+                                              ),
+                                            ],
+                                          )
+                                          /*Row(
                                             children: [
                                               Text(
                                                 "From ${DateFormat.jm().format(DateFormat("hh:mm:ss").parse('${_name.schdule![index].time}'))} ",
@@ -164,7 +204,7 @@ class _schedulewidgetapiState extends State<schedulewidgetapi> {
                                                             Color(0xffB7A4B2)),
                                               ),
                                             ],
-                                          )
+                                          )*/
                                         ],
                                       ),
                                     ),

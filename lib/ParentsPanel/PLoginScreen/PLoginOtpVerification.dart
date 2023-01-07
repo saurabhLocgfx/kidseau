@@ -69,7 +69,7 @@ class PLoginOtpVerification extends StatelessWidget {
                           width: 173,
                         ),
                         Text(
-                          "We offer a new way to track your children and watch them grow.",
+                          "We offer a new way to track your children and watch them grow.".tr(),
                           style: FontConstant.k16w4008471Text,
                           textAlign: TextAlign.center,
                         ),
@@ -120,7 +120,7 @@ class PLoginOtpVerification extends StatelessWidget {
                       child: MainButton(
                           onTap: () {
                             final resp = ParentLoginOtp()
-                                .get(code: int.parse(pinTextController.text));
+                                .get(code: pinTextController.text);
                             resp.then((value) {
                               print(value);
                               if (value['status'] == 0) {

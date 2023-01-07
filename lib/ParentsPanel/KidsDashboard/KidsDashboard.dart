@@ -223,7 +223,7 @@ class _PKidsDashboardState extends State<PKidsDashboard> {
                   ),
                   Padding(
                     padding: const EdgeInsets.only(left: 4.0),
-                    child: Text("OverView".tr(),
+                    child: Text("Overview".tr(),
                         style: FontConstant.k14w500B7A4Text.copyWith(
                             color: pageIndex == 0
                                 ? Color(0xff8267AC)
