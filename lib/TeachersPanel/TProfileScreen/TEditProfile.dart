@@ -4,6 +4,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:kidseau/Constants/colors.dart';
 import 'package:kidseau/Widgets/buttons.dart';
 
 import '../../Theme.dart';
@@ -19,7 +20,7 @@ class _TEditProfileScreenState extends State<TEditProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // backgroundColor: Color(0xFF8267AC),
+     // backgroundColor: AppColors().bgColor,
       appBar: AppBar(
         toolbarHeight: 70.0,
         flexibleSpace: ClipRect(
@@ -55,7 +56,7 @@ class _TEditProfileScreenState extends State<TEditProfileScreen> {
           ],
         ),
         title: Text(
-          "Edit Profile",
+          "Edit Profile".tr(),
           style: FontConstant.k18w5008471Text,
         ),
       ),
@@ -63,6 +64,7 @@ class _TEditProfileScreenState extends State<TEditProfileScreen> {
         child: Container(
           // height: 414,
           decoration: BoxDecoration(
+            color: AppColors().bgColor,
               image: DecorationImage(
                   image: AssetImage(
                     "assets/images/Group8270.png",
@@ -72,9 +74,9 @@ class _TEditProfileScreenState extends State<TEditProfileScreen> {
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 colors: [
+                  Colors.white.withOpacity(0.5),
                   Colors.white.withOpacity(0.7),
-                  Colors.white,
-                  Colors.white
+                  Colors.grey.shade100.withOpacity(0.9),
                 ],
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
@@ -139,7 +141,7 @@ class _TEditProfileScreenState extends State<TEditProfileScreen> {
                               ),
                               SizedBox(width: 16),
                               Text(
-                                'Change Profile',
+                                'Change Profile'.tr(),
                                 style: FontConstant.k16w5008471Text,
                               ),
                             ],
@@ -147,18 +149,18 @@ class _TEditProfileScreenState extends State<TEditProfileScreen> {
                         ),
                       ),
                       SizedBox(height: 40),
-                      Text('Personal Details',
+                      Text('Personal Details'.tr(),
                           style: FontConstant2.k24w5008471text),
                       SizedBox(height: 24),
-                      Text('Email Address',
+                      Text('Email Address'.tr(),
                           style: FontConstant.k16w500331FText),
                       SizedBox(height: 4),
                       TextFormField(
                         decoration: TextFieldDecoration().curvedWhiteDecoration(
-                            label: 'Enter your email address', curved: true),
+                            label: 'Enter your email address'.tr(), curved: true),
                       ),
                       SizedBox(height: 16),
-                      Text('Birthday', style: FontConstant.k16w500331FText),
+                      Text('Birthday'.tr(), style: FontConstant.k16w500331FText),
                       SizedBox(height: 4),
                       Container(
                         width: 1.sw,
@@ -193,14 +195,14 @@ class _TEditProfileScreenState extends State<TEditProfileScreen> {
                         ),
                       ),
                       SizedBox(height: 16),
-                      Text('Education', style: FontConstant.k16w500331FText),
+                      Text('Education'.tr(), style: FontConstant.k16w500331FText),
                       SizedBox(height: 4),
                       TextFormField(
                         decoration: TextFieldDecoration().curvedWhiteDecoration(
-                            label: 'Enter your highest degree', curved: true),
+                            label: 'Enter your highest degree'.tr(), curved: true),
                       ),
                       SizedBox(height: 16),
-                      Text('Gender', style: FontConstant.k16w500331FText),
+                      Text('Gender'.tr(), style: FontConstant.k16w500331FText),
                       SizedBox(height: 4),
                       Container(
                         width: 1.sw,
@@ -225,20 +227,20 @@ class _TEditProfileScreenState extends State<TEditProfileScreen> {
                         ),
                       ),
                       SizedBox(height: 16),
-                      Text('Year Of Experience',
+                      Text('Year Of Experience'.tr(),
                           style: FontConstant.k16w500331FText),
                       SizedBox(height: 4),
                       TextFormField(
                         decoration: TextFieldDecoration().curvedWhiteDecoration(
-                            label: 'Enter your years of experience',
+                            label: 'Enter your years of experience'.tr(),
                             curved: true),
                       ),
                       SizedBox(height: 16),
-                      Text('Address', style: FontConstant.k16w500331FText),
+                      Text('Address'.tr(), style: FontConstant.k16w500331FText),
                       SizedBox(height: 4),
                       TextFormField(
                         decoration: TextFieldDecoration().curvedWhiteDecoration(
-                            label: 'Enter your address', curved: true),
+                            label: 'Enter your address'.tr(), curved: true),
                       ),
                       SizedBox(height: 32),
                       materialButton(

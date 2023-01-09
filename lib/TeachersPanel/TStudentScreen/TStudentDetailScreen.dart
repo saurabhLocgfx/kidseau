@@ -393,6 +393,7 @@ class _TStudentDetailScreenState extends State<TStudentDetailScreen> {
                                                   child: Column(
                                                     mainAxisAlignment:
                                                         MainAxisAlignment.start,
+                                                    crossAxisAlignment: CrossAxisAlignment.start,
                                                     children: [
                                                       Text(
                                                         "Attendance".tr(),
@@ -883,12 +884,15 @@ class _TStudentDetailScreenState extends State<TStudentDetailScreen> {
                                     children: [
                                       Row(
                                         children: [
-                                          Text(
-                                            "Working Days".tr(),
-                                            /*AppLoaclizations.of(context)!
-                                          .translate("Working Days")
-                                          .toString(),*/
-                                            style: FontConstant.k16w500331FText,
+                                          SizedBox(
+                                            width:200,
+                                            child: Text(
+                                              "Working Days".tr(),
+                                              /*AppLoaclizations.of(context)!
+                                            .translate("Working Days")
+                                            .toString(),*/
+                                              style: FontConstant.k16w500331FText,
+                                            ),
                                           ),
                                           SizedBox(width: 16),
                                           Text(
@@ -900,12 +904,15 @@ class _TStudentDetailScreenState extends State<TStudentDetailScreen> {
                                       SizedBox(height: 10),
                                       Row(
                                         children: [
-                                          Text(
-                                            "Attended days".tr(),
-                                            /*AppLoaclizations.of(context)!
-                                          .translate("Attended days")
-                                          .toString(),*/
-                                            style: FontConstant.k16w500331FText,
+                                          SizedBox(
+                                            width:200,
+                                            child: Text(
+                                              "Attended days".tr(),
+                                              /*AppLoaclizations.of(context)!
+                                            .translate("Attended days")
+                                            .toString(),*/
+                                              style: FontConstant.k16w500331FText,
+                                            ),
                                           ),
                                           SizedBox(width: 16),
                                           Text(
@@ -917,12 +924,15 @@ class _TStudentDetailScreenState extends State<TStudentDetailScreen> {
                                       SizedBox(height: 10),
                                       Row(
                                         children: [
-                                          Text(
-                                            "Working Days".tr(),
-                                            /*AppLoaclizations.of(context)!
-                                          .translate("Working Days")
-                                          .toString(),*/
-                                            style: FontConstant.k16w500331FText,
+                                          SizedBox(
+                                            width:200,
+                                            child: Text(
+                                              "Working Days".tr(),
+                                              /*AppLoaclizations.of(context)!
+                                            .translate("Working Days")
+                                            .toString(),*/
+                                              style: FontConstant.k16w500331FText,
+                                            ),
                                           ),
                                           SizedBox(width: 16),
                                           Text(

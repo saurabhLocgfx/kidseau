@@ -22,7 +22,6 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
   @override
   void initState() {
     getSchedule();
-
     super.initState();
   }
 

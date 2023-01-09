@@ -1,22 +1,56 @@
+import 'dart:developer';
 import 'dart:ui';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kidseau/ParentsPanel/PHomeScreen/PHomeScreen.dart';
 import 'package:kidseau/Theme.dart';
 import 'package:kidseau/Widgets/buttons.dart';
+import 'package:kidseau/api/Teacherpanelapi/Tschedule_detail_api/Tschedule_detail_api.dart';
+import 'package:kidseau/api/models/Tschedule_detail_model.dart';
 
 import '../../TeachersPanel/TMessages/TChats.dart';
 
 class TLearningAlphabets extends StatefulWidget {
-  const TLearningAlphabets({Key? key}) : super(key: key);
+  String scheduleID;
+  TLearningAlphabets({Key? key, required this.scheduleID}) : super(key: key);
 
   @override
   State<TLearningAlphabets> createState() => _TLearningAlphabetsState();
 }
 
 class _TLearningAlphabetsState extends State<TLearningAlphabets> {
+
+
+  @override
+  void initState() {
+    _getData();
+    super.initState();
+  }
+
+  bool _isLoading = false;
+
+  TScheduleDetailModel _model = TScheduleDetailModel();
+  _getData(){
+    _isLoading = true;
+    final resp = TScheduleDetailApi().get(scheduleId: widget.scheduleID);
+    resp.then((value){
+      try{
+        setState(() {
+          _model = TScheduleDetailModel.fromJson(value);
+          _isLoading = false;
+        });
+      }catch(e){
+        log('TLearningAlphabets $value');
+        setState(() {
+          _isLoading = false;
+        });
+      }
+    });
+  }
+
   // bool _flag = true;
   @override
   Widget build(BuildContext context) {
@@ -56,7 +90,7 @@ class _TLearningAlphabetsState extends State<TLearningAlphabets> {
               ),
               Padding(
                 padding: const EdgeInsets.only(left: 17.93),
-                child: Text("Activity",
+                child: Text("Activity".tr(),
                     style: FontConstant.k14w400lightpurpleText.copyWith(
                         fontSize: 16,
                         fontWeight: FontWeight.w400,
@@ -100,7 +134,7 @@ class _TLearningAlphabetsState extends State<TLearningAlphabets> {
             ),
           ),
         ),*/
-        body: SingleChildScrollView(
+        body: _isLoading? Center(child: CircularProgressIndicator()) :SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: Column(
@@ -109,7 +143,7 @@ class _TLearningAlphabetsState extends State<TLearningAlphabets> {
                 Align(
                   alignment: Alignment.topCenter,
                   child: Text(
-                    "Learning Alphabets",
+                    _model.learningAlaphabets!.title.toString(),
                     style: FontConstant.k16w500brownText.copyWith(fontSize: 32),
                   ),
                 ),
@@ -124,7 +158,7 @@ class _TLearningAlphabetsState extends State<TLearningAlphabets> {
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(16),
                                ),
-                            child: Image.asset("assets/images/Rectangle for la.png"),
+                            child: Image.network(_model.learningAlaphabets!.image.toString(), errorBuilder: (q,w,e)=> Text('Image not found'),),
                           ),
                         ),
                       ],
@@ -139,7 +173,7 @@ class _TLearningAlphabetsState extends State<TLearningAlphabets> {
                         ),
                         Padding(
                           padding: const EdgeInsets.only(left: 06.0),
-                          child: Text("09:00am to 11:00am",
+                          child: Text("${_model.learningAlaphabets!.time!.split('-').first} to ${_model.learningAlaphabets!.time!.split('-').last}",
                               style: FontConstant.k14w400lightpurpleText
                                   .copyWith(
                                   fontSize: 16,
@@ -151,18 +185,18 @@ class _TLearningAlphabetsState extends State<TLearningAlphabets> {
                 ),
                 SizedBox(height: 24),
                 Text(
-                    "Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet. Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud.",
+                    _model.learningAlaphabets!.description.toString(),
                     style: FontConstant.k14w4008471Text
                         .copyWith(fontWeight: FontWeight.w400, fontSize: 18)),
                 SizedBox(height: 30),
-                Align(
+               _model.weakStudent!.isEmpty? SizedBox.shrink() :Align(
                     alignment: Alignment.centerLeft,
                     child: Text(
                       "Weak Students",
                       style: FontConstant2.baloothampifont,
                     )),
-                SizedBox(height: 24),
-                ListView.separated(
+                _model.weakStudent!.isEmpty? SizedBox.shrink() :SizedBox(height: 24),
+                _model.weakStudent!.isEmpty? SizedBox.shrink() :ListView.separated(
                   shrinkWrap: true,
                     physics: NeverScrollableScrollPhysics(),
                     itemBuilder: (context, index) => Studentcard(), separatorBuilder: (ctx, ind) => SizedBox(height: 16.h,), itemCount: 5),

@@ -84,16 +84,16 @@ class GroupInCard {
 class Schdule {
   String? actTitle;
   String? actIcon;
-  String? sun;
+  String? actId;
   String? timing;
   String? grpName;
 
-  Schdule({this.actTitle, this.actIcon, this.sun, this.timing, this.grpName});
+  Schdule({this.actTitle, this.actIcon, this.actId, this.timing, this.grpName});
 
   Schdule.fromJson(Map<String, dynamic> json) {
     actTitle = json['act_title'];
     actIcon = json['act_icon'];
-    sun = json['sun'];
+    actId = json['act_id'];
     timing = json['timing'];
     grpName = json['grp_name'];
   }
@@ -102,7 +102,7 @@ class Schdule {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['act_title'] = this.actTitle;
     data['act_icon'] = this.actIcon;
-    data['sun'] = this.sun;
+    data['act_id'] = this.actId;
     data['timing'] = this.timing;
     data['grp_name'] = this.grpName;
     return data;

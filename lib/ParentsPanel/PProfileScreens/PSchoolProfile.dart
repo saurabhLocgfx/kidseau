@@ -1,9 +1,15 @@
+import 'dart:ui';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kidseau/ParentsPanel/PHomeScreen/PLearningAlphabets.dart';
 import 'package:kidseau/Theme.dart';
 import 'package:kidseau/Widgets/buttons.dart';
+import 'package:kidseau/api/Teacherpanelapi/teacher_profile_api/teacher_school_profile_api.dart';
+import 'package:kidseau/api/models/teacher_profile_details_model/teacher_profile_details_model.dart';
+import 'package:kidseau/api/models/teacher_profile_details_model/teacher_school_profile_detail_model.dart';
 
 class PSchoolProfile extends StatefulWidget {
   const PSchoolProfile({Key? key}) : super(key: key);
@@ -19,6 +25,33 @@ class _PSchoolProfileState extends State<PSchoolProfile> {
     "9876543210",
     "6391 Elgin St. Celina,"
   ];
+  @override
+  void initState() {
+    _getData();
+    super.initState();
+  }
+
+  bool _isLoading = false;
+
+  TeacherSchoolProfileDetailsModel model = TeacherSchoolProfileDetailsModel();
+  _getData(){
+    _isLoading = true;
+    final resp = TeacherSchoolProfileApi().get();
+    resp.then((value){
+      try{
+        setState(() {
+          model = TeacherSchoolProfileDetailsModel.fromJson(value);
+          _isLoading = false;
+        });
+      }catch(e){
+        print('Teacher School profile $value');
+        setState(() {
+          _isLoading = false;
+        });
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -61,7 +94,41 @@ class _PSchoolProfileState extends State<PSchoolProfile> {
       //     ],
       //   ),
       // ),
-      body: Padding(
+      appBar: AppBar(
+        toolbarHeight: 70.0,
+        flexibleSpace: ClipRect(
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+            child: Container(
+              color: Colors.transparent,
+            ),
+          ),
+        ),
+        automaticallyImplyLeading: false,
+        elevation: 0,
+        systemOverlayStyle: SystemUiOverlayStyle(
+          statusBarColor: Color(0xff8267AC).withOpacity(0.16),
+        ),
+        backgroundColor: Color(0xff8267AC).withOpacity(0.16),
+        leading: Row(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(left: 16.0),
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.pop(context);
+                },
+                child: Image.asset(
+                  "assets/images/backarrow.png",
+                  height: 24,
+                  width: 24,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+      body: _isLoading ? Center(child: CircularProgressIndicator(),) :Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -87,7 +154,7 @@ class _PSchoolProfileState extends State<PSchoolProfile> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "ABC Nursery School",
+                          model.schoolName.toString(),
                           style: FontConstant.k24w500brownText,
                         ),
                         Row(
@@ -97,7 +164,7 @@ class _PSchoolProfileState extends State<PSchoolProfile> {
                               height: 24,
                             ),
                             SizedBox(width: 10),
-                            Text("08:00 am to 02:00 pm",
+                            Text(model.schoolTime.toString(),
                                 style: FontConstant.k16w5008471Text),
                           ],
                         ),
@@ -128,7 +195,7 @@ class _PSchoolProfileState extends State<PSchoolProfile> {
                 width: 24,
               ),
               Text(
-                "Xyz@gmail.com",
+                model.schoolEmail.toString(),
                 style: FontConstant.k16w5008471Text,
               )
             ]),
@@ -144,7 +211,7 @@ class _PSchoolProfileState extends State<PSchoolProfile> {
                 width: 24,
               ),
               Text(
-                "9876543210",
+                model.schoolPhone.toString(),
                 style: FontConstant.k16w5008471Text,
               )
             ]),
@@ -164,7 +231,7 @@ class _PSchoolProfileState extends State<PSchoolProfile> {
               ),
               Expanded(
                 child: Text(
-                  "6391 Elgin St. Celina, Delaware 10299",
+                  model.schoolAddress.toString(),
                   style: FontConstant.k16w5008471Text,
                 ),
               )

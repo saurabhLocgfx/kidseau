@@ -6,6 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:kidseau/Constants/colors.dart';
 import 'package:kidseau/TeachersPanel/THomeScreen/TGroupScreen.dart';
 import 'package:kidseau/TeachersPanel/THomeScreen/TLearningAlphabets.dart';
 import 'package:kidseau/TeachersPanel/TNotificationScreen/TNotificationScreen.dart';
@@ -15,6 +16,7 @@ import 'package:kidseau/api/Teacherpanelapi/Tmodel/TScheduleModel.dart';
 import 'package:kidseau/api/Teacherpanelapi/Tschedule_api/schedule_api.dart';
 import 'package:kidseau/api/Teacherpanelapi/teacher_home_api/THomeApi.dart';
 import 'package:kidseau/shard_prefs/shared_prefs.dart';
+import '../../api/models/teacher_profile_details_model/teacher_profile_details_model.dart';
 import '../../restartappwidget/restartwidgets.dart';
 import '../TReminder/TReminderScreen.dart';
 import 'TAttendanceScreen.dart';
@@ -44,6 +46,9 @@ class _THomeScreenState extends State<THomeScreen> {
     super.initState();
   }
 
+  int length = 0;
+
+
   getData() {
     loadingData = true;
     final rsp = THomeApi().get();
@@ -52,6 +57,7 @@ class _THomeScreenState extends State<THomeScreen> {
       try {
         setState(() {
           _name = value;
+          _countLength();
           loadingData = false;
         });
       } catch (e) {
@@ -64,6 +70,28 @@ class _THomeScreenState extends State<THomeScreen> {
       //print(_name.group!.length);
     }).then((value) {
      // getSchedule();
+    });
+  }
+
+  _countLength(){
+    setState(() {
+      if(_name.attendance!.isEmpty){
+          length = _name.schdule!.length;
+      }else{
+        if(_name.schdule!.length>4){
+          length = 4;
+        }else{
+          length = _name.schdule!.length;
+        }
+      }
+      /*else if(_name.schdule!.length>4){
+        length = 4;
+        log('3');
+      }else{
+        length = _name.schdule!.length;
+        log('4');
+      }*/
+      log(length.toString());
     });
   }
 
@@ -95,7 +123,7 @@ class _THomeScreenState extends State<THomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xff8267AC).withOpacity(.06),
+      backgroundColor: AppColors().bgColor,
       appBar: AppBar(
         toolbarHeight: 70.0,
         flexibleSpace: ClipRect(
@@ -381,21 +409,17 @@ class _THomeScreenState extends State<THomeScreen> {
                     shrinkWrap: true,
                     padding: EdgeInsets.zero,
                     physics: NeverScrollableScrollPhysics(),
-                    itemCount: _name.schdule!.length,
+                    itemCount: length,
                     scrollDirection: Axis.vertical,
                     itemBuilder: (BuildContext context, int index) {
                         return InkWell(
                           onTap: () {
-                            if (index == 0) {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) =>
-                                    const TLearningAlphabets()),
+                                     TLearningAlphabets(scheduleID: _name.schdule![index].actId.toString(),)),
                               );
-                            } else if (index == 1) {
-                            } else if (index == 2) {
-                            } else if (index == 3) {}
                           },
                           child:
                           // loadingData
@@ -485,7 +509,7 @@ class _THomeScreenState extends State<THomeScreen> {
               ),
              // schedulewidgetapi(),
               // schedulelistapi(),
-              Center(
+             length == _name.schdule!.length ? SizedBox.shrink() : Center(
                 child: GestureDetector(
                   onTap: () {
                     Navigator.push(
@@ -595,7 +619,7 @@ class _THomeScreenState extends State<THomeScreen> {
                             context,
                             MaterialPageRoute(
                                 builder: (context) =>
-                                    const TLearningAlphabets()),
+                                     TLearningAlphabets(scheduleID: '',)),
                           );
                         } else if (index == 1) {
                         } else if (index == 2) {
@@ -805,7 +829,7 @@ class _schedulewidgetapiState extends State<schedulewidgetapi> {
                             context,
                             MaterialPageRoute(
                                 builder: (context) =>
-                                    const TLearningAlphabets()),
+                                     TLearningAlphabets(scheduleID: '',)),
                           );
                         } else if (index == 1) {
                         } else if (index == 2) {
@@ -1009,7 +1033,8 @@ class Groupcard extends StatelessWidget {
 }
 
 class SchoolCard extends StatelessWidget {
-  const SchoolCard({Key? key}) : super(key: key);
+  final TeacherProfileDetailsModel model;
+  const SchoolCard({Key? key, required this.model}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -1040,9 +1065,10 @@ class SchoolCard extends StatelessWidget {
           Container(
             height: 96,
             width: 72,
-            decoration: BoxDecoration(
+            /*decoration: BoxDecoration(
                 image: DecorationImage(
-                    image: AssetImage("assets/images/groupimage.png"))),
+                    image: AssetImage("assets/images/groupimage.png"))),*/
+            child: Image.network(model.school!.schoolImage.toString(), errorBuilder: (q,w,e)=> Text('Image not loaded'),),
           ),
           SizedBox(width: 12),
           Expanded(
@@ -1050,7 +1076,7 @@ class SchoolCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "ABC School",
+                 model.school!.schoolName.toString(),
                   style: FontConstant2.k18w500Black,
                 ),
                 Row(
@@ -1063,7 +1089,7 @@ class SchoolCard extends StatelessWidget {
                         )),
                     SizedBox(width: 8),
                     Text(
-                      "08:00 am to 02:00 pm",
+                      model.school!.schoolTime!.toString(),
                       style: FontConstant.k18w500whiteText.copyWith(
                         fontSize: 16,
                         fontWeight: FontWeight.w400,
@@ -1082,7 +1108,7 @@ class SchoolCard extends StatelessWidget {
                         )),
                     SizedBox(width: 8),
                     Text(
-                      "9876543210",
+                      model.school!.schoolPhone.toString(),
                       style: FontConstant.k18w500whiteText.copyWith(
                         fontSize: 16,
                         fontWeight: FontWeight.w400,

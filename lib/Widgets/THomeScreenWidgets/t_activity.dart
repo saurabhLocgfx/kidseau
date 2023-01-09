@@ -61,7 +61,7 @@ class _TActivityState extends State<TActivity> {
             return InkWell(
               onTap: () {
                 if (index == 0) {
-                  Get.to(() => TLearningAlphabets());
+                  Get.to(() => TLearningAlphabets(scheduleID: '',));
                 } else if (index == 1) {
                 } else if (index == 2) {
                 } else if (index == 3) {}

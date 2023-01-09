@@ -4,12 +4,15 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kidseau/TeachersPanel/THomeScreen/THomeScreen.dart';
 import 'package:kidseau/Theme.dart';
 import 'package:kidseau/Widgets/buttons.dart';
+import 'package:kidseau/api/Teacherpanelapi/teacher_profile_api/teacher_profile.dart';
+import 'package:kidseau/api/models/teacher_profile_details_model/teacher_profile_details_model.dart';
 
 import '../../ParentsPanel/PProfileScreens/PSchoolProfile.dart';
 import 'TEditProfile.dart';
 
 class TParentProfile extends StatefulWidget {
-  const TParentProfile({Key? key}) : super(key: key);
+  final TeacherProfileDetailsModel model;
+  const TParentProfile({Key? key, required this.model}) : super(key: key);
 
   @override
   State<TParentProfile> createState() => _TParentProfileState();
@@ -33,6 +36,15 @@ class _TParentProfileState extends State<TParentProfile> {
     "9876543210",
     "6391 Elgin St. Celina,"
   ];
+
+  @override
+  void initState() {
+    //_getData();
+    super.initState();
+  }
+
+
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -74,11 +86,11 @@ class _TParentProfileState extends State<TParentProfile> {
                   children: [
                     Container(
                       height: 128,
-                      width: 96.2,
+                      width: 96.2,/*
                       decoration: BoxDecoration(
                           image: DecorationImage(
                               image: AssetImage(
-                                  "assets/images/profileperson.png"))),
+                                  "assets/images/profileperson.png")))*/child: Image.network(widget.model.image.toString(),errorBuilder: (q,w,e)=> Text('Image not loaded'),),
                     ),
                     SizedBox(width: 16),
                     Column(
@@ -86,15 +98,15 @@ class _TParentProfileState extends State<TParentProfile> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          "Johnny Bravo",
+                        widget.model.name.toString(),
                           style: FontConstant.k24w500brownText,
                         ),
                         Text(
-                          "Graduated",
+                          widget.model.education.toString(),
                           style: FontConstant.k16w400B7A4Text,
                         ),
-                        Text("9876543210", style: FontConstant.k16w5008471Text),
-                        Text("xyz@gmail.com",
+                        Text(widget.model.phoneNumber.toString(), style: FontConstant.k16w5008471Text),
+                        Text(widget.model.email.toString(),
                             style: FontConstant.k16w5008471Text),
                       ],
                     ),
@@ -110,7 +122,7 @@ class _TParentProfileState extends State<TParentProfile> {
                     ),
                   );
                 },
-                child: SchoolCard(),
+                child: SchoolCard(model: widget.model,),
               ),
               Padding(
                 padding:
@@ -123,7 +135,187 @@ class _TParentProfileState extends State<TParentProfile> {
                       style: FontConstant2.k22w5008471text,
                     ),
                     SizedBox(height: 16),
-                    SizedBox(
+                    Row(
+                      children: [
+                        Container(
+                          height: 32,
+                          width: 104,
+                          child: Align(
+                            alignment: Alignment.centerLeft,
+                            child: Column(
+                              children: [
+                                Expanded(
+                                  child: Text(
+                                    "First name".tr(),
+                                    style: FontConstant.k16w500331FText,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        SizedBox(width: 16),
+                        Column(
+                          children: [
+                            Text(
+                              widget.model.fristName.toString(),
+                              style: FontConstant.k16w5008471Text,
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Container(
+                          height: 32,
+                          width: 104,
+                          child: Align(
+                            alignment: Alignment.centerLeft,
+                            child: Column(
+                              children: [
+                                Expanded(
+                                  child: Text(
+                                    "Family name".tr(),
+                                    style: FontConstant.k16w500331FText,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        SizedBox(width: 16),
+                        Column(
+                          children: [
+                            Text(
+                              widget.model.familyName.toString(),
+                              style: FontConstant.k16w5008471Text,
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Container(
+                          height: 32,
+                          width: 104,
+                          child: Align(
+                            alignment: Alignment.centerLeft,
+                            child: Column(
+                              children: [
+                                Expanded(
+                                  child: Text(
+                                    "Gender".tr(),
+                                    style: FontConstant.k16w500331FText,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        SizedBox(width: 16),
+                        Column(
+                          children: [
+                            Text(
+                              widget.model.gender.toString(),
+                              style: FontConstant.k16w5008471Text,
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Container(
+                          height: 32,
+                          width: 104,
+                          child: Align(
+                            alignment: Alignment.centerLeft,
+                            child: Column(
+                              children: [
+                                Expanded(
+                                  child: Text(
+                                    "Birthday".tr(),
+                                    style: FontConstant.k16w500331FText,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        SizedBox(width: 16),
+                        Column(
+                          children: [
+                            Text(
+                              widget.model.brithday.toString(),
+                              style: FontConstant.k16w5008471Text,
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Container(
+                          height: 32,
+                          width: 104,
+                          child: Align(
+                            alignment: Alignment.centerLeft,
+                            child: Column(
+                              children: [
+                                Expanded(
+                                  child: Text(
+                                    "Year of experiance".tr(),
+                                    style: FontConstant.k16w500331FText,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        SizedBox(width: 16),
+                        Column(
+                          children: [
+                            Text(
+                              widget.model.yearOfExp.toString(),
+                              style: FontConstant.k16w5008471Text,
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Container(
+                          height: 32,
+                          width: 104,
+                          child: Align(
+                            alignment: Alignment.centerLeft,
+                            child: Column(
+                              children: [
+                                Expanded(
+                                  child: Text(
+                                    "Address".tr(),
+                                    style: FontConstant.k16w500331FText,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        SizedBox(width: 16),
+                        Column(
+                          children: [
+                            Text(
+                              widget.model.address.toString(),
+                              style: FontConstant.k16w5008471Text,
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                    /*SizedBox(
                       height: 260,
                       child: ListView.builder(
                         padding: EdgeInsets.zero,
@@ -132,40 +324,11 @@ class _TParentProfileState extends State<TParentProfile> {
                         itemBuilder: (BuildContext context, int index) {
                           return Padding(
                             padding: const EdgeInsets.only(bottom: 16),
-                            child: Row(
-                              children: [
-                                Container(
-                                  height: 32,
-                                  width: 104,
-                                  child: Align(
-                                    alignment: Alignment.centerLeft,
-                                    child: Column(
-                                      children: [
-                                        Expanded(
-                                          child: Text(
-                                            infocategory[index],
-                                            style: FontConstant.k16w500331FText,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(width: 16),
-                                Column(
-                                  children: [
-                                    Text(
-                                      infocategorydata[index],
-                                      style: FontConstant.k16w5008471Text,
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
+                            child:
                           );
                         },
                       ),
-                    ),
+                    ),*/
                   ],
                 ),
               ),

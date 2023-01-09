@@ -9,6 +9,8 @@ import 'package:flutter_switch/flutter_switch.dart';
 import 'package:kidseau/Theme.dart';
 import 'package:kidseau/Widgets/Calender/calendermodel.dart';
 
+import '../../Widgets/buttons.dart';
+
 class TAttendanceScreen extends StatefulWidget {
   const TAttendanceScreen({Key? key}) : super(key: key);
 
@@ -20,7 +22,7 @@ class _TAttendanceScreenState extends State<TAttendanceScreen> {
   bool isSwitched = false;
   bool val2 = false;
   bool val1 = false;
-  List<bool> values = [];
+  List<bool> _values = [];
 
   var image = [
     "assets/images/kidsimage.png",
@@ -46,7 +48,6 @@ class _TAttendanceScreenState extends State<TAttendanceScreen> {
     "Azhar",
     "Azhar",
   ];
-
   List<AttendanceModel> contacts = [
     AttendanceModel("assets/images/kidsimage.png", "0778979454", false),
     AttendanceModel("assets/images/kidsimage.png", "0766223795", false),
@@ -63,7 +64,7 @@ class _TAttendanceScreenState extends State<TAttendanceScreen> {
   void initState() {
     // TODO: implement initState
     for (var v in image) {
-      values.add(false);
+      _values.add(false);
     }
     super.initState();
   }
@@ -170,36 +171,36 @@ class _TAttendanceScreenState extends State<TAttendanceScreen> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      GestureDetector(
-                        onTap: () {
-                          showDialog(
-                              context: context,
-                              builder: (_) => CalendarPage2());
-                        },
-                        child: Text("Today’s attendance".tr(),
+                  InkWell(
+                    onTap: () {
+                      showDialog(
+                          context: context,
+                          builder: (_) => CalendarPage2());
+                    },
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text("Today’s attendance".tr(),
                             /* AppLoaclizations.of(context)!
                                 .translate("Today’s attendance")
                                 .toString(),*/
                             style: FontConstant2.k24w5008267text),
-                      ),
-                      Row(
-                        children: [
-                          Text(
-                            "Sunday 17 Oct - 2022",
-                            style: FontConstant.k16w500B7A4Text,
-                          ),
-                          SizedBox(width: 8),
-                          Image.asset(
-                            "assets/images/calendericon.png",
-                            height: 24,
-                            fit: BoxFit.fitWidth,
-                          )
-                        ],
-                      )
-                    ],
+                        Row(
+                          children: [
+                            Text(
+                              "Sunday 17 Oct - 2022",
+                              style: FontConstant.k16w500B7A4Text,
+                            ),
+                            SizedBox(width: 8),
+                            Image.asset(
+                              "assets/images/calendericon.png",
+                              height: 24,
+                              fit: BoxFit.fitWidth,
+                            )
+                          ],
+                        )
+                      ],
+                    ),
                   ),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
@@ -215,6 +216,15 @@ class _TAttendanceScreenState extends State<TAttendanceScreen> {
                               onToggle: (v) {
                                 setState(() {
                                   val1 = v;
+                                 // _values.clear();
+                                  for(int i = 0; i<= _values.length-1; i++){
+                                    if(v == true){
+                                      _values[i] = true;
+                                    }else{
+                                      _values[i] = false;
+                                    }
+                                    //_values[i] = !_values[i];
+                                  }
                                 });
                               })),
                       SizedBox(height: 4),
@@ -227,20 +237,19 @@ class _TAttendanceScreenState extends State<TAttendanceScreen> {
                 ],
               ),
             ),
+            SizedBox(height: 10),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Column(
                 children: [
+                  //SizedBox(height: 16,),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                          "74 ${"students".tr() /*AppLoaclizations.of(context)!.translate("students")*/}",
+                          "74 ${"students".tr()}",
                           style: FontConstant.k16w4008471Text),
                       Text("Present1".tr(),
-                          /*AppLoaclizations.of(context)!
-                              .translate("Present1")
-                              .toString(),*/
                           style: FontConstant.k16w4008471Text),
                     ],
                   ),
@@ -262,9 +271,10 @@ class _TAttendanceScreenState extends State<TAttendanceScreen> {
                                   height: 67,
                                   width: 50,
                                   decoration: BoxDecoration(
-                                      image: DecorationImage(
-                                          image: AssetImage(image[index]),
-                                          fit: BoxFit.cover)),
+                                      /*image: DecorationImage(
+                                          image: AssetImage(image[index],),
+                                          fit: BoxFit.cover)*/),
+                                  child: Image.network(image[index], errorBuilder: (q,w,e)=> Text('Image not loaded'),fit: BoxFit.cover),
                                 ),
                                 SizedBox(width: 16),
                                 Column(
@@ -278,10 +288,7 @@ class _TAttendanceScreenState extends State<TAttendanceScreen> {
                                     Row(
                                       children: [
                                         Text(
-                                          "desc".tr()[index],
-                                          /* AppLoaclizations.of(context)!
-                                              .translate("desc"[index])
-                                              .toString(),*/
+                                          "S/O ",
                                           style: FontConstant.k14w4008471Text,
                                         ),
                                         Text(
@@ -301,10 +308,10 @@ class _TAttendanceScreenState extends State<TAttendanceScreen> {
                                     toggleSize: 20,
                                     inactiveColor: ThemeColor.b7A4B2,
                                     activeColor: ThemeColor.primarycolor,
-                                    value: values[index],
+                                    value: _values[index],
                                     onToggle: (v) {
                                       setState(() {
-                                        values[index] = v;
+                                        _values[index] = v;
                                       });
                                     })),
                             // Container(
@@ -330,6 +337,21 @@ class _TAttendanceScreenState extends State<TAttendanceScreen> {
             )
           ],
         ),
+      ),
+      bottomNavigationBar: Container(
+        height: 52.h,
+        width: 1.sw,
+        margin: EdgeInsets.only(bottom: 10,left: 16,right: 16),
+        child: MainButton(
+            onTap: () {
+
+            },
+            title: "Submit".tr(),
+            /*AppLoaclizations.of(context)!
+                        .translate("View all students")
+                        .toString(),*/
+            textStyleColor: Colors.white,
+            backgroundColor: ThemeColor.primarycolor),
       ),
     );
   }

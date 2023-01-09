@@ -82,15 +82,15 @@ class _TParentsState extends State<TParents> {
                       //mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Container(
-                          height: 80.h,
-                          width: 60.w,
+                          height: 80,
+                          width: 60,
                           decoration: BoxDecoration(
                               image: DecorationImage(
                                   image: AssetImage(images[index]),
                                   fit: BoxFit.fill)),
                         ),
                         SizedBox(
-                          width: 12.w,
+                          width: 12,
                         ),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,

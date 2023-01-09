@@ -7,6 +7,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kidseau/TeachersPanel/Widgets/Tpopup.dart';
 import 'package:kidseau/Theme.dart';
 
+import '../../api/Teacherpanelapi/teacher_profile_api/teacher_profile.dart';
+import '../../api/models/teacher_profile_details_model/teacher_profile_details_model.dart';
 import 'TParentProfile.dart';
 
 class TProfileDashBoard extends StatefulWidget {
@@ -30,6 +32,31 @@ class _TProfileDashBoardState extends State<TProfileDashBoard> {
   );
   int pageIndex = 0;
   int selectedIndex = 0;
+
+  bool _isLoading = false;
+  @override
+  void initState() {
+    _getData();
+    super.initState();
+  }
+  TeacherProfileDetailsModel _model = TeacherProfileDetailsModel();
+  _getData(){
+    _isLoading = true;
+    final resp = TeacherProfileApi().get();
+    resp.then((value){
+      setState(() {
+        try{
+          _model = TeacherProfileDetailsModel.fromJson(value);
+          _isLoading = false;
+        }catch(e){
+          print('Teacher profile detail $value');
+          setState(() {
+            _isLoading = false;
+          });
+        }
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -73,7 +100,7 @@ class _TProfileDashBoardState extends State<TProfileDashBoard> {
           actions: [TProfilepopup()],
         ),
         backgroundColor: Color(0xffF8F6FA),
-        body: SingleChildScrollView(
+        body: _isLoading?  Center(child: CircularProgressIndicator(),) :SingleChildScrollView(
           child: Container(
             decoration: BoxDecoration(
                 image: DecorationImage(
@@ -101,7 +128,7 @@ class _TProfileDashBoardState extends State<TProfileDashBoard> {
                 children: [SizedBox(height: 40), pageViewTabProfile()],
               ),
               SizedBox(height: 24.h),*/
-                  TParentProfile(),
+                  TParentProfile(model: _model,),
                 ],
               ),
             ),
