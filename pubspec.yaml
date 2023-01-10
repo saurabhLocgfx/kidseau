@@ -61,6 +61,7 @@ dependencies:
   percent_indicator:
   carousel_slider:
   flutter_mentions: ^2.0.1
+  image_cropper: ^3.0.1
 
 
 dev_dependencies:

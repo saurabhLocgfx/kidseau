@@ -95,7 +95,7 @@ class _THomeScreenState extends State<THomeScreen> {
     });
   }
 
-  getSchedule() {
+  /*getSchedule() {
    // loadingsch = true;
     final rsp = TScheduleApi().get();
     rsp.then((value) {
@@ -111,7 +111,7 @@ class _THomeScreenState extends State<THomeScreen> {
       }
       print(_schedule.schedule);
     });
-  }
+  }*/
 
   final CarouselController _controller = CarouselController();
 
@@ -780,7 +780,7 @@ class _schedulewidgetapiState extends State<schedulewidgetapi> {
     });
   }
 
-  getSchedule() {
+  /*getSchedule() {
     loadingsch = true;
     final rsp = TScheduleApi().get();
     rsp.then((value) {
@@ -796,7 +796,7 @@ class _schedulewidgetapiState extends State<schedulewidgetapi> {
       }
       print(_schedule.schedule);
     });
-  }
+  }*/
 
   bool loadingsch = false;
   bool loadingData = false;
@@ -1089,7 +1089,8 @@ class SchoolCard extends StatelessWidget {
                         )),
                     SizedBox(width: 8),
                     Text(
-                      model.school!.schoolTime!.toString(),
+                        '${DateFormat.jm().format(DateFormat("hh:mm:ss").parse(model.school!.schoolTime!.split('To').first.toString()))} to ${DateFormat.jm().format(DateFormat("hh:mm:ss").parse(model.school!.schoolTime!.split(' To ').last.toString()))}',
+                      //model.school!.schoolTime.toString(),
                       style: FontConstant.k18w500whiteText.copyWith(
                         fontSize: 16,
                         fontWeight: FontWeight.w400,

@@ -303,7 +303,7 @@ class _TMessageDashboardState extends State<TMessageDashboard> {
                 ),
                 Padding(
                   padding: const EdgeInsets.only(left: 4.0),
-                  child: Text("Message",
+                  child: Text("Message".tr(),
                       style: FontConstant.k14w500B7A4Text.copyWith(
                           color: pageIndex == 0
                               ? Color(0xff8267AC)
@@ -327,7 +327,7 @@ class _TMessageDashboardState extends State<TMessageDashboard> {
             },
             child: Row(
               children: [
-                Text("Parent",
+                Text("Parent".tr(),
                     style: FontConstant.k14w500B7A4Text.copyWith(
                         color: pageIndex == 1
                             ? Color(0xff8267AC)

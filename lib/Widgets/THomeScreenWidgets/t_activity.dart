@@ -5,9 +5,10 @@ import 'package:intl/intl.dart';
 import 'package:kidseau/TeachersPanel/THomeScreen/TLearningAlphabets.dart';
 import 'package:kidseau/Theme.dart';
 import 'package:kidseau/api/Teacherpanelapi/Tmodel/TScheduleModel.dart';
+import 'package:kidseau/api/models/T_all_schedule_model.dart';
 
 class TActivity extends StatefulWidget {
-  TScheduleModel schedule;
+  TAllScheduleModel schedule;
   TActivity({Key? key, required this.schedule}) : super(key: key);
 
   @override
@@ -55,16 +56,12 @@ class _TActivityState extends State<TActivity> {
           shrinkWrap: true,
           padding: EdgeInsets.zero,
           physics: NeverScrollableScrollPhysics(),
-          itemCount: widget.schedule.schedule!.length,
+          itemCount: widget.schedule.schdule!.length,
           scrollDirection: Axis.vertical,
           itemBuilder: (BuildContext context, int index) {
             return InkWell(
               onTap: () {
-                if (index == 0) {
-                  Get.to(() => TLearningAlphabets(scheduleID: '',));
-                } else if (index == 1) {
-                } else if (index == 2) {
-                } else if (index == 3) {}
+                  Get.to(() => TLearningAlphabets(scheduleID: widget.schedule.schdule![index].actId.toString(),));
               },
               child: Container(
                 height: 64,
@@ -80,7 +77,7 @@ class _TActivityState extends State<TActivity> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Image.asset(
-                        widget.schedule.schedule![index].actIcon.toString(),
+                        widget.schedule.schdule![index].actIcon.toString(),
                         errorBuilder: (q, w, e) {
                           return Text('Image not loaded');
                         },
@@ -94,7 +91,7 @@ class _TActivityState extends State<TActivity> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              widget.schedule.schedule![index].actTitle
+                              widget.schedule.schdule![index].actTitle
                                   .toString(),
                               style: FontConstant.k32w500blackText
                                   .copyWith(fontSize: 16),
@@ -102,7 +99,7 @@ class _TActivityState extends State<TActivity> {
                             Row(
                               children: [
                                 Text(
-                                  "From ${DateFormat.jm().format(DateFormat("hh:mm:ss").parse('${widget.schedule.schedule![index].actTimeStart}'))} ",
+                                  "From ${widget.schedule.schdule![index].timing!.split('-').first} ",
                                   // '${groups[index]} . ${time[index]}',
                                   style: FontConstant.k14w400lightpurpleText
                                       .copyWith(
@@ -111,7 +108,7 @@ class _TActivityState extends State<TActivity> {
                                           color: Color(0xffB7A4B2)),
                                 ),
                                 Text(
-                                  "To ${DateFormat.jm().format(DateFormat("hh:mm:ss").parse('${widget.schedule.schedule![index].actTimeEnd}'))} ",
+                                  "To ${widget.schedule.schdule![index].timing!.split('-').last}",
                                   // '${groups[index]} . ${time[index]}',
                                   style: FontConstant.k14w400lightpurpleText
                                       .copyWith(

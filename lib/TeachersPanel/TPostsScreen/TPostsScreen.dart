@@ -11,6 +11,8 @@ import 'package:kidseau/api/Teacherpanelapi/teacher_post_api/teacher_all_post_ap
 import 'package:kidseau/api/Teacherpanelapi/teacher_post_api/teacher_like_post.dart';
 import 'package:kidseau/api/models/Tschool_post_model/teacher_school_post_model.dart' as model;
 
+import '../../enlarged_image_screen.dart';
+
 class TPostsScreen extends StatefulWidget {
   const TPostsScreen({Key? key}) : super(key: key);
 
@@ -98,13 +100,14 @@ try{
 });
   }
 
+  final postTag = 'postTag';
 String reloadedVal = '';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
+      body: _isLoading? Container(height:1.sh,child: Center(child: CircularProgressIndicator(),)): SingleChildScrollView(
         controller: _scrollController,
-        child: _isLoading? Center(child: CircularProgressIndicator(),): Column(
+        child: Column(
           children: [
             ListView.separated(
               shrinkWrap: true,
@@ -182,13 +185,21 @@ String reloadedVal = '';
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(8)
                                   ),
-                                  child: Image.network(
-                                    _postList[index].image![indexx].fileName.toString(),
-                                    fit: BoxFit.fill,
-                                    errorBuilder: (q, w, e) =>
-                                        SizedBox(width: 1.sw,
-                                            child: Center(child: Text('No image found'))),
-                                    width: 1.sw,),
+                                  child: InkWell(
+                                    onTap: (){
+                                      Navigator.of(context).push(MaterialPageRoute(builder: (ctx)=> ShowEnlargedPictureScreen(imageUrl: _postList[index].image![indexx].fileName.toString(), tag: postTag)));
+                                    },
+                                    child: Hero(
+                                      tag: postTag,
+                                      child: Image.network(
+                                        _postList[index].image![indexx].fileName.toString(),
+                                        fit: BoxFit.fitWidth,
+                                        errorBuilder: (q, w, e) =>
+                                            SizedBox(width: 1.sw,
+                                                child: Center(child: Text('No image found'))),
+                                        width: 1.sw,),
+                                    ),
+                                  ),
                                 ),
                               );
                             }),

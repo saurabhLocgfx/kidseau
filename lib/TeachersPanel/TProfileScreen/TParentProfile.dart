@@ -44,7 +44,6 @@ class _TParentProfileState extends State<TParentProfile> {
   }
 
 
-
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -86,11 +85,13 @@ class _TParentProfileState extends State<TParentProfile> {
                   children: [
                     Container(
                       height: 128,
-                      width: 96.2,/*
+                      width: 96.2,
+                      /*
                       decoration: BoxDecoration(
                           image: DecorationImage(
                               image: AssetImage(
-                                  "assets/images/profileperson.png")))*/child: Image.network(widget.model.image.toString(),errorBuilder: (q,w,e)=> Text('Image not loaded'),),
+                                  "assets/images/profileperson.png")))*/
+                      child: Image.network(widget.model.image.toString(),errorBuilder: (q,w,e)=> Text('Image not loaded'),),
                     ),
                     SizedBox(width: 16),
                     Column(

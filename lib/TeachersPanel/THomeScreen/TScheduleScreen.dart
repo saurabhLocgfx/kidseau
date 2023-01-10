@@ -7,6 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kidseau/Widgets/THomeScreenWidgets/t_activity.dart';
 import 'package:kidseau/api/Teacherpanelapi/Tmodel/TScheduleModel.dart';
 import 'package:kidseau/api/Teacherpanelapi/Tschedule_api/schedule_api.dart';
+import 'package:kidseau/api/models/T_all_schedule_model.dart';
 
 import '../../Theme.dart';
 
@@ -25,7 +26,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
     super.initState();
   }
 
-  TScheduleModel _schedule = TScheduleModel();
+  TAllScheduleModel _schedule = TAllScheduleModel();
 
   getSchedule() {
     loading = true;
@@ -93,12 +94,15 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
       ),
       body: loading
           ? Center(child: CircularProgressIndicator())
-          :_schedule.schedule!.isEmpty? Center(child: Text('No schedule found')) :SingleChildScrollView(
+          :_schedule.schdule!.isEmpty? Center(child: Text('No schedule found')) :SingleChildScrollView(
         child: Container(
+          height: 1.sh,
           color: Color(0xff8267AC).withOpacity(.06),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
+          //  mainAxisSize: MainAxisSize.max,
             children: [
+              Row(),
               SizedBox(height: 24),
               Padding(
                 padding: EdgeInsets.all(16),

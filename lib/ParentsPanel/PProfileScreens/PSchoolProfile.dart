@@ -164,7 +164,7 @@ class _PSchoolProfileState extends State<PSchoolProfile> {
                               height: 24,
                             ),
                             SizedBox(width: 10),
-                            Text(model.schoolTime.toString(),
+                            Text('${DateFormat.jm().format(DateFormat("hh:mm:ss").parse(model.schoolTime!.split('To').first.toString()))} to ${DateFormat.jm().format(DateFormat("hh:mm:ss").parse(model.schoolTime!.split('To').last.toString()))}',
                                 style: FontConstant.k16w5008471Text),
                           ],
                         ),
@@ -204,7 +204,7 @@ class _PSchoolProfileState extends State<PSchoolProfile> {
             ),
             Row(children: [
               Text(
-                "Phone number",
+                "Phone number".tr(),
                 style: FontConstant.k16w500331FText,
               ),
               SizedBox(
@@ -222,7 +222,7 @@ class _PSchoolProfileState extends State<PSchoolProfile> {
               Padding(
                 padding: const EdgeInsets.only(right: 50),
                 child: Text(
-                  "Address",
+                  "Address".tr(),
                   style: FontConstant.k16w500331FText,
                 ),
               ),
@@ -281,30 +281,42 @@ class _PSchoolProfileState extends State<PSchoolProfile> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                CircleAvatar(
-                    radius: 24,
-                    backgroundImage: AssetImage(
-                      "assets/images/facebookicon.png",
-                    )),
-                CircleAvatar(
-                    radius: 24,
-                    backgroundImage: AssetImage(
-                      "assets/images/Twittericon.png",
-                    )),
-                CircleAvatar(
-                    radius: 24,
-                    backgroundImage: AssetImage(
-                      "assets/images/linkedicon.png",
-                    )),
-                CircleAvatar(
-                    radius: 24,
-                    backgroundImage: AssetImage(
-                      "assets/images/instagramicon.png",
-                    )),
+                InkWell(
+                  onTap: (){},
+                  child: CircleAvatar(
+                      radius: 24,
+                      backgroundImage: AssetImage(
+                        "assets/images/facebookicon.png",
+                      )),
+                ),
+                InkWell(
+                  onTap: (){},
+                  child: CircleAvatar(
+                      radius: 24,
+                      backgroundImage: AssetImage(
+                        "assets/images/Twittericon.png",
+                      )),
+                ),
+                InkWell(
+                  onTap: (){},
+                  child: CircleAvatar(
+                      radius: 24,
+                      backgroundImage: AssetImage(
+                        "assets/images/linkedicon.png",
+                      )),
+                ),
+                InkWell(
+                  onTap: (){},
+                  child: CircleAvatar(
+                      radius: 24,
+                      backgroundImage: AssetImage(
+                        "assets/images/instagramicon.png",
+                      )),
+                ),
               ],
             ),
             SizedBox(height: 32),
-            TeacherCard(),
+            TeacherCard(model: model,),
             SizedBox(height: 68),
             SizedBox(
               height: 52.h,

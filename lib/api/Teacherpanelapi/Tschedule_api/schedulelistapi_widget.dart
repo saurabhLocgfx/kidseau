@@ -43,7 +43,7 @@ class _schedulewidgetapiState extends State<schedulewidgetapi> {
     });
   }
 
-  getSchedule() {
+ /* getSchedule() {
     loadingsch = true;
     final rsp = TScheduleApi().get();
     rsp.then((value) {
@@ -59,7 +59,7 @@ class _schedulewidgetapiState extends State<schedulewidgetapi> {
       }
       print(_schedule.schedule);
     });
-  }
+  }*/
 
   bool loadingsch = false;
   bool loadingData = false;

@@ -4,10 +4,11 @@ import 'dart:developer';
 import 'package:http/http.dart' as http;
 import 'package:kidseau/Constants/string_const.dart';
 import 'package:kidseau/api/Teacherpanelapi/Tmodel/TScheduleModel.dart';
+import 'package:kidseau/api/models/T_all_schedule_model.dart';
 import 'package:kidseau/shard_prefs/shared_prefs.dart';
 
 class TScheduleApi {
-  Future<TScheduleModel> get() async {
+  Future<TAllScheduleModel> get() async {
     String? cookie = UserPrefs.getCookies();
     var headers = {'Cookie': 'PHPSESSID=$cookie'};
     var request = http.Request(
@@ -22,7 +23,7 @@ class TScheduleApi {
     if (response.statusCode == 200) {
       var v = jsonDecode(await response.stream.bytesToString());
      // log(v.toString());
-      final model = TScheduleModel.fromJson(v);
+      final model = TAllScheduleModel.fromJson(v);
       return model;
     } else {
       print(response.reasonPhrase);

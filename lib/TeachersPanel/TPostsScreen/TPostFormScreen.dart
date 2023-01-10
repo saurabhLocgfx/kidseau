@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mentions/flutter_mentions.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:image_cropper/image_cropper.dart';
 import 'package:kidseau/TeachersPanel/Widgets/Themes.dart';
 import 'package:kidseau/Theme.dart';
 import 'package:kidseau/Widgets/buttons.dart';
@@ -115,6 +116,69 @@ class _TPostFormScreenState extends State<TPostFormScreen> {
   }
   ];
 
+  CroppedFile? croppedFile;
+  List<CroppedFile> _croppedFileList = [];
+  _imageCropper(String path, int index) async {
+    croppedFile = await ImageCropper().cropImage(
+        sourcePath: path,
+        aspectRatio: CropAspectRatio(ratioX: 4, ratioY: 3),
+        aspectRatioPresets: [CropAspectRatioPreset.ratio4x3],
+        uiSettings: [
+          AndroidUiSettings(
+            toolbarColor: Colors.blue,
+            toolbarWidgetColor: Colors.white,
+          ),
+          IOSUiSettings(
+            title: 'Cropper',
+          ),
+        ]);
+    if (croppedFile == null) {
+      return;
+    } else {
+     setState(() {
+       widget.pickedImages.removeAt(index);
+       widget.pickedImages.add(File(croppedFile!.path));
+     });
+      //_croppedFileList.add(croppedFile!);
+      /*final resp = UpdateCoverAndProfileImgAPI.update(
+          isProfile ? 'profile' : 'cover', File(croppedFile!.path).path);
+      resp.then((value) {
+        print(value);
+        if (value['message'] == 'image_size_greater_than_10MB') {
+          CustomSnackBar.customErrorSnackBar(context,
+              'File too large! Maximum size should be less that 10 MB');
+        } else if (value['message'] == 'page_not_found') {
+          print('page not found');
+        } else if (value['message'] == 'page_error') {
+          print('page error');
+        } else if (value['message'] == 'image_error') {
+          print('image error');
+        } else if (value['message'] == 'image_empty') {
+          print('image empty');
+        } else if (value['message'] == 'image_too_small') {
+          CustomSnackBar.customErrorSnackBar(context, "Image too small!");
+        } else if (value['message'] == 'mode_required') {
+          print('mode required');
+        } else if (value['message'] == 'image_format_unsupported') {
+          CustomSnackBar.customErrorSnackBar(context,
+              "Unsupported format! Only jpg, jpeg, png, gif are allowed!");
+        } else if (value['message'] == 'upload_failed') {
+          CustomSnackBar.customErrorSnackBar(
+              context, "Something went wrong! Please try again after a while.");
+        } else {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (ctx) =>
+                  ProfileScreen(userName: widget.details!.username),
+            ),
+          );
+          CustomSnackBar.customSnackBar(context,
+              isProfile ? 'Profile Picture updated' : 'Cover Picture updated');
+        }
+      });*/
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -154,23 +218,32 @@ class _TPostFormScreenState extends State<TPostFormScreen> {
                       child: Image.asset('assets/images/backarrow.png')),
                 ),
               ),
-              SizedBox(
+              SizedBox(height: 16,),
+              Container(
                 height: 150,
+                padding: EdgeInsets.only(left: 16),
                 child: ListView.separated(
                   shrinkWrap: true,
                     scrollDirection: Axis.horizontal,
                     itemBuilder: (ctx, index){
-                    return ClipRRect(
-                      borderRadius: BorderRadius.circular(10),
-                      child: Image.file(
-                        widget.pickedImages[index],
-                        fit: BoxFit.fitWidth,
+                    return InkWell(
+                      onTap: (){
+                        _imageCropper(widget.pickedImages[index].path, index);
+                      },
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: Image.file(
+                          widget.pickedImages[index],
+                          fit: BoxFit.fitWidth,
+                        ),
                       ),
                     );
                     }, separatorBuilder: (ctx,ind)=> SizedBox(width: 10,), itemCount: widget.pickedImages.length),
               ),
+              SizedBox(height: 16,),
+              Text('(Click image to crop)',style: FontConstant.k12w4008267Text,),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16, vertical: 40),
+                padding: EdgeInsets.symmetric(horizontal: 16, vertical: 0),
                 child: Form(
                   key: _formKey,
                   child: Column(

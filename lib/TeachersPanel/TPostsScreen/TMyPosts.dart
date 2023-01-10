@@ -4,7 +4,9 @@ import 'dart:math';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:kidseau/api/Teacherpanelapi/teacher_post_api/teacher_my_post_api.dart';
+import 'package:kidseau/enlarged_image_screen.dart';
 
 import '../../Theme.dart';
 import '../../Widgets/dialogs.dart';
@@ -96,12 +98,14 @@ class _TMyPostsState extends State<TMyPosts> {
     });
   }
 
+  final String myPostTag = 'myPostTag';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
         controller: _scrollController,
-        child: _isLoading? Center(child: CircularProgressIndicator(),): Column(
+        child: _isLoading? SizedBox(height:1.sh,child: Center(child: CircularProgressIndicator(),)): Column(
           children: [
             ListView.separated(
                 shrinkWrap: true,
@@ -168,6 +172,7 @@ class _TMyPostsState extends State<TMyPosts> {
                             height: 300,
                             //width: 1.sw,
                             child: PageView.builder(
+                              //controller: PageController(viewportFraction: 0.6),
                                 itemCount: _postList[index].images!.length,
                                 onPageChanged: (currentIndex){
                                   //log(_postList[index].images![currentIndex].fileImage.toString());
@@ -176,16 +181,29 @@ class _TMyPostsState extends State<TMyPosts> {
                                   return ClipRRect(
                                     borderRadius: BorderRadius.circular(8),
                                     child: Container(
+                                     // margin: EdgeInsets.only(right: 16),
                                       decoration: BoxDecoration(
                                           borderRadius: BorderRadius.circular(8)
                                       ),
-                                      child: Image.network(
-                                        _postList[index].images![indexx].fileImage.toString(),
-                                        fit: BoxFit.fill,
-                                        errorBuilder: (q, w, e) =>
-                                            SizedBox(width: 1.sw,
-                                                child: Center(child: Text('No image found'))),
-                                        width: 1.sw,),
+                                      child: InkWell(
+                                        onTap: (){
+                                          Navigator.of(context).push(MaterialPageRoute(builder: (ctx)=> ShowEnlargedPictureScreen(imageUrl: _postList[index].images![indexx].fileImage.toString(), tag: myPostTag)));
+                                        },
+                                        child: Hero(
+                                          tag: myPostTag,
+                                          child: Image.network(
+                                            _postList[index].images![indexx].fileImage.toString(),
+                                            fit: BoxFit.fitWidth,
+                                            loadingBuilder: (q,w,e){
+                                              if (e == null){ return w;}else{
+                                             return SpinKitThreeBounce(size: 30,color: Colors.grey,);}
+                                            } ,
+                                            errorBuilder: (q, w, e) =>
+                                                SizedBox(width: 1.sw,
+                                                    child: Center(child: Text('No image found'))),
+                                            width: 1.sw,),
+                                        ),
+                                      ),
                                     ),
                                   );
                                 }),

@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kidseau/Theme.dart';
 import 'package:kidseau/Widgets/buttons.dart';
+import 'package:kidseau/api/models/teacher_profile_details_model/teacher_school_profile_detail_model.dart';
 
 import '../../TeachersPanel/TMessages/TChats.dart';
 
@@ -158,7 +159,7 @@ class _PLearningAplphabetsState extends State<PLearningAplphabets> {
                       style: FontConstant2.baloothampifont,
                     )),
                 SizedBox(height: 24),
-                TeacherCard(),
+                TeacherCard(model: TeacherSchoolProfileDetailsModel(),),
                 SizedBox(
                   height: 32,
                 ),
@@ -180,8 +181,10 @@ class _PLearningAplphabetsState extends State<PLearningAplphabets> {
 }
 
 class TeacherCard extends StatelessWidget {
+  final TeacherSchoolProfileDetailsModel model;
   TeacherCard({
     Key? key,
+    required this.model
   }) : super(key: key);
 
   List<String> bird = [
@@ -223,10 +226,11 @@ class TeacherCard extends StatelessWidget {
               Container(
                 height: 80,
                 width: 60,
-                decoration: BoxDecoration(
+                /*decoration: BoxDecoration(
                     image: DecorationImage(
                         image: AssetImage('assets/images/teacher1.png'),
-                        fit: BoxFit.fill)),
+                        fit: BoxFit.fill)),*/
+                child: Image.network(model.directorImage.toString(), errorBuilder: (q,w,e)=> Text('Image not loaded'),fit: BoxFit.fill,),
               ),
               SizedBox(
                 width: 12.w,
@@ -235,14 +239,14 @@ class TeacherCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text('Mohammad Umar',
+                  Text(model.directorName.toString(),
                       style: FontConstant.k18w5008471Text.copyWith(
                         color: Colors.white,
                       )),
-                  Text('Class teacher',
+                  Text('Director',
                       style: FontConstant.k14w4008471Text
                           .copyWith(color: Colors.white.withOpacity(0.74))),
-                  Text("English, French, Arabic",
+                  Text(model.directorPhone.toString(),
                       style: FontConstant.k16w4008471Text
                           .copyWith(color: Colors.white.withOpacity(0.80))),
                 ],
