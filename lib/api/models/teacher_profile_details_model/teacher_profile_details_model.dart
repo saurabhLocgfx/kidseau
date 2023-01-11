@@ -7,6 +7,7 @@ class TeacherProfileDetailsModel {
   School? school;
   String? info;
   String? fristName;
+  //String? image;
   String? familyName;
   String? gender;
   String? brithday;

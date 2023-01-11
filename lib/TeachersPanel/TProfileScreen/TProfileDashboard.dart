@@ -128,7 +128,7 @@ class _TProfileDashBoardState extends State<TProfileDashBoard> {
                 children: [SizedBox(height: 40), pageViewTabProfile()],
               ),
               SizedBox(height: 24.h),*/
-                  TParentProfile(model: _model,),
+                  TParentProfile(model: _model,onPop: (){_getData();},),
                 ],
               ),
             ),

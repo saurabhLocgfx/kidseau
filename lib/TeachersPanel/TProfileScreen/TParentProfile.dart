@@ -12,7 +12,8 @@ import 'TEditProfile.dart';
 
 class TParentProfile extends StatefulWidget {
   final TeacherProfileDetailsModel model;
-  const TParentProfile({Key? key, required this.model}) : super(key: key);
+  final Function onPop;
+  const TParentProfile({Key? key, required this.model, required this.onPop}) : super(key: key);
 
   @override
   State<TParentProfile> createState() => _TParentProfileState();
@@ -91,7 +92,11 @@ class _TParentProfileState extends State<TParentProfile> {
                           image: DecorationImage(
                               image: AssetImage(
                                   "assets/images/profileperson.png")))*/
-                      child: Image.network(widget.model.image.toString(),errorBuilder: (q,w,e)=> Text('Image not loaded'),),
+                      clipBehavior: Clip.hardEdge,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                      child: Image.network(widget.model.image.toString(),errorBuilder: (q,w,e)=> Text('Image not loaded'),fit: BoxFit.fitHeight,),
                     ),
                     SizedBox(width: 16),
                     Column(
@@ -344,7 +349,9 @@ class _TParentProfileState extends State<TParentProfile> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (_) => TEditProfileScreen(),
+                            builder: (_) => TEditProfileScreen(model: widget.model, onPop: (){
+                              widget.onPop();
+                            },),
                           ),
                         );
                       },
