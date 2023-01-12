@@ -141,7 +141,7 @@ class _TActivityScreenState extends State<TActivityScreen> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => TAttendanceScreen()),
+                                  builder: (context) => TAttendanceScreen(attendanceId: '',)),
                             );
                           },
                           child: SizedBox(

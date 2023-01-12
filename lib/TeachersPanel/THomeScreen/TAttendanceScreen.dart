@@ -8,11 +8,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:kidseau/Theme.dart';
 import 'package:kidseau/Widgets/Calender/calendermodel.dart';
+import 'package:kidseau/api/Teacherpanelapi/Tattendance_api/teacher_all_attendance_api.dart';
+import 'package:kidseau/api/models/teacher_all_attendance_model/teacher_all_attendance_model.dart';
 
 import '../../Widgets/buttons.dart';
 
 class TAttendanceScreen extends StatefulWidget {
-  const TAttendanceScreen({Key? key}) : super(key: key);
+  final String attendanceId;
+  const TAttendanceScreen({Key? key, required this.attendanceId}) : super(key: key);
 
   @override
   State<TAttendanceScreen> createState() => _TAttendanceScreenState();
@@ -24,7 +27,7 @@ class _TAttendanceScreenState extends State<TAttendanceScreen> {
   bool val1 = false;
   List<bool> _values = [];
 
-  var image = [
+  /*var image = [
     "assets/images/kidsimage.png",
     "assets/images/kidsimage.png",
     "assets/images/kidsimage.png",
@@ -56,18 +59,50 @@ class _TAttendanceScreenState extends State<TAttendanceScreen> {
     AttendanceModel("assets/images/kidsimage.png", "0744795640", false),
     AttendanceModel("assets/images/kidsimage.png", "0707404370", false),
     AttendanceModel("assets/images/kidsimage.png", "0772680138", false),
-  ];
+  ];*/
 
   List<AttendanceModel> selectedAttendance = [];
 
   @override
   void initState() {
     // TODO: implement initState
-    for (var v in image) {
+    /*for (var v in image) {
       _values.add(false);
-    }
+    }*/
+    _getData();
     super.initState();
   }
+
+  bool _isLoading = false;
+  TeacherAllAttendanceModel model = TeacherAllAttendanceModel();
+
+  _getData(){
+    _isLoading = true;
+    final resp = TeacherAllAttendanceApi().get(attendanceId: widget.attendanceId);
+    resp.then((value){
+      try{
+        setState(() {
+          model = TeacherAllAttendanceModel.fromJson(value);
+          for(var v in model.groupAllkid!){
+            if(v.status == '0'){
+              _values.add(false);
+            }else if(v.status == '1'){
+              _values.add(true);
+            }else{
+              _values.add(false);
+            }
+          }
+          _isLoading = false;
+        });
+      }catch(e){
+        print(e);
+        setState(() {
+          _isLoading = false;
+        });
+      }
+    });
+  }
+ // String _desc = '';
 
   @override
   Widget build(BuildContext context) {
@@ -114,7 +149,7 @@ class _TAttendanceScreenState extends State<TAttendanceScreen> {
           ],
         ),
       ),
-      body: SingleChildScrollView(
+      body: _isLoading? Center(child: CircularProgressIndicator(),) :SingleChildScrollView(
         child: Column(
           children: [
             SizedBox(height: 40),
@@ -257,7 +292,7 @@ class _TAttendanceScreenState extends State<TAttendanceScreen> {
                   ListView.separated(
                       physics: NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
-                      itemCount: image.length,
+                      itemCount: model.groupAllkid!.length,
                       separatorBuilder: (ctx, ind) => SizedBox(
                             height: 16.h,
                           ),
@@ -274,7 +309,7 @@ class _TAttendanceScreenState extends State<TAttendanceScreen> {
                                       /*image: DecorationImage(
                                           image: AssetImage(image[index],),
                                           fit: BoxFit.cover)*/),
-                                  child: Image.network(image[index], errorBuilder: (q,w,e)=> Text('Image not loaded'),fit: BoxFit.cover),
+                                  child: Image.network(model.groupAllkid![index].profilePic.toString(), errorBuilder: (q,w,e)=> Text('Image not loaded'),fit: BoxFit.cover),
                                 ),
                                 SizedBox(width: 16),
                                 Column(
@@ -282,17 +317,17 @@ class _TAttendanceScreenState extends State<TAttendanceScreen> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      name[index],
+                                      model.groupAllkid![index].name.toString(),
                                       style: FontConstant.k18w500331FText,
                                     ),
                                     Row(
                                       children: [
                                         Text(
-                                          "S/O ",
+                                         model.groupAllkid![index].gender!.toLowerCase() == 'm'? 'S/O ': model.groupAllkid![index].gender!.toLowerCase() == 'f'? 'D/O ' : 'C/O ',
                                           style: FontConstant.k14w4008471Text,
                                         ),
                                         Text(
-                                          desc1[index],
+                                          model.groupAllkid![index].father.toString(),
                                           style: FontConstant.k14w4008471Text,
                                         ),
                                       ],
@@ -340,6 +375,7 @@ class _TAttendanceScreenState extends State<TAttendanceScreen> {
       ),
       bottomNavigationBar: Container(
         height: 52.h,
+        //color: Colors.transparent,
         width: 1.sw,
         margin: EdgeInsets.only(bottom: 10,left: 16,right: 16),
         child: MainButton(

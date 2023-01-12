@@ -11,6 +11,12 @@ import 'package:kidseau/Theme.dart';
 import 'package:kidseau/Widgets/buttons.dart';
 import 'package:kidseau/api/Teacherpanelapi/Tmodel/TScheduleModel.dart';
 import 'package:kidseau/api/Teacherpanelapi/Tschedule_api/schedule_api.dart';
+import 'package:kidseau/api/Teacherpanelapi/teacher_home_api/teacher_group_api.dart';
+import 'package:kidseau/api/Teacherpanelapi/teacher_home_api/teacher_group_schedule_api.dart';
+import 'package:kidseau/api/models/teacher_group_model/teacher_group_model.dart';
+import 'package:kidseau/api/models/teacher_group_model/teacher_group_schedule_model.dart';
+
+import 'TLearningAlphabets.dart';
 
 class TGroupScreen extends StatefulWidget {
   TGroupScreen({
@@ -22,35 +28,60 @@ class TGroupScreen extends StatefulWidget {
 }
 
 class _TGroupScreenState extends State<TGroupScreen> {
-  bool loading = true;
-  @override
-  void initState() {
-    getSchedule();
+  bool _isLoading = false;
+  bool _isScheduleLoading = false;
 
-    super.initState();
-  }
+  TeacherGroupsModel model = TeacherGroupsModel();
 
-  getSchedule() {
-    final rsp = TScheduleApi().get();
-    rsp.then((value) {
-      print(value);
-      try {
-        _schedule = value as TScheduleModel;
+  TeacherGroupsScheduelModel scheduelModel = TeacherGroupsScheduelModel();
+
+  String _grpId = '';
+  _getData(){
+    _isLoading = true;
+    final resp = TeacherGroupApi().get();
+    resp.then((value){
+      try{
         setState(() {
-          loading = false;
+          model = TeacherGroupsModel.fromJson(value);
+          _grpId = model.groupInCard![0].grpId?? '';
         });
-      } catch (e) {
+      }catch(e){
+        print(e.toString());
         setState(() {
-          loading = false;
+          _isLoading = false;
         });
       }
-      //print(_schedule.schedule!.length);
-      print(_schedule.schedule!.length);
-      print(_schedule.schedule![0].actTitle);
+    }).then((value){
+      _getSchedule();
     });
   }
 
-  TScheduleModel _schedule = TScheduleModel();
+  @override
+  void initState() {
+    _getData();
+    super.initState();
+  }
+
+  _getSchedule() {
+    final resp = TeacherGroupScheduleApi().get(grpId: _grpId);
+    resp.then((value){
+      try{
+        setState(() {
+          scheduelModel = TeacherGroupsScheduelModel.fromJson(value);
+          _isLoading = false;
+          _isScheduleLoading = false;
+        });
+      }catch(e){
+        print(e.toString());
+        setState(() {
+          _isLoading = false;
+          _isScheduleLoading = false;
+        });
+      }
+    });
+  }
+
+ // TScheduleModel _schedule = TScheduleModel();
 
   @override
   Widget build(BuildContext context) {
@@ -95,7 +126,7 @@ class _TGroupScreenState extends State<TGroupScreen> {
           ],
         ),
       ),
-      body: SingleChildScrollView(
+      body: _isLoading? Center(child: CircularProgressIndicator(),) :SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
           child: Column(
@@ -109,12 +140,11 @@ class _TGroupScreenState extends State<TGroupScreen> {
                   decoration: BoxDecoration(
                     color: Colors.white,
                   ),
-
                   /// borderRadius: BorderRadius.circular(81)),
                   child: ListView.builder(
                       shrinkWrap: true,
                       //  physics: const BouncingScrollPhysics(),
-                      itemCount: items.length,
+                      itemCount: model.groupInCard!.length,
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (ctx, index) {
                         return Column(
@@ -124,6 +154,9 @@ class _TGroupScreenState extends State<TGroupScreen> {
                               onTap: () {
                                 setState(() {
                                   current = index;
+                                  _grpId = model.groupInCard![index].grpId.toString();
+                                  _isScheduleLoading = true;
+                                  _getSchedule();
                                 });
                               },
                               child: Container(
@@ -148,7 +181,7 @@ class _TGroupScreenState extends State<TGroupScreen> {
                                 ),
                                 child: Center(
                                   child: Text(
-                                    items[index],
+                                    model.groupInCard![index].groupName.toString(),
                                     style: TextStyle(
                                         fontWeight: FontWeight.w500,
                                         color: current == index
@@ -175,8 +208,99 @@ class _TGroupScreenState extends State<TGroupScreen> {
                   style: FontConstant2.baloothampifont,
                 ),
               ),
-              schedulewidgetapi(),
-
+              _isScheduleLoading ? Center(child: CircularProgressIndicator(),) :Container(
+               // padding: EdgeInsets.symmetric(horizontal: 16),
+                // height: 300.h,
+                width: 1.sw,
+                child: ListView.separated(
+                    separatorBuilder: (ctx, ind) => SizedBox(
+                      height: 14.h,
+                    ),
+                    shrinkWrap: true,
+                    padding: EdgeInsets.zero,
+                    physics: NeverScrollableScrollPhysics(),
+                    itemCount: scheduelModel.schdule!.length,
+                    scrollDirection: Axis.vertical,
+                    itemBuilder: (BuildContext context, int index) {
+                      return InkWell(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    TLearningAlphabets(scheduleID: scheduelModel.schdule![index].actId.toString(),)),
+                          );
+                        },
+                        child:
+                        // loadingData
+                        //     ? CircularProgressIndicator()
+                        //     :
+                        Container(
+                          height: 64,
+                          // width: Get.size.width * 0.93,
+                          //margin: EdgeInsets.symmetric(horizontal: 16),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(16),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Image.asset(
+                                  scheduelModel.schdule![index].actIcon.toString(),
+                                  errorBuilder: (q, w, e) {
+                                    return Text('Image not loaded');
+                                  },
+                                  height: 40,
+                                  width: 40,
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 15.0),
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        scheduelModel.schdule![index].actTitle.toString(),
+                                        style: FontConstant.k32w500blackText
+                                            .copyWith(fontSize: 16),
+                                      ),
+                                      Row(
+                                        children: [
+                                          Text(
+                                            "From ${scheduelModel.schdule![index].timing!.split('-').first} ",
+                                            // '${groups[index]} . ${time[index]}',
+                                            style: FontConstant
+                                                .k14w400lightpurpleText
+                                                .copyWith(
+                                                fontWeight: FontWeight.w400,
+                                                fontSize: 14,
+                                                color: Color(0xffB7A4B2)),
+                                          ),
+                                          Text(
+                                            "To ${scheduelModel.schdule![index].timing!.split('-').last}",
+                                            // '${groups[index]} . ${time[index]}',
+                                            style: FontConstant
+                                                .k14w400lightpurpleText
+                                                .copyWith(
+                                                fontWeight: FontWeight.w400,
+                                                fontSize: 14,
+                                                color: Color(0xffB7A4B2)),
+                                          ),
+                                        ],
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      );
+                    }),
+              ),
               // Padding(
               //   padding: EdgeInsets.symmetric(horizontal: 16),
               //   child: loadingData

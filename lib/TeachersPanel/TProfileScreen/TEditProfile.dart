@@ -1,7 +1,7 @@
+import 'dart:async';
 import 'dart:developer';
 import 'dart:io';
 import 'dart:ui';
-
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -12,8 +12,11 @@ import 'package:kidseau/Constants/colors.dart';
 import 'package:kidseau/Widgets/buttons.dart';
 import 'package:kidseau/Widgets/custom_snack_bar.dart';
 import 'package:kidseau/Widgets/screen_loader.dart';
+import 'package:kidseau/api/Teacherpanelapi/teacher_profile_api/teacher_update_email_number_api.dart';
 import 'package:kidseau/api/Teacherpanelapi/teacher_profile_api/teacher_update_profile.dart';
 import 'package:kidseau/api/Teacherpanelapi/teacher_profile_api/teacher_update_profile_picture.dart';
+import 'package:kidseau/api/Teacherpanelapi/teacher_profile_api/teacher_verify_update_otp.dart';
+import 'package:pin_code_fields/pin_code_fields.dart';
 
 import '../../Theme.dart';
 import '../../api/models/teacher_profile_details_model/teacher_profile_details_model.dart';
@@ -32,14 +35,18 @@ class _TEditProfileScreenState extends State<TEditProfileScreen> {
   final TextEditingController _educationController = TextEditingController();
   final TextEditingController _yearController = TextEditingController();
   final TextEditingController _addressController = TextEditingController();
+ /* final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _numberController = TextEditingController();*/
   String _birthday = '';
   String _gender = '';
+
   @override
   void initState() {
     _educationController.text = widget.model.education ?? '';
     _yearController.text = widget.model.yearOfExp ?? '';
     _addressController.text = widget.model.address ?? '';
     _birthday = widget.model.brithday ?? 'dd/mm/yyyy';
+
     profileImageUrl = widget.model.image??'';
     if(widget.model.gender!.toLowerCase() == 'm'){
       _gender = 'male';
@@ -48,20 +55,33 @@ class _TEditProfileScreenState extends State<TEditProfileScreen> {
     }else{
       _gender = 'other';
     }
-
     super.initState();
   }
 
   @override
   void dispose() {
     widget.onPop();
+   // _timer?.cancel();
     super.dispose();
   }
+
   String profileImageUrl = '';
 
   DateTime? _pickedDate;
   final _picker = ImagePicker();
   File _pickedFile = File('');
+
+
+  final GlobalKey<FormState> _key = GlobalKey<FormState>();
+
+  Widget _showBottomSheet(){
+    return StatefulBuilder(builder: (context, sheetState){
+      return BottomSheetWidget(model: widget.model,onPop: (val, val2){
+        widget.model.email = val;
+        widget.model.phoneNumber = val2;
+      },);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -338,9 +358,22 @@ class _TEditProfileScreenState extends State<TEditProfileScreen> {
                             label: 'Enter your address'.tr(), curved: true),
                       ),
                       SizedBox(height: 16,),
-                      InkWell(onTap:(){
+                      InkWell(
+                          onTap:(){
+                        showModalBottomSheet(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.only(topLeft: Radius.circular(24), topRight: Radius.circular(24))
+                          ),
+                            context: context,
+                            isScrollControlled: true,
+                            builder: (ctx){
+                          return _showBottomSheet();
+                        }).then((value){
 
-                      },child: Container(padding:EdgeInsets.symmetric(vertical: 5),color: Colors.transparent,child: Text('Change email & phone number', style: FontConstant.k16w5008471Text,))),
+                        });
+                      },
+                          child: Container(padding:EdgeInsets.symmetric(vertical: 5),
+                              color: Colors.transparent,child: Text('Change email & phone number', style: FontConstant.k16w5008471,),),),
                       SizedBox(height: 32),
                       materialButton(
                         context,
@@ -374,3 +407,279 @@ class _TEditProfileScreenState extends State<TEditProfileScreen> {
     );
   }
 }
+
+class BottomSheetWidget extends StatefulWidget {
+  final TeacherProfileDetailsModel model;
+  final Function(String, String) onPop;
+  const BottomSheetWidget({Key? key, required this.model, required this.onPop}) : super(key: key);
+
+  @override
+  State<BottomSheetWidget> createState() => _BottomSheetWidgetState();
+}
+
+class _BottomSheetWidgetState extends State<BottomSheetWidget> {
+  Timer? _timer;
+  int _start = 59;
+  bool _emailTimer = false;
+  bool _numberTimer = false;
+  bool _showField = false;
+
+  final TextEditingController pinTextController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _numberController = TextEditingController();
+  final GlobalKey<FormState> _key = GlobalKey<FormState>();
+
+  String val = '';
+  String val2 = '';
+  @override
+  void initState() {
+    _emailController.text = widget.model.email??'';
+    _numberController.text = widget.model.phoneNumber??'';
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    super.dispose();
+  }
+
+  _startTimer() {
+    //log(_start.toString());
+    const oneSec = Duration(seconds: 1);
+    _timer = Timer.periodic(
+      oneSec,
+          (Timer timer) {
+        //log(_start.toString());
+        if (_start == 0) {
+          setState(() {
+            timer.cancel();
+            _emailTimer = false;
+            _numberTimer = false;
+          });
+        } else {
+          setState(() {
+            _start--;
+          });
+        }
+      },
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      child: Padding(
+        padding: EdgeInsets.only(
+            bottom: MediaQuery.of(context).viewInsets.bottom),
+        child: Container(
+          padding: EdgeInsets.only(top: 32, left: 16, right: 16, bottom: 56),
+          decoration: BoxDecoration(
+              color: AppColors().bgColor
+          ),
+          child: Form(
+            key: _key,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('Email'.tr(),
+                    style: FontConstant.k16w500331FText),
+                SizedBox(height: 4),
+                TextFormField(
+                  keyboardType: TextInputType.emailAddress,
+                  controller: _emailController,
+                  validator: (val){
+                    if(_emailController.text.isEmpty){
+                      return 'This field cannot be empty';
+                    }else{
+                      return null;
+                    }
+                  },
+                  decoration:InputDecoration(
+                    fillColor: Colors.white,
+                    filled: true,
+                    hintText: 'Enter your email'.tr(),
+                    suffix: InkWell(
+                      onTap: _numberTimer ? (){}: (){
+                        if(_key.currentState!.validate()){
+                          final resp = TeacherUpdateEmailNumberApi().get(field: _emailController.text);
+                          resp.then((value){
+                            log(value.toString());
+                            if(value['status'] == 1){
+                              setState(() {
+                                _start = 59;
+                                _emailTimer = true;
+                                _showField = true;
+                              });
+                              _startTimer();
+                            }else{
+                              Navigator.of(context).pop();
+                              CustomSnackBar.customErrorSnackBar(context, value['msg']);
+                            }
+                          });
+                        }
+                        /*var value;
+                          if(value['success'] == true){
+
+                          }else{
+                            CustomSnackBar.customErrorSnackBar(context, '${value['message']}');
+                            print(value);
+                          }*/
+                      },
+                      child: Container(
+                        //color: Colors.black,
+                        //padding: EdgeInsets.all(16),
+                        child: Text(_emailTimer? _start.toString():'Verify'),
+                      ),
+                    ),
+                    // isCollapsed: true,
+                    hintStyle: FontConstant.k16w400B7A4Text,
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular( 90 ),
+                      borderSide: BorderSide(color: Colors.white, width: 1),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(90),
+                      borderSide: BorderSide(color: Colors.white, width: 1),
+                    ),
+                    errorBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(90),
+                      borderSide: BorderSide(color: Colors.redAccent, width: 1),
+                    ),
+                    focusedErrorBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(90),
+                      borderSide: BorderSide(color: Colors.white, width: 1),
+                    ),
+                    disabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(90),
+                      borderSide: BorderSide(color: Colors.white, width: 1),
+                    ),
+                  ),
+                ),
+                SizedBox(height: 16),
+                Text('Phone number'.tr(),
+                    style: FontConstant.k16w500331FText),
+                SizedBox(height: 4),
+                TextFormField(
+                  keyboardType: TextInputType.phone,
+                  controller: _numberController,
+                  validator: (val){
+                    if(_numberController.text.isEmpty){
+                      return 'This field cannot be empty';
+                    }else{
+                      return null;
+                    }
+                  },
+                  decoration:InputDecoration(
+                    fillColor: Colors.white,
+                    filled: true,
+                    hintText: 'Enter your number'.tr(),
+                    suffix: InkWell(
+                      onTap: _emailTimer ? (){}:(){
+                        if(_key.currentState!.validate()){
+                          final resp = TeacherUpdateEmailNumberApi().get(field: _numberController.text);
+                          resp.then((value){
+                            log(value.toString());
+                            if(value['status'] == 1){
+                              setState(() {
+                                _start = 59;
+                                _numberTimer = true;
+                                _showField = true;
+                              });
+                              _startTimer();
+                            }else{
+                              Navigator.of(context).pop();
+                              CustomSnackBar.customErrorSnackBar(context, value['msg']);
+                            }
+                          });
+                        }
+                      },
+                      child: Container(
+                        //color: Colors.black,
+                        //padding: EdgeInsets.all(16),
+                        child: Text(_numberTimer? _start.toString():'Verify'),
+                      ),
+                    ),
+                    // isCollapsed: true,
+                    hintStyle: FontConstant.k16w400B7A4Text,
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular( 90 ),
+                      borderSide: BorderSide(color: Colors.white, width: 1),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(90),
+                      borderSide: BorderSide(color: Colors.white, width: 1),
+                    ),
+                    errorBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(90),
+                      borderSide: BorderSide(color: Colors.redAccent, width: 1),
+                    ),
+                    focusedErrorBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(90),
+                      borderSide: BorderSide(color: Colors.white, width: 1),
+                    ),
+                    disabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(90),
+                      borderSide: BorderSide(color: Colors.white, width: 1),
+                    ),
+                  ),
+                ),
+                SizedBox(height: 32),
+                _showField? Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 32),
+                  child: PinCodeTextField(
+                    controller: pinTextController,
+                    keyboardType: TextInputType.number,
+                    cursorColor: AppColors().k8267AC,
+                    //enableActiveFill: true,
+                    appContext: context,
+                    length: 4,
+                    onChanged: (val) {},
+                    pinTheme: PinTheme(
+                      inactiveColor: AppColors().k8267AC,
+                      //activeFillColor: kECF0F8,
+                      fieldOuterPadding: EdgeInsets.all(0),
+                      //selectedFillColor: kECF0F8,
+                      selectedColor: AppColors().k8267AC,
+                      borderWidth: 0,
+                      fieldWidth: 45.w,
+                      fieldHeight: 50.h,
+                      borderRadius: BorderRadius.circular(8),
+                      //inactiveFillColor: kECF0F8,
+                      activeColor: AppColors().k8267AC,
+                      shape: PinCodeFieldShape.underline,
+                    ),
+                  ),
+                ): SizedBox.shrink(),
+                SizedBox(height: 32),
+                SizedBox(
+                  height: 52,
+                  width: 1.sw,
+                  child: MainButton(
+                      onTap: _showField?() {
+                        final resp = TeacherVerifyUpdateOTP().get(otp: pinTextController.text);
+                        resp.then((value){
+                          Navigator.of(context).pop();
+                          if(value['status'] == 1){
+                            CustomSnackBar.customSnackBar(context, 'Updated successfully');
+                            val = _emailController.text;
+                            val2 = _numberController.text;
+                            widget.onPop(val,val2);
+                          }else{
+                            CustomSnackBar.customErrorSnackBar(context, value['msg']);
+                          }
+                        });
+                      }:(){},
+                      title: "Save",
+                      textStyleColor: Colors.white,
+                      backgroundColor: ThemeColor.primarycolor),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+

@@ -105,7 +105,7 @@ String reloadedVal = '';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _isLoading? Container(height:1.sh,child: Center(child: CircularProgressIndicator(),)): SingleChildScrollView(
+      body: _isLoading? SizedBox(height:1.sh,child: Center(child: CircularProgressIndicator(),)): SingleChildScrollView(
         controller: _scrollController,
         child: Column(
           children: [

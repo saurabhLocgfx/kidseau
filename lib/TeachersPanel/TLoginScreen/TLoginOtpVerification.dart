@@ -84,7 +84,7 @@ class _TLoginOtpVerificationState extends State<TLoginOtpVerification> {
                                 text: TextSpan(children: [
                               TextSpan(
                                 text:
-                                    "A OTP has been sent to “9876543210”. Please enter the OTP here."
+                                    "A OTP has been sent to “${widget.mobileText}”. Please enter the OTP here."
                                         .tr(),
                                 /*AppLoaclizations.of(context)!
                                     .translate(

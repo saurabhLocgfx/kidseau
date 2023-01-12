@@ -145,6 +145,8 @@ class FontConstant {
       fontWeight: FontWeight.w400, fontSize: 16, color: Color(0xff331F2D));
   static TextStyle k16w5008471Text = GoogleFonts.balooDa2(
       fontWeight: FontWeight.w500, fontSize: 16, color: Color(0xff84717F));
+  static TextStyle k16w5008471 = GoogleFonts.balooDa2(
+      fontWeight: FontWeight.w500, fontSize: 16, color: Color(0xff8267AC));
   static TextStyle k14w5008471Text = GoogleFonts.balooDa2(
       fontWeight: FontWeight.w500, fontSize: 14, color: Color(0xff84717F));
   static TextStyle k12w5008471Text = GoogleFonts.balooDa2(
@@ -199,12 +201,21 @@ class FontConstant2 {
 class TextFieldDecoration {
   InputDecoration curvedWhiteDecoration({
     required String label,
+
     required bool curved,
   }) {
     return InputDecoration(
       fillColor: Colors.white,
       filled: true,
       hintText: label,
+     /*suffix: InkWell(
+       onTap: (){},
+       child: Container(
+         //color: Colors.black,
+         //padding: EdgeInsets.all(16),
+         child: Text('Verify'),
+       ),
+     ),*/
      // isCollapsed: true,
       hintStyle: FontConstant.k16w400B7A4Text,
       enabledBorder: OutlineInputBorder(

@@ -135,7 +135,7 @@ class TDashboard extends StatefulWidget {
 }
 
 class _TDashboardState extends State<TDashboard> {
-  PageController _pageController = PageController(
+  final PageController _pageController = PageController(
     initialPage: 0,
   );
   int pageIndex = 0;

@@ -113,12 +113,12 @@ class _THomeScreenState extends State<THomeScreen> {
     });
   }*/
 
-  final CarouselController _controller = CarouselController();
+ // final CarouselController _controller = CarouselController();
 
-  TScheduleModel _schedule = TScheduleModel();
+  //TScheduleModel _schedule = TScheduleModel();
   THomeModel _name = THomeModel();
   // THomeModel _attend = THomeModel();
-  int _index = 0;
+ // int _index = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -567,7 +567,7 @@ class _THomeScreenState extends State<THomeScreen> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => TAttendanceScreen()),
+                              builder: (context) => TAttendanceScreen(attendanceId: _name.attendance![index].groupId.toString(),)),
                         );
                       },
                       child:
@@ -614,16 +614,12 @@ class _THomeScreenState extends State<THomeScreen> {
                   itemBuilder: (BuildContext context, int index) {
                     return InkWell(
                       onTap: () {
-                        if (index == 0) {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
                                 builder: (context) =>
-                                     TLearningAlphabets(scheduleID: '',)),
+                                     TLearningAlphabets(scheduleID: _name.schdule![index].actId.toString(),)),
                           );
-                        } else if (index == 1) {
-                        } else if (index == 2) {
-                        } else if (index == 3) {}
                       },
                       child: loadingData
                           ? CircularProgressIndicator()

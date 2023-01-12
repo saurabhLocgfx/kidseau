@@ -113,6 +113,7 @@ class TLoginScreen extends StatelessWidget {
                                   style: FontConstant.k16w500331FText),
                               SizedBox(height: 6),
                               TextFormField(
+                                keyboardType: TextInputType.emailAddress,
                                 validator: (mobileText) {
                                   if (mobileText == null ||
                                       mobileText.isEmpty) {

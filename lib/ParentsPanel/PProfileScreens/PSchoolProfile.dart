@@ -184,8 +184,8 @@ class _PSchoolProfileState extends State<PSchoolProfile> {
             ),
             SizedBox(height: 6),
             Row(children: [
-              Padding(
-                padding: const EdgeInsets.only(right: 50),
+              SizedBox(
+                width: 150,
                 child: Text(
                   "Email id".tr(),
                   style: FontConstant.k16w500331FText,
@@ -203,9 +203,12 @@ class _PSchoolProfileState extends State<PSchoolProfile> {
               height: 16,
             ),
             Row(children: [
-              Text(
-                "Phone number".tr(),
-                style: FontConstant.k16w500331FText,
+              SizedBox(
+                width: 150,
+                child: Text(
+                  "Phone number".tr(),
+                  style: FontConstant.k16w500331FText,
+                ),
               ),
               SizedBox(
                 width: 24,
@@ -219,8 +222,8 @@ class _PSchoolProfileState extends State<PSchoolProfile> {
               height: 16,
             ),
             Row(children: [
-              Padding(
-                padding: const EdgeInsets.only(right: 50),
+              SizedBox(
+                width: 150,
                 child: Text(
                   "Address".tr(),
                   style: FontConstant.k16w500331FText,
