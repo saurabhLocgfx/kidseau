@@ -25,8 +25,6 @@ class _PHomeScreenState extends State<PHomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      /*height: 1110,
-      width: 414,*/
       decoration: BoxDecoration(
         color: Color(0xff8267AC).withOpacity(.06),
       ),
@@ -47,9 +45,7 @@ class _PHomeScreenState extends State<PHomeScreen> {
           title: Row(
             children: [
               GestureDetector(
-                onTap: () {
-                  // Get.to(() => Posts());
-                },
+                onTap: () {},
                 child: Text("Good Morning".tr(),
                     style: FontConstant2.k32w5008267text),
               ),
@@ -78,7 +74,6 @@ class _PHomeScreenState extends State<PHomeScreen> {
                                         UserPrefs.setEArbBool(false);
                                         context.locale = Locale('en', 'US');
                                         RestartWidget.restartApp(context);
-
                                         setState(() {
                                           colorChange;
                                         });
@@ -100,15 +95,9 @@ class _PHomeScreenState extends State<PHomeScreen> {
                                         UserPrefs.setEArbBool(false);
                                         context.locale = Locale('fr', 'FR');
                                         RestartWidget.restartApp(context);
-
                                         setState(() {
                                           colorChange;
                                         });
-                                        // Navigator.of(context).push(
-                                        //   MaterialPageRoute(
-                                        //     builder: (context) => Fees(),
-                                        //   ),
-                                        // );
                                       },
                                       child: Row(
                                         children: [
@@ -130,13 +119,6 @@ class _PHomeScreenState extends State<PHomeScreen> {
                                         setState(() {
                                           colorChange;
                                         });
-                                        /* Navigator.pop(context);
-                                          Navigator.of(context).push(
-                                            MaterialPageRoute(
-                                              builder: (context) =>
-                                                  TSettings(),
-                                            ),
-                                          );*/
                                       },
                                       child: Row(
                                         children: [
@@ -175,20 +157,6 @@ class _PHomeScreenState extends State<PHomeScreen> {
                       ),
                     ),
                   ),
-                  /*GestureDetector(
-                    onTap: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => PReminderScreen(),
-                        ),
-                      );
-                    },
-                    child: Image.asset(
-                      "assets/images/appbarclock.png",
-                      height: 24,
-                      width: 24,
-                    ),
-                  ),*/
                 ],
               ),
             ),
@@ -219,53 +187,15 @@ class _PHomeScreenState extends State<PHomeScreen> {
                               shrinkWrap: true,
                               scrollDirection: Axis.horizontal,
                               itemBuilder: (context, index) {
-                                  return Padding(
-                                    padding: const EdgeInsets.only(right: 15.0),
-                                    child: Studentcard(),
-                                  );
+                                return Padding(
+                                  padding: const EdgeInsets.only(right: 15.0),
+                                  child: Studentcard(),
+                                );
                               },
                               itemCount: 3),
                         ),
                       ),
                       SizedBox(width: 5),
-                      // GestureDetector(
-                      //   onTap: () {
-                      //     Navigator.push(
-                      //       context,
-                      //       MaterialPageRoute(
-                      //           builder: (context) => PAddkidScreen()),
-                      //     );
-                      //   },
-                      //   child: Padding(
-                      //     padding: const EdgeInsets.only(left: 16),
-                      //     child: Container(
-                      //       height: 128.h,
-                      //       width: 80.w,
-                      //       decoration: BoxDecoration(
-                      //           borderRadius: BorderRadius.circular(16),
-                      //           image: DecorationImage(
-                      //               image: AssetImage(
-                      //                   "assets/images/Rectangle 2716.png"),
-                      //               fit: BoxFit.cover)),
-                      //       child: Column(
-                      //         children: [
-                      //           SizedBox(
-                      //             height: MediaQuery.of(context).size.height *
-                      //                 0.05,
-                      //           ),
-                      //           Icon(
-                      //             Icons.add,
-                      //             size: 25,
-                      //             color: Colors.white,
-                      //           ),
-                      //           Text("Add".tr(),
-                      //               style: FontConstant.k18w500whiteText
-                      //                   .copyWith(fontSize: 16)),
-                      //         ],
-                      //       ),
-                      //     ),
-                      //   ),
-                      // ),
                     ],
                   ),
                   SizedBox(height: MediaQuery.of(context).size.height * 0.01),
@@ -337,14 +267,6 @@ class Studentcard extends StatelessWidget {
       width: 260.w,
       decoration: BoxDecoration(
         color: Colors.transparent,
-        // boxShadow: [
-        //   BoxShadow(
-        //     color: Color(0xffAD9CC9),
-        //     spreadRadius: 1,
-        //     blurRadius: 2,
-        //     offset: Offset(0, 2), // changes position of shadow
-        //   ),
-        // ],
         borderRadius: BorderRadius.circular(16),
         image: DecorationImage(
           image: AssetImage("assets/images/Student Card.png"),

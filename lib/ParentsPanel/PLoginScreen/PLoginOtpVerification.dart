@@ -11,7 +11,8 @@ import '../../api/parent_login_apis/parent_login_otp_api.dart';
 import '../PDashBoard.dart';
 
 class PLoginOtpVerification extends StatelessWidget {
-  PLoginOtpVerification({Key? key}) : super(key: key);
+  final String loginField;
+  PLoginOtpVerification({Key? key, required this.loginField}) : super(key: key);
   final TextEditingController pinTextController = TextEditingController();
   @override
   Widget build(BuildContext context) {
@@ -69,7 +70,8 @@ class PLoginOtpVerification extends StatelessWidget {
                           width: 173,
                         ),
                         Text(
-                          "We offer a new way to track your children and watch them grow.".tr(),
+                          "We offer a new way to track your children and watch them grow."
+                              .tr(),
                           style: FontConstant.k16w4008471Text,
                           textAlign: TextAlign.center,
                         ),
@@ -90,12 +92,8 @@ class PLoginOtpVerification extends StatelessWidget {
                             .toString(),*/
                         style: FontConstant.k24w500brownText),
                     Text(
-                      "A OTP has been sent to “9876543210”. Please enter the OTP here."
+                      "A OTP has been sent to “$loginField”. Please enter the OTP here."
                           .tr(),
-                      /*AppLoaclizations.of(context)!
-                          .translate(
-                              "A OTP has been sent to “9876543210”. Please enter the OTP here.")
-                          .toString(),*/
                       style:
                           FontConstant.k16w400B7A4Text.copyWith(fontSize: 15),
                       textAlign: TextAlign.start,
@@ -132,9 +130,6 @@ class PLoginOtpVerification extends StatelessWidget {
                             });
                           },
                           title: "Continue".tr(),
-                          /*AppLoaclizations.of(context)!
-                              .translate("Continue")
-                              .toString(),*/
                           textStyleColor: Colors.white,
                           backgroundColor: ThemeColor.primarycolor),
                     ),

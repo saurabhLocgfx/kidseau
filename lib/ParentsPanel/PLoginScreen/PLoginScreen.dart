@@ -53,7 +53,8 @@ class PLoginScreen extends StatelessWidget {
                                     width: 151,
                                   ),
                                   Text(
-                                    "We offer a new way to track your children and watch them grow.".tr(),
+                                    "We offer a new way to track your children and watch them grow."
+                                        .tr(),
                                     style: FontConstant.k16w4008471Text,
                                     textAlign: TextAlign.center,
                                   ),
@@ -72,7 +73,8 @@ class PLoginScreen extends StatelessWidget {
                               Text("Welcome".tr(),
                                   style: FontConstant.k24w500brownText),
                               Text(
-                                "Login/create a new account to track your kids’ activities.".tr(),
+                                "Login/create a new account to track your kids’ activities."
+                                    .tr(),
                                 style: FontConstant.k16w400B7A4Text
                                     .copyWith(fontSize: 15),
                                 textAlign: TextAlign.start,
@@ -82,8 +84,8 @@ class PLoginScreen extends StatelessWidget {
                                   style: FontConstant.k16w500331FText),
                               SizedBox(height: 6),
                               Container(
-                                height: 56,
-                                width: 382.w,
+                                // height: 56,
+                                width: 1.sw,
                                 child: TextFormField(
                                   validator: (phoneText) {
                                     if (phoneText == null ||
@@ -96,14 +98,9 @@ class PLoginScreen extends StatelessWidget {
                                   style: FontConstant.k18w5008471Text,
                                   decoration: InputDecoration(
                                     contentPadding: EdgeInsets.all(14.0),
-                                    enabledBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(30.0)),
-                                        borderSide: BorderSide(
-                                            color: Colors.white, width: 1.0)),
-                                    disabledBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                          color: Colors.white, width: 1.0),
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(30),
+                                      borderSide: BorderSide.none,
                                     ),
                                     focusedBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.all(
@@ -112,7 +109,8 @@ class PLoginScreen extends StatelessWidget {
                                           color: Color(0xffBE74AA), width: 1.0),
                                     ),
                                     isDense: true,
-                                    hintText: "Enter your email/phone number".tr(),
+                                    hintText:
+                                        "Enter your email/phone number".tr(),
                                     filled: true,
                                     fillColor: Colors.white,
                                     hintStyle: FontConstant.k14w400lightText
@@ -142,7 +140,11 @@ class PLoginScreen extends StatelessWidget {
                                             Navigator.of(context).push(
                                                 MaterialPageRoute(
                                                     builder: (context) =>
-                                                        PLoginOtpVerification()));
+                                                        PLoginOtpVerification(
+                                                          loginField:
+                                                              emailController
+                                                                  .text,
+                                                        )));
                                             Fluttertoast.showToast(
                                                 msg:
                                                     'Your OTP is ${value['OTP']}');

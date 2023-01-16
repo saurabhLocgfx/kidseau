@@ -129,16 +129,27 @@ import 'package:kidseau/Theme.dart';
 // }
 
 class TDashboard extends StatefulWidget {
-  TDashboard({Key? key}) : super(key: key);
+  final int? tabindex;
+  final int? postIndex;
+  TDashboard({Key? key, this.tabindex = 0, this.postIndex}) : super(key: key);
   @override
   _TDashboardState createState() => _TDashboardState();
 }
 
 class _TDashboardState extends State<TDashboard> {
-  final PageController _pageController = PageController(
+  PageController _pageController = PageController(
     initialPage: 0,
   );
   int pageIndex = 0;
+
+  @override
+  void initState() {
+    if (widget.tabindex != null) {
+      _pageController = PageController(initialPage: widget.tabindex!);
+      pageIndex = widget.tabindex!;
+    } else {}
+    super.initState();
+  }
 
   @override
   void dispose() {
@@ -174,7 +185,9 @@ class _TDashboardState extends State<TDashboard> {
         children: <Widget>[
           THomeScreen(),
           TProfileDashBoard(),
-          TPostsDashBoard(),
+          TPostsDashBoard(
+            postIndex: widget.postIndex,
+          ),
           TStudentScreen(),
           TMessageDashboard()
         ],
@@ -182,124 +195,6 @@ class _TDashboardState extends State<TDashboard> {
     );
   }
 
-  // Padding Bottombar() {
-  //   return Padding(
-  //     padding: const EdgeInsets.all(20),
-  //     child: Material(
-  //       elevation: 10,
-  //       borderRadius: BorderRadius.circular(131),
-  //       color: Colors.white,
-  //       child: Container(
-  //         height: 64,
-  //         width: 382,
-  //         child: ListView.builder(
-  //             scrollDirection: Axis.horizontal,
-  //             physics: NeverScrollableScrollPhysics(),
-  //             itemCount: imagedata.length,
-  //             itemBuilder: (ctx, i) {
-  //               return GestureDetector(
-  //                 onTap: () {
-  //                   setState(() {
-  //                     selectedIndex = i;
-  //                   });
-  //                 },
-  //                 child: Container(
-  //                   height: 62,
-  //                   width: 68,
-  //                   child: Row(
-  //                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-  //                     children: [
-  //                       Column(
-  //                         mainAxisAlignment: MainAxisAlignment.center,
-  //                         children: [
-  //                           Image.asset(
-  //                             imagedata[i],
-  //                             height: 24,
-  //                             width: 24,
-  //                             color: i == selectedIndex
-  //                                 ? Color(0xffB7A4B2)
-  //                                 : Color(0xffB7A4B2),
-  //                           ),
-  //                           Text(
-  //                             txt[i],
-  //                             style: TextStyle(
-  //                               fontSize: 12,
-  //                               fontWeight: FontWeight.w400,
-  //                               color: i == selectedIndex
-  //                                   ? Color(0xffB7A4B2)
-  //                                   : Color(0xffB7A4B2),
-  //                             ),
-  //                           )
-  //                         ],
-  //                       ),
-  //                     ],
-  //                   ),
-  //                 ),
-  //               );
-  //             }),
-  //       ),
-  //     ),
-  //   );
-  // }
-
-  // Container buildBottomNavigationBar(BuildContext context) {
-  //   return Container(
-  //     height: 64,
-  //     width: 382,
-  //     margin: EdgeInsets.all(20),
-  //     decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
-  //     child: BottomNavigationBar(
-  //       selectedLabelStyle: ,
-  //       selectedItemColor: ThemeColor.primarycolor,
-  //       unselectedItemColor: ThemeColor.primarycolor,
-  //       currentIndex: currentIndex,
-  //       onTap: (value) {
-  //         currentIndex = value;
-  //         _pageController.animateToPage(
-  //           value,
-  //           duration: Duration(milliseconds: 200),
-  //           curve: Curves.linear,
-  //         );
-  //
-  //         setState(() {});
-  //       },
-  //       items: [
-  //         BottomNavigationBarItem(
-  //           icon: ImageIcon(
-  //             AssetImage(
-  //               "assets/images/iconhome.png",
-  //             ),
-  //           ),
-  //           label: "First",
-  //         ),
-  //         BottomNavigationBarItem(
-  //           icon: ImageIcon(
-  //             AssetImage("assets/images/iconprofile2.png"),
-  //           ),
-  //           label: "Second",
-  //         ),
-  //         BottomNavigationBarItem(
-  //           icon: ImageIcon(
-  //             AssetImage("assets/images/Postsicon.png"),
-  //           ),
-  //           label: "Third",
-  //         ),
-  //         BottomNavigationBarItem(
-  //           icon: ImageIcon(
-  //             AssetImage("assets/images/notificationicon.png"),
-  //           ),
-  //           label: "Third",
-  //         ),
-  //         BottomNavigationBarItem(
-  //           icon: ImageIcon(
-  //             AssetImage("assets/images/messageicon.png"),
-  //           ),
-  //           label: "Third",
-  //         ),
-  //       ],
-  //     ),
-  //   );
-  // }
   Container buildMyNavBar(BuildContext context) {
     return Container(
       margin: EdgeInsets.all(20),
@@ -471,120 +366,8 @@ class _TDashboardState extends State<TDashboard> {
               ),
             ),
           ),
-
-          // IconButton(
-          //     // enableFeedback: false,
-          //     onPressed: () {
-          //       setState(() {
-          //         pageIndex = 0;
-          //       });
-          //     },
-          //     icon: pageIndex == 0
-          //         ? const ImageIcon(
-          //             AssetImage("assets/images/Galleryfill.png"),
-          //             color: Color(0xffB7A4B2),
-          //             size: 35,
-          //           )
-          //         : const ImageIcon(
-          //             AssetImage("assets/images/galleryicon.png"),
-          //             color: Color(0xffB7A4B2),
-          //             size: 35,
-          //           )),
-          // IconButt on(
-          //     // enableFeedback: false,
-          //     onPressed: () {
-          //       setState(() {
-          //         pageIndex = 1;
-          //       });
-          //     },
-          //     icon: pageIndex == 1
-          //         ? const ImageIcon(
-          //             AssetImage("assets/images/Galleryfill.png"),
-          //             color: Color(0xff8267AC),
-          //             size: 35,
-          //           )
-          //         : const ImageIcon(
-          //             AssetImage("assets/images/galleryicon.png"),
-          //             color: Color(0xffB7A4B2),
-          //             size: 35,
-          //           )),
-          // IconButton(
-          //     // enableFeedback: false,
-          //     onPressed: () {
-          //       setState(() {
-          //         pageIndex = 2;
-          //       });
-          //     },
-          //     icon: pageIndex == 2
-          //         ? const ImageIcon(
-          //             AssetImage("assets/images/Galleryfill.png"),
-          //             color: Color(0xff8267AC),
-          //             size: 35,
-          //           )
-          //         : const ImageIcon(
-          //             AssetImage("assets/images/galleryicon.png"),
-          //             color: Color(0xffB7A4B2),
-          //             size: 35,
-          //           )),
-          // IconButton(
-          //     // enableFeedback: false,
-          //     onPressed: () {
-          //       setState(() {
-          //         pageIndex = 3;
-          //       });
-          //     },
-          //     icon: pageIndex == 3
-          //         ? const ImageIcon(
-          //             AssetImage("assets/images/Galleryfill.png"),
-          //             color: Color(0xff8267AC),
-          //             size: 35,
-          //           )
-          //         : const ImageIcon(
-          //             AssetImage("assets/images/galleryicon.png"),
-          //             color: Color(0xffB7A4B2),
-          //             size: 35,
-          //           )),
-          // IconButton(
-          //     // enableFeedback: false,
-          //     onPressed: () {
-          //       setState(() {
-          //         pageIndex = 4;
-          //       });
-          //     },
-          //     icon: pageIndex == 4
-          //         ? const ImageIcon(
-          //             AssetImage("assets/images/Galleryfill.png"),
-          //             color: Color(0xffB7A4B2),
-          //             size: 35,
-          //           )
-          //         : const ImageIcon(
-          //             AssetImage("assets/images/galleryicon.png"),
-          //             color: Colors.white,
-          //             size: 35,
-          //           )),
         ],
       ),
     );
   }
 }
-// bottomNavigationBar: FloatingNavbar(
-//   backgroundColor: Colors.white,
-//   unselectedItemColor: Colors.red,
-//   selectedItemColor: Colors.purple,
-//   currentIndex: currentIndex,
-//   onTap: (value) {
-//     currentIndex = value;
-//     _pageController.animateToPage(
-//       value,
-//       duration: Duration(milliseconds: 200),
-//       curve: Curves.linear,
-//     );
-//     setState(() {});
-//   },
-//   items: [
-//     FloatingNavbarItem( icon: ImageIcon(AssetImage("assets/images/iconhome.png")), title: 'Home'),
-//     FloatingNavbarItem(icon: Icons.explore, title: 'Explore'),
-//     FloatingNavbarItem(icon: Icons.chat_bubble_outline, title: 'Chats'),
-//     FloatingNavbarItem(icon: Icons.settings, title: 'Settings'),
-//   ],
-// ),

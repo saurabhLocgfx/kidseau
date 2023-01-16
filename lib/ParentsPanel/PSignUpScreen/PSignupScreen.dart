@@ -76,25 +76,19 @@ class _PSignupScreenState extends State<PSignupScreen> {
                             SizedBox(height: 10),
                             Text("New Account",
                                 style: FontConstant.k24w500brownText),
-                            GestureDetector(
-                              onTap: () {
-                                /*Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => PSignupScreen()));*/
-                              },
-                              child: Text(
-                                "Create a new account to track your kids’ activities.",
-                                style: FontConstant.k16w400B7A4Text
-                                    .copyWith(fontSize: 15),
-                                textAlign: TextAlign.start,
-                              ),
+                            Text(
+                              "Create a new account to track your kids’ activities.",
+                              style: FontConstant.k16w400B7A4Text
+                                  .copyWith(fontSize: 15),
+                              textAlign: TextAlign.start,
                             ),
                             SizedBox(height: 24),
                             Text("Email/Phone number",
                                 style: FontConstant.k16w500331FText),
                             SizedBox(height: 6),
                             Container(
-                              height: 56,
-                              width: 382.w,
+                              // height: 56,
+                              width: 1.sw,
                               child: TextFormField(
                                 validator: (mobileText) {
                                   if (mobileText == null ||
@@ -107,14 +101,9 @@ class _PSignupScreenState extends State<PSignupScreen> {
                                 style: FontConstant.k18w5008471Text,
                                 decoration: InputDecoration(
                                   contentPadding: EdgeInsets.all(14.0),
-                                  enabledBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(30.0)),
-                                      borderSide: BorderSide(
-                                          color: Colors.white, width: 1.0)),
-                                  disabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color: Colors.white, width: 1.0),
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(30),
+                                    borderSide: BorderSide.none,
                                   ),
                                   focusedBorder: OutlineInputBorder(
                                     borderRadius:
@@ -123,7 +112,8 @@ class _PSignupScreenState extends State<PSignupScreen> {
                                         color: Color(0xffBE74AA), width: 1.0),
                                   ),
                                   isDense: true,
-                                  hintText: "Enter Email/Phone number ",
+                                  hintText:
+                                      "Enter your email/phone number".tr(),
                                   filled: true,
                                   fillColor: Colors.white,
                                   hintStyle: FontConstant.k14w400lightText
@@ -142,28 +132,25 @@ class _PSignupScreenState extends State<PSignupScreen> {
                               "Note: The email/phone number belongs to Father by default",
                               style: FontConstant.k14w400B7A4Text,
                             ),
-                            Row(
-                              children: [
-                                Checkbox(
-                                  checkColor: Colors.white,
-                                  value: isChecked,
-                                  shape: RoundedRectangleBorder(),
-                                  onChanged: (bool? value) {
-                                    setState(() {
-                                      isChecked = value!;
-                                      if (value == true) {
-                                        parent = 'Mother';
-                                      } else {
-                                        parent = 'Father';
-                                      }
-                                    });
-                                  },
-                                ),
-                                Text(
-                                  'This email/phone number belongs to\n Mother',
-                                  style: FontConstant.k16w4008471Text,
-                                )
-                              ],
+                            CheckboxListTile(
+                              contentPadding: EdgeInsets.only(left: 0),
+                              controlAffinity: ListTileControlAffinity.leading,
+                              checkColor: Colors.white,
+                              value: isChecked,
+                              onChanged: (val) {
+                                setState(() {
+                                  isChecked = val!;
+                                  if (val == true) {
+                                    parent = 'Mother';
+                                  } else {
+                                    parent = 'Father';
+                                  }
+                                });
+                              },
+                              title: Text(
+                                'This email/phone number belongs to Mother',
+                                style: FontConstant.k16w4008471Text,
+                              ),
                             ),
                             SizedBox(height: 32),
                             SizedBox(
@@ -186,7 +173,11 @@ class _PSignupScreenState extends State<PSignupScreen> {
                                           Navigator.of(context).push(
                                               MaterialPageRoute(
                                                   builder: (context) =>
-                                                      PSignupOtpVerification()));
+                                                      PSignupOtpVerification(
+                                                        signUpField:
+                                                            emailController
+                                                                .text,
+                                                      )));
                                           Fluttertoast.showToast(
                                               msg:
                                                   'Your OTP is ${value['OTP']}');

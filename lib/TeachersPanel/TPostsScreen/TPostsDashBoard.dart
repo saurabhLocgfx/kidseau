@@ -14,7 +14,8 @@ import '../../restartappwidget/restartwidgets.dart';
 import 'TAddPostsScreen.dart';
 
 class TPostsDashBoard extends StatefulWidget {
-  const TPostsDashBoard({Key? key}) : super(key: key);
+  final int? postIndex;
+  const TPostsDashBoard({Key? key, this.postIndex = 0}) : super(key: key);
 
   @override
   State<TPostsDashBoard> createState() => _TPostsDashBoardState();
@@ -23,7 +24,7 @@ class TPostsDashBoard extends StatefulWidget {
 class _TPostsDashBoardState extends State<TPostsDashBoard> {
   int selectedIndex = 0;
 
-  final controller = PageController(initialPage: 1);
+  PageController controller = PageController(initialPage: 1);
   bool colorChange = false;
   @override
   void dispose() {
@@ -31,7 +32,16 @@ class _TPostsDashBoardState extends State<TPostsDashBoard> {
     super.dispose();
   }
 
-  final PageController _pageController = PageController(
+  @override
+  void initState() {
+    if (widget.postIndex != null) {
+      _pageController = PageController(initialPage: widget.postIndex!);
+      pageIndex = widget.postIndex!;
+    } else {}
+    super.initState();
+  }
+
+  PageController _pageController = PageController(
     initialPage: 0,
   );
   int pageIndex = 0;

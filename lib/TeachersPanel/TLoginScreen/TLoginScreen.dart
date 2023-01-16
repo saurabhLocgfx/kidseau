@@ -21,18 +21,14 @@ class TLoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      /*height: 896.h,
-      width: 414.w,*/
       child: Scaffold(
         backgroundColor: Color(0xfff7f6fa),
         body: SingleChildScrollView(
           child: SizedBox(
-            // height: 1.sh,
             child: Form(
               key: _formKey,
               child: Column(
                 mainAxisSize: MainAxisSize.min,
-                //crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Container(
                     height: 1.sh,
@@ -53,10 +49,7 @@ class TLoginScreen extends StatelessWidget {
                           padding:
                               EdgeInsets.only(top: 180.h, left: 16, right: 16),
                           child: Column(
-                            //crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              //SizedBox.shrink(),
-                              //Spacer(),
                               Image.asset(
                                 "assets/images/logo.png",
                                 height: 172.h,
@@ -65,10 +58,6 @@ class TLoginScreen extends StatelessWidget {
                               Text(
                                 'We offer a new way to mark the children and shape them for better future.'
                                     .tr(),
-                                /*AppLoaclizations.of(context)!
-                                    .translate(
-                                        'We offer a new way to mark the children and shape them for better future.')
-                                    .toString(),*/
                                 style: FontConstant.k16w4008471Text,
                                 textAlign: TextAlign.center,
                               ),
@@ -83,23 +72,12 @@ class TLoginScreen extends StatelessWidget {
                             children: [
                               //  SizedBox(height: 10),
                               Text("Account".tr(),
-                                  /*AppLoaclizations.of(context)!
-                                      .translate("Account")
-                                      .toString(),*/
                                   style: FontConstant.k24w500brownText),
                               GestureDetector(
-                                onTap: () {
-                                  /* Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => TSignupScreen()));*/
-                                },
+                                onTap: () {},
                                 child: Text(
                                   "Login/create a new account to track your kids’ activities."
                                       .tr(),
-
-                                  /*AppLoaclizations.of(context)!
-                                      .translate(
-                                          "Login/create a new account to track your kids’ activities.")
-                                      .toString(),*/
                                   style: FontConstant.k16w400B7A4Text
                                       .copyWith(fontSize: 15),
                                   textAlign: TextAlign.start,
@@ -107,9 +85,6 @@ class TLoginScreen extends StatelessWidget {
                               ),
                               SizedBox(height: 24),
                               Text("Email/Phone number".tr(),
-                                  /* AppLoaclizations.of(context)!
-                                      .translate("Email/Phone number")
-                                      .toString(),*/
                                   style: FontConstant.k16w500331FText),
                               SizedBox(height: 6),
                               TextFormField(
@@ -137,10 +112,6 @@ class TLoginScreen extends StatelessWidget {
                                   isDense: true,
                                   hintText:
                                       "Enter your email/phone number".tr(),
-                                  /*AppLoaclizations.of(context)!
-                                      .translate(
-                                          "Enter your email/phone number")
-                                      .toString(),*/
                                   filled: true,
                                   fillColor: Colors.white,
                                   hintStyle: FontConstant.k14w400lightText
@@ -179,7 +150,6 @@ class TLoginScreen extends StatelessWidget {
                                                     } else {
                                                       isEmail = false;
                                                     }
-
                                                     print(isEmail);
                                                     mobileText =
                                                         controller.text;
@@ -200,12 +170,8 @@ class TLoginScreen extends StatelessWidget {
                                                 });
                                                 print(controller.text);
                                               }
-                                              /* */
                                             },
                                             title: "Login with OTP".tr(),
-                                            /*AppLoaclizations.of(context)!
-                                                .translate("Login with OTP")
-                                                .toString(),*/
                                             textStyleColor: Colors.white,
                                             backgroundColor:
                                                 ThemeColor.primarycolor),
@@ -217,43 +183,26 @@ class TLoginScreen extends StatelessWidget {
                               SizedBox(height: 40.h),
                               Center(
                                 child: RichText(
-                                    text: TextSpan(children: [
-                                  TextSpan(
-                                    text: ("By proceeding you agree to our "),
-                                    style: FontConstant.k14w400B7A4Text,
-                                  ),
-                                  TextSpan(
-                                    text: ("Privacy Policy"),
-                                    style: FontConstant.k14w500B7A4TextU,
-                                  ),
-                                  TextSpan(
-                                    text: " & ",
-                                    style: FontConstant.k14w400B7A4Text,
-                                  ),
-                                  TextSpan(
-                                    text: ("Terms and Conditions"),
-                                    style: FontConstant.k14w500B7A4TextU,
-                                  ),
-                                ])),
+                                  text: TextSpan(children: [
+                                    TextSpan(
+                                      text: ("By proceeding you agree to our "),
+                                      style: FontConstant.k14w400B7A4Text,
+                                    ),
+                                    TextSpan(
+                                      text: ("Privacy Policy"),
+                                      style: FontConstant.k14w500B7A4TextU,
+                                    ),
+                                    TextSpan(
+                                      text: " & ",
+                                      style: FontConstant.k14w400B7A4Text,
+                                    ),
+                                    TextSpan(
+                                      text: ("Terms and Conditions"),
+                                      style: FontConstant.k14w500B7A4TextU,
+                                    ),
+                                  ]),
+                                ),
                               ),
-                              /*Row(
-                  children: [
-                  Text(
-                    "By proceeding you agree to our ",
-                    style: FontConstant.k14w500B7A4Text,
-                    textAlign: TextAlign.start,
-                  ),
-                  Text(
-                    "Privacy Policy & ",
-                    style: FontConstant.k14w500B7A4Text,
-                    textAlign: TextAlign.start,
-                  ),Text(
-                    "Terms and Conditions",
-                    style: FontConstant.k14w500B7A4Text,
-                    textAlign: TextAlign.start,
-                  ),
-                  ],
-                  ),*/
                               SizedBox(height: 13.h),
                             ],
                           ),

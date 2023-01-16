@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:kidseau/TeachersPanel/TDashboard.dart';
 import 'package:kidseau/TeachersPanel/TNotificationScreen/TNotificationsbody.dart';
 import 'package:kidseau/Theme.dart';
 import 'package:kidseau/Widgets/widgets.dart';
@@ -132,8 +133,14 @@ class _TNotificationScreenState extends State<TNotificationScreen> {
             SizedBox(height: 16),
             InkWell(
               onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => TPostsScreen()));
+                Navigator.of(context).pop();
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => TDashboard(
+                              tabindex: 2,
+                              postIndex: 1,
+                            )));
               },
               child: Container(
                 //height: 99,

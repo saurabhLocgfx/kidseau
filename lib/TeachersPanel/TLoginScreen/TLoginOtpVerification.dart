@@ -1,4 +1,7 @@
+import 'dart:developer';
+
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -10,6 +13,7 @@ import 'package:kidseau/Widgets/buttons.dart';
 import 'package:kidseau/api/Teacherpanelapi/teacher_login_apis/teacher_otp_check.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
+import '../../api/Teacherpanelapi/teacher_login_apis/teacher_login_api.dart';
 import '../TSignupScreen/TSignupCode.dart';
 
 class TLoginOtpVerification extends StatefulWidget {
@@ -94,6 +98,22 @@ class _TLoginOtpVerificationState extends State<TLoginOtpVerification> {
                                     .copyWith(fontSize: 15),
                               ),
                               TextSpan(
+                                recognizer: TapGestureRecognizer()
+                                  ..onTap = () {
+                                    //log('');
+                                    final resp = TeacherLogin()
+                                        .get(email: widget.mobileText);
+                                    resp.then((value) {
+                                      print(value);
+                                      if (value['status'] == 0) {
+                                        Fluttertoast.showToast(
+                                            msg: value['msg']);
+                                      } else {
+                                        Fluttertoast.showToast(
+                                            msg: 'Your OTP is ${value['OTP']}');
+                                      }
+                                    });
+                                  },
                                 text: "  Resend",
                                 style: FontConstant.k16w4008471Text,
                               ),
@@ -112,7 +132,6 @@ class _TLoginOtpVerificationState extends State<TLoginOtpVerification> {
                         Text("Resend", style: FontConstant.k16w4008471Text),
                       ],
                     ),*/
-
                             SizedBox(height: 43),
                             PinCodeTextField(
                               validator: (pinText) {

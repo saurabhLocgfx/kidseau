@@ -11,7 +11,9 @@ import '../../api/parent_signup_apis/parent_signup_otp_api.dart';
 import 'PSignupCodeScreen.dart';
 
 class PSignupOtpVerification extends StatefulWidget {
-  const PSignupOtpVerification({Key? key}) : super(key: key);
+  final String signUpField;
+  const PSignupOtpVerification({Key? key, required this.signUpField})
+      : super(key: key);
 
   @override
   State<PSignupOtpVerification> createState() => _PSignupOtpVerificationState();
@@ -90,7 +92,7 @@ class _PSignupOtpVerificationState extends State<PSignupOtpVerification> {
                         Text("OTP verification",
                             style: FontConstant.k24w500brownText),
                         Text(
-                          "A OTP has been sent to “9876543210”. Please enter the OTP here.",
+                          "A OTP has been sent to “${widget.signUpField}”. Please enter the OTP here.",
                           style: FontConstant.k16w400B7A4Text
                               .copyWith(fontSize: 15),
                           textAlign: TextAlign.start,

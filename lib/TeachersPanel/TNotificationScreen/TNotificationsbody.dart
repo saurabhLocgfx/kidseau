@@ -1,7 +1,10 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kidseau/TeachersPanel/TNotificationScreen/TNotificationScreen.dart';
 import 'package:kidseau/Theme.dart';
+
+import '../TReminder/TReminderScreen.dart';
 
 class Tnotificationlist2 extends StatelessWidget {
   const Tnotificationlist2({
@@ -168,12 +171,12 @@ Future<dynamic> Tnotificationdialog(BuildContext context) {
       context: context,
       builder: (BuildContext context) {
         return Dialog(
-          insetPadding: EdgeInsets.all(0),
+          insetPadding: EdgeInsets.symmetric(horizontal: 30),
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(20.0)), //this right here
           child: Container(
             height: 290,
-            width: 382,
+            width: 1.sw,
             child: Padding(
               padding: const EdgeInsets.all(12.0),
               child: Column(
@@ -223,7 +226,14 @@ Future<dynamic> Tnotificationdialog(BuildContext context) {
                           //width: 170,
                           child: MaterialButton(
                             elevation: 0,
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (_) => TReminderScreen(),
+                                ),
+                              );
+                            },
                             color: ThemeColor.primarycolor,
                             shape: RoundedRectangleBorder(
                                 side: BorderSide(
@@ -231,6 +241,7 @@ Future<dynamic> Tnotificationdialog(BuildContext context) {
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(94))),
                             child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Image.asset(
                                   "assets/images/clockicon.png",
