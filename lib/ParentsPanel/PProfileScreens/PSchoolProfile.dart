@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:ui';
 
 import 'package:easy_localization/easy_localization.dart';
@@ -34,16 +35,18 @@ class _PSchoolProfileState extends State<PSchoolProfile> {
   bool _isLoading = false;
 
   TeacherSchoolProfileDetailsModel model = TeacherSchoolProfileDetailsModel();
-  _getData(){
+
+  _getData() {
     _isLoading = true;
     final resp = TeacherSchoolProfileApi().get();
-    resp.then((value){
-      try{
+    resp.then((value) {
+      log(value.toString());
+      try {
         setState(() {
           model = TeacherSchoolProfileDetailsModel.fromJson(value);
           _isLoading = false;
         });
-      }catch(e){
+      } catch (e) {
         print('Teacher School profile $value');
         setState(() {
           _isLoading = false;
@@ -128,214 +131,174 @@ class _PSchoolProfileState extends State<PSchoolProfile> {
           ],
         ),
       ),
-      body: _isLoading ? Center(child: CircularProgressIndicator(),) :Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(top: 40),
-              child: Row(
+      body: _isLoading
+          ? Center(
+              child: CircularProgressIndicator(),
+            )
+          : Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Container(
-                    height: 128,
-                    width: 96,
-                    decoration: BoxDecoration(
-                        image: DecorationImage(
-                            image:
-                                AssetImage("assets/images/profileperson.png"))),
-                  ),
-                  SizedBox(width: 16),
-                  Align(
-                    alignment: Alignment.center,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
+                  Padding(
+                    padding: const EdgeInsets.only(top: 40),
+                    child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          model.schoolName.toString(),
-                          style: FontConstant.k24w500brownText,
-                        ),
-                        Row(
-                          children: [
-                            Image.asset(
-                              "assets/images/clockicon.png",
-                              height: 24,
-                            ),
-                            SizedBox(width: 10),
-                            Text('${DateFormat.jm().format(DateFormat("hh:mm:ss").parse(model.schoolTime!.split('To').first.toString()))} to ${DateFormat.jm().format(DateFormat("hh:mm:ss").parse(model.schoolTime!.split('To').last.toString()))}',
-                                style: FontConstant.k16w5008471Text),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(height: 15),
-            Text(
-              "Reception Info".tr(),
-              /*AppLoaclizations.of(context)!
-                  .translate("Reception Info")
-                  .toString(),*/
-              style: FontConstant2.k22w5008471text,
-            ),
-            SizedBox(height: 6),
-            Row(children: [
-              SizedBox(
-                width: 150,
-                child: Text(
-                  "Email id".tr(),
-                  style: FontConstant.k16w500331FText,
-                ),
-              ),
-              SizedBox(
-                width: 24,
-              ),
-              Text(
-                model.schoolEmail.toString(),
-                style: FontConstant.k16w5008471Text,
-              )
-            ]),
-            SizedBox(
-              height: 16,
-            ),
-            Row(children: [
-              SizedBox(
-                width: 150,
-                child: Text(
-                  "Phone number".tr(),
-                  style: FontConstant.k16w500331FText,
-                ),
-              ),
-              SizedBox(
-                width: 24,
-              ),
-              Text(
-                model.schoolPhone.toString(),
-                style: FontConstant.k16w5008471Text,
-              )
-            ]),
-            SizedBox(
-              height: 16,
-            ),
-            Row(children: [
-              SizedBox(
-                width: 150,
-                child: Text(
-                  "Address".tr(),
-                  style: FontConstant.k16w500331FText,
-                ),
-              ),
-              SizedBox(
-                width: 24,
-              ),
-              Expanded(
-                child: Text(
-                  model.schoolAddress.toString(),
-                  style: FontConstant.k16w5008471Text,
-                ),
-              )
-            ]),
-            /*Container(
-              height: 180,
-              child: ListView.builder(
-                  physics: NeverScrollableScrollPhysics(),
-                  padding: EdgeInsets.zero,
-                  itemCount: receptioninfo.length,
-                  shrinkWrap: true,
-                  itemBuilder: (BuildContext context, int index) {
-                    return Row(
-                      children: [
                         Container(
-                          width: 104,
-                          height: 70,
+                          height: 128,
+                          width: 96,
+                          decoration: BoxDecoration(
+                              image: DecorationImage(
+                                  image: AssetImage(
+                                      "assets/images/profileperson.png"))),
+                        ),
+                        SizedBox(width: 16),
+                        Align(
+                          alignment: Alignment.center,
                           child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(vertical: 4.0),
-                                child: Text(
-                                  receptioninfo[index],
-                                  style: FontConstant.k16w500331FText,
-                                ),
+                              Text(
+                                model.schoolName.toString(),
+                                style: FontConstant.k24w500brownText,
+                              ),
+                              Row(
+                                children: [
+                                  Image.asset(
+                                    "assets/images/clockicon.png",
+                                    height: 24,
+                                  ),
+                                  SizedBox(width: 10),
+                                  Text(
+                                      '${DateFormat.jm().format(DateFormat("hh:mm:ss").parse(model.schoolTime!.split('To').first.toString()))} to ${DateFormat.jm().format(DateFormat("hh:mm:ss").parse(model.schoolTime!.split('To').last.toString()))}',
+                                      style: FontConstant.k16w5008471Text),
+                                ],
                               ),
                             ],
                           ),
                         ),
-                        SizedBox(width: 16),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              receptioninfodata[index],
-                              style: FontConstant.k16w5008471Text,
-                            )
-                          ],
-                        ),
                       ],
-                    );
-                  }),
-            ),*/
-            SizedBox(height: 20),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                InkWell(
-                  onTap: (){},
-                  child: CircleAvatar(
-                      radius: 24,
-                      backgroundImage: AssetImage(
-                        "assets/images/facebookicon.png",
-                      )),
-                ),
-                InkWell(
-                  onTap: (){},
-                  child: CircleAvatar(
-                      radius: 24,
-                      backgroundImage: AssetImage(
-                        "assets/images/Twittericon.png",
-                      )),
-                ),
-                InkWell(
-                  onTap: (){},
-                  child: CircleAvatar(
-                      radius: 24,
-                      backgroundImage: AssetImage(
-                        "assets/images/linkedicon.png",
-                      )),
-                ),
-                InkWell(
-                  onTap: (){},
-                  child: CircleAvatar(
-                      radius: 24,
-                      backgroundImage: AssetImage(
-                        "assets/images/instagramicon.png",
-                      )),
-                ),
-              ],
+                    ),
+                  ),
+                  SizedBox(height: 15),
+                  Text(
+                    "Reception Info".tr(),
+                    style: FontConstant2.k22w5008471text,
+                  ),
+                  SizedBox(height: 6),
+                  Row(children: [
+                    SizedBox(
+                      width: 150,
+                      child: Text(
+                        "Email id".tr(),
+                        style: FontConstant.k16w500331FText,
+                      ),
+                    ),
+                    SizedBox(
+                      width: 24,
+                    ),
+                    Text(
+                      model.schoolEmail.toString(),
+                      style: FontConstant.k16w5008471Text,
+                    )
+                  ]),
+                  SizedBox(
+                    height: 16,
+                  ),
+                  Row(children: [
+                    SizedBox(
+                      width: 150,
+                      child: Text(
+                        "Phone number".tr(),
+                        style: FontConstant.k16w500331FText,
+                      ),
+                    ),
+                    SizedBox(
+                      width: 24,
+                    ),
+                    Text(
+                      model.schoolPhone.toString(),
+                      style: FontConstant.k16w5008471Text,
+                    )
+                  ]),
+                  SizedBox(
+                    height: 16,
+                  ),
+                  Row(children: [
+                    SizedBox(
+                      width: 150,
+                      child: Text(
+                        "Address".tr(),
+                        style: FontConstant.k16w500331FText,
+                      ),
+                    ),
+                    SizedBox(
+                      width: 24,
+                    ),
+                    Expanded(
+                      child: Text(
+                        model.schoolAddress.toString(),
+                        style: FontConstant.k16w5008471Text,
+                      ),
+                    )
+                  ]),
+                  SizedBox(height: 20),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      InkWell(
+                        onTap: () {},
+                        child: CircleAvatar(
+                            radius: 24,
+                            backgroundImage: AssetImage(
+                              "assets/images/facebookicon.png",
+                            )),
+                      ),
+                      InkWell(
+                        onTap: () {},
+                        child: CircleAvatar(
+                            radius: 24,
+                            backgroundImage: AssetImage(
+                              "assets/images/Twittericon.png",
+                            )),
+                      ),
+                      InkWell(
+                        onTap: () {},
+                        child: CircleAvatar(
+                            radius: 24,
+                            backgroundImage: AssetImage(
+                              "assets/images/linkedicon.png",
+                            )),
+                      ),
+                      InkWell(
+                        onTap: () {},
+                        child: CircleAvatar(
+                            radius: 24,
+                            backgroundImage: AssetImage(
+                              "assets/images/instagramicon.png",
+                            )),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 32),
+                  TeacherCard(
+                    model: model,
+                  ),
+                  SizedBox(height: 68),
+                  SizedBox(
+                    height: 52.h,
+                    width: 382.w,
+                    child: MainButton(
+                        onTap: () {},
+                        title: "Locate us".tr(),
+                        textStyleColor: Colors.white,
+                        backgroundColor: ThemeColor.primarycolor),
+                  ),
+                ],
+              ),
             ),
-            SizedBox(height: 32),
-            TeacherCard(model: model,),
-            SizedBox(height: 68),
-            SizedBox(
-              height: 52.h,
-              width: 382.w,
-              child: MainButton(
-                  onTap: () {},
-                  title: "Locate us".tr(),
-                  /* AppLoaclizations.of(context)!
-                      .translate("Locate us")
-                      .toString(),*/
-                  textStyleColor: Colors.white,
-                  backgroundColor: ThemeColor.primarycolor),
-            ),
-          ],
-        ),
-      ),
     );
   }
 }

@@ -13,7 +13,8 @@ import 'TEditProfile.dart';
 class TParentProfile extends StatefulWidget {
   final TeacherProfileDetailsModel model;
   final Function onPop;
-  const TParentProfile({Key? key, required this.model, required this.onPop}) : super(key: key);
+  const TParentProfile({Key? key, required this.model, required this.onPop})
+      : super(key: key);
 
   @override
   State<TParentProfile> createState() => _TParentProfileState();
@@ -43,7 +44,6 @@ class _TParentProfileState extends State<TParentProfile> {
     //_getData();
     super.initState();
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -96,7 +96,11 @@ class _TParentProfileState extends State<TParentProfile> {
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(16),
                       ),
-                      child: Image.network(widget.model.image.toString(),errorBuilder: (q,w,e)=> Text('Image not loaded'),fit: BoxFit.fitHeight,),
+                      child: Image.network(
+                        widget.model.image.toString(),
+                        errorBuilder: (q, w, e) => Text('Image not loaded'),
+                        fit: BoxFit.fitHeight,
+                      ),
                     ),
                     SizedBox(width: 16),
                     Column(
@@ -104,14 +108,15 @@ class _TParentProfileState extends State<TParentProfile> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                        widget.model.name.toString(),
+                          widget.model.name.toString(),
                           style: FontConstant.k24w500brownText,
                         ),
                         Text(
                           widget.model.education.toString(),
                           style: FontConstant.k16w400B7A4Text,
                         ),
-                        Text(widget.model.phoneNumber.toString(), style: FontConstant.k16w5008471Text),
+                        Text(widget.model.phoneNumber.toString(),
+                            style: FontConstant.k16w5008471Text),
                         Text(widget.model.email.toString(),
                             style: FontConstant.k16w5008471Text),
                       ],
@@ -128,7 +133,9 @@ class _TParentProfileState extends State<TParentProfile> {
                     ),
                   );
                 },
-                child: SchoolCard(model: widget.model,),
+                child: SchoolCard(
+                  model: widget.model,
+                ),
               ),
               Padding(
                 padding:
@@ -349,9 +356,12 @@ class _TParentProfileState extends State<TParentProfile> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (_) => TEditProfileScreen(model: widget.model, onPop: (){
-                              widget.onPop();
-                            },),
+                            builder: (_) => TEditProfileScreen(
+                              model: widget.model,
+                              onPop: () {
+                                widget.onPop();
+                              },
+                            ),
                           ),
                         );
                       },

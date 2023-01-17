@@ -74,7 +74,6 @@ class _TMyPostsState extends State<TMyPosts> {
     _isLoading = true;
     final resp = TeacherMyPostApi().get(scroll: 1);
     resp.then((value) {
-      //log(value.postDetails![0].captions.toString());
       try {
         if (value.status == 1) {
           setState(() {
@@ -87,10 +86,6 @@ class _TMyPostsState extends State<TMyPosts> {
             _isLoading = false;
           });
         }
-        // setState(() {
-        //   _schoolPostModel = value;
-        //   _isLoading = false;
-        // });
       } catch (e) {
         setState(() {
           _isLoading = false;

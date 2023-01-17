@@ -332,7 +332,7 @@ class _THomeScreenState extends State<THomeScreen> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.center,
                                     children: [
-                                      Image.asset(
+                                      Image.network(
                                         _name.schdule![index].actIcon
                                             .toString(),
                                         errorBuilder: (q, w, e) {
@@ -888,9 +888,12 @@ class SchoolCard extends StatelessWidget {
           Container(
             height: 96,
             width: 72,
+            clipBehavior: Clip.hardEdge,
+            decoration: BoxDecoration(borderRadius: BorderRadius.circular(8)),
             child: Image.network(
               model.school!.schoolImage.toString(),
               errorBuilder: (q, w, e) => Text('Image not loaded'),
+              fit: BoxFit.fitHeight,
             ),
           ),
           SizedBox(width: 12),

@@ -57,14 +57,11 @@ class _ActivityState extends State<Activity> {
           itemBuilder: (BuildContext context, int index) {
             return InkWell(
               onTap: () {
-                if (index == 0) {
-                  Get.to(() => PLearningAplphabets());
-                } else if (index == 1) {
-                } else if (index == 2) {
-                } else if (index == 3) {}
+                Get.to(() => PLearningAplphabets());
               },
               child: Container(
-                height: 64.h,
+                //height: 64.h,
+                padding: EdgeInsets.symmetric(vertical: 12),
                 // width: Get.size.width * 0.93,
                 margin: EdgeInsets.symmetric(horizontal: 16),
                 decoration: BoxDecoration(

@@ -25,7 +25,7 @@ class _TSignupCodeState extends State<TSignupCode> {
   Widget build(BuildContext context) {
     return Container(
       height: 896,
-      width: 414,
+      width: 1.sw,
       child: Scaffold(
         backgroundColor: Color(0xfff7f6fa),
         body: SingleChildScrollView(
@@ -36,7 +36,7 @@ class _TSignupCodeState extends State<TSignupCode> {
                 Stack(children: [
                   Container(
                     height: 414,
-                    width: 414,
+                    width: 1.sw,
                     decoration: BoxDecoration(
                       image: DecorationImage(
                         image: AssetImage("assets/images/postsbackground.png"),
@@ -57,9 +57,6 @@ class _TSignupCodeState extends State<TSignupCode> {
                         Text(
                           'We offers a new way to marks the children and shape them for better future.'
                               .tr(),
-                          /* AppLoaclizations.of(context)!
-                              .translate('loginText')
-                              .toString(),*/
                           style: FontConstant.k16w4008471Text,
                           textAlign: TextAlign.center,
                         ),
@@ -77,9 +74,6 @@ class _TSignupCodeState extends State<TSignupCode> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text("Nursery code".tr(),
-                              /*AppLoaclizations.of(context)!
-                                  .translate("Nursery code")
-                                  .toString(),*/
                               style: FontConstant.k24w500brownText),
                           Text(
                             "The school code is provided by director.",
@@ -129,10 +123,6 @@ class _TSignupCodeState extends State<TSignupCode> {
                         ),
                         /*  controller: controller,*/
                       ),
-
-                      /*  AppLoaclizations.of(context)!
-                              .translate("Enter your nursery code")
-                              .toString()),*/
                       SizedBox(height: 24),
                       SizedBox(
                         height: 52,
@@ -187,9 +177,6 @@ class _TSignupCodeState extends State<TSignupCode> {
                                   });*/
                                 },
                                 title: "Continue".tr(),
-                                /* AppLoaclizations.of(context)!
-                                    .translate("Continue")
-                                    .toString(),*/
                                 textStyleColor: Colors.white,
                                 backgroundColor: ThemeColor.primarycolor),
                       ),

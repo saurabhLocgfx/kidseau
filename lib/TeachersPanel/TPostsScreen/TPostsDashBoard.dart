@@ -317,8 +317,8 @@ class _TPostsDashBoardState extends State<TPostsDashBoard> {
                       child: Image.asset(
                           pageIndex == 0
                               ? "assets/images/addFil.png"
-                              : "assets/images/add.png",
-                          height: pageIndex == 0 ? 24 : 40),
+                              : "assets/images/gallery-add.png",
+                          height: pageIndex == 0 ? 24 : 25),
                     ),
                   ),
                   Padding(

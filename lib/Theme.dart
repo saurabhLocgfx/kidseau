@@ -36,6 +36,12 @@ class FontConstant {
       fontWeight: FontWeight.w400, fontSize: 16, color: Colors.white);
   static TextStyle k18w5008471Text = GoogleFonts.balooDa2(
       fontWeight: FontWeight.w500, fontSize: 18, color: Color(0xff84717F));
+  static TextStyle k18w5008471Text2 = GoogleFonts.balooDa2(
+      fontWeight: FontWeight.w500, fontSize: 18, color: Color(0xff331F2D));
+  static TextStyle k18w500Primary = GoogleFonts.balooDa2(
+      fontWeight: FontWeight.w500, fontSize: 18, color: Color(0xff8267AC));
+  static TextStyle k18w500B7A4B2 = GoogleFonts.balooDa2(
+      fontWeight: FontWeight.w500, fontSize: 18, color: Color(0xffB7A4B2));
   static TextStyle k18w500F970Text = GoogleFonts.balooDa2(
       fontWeight: FontWeight.w500, fontSize: 18, color: Color(0xffF97070));
   static TextStyle k18w5008267Text = GoogleFonts.balooDa2(
@@ -107,11 +113,12 @@ class FontConstant {
   );
   static TextStyle k14w5008267AC = GoogleFonts.balooDa2(
       fontWeight: FontWeight.w500, fontSize: 14, color: Color(0xff8267AC));
-
   static TextStyle k18w500materialbuttonText = GoogleFonts.balooDa2(
       fontWeight: FontWeight.w500, fontSize: 18, color: Colors.white);
   static TextStyle k18w500SecondaryMaterialButtonText = GoogleFonts.balooDa2(
-      fontWeight: FontWeight.w500, fontSize: 18, color: ThemeColor.primarycolor);
+      fontWeight: FontWeight.w500,
+      fontSize: 18,
+      color: ThemeColor.primarycolor);
   static TextStyle k18w500BlackText = GoogleFonts.balooDa2(
       fontWeight: FontWeight.w500, fontSize: 18, color: Colors.black);
   static TextStyle k16w500brownText = GoogleFonts.balooDa2(
@@ -126,7 +133,6 @@ class FontConstant {
       fontWeight: FontWeight.w500, fontSize: 22, color: Color(0xff331F2D));
   static TextStyle k24w500brownText = GoogleFonts.balooDa2(
       fontWeight: FontWeight.w500, fontSize: 24, color: Color(0xff331F2D));
-
   static TextStyle k24w50084717FText = GoogleFonts.balooDa2(
       fontWeight: FontWeight.w500, fontSize: 24, color: Color(0xff84717F));
   static TextStyle k16w400greyText = GoogleFonts.balooDa2(
@@ -139,6 +145,8 @@ class FontConstant {
       fontWeight: FontWeight.w400, fontSize: 12, color: Colors.white);
   static TextStyle k18w500B7A4Text = GoogleFonts.balooDa2(
       fontWeight: FontWeight.w500, fontSize: 18, color: Color(0xffB7A4B2));
+  static TextStyle k18w500B7A4Text2 = GoogleFonts.balooDa2(
+      fontWeight: FontWeight.w500, fontSize: 18, color: Color(0xff8267AC));
   static TextStyle k12w4008267Text = GoogleFonts.balooDa2(
       fontWeight: FontWeight.w400, fontSize: 12, color: Color(0xff8267AC));
   static TextStyle k16w400331FText = GoogleFonts.balooDa2(
@@ -201,14 +209,13 @@ class FontConstant2 {
 class TextFieldDecoration {
   InputDecoration curvedWhiteDecoration({
     required String label,
-
     required bool curved,
   }) {
     return InputDecoration(
       fillColor: Colors.white,
       filled: true,
       hintText: label,
-     /*suffix: InkWell(
+      /*suffix: InkWell(
        onTap: (){},
        child: Container(
          //color: Colors.black,
@@ -216,7 +223,8 @@ class TextFieldDecoration {
          child: Text('Verify'),
        ),
      ),*/
-     // isCollapsed: true,
+      // isCollapsed: true,
+      contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
       hintStyle: FontConstant.k16w400B7A4Text,
       enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(curved ? 90 : 24),

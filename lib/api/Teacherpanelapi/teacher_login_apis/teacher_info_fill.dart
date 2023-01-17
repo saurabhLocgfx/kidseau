@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:http/http.dart' as http;
 import 'package:kidseau/shard_prefs/shared_prefs.dart';
@@ -21,6 +22,15 @@ class TeacherInfoFill {
         'POST',
         Uri.parse(
             'https://cerebal.locgfx.com/kidsue/kids/api_teacher_login/teacher_info_fill.php'));
+
+    /*final input = '$language';
+    final removedBrackets = input.substring(1, input.length - 1);
+    final parts = removedBrackets.split(', ');
+
+    var joined = parts.map((part) => "'$part'").join(', ');
+*/
+    //print(joined);
+
     request.fields.addAll({
       'f_name': fname,
       'family_name': familyname,
@@ -35,9 +45,9 @@ class TeacherInfoFill {
               ? 'F'
               : 'O',
       'address': address,
-      'lang': '$language',
+      'lang[]': '$language',
     });
-    print(request.fields);
+    log(request.fields.toString());
     request.headers.addAll(headers);
     http.StreamedResponse response = await request.send();
     //print(await response.stream.bytesToString());

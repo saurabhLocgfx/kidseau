@@ -2,6 +2,8 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:kidseau/Constants/colors.dart';
 import 'package:kidseau/ParentsPanel/PHomeScreen/PHomebody.dart';
 import 'package:kidseau/Theme.dart';
 
@@ -20,6 +22,8 @@ class _TSyllabusState extends State<TSyllabus> {
     "Group D",
     "Group E",
   ];
+
+  String selected = 'Today';
 
   int current = 0;
   @override
@@ -65,63 +69,76 @@ class _TSyllabusState extends State<TSyllabus> {
           ],
         ),
       ),
-      body: Stack(
-        children: [
-          Image.asset(
-            "assets/images/postsbackground.png",
-            height: 414,
-            width: 414,
-          ),
-          Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: Column(
-                children: [
-                  SizedBox(height: 130),
-                  GroupTab(),
-                  SizedBox(height: 15),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      DropdownButton<String>(
-                        icon: Image.asset(
+      body: Container(
+        color: AppColors().k8267AC.withOpacity(0.06),
+        child: Stack(
+          children: [
+            Image.asset(
+              "assets/images/postsbackground.png",
+              height: 414,
+              width: 1.sw,
+              fit: BoxFit.fitWidth,
+            ),
+            Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 0.0),
+                child: Column(
+                  children: [
+                    SizedBox(height: 130),
+                    GroupTab(),
+                    SizedBox(height: 15),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                          width: 150,
+                          child: DropdownButton<String>(
+                            dropdownColor: Colors.white,
+                            isExpanded: true,
+                            icon: Image.asset(
+                              "assets/images/arrowdown.png",
+                              width: 24,
+                              height: 24,
+                              color: Color(0xff84717F),
+                            ),
+                            hint: Text(selected),
+                            items: <String>[
+                              'Today',
+                              'Sunday',
+                              'Monday',
+                              'Tuesday',
+                              'Wednesday',
+                              'Thursday',
+                            ].map((String value) {
+                              return DropdownMenuItem<String>(
+                                value: value,
+                                child: Text(value),
+                              );
+                            }).toList(),
+                            onChanged: (val) {
+                              setState(() {
+                                selected = val!;
+                              });
+                            },
+                          ),
+                        ),
+                        /*Text(
+                          "Today",
+                          style: FontConstant.k18w5008471Text,
+                        ),
+                        Image.asset(
                           "assets/images/arrowdown.png",
                           width: 24,
                           height: 24,
                           color: Color(0xff84717F),
-                        ),
-                        hint: Text('  Today'),
-                        items: <String>[
-                          'Sunday',
-                          'Monday',
-                          'Tuesday',
-                          'Wednesday',
-                          'Thursday',
-                          'Friday'
-                        ].map((String value) {
-                          return DropdownMenuItem<String>(
-                            value: value,
-                            child: Text(value),
-                          );
-                        }).toList(),
-                        onChanged: (_) {},
-                      ),
-                      /*Text(
-                        "Today",
-                        style: FontConstant.k18w5008471Text,
-                      ),
-                      Image.asset(
-                        "assets/images/arrowdown.png",
-                        width: 24,
-                        height: 24,
-                        color: Color(0xff84717F),
-                      )*/
-                    ],
-                  ),
-                  SizedBox(height: 20),
-                  Container(height: 304, child: Activity())
-                ],
-              ))
-        ],
+                        )*/
+                      ],
+                    ),
+                    SizedBox(height: 20),
+                    Activity(),
+                  ],
+                ))
+          ],
+        ),
       ),
     );
   }

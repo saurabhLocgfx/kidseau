@@ -39,16 +39,17 @@ class _TProfileDashBoardState extends State<TProfileDashBoard> {
     _getData();
     super.initState();
   }
+
   TeacherProfileDetailsModel _model = TeacherProfileDetailsModel();
-  _getData(){
+  _getData() {
     _isLoading = true;
     final resp = TeacherProfileApi().get();
-    resp.then((value){
+    resp.then((value) {
       setState(() {
-        try{
+        try {
           _model = TeacherProfileDetailsModel.fromJson(value);
           _isLoading = false;
-        }catch(e){
+        } catch (e) {
           print('Teacher profile detail $value');
           setState(() {
             _isLoading = false;
@@ -100,40 +101,49 @@ class _TProfileDashBoardState extends State<TProfileDashBoard> {
           actions: [TProfilepopup()],
         ),
         backgroundColor: Color(0xffF8F6FA),
-        body: _isLoading?  Center(child: CircularProgressIndicator(),) :SingleChildScrollView(
-          child: Container(
-            decoration: BoxDecoration(
-                image: DecorationImage(
-                    image: AssetImage(
-                      "assets/images/Group8270.png",
+        body: _isLoading
+            ? Center(
+                child: CircularProgressIndicator(),
+              )
+            : SingleChildScrollView(
+                child: Container(
+                  decoration: BoxDecoration(
+                      image: DecorationImage(
+                          image: AssetImage(
+                            "assets/images/Group8270.png",
+                          ),
+                          fit: BoxFit.cover)),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: [
+                          Color(0xffF8F6FA).withOpacity(0.7),
+                          Color(0xffF8F6FA),
+                          Color(0xffF8F6FA)
+                        ],
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        stops: [0.3, 0.6, 0.9],
+                      ),
                     ),
-                    fit: BoxFit.cover)),
-            child: Container(
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [
-                    Color(0xffF8F6FA).withOpacity(0.7),
-                    Color(0xffF8F6FA),
-                    Color(0xffF8F6FA)
-                  ],
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  stops: [0.3, 0.6, 0.9],
-                ),
-              ),
-              child: Column(
-                children: [
-                  /*Column(
+                    child: Column(
+                      children: [
+                        /*Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [SizedBox(height: 40), pageViewTabProfile()],
               ),
               SizedBox(height: 24.h),*/
-                  TParentProfile(model: _model,onPop: (){_getData();},),
-                ],
+                        TParentProfile(
+                          model: _model,
+                          onPop: () {
+                            _getData();
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
               ),
-            ),
-          ),
-        ),
       ),
     );
   }
