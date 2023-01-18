@@ -23,6 +23,8 @@ class _TStudentScreenState extends State<TStudentScreen> {
   double value = 2;
   bool toggle1 = false;
   bool colorChange = false;
+  String selected = 'Activity A';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -214,10 +216,45 @@ class _TStudentScreenState extends State<TStudentScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
+                  SizedBox(
+                    width: 150,
+                    child: DropdownButton<String>(
+                      borderRadius: BorderRadius.circular(8),
+                      elevation: 1,
+                      dropdownColor: Colors.white,
+                      underline: SizedBox.shrink(),
+                      isExpanded: true,
+                      icon: Image.asset(
+                        "assets/images/arrowdown.png",
+                        width: 24,
+                        height: 24,
+                        color: Color(0xff84717F),
+                      ),
+                      hint: Text(
+                        selected,
+                        style: FontConstant2.k24w5008267text,
+                      ),
+                      items: <String>[
+                        'Activity A',
+                        'Activity B',
+                        'Activity C',
+                      ].map((String value) {
+                        return DropdownMenuItem<String>(
+                          value: value,
+                          child: Text(value),
+                        );
+                      }).toList(),
+                      onChanged: (val) {
+                        setState(() {
+                          selected = val!;
+                        });
+                      },
+                    ),
+                  ),
+                  /*Text(
                     "${"Activity".tr()} A",
                     style: FontConstant2.k24w5008267text,
-                  ),
+                  ),*/
                   GestureDetector(
                     onTap: () {
                       showDialog(

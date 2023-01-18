@@ -267,7 +267,14 @@ class _TPostsDashBoardState extends State<TPostsDashBoard> {
                         });
                       },
                       children: <Widget>[
-                        TAddPostsScreen(),
+                        TAddPostsScreen(
+                          onPop: (val) {
+                            setState(() {
+                              pageIndex = val;
+                              _pageController.jumpToPage(val);
+                            });
+                          },
+                        ),
                         TPostsScreen(),
                         TMyPosts(),
                       ],

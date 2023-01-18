@@ -1,5 +1,4 @@
 import 'dart:developer';
-import 'dart:math';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -30,14 +29,17 @@ class _TMyPostsState extends State<TMyPosts> {
     _scrollController.addListener(() {
       if (_scrollController.position.maxScrollExtent ==
           _scrollController.offset) {
-        _getReloadedVal();
+        if (_postCount >= 10) {
+          _getReloadedVal();
+        }
       }
     });
     _getData();
     super.initState();
   }
 
-  int _scroll = 1;
+  int _scroll = 0;
+  int _postCount = 0;
   List<model.PostDetails> _postList = [];
   bool _isLoading = false;
   String reloadedVal = '';
@@ -49,7 +51,10 @@ class _TMyPostsState extends State<TMyPosts> {
       try {
         if (value.status == 1) {
           setState(() {
-            _postList = value.postDetails!;
+            _postCount = value.postDetails!.length;
+            for (var v in value.postDetails!) {
+              _postList.add(v);
+            }
             _isLoading = false;
           });
         } else {
@@ -58,10 +63,6 @@ class _TMyPostsState extends State<TMyPosts> {
             _isLoading = false;
           });
         }
-        // setState(() {
-        //   _schoolPostModel = value;
-        //   _isLoading = false;
-        // });
       } catch (e) {
         setState(() {
           _isLoading = false;
@@ -72,12 +73,13 @@ class _TMyPostsState extends State<TMyPosts> {
 
   _getData() {
     _isLoading = true;
-    final resp = TeacherMyPostApi().get(scroll: 1);
+    final resp = TeacherMyPostApi().get(scroll: 0);
     resp.then((value) {
       try {
         if (value.status == 1) {
           setState(() {
             _postList = value.postDetails!;
+            _postCount = value.postDetails!.length;
             _isLoading = false;
           });
         } else {
@@ -161,123 +163,141 @@ class _TMyPostsState extends State<TMyPosts> {
                                           ),
                                         ),
                                         itemBuilder: (context) {
-                                          return [
+                                          return <PopupMenuItem<Widget>>[
                                             PopupMenuItem(
                                               enabled: false,
-                                              child: Container(
-                                                padding: EdgeInsets.only(
-                                                    left: 16,
-                                                    top: 16,
-                                                    bottom: 16),
-                                                //height: 260,
-                                                child: Column(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.center,
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.center,
-                                                  children: [
-                                                    InkWell(
-                                                      onTap: () {},
-                                                      child: Row(
-                                                        children: [
-                                                          Image.asset(
-                                                            "assets/images/edit.png",
-                                                            height: 24,
-                                                          ),
-                                                          SizedBox(width: 24),
-                                                          Text(
-                                                            "Edit".tr(),
-                                                            style: FontConstant
-                                                                .k18w5008471Text,
-                                                          )
-                                                        ],
+                                              child: InkWell(
+                                                onTap: () {
+                                                  log('Edit');
+                                                  Navigator.of(context).pop();
+                                                },
+                                                child: Container(
+                                                  padding: EdgeInsets.only(
+                                                      left: 16,
+                                                      top: 16,
+                                                      bottom: 16),
+                                                  child: Row(
+                                                    children: [
+                                                      Image.asset(
+                                                        "assets/images/edit.png",
+                                                        height: 24,
                                                       ),
-                                                    ),
-                                                    SizedBox(height: 26),
-                                                    InkWell(
-                                                      onTap: () {},
-                                                      child: Row(
-                                                        children: [
-                                                          Image.asset(
-                                                            "assets/images/eyelogo.png",
-                                                            height: 24,
-                                                          ),
-                                                          SizedBox(width: 24),
-                                                          Text(
-                                                            "Hide".tr(),
-                                                            style: FontConstant
-                                                                .k18w5008471Text,
-                                                          )
-                                                        ],
+                                                      SizedBox(width: 24),
+                                                      Text(
+                                                        "Edit".tr(),
+                                                        style: FontConstant
+                                                            .k18w5008471Text,
+                                                      )
+                                                    ],
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                            PopupMenuItem(
+                                              enabled: false,
+                                              child: InkWell(
+                                                onTap: () {
+                                                  log('Hide');
+                                                  Navigator.of(context).pop();
+                                                },
+                                                child: Container(
+                                                  padding: EdgeInsets.only(
+                                                      left: 16,
+                                                      top: 16,
+                                                      bottom: 16),
+                                                  child: Row(
+                                                    children: [
+                                                      Image.asset(
+                                                        "assets/images/eyelogo.png",
+                                                        height: 24,
                                                       ),
-                                                    ),
-                                                    SizedBox(height: 26),
-                                                    InkWell(
-                                                      onTap: () {},
-                                                      child: Row(
-                                                        children: [
-                                                          Image.asset(
-                                                            "assets/images/downloadicon.png",
-                                                            height: 24,
-                                                          ),
-                                                          SizedBox(width: 24),
-                                                          Text(
-                                                            "Download".tr(),
-                                                            style: FontConstant
-                                                                .k18w5008471Text,
-                                                          )
-                                                        ],
+                                                      SizedBox(width: 24),
+                                                      Text(
+                                                        "Hide".tr(),
+                                                        style: FontConstant
+                                                            .k18w5008471Text,
+                                                      )
+                                                    ],
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                            PopupMenuItem(
+                                              enabled: false,
+                                              child: InkWell(
+                                                onTap: () {
+                                                  log('Download');
+                                                  Navigator.of(context).pop();
+                                                },
+                                                child: Container(
+                                                  padding: EdgeInsets.only(
+                                                      left: 16,
+                                                      top: 16,
+                                                      bottom: 16),
+                                                  child: Row(
+                                                    children: [
+                                                      Image.asset(
+                                                        "assets/images/downloadicon.png",
+                                                        height: 24,
                                                       ),
-                                                    ),
-                                                    SizedBox(height: 26),
-                                                    InkWell(
-                                                      onTap: () {
-                                                        final resp =
-                                                            TeacherDeletePostApi().delete(
-                                                                postId: _postList[
-                                                                        index]
-                                                                    .postId
-                                                                    .toString());
-                                                        resp.then((value) {
-                                                          //TODO: implement delete api
-                                                          if (value['status'] ==
-                                                              1) {
-                                                            _postList.removeAt(
-                                                                index);
-                                                          }
-                                                        });
-                                                      },
-                                                      child: Row(
-                                                        children: [
-                                                          Image.asset(
-                                                            "assets/images/trash.png",
-                                                            height: 24,
-                                                          ),
-                                                          SizedBox(width: 24),
-                                                          Text(
-                                                            "Delete".tr(),
-                                                            style: FontConstant
-                                                                .k18w500F970Text,
-                                                          )
-                                                        ],
+                                                      SizedBox(width: 24),
+                                                      Text(
+                                                        "Download".tr(),
+                                                        style: FontConstant
+                                                            .k18w5008471Text,
+                                                      )
+                                                    ],
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                            PopupMenuItem(
+                                              enabled: false,
+                                              child: InkWell(
+                                                onTap: () {
+                                                  final resp =
+                                                      TeacherDeletePostApi()
+                                                          .delete(
+                                                              postId: _postList[
+                                                                      index]
+                                                                  .postId
+                                                                  .toString());
+                                                  resp.then((value) {
+                                                    log(value.toString());
+                                                    if (value['status'] == 1) {
+                                                      setState(() {
+                                                        _postList
+                                                            .removeAt(index);
+                                                        Navigator.of(context)
+                                                            .pop();
+                                                      });
+                                                    }
+                                                  });
+                                                },
+                                                child: Container(
+                                                  padding: EdgeInsets.only(
+                                                      left: 16,
+                                                      top: 16,
+                                                      bottom: 16),
+                                                  child: Row(
+                                                    children: [
+                                                      Image.asset(
+                                                        "assets/images/trash.png",
+                                                        height: 24,
                                                       ),
-                                                    ),
-                                                  ],
+                                                      SizedBox(width: 24),
+                                                      Text(
+                                                        "Delete".tr(),
+                                                        style: FontConstant
+                                                            .k18w500F970Text,
+                                                      )
+                                                    ],
+                                                  ),
                                                 ),
                                               ),
                                             ),
                                           ];
                                         })
-                                    /*GestureDetector(
-                          onTap: () {},
-                          child: Container(
-                            color: Colors.transparent,
-                            child: Image.asset(
-                              "assets/images/dots.png",
-                              height: 40,
-                            ),
-                          ),
-                        ),*/
                                   ],
                                 ),
                                 SizedBox(height: 08),
@@ -390,114 +410,15 @@ class _TMyPostsState extends State<TMyPosts> {
                           );
                         } else if (reloadedVal == 'no_post_found') {
                           return Center(child: Text('No Posts found.'));
-                        } else {
+                        } else if (_scrollController.position.maxScrollExtent ==
+                            _scrollController.offset) {
                           return Center(child: CircularProgressIndicator());
+                        } else {
+                          return SizedBox.shrink();
                         }
                       },
                       separatorBuilder: (ctx, ind) => SizedBox(),
                       itemCount: _postList.length + 1),
-                  // for (int i = 0; i < 8; i++)
-                  //   Container(
-                  //     margin: EdgeInsets.only(top: 10),
-                  //     padding: const EdgeInsets.only(left: 16.0, right: 16),
-                  //     child: Column(
-                  //       children: [
-                  //         Row(
-                  //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  //           children: [
-                  //             Row(
-                  //               children: [
-                  //                 Image.asset(
-                  //                   "assets/images/person2.png",
-                  //                   height: 40,
-                  //                   width: 40,
-                  //                 ),
-                  //                 SizedBox(
-                  //                   width: 08,
-                  //                 ),
-                  //                 Text(
-                  //                   "Mohammad Umar",
-                  //                   style: FontConstant2.k16w5008267text,
-                  //                 ),
-                  //               ],
-                  //             ),
-                  //             MyPostOptionsDialog(),
-                  //             /*GestureDetector(
-                  //               onTap: () {},
-                  //               child: Container(
-                  //                 color: Colors.transparent,
-                  //                 child: Image.asset(
-                  //                   "assets/images/dots.png",
-                  //                   height: 40,
-                  //                 ),
-                  //               ),
-                  //             ),*/
-                  //           ],
-                  //         ),
-                  //         SizedBox(height: 08),
-                  //         Row(
-                  //           children: [
-                  //             Expanded(
-                  //               child: Text(
-                  //                 "Today we had small music activity with all kids and teachers. ",
-                  //                 style: FontConstant.k16w4008471Text,
-                  //               ),
-                  //             ),
-                  //           ],
-                  //         ),
-                  //         SizedBox(height: 6),
-                  //         Row(
-                  //           children: [
-                  //             Expanded(
-                  //                 child:
-                  //                     Image.asset("assets/images/childrenposts.png"))
-                  //             /*Container(
-                  //               height: 214,
-                  //               width: 382,
-                  //               decoration: BoxDecoration(
-                  //                   image: DecorationImage(
-                  //                       image: AssetImage(
-                  //                           "assets/images/childrenposts.png"))),
-                  //             ),*/
-                  //           ],
-                  //         ),
-                  //         SizedBox(
-                  //           height: 16.5,
-                  //         ),
-                  //         Padding(
-                  //           padding: const EdgeInsets.only(left: 8.0, right: 8),
-                  //           child: Row(
-                  //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  //             children: [
-                  //               Row(
-                  //                 children: [
-                  //                   Image.asset(
-                  //                     "assets/images/heart2.png",
-                  //                     height: 24,
-                  //                   ),
-                  //                   SizedBox(width: 10),
-                  //                   Text(
-                  //                     "2.4k likes",
-                  //                     style: FontConstant.k16w4008471Text,
-                  //                   ),
-                  //                 ],
-                  //               ),
-                  //               Text("2 min ago",
-                  //                   style: FontConstant.k16w4008471Text
-                  //                       .copyWith(fontSize: 14))
-                  //             ],
-                  //           ),
-                  //         ),
-                  //         SizedBox(height: 16),
-                  //         Container(
-                  //           width: 1.sw,
-                  //           height: 3,
-                  //           color: Colors.white,
-                  //         ),
-                  //         SizedBox(height: 5),
-                  //       ],
-                  //     ),
-                  //   ),
                   SizedBox(height: 150)
                 ],
               ),

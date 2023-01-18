@@ -14,7 +14,8 @@ import 'TAddAnnouncement.dart';
 import 'TPostFormScreen.dart';
 
 class TAddPostsScreen extends StatefulWidget {
-  const TAddPostsScreen({Key? key}) : super(key: key);
+  final Function(int) onPop;
+  const TAddPostsScreen({Key? key, required this.onPop}) : super(key: key);
 
   @override
   State<TAddPostsScreen> createState() => _TAddPostsScreenState();
@@ -85,7 +86,11 @@ class _TAddPostsScreenState extends State<TAddPostsScreen> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (_) => AddAnnouncement(),
+                          builder: (_) => AddAnnouncement(
+                            onPop: (val) {
+                              widget.onPop(val);
+                            },
+                          ),
                         ),
                       );
                     },
@@ -208,6 +213,9 @@ class _TAddPostsScreenState extends State<TAddPostsScreen> {
                               Navigator.of(context).push(MaterialPageRoute(
                                   builder: (ctx) => TPostFormScreen(
                                         pickedImages: _pickedImages,
+                                        onPop: (val) {
+                                          widget.onPop(val);
+                                        },
                                       )));
                             },
                             title: "Continue".tr(),

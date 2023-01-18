@@ -5,6 +5,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:kidseau/ParentsPanel/PHomeScreen/PHomeScreen.dart';
 import 'package:kidseau/Theme.dart';
 import 'package:kidseau/Widgets/buttons.dart';
@@ -22,8 +23,6 @@ class TLearningAlphabets extends StatefulWidget {
 }
 
 class _TLearningAlphabetsState extends State<TLearningAlphabets> {
-
-
   @override
   void initState() {
     _getData();
@@ -33,16 +32,16 @@ class _TLearningAlphabetsState extends State<TLearningAlphabets> {
   bool _isLoading = false;
 
   TScheduleDetailModel _model = TScheduleDetailModel();
-  _getData(){
+  _getData() {
     _isLoading = true;
     final resp = TScheduleDetailApi().get(scheduleId: widget.scheduleID);
-    resp.then((value){
-      try{
+    resp.then((value) {
+      try {
         setState(() {
           _model = TScheduleDetailModel.fromJson(value);
           _isLoading = false;
         });
-      }catch(e){
+      } catch (e) {
         log('TLearningAlphabets $value');
         setState(() {
           _isLoading = false;
@@ -134,87 +133,112 @@ class _TLearningAlphabetsState extends State<TLearningAlphabets> {
             ),
           ),
         ),*/
-        body: _isLoading? Center(child: CircularProgressIndicator()) :SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: Column(
-              children: [
-                SizedBox(height: 20.h),
-                Align(
-                  alignment: Alignment.topCenter,
-                  child: Text(
-                    _model.learningAlaphabets!.title.toString(),
-                    style: FontConstant.k16w500brownText.copyWith(fontSize: 32),
-                  ),
-                ),
-                Column(
-                  children: [
-                    Row(
-                      children: [
-                        Expanded(
-                          child: Container(
-                            /*height: 286,
+        body: _isLoading
+            ? Center(child: CircularProgressIndicator())
+            : SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  child: Column(
+                    children: [
+                      SizedBox(height: 20.h),
+                      Align(
+                        alignment: Alignment.topCenter,
+                        child: Text(
+                          _model.learningAlaphabets!.title.toString(),
+                          style: FontConstant.k16w500brownText
+                              .copyWith(fontSize: 32),
+                        ),
+                      ),
+                      Column(
+                        children: [
+                          Row(
+                            children: [
+                              Expanded(
+                                child: Container(
+                                  /*height: 286,
                             width: 382,*/
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(16),
-                               ),
-                            child: Image.network(_model.learningAlaphabets!.image.toString(), errorBuilder: (q,w,e)=> Text('Image not found'),),
+                                  clipBehavior: Clip.hardEdge,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(16),
+                                  ),
+                                  child: Image.network(
+                                    _model.learningAlaphabets!.image.toString(),
+                                    loadingBuilder: (q, w, e) {
+                                      if (e == null) {
+                                        return w;
+                                      } else {
+                                        return SpinKitThreeBounce(
+                                          size: 30,
+                                          color: Colors.grey,
+                                        );
+                                      }
+                                    },
+                                    errorBuilder: (q, w, e) =>
+                                        Text('Image not found'),
+                                    fit: BoxFit.fill,
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: 16),
-                    Row(
-                      children: [
-                        Image.asset(
-                          "assets/images/clock.png",
-                          height: 20,
-                          width: 20,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 06.0),
-                          child: Text("${_model.learningAlaphabets!.time!.split('-').first} to ${_model.learningAlaphabets!.time!.split('-').last}",
-                              style: FontConstant.k14w400lightpurpleText
-                                  .copyWith(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w500)),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-                SizedBox(height: 24),
-                Text(
-                    _model.learningAlaphabets!.description.toString(),
-                    style: FontConstant.k14w4008471Text
-                        .copyWith(fontWeight: FontWeight.w400, fontSize: 18)),
-                SizedBox(height: 30),
-               _model.weakStudent!.isEmpty? SizedBox.shrink() :Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      "Weak Students",
-                      style: FontConstant2.baloothampifont,
-                    )),
-                _model.weakStudent!.isEmpty? SizedBox.shrink() :SizedBox(height: 24),
-                _model.weakStudent!.isEmpty? SizedBox.shrink() :ListView.separated(
-                  shrinkWrap: true,
-                    physics: NeverScrollableScrollPhysics(),
-                    itemBuilder: (context, index) => Studentcard(), separatorBuilder: (ctx, ind) => SizedBox(height: 16.h,), itemCount: 5),
-                SizedBox(
-                  height: 32,
-                ),
-                /*materialButton(context, () {
+                          SizedBox(height: 16),
+                          Row(
+                            children: [
+                              Image.asset(
+                                "assets/images/clock.png",
+                                height: 20,
+                                width: 20,
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(left: 06.0),
+                                child: Text(
+                                    "${_model.learningAlaphabets!.time!.split('-').first} to ${_model.learningAlaphabets!.time!.split('-').last}",
+                                    style: FontConstant.k14w400lightpurpleText
+                                        .copyWith(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w500)),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 24),
+                      Text(_model.learningAlaphabets!.description.toString(),
+                          style: FontConstant.k14w4008471Text.copyWith(
+                              fontWeight: FontWeight.w400, fontSize: 18)),
+                      SizedBox(height: 30),
+                      Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            "Weak Students",
+                            style: FontConstant2.baloothampifont,
+                          )),
+                      _model.weakStudent!.isEmpty
+                          ? SizedBox.shrink()
+                          : SizedBox(height: 24),
+                      ListView.separated(
+                          shrinkWrap: true,
+                          physics: NeverScrollableScrollPhysics(),
+                          itemBuilder: (context, index) => Studentcard(),
+                          separatorBuilder: (ctx, ind) => SizedBox(
+                                height: 16.h,
+                              ),
+                          itemCount: 5),
+                      SizedBox(
+                        height: 32,
+                      ),
+                      /*materialButton(context, () {
                   Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (context) => TChats(),
                     ),
                   );
                 }, "Ask Question", ThemeColor.primarycolor, 52.0),*/
-                SizedBox(height: 40.h),
-              ],
-            ),
-          ),
-        ),
+                      SizedBox(height: 40.h),
+                    ],
+                  ),
+                ),
+              ),
       ),
     );
   }
@@ -233,7 +257,7 @@ class TeacherCard extends StatelessWidget {
       decoration: BoxDecoration(
           image: DecorationImage(
               image:
-              AssetImage("assets/images/Teacher card leaarning ap.png"))),
+                  AssetImage("assets/images/Teacher card leaarning ap.png"))),
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Row(

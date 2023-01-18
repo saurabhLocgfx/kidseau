@@ -36,20 +36,29 @@ class _PSchoolProfileState extends State<PSchoolProfile> {
 
   TeacherSchoolProfileDetailsModel model = TeacherSchoolProfileDetailsModel();
 
+  bool _noDataFound = false;
   _getData() {
     _isLoading = true;
     final resp = TeacherSchoolProfileApi().get();
     resp.then((value) {
       log(value.toString());
       try {
-        setState(() {
-          model = TeacherSchoolProfileDetailsModel.fromJson(value);
-          _isLoading = false;
-        });
+        if (value['status'] == '1') {
+          setState(() {
+            model = TeacherSchoolProfileDetailsModel.fromJson(value);
+            _isLoading = false;
+          });
+        } else {
+          setState(() {
+            _isLoading = false;
+            _noDataFound = true;
+          });
+        }
       } catch (e) {
         print('Teacher School profile $value');
         setState(() {
           _isLoading = false;
+          _noDataFound = true;
         });
       }
     });

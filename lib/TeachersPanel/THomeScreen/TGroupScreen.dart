@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:ui';
 
 import 'package:easy_localization/easy_localization.dart';
@@ -16,6 +17,7 @@ import 'package:kidseau/api/Teacherpanelapi/teacher_home_api/teacher_group_sched
 import 'package:kidseau/api/models/teacher_group_model/teacher_group_model.dart';
 import 'package:kidseau/api/models/teacher_group_model/teacher_group_schedule_model.dart';
 
+import 'TKidsDetails.dart';
 import 'TLearningAlphabets.dart';
 
 class TGroupScreen extends StatefulWidget {
@@ -40,6 +42,7 @@ class _TGroupScreenState extends State<TGroupScreen> {
     _isLoading = true;
     final resp = TeacherGroupApi().get();
     resp.then((value) {
+      log(value.toString());
       try {
         setState(() {
           model = TeacherGroupsModel.fromJson(value);
@@ -52,7 +55,9 @@ class _TGroupScreenState extends State<TGroupScreen> {
         });
       }
     }).then((value) {
-      _getSchedule();
+      if (model.groupInCard!.isNotEmpty) {
+        _getSchedule();
+      }
     });
   }
 
@@ -136,7 +141,7 @@ class _TGroupScreenState extends State<TGroupScreen> {
                     ClipRRect(
                       borderRadius: BorderRadius.circular(81),
                       child: Container(
-                        //width: 414,
+                        width: 414,
                         height: 62.h,
                         decoration: BoxDecoration(
                           color: Colors.white,
@@ -210,8 +215,6 @@ class _TGroupScreenState extends State<TGroupScreen> {
                             child: CircularProgressIndicator(),
                           )
                         : Container(
-                            // padding: EdgeInsets.symmetric(horizontal: 16),
-                            // height: 300.h,
                             width: 1.sw,
                             child: ListView.separated(
                                 separatorBuilder: (ctx, ind) => SizedBox(
@@ -249,7 +252,7 @@ class _TGroupScreenState extends State<TGroupScreen> {
                                           crossAxisAlignment:
                                               CrossAxisAlignment.center,
                                           children: [
-                                            Image.asset(
+                                            Image.network(
                                               scheduelModel
                                                   .schdule![index].actIcon
                                                   .toString(),
@@ -340,7 +343,19 @@ class _TGroupScreenState extends State<TGroupScreen> {
                           return Padding(
                             padding: const EdgeInsets.only(bottom: 16.0),
                             child: SizedBox(
-                                height: 128, width: 382, child: Studentcard()),
+                                height: 128,
+                                width: 382,
+                                child: InkWell(
+                                  child: Studentcard(),
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              TKidsOverview()),
+                                    );
+                                  },
+                                )),
                           );
                         }),
                     SizedBox(height: 32),

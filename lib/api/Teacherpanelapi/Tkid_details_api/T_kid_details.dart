@@ -4,14 +4,14 @@ import 'package:http/http.dart' as http;
 import 'package:kidseau/Constants/string_const.dart';
 import 'package:kidseau/shard_prefs/shared_prefs.dart';
 
-class TeacherDeletePostApi {
-  Future<dynamic> delete({required String postId}) async {
+class TKidDetails {
+  Future<dynamic> get({required String kidId}) async {
     String? cookie = UserPrefs.getCookies();
     var headers = {'Cookie': 'PHPSESSID=$cookie'};
     var request = http.Request(
         'GET',
         Uri.parse(
-            '$kAPIConst/kids/api_teacher_login/teacher_post/post_delete.php?post_id=$postId'));
+            '$kAPIConst/kids/api_teacher_login/teacher_home_page/teach_home_kid_details.php?kid_id=$kidId'));
 
     request.headers.addAll(headers);
 

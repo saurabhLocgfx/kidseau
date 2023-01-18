@@ -6,6 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:kidseau/Constants/colors.dart';
 import 'package:kidseau/TeachersPanel/THomeScreen/TGroupScreen.dart';
 import 'package:kidseau/TeachersPanel/THomeScreen/TLearningAlphabets.dart';
@@ -276,7 +277,7 @@ class _THomeScreenState extends State<THomeScreen> {
                       ),
                     ),
                     SizedBox(
-                      height: 15.h,
+                      height: 32,
                     ),
                     Padding(
                       padding: const EdgeInsets.only(left: 16.0, right: 16),
@@ -292,7 +293,7 @@ class _THomeScreenState extends State<THomeScreen> {
                       ),
                     ),
                     SizedBox(
-                      height: 5,
+                      height: 16,
                     ),
                     Container(
                       padding: EdgeInsets.symmetric(horizontal: 16),
@@ -441,7 +442,7 @@ class _THomeScreenState extends State<THomeScreen> {
                               ),
                             ),
                           ),
-                    SizedBox(height: 10),
+                    SizedBox(height: 32),
                     _name.attendance!.isEmpty
                         ? SizedBox.shrink()
                         : Padding(
@@ -826,6 +827,17 @@ class Groupcard extends StatelessWidget {
             height: 96,
             child: Image.network(
               nameData.groupInCard![index].grpImage.toString(),
+              fit: BoxFit.cover,
+              loadingBuilder: (q, w, e) {
+                if (e == null) {
+                  return w;
+                } else {
+                  return SpinKitThreeBounce(
+                    size: 30,
+                    color: Colors.white,
+                  );
+                }
+              },
               errorBuilder: (q, w, e) {
                 return Text('Image not loaded');
               },
@@ -979,11 +991,23 @@ class Attendancecard extends StatelessWidget {
           Container(
             height: 96,
             width: 72,
+            clipBehavior: Clip.hardEdge,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(8),
             ),
-            child: Image.asset(
+            child: Image.network(
               model.attendance![index].groupImage.toString(),
+              fit: BoxFit.cover,
+              loadingBuilder: (q, w, e) {
+                if (e == null) {
+                  return w;
+                } else {
+                  return SpinKitThreeBounce(
+                    size: 30,
+                    color: Colors.white,
+                  );
+                }
+              },
               errorBuilder: (q, w, e) {
                 return Text('Image not loaded');
               },

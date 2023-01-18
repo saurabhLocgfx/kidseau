@@ -20,7 +20,9 @@ import 'package:kidseau/api/Teacherpanelapi/teacher_post_api/post_apis/teacher_t
 
 class TPostFormScreen extends StatefulWidget {
   List<File> pickedImages;
-  TPostFormScreen({Key? key, required this.pickedImages}) : super(key: key);
+  final Function(int) onPop;
+  TPostFormScreen({Key? key, required this.pickedImages, required this.onPop})
+      : super(key: key);
 
   @override
   State<TPostFormScreen> createState() => _TPostFormScreenState();
@@ -34,8 +36,7 @@ class _TPostFormScreenState extends State<TPostFormScreen> {
   String _selectedSection = "";
   List<String> languageList = [];
   List<String> sectionList = [];
-  // List<String> langListId = [];
-//  List<String> idList = [];
+
   List<Map<String, dynamic>> _map = [];
   List<Map<String, dynamic>> _groupMap = [];
 
@@ -111,6 +112,7 @@ class _TPostFormScreenState extends State<TPostFormScreen> {
 
   CroppedFile? croppedFile;
   List<CroppedFile> _croppedFileList = [];
+
   _imageCropper(String path, int index) async {
     croppedFile = await ImageCropper().cropImage(
         sourcePath: path,
@@ -256,11 +258,7 @@ class _TPostFormScreenState extends State<TPostFormScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       SizedBox(height: 16),
-                      Text("Caption".tr(),
-                          /*AppLoaclizations.of(context)!
-                              .translate("Description")
-                              .toString(),*/
-                          style: FontConstant.k16w500331FText),
+                      Text("Caption".tr(), style: FontConstant.k16w500331FText),
                       SizedBox(height: 4),
                       TextFormField(
                         validator: (val) {
@@ -520,9 +518,6 @@ class _TPostFormScreenState extends State<TPostFormScreen> {
                               })
                         ],
                         onSearchChanged: (s, t) {
-                          //print(t);
-                          // print(_key.currentState!.controller!.text);
-                          //suggestedData.clear();
                           if (s == '@') {
                             final resp = TeacherTagKidApi()
                                 .get(groupId: selectedGroup['id'], name: t);
@@ -609,6 +604,7 @@ class _TPostFormScreenState extends State<TPostFormScreen> {
                 return;
               } else {
                 ScreenLoader().onLoading(context);
+                FocusScope.of(context).unfocus();
                 final resp = TeacherPostAPI().get(
                     idList: taggedStudentsId,
                     caption: _captionController.text,
@@ -616,13 +612,19 @@ class _TPostFormScreenState extends State<TPostFormScreen> {
                     grpId: selectedGroup['id'],
                     imgList: widget.pickedImages);
                 resp.then((value) {
+                  log(value.toString());
                   Navigator.of(context).pop();
-                  CustomSnackBar.customSnackBar(context, value['msg']);
+                  if (value['status'] == 1) {
+                    CustomSnackBar.customSnackBar(context, value['msg']);
+                    Navigator.of(context).pop();
+                    widget.onPop(2);
+                  } else {
+                    CustomSnackBar.customErrorSnackBar(context, value['msg']);
+                  }
                 });
               }
             },
             "Post".tr(),
-            /*  AppLoaclizations.of(context)!.translate("Announce"),*/
             ThemeColor.primarycolor,
             52.0,
           ),

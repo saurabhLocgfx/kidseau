@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -9,7 +11,8 @@ import 'package:kidseau/Widgets/screen_loader.dart';
 import 'package:kidseau/api/Teacherpanelapi/teacher_post_api/post_apis/teacher_announcement_api.dart';
 
 class AddAnnouncement extends StatefulWidget {
-  const AddAnnouncement({Key? key}) : super(key: key);
+  final Function(int) onPop;
+  const AddAnnouncement({Key? key, required this.onPop}) : super(key: key);
 
   @override
   State<AddAnnouncement> createState() => _AddAnnouncementState();
@@ -77,10 +80,10 @@ class _AddAnnouncementState extends State<AddAnnouncement> {
                           style: FontConstant.k16w500331FText),
                       SizedBox(height: 4),
                       TextFormField(
-                        validator: (val){
-                          if(_titleController.text.isEmpty){
+                        validator: (val) {
+                          if (_titleController.text.isEmpty) {
                             return 'This field cannot be empty';
-                          }else{
+                          } else {
                             return null;
                           }
                         },
@@ -98,10 +101,10 @@ class _AddAnnouncementState extends State<AddAnnouncement> {
                           style: FontConstant.k16w500331FText),
                       SizedBox(height: 4),
                       TextFormField(
-                        validator: (val){
-                          if(_descController.text.isEmpty){
+                        validator: (val) {
+                          if (_descController.text.isEmpty) {
                             return 'This field cannot be empty';
-                          }else{
+                          } else {
                             return null;
                           }
                         },
@@ -120,7 +123,7 @@ class _AddAnnouncementState extends State<AddAnnouncement> {
                           style: FontConstant.k16w500331FText),
                       SizedBox(height: 4),
                       InkWell(
-                        onTap: () async{
+                        onTap: () async {
                           _pickedTime = await showTimePicker(
                               context: context,
                               initialTime: TimeOfDay(hour: 00, minute: 00));
@@ -133,8 +136,10 @@ class _AddAnnouncementState extends State<AddAnnouncement> {
                             //
                             setState(() {
                               final now = DateTime.now();
-                              final dt = DateTime(now.year, now.month, now.day, _pickedTime!.hour, _pickedTime!.minute);
-                              timeString = DateFormat.Hms().format(dt);  //"6:00 AM"
+                              final dt = DateTime(now.year, now.month, now.day,
+                                  _pickedTime!.hour, _pickedTime!.minute);
+                              timeString =
+                                  DateFormat.Hms().format(dt); //"6:00 AM"
                             });
                             print(timeString);
                           }
@@ -173,24 +178,25 @@ class _AddAnnouncementState extends State<AddAnnouncement> {
                           style: FontConstant.k16w500331FText),
                       SizedBox(height: 4),
                       InkWell(
-                        onTap: () async{
-                         _pickedDate = await showDatePicker(
+                        onTap: () async {
+                          _pickedDate = await showDatePicker(
                               context: context,
                               initialDate: DateTime.now(),
                               firstDate: DateTime(1970),
                               lastDate: DateTime(2100));
-                         if (_pickedDate == null) {
-                           return;
-                         } else {
-                           // _dobControllerDay.text =
-                           //     DateFormat('dd')
-                           //         .format(_pickedDate!);
-                           //
-                           setState(() {
-                             dobString = DateFormat('yyyy-MM-dd').format(_pickedDate!);
-                           });
-                           //print(dobString);
-                         }
+                          if (_pickedDate == null) {
+                            return;
+                          } else {
+                            // _dobControllerDay.text =
+                            //     DateFormat('dd')
+                            //         .format(_pickedDate!);
+                            //
+                            setState(() {
+                              dobString =
+                                  DateFormat('yyyy-MM-dd').format(_pickedDate!);
+                            });
+                            //print(dobString);
+                          }
                         },
                         child: Container(
                           width: 1.sw,
@@ -228,23 +234,32 @@ class _AddAnnouncementState extends State<AddAnnouncement> {
         bottomNavigationBar: Padding(
           padding: EdgeInsets.symmetric(horizontal: 16, vertical: 20),
           child: materialButton(
-            context, () {
+            context,
+            () {
               var isValid = _formKey.currentState!.validate();
-              if(!isValid){
+              if (!isValid) {
                 return;
-              }else{
+              } else {
                 ScreenLoader().onLoading(context);
                 FocusScope.of(context).unfocus();
-                final resp = TeacherAnnouncementApi().post(title: _titleController.text,
+                final resp = TeacherAnnouncementApi().post(
+                    title: _titleController.text,
                     desc: _descController.text,
-                    time: timeString.contains(':')? timeString : '',
-                    date: dobString.contains('-')? dobString:'');
-                resp.then((value){
+                    time: timeString.contains(':') ? timeString : '',
+                    date: dobString.contains('-') ? dobString : '');
+                resp.then((value) {
+                  log(value.toString());
                   Navigator.of(context).pop();
-                  CustomSnackBar.customSnackBar(context, value['msg']);
+                  if (value['status'] == 1) {
+                    CustomSnackBar.customSnackBar(context, value['msg']);
+                    Navigator.of(context).pop();
+                    widget.onPop(2);
+                  } else {
+                    CustomSnackBar.customErrorSnackBar(context, value['msg']);
+                  }
                 });
               }
-                },
+            },
             "Announce".tr(),
             /*  AppLoaclizations.of(context)!.translate("Announce"),*/
             ThemeColor.primarycolor,

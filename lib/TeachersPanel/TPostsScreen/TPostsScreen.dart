@@ -23,25 +23,31 @@ class TPostsScreen extends StatefulWidget {
 }
 
 class _TPostsScreenState extends State<TPostsScreen> {
+  final ScrollController _scrollController = ScrollController();
+  bool _onBottom = false;
   @override
   void initState() {
     _scrollController.addListener(() {
       if (_scrollController.position.maxScrollExtent ==
           _scrollController.offset) {
-        _getReloadedData();
+        if (_postCount >= 10) {
+          _getReloadedData();
+        }
+        setState(() {
+          _onBottom = true;
+        });
+      } else {
+        setState(() {
+          _onBottom = false;
+        });
       }
     });
-    Future.delayed(Duration.zero, () {
-      _getData();
-    });
+    _getData();
     super.initState();
   }
 
-  int _scroll = 1;
-
-  //model.SchoolPostModel _schoolPostModel = model.SchoolPostModel();
-
-  final ScrollController _scrollController = ScrollController();
+  int _scroll = 0;
+  int _postCount = 0;
 
   bool _isLoading = false;
 
@@ -54,6 +60,7 @@ class _TPostsScreenState extends State<TPostsScreen> {
       try {
         if (value.status == 1) {
           setState(() {
+            _postCount = value.schoolAllPost!.length;
             for (var v in value.schoolAllPost!) {
               _postList.add(v);
             }
@@ -74,7 +81,7 @@ class _TPostsScreenState extends State<TPostsScreen> {
 
   _getData() {
     _isLoading = true;
-    final resp = TeacherAllPostApi().get(scroll: 1);
+    final resp = TeacherAllPostApi().get(scroll: 0);
     resp.then((value) {
       // log(value.status.toString());
       try {
@@ -203,6 +210,29 @@ class _TPostsScreenState extends State<TPostsScreen> {
                                                 borderRadius:
                                                     BorderRadius.circular(8)),
                                             child: InkWell(
+                                              onDoubleTap: () {
+                                                /*final resp = TeacherLikePost().get(
+                                                    postId: int.parse(
+                                                        _postList[index].postId.toString()));
+                                                resp.then((value) {
+                                                  print(value);
+                                                  if (value['msg'] == 'post is like') {
+                                                    setState(() {
+                                                      print('Liked');
+                                                      _isLiked = 1;
+                                                      _voteCount++;
+                                                      //_voteCount = min(0, _voteCount++);
+                                                    });
+                                                  } else {
+                                                    setState(() {
+                                                      print('Un liked');
+                                                      _isLiked = 0;
+                                                      _voteCount--;
+                                                      //_voteCount = min(0, _voteCount--);
+                                                    });
+                                                  }
+                                                });*/
+                                              },
                                               onTap: () {
                                                 Navigator.of(context).push(
                                                     MaterialPageRoute(
@@ -276,8 +306,10 @@ class _TPostsScreenState extends State<TPostsScreen> {
                           );
                         } else if (reloadedVal == 'no_post_found') {
                           return Center(child: Text('No Posts found.'));
-                        } else {
+                        } else if (_onBottom && _postCount >= 10) {
                           return Center(child: CircularProgressIndicator());
+                        } else {
+                          return SizedBox.shrink();
                         }
                       },
                       separatorBuilder: (ctx, ind) => SizedBox(),

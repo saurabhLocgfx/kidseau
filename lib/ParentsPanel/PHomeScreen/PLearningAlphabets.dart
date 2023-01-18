@@ -159,7 +159,9 @@ class _PLearningAplphabetsState extends State<PLearningAplphabets> {
                       style: FontConstant2.baloothampifont,
                     )),
                 SizedBox(height: 24),
-                TeacherCard(model: TeacherSchoolProfileDetailsModel(),),
+                TeacherCard(
+                  model: TeacherSchoolProfileDetailsModel(),
+                ),
                 SizedBox(
                   height: 32,
                 ),
@@ -182,10 +184,7 @@ class _PLearningAplphabetsState extends State<PLearningAplphabets> {
 
 class TeacherCard extends StatelessWidget {
   final TeacherSchoolProfileDetailsModel model;
-  TeacherCard({
-    Key? key,
-    required this.model
-  }) : super(key: key);
+  TeacherCard({Key? key, required this.model}) : super(key: key);
 
   List<String> bird = [
     "assets/images/small bird2.png",
@@ -226,11 +225,14 @@ class TeacherCard extends StatelessWidget {
               Container(
                 height: 80,
                 width: 60,
-                /*decoration: BoxDecoration(
-                    image: DecorationImage(
-                        image: AssetImage('assets/images/teacher1.png'),
-                        fit: BoxFit.fill)),*/
-                child: Image.network(model.directorImage.toString(), errorBuilder: (q,w,e)=> Text('Image not loaded'),fit: BoxFit.fill,),
+                clipBehavior: Clip.hardEdge,
+                decoration:
+                    BoxDecoration(borderRadius: BorderRadius.circular(8)),
+                child: Image.network(
+                  model.directorImage.toString(),
+                  errorBuilder: (q, w, e) => Text('Image not loaded'),
+                  fit: BoxFit.fill,
+                ),
               ),
               SizedBox(
                 width: 12.w,
