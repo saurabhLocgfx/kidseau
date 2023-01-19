@@ -313,19 +313,13 @@ class _TMyPostsState extends State<TMyPosts> {
                                 ),
                                 SizedBox(height: 6),
                                 SizedBox(
-                                  // decoration: BoxDecoration(
-                                  //   borderRadius: BorderRadius.circular(100),
-                                  //   color: Colors.black54,
-                                  // ),
                                   height: 300,
                                   //width: 1.sw,
                                   child: PageView.builder(
                                       //controller: PageController(viewportFraction: 0.6),
                                       itemCount:
                                           _postList[index].images!.length,
-                                      onPageChanged: (currentIndex) {
-                                        //log(_postList[index].images![currentIndex].fileImage.toString());
-                                      },
+                                      onPageChanged: (currentIndex) {},
                                       itemBuilder: (ctx, indexx) {
                                         return ClipRRect(
                                           borderRadius:
@@ -381,15 +375,6 @@ class _TMyPostsState extends State<TMyPosts> {
                                           ),
                                         );
                                       }),
-                                  // ListView.separated(
-                                  //   itemBuilder: (ctx, indexx){
-                                  //   return Image.network(
-                                  //     'https://d2dupazv4z3oi6.cloudfront.net/i/nic/abp_live.jpg', errorBuilder: (q, w, e) =>
-                                  //       SizedBox(width: 1.sw,child: Text('No image found')),width: 1.sw,);
-                                  // }, separatorBuilder: (ctx, ind)=> SizedBox.shrink(),
-                                  //   itemCount: _postList[index].image!.length,
-                                  //   shrinkWrap: true,
-                                  //   scrollDirection: Axis.horizontal,)
                                 ),
                                 SizedBox(
                                   height: 16.5,

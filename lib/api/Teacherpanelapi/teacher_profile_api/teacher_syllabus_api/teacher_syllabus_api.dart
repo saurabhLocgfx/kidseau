@@ -5,31 +5,18 @@ import 'package:http/http.dart' as http;
 import 'package:kidseau/Constants/string_const.dart';
 import 'package:kidseau/shard_prefs/shared_prefs.dart';
 
-class TeacherSubmitAttendanceAPI {
-  Future<dynamic> submit(List<Map<String, dynamic>> attendanceList) async {
+class TeacherSyllabusApi {
+  Future<dynamic> get({required String grpId, required String day}) async {
     String? cookie = UserPrefs.getCookies();
-    var headers = {
-      'Content-Type': 'application/json',
-      'Cookie': 'PHPSESSID=$cookie'
-    };
-    var request = http.Request(
+    var headers = {'Cookie': 'PHPSESSID=$cookie'};
+    var request = http.MultipartRequest(
         'POST',
         Uri.parse(
-            '$kAPIConst/kids/api_teacher_login/teacher_home_page/attendance_action_p_a.php'));
-    request.body = json.encode(attendanceList
-        /*[
-      {
-        "kid_id": 1,
-        "status": 1
-      },
-      {
-        "kid_id": 5,
-        "status": 0
-      }
-    ]*/
-        );
+            '$kAPIConst/kids/api_teacher_login/teacher_profile/teacher_syllabus.php'));
+    request.fields.addAll({'grp_id': grpId, 'days': day});
+
+    log(request.fields.toString());
     request.headers.addAll(headers);
-    log(request.body);
 
     http.StreamedResponse response = await request.send();
 

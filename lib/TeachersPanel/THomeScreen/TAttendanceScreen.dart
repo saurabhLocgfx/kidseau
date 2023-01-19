@@ -32,6 +32,7 @@ class _TAttendanceScreenState extends State<TAttendanceScreen> {
   bool val2 = false;
   bool val1 = false;
   List<bool> _values = [];
+  // List<int> _searchedIndex = [];
 
   List<AttendanceModel> selectedAttendance = [];
 
@@ -80,6 +81,10 @@ class _TAttendanceScreenState extends State<TAttendanceScreen> {
                 });
               }
             }
+            /*for (int i = 0; i <= model.groupAllkid!.length - 1; i++) {
+              _searchedIndex.add(i);
+            }
+            log(_searchedIndex.length.toString());*/
             _isLoading = false;
             _val = '';
           });
@@ -104,6 +109,7 @@ class _TAttendanceScreenState extends State<TAttendanceScreen> {
   AttendanceSearchKidsModel attendanceSearchKidsModel =
       AttendanceSearchKidsModel();
   FocusNode searchNode = FocusNode();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -338,97 +344,238 @@ class _TAttendanceScreenState extends State<TAttendanceScreen> {
                                       height: 16.h,
                                     ),
                                 itemBuilder: (BuildContext context, int index) {
-                                  return Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Row(
-                                        children: [
-                                          Container(
-                                            height: 67,
-                                            width: 50,
-                                            decoration: BoxDecoration(
-                                                /*image: DecorationImage(
+                                  return _controller.text.isEmpty
+                                      ? Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Row(
+                                              children: [
+                                                Container(
+                                                  height: 67,
+                                                  width: 50,
+                                                  decoration: BoxDecoration(
+                                                      /*image: DecorationImage(
                                           image: AssetImage(image[index],),
                                           fit: BoxFit.cover)*/
+                                                      ),
+                                                  child: Image.network(
+                                                      model.groupAllkid![index]
+                                                          .profilePic
+                                                          .toString(),
+                                                      errorBuilder: (q, w, e) =>
+                                                          Text(
+                                                              'Image not loaded'),
+                                                      fit: BoxFit.cover),
                                                 ),
-                                            child: Image.network(
-                                                model.groupAllkid![index]
-                                                    .profilePic
-                                                    .toString(),
-                                                errorBuilder: (q, w, e) =>
-                                                    Text('Image not loaded'),
-                                                fit: BoxFit.cover),
-                                          ),
-                                          SizedBox(width: 16),
-                                          Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                model.groupAllkid![index].name
-                                                    .toString(),
-                                                style: FontConstant
-                                                    .k18w500331FText,
-                                              ),
-                                              Row(
-                                                children: [
-                                                  Text(
-                                                    model.groupAllkid![index]
-                                                                .gender!
-                                                                .toLowerCase() ==
-                                                            'm'
-                                                        ? 'S/O '
-                                                        : model
-                                                                    .groupAllkid![
-                                                                        index]
-                                                                    .gender!
-                                                                    .toLowerCase() ==
-                                                                'f'
-                                                            ? 'D/O '
-                                                            : 'C/O ',
-                                                    style: FontConstant
-                                                        .k14w4008471Text,
-                                                  ),
-                                                  Text(
-                                                    model.groupAllkid![index]
-                                                        .father
-                                                        .toString(),
-                                                    style: FontConstant
-                                                        .k14w4008471Text,
-                                                  ),
-                                                ],
-                                              )
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                      SizedBox(
-                                        width: 48.w,
-                                        height: 24.w,
-                                        child: FlutterSwitch(
-                                            toggleSize: 20,
-                                            inactiveColor: ThemeColor.b7A4B2,
-                                            activeColor:
-                                                ThemeColor.primarycolor,
-                                            value: _values[index],
-                                            onToggle: (v) {
-                                              setState(() {
-                                                _values[index] = v;
-                                                attendanceList[index] = {
-                                                  "kid_id": model
-                                                      .groupAllkid![index]
-                                                      .kidId,
-                                                  "status":
-                                                      v == false ? '0' : '1',
-                                                };
-                                              });
-                                            }),
-                                      ),
-                                    ],
-                                  );
+                                                SizedBox(width: 16),
+                                                Column(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      model.groupAllkid![index]
+                                                          .name
+                                                          .toString(),
+                                                      style: FontConstant
+                                                          .k18w500331FText,
+                                                    ),
+                                                    Row(
+                                                      children: [
+                                                        Text(
+                                                          model
+                                                                      .groupAllkid![
+                                                                          index]
+                                                                      .gender!
+                                                                      .toLowerCase() ==
+                                                                  'm'
+                                                              ? 'S/O '
+                                                              : model.groupAllkid![index]
+                                                                          .gender!
+                                                                          .toLowerCase() ==
+                                                                      'f'
+                                                                  ? 'D/O '
+                                                                  : 'C/O ',
+                                                          style: FontConstant
+                                                              .k14w4008471Text,
+                                                        ),
+                                                        Text(
+                                                          model
+                                                              .groupAllkid![
+                                                                  index]
+                                                              .father
+                                                              .toString(),
+                                                          style: FontConstant
+                                                              .k14w4008471Text,
+                                                        ),
+                                                      ],
+                                                    )
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
+                                            SizedBox(
+                                              width: 48.w,
+                                              height: 24.w,
+                                              child: FlutterSwitch(
+                                                  toggleSize: 20,
+                                                  inactiveColor:
+                                                      ThemeColor.b7A4B2,
+                                                  activeColor:
+                                                      ThemeColor.primarycolor,
+                                                  value: _values[index],
+                                                  onToggle: (v) {
+                                                    setState(() {
+                                                      _values[index] = v;
+                                                      attendanceList[index] = {
+                                                        "kid_id": model
+                                                            .groupAllkid![index]
+                                                            .kidId,
+                                                        "status": v == false
+                                                            ? '0'
+                                                            : '1',
+                                                      };
+                                                    });
+                                                  }),
+                                            ),
+                                          ],
+                                        )
+                                      : Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Row(
+                                              children: [
+                                                Container(
+                                                  height: 67,
+                                                  width: 50,
+                                                  decoration: BoxDecoration(
+                                                      /*image: DecorationImage(
+                                          image: AssetImage(image[index],),
+                                          fit: BoxFit.cover)*/
+                                                      ),
+                                                  child: Image.network(
+                                                      model.groupAllkid!
+                                                          .where((e) => e.name!
+                                                              .toLowerCase()
+                                                              .contains(_controller
+                                                                  .text
+                                                                  .toLowerCase()))
+                                                          .toList()[index]
+                                                          .profilePic
+                                                          .toString(),
+                                                      errorBuilder: (q, w, e) =>
+                                                          Text(
+                                                              'Image not loaded'),
+                                                      fit: BoxFit.cover),
+                                                ),
+                                                SizedBox(width: 16),
+                                                Column(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      model.groupAllkid!
+                                                          .where((e) => e.name!
+                                                              .toLowerCase()
+                                                              .contains(_controller
+                                                                  .text
+                                                                  .toLowerCase()))
+                                                          .toList()[index]
+                                                          .name
+                                                          .toString(),
+                                                      style: FontConstant
+                                                          .k18w500331FText,
+                                                    ),
+                                                    Row(
+                                                      children: [
+                                                        Text(
+                                                          model.groupAllkid!
+                                                                      .where((e) => e
+                                                                          .name!
+                                                                          .toLowerCase()
+                                                                          .contains(_controller
+                                                                              .text
+                                                                              .toLowerCase()))
+                                                                      .toList()[
+                                                                          index]
+                                                                      .gender!
+                                                                      .toLowerCase() ==
+                                                                  'm'
+                                                              ? 'S/O '
+                                                              : model.groupAllkid!
+                                                                          .where((e) => e
+                                                                              .name!
+                                                                              .toLowerCase()
+                                                                              .contains(_controller.text.toLowerCase()))
+                                                                          .toList()[index]
+                                                                          .gender!
+                                                                          .toLowerCase() ==
+                                                                      'f'
+                                                                  ? 'D/O '
+                                                                  : 'C/O ',
+                                                          style: FontConstant
+                                                              .k14w4008471Text,
+                                                        ),
+                                                        Text(
+                                                          model.groupAllkid!
+                                                              .where((e) => e
+                                                                  .name!
+                                                                  .toLowerCase()
+                                                                  .contains(
+                                                                      _controller
+                                                                          .text
+                                                                          .toLowerCase()))
+                                                              .toList()[index]
+                                                              .father
+                                                              .toString(),
+                                                          style: FontConstant
+                                                              .k14w4008471Text,
+                                                        ),
+                                                      ],
+                                                    )
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
+                                            SizedBox(
+                                              width: 48.w,
+                                              height: 24.w,
+                                              child: FlutterSwitch(
+                                                  toggleSize: 20,
+                                                  inactiveColor:
+                                                      ThemeColor.b7A4B2,
+                                                  activeColor:
+                                                      ThemeColor.primarycolor,
+                                                  value: _values[index],
+                                                  onToggle: (v) {
+                                                    setState(() {
+                                                      _values[index] = v;
+                                                      attendanceList[index] = {
+                                                        "kid_id": model
+                                                            .groupAllkid!
+                                                            .where((e) => e
+                                                                .name!
+                                                                .toLowerCase()
+                                                                .contains(
+                                                                    _controller
+                                                                        .text
+                                                                        .toLowerCase()))
+                                                            .toList()[index]
+                                                            .kidId,
+                                                        "status": v == false
+                                                            ? '0'
+                                                            : '1',
+                                                      };
+                                                    });
+                                                  }),
+                                            ),
+                                          ],
+                                        );
                                   /*Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceBetween,

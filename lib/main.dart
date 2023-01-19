@@ -121,9 +121,9 @@ class MyAppState extends State<MyApp> {
                   // ParentInfo()
                   // TWaitingScreen()
                   // PSignupCode()
-                  // TDashboard(),
-                  // PDashboard(),
-                  PSplashScreen(),
+                  TDashboard(),
+              // PDashboard(),
+              //PSplashScreen(),
             ),
           );
         });
