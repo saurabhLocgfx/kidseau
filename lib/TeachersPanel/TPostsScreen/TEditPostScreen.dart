@@ -54,8 +54,13 @@ class _TEditPostFormScreenState extends State<TEditPostFormScreen> {
   @override
   void initState() {
     _captionController.text = widget.posts[widget.index].captions.toString();
-    //TODO: set up edit screen
-    //_selectedSection = widget.posts[widget.index]..toString();
+    _selectedSection = widget.posts[widget.index].secName.toString();
+    _selectedGroup = widget.posts[widget.index].grpName.toString();
+    for (var v in widget.posts[widget.index].tagKid!) {
+      _taggedStudents.add(v.tagKidName.toString());
+      taggedStudentsId.add(v.tagId.toString());
+    }
+
     super.initState();
   }
 
@@ -233,95 +238,29 @@ class _TEditPostFormScreenState extends State<TEditPostFormScreen> {
                         ),
                       ),
                       SizedBox(height: 16),
-                      Text("Choose section*".tr(),
+                      Text("Section*".tr(),
                           style: FontConstant.k16w500331FText),
                       SizedBox(height: 4),
                       Container(
-                        padding: EdgeInsets.only(left: 20),
-                        height: 54.h,
-                        width: 1.sw,
-                        decoration: BoxDecoration(
-                            color: Color(0xffFFFFFF),
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(30))),
-                        child: DropdownButton<String>(
-                          alignment: Alignment.centerLeft,
-                          borderRadius: BorderRadius.circular(30),
-                          dropdownColor: Color(0xffffffff),
-                          isExpanded: true,
-                          hint: Text(
-                            "Select section",
-                          ),
-                          icon: Center(
-                            child: Padding(
-                              padding: const EdgeInsets.only(right: 16.0),
-                              child: Image.asset(
-                                "assets/images/downarrow.png",
-                                height: 15,
-                                width: 15,
-                              ),
-                            ),
-                          ),
-                          elevation: 0,
-                          underline: SizedBox(),
-                          value: _selectedSection,
-                          items: sectionList.map((String value) {
-                            return DropdownMenuItem<String>(
-                              value: value,
-                              child: Text(value),
-                            );
-                          }).toList(),
-                          onChanged: (String? val) {
-                            /*setState(() {
-                              _selectedSection = val!;
-                              for (int i = 0; i <= _map.length - 1; i++) {
-                                if (_selectedSection == _map[i]['name']) {
-                                  selectedSection = {
-                                    'name': _map[i]['name'],
-                                    'id': _map[i]['id']
-                                  };
-                                }
-                              }
-                              _getGroups(selectedSection['id']);
-                              log('Selected sections: $selectedSection');
-                            });*/
-                          },
-                        ),
-                      ),
-                      /* InkWell(
-                        onTap: (){
-
-                        },
-                        child: Container(
+                          padding: EdgeInsets.only(left: 20),
+                          height: 54.h,
                           width: 1.sw,
-                          height: 56.h,
                           decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(90),
-                          ),
-                          padding: EdgeInsets.symmetric(horizontal: 18),
+                              color: Color(0xffFFFFFF),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(30))),
                           child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              Text('timeString',
-                                  style: TextStyle(
-                                    color: Colors.grey,
-                                  )),
-                              SizedBox(
-                                width: 30,
-                                child: Image.asset(
-                                  "assets/images/downarrow.png",
-                                  height: 15,
-                                  width: 15,
-                                )
+                              Center(
+                                child: Text(
+                                  _selectedSection,
+                                ),
                               ),
                             ],
-                          ),
-                        ),
-                      ),*/
+                          )),
                       SizedBox(height: 16),
-                      Text("Choose group*".tr(),
-                          style: FontConstant.k16w500331FText),
+                      Text("Group*".tr(), style: FontConstant.k16w500331FText),
                       SizedBox(height: 4),
                       Container(
                         padding: EdgeInsets.only(left: 20),
@@ -331,40 +270,21 @@ class _TEditPostFormScreenState extends State<TEditPostFormScreen> {
                             color: Color(0xffFFFFFF),
                             borderRadius:
                                 BorderRadius.all(Radius.circular(30))),
-                        child: DropdownButton<String>(
-                          alignment: Alignment.centerLeft,
-                          borderRadius: BorderRadius.circular(30),
-                          dropdownColor: Color(0xffffffff),
-                          isExpanded: true,
-                          hint: Text(
-                            "Select group",
-                          ),
-                          icon: Center(
-                            child: Padding(
-                              padding: const EdgeInsets.only(right: 16.0),
-                              child: Image.asset(
-                                "assets/images/downarrow.png",
-                                height: 15,
-                                width: 15,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Center(
+                              child: Text(
+                                _selectedGroup,
                               ),
                             ),
-                          ),
-                          elevation: 0,
-                          underline: SizedBox(),
-                          value: _selectedGroup,
-                          items: groupList.map((String value) {
-                            return DropdownMenuItem<String>(
-                              value: value,
-                              child: Text(value),
-                            );
-                          }).toList(),
-                          onChanged: (String? val) {},
+                          ],
                         ),
                       ),
                       SizedBox(height: 16),
                       Text("Tag".tr(), style: FontConstant.k16w500331FText),
                       SizedBox(height: 4),
-                      /* FlutterMentions(
+                      FlutterMentions(
                         key: _key,
                         suggestionPosition: SuggestionPosition.Top,
                         suggestionListDecoration: BoxDecoration(
@@ -401,8 +321,10 @@ class _TEditPostFormScreenState extends State<TEditPostFormScreen> {
                         ],
                         onSearchChanged: (s, t) {
                           if (s == '@') {
-                            final resp = TeacherTagKidApi()
-                                .get(groupId: selectedGroup['id'], name: t);
+                            final resp = TeacherTagKidApi().get(
+                                groupId:
+                                    widget.posts[widget.index].grpId.toString(),
+                                name: t);
                             resp.then((value) {
                               log(value.toString());
                               suggestedData.clear();
@@ -418,15 +340,13 @@ class _TEditPostFormScreenState extends State<TEditPostFormScreen> {
                                 }
                               });
                               log("suggested data $suggestedData");
-                              */ /*setState(() {
-                                  suggestedData
-                                      .toSet()
-                                      .toList();
-                                });*/ /*
+                              setState(() {
+                                suggestedData.toSet().toList();
+                              });
                             });
                           }
                         },
-                      ),*/
+                      ),
                       SizedBox(
                         height: 16,
                       ),
@@ -445,9 +365,29 @@ class _TEditPostFormScreenState extends State<TEditPostFormScreen> {
                                       color: TThemeColor.purplecolor,
                                       borderRadius: BorderRadius.circular(40)),
                                   child: Center(
-                                      child: Text(
-                                    _taggedStudents[index],
-                                    style: FontConstant.k16w400whiteText,
+                                      child: Row(
+                                    children: [
+                                      Text(
+                                        _taggedStudents[index],
+                                        style: FontConstant.k16w400whiteText,
+                                      ),
+                                      /*SizedBox(
+                                        width: 15,
+                                      ),*/
+                                      InkWell(
+                                        onTap: () {
+                                          setState(() {
+                                            _taggedStudents.removeAt(index);
+                                            taggedStudentsId.removeAt(index);
+                                          });
+                                        },
+                                        child: Container(
+                                          color: Colors.transparent,
+                                          padding: EdgeInsets.only(left: 15),
+                                          child: Icon(Icons.close),
+                                        ),
+                                      )
+                                    ],
                                   )),
                                 );
                               },
@@ -473,23 +413,7 @@ class _TEditPostFormScreenState extends State<TEditPostFormScreen> {
               } else {
                 ScreenLoader().onLoading(context);
                 FocusScope.of(context).unfocus();
-                /*final resp = TeacherPostAPI().get(
-                    idList: taggedStudentsId,
-                    caption: _captionController.text,
-                    secId: selectedSection['id'],
-                    grpId: selectedGroup['id'],
-                    imgList: widget.pickedImages);
-                resp.then((value) {
-                  log(value.toString());
-                  Navigator.of(context).pop();
-                  if (value['status'] == 1) {
-                    CustomSnackBar.customSnackBar(context, value['msg']);
-                    Navigator.of(context).pop();
-                    widget.onPop(2);
-                  } else {
-                    CustomSnackBar.customErrorSnackBar(context, value['msg']);
-                  }
-                });*/
+                //TODO: Insert Edit API
               }
             },
             "Update".tr(),

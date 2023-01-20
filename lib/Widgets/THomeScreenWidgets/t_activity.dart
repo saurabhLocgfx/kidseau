@@ -61,7 +61,10 @@ class _TActivityState extends State<TActivity> {
           itemBuilder: (BuildContext context, int index) {
             return InkWell(
               onTap: () {
-                  Get.to(() => TLearningAlphabets(scheduleID: widget.schedule.schdule![index].actId.toString(),));
+                Get.to(() => TLearningAlphabets(
+                      scheduleID:
+                          widget.schedule.schdule![index].actId.toString(),
+                    ));
               },
               child: Container(
                 height: 64,
@@ -76,7 +79,7 @@ class _TActivityState extends State<TActivity> {
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Image.asset(
+                      Image.network(
                         widget.schedule.schdule![index].actIcon.toString(),
                         errorBuilder: (q, w, e) {
                           return Text('Image not loaded');

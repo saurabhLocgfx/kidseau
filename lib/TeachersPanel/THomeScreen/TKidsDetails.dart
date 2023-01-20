@@ -123,7 +123,8 @@ class _TKidsOverviewState extends State<TKidsOverview> {
                         image: AssetImage(
                           "assets/images/Group8270.png",
                         ),
-                        fit: BoxFit.cover)),
+                        fit: BoxFit.fitWidth,
+                        alignment: Alignment.topLeft)),
                 child: Container(
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
@@ -936,9 +937,6 @@ class _TKidsOverviewState extends State<TKidsOverview> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text("Current treatment".tr(),
-                                    /* AppLoaclizations.of(context)!
-                              .translate("Current treatment")
-                              .toString(),*/
                                     style: FontConstant.k16w500331FText),
                                 SizedBox(height: 4),
                                 Text(

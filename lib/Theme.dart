@@ -44,6 +44,8 @@ class FontConstant {
       fontWeight: FontWeight.w500, fontSize: 18, color: Color(0xffB7A4B2));
   static TextStyle k18w500F970Text = GoogleFonts.balooDa2(
       fontWeight: FontWeight.w500, fontSize: 18, color: Color(0xffF97070));
+  static TextStyle k16w400F97070 = GoogleFonts.balooDa2(
+      fontWeight: FontWeight.w400, fontSize: 16, color: Color(0xffF97070));
   static TextStyle k18w5008267Text = GoogleFonts.balooDa2(
       fontWeight: FontWeight.w500, fontSize: 18, color: Color(0xff8267AC));
   static TextStyle k32w500blackText = GoogleFonts.balooDa2(

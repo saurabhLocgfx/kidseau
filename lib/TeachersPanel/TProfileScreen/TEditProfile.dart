@@ -52,9 +52,7 @@ class _TEditProfileScreenState extends State<TEditProfileScreen> {
       _gender = 'male';
     } else if (widget.model.gender!.toLowerCase() == 'f') {
       _gender = 'female';
-    } else {
-      _gender = 'other';
-    }
+    } else {}
     _eduFocus.addListener(() {
       setState(() {});
     });
@@ -370,7 +368,7 @@ class _TEditProfileScreenState extends State<TEditProfileScreen> {
                                 isExpanded: true,
                                 underline: SizedBox(),
                                 value: _gender,
-                                items: <String>['male', 'female', 'other']
+                                items: <String>['male', 'female']
                                     .map((String value) {
                                   return DropdownMenuItem<String>(
                                     value: value,

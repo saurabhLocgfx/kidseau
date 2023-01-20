@@ -372,8 +372,10 @@ class _KidsDetailsState extends State<KidsDetails> {
                             isExpanded: true,
                             underline: SizedBox(),
                             value: _selectedText,
-                            items: <String>['Male', 'Female', 'Other']
-                                .map((String value) {
+                            items: <String>[
+                              'Male',
+                              'Female',
+                            ].map((String value) {
                               return DropdownMenuItem<String>(
                                 value: value,
                                 child: Text(

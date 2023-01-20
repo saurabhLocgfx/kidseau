@@ -4,6 +4,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:kidseau/TeachersPanel/TPostsScreen/TEditPostScreen.dart';
 import 'package:kidseau/api/Teacherpanelapi/teacher_post_api/teacher_delete_post_api.dart';
 import 'package:kidseau/api/Teacherpanelapi/teacher_post_api/teacher_my_post_api.dart';
 import 'package:kidseau/enlarged_image_screen.dart';
@@ -170,6 +171,15 @@ class _TMyPostsState extends State<TMyPosts> {
                                                 onTap: () {
                                                   log('Edit');
                                                   Navigator.of(context).pop();
+                                                  Navigator.of(context).push(
+                                                      MaterialPageRoute(
+                                                          builder: (ctx) =>
+                                                              TEditPostFormScreen(
+                                                                posts:
+                                                                    _postList,
+                                                                index: index,
+                                                                onPop: (val) {},
+                                                              )));
                                                 },
                                                 child: Container(
                                                   padding: EdgeInsets.only(

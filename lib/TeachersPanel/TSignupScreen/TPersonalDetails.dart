@@ -573,7 +573,7 @@ class _TPersonalDetailsState extends State<TPersonalDetails> {
                               isExpanded: true,
                               underline: SizedBox(),
                               value: _selectedText,
-                              items: <String>['male', 'female', 'other']
+                              items: <String>['male', 'female']
                                   .map((String value) {
                                 return DropdownMenuItem<String>(
                                   value: value,

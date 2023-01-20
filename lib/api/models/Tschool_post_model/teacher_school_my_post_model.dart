@@ -33,38 +33,58 @@ class PostDetails {
   String? captions;
   String? postTime;
   String? postDate;
+  String? secId;
+  String? secName;
+  String? grpId;
+  String? grpName;
   int? like;
   int? likeStatus;
   List<Images>? images;
+  List<TagKid>? tagKid;
 
   PostDetails(
       {this.teacherId,
-        this.fName,
-        this.familyName,
-        this.techProfile,
-        this.postId,
-        this.captions,
-        this.postTime,
-        this.postDate,
-        this.like,
-        this.likeStatus,
-        this.images});
+      this.fName,
+      this.familyName,
+      this.techProfile,
+      this.postId,
+      this.captions,
+      this.postTime,
+      this.postDate,
+      this.secId,
+      this.secName,
+      this.grpId,
+      this.grpName,
+      this.like,
+      this.likeStatus,
+      this.images,
+      this.tagKid});
 
   PostDetails.fromJson(Map<String, dynamic> json) {
     teacherId = json['teacher_id'];
     fName = json['f_name'];
-    likeStatus = json['likeStatus'];
     familyName = json['family_name'];
     techProfile = json['tech_profile'];
     postId = json['post_id'];
     captions = json['captions'];
     postTime = json['post_time'];
     postDate = json['post_date'];
+    secId = json['sec_id'];
+    secName = json['sec_name'];
+    grpId = json['grp_id'];
+    grpName = json['grp_name'];
     like = json['like'];
+    likeStatus = json['likeStatus'];
     if (json['Images'] != null) {
       images = <Images>[];
       json['Images'].forEach((v) {
         images!.add(new Images.fromJson(v));
+      });
+    }
+    if (json['tagKid'] != null) {
+      tagKid = <TagKid>[];
+      json['tagKid'].forEach((v) {
+        tagKid!.add(new TagKid.fromJson(v));
       });
     }
   }
@@ -79,9 +99,17 @@ class PostDetails {
     data['captions'] = this.captions;
     data['post_time'] = this.postTime;
     data['post_date'] = this.postDate;
+    data['sec_id'] = this.secId;
+    data['sec_name'] = this.secName;
+    data['grp_id'] = this.grpId;
+    data['grp_name'] = this.grpName;
     data['like'] = this.like;
+    data['likeStatus'] = this.likeStatus;
     if (this.images != null) {
       data['Images'] = this.images!.map((v) => v.toJson()).toList();
+    }
+    if (this.tagKid != null) {
+      data['tagKid'] = this.tagKid!.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -102,6 +130,25 @@ class Images {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['fileId'] = this.fileId;
     data['fileImage'] = this.fileImage;
+    return data;
+  }
+}
+
+class TagKid {
+  String? tagId;
+  String? tagKidName;
+
+  TagKid({this.tagId, this.tagKidName});
+
+  TagKid.fromJson(Map<String, dynamic> json) {
+    tagId = json['tagId'];
+    tagKidName = json['tagKidName'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['tagId'] = this.tagId;
+    data['tagKidName'] = this.tagKidName;
     return data;
   }
 }
