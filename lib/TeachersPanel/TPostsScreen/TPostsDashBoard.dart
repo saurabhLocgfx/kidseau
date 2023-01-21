@@ -50,6 +50,9 @@ class _TPostsDashBoardState extends State<TPostsDashBoard> {
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 70.0,
+        systemOverlayStyle: SystemUiOverlayStyle(
+          statusBarIconBrightness: Brightness.dark,
+        ),
         flexibleSpace: ClipRect(
           child: BackdropFilter(
             filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),

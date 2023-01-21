@@ -5,13 +5,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kidseau/Constants/colors.dart';
+import 'package:kidseau/api/Teacherpanelapi/teacher_student_performance_apis/student_detail_api.dart';
+import 'package:kidseau/api/models/kid_detail_model/kid_performance_detail_model.dart';
 
 import '../../Theme.dart';
 import '../../Widgets/Calender/calendermodel.dart';
 import '../../Widgets/buttons.dart';
 
 class TStudentDetailScreen extends StatefulWidget {
-  const TStudentDetailScreen({Key? key}) : super(key: key);
+  final String kidId;
+  const TStudentDetailScreen({Key? key, required this.kidId}) : super(key: key);
 
   @override
   State<TStudentDetailScreen> createState() => _TStudentDetailScreenState();
@@ -36,6 +39,32 @@ class _TStudentDetailScreenState extends State<TStudentDetailScreen> {
   void dispose() {
     controller.dispose();
     super.dispose();
+  }
+
+  @override
+  void initState() {
+    _getDetails();
+    super.initState();
+  }
+
+  KidPerformanceDetailModel model = KidPerformanceDetailModel();
+
+  bool _isLoading = false;
+  _getDetails() {
+    _isLoading = true;
+    final resp = TStudentDetailAPi().get(kidId: widget.kidId);
+    resp.then((value) {
+      if (value['status'] == 1) {
+        setState(() {
+          model = KidPerformanceDetailModel.fromJson(value);
+          _isLoading = false;
+        });
+      } else {
+        setState(() {
+          _isLoading = false;
+        });
+      }
+    });
   }
 
   final PageController _pageController = PageController(
@@ -114,890 +143,923 @@ class _TStudentDetailScreenState extends State<TStudentDetailScreen> {
               ),
             ),
           ),
-          body: SingleChildScrollView(
-            child: Container(
-              decoration: BoxDecoration(
-                  image: DecorationImage(
-                      image: AssetImage(
-                        "assets/images/Group8270.png",
+          body: _isLoading
+              ? Center(
+                  child: CircularProgressIndicator(),
+                )
+              : SingleChildScrollView(
+                  child: Container(
+                    decoration: BoxDecoration(
+                        image: DecorationImage(
+                            image: AssetImage(
+                              "assets/images/Group8270.png",
+                            ),
+                            fit: BoxFit.cover)),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          colors: [
+                            Color(0xffF8F6FA).withOpacity(0.7),
+                            Color(0xffF8F6FA),
+                            Color(0xffF8F6FA),
+                          ],
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                          stops: [0.3, 0.6, 0.9],
+                        ),
                       ),
-                      fit: BoxFit.cover)),
-              child: Container(
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [
-                      Color(0xffF8F6FA).withOpacity(0.7),
-                      Color(0xffF8F6FA),
-                      Color(0xffF8F6FA),
-                    ],
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    stops: [0.3, 0.6, 0.9],
-                  ),
-                ),
-                child: Stack(
-                  children: [
-                    Container(
-                      width: 1.sw,
-                      /*decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [
-                      Color(0xffF8F6FA).withOpacity(0.6),
-                      Color(0xffF8F6FA).withOpacity(0.6)
-                    ],
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    stops: [0.01, 1.0],
-                  ),
-                ),
-                child: Image.asset(
-                  'assets/images/topbackground.png',
-                  fit: BoxFit.fitWidth,
-                ),*/
-                    ),
-                    Container(
-                      width: 1.sw,
-                      height: 455,
-                      /* decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [
-                      Color(0xffF8F6FA).withOpacity(0.6),
-                      Color(0xffF8F6FA).withOpacity(0.6)
-                    ],
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    stops: [0.01, 1.0],
-                  ),
-                ),*/
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                      child: Column(
+                      child: Stack(
                         children: [
-                          SizedBox(height: 30),
-                          Row(
-                            children: [
-                              Container(
-                                height: 128.h,
-                                width: 96.w,
-                                decoration: BoxDecoration(
-                                    image: DecorationImage(
-                                        image: AssetImage(
-                                            "assets/images/profileperson.png"))),
-                              ),
-                              SizedBox(width: 16),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    "Nobita",
-                                    style: FontConstant2.k32w500331Ftext,
-                                  ),
-                                  Text(
-                                    "S/O -  Akbar",
-                                    style: FontConstant.k16w5008471Text,
-                                  ),
-                                  Text("xyz@gmail.com",
-                                      style: FontConstant.k16w5008471Text),
-                                ],
-                              ),
-                            ],
+                          Container(
+                            width: 1.sw,
                           ),
-                          SizedBox(height: 20),
-                          Column(
-                            children: [
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        "info".tr(),
-                                        style: FontConstant2.k22w5008471text,
+                          Container(
+                            width: 1.sw,
+                            height: 455,
+                          ),
+                          Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 16.0),
+                            child: Column(
+                              children: [
+                                SizedBox(height: 30),
+                                Row(
+                                  children: [
+                                    Container(
+                                      height: 128,
+                                      width: 96,
+                                      child: Image.network(
+                                        model.kidImage.toString(),
+                                        fit: BoxFit.fitHeight,
+                                        errorBuilder: (q, w, e) => Image.asset(
+                                            "assets/images/profileperson.png"),
                                       ),
-                                      Stack(
-                                        children: [
-                                          Positioned(
-                                            bottom: 0,
-                                            right: 0,
-                                            child: SizedBox(
-                                              width: 134,
-                                              child: Image.asset(
-                                                  'assets/images/birds.png'),
+                                    ),
+                                    SizedBox(width: 16),
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          model.kidName.toString(),
+                                          style: FontConstant2.k32w500331Ftext,
+                                        ),
+                                        Text(
+                                          model.kidGender!.toLowerCase() == 'm'
+                                              ? 'S/O ${model.kidFather}'
+                                              : 'D/O ${model.kidFather}',
+                                          style: FontConstant.k16w5008471Text,
+                                        ),
+                                        Row(
+                                          children: [
+                                            Text(model.kidGroup.toString(),
+                                                style: FontConstant
+                                                    .k16w5008471Text),
+                                            SizedBox(
+                                              width: 4,
                                             ),
-                                          ),
-                                          Row(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.end,
-                                            children: [
-                                              Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Text(
-                                                    "Class Section".tr(),
-                                                    style: FontConstant
-                                                        .k16w500331FText,
-                                                  ),
-                                                  SizedBox(height: 16),
-                                                  Text(
-                                                    "Group".tr(),
-                                                    style: FontConstant
-                                                        .k16w500331FText,
-                                                  ),
-                                                  SizedBox(height: 16),
-                                                  Text(
-                                                    "Age".tr(),
-                                                    style: FontConstant
-                                                        .k16w500331FText,
-                                                  ),
-                                                  SizedBox(height: 16),
-                                                  Text(
-                                                    "Birthday".tr(),
-                                                    style: FontConstant
-                                                        .k16w500331FText,
-                                                  ),
-                                                  SizedBox(height: 16),
-                                                  Text(
-                                                    "Gender".tr(),
-                                                    style: FontConstant
-                                                        .k16w500331FText,
-                                                  ),
-                                                ],
-                                              ),
-                                              SizedBox(width: 16),
-                                              Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Text(
-                                                    "Nursery Sec A",
-                                                    style: FontConstant
-                                                        .k16w5008471Text,
-                                                  ),
-                                                  SizedBox(height: 16),
-                                                  Text(
-                                                    "Group A",
-                                                    style: FontConstant
-                                                        .k16w5008471Text,
-                                                  ),
-                                                  SizedBox(height: 16),
-                                                  Text(
-                                                    "4 years old",
-                                                    style: FontConstant
-                                                        .k16w5008471Text,
-                                                  ),
-                                                  SizedBox(height: 16),
-                                                  Text(
-                                                    "29/09/2020",
-                                                    style: FontConstant
-                                                        .k16w5008471Text,
-                                                  ),
-                                                  SizedBox(height: 16),
-                                                  Text(
-                                                    "Male",
-                                                    style: FontConstant
-                                                        .k16w5008471Text,
-                                                  )
-                                                ],
-                                              ),
-                                              //Spacer(),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                              SizedBox(height: 20),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    "Performance".tr(),
-                                    style: FontConstant2.k22w5008471text,
-                                  ),
-                                  SizedBox(height: 16),
-                                  Row(
-                                    children: [
-                                      Expanded(
-                                        child: Container(
-                                          height: 116,
-                                          decoration: BoxDecoration(
-                                              color: Colors.white,
-                                              borderRadius:
-                                                  BorderRadius.circular(16)),
-                                          child: Padding(
-                                            padding: const EdgeInsets.symmetric(
-                                                horizontal: 16.0),
-                                            child: Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.center,
+                                            Container(
+                                              width: 4,
+                                              height: 4,
+                                              decoration: BoxDecoration(
+                                                  shape: BoxShape.circle,
+                                                  color: Colors.black),
+                                            ),
+                                            SizedBox(
+                                              width: 4,
+                                            ),
+                                            Text(
+                                                '${model.kidAge} ${"years".tr()}',
+                                                style: FontConstant
+                                                    .k16w5008471Text),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(height: 20),
+                                Column(
+                                  children: [
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              "info".tr(),
+                                              style:
+                                                  FontConstant2.k22w5008471text,
+                                            ),
+                                            Stack(
                                               children: [
-                                                Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
-                                                  children: [
-                                                    Expanded(
-                                                        child: Text(
-                                                      "Growth Rank".tr(),
-                                                      style: FontConstant
-                                                          .k16w5008471Text,
-                                                    )),
-                                                    Image.asset(
-                                                      "assets/images/batchicon.png",
-                                                      height: 24,
-                                                    )
-                                                  ],
+                                                Positioned(
+                                                  bottom: 0,
+                                                  right: 0,
+                                                  child: SizedBox(
+                                                    width: 134,
+                                                    child: Image.asset(
+                                                        'assets/images/birds.png'),
+                                                  ),
                                                 ),
                                                 Row(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.end,
                                                   children: [
-                                                    Text(
-                                                      "2",
-                                                      style: FontConstant2
-                                                          .k32w5008267text,
+                                                    Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Text(
+                                                          "Class Section".tr(),
+                                                          style: FontConstant
+                                                              .k16w500331FText,
+                                                        ),
+                                                        SizedBox(height: 16),
+                                                        Text(
+                                                          "Group".tr(),
+                                                          style: FontConstant
+                                                              .k16w500331FText,
+                                                        ),
+                                                        SizedBox(height: 16),
+                                                        Text(
+                                                          "Age".tr(),
+                                                          style: FontConstant
+                                                              .k16w500331FText,
+                                                        ),
+                                                        SizedBox(height: 16),
+                                                        Text(
+                                                          "Birthday".tr(),
+                                                          style: FontConstant
+                                                              .k16w500331FText,
+                                                        ),
+                                                        SizedBox(height: 16),
+                                                        Text(
+                                                          "Gender".tr(),
+                                                          style: FontConstant
+                                                              .k16w500331FText,
+                                                        ),
+                                                      ],
                                                     ),
-                                                    Text(
-                                                      "nd Place",
-                                                      style: FontConstant
-                                                          .k16w400B7A4Text,
-                                                    )
+                                                    SizedBox(width: 16),
+                                                    Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Text(
+                                                          model.kidSection
+                                                              .toString(),
+                                                          style: FontConstant
+                                                              .k16w5008471Text,
+                                                        ),
+                                                        SizedBox(height: 16),
+                                                        Text(
+                                                          model.kidGroup
+                                                              .toString(),
+                                                          style: FontConstant
+                                                              .k16w5008471Text,
+                                                        ),
+                                                        SizedBox(height: 16),
+                                                        Text(
+                                                          '${model.kidAge} ${"years".tr()}',
+                                                          style: FontConstant
+                                                              .k16w5008471Text,
+                                                        ),
+                                                        SizedBox(height: 16),
+                                                        Text(
+                                                          model.kidDob
+                                                              .toString(),
+                                                          style: FontConstant
+                                                              .k16w5008471Text,
+                                                        ),
+                                                        SizedBox(height: 16),
+                                                        Text(
+                                                          model.kidGender
+                                                              .toString(),
+                                                          style: FontConstant
+                                                              .k16w5008471Text,
+                                                        )
+                                                      ],
+                                                    ),
+                                                    //Spacer(),
                                                   ],
-                                                )
+                                                ),
                                               ],
                                             ),
-                                          ),
+                                          ],
                                         ),
-                                      ),
-                                      SizedBox(width: 16),
-                                      Expanded(
-                                        child: Container(
-                                          height: 116,
-                                          decoration: BoxDecoration(
-                                              color: Colors.white,
-                                              borderRadius:
-                                                  BorderRadius.circular(16)),
-                                          child: Padding(
-                                            padding: const EdgeInsets.symmetric(
-                                                horizontal: 16.0, vertical: 4),
-                                            child: Row(
-                                              children: [
-                                                Expanded(
-                                                  flex: 2,
+                                      ],
+                                    ),
+                                    SizedBox(height: 20),
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          "Performance".tr(),
+                                          style: FontConstant2.k22w5008471text,
+                                        ),
+                                        SizedBox(height: 16),
+                                        Row(
+                                          children: [
+                                            Expanded(
+                                              child: Container(
+                                                height: 116,
+                                                decoration: BoxDecoration(
+                                                    color: Colors.white,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            16)),
+                                                child: Padding(
+                                                  padding: const EdgeInsets
+                                                          .symmetric(
+                                                      horizontal: 16.0),
                                                   child: Column(
                                                     mainAxisAlignment:
-                                                        MainAxisAlignment.start,
-                                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                                    children: [
-                                                      Text(
-                                                        "Attendance".tr(),
-                                                        style: FontConstant
-                                                            .k16w5008471Text,
-                                                      ),
-                                                      Row(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .spaceBetween,
-                                                        children: [
-                                                          Container(
-                                                            width: 6,
-                                                            height: 44,
-                                                            decoration:
-                                                                BoxDecoration(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          18),
-                                                              color: AppColors()
-                                                                  .k8267AC,
-                                                            ),
-                                                          ),
-                                                          Container(
-                                                            width: 6,
-                                                            height: 44,
-                                                            decoration:
-                                                                BoxDecoration(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          18),
-                                                              color: AppColors()
-                                                                  .k8267AC,
-                                                            ),
-                                                          ),
-                                                          Container(
-                                                            width: 6,
-                                                            height: 24,
-                                                            decoration:
-                                                                BoxDecoration(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          18),
-                                                              color: AppColors()
-                                                                  .k8267AC
-                                                                  .withOpacity(
-                                                                      0.2),
-                                                            ),
-                                                          ),
-                                                          Container(
-                                                            width: 6,
-                                                            height: 44,
-                                                            decoration:
-                                                                BoxDecoration(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          18),
-                                                              color: AppColors()
-                                                                  .k8267AC,
-                                                            ),
-                                                          ),
-                                                          Container(
-                                                            width: 6,
-                                                            height: 24,
-                                                            decoration:
-                                                                BoxDecoration(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          18),
-                                                              color: AppColors()
-                                                                  .k8267AC
-                                                                  .withOpacity(
-                                                                      0.2),
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      )
-                                                    ],
-                                                  ),
-                                                ),
-                                                SizedBox(
-                                                  width: 3,
-                                                ),
-                                                Expanded(
-                                                  child: Column(
-                                                    /*mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.center,*/
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .center,
                                                     children: [
                                                       Row(
                                                         mainAxisAlignment:
                                                             MainAxisAlignment
                                                                 .spaceBetween,
                                                         children: [
+                                                          Expanded(
+                                                              child: Text(
+                                                            "Growth Rank".tr(),
+                                                            style: FontConstant
+                                                                .k16w5008471Text,
+                                                          )),
                                                           Image.asset(
-                                                            "assets/images/bars1.png",
+                                                            "assets/images/batchicon.png",
                                                             height: 24,
                                                           )
                                                         ],
                                                       ),
-                                                      Column(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .start,
+                                                      Row(
                                                         children: [
                                                           Text(
-                                                            "3/5",
+                                                            model.rank
+                                                                .toString(),
                                                             style: FontConstant2
-                                                                .k24w4008267text,
-                                                          ),
-                                                          Text(
-                                                            "days",
-                                                            style: FontConstant2
-                                                                .k16w400B7A4text,
+                                                                .k32w5008267text,
                                                           ),
                                                         ],
                                                       )
                                                     ],
                                                   ),
                                                 ),
-                                              ],
+                                              ),
                                             ),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                              SizedBox(height: 16),
-                              Container(
-                                /*height: 190.h,
-                          width: 392.w,*/
-                                decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.circular(16)),
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 16.0, vertical: 5),
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text(
-                                            "Activity Tracker".tr(),
-                                            style: FontConstant.k16w5008471Text,
-                                          ),
-                                          Image.asset(
-                                            "assets/images/bar3.png",
-                                            height: 24,
-                                          )
-                                        ],
-                                      ),
-                                      SizedBox(height: 15),
-                                      Row(
-                                        children: [
-                                          Expanded(
-                                            child: Column(
-                                              children: [
-                                                Row(
-                                                  children: [
-                                                    Text(
-                                                      "75%",
-                                                      style: FontConstant
-                                                          .k14w400B7A4Text,
-                                                    ),
-                                                    SizedBox(
-                                                      width: 5,
-                                                    ),
-                                                    Text(
-                                                      "50%",
-                                                      style: FontConstant
-                                                          .k14w400B7A4Text,
-                                                    ),
-                                                    SizedBox(
-                                                      width: 5,
-                                                    ),
-                                                    Text(
-                                                      "10%",
-                                                      style: FontConstant
-                                                          .k14w400B7A4Text,
-                                                    ),
-                                                    SizedBox(
-                                                      width: 5,
-                                                    ),
-                                                    Text(
-                                                      "100%",
-                                                      style: FontConstant
-                                                          .k14w400B7A4Text,
-                                                    ),
-                                                    SizedBox(
-                                                      width: 5,
-                                                    ),
-                                                    Text(
-                                                      "5%",
-                                                      style: FontConstant
-                                                          .k14w400B7A4Text,
-                                                    )
-                                                  ],
+                                            SizedBox(width: 16),
+                                            Expanded(
+                                              child: Container(
+                                                height: 116,
+                                                decoration: BoxDecoration(
+                                                    color: Colors.white,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            16)),
+                                                child: Padding(
+                                                  padding: const EdgeInsets
+                                                          .symmetric(
+                                                      horizontal: 16.0,
+                                                      vertical: 4),
+                                                  child: Row(
+                                                    children: [
+                                                      Expanded(
+                                                        flex: 2,
+                                                        child: Column(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .start,
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          children: [
+                                                            Text(
+                                                              "Attendance".tr(),
+                                                              style: FontConstant
+                                                                  .k16w5008471Text,
+                                                            ),
+                                                            Row(
+                                                              mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .spaceBetween,
+                                                              children: [
+                                                                for (var v in model
+                                                                    .attendance!.)
+                                                                  Container(
+                                                                    width: 6,
+                                                                    height: 44,
+                                                                    decoration:
+                                                                        BoxDecoration(
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              18),
+                                                                      color: v.AppColors()
+                                                                          .k8267AC,
+                                                                    ),
+                                                                  ),
+                                                                /*Container(
+                                                                  width: 6,
+                                                                  height: 44,
+                                                                  decoration:
+                                                                      BoxDecoration(
+                                                                    borderRadius:
+                                                                        BorderRadius.circular(
+                                                                            18),
+                                                                    color: AppColors()
+                                                                        .k8267AC,
+                                                                  ),
+                                                                ),
+                                                                Container(
+                                                                  width: 6,
+                                                                  height: 24,
+                                                                  decoration:
+                                                                      BoxDecoration(
+                                                                    borderRadius:
+                                                                        BorderRadius.circular(
+                                                                            18),
+                                                                    color: AppColors()
+                                                                        .k8267AC
+                                                                        .withOpacity(
+                                                                            0.2),
+                                                                  ),
+                                                                ),
+                                                                Container(
+                                                                  width: 6,
+                                                                  height: 44,
+                                                                  decoration:
+                                                                      BoxDecoration(
+                                                                    borderRadius:
+                                                                        BorderRadius.circular(
+                                                                            18),
+                                                                    color: AppColors()
+                                                                        .k8267AC,
+                                                                  ),
+                                                                ),
+                                                                Container(
+                                                                  width: 6,
+                                                                  height: 24,
+                                                                  decoration:
+                                                                      BoxDecoration(
+                                                                    borderRadius:
+                                                                        BorderRadius.circular(
+                                                                            18),
+                                                                    color: AppColors()
+                                                                        .k8267AC
+                                                                        .withOpacity(
+                                                                            0.2),
+                                                                  ),
+                                                                ),*/
+                                                              ],
+                                                            )
+                                                          ],
+                                                        ),
+                                                      ),
+                                                      SizedBox(
+                                                        width: 3,
+                                                      ),
+                                                      Expanded(
+                                                        child: Column(
+                                                          /*mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,*/
+                                                          children: [
+                                                            Row(
+                                                              mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .spaceBetween,
+                                                              children: [
+                                                                Image.asset(
+                                                                  "assets/images/bars1.png",
+                                                                  height: 24,
+                                                                )
+                                                              ],
+                                                            ),
+                                                            Column(
+                                                              mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .start,
+                                                              children: [
+                                                                Text(
+                                                                  "3/5",
+                                                                  style: FontConstant2
+                                                                      .k24w4008267text,
+                                                                ),
+                                                                Text(
+                                                                  "days",
+                                                                  style: FontConstant2
+                                                                      .k16w400B7A4text,
+                                                                ),
+                                                              ],
+                                                            )
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
                                                 ),
-                                                Row(
-                                                  children: [
-                                                    Column(
-                                                      children: [
-                                                        Stack(
-                                                          children: [
-                                                            Container(
-                                                              height: 110.h,
-                                                              width: 6.w,
-                                                              decoration: BoxDecoration(
-                                                                  color: Color(
-                                                                          0xff8267AC)
-                                                                      .withOpacity(
-                                                                          0.28),
-                                                                  borderRadius:
-                                                                      BorderRadius.all(
-                                                                          Radius.circular(
-                                                                              12))),
-                                                            ),
-                                                            Positioned(
-                                                              bottom: 0,
-                                                              child: Container(
-                                                                height: 82.h,
-                                                                width: 6.w,
-                                                                decoration: BoxDecoration(
-                                                                    color: Color(
-                                                                        0xff8267AC),
-                                                                    borderRadius:
-                                                                        BorderRadius.all(
-                                                                            Radius.circular(12))),
-                                                              ),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                        Text(
-                                                          "PG",
-                                                          style: FontConstant
-                                                              .k14w400B7A4Text,
-                                                        )
-                                                      ],
-                                                    ),
-                                                    SizedBox(
-                                                      width: 15,
-                                                    ),
-                                                    Column(
-                                                      children: [
-                                                        Stack(
-                                                          children: [
-                                                            Container(
-                                                              height: 110.h,
-                                                              width: 6.w,
-                                                              decoration: BoxDecoration(
-                                                                  color: Color(
-                                                                          0xff8267AC)
-                                                                      .withOpacity(
-                                                                          0.28),
-                                                                  borderRadius:
-                                                                      BorderRadius.all(
-                                                                          Radius.circular(
-                                                                              12))),
-                                                            ),
-                                                            Positioned(
-                                                              bottom: 0,
-                                                              child: Container(
-                                                                height: 55.h,
-                                                                width: 6.w,
-                                                                decoration: BoxDecoration(
-                                                                    color: Color(
-                                                                        0xff8267AC),
-                                                                    borderRadius:
-                                                                        BorderRadius.all(
-                                                                            Radius.circular(12))),
-                                                              ),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                        Text(
-                                                          "RS",
-                                                          style: FontConstant
-                                                              .k14w400B7A4Text,
-                                                        )
-                                                      ],
-                                                    ),
-                                                    SizedBox(
-                                                      width: 15,
-                                                    ),
-                                                    Column(
-                                                      children: [
-                                                        Stack(
-                                                          children: [
-                                                            Container(
-                                                              height: 110.h,
-                                                              width: 6.w,
-                                                              decoration: BoxDecoration(
-                                                                  color: Color(
-                                                                          0xff8267AC)
-                                                                      .withOpacity(
-                                                                          0.28),
-                                                                  borderRadius:
-                                                                      BorderRadius.all(
-                                                                          Radius.circular(
-                                                                              12))),
-                                                            ),
-                                                            Positioned(
-                                                              bottom: 0,
-                                                              child: Container(
-                                                                height: 11.h,
-                                                                width: 6.w,
-                                                                decoration: BoxDecoration(
-                                                                    color: Color(
-                                                                        0xff8267AC),
-                                                                    borderRadius:
-                                                                        BorderRadius.all(
-                                                                            Radius.circular(12))),
-                                                              ),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                        Text(
-                                                          "Re",
-                                                          style: FontConstant
-                                                              .k14w400B7A4Text,
-                                                        )
-                                                      ],
-                                                    ),
-                                                    SizedBox(
-                                                      width: 15,
-                                                    ),
-                                                    Column(
-                                                      children: [
-                                                        Stack(
-                                                          children: [
-                                                            Container(
-                                                              height: 110.h,
-                                                              width: 6.w,
-                                                              decoration: BoxDecoration(
-                                                                  color: Color(
-                                                                          0xff8267AC)
-                                                                      .withOpacity(
-                                                                          0.28),
-                                                                  borderRadius:
-                                                                      BorderRadius.all(
-                                                                          Radius.circular(
-                                                                              12))),
-                                                            ),
-                                                            Positioned(
-                                                              bottom: 0,
-                                                              child: Container(
-                                                                height: 110.h,
-                                                                width: 6.w,
-                                                                decoration: BoxDecoration(
-                                                                    color: Color(
-                                                                        0xff8267AC),
-                                                                    borderRadius:
-                                                                        BorderRadius.all(
-                                                                            Radius.circular(12))),
-                                                              ),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                        Text(
-                                                          "LA",
-                                                          style: FontConstant
-                                                              .k14w400B7A4Text,
-                                                        )
-                                                      ],
-                                                    ),
-                                                    SizedBox(
-                                                      width: 15,
-                                                    ),
-                                                    Column(
-                                                      children: [
-                                                        Stack(
-                                                          children: [
-                                                            Container(
-                                                              height: 110.h,
-                                                              width: 6.w,
-                                                              decoration: BoxDecoration(
-                                                                  color: Color(
-                                                                          0xff8267AC)
-                                                                      .withOpacity(
-                                                                          0.28),
-                                                                  borderRadius:
-                                                                      BorderRadius.all(
-                                                                          Radius.circular(
-                                                                              12))),
-                                                            ),
-                                                            Positioned(
-                                                              bottom: 0,
-                                                              child: Container(
-                                                                height: 5.h,
-                                                                width: 6.w,
-                                                                decoration: BoxDecoration(
-                                                                    color: Color(
-                                                                        0xff8267AC),
-                                                                    borderRadius:
-                                                                        BorderRadius.all(
-                                                                            Radius.circular(12))),
-                                                              ),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                        Text(
-                                                          "VP",
-                                                          style: FontConstant
-                                                              .k14w400B7A4Text,
-                                                        )
-                                                      ],
-                                                    ),
-                                                  ],
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(height: 16),
+                                    Container(
+                                      /*height: 190.h,
+                          width: 392.w,*/
+                                      decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius:
+                                              BorderRadius.circular(16)),
+                                      child: Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 16.0, vertical: 5),
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: [
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Text(
+                                                  "Activity Tracker".tr(),
+                                                  style: FontConstant
+                                                      .k16w5008471Text,
+                                                ),
+                                                Image.asset(
+                                                  "assets/images/bar3.png",
+                                                  height: 24,
                                                 )
                                               ],
                                             ),
-                                          ),
-                                          SizedBox(width: 8),
-                                          Expanded(
-                                            child: SizedBox(
-                                              // height: 140,
-                                              child: ListView.builder(
-                                                  shrinkWrap: true,
-                                                  padding: EdgeInsets.zero,
-                                                  physics:
-                                                      NeverScrollableScrollPhysics(),
-                                                  itemCount: shortnames.length,
-                                                  itemBuilder:
-                                                      (BuildContext context,
-                                                          int index) {
-                                                    return Row(
-                                                      children: [
-                                                        Text(shortnames[index],
+                                            SizedBox(height: 15),
+                                            Row(
+                                              children: [
+                                                Expanded(
+                                                  child: Column(
+                                                    children: [
+                                                      Row(
+                                                        children: [
+                                                          Text(
+                                                            "75%",
                                                             style: FontConstant
-                                                                .k14w4008471Text
-                                                                .copyWith(
-                                                                    color: Color(
-                                                                        0xff331F2D))),
-                                                        SizedBox(width: 5),
-                                                        Icon(
-                                                          Icons.circle,
-                                                          size: 4,
-                                                          color:
-                                                              Color(0xff84717F),
-                                                        ),
-                                                        SizedBox(width: 5),
-                                                        Expanded(
-                                                          child: Text(
-                                                              fullnames[index]
-                                                                  .tr(),
-                                                              /* AppLoaclizations.of(
+                                                                .k14w400B7A4Text,
+                                                          ),
+                                                          SizedBox(
+                                                            width: 5,
+                                                          ),
+                                                          Text(
+                                                            "50%",
+                                                            style: FontConstant
+                                                                .k14w400B7A4Text,
+                                                          ),
+                                                          SizedBox(
+                                                            width: 5,
+                                                          ),
+                                                          Text(
+                                                            "10%",
+                                                            style: FontConstant
+                                                                .k14w400B7A4Text,
+                                                          ),
+                                                          SizedBox(
+                                                            width: 5,
+                                                          ),
+                                                          Text(
+                                                            "100%",
+                                                            style: FontConstant
+                                                                .k14w400B7A4Text,
+                                                          ),
+                                                          SizedBox(
+                                                            width: 5,
+                                                          ),
+                                                          Text(
+                                                            "5%",
+                                                            style: FontConstant
+                                                                .k14w400B7A4Text,
+                                                          )
+                                                        ],
+                                                      ),
+                                                      Row(
+                                                        children: [
+                                                          Column(
+                                                            children: [
+                                                              Stack(
+                                                                children: [
+                                                                  Container(
+                                                                    height:
+                                                                        110.h,
+                                                                    width: 6.w,
+                                                                    decoration: BoxDecoration(
+                                                                        color: Color(0xff8267AC).withOpacity(
+                                                                            0.28),
+                                                                        borderRadius:
+                                                                            BorderRadius.all(Radius.circular(12))),
+                                                                  ),
+                                                                  Positioned(
+                                                                    bottom: 0,
+                                                                    child:
+                                                                        Container(
+                                                                      height:
+                                                                          82.h,
+                                                                      width:
+                                                                          6.w,
+                                                                      decoration: BoxDecoration(
+                                                                          color: Color(
+                                                                              0xff8267AC),
+                                                                          borderRadius:
+                                                                              BorderRadius.all(Radius.circular(12))),
+                                                                    ),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                              Text(
+                                                                "PG",
+                                                                style: FontConstant
+                                                                    .k14w400B7A4Text,
+                                                              )
+                                                            ],
+                                                          ),
+                                                          SizedBox(
+                                                            width: 15,
+                                                          ),
+                                                          Column(
+                                                            children: [
+                                                              Stack(
+                                                                children: [
+                                                                  Container(
+                                                                    height:
+                                                                        110.h,
+                                                                    width: 6.w,
+                                                                    decoration: BoxDecoration(
+                                                                        color: Color(0xff8267AC).withOpacity(
+                                                                            0.28),
+                                                                        borderRadius:
+                                                                            BorderRadius.all(Radius.circular(12))),
+                                                                  ),
+                                                                  Positioned(
+                                                                    bottom: 0,
+                                                                    child:
+                                                                        Container(
+                                                                      height:
+                                                                          55.h,
+                                                                      width:
+                                                                          6.w,
+                                                                      decoration: BoxDecoration(
+                                                                          color: Color(
+                                                                              0xff8267AC),
+                                                                          borderRadius:
+                                                                              BorderRadius.all(Radius.circular(12))),
+                                                                    ),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                              Text(
+                                                                "RS",
+                                                                style: FontConstant
+                                                                    .k14w400B7A4Text,
+                                                              )
+                                                            ],
+                                                          ),
+                                                          SizedBox(
+                                                            width: 15,
+                                                          ),
+                                                          Column(
+                                                            children: [
+                                                              Stack(
+                                                                children: [
+                                                                  Container(
+                                                                    height:
+                                                                        110.h,
+                                                                    width: 6.w,
+                                                                    decoration: BoxDecoration(
+                                                                        color: Color(0xff8267AC).withOpacity(
+                                                                            0.28),
+                                                                        borderRadius:
+                                                                            BorderRadius.all(Radius.circular(12))),
+                                                                  ),
+                                                                  Positioned(
+                                                                    bottom: 0,
+                                                                    child:
+                                                                        Container(
+                                                                      height:
+                                                                          11.h,
+                                                                      width:
+                                                                          6.w,
+                                                                      decoration: BoxDecoration(
+                                                                          color: Color(
+                                                                              0xff8267AC),
+                                                                          borderRadius:
+                                                                              BorderRadius.all(Radius.circular(12))),
+                                                                    ),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                              Text(
+                                                                "Re",
+                                                                style: FontConstant
+                                                                    .k14w400B7A4Text,
+                                                              )
+                                                            ],
+                                                          ),
+                                                          SizedBox(
+                                                            width: 15,
+                                                          ),
+                                                          Column(
+                                                            children: [
+                                                              Stack(
+                                                                children: [
+                                                                  Container(
+                                                                    height:
+                                                                        110.h,
+                                                                    width: 6.w,
+                                                                    decoration: BoxDecoration(
+                                                                        color: Color(0xff8267AC).withOpacity(
+                                                                            0.28),
+                                                                        borderRadius:
+                                                                            BorderRadius.all(Radius.circular(12))),
+                                                                  ),
+                                                                  Positioned(
+                                                                    bottom: 0,
+                                                                    child:
+                                                                        Container(
+                                                                      height:
+                                                                          110.h,
+                                                                      width:
+                                                                          6.w,
+                                                                      decoration: BoxDecoration(
+                                                                          color: Color(
+                                                                              0xff8267AC),
+                                                                          borderRadius:
+                                                                              BorderRadius.all(Radius.circular(12))),
+                                                                    ),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                              Text(
+                                                                "LA",
+                                                                style: FontConstant
+                                                                    .k14w400B7A4Text,
+                                                              )
+                                                            ],
+                                                          ),
+                                                          SizedBox(
+                                                            width: 15,
+                                                          ),
+                                                          Column(
+                                                            children: [
+                                                              Stack(
+                                                                children: [
+                                                                  Container(
+                                                                    height:
+                                                                        110.h,
+                                                                    width: 6.w,
+                                                                    decoration: BoxDecoration(
+                                                                        color: Color(0xff8267AC).withOpacity(
+                                                                            0.28),
+                                                                        borderRadius:
+                                                                            BorderRadius.all(Radius.circular(12))),
+                                                                  ),
+                                                                  Positioned(
+                                                                    bottom: 0,
+                                                                    child:
+                                                                        Container(
+                                                                      height:
+                                                                          5.h,
+                                                                      width:
+                                                                          6.w,
+                                                                      decoration: BoxDecoration(
+                                                                          color: Color(
+                                                                              0xff8267AC),
+                                                                          borderRadius:
+                                                                              BorderRadius.all(Radius.circular(12))),
+                                                                    ),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                              Text(
+                                                                "VP",
+                                                                style: FontConstant
+                                                                    .k14w400B7A4Text,
+                                                              )
+                                                            ],
+                                                          ),
+                                                        ],
+                                                      )
+                                                    ],
+                                                  ),
+                                                ),
+                                                SizedBox(width: 8),
+                                                Expanded(
+                                                  child: SizedBox(
+                                                    // height: 140,
+                                                    child: ListView.builder(
+                                                        shrinkWrap: true,
+                                                        padding:
+                                                            EdgeInsets.zero,
+                                                        physics:
+                                                            NeverScrollableScrollPhysics(),
+                                                        itemCount:
+                                                            shortnames.length,
+                                                        itemBuilder:
+                                                            (BuildContext
+                                                                    context,
+                                                                int index) {
+                                                          return Row(
+                                                            children: [
+                                                              Text(
+                                                                  shortnames[
+                                                                      index],
+                                                                  style: FontConstant
+                                                                      .k14w4008471Text
+                                                                      .copyWith(
+                                                                          color:
+                                                                              Color(0xff331F2D))),
+                                                              SizedBox(
+                                                                  width: 5),
+                                                              Icon(
+                                                                Icons.circle,
+                                                                size: 4,
+                                                                color: Color(
+                                                                    0xff84717F),
+                                                              ),
+                                                              SizedBox(
+                                                                  width: 5),
+                                                              Expanded(
+                                                                child: Text(
+                                                                    fullnames[
+                                                                            index]
+                                                                        .tr(),
+                                                                    /* AppLoaclizations.of(
                                                                 context)!
                                                             .translate(
                                                                 fullnames[index])
                                                             .toString(),*/
-                                                              style: FontConstant
-                                                                  .k12w5008471Text),
-                                                        ),
-                                                      ],
-                                                    );
-                                                  }),
-                                            ),
-                                          )
-                                        ],
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              SizedBox(height: 16),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    "Attendance".tr(),
-                                    style: FontConstant2.k22w5008471text,
-                                  ),
-                                  SizedBox(height: 10),
-                                  Column(
-                                    children: [
-                                      Row(
-                                        children: [
-                                          SizedBox(
-                                            width:200,
-                                            child: Text(
-                                              "Working Days".tr(),
-                                              /*AppLoaclizations.of(context)!
+                                                                    style: FontConstant
+                                                                        .k12w5008471Text),
+                                                              ),
+                                                            ],
+                                                          );
+                                                        }),
+                                                  ),
+                                                )
+                                              ],
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(height: 16),
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          "Attendance".tr(),
+                                          style: FontConstant2.k22w5008471text,
+                                        ),
+                                        SizedBox(height: 10),
+                                        Column(
+                                          children: [
+                                            Row(
+                                              children: [
+                                                SizedBox(
+                                                  width: 200,
+                                                  child: Text(
+                                                    "Working Days".tr(),
+                                                    /*AppLoaclizations.of(context)!
                                             .translate("Working Days")
                                             .toString(),*/
-                                              style: FontConstant.k16w500331FText,
+                                                    style: FontConstant
+                                                        .k16w500331FText,
+                                                  ),
+                                                ),
+                                                SizedBox(width: 16),
+                                                Text(
+                                                  "70 days",
+                                                  style: FontConstant
+                                                      .k16w5008471Text,
+                                                )
+                                              ],
                                             ),
-                                          ),
-                                          SizedBox(width: 16),
-                                          Text(
-                                            "70 days",
-                                            style: FontConstant.k16w5008471Text,
-                                          )
-                                        ],
-                                      ),
-                                      SizedBox(height: 10),
-                                      Row(
-                                        children: [
-                                          SizedBox(
-                                            width:200,
-                                            child: Text(
-                                              "Attended days".tr(),
-                                              /*AppLoaclizations.of(context)!
+                                            SizedBox(height: 10),
+                                            Row(
+                                              children: [
+                                                SizedBox(
+                                                  width: 200,
+                                                  child: Text(
+                                                    "Attended days".tr(),
+                                                    /*AppLoaclizations.of(context)!
                                             .translate("Attended days")
                                             .toString(),*/
-                                              style: FontConstant.k16w500331FText,
+                                                    style: FontConstant
+                                                        .k16w500331FText,
+                                                  ),
+                                                ),
+                                                SizedBox(width: 16),
+                                                Text(
+                                                  "54 days",
+                                                  style: FontConstant
+                                                      .k16w5008471Text,
+                                                )
+                                              ],
                                             ),
-                                          ),
-                                          SizedBox(width: 16),
-                                          Text(
-                                            "54 days",
-                                            style: FontConstant.k16w5008471Text,
-                                          )
-                                        ],
-                                      ),
-                                      SizedBox(height: 10),
-                                      Row(
-                                        children: [
-                                          SizedBox(
-                                            width:200,
-                                            child: Text(
-                                              "Working Days".tr(),
-                                              /*AppLoaclizations.of(context)!
+                                            SizedBox(height: 10),
+                                            Row(
+                                              children: [
+                                                SizedBox(
+                                                  width: 200,
+                                                  child: Text(
+                                                    "Working Days".tr(),
+                                                    /*AppLoaclizations.of(context)!
                                             .translate("Working Days")
                                             .toString(),*/
-                                              style: FontConstant.k16w500331FText,
+                                                    style: FontConstant
+                                                        .k16w500331FText,
+                                                  ),
+                                                ),
+                                                SizedBox(width: 16),
+                                                Text(
+                                                  "4 days",
+                                                  style: FontConstant
+                                                      .k16w5008471Text,
+                                                )
+                                              ],
                                             ),
-                                          ),
-                                          SizedBox(width: 16),
-                                          Text(
-                                            "4 days",
-                                            style: FontConstant.k16w5008471Text,
-                                          )
-                                        ],
-                                      ),
-                                    ],
-                                  )
-                                ],
-                              ),
-                              SizedBox(height: 16),
-                              SizedBox(
-                                height: 52.h,
-                                width: 382.w,
-                                child: MaterialButton(
-                                  elevation: 0,
-                                  color: Colors.white,
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(30))),
-                                  onPressed: () {
-                                    showDialog(
-                                      context: context,
-                                      builder: (_) => CalendarPage2(),
-                                    );
-                                  },
-                                  child: Center(
-                                    child: Text(
-                                      "Open Calendar".tr(),
-                                      /* AppLoaclizations.of(context)!
+                                          ],
+                                        )
+                                      ],
+                                    ),
+                                    SizedBox(height: 16),
+                                    SizedBox(
+                                      height: 52.h,
+                                      width: 382.w,
+                                      child: MaterialButton(
+                                        elevation: 0,
+                                        color: Colors.white,
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(30))),
+                                        onPressed: () {
+                                          showDialog(
+                                            context: context,
+                                            builder: (_) => CalendarPage2(),
+                                          );
+                                        },
+                                        child: Center(
+                                          child: Text(
+                                            "Open Calendar".tr(),
+                                            /* AppLoaclizations.of(context)!
                                     .translate("Open Calendar")
                                     .toString(),*/
-                                      style: FontConstant
-                                          .k18w500materialbuttonText
-                                          .copyWith(
-                                              color: ThemeColor.primarycolor),
+                                            style: FontConstant
+                                                .k18w500materialbuttonText
+                                                .copyWith(
+                                                    color: ThemeColor
+                                                        .primarycolor),
+                                          ),
+                                        ),
+                                      ),
                                     ),
-                                  ),
+                                    SizedBox(height: 32),
+                                    SizedBox(
+                                        height: 52.h,
+                                        width: 382.w,
+                                        child: MainButton(
+                                            onTap: () {},
+                                            title: "Talk to class teacher".tr(),
+                                            textStyleColor: Colors.white,
+                                            backgroundColor:
+                                                ThemeColor.primarycolor)),
+                                    SizedBox(
+                                      height: 52,
+                                    )
+                                  ],
                                 ),
-                              ),
-                              SizedBox(height: 32),
-                              SizedBox(
-                                  height: 52.h,
-                                  width: 382.w,
-                                  child: MainButton(
-                                      onTap: () {},
-                                      title: "Talk to class teacher".tr(),
-                                      textStyleColor: Colors.white,
-                                      backgroundColor:
-                                          ThemeColor.primarycolor)),
-                              SizedBox(
-                                height: 52,
-                              )
-                            ],
+                              ],
+                            ),
                           ),
                         ],
                       ),
                     ),
-                  ],
+                  ),
                 ),
-              ),
-            ),
-          ),
         ));
   }
 }

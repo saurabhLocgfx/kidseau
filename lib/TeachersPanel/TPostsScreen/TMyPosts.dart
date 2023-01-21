@@ -76,6 +76,7 @@ class _TMyPostsState extends State<TMyPosts> {
     _isLoading = true;
     final resp = TeacherMyPostApi().get(scroll: 0);
     resp.then((value) {
+      //log(value.postDetails![0].tagKid.toString());
       try {
         if (value.status == 1) {
           setState(() {
@@ -178,7 +179,9 @@ class _TMyPostsState extends State<TMyPosts> {
                                                                 posts:
                                                                     _postList,
                                                                 index: index,
-                                                                onPop: (val) {},
+                                                                onPop: (val) {
+                                                                  _getData();
+                                                                },
                                                               )));
                                                 },
                                                 child: Container(

@@ -17,6 +17,7 @@ import 'package:kidseau/api/Teacherpanelapi/teacher_post_api/post_apis/teacher_g
 import 'package:kidseau/api/Teacherpanelapi/teacher_post_api/post_apis/teacher_get_sections.dart';
 import 'package:kidseau/api/Teacherpanelapi/teacher_post_api/post_apis/teacher_post_api.dart';
 import 'package:kidseau/api/Teacherpanelapi/teacher_post_api/post_apis/teacher_tag_kid_api.dart';
+import 'package:kidseau/api/Teacherpanelapi/teacher_post_api/teacher_edit_post_api.dart';
 import 'package:kidseau/api/models/Tschool_post_model/teacher_school_my_post_model.dart';
 
 class TEditPostFormScreen extends StatefulWidget {
@@ -59,6 +60,7 @@ class _TEditPostFormScreenState extends State<TEditPostFormScreen> {
     for (var v in widget.posts[widget.index].tagKid!) {
       _taggedStudents.add(v.tagKidName.toString());
       taggedStudentsId.add(v.tagId.toString());
+      //log('tag kid id ${v.tagId}');
     }
 
     super.initState();
@@ -413,7 +415,22 @@ class _TEditPostFormScreenState extends State<TEditPostFormScreen> {
               } else {
                 ScreenLoader().onLoading(context);
                 FocusScope.of(context).unfocus();
-                //TODO: Insert Edit API
+                final resp = TeacherEditPostApi().get(
+                    postId: widget.posts[widget.index].postId.toString(),
+                    caption: _captionController.text,
+                    tagId: taggedStudentsId);
+                resp.then((value) {
+                  Navigator.of(context).pop();
+                  if (value['status'] == 1) {
+                    CustomSnackBar.customSnackBar(context, 'Post Updated');
+                    Navigator.of(context).pop();
+                    widget.onPop(1);
+                  } else {
+                    CustomSnackBar.customErrorSnackBar(
+                        context, 'Update failed');
+                  }
+                  log(value.toString());
+                });
               }
             },
             "Update".tr(),

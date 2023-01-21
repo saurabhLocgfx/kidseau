@@ -60,6 +60,24 @@ class _TAttendanceScreenState extends State<TAttendanceScreen> {
         if (value['Status'] == 1) {
           setState(() {
             model = TeacherAllAttendanceModel.fromJson(value);
+            /*for(int i = 0; i<model.groupAllkid!.length;i++){
+              if(model.groupAllkid![i].status == '0'){
+                _values.add({
+                  'index': i,
+                  'value': false,
+                  'name': model.groupAllkid![i].name,
+                  'id': model.groupAllkid![i].kidId,
+                });
+              }else if(model.groupAllkid![i].status == '1'){
+                _values.add({
+                  'index': i,
+                  'value': true,
+                  'name': model.groupAllkid![i].name,
+                  'id': model.groupAllkid![i].kidId,
+                });
+              }else{}
+
+            }*/
             for (var v in model.groupAllkid!) {
               if (v.status == '0') {
                 _values.add(false);
@@ -317,7 +335,6 @@ class _TAttendanceScreenState extends State<TAttendanceScreen> {
                         padding: const EdgeInsets.symmetric(horizontal: 16.0),
                         child: Column(
                           children: [
-                            //SizedBox(height: 16,),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [

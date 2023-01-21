@@ -102,7 +102,7 @@ class _THomeScreenState extends State<THomeScreen> {
           children: [
             Padding(
               padding: const EdgeInsets.only(top: 15.0),
-              child: Text(_name.hello ?? '',
+              child: Text('Hello'.tr(),
                   style: FontConstant2.k32w5008267text.copyWith(fontSize: 25)),
             ),
           ],
@@ -386,7 +386,7 @@ class _THomeScreenState extends State<THomeScreen> {
                                                   width: 5,
                                                 ),
                                                 Text(
-                                                  "From ${_name.schdule![index].timing!.split('-').first} ",
+                                                  "${"From".tr()} ${_name.schdule![index].timing!.split('-').first} ",
                                                   style: FontConstant
                                                       .k14w400lightpurpleText
                                                       .copyWith(
@@ -397,7 +397,7 @@ class _THomeScreenState extends State<THomeScreen> {
                                                               0xffB7A4B2)),
                                                 ),
                                                 Text(
-                                                  "To ${_name.schdule![index].timing!.split('-').last}",
+                                                  "${"To".tr()} ${_name.schdule![index].timing!.split('-').last}",
                                                   style: FontConstant
                                                       .k14w400lightpurpleText
                                                       .copyWith(

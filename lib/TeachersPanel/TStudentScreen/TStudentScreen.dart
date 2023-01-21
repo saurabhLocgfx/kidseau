@@ -451,7 +451,14 @@ class _TStudentScreenState extends State<TStudentScreen> {
                                                 context,
                                                 MaterialPageRoute(
                                                     builder: (context) =>
-                                                        TStudentDetailScreen()),
+                                                        TStudentDetailScreen(
+                                                          kidId:
+                                                              _studentPerformanceModel
+                                                                  .performance![
+                                                                      index]
+                                                                  .kidId
+                                                                  .toString(),
+                                                        )),
                                               );
                                             },
                                             child: Container(
