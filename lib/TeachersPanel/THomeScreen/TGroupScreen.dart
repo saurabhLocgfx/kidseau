@@ -283,7 +283,7 @@ class _TGroupScreenState extends State<TGroupScreen> {
                                                   Row(
                                                     children: [
                                                       Text(
-                                                        "From ${scheduelModel.schdule![index].timing!.split('-').first} ",
+                                                        "${"From".tr()}  ${scheduelModel.schdule![index].timing!.split('-').first} ",
                                                         // '${groups[index]} . ${time[index]}',
                                                         style: FontConstant
                                                             .k14w400lightpurpleText
@@ -296,7 +296,7 @@ class _TGroupScreenState extends State<TGroupScreen> {
                                                                     0xffB7A4B2)),
                                                       ),
                                                       Text(
-                                                        "To ${scheduelModel.schdule![index].timing!.split('-').last}",
+                                                        "${"To".tr()} ${scheduelModel.schdule![index].timing!.split('-').last}",
                                                         // '${groups[index]} . ${time[index]}',
                                                         style: FontConstant
                                                             .k14w400lightpurpleText

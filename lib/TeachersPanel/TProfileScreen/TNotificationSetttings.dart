@@ -71,7 +71,7 @@ class _TNotificationsettingsState extends State<TNotificationsettings> {
           ),
           backgroundColor: Color(0xff8267AC).withOpacity(0.16),
           title: Text(
-            "Notification settings",
+            "Notification settings".tr(),
             style: FontConstant.k18w5008471Text,
           ),
           leading: Row(
@@ -107,7 +107,7 @@ class _TNotificationsettingsState extends State<TNotificationsettings> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "Notification Settings",
+                      "Notification Settings".tr(),
                       style: FontConstant.k18w500331FText,
                     ),
                     SizedBox(

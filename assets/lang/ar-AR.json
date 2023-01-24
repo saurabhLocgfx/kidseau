@@ -48,8 +48,14 @@
   "Profile": " الشخصي",
 
   "Posts": " المنشورات",
-
+  "English": "English",
+  "French": "Français",
+  "Notification Settings": "إعدادات الإشعارات",
+  "About Us": "من نحن",
+  "(Click image to crop)":"(انقر فوق الصورة لتغير الاطار)",
   "Kids": " الاطفال",
+  "Choose section": "اختر الاختيار",
+  "Choose group": "اختر المجموعة",
 
   "Message": " الرسائل",
 
@@ -74,6 +80,7 @@
   "5 years": "5سنوات",
 
   "kid":"الطفل",
+  "Email Address": "البريد الالكتروني",
 
   "Class":"القسم",
 
@@ -90,6 +97,7 @@
   "years": "سنوات",
 
   "Female": "بنت",
+  "kid Profile":"صفحة الطفل",
 
   "Parent": "الأولياء",
 
@@ -223,12 +231,24 @@
   "Add post": "أضف مشاركة",
   "Enter your address": "أدخل عنوانك",
   "Caption": "شرح",
-  "Write here": "أكتب هنا",
-  "Tag": "أضف طفلا",
+  "Write here": "اكتب هنا",
+  "Tag": "بطاقة شعارا",
   "Personal Details": "معلومات شخصية",
   "Add more": "أضف المزيد",
   "Discard": "إلغاء",
   "Description":"الشرح",
+  "Years of experience": "سنوات الخبرة",
+  "Phone number": "رقم الهاتف",
+  "Tag students": "أضف طفلا",
+  "Male": "ذكر",
+  "days": "يوم ",
+  "Arabic": "عربي",
+  "Submit": "إرسال",
+  "Father's name": "إسم الأب",
+  "View father’s info": "عرض معلومات الأب",
+  "Enter reminder’s title": "أدخل عنوان تذكير",
+  "Change email & phone number": "تغيير البريد الإلكتروني ورقم الهاتف",
+
 
   "Time":"الوقت",
 
@@ -269,6 +289,11 @@
   "Contact":"أشخاص",
 
   "Reminder": " تذكير",
+  "Sunday": "الأحد",
+  "Monday": "الإثنين",
+  "Tuesday": "الثلاثاء",
+  "Wednesday": "الأربعاء",
+  "Thursday": "الخميس",
 
   "Tomorrow is holiday":" غدا هو يوم عطلة",
 
@@ -302,7 +327,8 @@
 
   "Enter your highest degree":"أدخل مستواك الدراسي",
 
-  "Year of experiance":"سنوات الخبرة",
+  "Year of Experience":"سنوات الخبرة",
+  "Enter your years of experience": "أدخل سنوات خبرتك",
 
   "Select your gender":"أختر جنسك",
 

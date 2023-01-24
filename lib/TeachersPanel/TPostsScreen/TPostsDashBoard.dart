@@ -9,6 +9,7 @@ import 'package:kidseau/TeachersPanel/TPostsScreen/TMyPosts.dart';
 import 'package:kidseau/TeachersPanel/TPostsScreen/TPostsScreen.dart';
 import 'package:kidseau/TeachersPanel/TReminder/TReminderScreen.dart';
 import 'package:kidseau/Theme.dart';
+import 'package:kidseau/shard_prefs/shared_prefs.dart';
 
 import '../../restartappwidget/restartwidgets.dart';
 import 'TAddPostsScreen.dart';
@@ -108,6 +109,7 @@ class _TPostsDashBoardState extends State<TPostsDashBoard> {
                                     children: [
                                       GestureDetector(
                                         onTap: () {
+                                          UserPrefs.setEArbBool(false);
                                           context.locale = Locale('en', 'US');
                                           RestartWidget.restartApp(context);
 
@@ -118,7 +120,7 @@ class _TPostsDashBoardState extends State<TPostsDashBoard> {
                                         child: Row(
                                           children: [
                                             Text(
-                                              ("English"),
+                                              ("English".tr()),
                                               style: colorChange
                                                   ? FontConstant.k16w5008267Text
                                                   : FontConstant
@@ -130,6 +132,7 @@ class _TPostsDashBoardState extends State<TPostsDashBoard> {
                                       SizedBox(height: 20),
                                       GestureDetector(
                                         onTap: () {
+                                          UserPrefs.setEArbBool(false);
                                           context.locale = Locale('fr', 'FR');
                                           RestartWidget.restartApp(context);
 
@@ -145,7 +148,7 @@ class _TPostsDashBoardState extends State<TPostsDashBoard> {
                                         child: Row(
                                           children: [
                                             Text(
-                                              ("French"),
+                                              ("French".tr()),
                                               style: colorChange
                                                   ? FontConstant.k16w5008267Text
                                                   : FontConstant
@@ -157,6 +160,7 @@ class _TPostsDashBoardState extends State<TPostsDashBoard> {
                                       SizedBox(height: 20),
                                       GestureDetector(
                                         onTap: () {
+                                          UserPrefs.setEArbBool(true);
                                           context.locale = Locale('ar', 'AR');
                                           RestartWidget.restartApp(context);
 
@@ -174,7 +178,7 @@ class _TPostsDashBoardState extends State<TPostsDashBoard> {
                                         child: Row(
                                           children: [
                                             Text(
-                                              ("Arabic"),
+                                              ("Arabic".tr()),
                                               style: colorChange
                                                   ? FontConstant.k16w5008267Text
                                                   : FontConstant

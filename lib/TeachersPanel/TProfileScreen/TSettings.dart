@@ -37,7 +37,7 @@ class _TSettingsState extends State<TSettings> {
           ),
           backgroundColor: Color(0xff8267AC).withOpacity(0.16),
           title: Text(
-            "Settings",
+            "Settings".tr(),
             style: FontConstant.k18w5008471Text,
           ),
           leading: Row(
@@ -77,7 +77,7 @@ class _TSettingsState extends State<TSettings> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        "Notification Settings",
+                        "Notification Settings".tr(),
                         style: FontConstant.k18w500331FText,
                       ),
                       Image.asset(
@@ -132,7 +132,7 @@ class _TSettingsState extends State<TSettings> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        "About Us",
+                        "About Us".tr(),
                         style: FontConstant.k18w500331FText,
                       ),
                       Image.asset(

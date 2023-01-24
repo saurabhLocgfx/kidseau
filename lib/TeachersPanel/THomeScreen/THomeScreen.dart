@@ -102,7 +102,7 @@ class _THomeScreenState extends State<THomeScreen> {
           children: [
             Padding(
               padding: const EdgeInsets.only(top: 15.0),
-              child: Text('Hello'.tr(),
+              child: Text("${"Hello".tr()} ${_name.hello ?? ''}",
                   style: FontConstant2.k32w5008267text.copyWith(fontSize: 25)),
             ),
           ],
@@ -140,7 +140,7 @@ class _THomeScreenState extends State<THomeScreen> {
                                       child: Row(
                                         children: [
                                           Text(
-                                            ("English"),
+                                            ("English".tr()),
                                             style: colorChange
                                                 ? FontConstant.k16w5008267Text
                                                 : FontConstant.k18w5008471Text,
@@ -161,7 +161,7 @@ class _THomeScreenState extends State<THomeScreen> {
                                       child: Row(
                                         children: [
                                           Text(
-                                            ("French"),
+                                            ("French".tr()),
                                             style: colorChange
                                                 ? FontConstant.k16w5008267Text
                                                 : FontConstant.k18w5008471Text,
@@ -183,7 +183,7 @@ class _THomeScreenState extends State<THomeScreen> {
                                       child: Row(
                                         children: [
                                           Text(
-                                            ("Arabic"),
+                                            ("Arabic".tr()),
                                             style: colorChange
                                                 ? FontConstant.k16w5008267Text
                                                 : FontConstant.k18w5008471Text,

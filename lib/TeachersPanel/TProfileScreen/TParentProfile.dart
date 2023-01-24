@@ -26,7 +26,7 @@ class _TParentProfileState extends State<TParentProfile> {
     "Family name".tr(),
     "Gender".tr(),
     "Birthday".tr(),
-    "Year of experiance".tr(),
+    "Year of Experience".tr(),
     "Address".tr(),
   ];
 
@@ -279,7 +279,7 @@ class _TParentProfileState extends State<TParentProfile> {
                               children: [
                                 Expanded(
                                   child: Text(
-                                    "Year of experiance".tr(),
+                                    "Year of Experience".tr(),
                                     style: FontConstant.k16w500331FText,
                                   ),
                                 ),

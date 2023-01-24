@@ -81,7 +81,7 @@ class _PHomeScreenState extends State<PHomeScreen> {
                                       child: Row(
                                         children: [
                                           Text(
-                                            ("English"),
+                                            ("English".tr()),
                                             style: colorChange
                                                 ? FontConstant.k16w5008267Text
                                                 : FontConstant.k18w5008471Text,
@@ -102,7 +102,7 @@ class _PHomeScreenState extends State<PHomeScreen> {
                                       child: Row(
                                         children: [
                                           Text(
-                                            ("French"),
+                                            ("French".tr()),
                                             style: colorChange
                                                 ? FontConstant.k16w5008267Text
                                                 : FontConstant.k18w5008471Text,
@@ -123,7 +123,7 @@ class _PHomeScreenState extends State<PHomeScreen> {
                                       child: Row(
                                         children: [
                                           Text(
-                                            ("Arabic"),
+                                            ("Arabic".tr()),
                                             style: colorChange
                                                 ? FontConstant.k16w5008267Text
                                                 : FontConstant.k18w5008471Text,

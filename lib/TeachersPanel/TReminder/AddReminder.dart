@@ -88,7 +88,7 @@ class _TAddReminderState extends State<TAddReminder> {
                   SizedBox(
                     height: 4.h,
                   ),
-                  textfield(context, "Enter Reminder’s title")
+                  textfield(context, "Enter reminder’s title".tr())
                 ],
               ),
               SizedBox(height: 8.h),
@@ -103,7 +103,18 @@ class _TAddReminderState extends State<TAddReminder> {
                   SizedBox(
                     height: 4.h,
                   ),
-                  textfield(context, "Enter Reminder’s time")
+                  InkWell(
+                    onTap: () {
+                      showTimePicker(
+                        context: context,
+                        initialTime: TimeOfDay(hour: 12, minute: 00),
+                      );
+                    },
+                    child: IgnorePointer(
+                      child: IconTextfield(
+                          Icon: "assets/images/clock.png", title: "12:00"),
+                    ),
+                  )
                 ],
               ),
               SizedBox(height: 8.h),
@@ -129,7 +140,7 @@ class _TAddReminderState extends State<TAddReminder> {
                     child: IgnorePointer(
                       child: IconTextfield(
                           Icon: "assets/images/calendericon.png",
-                          title: "Select date"),
+                          title: "dd/mm/yyyy"),
                     ),
                   )
                 ],

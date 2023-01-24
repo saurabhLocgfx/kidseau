@@ -498,7 +498,7 @@ class _TPersonalDetailsState extends State<TPersonalDetails> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Year of experiance".tr(),
+                        "Year of Experience".tr(),
                         style: FontConstant.k16w500331FText,
                       ),
                       SizedBox(height: 4),

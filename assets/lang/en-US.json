@@ -86,6 +86,7 @@
   "5 years": "5 years",
 
   "kid": "kid",
+  "Email Address": "Email Address",
 
   "Class": "Class",
 
@@ -102,6 +103,7 @@
   "years": "years",
 
   "Female": "Female",
+  "kid Profile": "Kid Profile",
 
   "Parent": "Parent",
 
@@ -196,6 +198,9 @@
   "Discard": "Discard",
   "Write here...": "Write here...",
   "Tag": "Tag",
+  "Tag students": "Tag students",
+  "days": "days",
+
   "Caption": "Caption",
 
   "Time": "Time",
@@ -235,6 +240,11 @@
   "Contact": "Contact",
 
   "Reminder": "Reminder",
+  "Sunday": "Sunday",
+  "Monday": "Monday",
+  "Tuesday": "Tuesday",
+  "Wednesday": "Wednesday",
+  "Thursday": "Thursday",
 
   "Tomorrow is holiday": "Tomorrow is holiday",
 
@@ -249,8 +259,24 @@
   "Save": "Save",
 
   "students":  "students",
-
+  "English": "English",
+  "French": "Français",
+  "Notification Settings": "Notification Settings",
+  "About Us": "About Us",
+  "(Click image to crop)": "(Click image to crop)",
+  "Choose section": "Choose Section",
+  "Choose group": "Choose group",
   "Wednesday’s attendance": "Wednesday’s attendance",
+  "Male": "Male",
+  "Phone number": "Phone number",
+  "Years of experience": "Years of experience",
+  "Arabic": "عربي",
+  "Submit": "Submit",
+  "Father's name": "Father's name",
+  "View father’s info": "View father’s info",
+  "Enter reminder’s title": "Enter reminder’s title",
+  "Write here": "Write here",
+  "Change email & phone number": "Change email & phone number",
 
   "Personal details":  "Personal details",
 
@@ -270,7 +296,8 @@
 
   "Enter your highest degree": "Enter your highest degree",
 
-  "Year of experiance": "Year of experiance",
+  "Year of Experience": "Year of experience",
+  "Enter your years of experience": "Enter your years of experience",
 
   "Select your gender": "Select your gender",
 

@@ -7,6 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:kidseau/ParentsPanel/POnboardingScreens/PSplashScreen.dart';
 import 'package:kidseau/Theme.dart';
+import 'package:kidseau/choose_language_screen.dart';
 import 'package:kidseau/restartappwidget/restartwidgets.dart';
 import 'package:kidseau/shard_prefs/shared_prefs.dart';
 
@@ -121,9 +122,9 @@ class MyAppState extends State<MyApp> {
                   // ParentInfo()
                   // TWaitingScreen()
                   // PSignupCode()
-                  TDashboard(),
-              // PDashboard(),
-              //PSplashScreen(),
+                  //TDashboard(),
+                  // PDashboard(),
+                  PSplashScreen(),
             ),
           );
         });

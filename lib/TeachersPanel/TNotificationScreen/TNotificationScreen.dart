@@ -95,7 +95,7 @@ class _TNotificationScreenState extends State<TNotificationScreen> {
               //     MaterialPageRoute(builder: (context) => MessageScreen()));
             },
             child: Text(
-              "Notification".tr(),
+              "Notifications".tr(),
               /*AppLoaclizations.of(context)!
                   .translate("Notification")
                   .toString(),*/
@@ -126,7 +126,7 @@ class _TNotificationScreenState extends State<TNotificationScreen> {
             Align(
               alignment: Alignment.center,
               child: Text(
-                "Today",
+                "Today".tr(),
                 style: FontConstant.k14w500B7A4Text,
               ),
             ),
@@ -245,7 +245,7 @@ class _TNotificationScreenState extends State<TNotificationScreen> {
             Align(
               alignment: Alignment.center,
               child: Text(
-                "Yesterday",
+                "Yesterday".tr(),
                 style: FontConstant.k14w500B7A4Text,
               ),
             ),

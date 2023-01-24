@@ -8,6 +8,7 @@ import 'package:kidseau/TeachersPanel/TMessages/TMessages.dart';
 import 'package:kidseau/TeachersPanel/TMessages/TParents.dart';
 import 'package:kidseau/TeachersPanel/TNotificationScreen/TNotificationScreen.dart';
 import 'package:kidseau/Theme.dart';
+import 'package:kidseau/shard_prefs/shared_prefs.dart';
 
 import '../../restartappwidget/restartwidgets.dart';
 import '../TReminder/TReminderScreen.dart';
@@ -66,7 +67,7 @@ class _TMessageDashboardState extends State<TMessageDashboard> {
                 onTap: () {},
                 child: Padding(
                   padding: const EdgeInsets.only(top: 15.0),
-                  child: Text("Messages",
+                  child: Text("Messages".tr(),
                       style:
                           FontConstant2.k32w5008267text.copyWith(fontSize: 25)),
                 ),
@@ -105,6 +106,7 @@ class _TMessageDashboardState extends State<TMessageDashboard> {
                                       children: [
                                         GestureDetector(
                                           onTap: () {
+                                            UserPrefs.setEArbBool(false);
                                             context.locale = Locale('en', 'US');
                                             RestartWidget.restartApp(context);
 
@@ -115,7 +117,7 @@ class _TMessageDashboardState extends State<TMessageDashboard> {
                                           child: Row(
                                             children: [
                                               Text(
-                                                ("English"),
+                                                ("English".tr()),
                                                 style: colorChange
                                                     ? FontConstant
                                                         .k16w5008267Text
@@ -128,6 +130,7 @@ class _TMessageDashboardState extends State<TMessageDashboard> {
                                         SizedBox(height: 20),
                                         GestureDetector(
                                           onTap: () {
+                                            UserPrefs.setEArbBool(false);
                                             context.locale = Locale('fr', 'FR');
                                             RestartWidget.restartApp(context);
 
@@ -143,7 +146,7 @@ class _TMessageDashboardState extends State<TMessageDashboard> {
                                           child: Row(
                                             children: [
                                               Text(
-                                                ("French"),
+                                                ("French".tr()),
                                                 style: colorChange
                                                     ? FontConstant
                                                         .k16w5008267Text
@@ -156,24 +159,18 @@ class _TMessageDashboardState extends State<TMessageDashboard> {
                                         SizedBox(height: 20),
                                         GestureDetector(
                                           onTap: () {
+                                            UserPrefs.setEArbBool(true);
                                             context.locale = Locale('ar', 'AR');
                                             RestartWidget.restartApp(context);
 
                                             setState(() {
                                               colorChange;
                                             });
-                                            /* Navigator.pop(context);
-                                            Navigator.of(context).push(
-                                              MaterialPageRoute(
-                                                builder: (context) =>
-                                                    TSettings(),
-                                              ),
-                                            );*/
                                           },
                                           child: Row(
                                             children: [
                                               Text(
-                                                ("Arabic"),
+                                                ("Arabic".tr()),
                                                 style: colorChange
                                                     ? FontConstant
                                                         .k16w5008267Text

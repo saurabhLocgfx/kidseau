@@ -1,6 +1,7 @@
 import 'dart:developer';
 import 'dart:ui';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -30,7 +31,7 @@ class _TSyllabusState extends State<TSyllabus> {
     "Group E",
   ];
 
-  String selected = 'Sunday';
+  String selected = 'Sunday'.tr();
 
   int current = 0;
 
@@ -42,9 +43,9 @@ class _TSyllabusState extends State<TSyllabus> {
   void initState() {
     _getData();
     if (DateFormat('EEEE').format(DateTime.now()) == 'Friday') {
-      selected = 'Sunday';
+      selected = 'Sunday'.tr();
     } else if (DateFormat('EEEE').format(DateTime.now()) == 'Saturday') {
-      selected = 'Sunday';
+      selected = 'Sunday'.tr();
     } else {
       selected = DateFormat('EEEE').format(DateTime.now());
     }
@@ -78,13 +79,13 @@ class _TSyllabusState extends State<TSyllabus> {
   String _str = 'sun';
   TeacherSyllabusModel _syllabusModel = TeacherSyllabusModel();
   _getSyllabus() {
-    if (selected == 'Monday') {
+    if (selected == 'Monday'.tr()) {
       _str = 'mon';
-    } else if (selected == 'Tuesday') {
+    } else if (selected == 'Tuesday'.tr()) {
       _str = 'tues';
-    } else if (selected == 'Wednesday') {
+    } else if (selected == 'Wednesday'.tr()) {
       _str = 'wed';
-    } else if (selected == 'Thursday') {
+    } else if (selected == 'Thursday'.tr()) {
       _str = 'thrus';
     } else {
       _str = 'sun';
@@ -124,7 +125,7 @@ class _TSyllabusState extends State<TSyllabus> {
         ),
         backgroundColor: Color(0xff8267AC).withOpacity(0.16),
         title: Text(
-          "Syllabus",
+          "Syllabus".tr(),
           style: FontConstant.k18w5008471Text,
         ),
         leading: Row(
@@ -182,13 +183,13 @@ class _TSyllabusState extends State<TSyllabus> {
                                     height: 24,
                                     color: Color(0xff84717F),
                                   ),
-                                  hint: Text(selected),
+                                  hint: Text(selected.tr()),
                                   items: <String>[
-                                    'Sunday',
-                                    'Monday',
-                                    'Tuesday',
-                                    'Wednesday',
-                                    'Thursday',
+                                    'Sunday'.tr(),
+                                    'Monday'.tr(),
+                                    'Tuesday'.tr(),
+                                    'Wednesday'.tr(),
+                                    'Thursday'.tr(),
                                   ].map((String value) {
                                     return DropdownMenuItem<String>(
                                       value: value,

@@ -82,7 +82,7 @@ class _TReminderScreenState extends State<TReminderScreen> {
             ],
           ),
           title: Text(
-            "Reminder",
+            "Reminder".tr(),
             /*AppLoaclizations.of(context)!.translate("Reminder").toString(),*/
             style: FontConstant.k18w5008471Text,
           ),

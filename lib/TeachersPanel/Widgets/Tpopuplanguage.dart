@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:kidseau/TeachersPanel/TProfileScreen/TSettings.dart';
 import 'package:kidseau/Theme.dart';
@@ -38,7 +39,7 @@ class TLanguagepopup extends StatelessWidget {
                       child: Row(
                         children: [
                           Text(
-                            ("English"),
+                            ("English".tr()),
                             style: FontConstant.k18w5008471Text,
                           )
                         ],
@@ -58,7 +59,7 @@ class TLanguagepopup extends StatelessWidget {
                         children: [
                           SizedBox(width: 15),
                           Text(
-                            ("Arabic"),
+                            ("Arabic".tr()),
                             style: FontConstant.k18w5008471Text,
                           )
                         ],
@@ -78,7 +79,7 @@ class TLanguagepopup extends StatelessWidget {
                         children: [
                           SizedBox(width: 15),
                           Text(
-                            ("Freach"),
+                            ("French".tr()),
                             style: FontConstant.k18w5008471Text,
                           )
                         ],

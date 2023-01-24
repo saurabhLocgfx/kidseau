@@ -12,6 +12,9 @@ class KidPerformanceDetailModel {
   Attendance? attendance;
   List<Actvity>? actvity;
   String? allDayAttendance;
+  String? workingDay;
+  String? kidAttendDay;
+  String? holiDay;
 
   KidPerformanceDetailModel(
       {this.status,
@@ -26,6 +29,9 @@ class KidPerformanceDetailModel {
       this.rank,
       this.attendance,
       this.actvity,
+      this.workingDay,
+      this.kidAttendDay,
+      this.holiDay,
       this.allDayAttendance});
 
   KidPerformanceDetailModel.fromJson(Map<String, dynamic> json) {
@@ -49,6 +55,9 @@ class KidPerformanceDetailModel {
       });
     }
     allDayAttendance = json['allDayAttendance'];
+    workingDay = json['workingDay'];
+    kidAttendDay = json['kidAttendDay'];
+    holiDay = json['holiDay'];
   }
 
   Map<String, dynamic> toJson() {
@@ -70,6 +79,9 @@ class KidPerformanceDetailModel {
       data['actvity'] = this.actvity!.map((v) => v.toJson()).toList();
     }
     data['allDayAttendance'] = this.allDayAttendance;
+    data['workingDay'] = this.workingDay;
+    data['kidAttendDay'] = this.kidAttendDay;
+    data['holiDay'] = this.holiDay;
     return data;
   }
 }
@@ -78,6 +90,8 @@ class Attendance {
   String? day1;
   String? day2;
   String? day3;
+  String? day4;
+  String? day5;
 
   Attendance({this.day1, this.day2, this.day3});
 
@@ -85,6 +99,8 @@ class Attendance {
     day1 = json['day-1'];
     day2 = json['day-2'];
     day3 = json['day-3'];
+    day4 = json['day-4'];
+    day5 = json['day-5'];
   }
 
   Map<String, dynamic> toJson() {
@@ -92,6 +108,8 @@ class Attendance {
     data['day-1'] = this.day1;
     data['day-2'] = this.day2;
     data['day-3'] = this.day3;
+    data['day-4'] = this.day4;
+    data['day-5'] = this.day5;
     return data;
   }
 }

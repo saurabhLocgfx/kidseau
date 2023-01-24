@@ -62,7 +62,26 @@
 
   "Profile":"Profil",
 
+  "English": "English",
+  "French": "Français",
   "Posts":"Publications",
+  "Notification Settings": "Paramètre de notification",
+  "Male": "Mal",
+  "Phone number": "Numéro de téléphone",
+  "days": "jours",
+  "Tag students": "Mentionner un enfant",
+  "About Us": "Qui sommes nous",
+  "(Click image to crop)": "(Cliquez sur l'image pour recadrer)",
+  "Choose section": "Choisissez la séction",
+  "Choose group": "Choisissez le groupe",
+  "Years of experience": "Années d'expérience",
+  "Arabic": "عربي",
+  "Submit": "Soumettre",
+  "Father's name": "Nom du papa",
+  "View father’s info": "Voir les info du père",
+  "Enter reminder’s title": "Entrez le titre du rappel",
+  "Write here": "Ecrivez ici",
+  "Change email & phone number": "Modifier l’e-mails et le numéro de téléphone",
 
   "Kids":"Enfants",
 
@@ -89,6 +108,7 @@
   "5 years":"5 ans",
 
   "kid":"Enfant",
+  "Email Address": "Adresse mail",
 
   "Class":"Groupe",
 
@@ -105,6 +125,7 @@
   "years":"ans",
 
   "Female":"Femelle",
+  "kid Profile": "Profil de l'enfant",
 
   "Parent":"Parent",
 
@@ -194,7 +215,7 @@
   "Caption": "Sous-titre",
   "Write here...": "Écrire ici",
   "Enter your address": "Entrez votre adresse",
-  "Tag": "Mentionner un enfant",
+  "Tag": "Tagez",
   "Personal Details": "Détails personnels",
   "Add more": "Ajouter plus",
   "Discard": "Abandonner",
@@ -241,6 +262,11 @@
   "Add Kid": "Ajouter un enfant",
 
   "Reminder":"Rappel",
+  "Sunday": "Dimanche",
+  "Monday": "Lundi",
+  "Tuesday": "Mardi",
+  "Wednesday": "Mercredi",
+  "Thursday": "Jeudi",
 
   "Today" : "Aujourd'hui",
 
@@ -305,7 +331,8 @@
 
   "Enter your highest degree": "Entrez votre niveau d'étude",
 
-  "Year of experiance":"Année d'expérience",
+  "Year of Experience":"Année d'expérience",
+  "Enter your years of experience": "Entrez votre année d'expérience",
 
   "Select your gender": "Selectionnez votre genre ",
 

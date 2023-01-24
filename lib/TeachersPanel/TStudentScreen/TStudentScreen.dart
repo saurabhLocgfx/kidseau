@@ -15,6 +15,7 @@ import 'package:kidseau/api/Teacherpanelapi/teacher_student_performance_apis/sub
 import 'package:kidseau/api/models/perforamnce_models/performance_activity_model.dart';
 import 'package:kidseau/api/models/perforamnce_models/student_performance_model.dart';
 import 'package:kidseau/api/models/teacher_group_model/teacher_group_model.dart';
+import 'package:kidseau/shard_prefs/shared_prefs.dart';
 
 import '../../Widgets/buttons.dart';
 import '../../api/Teacherpanelapi/teacher_home_api/teacher_group_api.dart';
@@ -99,6 +100,9 @@ class _TStudentScreenState extends State<TStudentScreen> {
           };
           _isLoading = false;
           _activityLoading = false;
+          if (_activityModel.allKidActvity!.isEmpty) {
+            _studentPerformanceLoading = false;
+          }
         });
       } else {
         setState(() {
@@ -205,6 +209,7 @@ class _TStudentScreenState extends State<TStudentScreen> {
                                     children: [
                                       GestureDetector(
                                         onTap: () {
+                                          UserPrefs.setEArbBool(false);
                                           context.locale = Locale('en', 'US');
                                           RestartWidget.restartApp(context);
 
@@ -215,7 +220,7 @@ class _TStudentScreenState extends State<TStudentScreen> {
                                         child: Row(
                                           children: [
                                             Text(
-                                              ("English"),
+                                              ("English".tr()),
                                               style: colorChange
                                                   ? FontConstant.k16w5008267Text
                                                   : FontConstant
@@ -227,6 +232,7 @@ class _TStudentScreenState extends State<TStudentScreen> {
                                       SizedBox(height: 20),
                                       GestureDetector(
                                         onTap: () {
+                                          UserPrefs.setEArbBool(false);
                                           context.locale = Locale('fr', 'FR');
                                           RestartWidget.restartApp(context);
 
@@ -242,7 +248,7 @@ class _TStudentScreenState extends State<TStudentScreen> {
                                         child: Row(
                                           children: [
                                             Text(
-                                              ("French"),
+                                              ("French".tr()),
                                               style: colorChange
                                                   ? FontConstant.k16w5008267Text
                                                   : FontConstant
@@ -254,6 +260,7 @@ class _TStudentScreenState extends State<TStudentScreen> {
                                       SizedBox(height: 20),
                                       GestureDetector(
                                         onTap: () {
+                                          UserPrefs.setEArbBool(true);
                                           context.locale = Locale('ar', 'AR');
                                           RestartWidget.restartApp(context);
 
@@ -271,7 +278,7 @@ class _TStudentScreenState extends State<TStudentScreen> {
                                         child: Row(
                                           children: [
                                             Text(
-                                              ("Arabic"),
+                                              ("Arabic".tr()),
                                               style: colorChange
                                                   ? FontConstant.k16w5008267Text
                                                   : FontConstant
@@ -405,7 +412,7 @@ class _TStudentScreenState extends State<TStudentScreen> {
                                 ),
                                 SizedBox(width: 8),
                                 Text(
-                                  "Today",
+                                  "Today".tr(),
                                   style: FontConstant.k16w500B7A4Text,
                                 ),
                               ],

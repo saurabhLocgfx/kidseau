@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -27,7 +29,7 @@ class _TOnboardingScreenState extends State<TOnboardingScreen> {
   @override
   void initState() {
     ezarabic2 = UserPrefs.getArbBool() ?? false;
-
+    log(ezarabic2.toString());
     super.initState();
     // print();
   }

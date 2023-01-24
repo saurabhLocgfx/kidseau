@@ -49,9 +49,9 @@ class _TEditProfileScreenState extends State<TEditProfileScreen> {
 
     profileImageUrl = widget.model.image ?? '';
     if (widget.model.gender!.toLowerCase() == 'm') {
-      _gender = 'male';
+      _gender = 'Male'.tr();
     } else if (widget.model.gender!.toLowerCase() == 'f') {
-      _gender = 'female';
+      _gender = 'Female'.tr();
     } else {}
     _eduFocus.addListener(() {
       setState(() {});
@@ -266,7 +266,7 @@ class _TEditProfileScreenState extends State<TEditProfileScreen> {
                                 ),
                                 SizedBox(width: 16),
                                 Text(
-                                  'Change Profile'.tr(),
+                                  'Change Profile Photo'.tr(),
                                   style: FontConstant.k16w5008471Text,
                                 ),
                               ],
@@ -344,7 +344,7 @@ class _TEditProfileScreenState extends State<TEditProfileScreen> {
                         Center(
                           child: Container(
                             height: 64,
-                            padding: EdgeInsets.only(left: 16),
+                            padding: EdgeInsets.only(left: 16, right: 16),
                             decoration: BoxDecoration(
                                 color: Colors.white,
                                 borderRadius: BorderRadius.circular(90)),
@@ -368,7 +368,7 @@ class _TEditProfileScreenState extends State<TEditProfileScreen> {
                                 isExpanded: true,
                                 underline: SizedBox(),
                                 value: _gender,
-                                items: <String>['male', 'female']
+                                items: <String>['Male'.tr(), 'Female'.tr()]
                                     .map((String value) {
                                   return DropdownMenuItem<String>(
                                     value: value,
@@ -388,7 +388,7 @@ class _TEditProfileScreenState extends State<TEditProfileScreen> {
                           ),
                         ),
                         SizedBox(height: 16),
-                        Text('Year Of Experience'.tr(),
+                        Text('Year of Experience'.tr(),
                             style: _expFocus.hasFocus
                                 ? FontConstant.k16w5008471Text
                                 : FontConstant.k16w500331FText),
@@ -441,7 +441,7 @@ class _TEditProfileScreenState extends State<TEditProfileScreen> {
                             padding: EdgeInsets.symmetric(vertical: 5),
                             color: Colors.transparent,
                             child: Text(
-                              'Change email & phone number',
+                              'Change email & phone number'.tr(),
                               style: FontConstant.k16w5008471,
                             ),
                           ),
@@ -455,7 +455,7 @@ class _TEditProfileScreenState extends State<TEditProfileScreen> {
                                 dob: _birthday,
                                 education: _educationController.text,
                                 experience: _yearController.text,
-                                gender: _gender,
+                                gender: _gender.toLowerCase(),
                                 address: _addressController.text);
                             resp.then((value) {
                               if (value['status'] == 1) {
@@ -570,7 +570,7 @@ class _BottomSheetWidgetState extends State<BottomSheetWidget> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Email'.tr(),
+                Text('Email address'.tr(),
                     style: _emailNode.hasFocus
                         ? FontConstant.k16w5008471Text
                         : FontConstant.k16w500331FText),
@@ -584,7 +584,7 @@ class _BottomSheetWidgetState extends State<BottomSheetWidget> {
                   controller: _emailController,
                   validator: (val) {
                     if (_emailController.text.isEmpty) {
-                      return 'This field cannot be empty';
+                      return 'This field cannot be empty'.tr();
                     } else {
                       return null;
                     }
@@ -628,7 +628,7 @@ class _BottomSheetWidgetState extends State<BottomSheetWidget> {
                         //color: Colors.black,
                         //padding: EdgeInsets.all(16),
                         child: Text(
-                          _emailTimer ? _start.toString() : 'Verify',
+                          _emailTimer ? _start.toString() : 'Verify'.tr(),
                           style: _emailNode.hasFocus
                               ? FontConstant.k18w500Primary
                               : FontConstant.k18w500B7A4B2,
@@ -711,7 +711,7 @@ class _BottomSheetWidgetState extends State<BottomSheetWidget> {
                         //color: Colors.black,
                         //padding: EdgeInsets.all(16),
                         child: Text(
-                          _numberTimer ? _start.toString() : 'Verify',
+                          _numberTimer ? _start.toString() : 'Verify'.tr(),
                           style: _phoneNode.hasFocus
                               ? FontConstant.k18w500Primary
                               : FontConstant.k18w500B7A4B2,
@@ -795,7 +795,7 @@ class _BottomSheetWidgetState extends State<BottomSheetWidget> {
                               });
                             }
                           : () {},
-                      title: "Save",
+                      title: "Save".tr(),
                       textStyleColor: Colors.white,
                       backgroundColor: ThemeColor.primarycolor),
                 ),

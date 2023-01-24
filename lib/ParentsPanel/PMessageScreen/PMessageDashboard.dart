@@ -109,7 +109,7 @@ class _PMessageDashboardState extends State<PMessageDashboard> {
                                         child: Row(
                                           children: [
                                             Text(
-                                              ("English"),
+                                              ("English".tr()),
                                               style: colorChange
                                                   ? FontConstant.k16w5008267Text
                                                   : FontConstant
@@ -137,7 +137,7 @@ class _PMessageDashboardState extends State<PMessageDashboard> {
                                         child: Row(
                                           children: [
                                             Text(
-                                              ("French"),
+                                              ("French".tr()),
                                               style: colorChange
                                                   ? FontConstant.k16w5008267Text
                                                   : FontConstant
@@ -167,7 +167,7 @@ class _PMessageDashboardState extends State<PMessageDashboard> {
                                         child: Row(
                                           children: [
                                             Text(
-                                              ("Arabic"),
+                                              ("Arabic".tr()),
                                               style: colorChange
                                                   ? FontConstant.k16w5008267Text
                                                   : FontConstant

@@ -8,6 +8,7 @@ import 'package:kidseau/TeachersPanel/THomeScreen/TActivityScreen.dart';
 import 'package:kidseau/Theme.dart';
 import 'package:kidseau/api/Teacherpanelapi/Tkid_details_api/T_kid_details.dart';
 import 'package:kidseau/api/models/kid_detail_model/kid_detail_model.dart';
+import 'package:kidseau/shard_prefs/shared_prefs.dart';
 
 class TKidsOverview extends StatefulWidget {
   const TKidsOverview({Key? key}) : super(key: key);
@@ -44,10 +45,12 @@ class _TKidsOverviewState extends State<TKidsOverview> {
 
   @override
   void initState() {
+    _isArabic = UserPrefs.getArbBool() ?? false;
     _getData();
     super.initState();
   }
 
+  bool _isArabic = false;
   bool _isLoading = false;
   KidDetailModel model = KidDetailModel();
   _getData() {
@@ -91,7 +94,7 @@ class _TKidsOverviewState extends State<TKidsOverview> {
           backgroundColor: Color(0xff8267AC).withOpacity(0.16),
           centerTitle: false,
           title: Text(
-            "Kid’s Profile ",
+            "kid Profile".tr(),
             style: FontConstant.k18w5008471Text,
           ),
           leading: Row(
@@ -203,13 +206,11 @@ class _TKidsOverviewState extends State<TKidsOverview> {
                             padding:
                                 const EdgeInsets.symmetric(horizontal: 16.0),
                             child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Align(
-                                  alignment: Alignment.centerLeft,
-                                  child: Text(
-                                    "kid ".tr(),
-                                    style: FontConstant2.k22w5008471text,
-                                  ),
+                                Text(
+                                  "kid".tr(),
+                                  style: FontConstant2.k22w5008471text,
                                 ),
                                 SizedBox(height: 10),
                                 Row(
@@ -263,7 +264,7 @@ class _TKidsOverviewState extends State<TKidsOverview> {
                                           CrossAxisAlignment.start,
                                       children: [
                                         Text(
-                                          '${model.age} years',
+                                          '${model.age} ${'years'.tr()}',
                                           style: FontConstant.k16w5008471Text,
                                         )
                                       ],
@@ -321,7 +322,9 @@ class _TKidsOverviewState extends State<TKidsOverview> {
                                           CrossAxisAlignment.start,
                                       children: [
                                         Text(
-                                          model.gender.toString(),
+                                          model.gender.toString() == 'M'
+                                              ? 'Male'.tr()
+                                              : 'Female'.tr(),
                                           style: FontConstant.k16w5008471Text,
                                         )
                                       ],
@@ -634,8 +637,6 @@ class _TKidsOverviewState extends State<TKidsOverview> {
                                               Row(
                                                 children: [
                                                   Expanded(
-                                                    /*width: 104.w,
-                                      height: 27.h,*/
                                                     child: Column(
                                                       mainAxisAlignment:
                                                           MainAxisAlignment
@@ -734,7 +735,7 @@ class _TKidsOverviewState extends State<TKidsOverview> {
                                                 mainAxisAlignment:
                                                     MainAxisAlignment.center,
                                                 children: [
-                                                  Text("Close",
+                                                  Text("Close".tr(),
                                                       style: FontConstant2
                                                           .k24w5008267text
                                                           .copyWith(
@@ -756,7 +757,8 @@ class _TKidsOverviewState extends State<TKidsOverview> {
                                                 mainAxisAlignment:
                                                     MainAxisAlignment.center,
                                                 children: [
-                                                  Text("View Father's info",
+                                                  Text(
+                                                      "View father’s info".tr(),
                                                       style: FontConstant2
                                                           .k24w5008267text
                                                           .copyWith(
@@ -776,15 +778,17 @@ class _TKidsOverviewState extends State<TKidsOverview> {
                                 ),
                               ),
                             ),
-                            Positioned(
-                              right: -10,
-                              top: 30,
-                              child: Image.asset(
-                                'assets/images/owl.png',
-                                width: 166,
-                                height: 154,
-                              ),
-                            ),
+                            _isArabic
+                                ? SizedBox.shrink()
+                                : Positioned(
+                                    right: -10,
+                                    top: 30,
+                                    child: Image.asset(
+                                      'assets/images/owl.png',
+                                      width: 166,
+                                      height: 154,
+                                    ),
+                                  ),
                           ]),
                           Container(
                             height: 210,

@@ -7,6 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kidseau/Constants/colors.dart';
 import 'package:kidseau/api/Teacherpanelapi/teacher_student_performance_apis/student_detail_api.dart';
 import 'package:kidseau/api/models/kid_detail_model/kid_performance_detail_model.dart';
+import 'package:kidseau/shard_prefs/shared_prefs.dart';
 
 import '../../Theme.dart';
 import '../../Widgets/Calender/calendermodel.dart';
@@ -43,12 +44,15 @@ class _TStudentDetailScreenState extends State<TStudentDetailScreen> {
 
   @override
   void initState() {
+    print(widget.kidId);
+    _isArabic = UserPrefs.getArbBool() ?? false;
     _getDetails();
     super.initState();
   }
 
   KidPerformanceDetailModel model = KidPerformanceDetailModel();
 
+  List<String> _attendanceVal = [];
   bool _isLoading = false;
   _getDetails() {
     _isLoading = true;
@@ -57,6 +61,21 @@ class _TStudentDetailScreenState extends State<TStudentDetailScreen> {
       if (value['status'] == 1) {
         setState(() {
           model = KidPerformanceDetailModel.fromJson(value);
+          if (model.attendance!.day1 == '1') {
+            _attendanceVal.add('1');
+          }
+          if (model.attendance!.day2 == '1') {
+            _attendanceVal.add('1');
+          }
+          if (model.attendance!.day3 == '1') {
+            _attendanceVal.add('1');
+          }
+          if (model.attendance!.day4 == '1') {
+            _attendanceVal.add('1');
+          }
+          if (model.attendance!.day5 == '1') {
+            _attendanceVal.add('1');
+          }
           _isLoading = false;
         });
       } else {
@@ -71,6 +90,7 @@ class _TStudentDetailScreenState extends State<TStudentDetailScreen> {
     initialPage: 0,
   );
 
+  bool _isArabic = false;
   int pageIndex = 0;
   var shortnames = ["PG", "RS", "Re", "LA", "VP"];
   var fullnames = [
@@ -256,15 +276,17 @@ class _TStudentDetailScreenState extends State<TStudentDetailScreen> {
                                             ),
                                             Stack(
                                               children: [
-                                                Positioned(
-                                                  bottom: 0,
-                                                  right: 0,
-                                                  child: SizedBox(
-                                                    width: 134,
-                                                    child: Image.asset(
-                                                        'assets/images/birds.png'),
-                                                  ),
-                                                ),
+                                                _isArabic
+                                                    ? SizedBox.shrink()
+                                                    : Positioned(
+                                                        bottom: 0,
+                                                        right: 0,
+                                                        child: SizedBox(
+                                                          width: 134,
+                                                          child: Image.asset(
+                                                              'assets/images/birds.png'),
+                                                        ),
+                                                      ),
                                                 Row(
                                                   crossAxisAlignment:
                                                       CrossAxisAlignment.end,
@@ -340,7 +362,10 @@ class _TStudentDetailScreenState extends State<TStudentDetailScreen> {
                                                         SizedBox(height: 16),
                                                         Text(
                                                           model.kidGender
-                                                              .toString(),
+                                                                      .toString() ==
+                                                                  "M"
+                                                              ? "Male".tr()
+                                                              : "Female".tr(),
                                                           style: FontConstant
                                                               .k16w5008471Text,
                                                         )
@@ -455,72 +480,131 @@ class _TStudentDetailScreenState extends State<TStudentDetailScreen> {
                                                                   MainAxisAlignment
                                                                       .spaceBetween,
                                                               children: [
-                                                                for (var v in model
-                                                                    .attendance!.)
-                                                                  Container(
-                                                                    width: 6,
-                                                                    height: 44,
-                                                                    decoration:
-                                                                        BoxDecoration(
-                                                                      borderRadius:
-                                                                          BorderRadius.circular(
-                                                                              18),
-                                                                      color: v.AppColors()
-                                                                          .k8267AC,
-                                                                    ),
-                                                                  ),
-                                                                /*Container(
+                                                                Container(
                                                                   width: 6,
-                                                                  height: 44,
+                                                                  height: model.attendance!.day1 ==
+                                                                              null ||
+                                                                          model.attendance!.day1 ==
+                                                                              '0'
+                                                                      ? 24
+                                                                      : 44,
                                                                   decoration:
                                                                       BoxDecoration(
                                                                     borderRadius:
                                                                         BorderRadius.circular(
                                                                             18),
-                                                                    color: AppColors()
-                                                                        .k8267AC,
+                                                                    color: model.attendance!.day1 ==
+                                                                                null ||
+                                                                            model.attendance!.day1 ==
+                                                                                '0'
+                                                                        ? AppColors()
+                                                                            .k8267AC
+                                                                            .withOpacity(
+                                                                                0.2)
+                                                                        : AppColors()
+                                                                            .k8267AC,
                                                                   ),
                                                                 ),
                                                                 Container(
                                                                   width: 6,
-                                                                  height: 24,
+                                                                  height: model.attendance!.day2 ==
+                                                                              null ||
+                                                                          model.attendance!.day2 ==
+                                                                              '0'
+                                                                      ? 24
+                                                                      : 44,
                                                                   decoration:
                                                                       BoxDecoration(
                                                                     borderRadius:
                                                                         BorderRadius.circular(
                                                                             18),
-                                                                    color: AppColors()
-                                                                        .k8267AC
-                                                                        .withOpacity(
-                                                                            0.2),
+                                                                    color: model.attendance!.day2 ==
+                                                                                null ||
+                                                                            model.attendance!.day2 ==
+                                                                                '0'
+                                                                        ? AppColors()
+                                                                            .k8267AC
+                                                                            .withOpacity(
+                                                                                0.2)
+                                                                        : AppColors()
+                                                                            .k8267AC,
                                                                   ),
                                                                 ),
                                                                 Container(
                                                                   width: 6,
-                                                                  height: 44,
+                                                                  height: model.attendance!.day3 ==
+                                                                              null ||
+                                                                          model.attendance!.day3 ==
+                                                                              '0'
+                                                                      ? 24
+                                                                      : 44,
                                                                   decoration:
                                                                       BoxDecoration(
                                                                     borderRadius:
                                                                         BorderRadius.circular(
                                                                             18),
-                                                                    color: AppColors()
-                                                                        .k8267AC,
+                                                                    color: model.attendance!.day3 ==
+                                                                                null ||
+                                                                            model.attendance!.day3 ==
+                                                                                '0'
+                                                                        ? AppColors()
+                                                                            .k8267AC
+                                                                            .withOpacity(
+                                                                                0.2)
+                                                                        : AppColors()
+                                                                            .k8267AC,
                                                                   ),
                                                                 ),
                                                                 Container(
                                                                   width: 6,
-                                                                  height: 24,
+                                                                  height: model.attendance!.day4 ==
+                                                                              null ||
+                                                                          model.attendance!.day4 ==
+                                                                              '0'
+                                                                      ? 24
+                                                                      : 44,
                                                                   decoration:
                                                                       BoxDecoration(
                                                                     borderRadius:
                                                                         BorderRadius.circular(
                                                                             18),
-                                                                    color: AppColors()
-                                                                        .k8267AC
-                                                                        .withOpacity(
-                                                                            0.2),
+                                                                    color: model.attendance!.day4 ==
+                                                                                null ||
+                                                                            model.attendance!.day4 ==
+                                                                                '0'
+                                                                        ? AppColors()
+                                                                            .k8267AC
+                                                                            .withOpacity(
+                                                                                0.2)
+                                                                        : AppColors()
+                                                                            .k8267AC,
                                                                   ),
-                                                                ),*/
+                                                                ),
+                                                                Container(
+                                                                  width: 6,
+                                                                  height: model.attendance!.day5 ==
+                                                                              null ||
+                                                                          model.attendance!.day5 ==
+                                                                              '0'
+                                                                      ? 24
+                                                                      : 44,
+                                                                  decoration:
+                                                                      BoxDecoration(
+                                                                    borderRadius:
+                                                                        BorderRadius.circular(
+                                                                            18),
+                                                                    color: model.attendance!.day5 ==
+                                                                                null ||
+                                                                            model.attendance!.day5 ==
+                                                                                '0'
+                                                                        ? AppColors()
+                                                                            .k8267AC
+                                                                            .withOpacity(
+                                                                                0.2)
+                                                                        : AppColors()
+                                                                            .k8267AC,
+                                                                  ),
+                                                                ),
                                                               ],
                                                             )
                                                           ],
@@ -553,12 +637,12 @@ class _TStudentDetailScreenState extends State<TStudentDetailScreen> {
                                                                       .start,
                                                               children: [
                                                                 Text(
-                                                                  "3/5",
+                                                                  "${_attendanceVal.length}/${model.attendance!.toJson().length}",
                                                                   style: FontConstant2
                                                                       .k24w4008267text,
                                                                 ),
                                                                 Text(
-                                                                  "days",
+                                                                  "days".tr(),
                                                                   style: FontConstant2
                                                                       .k16w400B7A4text,
                                                                 ),
@@ -952,7 +1036,7 @@ class _TStudentDetailScreenState extends State<TStudentDetailScreen> {
                                                 ),
                                                 SizedBox(width: 16),
                                                 Text(
-                                                  "70 days",
+                                                  "${model.workingDay} ${'days'.tr()}",
                                                   style: FontConstant
                                                       .k16w5008471Text,
                                                 )
@@ -974,7 +1058,7 @@ class _TStudentDetailScreenState extends State<TStudentDetailScreen> {
                                                 ),
                                                 SizedBox(width: 16),
                                                 Text(
-                                                  "54 days",
+                                                  "${model.kidAttendDay} ${'days'.tr()}",
                                                   style: FontConstant
                                                       .k16w5008471Text,
                                                 )
@@ -986,7 +1070,7 @@ class _TStudentDetailScreenState extends State<TStudentDetailScreen> {
                                                 SizedBox(
                                                   width: 200,
                                                   child: Text(
-                                                    "Working Days".tr(),
+                                                    "Holidays".tr(),
                                                     /*AppLoaclizations.of(context)!
                                             .translate("Working Days")
                                             .toString(),*/
@@ -996,7 +1080,7 @@ class _TStudentDetailScreenState extends State<TStudentDetailScreen> {
                                                 ),
                                                 SizedBox(width: 16),
                                                 Text(
-                                                  "4 days",
+                                                  "${model.holiDay} ${'days'.tr()}",
                                                   style: FontConstant
                                                       .k16w5008471Text,
                                                 )
@@ -1043,7 +1127,7 @@ class _TStudentDetailScreenState extends State<TStudentDetailScreen> {
                                         width: 382.w,
                                         child: MainButton(
                                             onTap: () {},
-                                            title: "Talk to class teacher".tr(),
+                                            title: "Edit".tr(),
                                             textStyleColor: Colors.white,
                                             backgroundColor:
                                                 ThemeColor.primarycolor)),

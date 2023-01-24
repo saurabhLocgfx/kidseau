@@ -247,7 +247,7 @@ class _TPostFormScreenState extends State<TPostFormScreen> {
                 height: 16,
               ),
               Text(
-                '(Click image to crop)',
+                '(Click image to crop)'.tr(),
                 style: FontConstant.k12w4008267Text,
               ),
               Padding(
@@ -276,11 +276,11 @@ class _TPostFormScreenState extends State<TPostFormScreen> {
                         ),
                       ),
                       SizedBox(height: 16),
-                      Text("Choose section*".tr(),
+                      Text("Choose section".tr(),
                           style: FontConstant.k16w500331FText),
                       SizedBox(height: 4),
                       Container(
-                        padding: EdgeInsets.only(left: 20),
+                        padding: EdgeInsets.only(left: 20, right: 20),
                         height: 54.h,
                         width: 1.sw,
                         decoration: BoxDecoration(
@@ -372,11 +372,11 @@ class _TPostFormScreenState extends State<TPostFormScreen> {
                         ),
                       ),*/
                       SizedBox(height: 16),
-                      Text("Choose group*".tr(),
+                      Text("Choose group".tr(),
                           style: FontConstant.k16w500331FText),
                       SizedBox(height: 4),
                       Container(
-                        padding: EdgeInsets.only(left: 20),
+                        padding: EdgeInsets.only(left: 20, right: 20),
                         height: 54.h,
                         width: 1.sw,
                         decoration: BoxDecoration(
@@ -490,7 +490,7 @@ class _TPostFormScreenState extends State<TPostFormScreen> {
                             color: Colors.white),
                         decoration: TextFieldDecoration().curvedWhiteDecoration(
                           curved: true,
-                          label: 'Tag students',
+                          label: 'Tag students'.tr(),
                         ),
                         mentions: [
                           Mention(
@@ -624,7 +624,7 @@ class _TPostFormScreenState extends State<TPostFormScreen> {
                 });
               }
             },
-            "Post".tr(),
+            "Posts".tr(),
             ThemeColor.primarycolor,
             52.0,
           ),
