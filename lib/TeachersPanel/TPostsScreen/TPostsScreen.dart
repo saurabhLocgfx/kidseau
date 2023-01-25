@@ -8,12 +8,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:kidseau/Theme.dart';
 import 'package:kidseau/Widgets/dialogs.dart';
+import 'package:kidseau/api/Teacherpanelapi/teacher_post_api/post_apis/teacher_hide_post_api.dart';
 import 'package:kidseau/api/Teacherpanelapi/teacher_post_api/teacher_all_post_api.dart';
 import 'package:kidseau/api/Teacherpanelapi/teacher_post_api/teacher_like_post.dart';
 import 'package:kidseau/api/models/Tschool_post_model/teacher_school_post_model.dart'
     as model;
 
 import '../../enlarged_image_screen.dart';
+import 'TEditPostScreen.dart';
 
 class TPostsScreen extends StatefulWidget {
   const TPostsScreen({Key? key}) : super(key: key);
@@ -164,7 +166,215 @@ class _TPostsScreenState extends State<TPostsScreen> {
                                         ),
                                       ],
                                     ),
-                                    PostOptionsDialog(),
+                                    PopupMenuButton(
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(16)),
+                                        iconSize: 40,
+                                        icon: ImageIcon(
+                                          AssetImage(
+                                            "assets/images/dots2.png",
+                                          ),
+                                        ),
+                                        itemBuilder: (context) {
+                                          return [
+                                            PopupMenuItem(
+                                              enabled: false,
+                                              child: SizedBox(
+                                                height: 160,
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          left: 16.0),
+                                                  child: Column(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      _postList[index]
+                                                                  .teacherPost! ==
+                                                              0
+                                                          ? InkWell(
+                                                              onTap: () {
+                                                                final resp = TeacherHidePostApi().get(
+                                                                    postId: _postList[
+                                                                            index]
+                                                                        .postId
+                                                                        .toString());
+                                                                resp.then(
+                                                                    (value) {
+                                                                  if (value[
+                                                                          'status'] ==
+                                                                      1) {
+                                                                    setState(
+                                                                        () {
+                                                                      _postList
+                                                                          .removeAt(
+                                                                              index);
+                                                                      Navigator.of(
+                                                                              context)
+                                                                          .pop();
+                                                                    });
+                                                                  }
+                                                                });
+                                                              },
+                                                              child: Row(
+                                                                children: [
+                                                                  Image.asset(
+                                                                    "assets/images/eyelogo.png",
+                                                                    height: 24,
+                                                                  ),
+                                                                  SizedBox(
+                                                                      width:
+                                                                          24),
+                                                                  Text(
+                                                                    "Hide".tr(),
+                                                                    style: FontConstant
+                                                                        .k18w5008471Text,
+                                                                  )
+                                                                ],
+                                                              ),
+                                                            )
+                                                          : SizedBox.shrink(),
+                                                      _postList[index]
+                                                                  .teacherPost! ==
+                                                              0
+                                                          ? SizedBox(height: 26)
+                                                          : SizedBox.shrink(),
+                                                      InkWell(
+                                                        onTap: () {
+                                                          showModalBottomSheet(
+                                                              shape: RoundedRectangleBorder(
+                                                                  borderRadius: BorderRadius.only(
+                                                                      topLeft: const Radius
+                                                                              .circular(
+                                                                          20.0),
+                                                                      topRight:
+                                                                          const Radius.circular(
+                                                                              20.0))),
+                                                              context: context,
+                                                              builder:
+                                                                  (builder) {
+                                                                return Container(
+                                                                    height: 298,
+                                                                    decoration:
+                                                                        BoxDecoration(
+                                                                            // color: Colors.transparent,
+                                                                            borderRadius:
+                                                                                BorderRadius.only(topLeft: const Radius.circular(20.0), topRight: const Radius.circular(20.0))),
+                                                                    child: Padding(
+                                                                      padding: const EdgeInsets
+                                                                              .only(
+                                                                          left:
+                                                                              16),
+                                                                      child:
+                                                                          Column(
+                                                                        crossAxisAlignment:
+                                                                            CrossAxisAlignment.start,
+                                                                        children: [
+                                                                          SizedBox(
+                                                                            height:
+                                                                                10,
+                                                                          ),
+                                                                          Text(
+                                                                            "Report ",
+                                                                            style:
+                                                                                FontConstant.k24w50084717FText,
+                                                                          ),
+                                                                          SizedBox(
+                                                                            height:
+                                                                                34,
+                                                                          ),
+                                                                          Text(
+                                                                            "I don’t like this",
+                                                                            style:
+                                                                                FontConstant.k16w500331FText,
+                                                                          ),
+                                                                          SizedBox(
+                                                                            height:
+                                                                                34,
+                                                                          ),
+                                                                          Text(
+                                                                            "Not from the same group",
+                                                                            style:
+                                                                                FontConstant.k16w500331FText,
+                                                                          ),
+                                                                          SizedBox(
+                                                                            height:
+                                                                                34,
+                                                                          ),
+                                                                          Text(
+                                                                            "Inappropriate content",
+                                                                            style:
+                                                                                FontConstant.k16w500331FText,
+                                                                          ),
+                                                                          SizedBox(
+                                                                            height:
+                                                                                34,
+                                                                          ),
+                                                                          Row(
+                                                                            mainAxisAlignment:
+                                                                                MainAxisAlignment.center,
+                                                                            children: [
+                                                                              Container(
+                                                                                width: 100.w,
+                                                                                height: 3,
+                                                                                decoration: BoxDecoration(borderRadius: BorderRadius.circular(20), color: Color(0xff331F2D)),
+                                                                              ),
+                                                                            ],
+                                                                          )
+                                                                        ],
+                                                                      ),
+                                                                    ));
+                                                              });
+                                                        },
+                                                        child: Row(
+                                                          children: [
+                                                            Image.asset(
+                                                              "assets/images/reportlogo.png",
+                                                              height: 24,
+                                                            ),
+                                                            SizedBox(width: 24),
+                                                            Text(
+                                                              "Report".tr(),
+                                                              /* AppLoaclizations.of(context)!
+                                  .translate("Report")
+                                  .toString(),*/
+                                                              style: FontConstant
+                                                                  .k18w5008471Text,
+                                                            )
+                                                          ],
+                                                        ),
+                                                      ),
+                                                      SizedBox(height: 26),
+                                                      Row(
+                                                        children: [
+                                                          Image.asset(
+                                                            "assets/images/downloadicon.png",
+                                                            height: 24,
+                                                          ),
+                                                          SizedBox(width: 24),
+                                                          Text(
+                                                            "Download".tr(),
+                                                            /*AppLoaclizations.of(context)!
+                                .translate("Download")
+                                .toString(),*/
+                                                            style: FontConstant
+                                                                .k18w5008471Text,
+                                                          )
+                                                        ],
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ];
+                                        }),
+                                    // PostOptionsDialog(),
                                     /*GestureDetector(
                           onTap: () {},
                           child: Container(

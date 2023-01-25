@@ -98,6 +98,7 @@ class _PSignupScreenState extends State<PSignupScreen> {
                                   return null;
                                 },
                                 controller: emailController,
+                                keyboardType: TextInputType.emailAddress,
                                 style: FontConstant.k18w5008471Text,
                                 decoration: InputDecoration(
                                   contentPadding: EdgeInsets.all(14.0),
@@ -170,6 +171,14 @@ class _PSignupScreenState extends State<PSignupScreen> {
                                               msg: value['msg']);
                                         } else {
                                           UserPrefs.setCookies(value['key']);
+                                          UserPrefs.setEnteredVal(
+                                              emailController.text);
+                                          UserPrefs.setIsMother(isChecked);
+                                          if (isChecked) {
+                                            UserPrefs.setIsFather(false);
+                                          } else {
+                                            UserPrefs.setIsFather(true);
+                                          }
                                           Navigator.of(context).push(
                                               MaterialPageRoute(
                                                   builder: (context) =>

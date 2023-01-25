@@ -51,6 +51,7 @@ class _ParentinfodashboardState extends State<Parentinfodashboard>
         return false;
       },
       child: Scaffold(
+        resizeToAvoidBottomInset: true,
         body: Container(
           color: ThemeColor.primarycolor.withOpacity(.06),
           child: SingleChildScrollView(
@@ -71,7 +72,7 @@ class _ParentinfodashboardState extends State<Parentinfodashboard>
                 SizedBox(
                   height: 1.sh,
                   child: PageView(
-                    //physics: NeverScrollableScrollPhysics(),
+                    physics: NeverScrollableScrollPhysics(),
                     controller: _pageController,
                     onPageChanged: (page) {
                       setState(

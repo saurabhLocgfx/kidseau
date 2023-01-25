@@ -13,6 +13,7 @@ import 'package:kidseau/api/Teacherpanelapi/Tschedule_detail_api/Tschedule_detai
 import 'package:kidseau/api/models/Tschedule_detail_model.dart';
 
 import '../../TeachersPanel/TMessages/TChats.dart';
+import 'TKidsDetails.dart';
 
 class TLearningAlphabets extends StatefulWidget {
   String scheduleID;
@@ -207,23 +208,41 @@ class _TLearningAlphabetsState extends State<TLearningAlphabets> {
                           style: FontConstant.k14w4008471Text.copyWith(
                               fontWeight: FontWeight.w400, fontSize: 18)),
                       SizedBox(height: 30),
-                      Align(
-                          alignment: Alignment.centerLeft,
-                          child: Text(
-                            "Weak Students",
-                            style: FontConstant2.baloothampifont,
-                          )),
+                      _model.weakStudent!.isEmpty
+                          ? SizedBox.shrink()
+                          : Align(
+                              alignment: Alignment.centerLeft,
+                              child: Text(
+                                "Weak Students",
+                                style: FontConstant2.baloothampifont,
+                              )),
                       _model.weakStudent!.isEmpty
                           ? SizedBox.shrink()
                           : SizedBox(height: 24),
                       ListView.separated(
                           shrinkWrap: true,
                           physics: NeverScrollableScrollPhysics(),
-                          itemBuilder: (context, index) => Studentcard(),
+                          itemBuilder: (context, index) => InkWell(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => TKidsOverview(
+                                              kidId: _model
+                                                  .weakStudent![index].kidId
+                                                  .toString(),
+                                            )),
+                                  );
+                                },
+                                child: TStudentcard(
+                                  model: _model,
+                                  index: index,
+                                ),
+                              ),
                           separatorBuilder: (ctx, ind) => SizedBox(
                                 height: 16.h,
                               ),
-                          itemCount: 5),
+                          itemCount: _model.weakStudent!.length),
                       SizedBox(
                         height: 32,
                       ),
@@ -244,8 +263,72 @@ class _TLearningAlphabetsState extends State<TLearningAlphabets> {
   }
 }
 
+class TStudentcard extends StatelessWidget {
+  final TScheduleDetailModel model;
+  final int index;
+  TStudentcard({
+    Key? key,
+    required this.model,
+    required this.index,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 260.w,
+      decoration: BoxDecoration(
+        color: Colors.transparent,
+        borderRadius: BorderRadius.circular(16),
+        image: DecorationImage(
+          image: AssetImage("assets/images/Student Card.png"),
+          fit: BoxFit.fitWidth,
+        ),
+      ),
+      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
+      child: Row(
+        children: [
+          Container(
+            height: 96,
+            width: 72,
+            child: Image.network(
+              model.weakStudent![index].image.toString(),
+              errorBuilder: (q, w, e) =>
+                  Image.asset('assets/images/Rectangle 2715.png'),
+            ),
+          ),
+          SizedBox(width: 16),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(
+                height: 8,
+              ),
+              Text(
+                model.weakStudent![index].name.toString(),
+                style: FontConstant.k16w500White,
+              ),
+              Text(
+                model.weakStudent![index].sectionName.toString(),
+                style: FontConstant.k14w400White,
+              ),
+              Text(
+                model.weakStudent![index].actTime.toString(),
+                style: FontConstant.k12w400White,
+              ),
+              Text(
+                model.weakStudent![index].rank.toString(),
+                style: FontConstant.k12w400White,
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
 class TeacherCard extends StatelessWidget {
-  const TeacherCard({
+  TeacherCard({
     Key? key,
   }) : super(key: key);
 

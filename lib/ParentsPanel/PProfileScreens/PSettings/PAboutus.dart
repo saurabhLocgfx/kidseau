@@ -39,7 +39,7 @@ class _PAboutusState extends State<PAboutus> {
           ),
           backgroundColor: Color(0xff8267AC).withOpacity(0.16),
           title: Text(
-            "About us".tr(),
+            "About Us".tr(),
             style: FontConstant.k18w5008471Text,
           ),
           leading: Row(

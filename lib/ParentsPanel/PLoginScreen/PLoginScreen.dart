@@ -6,6 +6,7 @@ import 'package:kidseau/ParentsPanel/PLoginScreen/PLoginOtpVerification.dart';
 import 'package:kidseau/ParentsPanel/PSignUpScreen/PSignupScreen.dart';
 import 'package:kidseau/Theme.dart';
 import 'package:kidseau/Widgets/buttons.dart';
+import 'package:kidseau/shard_prefs/shared_prefs.dart';
 
 import '../../api/parent_login_apis/parent_login_api.dart';
 
@@ -137,6 +138,7 @@ class PLoginScreen extends StatelessWidget {
                                             Fluttertoast.showToast(
                                                 msg: value['msg']);
                                           } else {
+                                            UserPrefs.setCookies(value['key']);
                                             Navigator.of(context).push(
                                                 MaterialPageRoute(
                                                     builder: (context) =>

@@ -1,6 +1,9 @@
 import 'dart:convert';
+import 'dart:developer';
+import 'dart:io';
 
 import 'package:http/http.dart' as http;
+import 'package:kidseau/Constants/string_const.dart';
 import 'package:kidseau/shard_prefs/shared_prefs.dart';
 
 class ParentSignUpInfo {
@@ -15,16 +18,15 @@ class ParentSignUpInfo {
       required String fatherEmail,
       required String address,
       // required String parents,
-      required dynamic pickedImage}) async {
+      required File pickedImage}) async {
     String? cookie = UserPrefs.getCookies();
+    log('cookie $cookie');
     var headers = {
       'Content-Type': 'application/json',
       'Cookie': 'PHPSESSID=$cookie',
     };
     var request = http.MultipartRequest(
-        'POST',
-        Uri.parse(
-            'https://cerebal.locgfx.com/kidsue/kids/api_parent_login/pt_sign_up.php'));
+        'POST', Uri.parse('$kAPIConst/kids/api_parent_login/pt_sign_up.php'));
     request.fields.addAll({
       'mother_nam': motherName,
       'mother_occupation': motherOccupation,
@@ -37,13 +39,16 @@ class ParentSignUpInfo {
       'address': address,
       //'profile_photo': "$pickedImage"
     });
-    request.files
-        .add(await http.MultipartFile.fromPath('profile_pic', "$pickedImage"));
+    request.files.add(
+        await http.MultipartFile.fromPath('profile_pic', pickedImage.path));
+
     request.headers.addAll(headers);
-    print(request.fields);
+    log(request.fields.toString());
+    log(request.files[0].toString());
     http.StreamedResponse response = await request.send();
     //http.StreamedResponse response = await request.send();
     var rsp = jsonDecode(await response.stream.bytesToString());
+    log('api $rsp');
     if (response.statusCode == 200) {
       return rsp;
     } else {

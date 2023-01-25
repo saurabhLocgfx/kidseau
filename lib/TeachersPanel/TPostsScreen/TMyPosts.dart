@@ -206,7 +206,7 @@ class _TMyPostsState extends State<TMyPosts> {
                                                 ),
                                               ),
                                             ),
-                                            PopupMenuItem(
+                                            /*PopupMenuItem(
                                               enabled: false,
                                               child: InkWell(
                                                 onTap: () {
@@ -234,7 +234,7 @@ class _TMyPostsState extends State<TMyPosts> {
                                                   ),
                                                 ),
                                               ),
-                                            ),
+                                            ),*/
                                             PopupMenuItem(
                                               enabled: false,
                                               child: InkWell(

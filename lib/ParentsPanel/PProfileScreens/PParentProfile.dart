@@ -86,7 +86,7 @@ class _PParentsProfileState extends State<PParentsProfile> {
                     shrinkWrap: true,
                     scrollDirection: Axis.horizontal,
                     itemBuilder: (context, index) {
-                      return Studentcard();
+                      return PStudentcard();
                     },
                     separatorBuilder: (ctx, ind) => SizedBox(
                           width: 10,

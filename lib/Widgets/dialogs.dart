@@ -160,9 +160,9 @@ class PostOptionsDialog extends StatelessWidget {
                               builder: (builder) {
                                 return Container(
                                     height: 298,
-                                    decoration: new BoxDecoration(
+                                    decoration: BoxDecoration(
                                         // color: Colors.transparent,
-                                        borderRadius: new BorderRadius.only(
+                                        borderRadius: BorderRadius.only(
                                             topLeft:
                                                 const Radius.circular(20.0),
                                             topRight:

@@ -27,7 +27,6 @@ class TeacherPostAPI {
       'grp_id': grpId,
       'tag_kid': '$idList',
     });
-
     for (var v in imgList) {
       request.files
           .add(await http.MultipartFile.fromPath('file_name[]', v.path));

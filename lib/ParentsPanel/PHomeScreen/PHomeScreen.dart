@@ -8,6 +8,7 @@ import 'package:kidseau/ParentsPanel/KidsDashboard/KidsDashboard.dart';
 import 'package:kidseau/ParentsPanel/PHomeScreen/PHomebody.dart';
 import 'package:kidseau/ParentsPanel/PReminderScreen/PReminderScreen.dart';
 import 'package:kidseau/Theme.dart';
+import 'package:kidseau/api/models/Tschedule_detail_model.dart';
 import 'package:kidseau/shard_prefs/shared_prefs.dart';
 
 import '../../restartappwidget/restartwidgets.dart';
@@ -189,7 +190,7 @@ class _PHomeScreenState extends State<PHomeScreen> {
                               itemBuilder: (context, index) {
                                 return Padding(
                                   padding: const EdgeInsets.only(right: 15.0),
-                                  child: Studentcard(),
+                                  child: PStudentcard(),
                                 );
                               },
                               itemCount: 3),
@@ -256,8 +257,8 @@ class _PHomeScreenState extends State<PHomeScreen> {
   }
 }
 
-class Studentcard extends StatelessWidget {
-  const Studentcard({
+class PStudentcard extends StatelessWidget {
+  PStudentcard({
     Key? key,
   }) : super(key: key);
 

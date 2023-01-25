@@ -27,6 +27,7 @@ class SchoolPostModel {
 
 class SchoolAllPost {
   String? teacherId;
+  int? teacherPost;
   String? fName;
   String? familyName;
   String? techProfile;
@@ -40,20 +41,22 @@ class SchoolAllPost {
 
   SchoolAllPost(
       {this.teacherId,
-        this.fName,
-        this.familyName,
-        this.techProfile,
-        this.postId,
-        this.captions,
-        this.postTime,
-        this.postDate,
-        this.like,
-        this.likeStatus,
-        this.image});
+      this.fName,
+      this.teacherPost,
+      this.familyName,
+      this.techProfile,
+      this.postId,
+      this.captions,
+      this.postTime,
+      this.postDate,
+      this.like,
+      this.likeStatus,
+      this.image});
 
   SchoolAllPost.fromJson(Map<String, dynamic> json) {
     teacherId = json['teacher_id'];
     fName = json['f_name'];
+    teacherPost = json['teacher_post'];
     likeStatus = json['likeStatus'];
     familyName = json['family_name'];
     techProfile = json['tech_profile'];
@@ -75,6 +78,7 @@ class SchoolAllPost {
     data['teacher_id'] = this.teacherId;
     data['f_name'] = this.fName;
     data['family_name'] = this.familyName;
+    data['teacher_post'] = this.teacherPost;
     data['tech_profile'] = this.techProfile;
     data['post_id'] = this.postId;
     data['captions'] = this.captions;

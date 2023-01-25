@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kidseau/Theme.dart';
@@ -247,6 +248,32 @@ class Primarytextfield extends StatelessWidget {
           ),
         )
       ],
+    );
+  }
+}
+
+class CustomInputDecoration {
+  final String hintText;
+  CustomInputDecoration({required this.hintText});
+  InputDecoration decoration() {
+    return InputDecoration(
+      contentPadding: EdgeInsets.all(14.0),
+      border: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(30),
+        borderSide: BorderSide.none,
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.all(Radius.circular(30.0)),
+        borderSide: BorderSide(color: Color(0xffBE74AA), width: 1.0),
+      ),
+      isDense: true,
+      hintText: hintText.tr(),
+      filled: true,
+      fillColor: Colors.white,
+      hintStyle: FontConstant.k14w400lightText.copyWith(
+          color: Color(0xffB7A4B2),
+          fontSize: 16.0,
+          fontWeight: FontWeight.w400),
     );
   }
 }

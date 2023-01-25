@@ -11,7 +11,8 @@ import 'package:kidseau/api/models/kid_detail_model/kid_detail_model.dart';
 import 'package:kidseau/shard_prefs/shared_prefs.dart';
 
 class TKidsOverview extends StatefulWidget {
-  const TKidsOverview({Key? key}) : super(key: key);
+  final String kidId;
+  const TKidsOverview({Key? key, required this.kidId}) : super(key: key);
 
   @override
   State<TKidsOverview> createState() => _TKidsOverviewState();
@@ -54,9 +55,8 @@ class _TKidsOverviewState extends State<TKidsOverview> {
   bool _isLoading = false;
   KidDetailModel model = KidDetailModel();
   _getData() {
-    //TODO: make kid id dynamic
     _isLoading = true;
-    final resp = TKidDetails().get(kidId: '1');
+    final resp = TKidDetails().get(kidId: widget.kidId);
     resp.then((value) {
       if (value['status'] == 1) {
         setState(() {
@@ -993,11 +993,11 @@ class _TKidsOverviewState extends State<TKidsOverview> {
                                                   borderRadius:
                                                       BorderRadius.circular(5),
                                                 ),
-                                                value: isChecked[i],
+                                                value: true, // isChecked[i],
                                                 onChanged: (bool? value) {
-                                                  setState(() {
+                                                  /*setState(() {
                                                     isChecked[i] = value!;
-                                                  });
+                                                  });*/
                                                 },
                                               ),
                                             ],
@@ -1005,7 +1005,7 @@ class _TKidsOverviewState extends State<TKidsOverview> {
                                         ),
                                       ),
                                     SizedBox(height: 20),
-                                    Row(
+                                    /*  Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
                                       children: [
@@ -1023,7 +1023,7 @@ class _TKidsOverviewState extends State<TKidsOverview> {
                                           width: 24,
                                         ),
                                       ],
-                                    ),
+                                    ),*/
                                     SizedBox(height: 40),
                                   ],
                                 ),

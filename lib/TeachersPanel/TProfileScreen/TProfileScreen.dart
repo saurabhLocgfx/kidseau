@@ -75,7 +75,9 @@ class _TParentsProfileState extends State<TParentsProfile> {
               onTap: () {
                 Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (context) => TKidsOverview(),
+                    builder: (context) => TKidsOverview(
+                      kidId: '',
+                    ),
                   ),
                 );
               },
@@ -85,9 +87,9 @@ class _TParentsProfileState extends State<TParentsProfile> {
                 child: ListView(scrollDirection: Axis.horizontal, children: [
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                    child: Studentcard(),
+                    child: PStudentcard(),
                   ),
-                  Studentcard()
+                  PStudentcard()
                 ]),
               ),
             ),
