@@ -276,17 +276,18 @@ class _TStudentDetailScreenState extends State<TStudentDetailScreen> {
                                             ),
                                             Stack(
                                               children: [
-                                                _isArabic
+                                                /*_isArabic
                                                     ? SizedBox.shrink()
-                                                    : Positioned(
-                                                        bottom: 0,
-                                                        right: 0,
-                                                        child: SizedBox(
-                                                          width: 134,
-                                                          child: Image.asset(
-                                                              'assets/images/birds.png'),
-                                                        ),
-                                                      ),
+                                                    : */
+                                                Positioned(
+                                                  bottom: 0,
+                                                  right: 0,
+                                                  child: SizedBox(
+                                                    width: 134,
+                                                    child: Image.asset(
+                                                        'assets/images/birds.png'),
+                                                  ),
+                                                ),
                                                 Row(
                                                   crossAxisAlignment:
                                                       CrossAxisAlignment.end,

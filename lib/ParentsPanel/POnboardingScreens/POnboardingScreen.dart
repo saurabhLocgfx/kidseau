@@ -122,7 +122,7 @@ class _POnboardingScreenState extends State<POnboardingScreen> {
                         },
                       ),
                     ),
-                    ezarabic2
+                    /*!ezarabic2
                         ? Row(
                             crossAxisAlignment: CrossAxisAlignment.end,
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -162,7 +162,7 @@ class _POnboardingScreenState extends State<POnboardingScreen> {
                                 ),
                               ),
 
-                              /*Stack(
+                              */ /*Stack(
                           children: [
 
                             Padding(
@@ -194,49 +194,50 @@ class _POnboardingScreenState extends State<POnboardingScreen> {
                               ),
                             ),
                           ],
-                        ),*/
+                        ),*/ /*
                             ],
                           )
-                        : Row(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(
-                                    left: 16, top: 10, bottom: 80),
-                                child: Row(
-                                  children: List.generate(
-                                    Pcontents.length,
-                                    (index) => buildDot(index, context),
+                        : */
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(
+                              left: 16, top: 10, bottom: 80),
+                          child: Row(
+                            children: List.generate(
+                              Pcontents.length,
+                              (index) => buildDot(index, context),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          width: 90,
+                          height: 130.h,
+                          child: InkWell(
+                            onTap: () {
+                              if (currentIndex == Pcontents.length - 1) {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (_) => PLoginScreen(),
                                   ),
-                                ),
-                              ),
-                              SizedBox(
-                                width: 90,
-                                height: 130.h,
-                                child: InkWell(
-                                  onTap: () {
-                                    if (currentIndex == Pcontents.length - 1) {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (_) => PLoginScreen(),
-                                        ),
-                                      );
-                                    }
-                                    controller.nextPage(
-                                      duration: Duration(milliseconds: 300),
-                                      curve: Curves.fastOutSlowIn,
-                                    );
-                                  },
-                                  child: Image.asset(
-                                    "assets/images/onbarrow.png",
-                                    fit: BoxFit.fill,
-                                  ),
-                                ),
-                              ),
+                                );
+                              }
+                              controller.nextPage(
+                                duration: Duration(milliseconds: 300),
+                                curve: Curves.fastOutSlowIn,
+                              );
+                            },
+                            child: Image.asset(
+                              "assets/images/onbarrow.png",
+                              fit: BoxFit.fill,
+                            ),
+                          ),
+                        ),
 
-                              /*Stack(
+                        /*Stack(
                           children: [
 
                             Padding(
@@ -269,8 +270,8 @@ class _POnboardingScreenState extends State<POnboardingScreen> {
                             ),
                           ],
                         ),*/
-                            ],
-                          ),
+                      ],
+                    ),
                   ],
                 ),
               ),

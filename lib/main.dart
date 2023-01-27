@@ -1,5 +1,4 @@
-import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:easy_localization/easy_localization.dart' as local;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mentions/flutter_mentions.dart';
@@ -7,19 +6,18 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:kidseau/ParentsPanel/POnboardingScreens/PSplashScreen.dart';
 import 'package:kidseau/Theme.dart';
-import 'package:kidseau/choose_language_screen.dart';
 import 'package:kidseau/restartappwidget/restartwidgets.dart';
 import 'package:kidseau/shard_prefs/shared_prefs.dart';
+import 'dart:ui' as ui;
 
-import 'ParentsPanel/PDashBoard.dart';
 import 'TeachersPanel/TDashboard.dart';
 
 GlobalKey<MyAppState> globalKey = GlobalKey<MyAppState>();
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await EasyLocalization.ensureInitialized();
+  await local.EasyLocalization.ensureInitialized();
   await UserPrefs.init();
-  runApp(EasyLocalization(
+  runApp(local.EasyLocalization(
     supportedLocales: [
       Locale('en', 'US'),
       Locale('ar', 'AR'),
@@ -85,6 +83,7 @@ class MyAppState extends State<MyApp> {
         builder: (context, child) {
           return Portal(
             child: GetMaterialApp(
+              textDirection: TextDirection.ltr,
               theme: ThemeData().copyWith(
                 colorScheme: ThemeData().colorScheme.copyWith(
                       primary: ThemeColor.primarycolor,
@@ -122,9 +121,9 @@ class MyAppState extends State<MyApp> {
                   // ParentInfo()
                   // TWaitingScreen()
                   // PSignupCode()
-                  TDashboard(),
-              // PDashboard(),
-              // PSplashScreen(),
+                  //    TDashboard(),
+                  // PDashboard(),
+                  PSplashScreen(),
             ),
           );
         });

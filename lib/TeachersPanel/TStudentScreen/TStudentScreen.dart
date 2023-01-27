@@ -149,6 +149,7 @@ class _TStudentScreenState extends State<TStudentScreen> {
     });
   }
 
+  bool _btnLoading = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -645,34 +646,47 @@ class _TStudentScreenState extends State<TStudentScreen> {
         height: 55.h,
         width: 1.sw,
         margin: EdgeInsets.only(bottom: 90, left: 16, right: 16),
-        child: MainButton(
-            onTap: () {
-              for (var v in _performanceStatus) {
-                _performance.add(
-                  {
-                    "kid_id": v['id'],
-                    "pfm": v['performance'] == 'null'
-                        ? 0
-                        : int.parse(v['performance']),
-                    "days_activity_id": _selectedMap['id']
-                  },
-                );
-              }
-              final resp =
-                  SubmitPerformanceApi().get(performance: _performance);
-              resp.then((value) {
-                if (value['status'] == 1) {
-                  CustomSnackBar.customSnackBar(
-                      context, 'Submitted successfully.');
-                } else {
-                  CustomSnackBar.customErrorSnackBar(
-                      context, 'Submit failed. Please try again later.');
-                }
-              });
-            },
-            title: "Submit".tr(),
-            textStyleColor: Colors.white,
-            backgroundColor: ThemeColor.primarycolor),
+        child: _btnLoading
+            ? Center(
+                child: CircularProgressIndicator(),
+              )
+            : MainButton(
+                onTap: () {
+                  setState(() {
+                    _btnLoading = true;
+                  });
+                  for (var v in _performanceStatus) {
+                    _performance.add(
+                      {
+                        "kid_id": v['id'],
+                        "pfm": v['performance'] == 'null'
+                            ? 0
+                            : int.parse(v['performance']),
+                        "days_activity_id": _selectedMap['id']
+                      },
+                    );
+                  }
+                  final resp =
+                      SubmitPerformanceApi().get(performance: _performance);
+                  resp.then((value) {
+                    if (value['status'] == 1) {
+                      CustomSnackBar.customSnackBar(
+                          context, 'Submitted successfully.');
+                      setState(() {
+                        _btnLoading = false;
+                      });
+                    } else {
+                      CustomSnackBar.customErrorSnackBar(
+                          context, 'Submit failed. Please try again later.');
+                      setState(() {
+                        _btnLoading = false;
+                      });
+                    }
+                  });
+                },
+                title: "Submit".tr(),
+                textStyleColor: Colors.white,
+                backgroundColor: ThemeColor.primarycolor),
       ),
     );
   }

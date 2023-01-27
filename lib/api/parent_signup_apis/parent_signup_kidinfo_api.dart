@@ -1,4 +1,6 @@
 import 'dart:convert';
+import 'dart:developer';
+import 'dart:io';
 
 import 'package:http/http.dart' as http;
 import 'package:kidseau/Constants/string_const.dart';
@@ -12,7 +14,7 @@ class KidsSignupInfo {
       required String kidAge,
       required String kidBirthday,
       required String kidGender,
-      required dynamic pickedImage}) async {
+      required File pickedImage}) async {
     String? cookie = UserPrefs.getCookies();
     var headers = {
       'Content-Type': 'application/json',
@@ -30,11 +32,11 @@ class KidsSignupInfo {
           : kidGender == 'Female'
               ? 'F'
               : 'O',
-      'profile_pic': "$pickedImage"
+      //'profile_pic': "$pickedImage"
     });
-    print(request.fields);
-    request.files
-        .add(await http.MultipartFile.fromPath('profile_pic', "$pickedImage"));
+    log(request.fields.toString());
+    request.files.add(
+        await http.MultipartFile.fromPath('profile_pic', pickedImage.path));
     request.headers.addAll(headers);
 
     http.StreamedResponse response = await request.send();

@@ -121,6 +121,7 @@ class _TAttendanceScreenState extends State<TAttendanceScreen> {
     });
   }
 
+  bool _btnLoading = false;
   final TextEditingController _controller = TextEditingController();
   List<Map<String, dynamic>> attendanceList = [];
 
@@ -706,23 +707,37 @@ class _TAttendanceScreenState extends State<TAttendanceScreen> {
         height: 52.h,
         width: 1.sw,
         margin: EdgeInsets.only(bottom: 10, left: 16, right: 16),
-        child: MainButton(
-            onTap: () {
-              final resp = TeacherSubmitAttendanceAPI().submit(attendanceList);
-              resp.then((value) {
-                log(value.toString());
-                if (value['status'] == 1) {
-                  CustomSnackBar.customSnackBar(
-                      context, 'Attendance submitted!');
-                } else {
-                  CustomSnackBar.customErrorSnackBar(
-                      context, 'Attendance not submitted!');
-                }
-              });
-            },
-            title: "Submit".tr(),
-            textStyleColor: Colors.white,
-            backgroundColor: ThemeColor.primarycolor),
+        child: _btnLoading
+            ? Center(
+                child: CircularProgressIndicator(),
+              )
+            : MainButton(
+                onTap: () {
+                  setState(() {
+                    _btnLoading = true;
+                  });
+                  final resp =
+                      TeacherSubmitAttendanceAPI().submit(attendanceList);
+                  resp.then((value) {
+                    log(value.toString());
+                    if (value['status'] == 1) {
+                      CustomSnackBar.customSnackBar(
+                          context, 'Attendance submitted!');
+                      setState(() {
+                        _btnLoading = false;
+                      });
+                    } else {
+                      CustomSnackBar.customErrorSnackBar(
+                          context, 'Attendance not submitted!');
+                      setState(() {
+                        _btnLoading = false;
+                      });
+                    }
+                  });
+                },
+                title: "Submit".tr(),
+                textStyleColor: Colors.white,
+                backgroundColor: ThemeColor.primarycolor),
       ),
     );
   }

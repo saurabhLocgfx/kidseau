@@ -28,7 +28,7 @@ class ParentSignUpInfo {
     var request = http.MultipartRequest(
         'POST', Uri.parse('$kAPIConst/kids/api_parent_login/pt_sign_up.php'));
     request.fields.addAll({
-      'mother_nam': motherName,
+      'mother_name': motherName,
       'mother_occupation': motherOccupation,
       'mother_contact': motherContact,
       'mother_email': motherEmail,
@@ -40,7 +40,7 @@ class ParentSignUpInfo {
       //'profile_photo': "$pickedImage"
     });
     request.files.add(
-        await http.MultipartFile.fromPath('profile_pic', pickedImage.path));
+        await http.MultipartFile.fromPath('profile_photo', pickedImage.path));
 
     request.headers.addAll(headers);
     log(request.fields.toString());

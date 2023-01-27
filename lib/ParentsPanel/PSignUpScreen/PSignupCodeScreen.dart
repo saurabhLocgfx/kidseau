@@ -5,6 +5,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:kidseau/ParentsPanel/PSignUpScreen/Parentinfodashboard.dart';
 import 'package:kidseau/Theme.dart';
 import 'package:kidseau/Widgets/buttons.dart';
+import 'package:kidseau/Widgets/textfields.dart';
 import 'package:kidseau/Widgets/widgets.dart';
 import 'package:kidseau/api/parent_signup_apis/voucher_code_api.dart';
 
@@ -48,8 +49,8 @@ class PSignupCode extends StatelessWidget {
                     ),
                     SizedBox(height: 5),
                     Container(
-                      height: 56.h,
-                      width: 382.w,
+                      //height: 56.h,
+                      width: 1.sw,
                       child: TextFormField(
                         validator: (voucherCode) {
                           if (voucherCode == null || voucherCode.isEmpty) {
@@ -59,32 +60,9 @@ class PSignupCode extends StatelessWidget {
                         },
                         controller: voucherCodeText,
                         style: FontConstant.k18w5008471Text,
-                        decoration: InputDecoration(
-                          contentPadding: EdgeInsets.all(14.0),
-                          enabledBorder: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(30.0)),
-                              borderSide:
-                                  BorderSide(color: Colors.white, width: 1.0)),
-                          disabledBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: Colors.white, width: 1.0),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(30.0)),
-                            borderSide: BorderSide(
-                                color: Color(0xffBE74AA), width: 1.0),
-                          ),
-                          isDense: true,
-                          hintText: "Enter your Voucher’s code".tr(),
-                          filled: true,
-                          fillColor: Colors.white,
-                          hintStyle: FontConstant.k14w400lightText.copyWith(
-                              color: Color(0xffB7A4B2),
-                              fontSize: 16.0,
-                              fontWeight: FontWeight.w400),
-                        ),
+                        decoration: CustomInputDecoration(
+                                hintText: "Enter your Voucher’s code".tr())
+                            .decoration(),
                         /*  controller: controller,*/
                       ),
                     ),

@@ -778,17 +778,18 @@ class _TKidsOverviewState extends State<TKidsOverview> {
                                 ),
                               ),
                             ),
-                            _isArabic
+                            /*_isArabic
                                 ? SizedBox.shrink()
-                                : Positioned(
-                                    right: -10,
-                                    top: 30,
-                                    child: Image.asset(
-                                      'assets/images/owl.png',
-                                      width: 166,
-                                      height: 154,
-                                    ),
-                                  ),
+                                : */
+                            Positioned(
+                              right: -10,
+                              top: 30,
+                              child: Image.asset(
+                                'assets/images/owl.png',
+                                width: 166,
+                                height: 154,
+                              ),
+                            ),
                           ]),
                           Container(
                             height: 210,

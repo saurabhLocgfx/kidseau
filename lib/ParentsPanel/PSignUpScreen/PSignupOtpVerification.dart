@@ -116,54 +116,6 @@ class _PSignupOtpVerificationState extends State<PSignupOtpVerification> {
                             inactiveColor: AppColors().k8267AC,
                           ),
                         ),
-                        /*Container(
-                          height: 50,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              SizedBox(
-                                height: 19,
-                                width: 60,
-                                child: Otpfield(
-                                  onTap: () {},
-                                  title: "",
-                                  underlinecolor1: ThemeColor.primarycolor,
-                                  underlinecolor2: ThemeColor.primarycolor,
-                                ),
-                              ),
-                              SizedBox(
-                                height: 19,
-                                width: 60,
-                                child: Otpfield(
-                                  onTap: () {},
-                                  title: "",
-                                  underlinecolor1: ThemeColor.primarycolor,
-                                  underlinecolor2: ThemeColor.primarycolor,
-                                ),
-                              ),
-                              SizedBox(
-                                height: 19,
-                                width: 60,
-                                child: Otpfield(
-                                  onTap: () {},
-                                  title: "",
-                                  underlinecolor1: ThemeColor.primarycolor,
-                                  underlinecolor2: ThemeColor.primarycolor,
-                                ),
-                              ),
-                              SizedBox(
-                                height: 19,
-                                width: 60,
-                                child: Otpfield(
-                                  onTap: () {},
-                                  title: "",
-                                  underlinecolor1: ThemeColor.primarycolor,
-                                  underlinecolor2: ThemeColor.primarycolor,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),*/
                         SizedBox(height: 32),
                         // Spacer(),
                         Center(
