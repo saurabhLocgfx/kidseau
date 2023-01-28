@@ -119,7 +119,7 @@ class _PSyllabusState extends State<PSyllabus> {
                     ],
                   ),
                   SizedBox(height: 20),
-                  Container(height: 304, child: Activity())
+                  //Container(height: 304, child: Activity())
                 ],
               ))
         ],

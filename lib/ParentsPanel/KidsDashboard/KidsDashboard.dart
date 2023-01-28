@@ -7,9 +7,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kidseau/ParentsPanel/KidsDashboard/KidsOverview.dart';
 import 'package:kidseau/ParentsPanel/KidsDashboard/Kidsgallery.dart';
 import 'package:kidseau/Theme.dart';
+import 'package:kidseau/api/models/parent_models/kid_details_models/parent_kid_overview_model.dart';
+import 'package:kidseau/api/parent_panel_apis/parent_kid_details_api/parent_kid_overview_api.dart';
 
 class PKidsDashboard extends StatefulWidget {
-  const PKidsDashboard({Key? key}) : super(key: key);
+  final String kidId;
+  const PKidsDashboard({Key? key, required this.kidId}) : super(key: key);
 
   @override
   State<PKidsDashboard> createState() => _PKidsDashboardState();
@@ -36,6 +39,31 @@ class _PKidsDashboardState extends State<PKidsDashboard> {
     super.dispose();
   }
 
+  @override
+  void initState() {
+    _getData();
+    super.initState();
+  }
+
+  bool _isLoading = false;
+  _getData() {
+    _isLoading = true;
+    final resp = KidOverviewApi().get(kidId: widget.kidId);
+    resp.then((value) {
+      if (value['Status'] == 1) {
+        setState(() {
+          overviewModel = ParentKidOverviewModel.fromJson(value);
+          _isLoading = false;
+        });
+      } else {
+        setState(() {
+          _isLoading = false;
+        });
+      }
+    });
+  }
+
+  ParentKidOverviewModel overviewModel = ParentKidOverviewModel();
   /* final PageController _pageController = PageController(
     initialPage: 0,
   );
@@ -91,83 +119,106 @@ class _PKidsDashboardState extends State<PKidsDashboard> {
             ),
           ),
         ),
-        body: SingleChildScrollView(
-          child: Column(
-            children: [
-              Container(
-                //height: 414.h,
-                //width: 414.w,
-                decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      colors: [
-                        Color(0xffD9D9D9).withOpacity(.100),
-                        Color(0xffD9D9D9).withOpacity(.0),
-                      ],
-                    ),
-                    image: DecorationImage(
-                        opacity: 0.2,
-                        image: AssetImage("assets/images/postsbackground.png"),
-                        fit: BoxFit.fill)),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                  child: Column(
-                    children: [
-                      SizedBox(height: 110),
-                      Row(
-                        children: [
-                          Container(
-                            height: 128.h,
-                            width: 96.w,
-                            decoration: BoxDecoration(
-                                image: DecorationImage(
-                                    image: AssetImage(
-                                        "assets/images/profileperson.png"))),
-                          ),
-                          SizedBox(width: 24),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                "Nobita ",
-                                style: FontConstant2.k32w500331Ftext,
-                              ),
-                              Text(
-                                "S/O -  Akbar",
-                                style: FontConstant.k16w5008471Text,
-                              ),
-                              Text("xyz@gmail.com",
-                                  style: FontConstant.k16w5008471Text),
+        body: _isLoading
+            ? Center(
+                child: CircularProgressIndicator(),
+              )
+            : SingleChildScrollView(
+                child: Column(
+                  children: [
+                    Container(
+                      //height: 414.h,
+                      //width: 414.w,
+                      decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            begin: Alignment.topCenter,
+                            end: Alignment.bottomCenter,
+                            colors: [
+                              Color(0xffD9D9D9).withOpacity(.100),
+                              Color(0xffD9D9D9).withOpacity(.0),
                             ],
                           ),
-                        ],
+                          image: DecorationImage(
+                              opacity: 0.2,
+                              image: AssetImage(
+                                  "assets/images/postsbackground.png"),
+                              fit: BoxFit.fitWidth,
+                              alignment: Alignment.topLeft)),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                        child: Column(
+                          children: [
+                            SizedBox(height: 110),
+                            Row(
+                              children: [
+                                Container(
+                                  height: 128,
+                                  width: 96,
+                                  child: Image.network(
+                                    overviewModel.kidDetails!.kidImage
+                                        .toString(),
+                                    errorBuilder: (q, w, e) => Image.asset(
+                                        "assets/images/profileperson.png"),
+                                  ),
+                                ),
+                                SizedBox(width: 20),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      overviewModel.kidDetails!.kidName
+                                          .toString(),
+                                      style: FontConstant2.k32w500331Ftext,
+                                    ),
+                                    Text(
+                                      overviewModel.kidDetails!.kidGender
+                                                  .toString()
+                                                  .toLowerCase() ==
+                                              'm'
+                                          ? "S/O -  ${overviewModel.kidDetails!.kidFather.toString()}"
+                                          : "D/O -  ${overviewModel.kidDetails!.kidFather.toString()}",
+                                      style: FontConstant.k16w5008471Text,
+                                    ),
+                                    Text(
+                                        overviewModel.kidDetails!.kidVoucher
+                                            .toString(),
+                                        style: FontConstant.k16w5008471Text),
+                                  ],
+                                ),
+                              ],
+                            ),
+                            SizedBox(height: 40),
+                            Pageviewtabprofile(),
+                            SizedBox(height: 20),
+                            pageIndex == 0
+                                ? PKidsOverview(
+                                    model: overviewModel,
+                                  )
+                                : PKidsGallery(
+                                    kidId: overviewModel.kidDetails!.kidId
+                                        .toString(),
+                                  )
+                            /* SizedBox(
+                    height: 1350.h,
+                    child: PageView(
+                      controller: _pageController,
+                      onPageChanged: (page) {
+                        setState(
+                          () {
+                            pageIndex = page;
+                          },
+                        );
+                      },
+                      children: [],
+                    ),
+                  ),*/
+                          ],
+                        ),
                       ),
-                      SizedBox(height: 40),
-                      Pageviewtabprofile(),
-                      SizedBox(height: 20),
-                      pageIndex == 0 ? PKidsOverview() : PKidsGallery()
-                      /* SizedBox(
-                      height: 1350.h,
-                      child: PageView(
-                        controller: _pageController,
-                        onPageChanged: (page) {
-                          setState(
-                            () {
-                              pageIndex = page;
-                            },
-                          );
-                        },
-                        children: [],
-                      ),
-                    ),*/
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
-            ],
-          ),
-        ),
       ),
     );
   }

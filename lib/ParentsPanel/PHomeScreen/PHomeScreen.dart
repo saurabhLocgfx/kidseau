@@ -1,16 +1,26 @@
+import 'dart:developer';
 import 'dart:ui';
 
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 // import 'package:get/get.dart';
 import 'package:kidseau/ParentsPanel/KidsDashboard/KidsDashboard.dart';
 import 'package:kidseau/ParentsPanel/PHomeScreen/PHomebody.dart';
+import 'package:kidseau/ParentsPanel/PHomeScreen/parent_all_schedule_screen.dart';
 import 'package:kidseau/ParentsPanel/PReminderScreen/PReminderScreen.dart';
 import 'package:kidseau/Theme.dart';
 import 'package:kidseau/api/models/Tschedule_detail_model.dart';
+import 'package:kidseau/api/models/parent_models/parent_home_models/parent_kid_home_model.dart';
+import 'package:kidseau/api/parent_panel_apis/parent_dashboard_api/parent_activity_home_api.dart';
+import 'package:kidseau/api/parent_panel_apis/parent_dashboard_api/parent_kid_api.dart';
 import 'package:kidseau/shard_prefs/shared_prefs.dart';
 
+import '../../Constants/colors.dart';
+import '../../TeachersPanel/THomeScreen/TScheduleScreen.dart';
+import '../../TeachersPanel/TReminder/TReminderScreen.dart';
+import '../../api/models/parent_models/parent_home_models/parent_activity_home_model.dart';
 import '../../restartappwidget/restartwidgets.dart';
 
 class PHomeScreen extends StatefulWidget {
@@ -21,41 +31,110 @@ class PHomeScreen extends StatefulWidget {
 }
 
 class _PHomeScreenState extends State<PHomeScreen> {
+  final CarouselController _controller = CarouselController();
+
   bool colorChange = false;
   bool Ezarabic = false;
+
+  @override
+  void initState() {
+    _getData();
+    super.initState();
+  }
+
+  bool _isLoading = false;
+  _getData() {
+    _isLoading = true;
+    final resp = ParentKidApi().get();
+    resp.then((value) {
+      if (value['status'] == 1) {
+        setState(() {
+          _kidModel = ParentKidHomeModel.fromJson(value);
+        });
+        // _isLoading = false;
+      } else {
+        setState(() {
+          _isLoading = false;
+        });
+      }
+    }).then((value) {
+      _getActivity(_kidModel.parentKidId![0].kidId.toString());
+    });
+  }
+
+  bool _isActivityLoading = false;
+
+  ParentActivityHomeModel _activityModel = ParentActivityHomeModel();
+  _getActivity(String kidId) {
+    final resp = ParentActivityHomeApi().get(kidId: kidId);
+    resp.then((value) {
+      if (value['status'] == 1) {
+        setState(() {
+          _activityModel = ParentActivityHomeModel.fromJson(value);
+          _countLength();
+          _isLoading = false;
+          _isActivityLoading = false;
+        });
+      } else {
+        setState(() {
+          _isLoading = false;
+          _isActivityLoading = false;
+        });
+      }
+    });
+  }
+
+  int length = 0;
+  _countLength() {
+    setState(() {
+      if (_activityModel.kidAndActivity!.isEmpty) {
+        length = _activityModel.kidAndActivity!.length;
+      } else {
+        if (_activityModel.kidAndActivity!.length > 4) {
+          length = 4;
+        } else {
+          length = _activityModel.kidAndActivity!.length;
+        }
+      }
+      log(length.toString());
+    });
+  }
+
+  // int _index = 0;
+  ParentKidHomeModel _kidModel = ParentKidHomeModel();
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: Color(0xff8267AC).withOpacity(.06),
-      ),
-      child: Scaffold(
-        appBar: AppBar(
-          toolbarHeight: 70.0,
-          flexibleSpace: ClipRect(
-            child: BackdropFilter(
-              filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-              child: Container(
-                color: Colors.transparent,
-              ),
+    return Scaffold(
+      backgroundColor: AppColors().bgColor,
+      appBar: AppBar(
+        toolbarHeight: 70.0,
+        flexibleSpace: ClipRect(
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+            child: Container(
+              color: Colors.transparent,
             ),
           ),
-          backgroundColor: Color(0x2a8267ac),
-          automaticallyImplyLeading: false,
-          elevation: 0,
-          title: Row(
-            children: [
-              GestureDetector(
-                onTap: () {},
-                child: Text("Good Morning".tr(),
-                    style: FontConstant2.k32w5008267text),
-              ),
-            ],
-          ),
-          actions: [
+        ),
+        backgroundColor: Color(0xff8267AC).withAlpha(16),
+        automaticallyImplyLeading: false,
+        elevation: 0,
+        title: Row(
+          children: [
             Padding(
-              padding: const EdgeInsets.only(right: 16.0),
+              padding: const EdgeInsets.only(top: 15.0),
+              child: Text("${"Hello".tr()} ${'_name.hello' ?? ''}",
+                  style: FontConstant2.k32w5008267text.copyWith(fontSize: 25)),
+            ),
+          ],
+        ),
+        actions: [
+          SizedBox(
+            width: 164,
+            child: Padding(
+              padding: const EdgeInsets.only(top: 15.0),
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Padding(
                       padding: const EdgeInsets.all(15.0),
@@ -117,6 +196,7 @@ class _PHomeScreenState extends State<PHomeScreen> {
                                         UserPrefs.setEArbBool(true);
                                         context.locale = Locale('ar', 'AR');
                                         RestartWidget.restartApp(context);
+
                                         setState(() {
                                           colorChange;
                                         });
@@ -146,7 +226,7 @@ class _PHomeScreenState extends State<PHomeScreen> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (_) => PReminderScreen(),
+                          builder: (_) => TReminderScreen(),
                         ),
                       );
                     },
@@ -158,18 +238,153 @@ class _PHomeScreenState extends State<PHomeScreen> {
                       ),
                     ),
                   ),
+                  /*
+                InkWell(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => TNotificationScreen()),
+                      );
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.all(15.0),
+                      child: Image.asset(
+                        "assets/images/iconbell.png",
+                        height: 24,
+                      ),
+                    ),
+                  ),*/
                 ],
               ),
             ),
-          ],
-        ),
-        body: SingleChildScrollView(
-          child: Column(
-            children: [
-              SizedBox(height: 30),
-              Column(
-                children: [
-                  Row(
+          )
+        ],
+      ),
+      body: _isLoading
+          ? Center(
+              child: CircularProgressIndicator(),
+            )
+          : Container(
+              //color: AppColors().bgColor,
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    SizedBox(height: 30),
+                    Column(
+                      children: [
+                        Container(
+                          margin: EdgeInsets.symmetric(horizontal: 0.w),
+                          // color: Colors.black,
+                          child: CarouselSlider.builder(
+                            carouselController: _controller,
+                            itemCount: _kidModel.parentKidId!.length,
+                            itemBuilder: (ctx, index, realIndex) {
+                              return InkWell(
+                                onTap: () {
+                                  Navigator.of(context).push(MaterialPageRoute(
+                                      builder: (ctx) => PKidsDashboard(
+                                            kidId: _kidModel
+                                                .parentKidId![index].kidId
+                                                .toString(),
+                                          )));
+                                },
+                                child: Container(
+                                  width: 260.w,
+                                  // height: 100,
+                                  decoration: BoxDecoration(
+                                    // color: Colors.red,
+                                    borderRadius: BorderRadius.circular(16),
+                                    image: DecorationImage(
+                                      image: AssetImage(
+                                          "assets/images/Student Card.png"),
+                                      fit: BoxFit.fill,
+                                    ),
+                                  ),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 16.0, vertical: 8),
+                                  child: Row(
+                                    children: [
+                                      Container(
+                                        height: 100,
+                                        width: 72,
+                                        child: Image.network(
+                                          _kidModel
+                                              .parentKidId![index].profilePic
+                                              .toString(),
+                                          errorBuilder: (q, w, e) => Image.asset(
+                                              "assets/images/Rectangle 2715.png"),
+                                        ),
+                                      ),
+                                      SizedBox(width: 16),
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          /*SizedBox(
+                                      height: 8,
+                                    ),*/
+                                          Text(
+                                            _kidModel.parentKidId![index].name
+                                                .toString(),
+                                            style: FontConstant.k16w500White,
+                                          ),
+                                          Text(
+                                            _kidModel
+                                                .parentKidId![index].secName
+                                                .toString(),
+                                            style: FontConstant.k14w400White,
+                                          ),
+                                          Row(
+                                            children: [
+                                              Text(
+                                                "${"From".tr()} ${DateFormat.jm().format(DateFormat("hh:mm:ss").parse(_kidModel.parentKidId![index].schTimeIn.toString().split('.').first))} ",
+                                                style:
+                                                    FontConstant.k14w400White,
+                                              ),
+                                              Text(
+                                                "${"To".tr()} ${DateFormat.jm().format(DateFormat("hh:mm:ss").parse(_kidModel.parentKidId![index].schTimeOut.toString().split('.').first))}",
+                                                style:
+                                                    FontConstant.k14w400White,
+                                              ),
+                                            ],
+                                          ),
+                                          Text(
+                                            _kidModel.parentKidId![index].grpId
+                                                .toString()
+                                                .tr(),
+                                            style: FontConstant.k12w400White,
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              );
+                            },
+                            options: CarouselOptions(
+                              height: 150,
+                              onPageChanged: (index, reason) {
+                                setState(() {
+                                  // _index = index;
+                                  _isActivityLoading = true;
+                                  _getActivity(_kidModel
+                                      .parentKidId![index].kidId
+                                      .toString());
+                                  log(index.toString());
+                                });
+                              },
+                              viewportFraction: 0.7,
+                              //enlargeCenterPage: true,
+                              padEnds: false,
+                              //pageSnapping: false,
+                              enableInfiniteScroll: false,
+                            ),
+                          ),
+                        ),
+                        /*Row(
                     //mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       GestureDetector(
@@ -198,61 +413,104 @@ class _PHomeScreenState extends State<PHomeScreen> {
                       ),
                       SizedBox(width: 5),
                     ],
-                  ),
-                  SizedBox(height: MediaQuery.of(context).size.height * 0.01),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SizedBox(
-                        height: 15.h,
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(left: 16.0),
-                        child: Text(
-                          "Activity".tr(),
-                          style: FontConstant2.baloothampifont,
-                        ),
-                      ),
-                      SizedBox(
-                        height: 5.h,
-                      ),
-                      Activity(),
-                      SizedBox(height: 10),
-                      Center(
-                        child: Text("See more".tr(),
-                            style: FontConstant.k16w500purpleText.copyWith(
-                              fontSize: 18,
-                            )),
-                      ),
-                      SizedBox(height: 20.h),
-                      Padding(
-                        padding: EdgeInsets.only(left: 16.0),
-                        child: Text(
-                          "Tutorials".tr(),
-                          style: FontConstant2.baloothampifont,
-                        ),
-                      ),
-                      SizedBox(
-                        height: 10.h,
-                      ),
-                    ],
-                  )
-                ],
+                  ),*/
+                        SizedBox(
+                            height: MediaQuery.of(context).size.height * 0.01),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            SizedBox(
+                              height: 15.h,
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(left: 16.0),
+                              child: Text(
+                                "Activity".tr(),
+                                style: FontConstant2.baloothampifont,
+                              ),
+                            ),
+                            SizedBox(
+                              height: 5.h,
+                            ),
+                            _isActivityLoading
+                                ? Center(
+                                    child: CircularProgressIndicator(),
+                                  )
+                                : Activity(
+                                    model: _activityModel, length: length),
+                            SizedBox(height: 10),
+                            length == _activityModel.kidAndActivity!.length
+                                ? SizedBox.shrink()
+                                : Center(
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (_) => PScheduleScreen(
+                                              model: _activityModel,
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                      child: Container(
+                                        color: Colors.transparent,
+                                        padding: EdgeInsets.all(16),
+                                        child: Text("See more".tr(),
+                                            style: FontConstant
+                                                .k16w500purpleText
+                                                .copyWith(
+                                              fontSize: 18,
+                                            )),
+                                      ),
+                                    ),
+                                  ),
+                            /*Center(
+                              child: Text("See more".tr(),
+                                  style:
+                                      FontConstant.k16w500purpleText.copyWith(
+                                    fontSize: 18,
+                                  )),
+                            ),*/
+                          ],
+                        )
+                      ],
+                    ),
+                    _activityModel.videoTutorial!.isEmpty
+                        ? SizedBox.shrink()
+                        : Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              SizedBox(height: 20.h),
+                              Padding(
+                                padding: EdgeInsets.only(left: 16.0),
+                                child: Text(
+                                  "Tutorials".tr(),
+                                  style: FontConstant2.baloothampifont,
+                                ),
+                              ),
+                              SizedBox(
+                                height: 10.h,
+                              ),
+                              Row(
+                                children: [
+                                  Expanded(
+                                      child: Tutorials(
+                                    model: _activityModel,
+                                  )),
+                                ],
+                              ),
+                            ],
+                          ),
+                    //Tutorials card
+                    SizedBox(
+                      height: 100.h,
+                    )
+                  ],
+                ),
               ),
-              Row(
-                children: [
-                  Expanded(child: Tutorials()),
-                ],
-              ),
-              //Tutorials card
-              SizedBox(
-                height: 100.h,
-              )
-            ],
-          ),
-        ),
-      ),
+            ),
     );
   }
 }
@@ -267,7 +525,7 @@ class PStudentcard extends StatelessWidget {
     return Container(
       width: 260.w,
       decoration: BoxDecoration(
-        color: Colors.transparent,
+        color: Colors.black,
         borderRadius: BorderRadius.circular(16),
         image: DecorationImage(
           image: AssetImage("assets/images/Student Card.png"),

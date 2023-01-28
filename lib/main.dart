@@ -10,6 +10,7 @@ import 'package:kidseau/restartappwidget/restartwidgets.dart';
 import 'package:kidseau/shard_prefs/shared_prefs.dart';
 import 'dart:ui' as ui;
 
+import 'ParentsPanel/PDashBoard.dart';
 import 'TeachersPanel/TDashboard.dart';
 
 GlobalKey<MyAppState> globalKey = GlobalKey<MyAppState>();
@@ -122,8 +123,8 @@ class MyAppState extends State<MyApp> {
                   // TWaitingScreen()
                   // PSignupCode()
                   //    TDashboard(),
-                  // PDashboard(),
-                  PSplashScreen(),
+                  PDashboard(),
+              //PSplashScreen(),
             ),
           );
         });

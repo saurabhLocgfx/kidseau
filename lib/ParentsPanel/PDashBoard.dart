@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kidseau/ParentsPanel/PHomeScreen/PHomeScreen.dart';
 import 'package:kidseau/ParentsPanel/PMessageScreen/PMessageDashboard.dart';
@@ -151,6 +152,14 @@ class _PDashboardState extends State<PDashboard> {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBody: true,
+      appBar: AppBar(
+        toolbarHeight: 0,
+        elevation: 0,
+        systemOverlayStyle: SystemUiOverlayStyle(
+          statusBarBrightness: Brightness.light,
+        ),
+        backgroundColor: Colors.transparent,
+      ),
       bottomNavigationBar: buildMyNavBar(context),
       // bottomNavigationBar: Padding(
       //   padding: const EdgeInsets.all(20.0),
@@ -241,7 +250,6 @@ class _PDashboardState extends State<PDashboard> {
           PPostScreen(),
           PNotificationScreen(),
           PMessageDashboard(),
-
           // HomeProfile(),
           // Posts(),
           // NotificationScreen(),
