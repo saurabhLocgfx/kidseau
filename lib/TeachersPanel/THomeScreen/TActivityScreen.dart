@@ -8,6 +8,8 @@ import 'package:kidseau/ParentsPanel/PHomeScreen/PHomeScreen.dart';
 import 'package:kidseau/TeachersPanel/THomeScreen/TAttendanceScreen.dart';
 import 'package:kidseau/Theme.dart';
 
+import '../../api/models/parent_models/parent_profile_models/kid_school_detail_model.dart';
+
 class TActivityScreen extends StatefulWidget {
   const TActivityScreen({Key? key}) : super(key: key);
 
@@ -162,9 +164,10 @@ class _TActivityScreenState extends State<TActivityScreen> {
 }
 
 class TeacherCard extends StatelessWidget {
-  const TeacherCard({
-    Key? key,
-  }) : super(key: key);
+  final List<PKidSchoolDetailModel> list;
+  final int index;
+  TeacherCard({Key? key, required this.list, required this.index})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -182,10 +185,10 @@ class TeacherCard extends StatelessWidget {
             Container(
               height: 96,
               width: 72,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(16),
-                image: DecorationImage(
-                    image: AssetImage("assets/images/leaning alp person.png")),
+              child: Image.network(
+                list[index].directorImage.toString(),
+                errorBuilder: (q, w, e) =>
+                    Image.asset("assets/images/leaning alp person.png"),
               ),
             ),
             SizedBox(width: 12),
@@ -194,16 +197,16 @@ class TeacherCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  "Mohammad Umar",
+                  list[index].directorName.toString(),
                   style: FontConstant.k18w500whiteText,
                 ),
-                Text("Class teacher",
+                Text(list[index].directorEmail.toString(),
                     style: FontConstant.k18w500whiteText.copyWith(
                       fontSize: 14,
                       fontWeight: FontWeight.w400,
                       color: Colors.white.withOpacity(0.6),
                     )),
-                Text("Class teacher",
+                Text(list[index].directorPhone.toString(),
                     style: FontConstant.k18w500whiteText.copyWith(
                       fontSize: 16,
                       fontWeight: FontWeight.w400,

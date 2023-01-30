@@ -38,6 +38,7 @@ class _PPostScreenState extends State<PPostScreen> {
   bool _onBottom = false;
   int _postCount = 0;
   String reloadedVal = '';
+
   @override
   void initState() {
     _scrollController.addListener(() {

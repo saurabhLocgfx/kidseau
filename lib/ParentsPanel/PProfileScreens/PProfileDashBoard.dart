@@ -8,7 +8,10 @@ import 'package:kidseau/ParentsPanel/PProfileScreens/PParentProfile.dart';
 import 'package:kidseau/ParentsPanel/PProfileScreens/PSchoolProfile.dart';
 import 'package:kidseau/ParentsPanel/PProfileScreens/PSettings/PSettings.dart';
 import 'package:kidseau/ParentsPanel/PProfileScreens/PSyllabus.dart';
+import 'package:kidseau/ParentsPanel/PProfileScreens/p_parent_nursery_widget.dart';
 import 'package:kidseau/Theme.dart';
+import 'package:kidseau/api/models/parent_models/parent_profile_models/parent_profile_model.dart';
+import 'package:kidseau/api/parent_panel_apis/parent_profile_apis/parent_profile_api.dart';
 
 import 'PFees.dart';
 
@@ -26,6 +29,11 @@ class _PProfileDashBoardState extends State<PProfileDashBoard> {
   void dispose() {
     controller.dispose();
     super.dispose();
+  }
+
+  @override
+  void initState() {
+    super.initState();
   }
 
   final PageController _pageController = PageController(
@@ -113,7 +121,10 @@ class _PProfileDashBoardState extends State<PProfileDashBoard> {
                             },
                           );
                         },
-                        children: <Widget>[PParentsProfile(), PSchoolProfile()],
+                        children: <Widget>[
+                          PParentsProfile(),
+                          PParentNurseryWidget()
+                        ],
                       ),
                     ),
                   ],
@@ -316,85 +327,76 @@ class Pprofilepopup extends StatelessWidget {
           return [
             PopupMenuItem(
               enabled: false,
-              child: Container(
-                height: 210,
-                width: 135,
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 15.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) => PSyllabus(),
-                            ),
-                          );
-                        },
-                        child: Row(
-                          children: [
-                            Image.asset(
-                              "assets/images/syllabusicon.png",
-                              height: 24,
-                            ),
-                            SizedBox(width: 15),
-                            Text(
-                              "Syllabus".tr(),
-                              style: FontConstant.k18w5008471Text,
-                            )
-                          ],
-                        ),
-                      ),
-                      SizedBox(height: 20),
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) => PFees(),
-                            ),
-                          );
-                        },
-                        child: Row(
-                          children: [
-                            Image.asset(
-                              "assets/images/feesicon.png",
-                              height: 24,
-                            ),
-                            SizedBox(width: 15),
-                            Text(
-                              "Fees".tr(),
-                              style: FontConstant.k18w5008471Text,
-                            )
-                          ],
-                        ),
-                      ),
-                      SizedBox(height: 20),
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) => PSettings(),
-                            ),
-                          );
-                        },
-                        child: Row(
-                          children: [
-                            Image.asset(
-                              "assets/images/gearicon.png",
-                              height: 24,
-                            ),
-                            SizedBox(width: 15),
-                            Text(
-                              "Settings".tr(),
-                              style: FontConstant.k18w5008471Text,
-                            )
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => PSyllabus(),
+                    ),
+                  );
+                },
+                child: Row(
+                  children: [
+                    Image.asset(
+                      "assets/images/syllabusicon.png",
+                      height: 24,
+                    ),
+                    SizedBox(width: 15),
+                    Text(
+                      "Syllabus".tr(),
+                      style: FontConstant.k18w5008471Text,
+                    )
+                  ],
+                ),
+              ),
+            ),
+            PopupMenuItem(
+              enabled: false,
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => PFees(),
+                    ),
+                  );
+                },
+                child: Row(
+                  children: [
+                    Image.asset(
+                      "assets/images/feesicon.png",
+                      height: 24,
+                    ),
+                    SizedBox(width: 15),
+                    Text(
+                      "Fees".tr(),
+                      style: FontConstant.k18w5008471Text,
+                    )
+                  ],
+                ),
+              ),
+            ),
+            PopupMenuItem(
+              enabled: false,
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => PSettings(),
+                    ),
+                  );
+                },
+                child: Row(
+                  children: [
+                    Image.asset(
+                      "assets/images/gearicon.png",
+                      height: 24,
+                    ),
+                    SizedBox(width: 15),
+                    Text(
+                      "Settings".tr(),
+                      style: FontConstant.k18w5008471Text,
+                    )
+                  ],
                 ),
               ),
             ),

@@ -82,7 +82,7 @@ class _PFeesState extends State<PFees> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "Remaining fees",
+                      "Remaining fees".tr(),
                       style: FontConstant.k24w500brownText,
                     ),
                     Text(
@@ -95,7 +95,7 @@ class _PFeesState extends State<PFees> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "Total Paid fees",
+                      "Total Paid fees".tr(),
                       style: FontConstant.k16w4008471Text,
                     ),
                     SizedBox(height: 16),
@@ -118,7 +118,7 @@ class _PFeesState extends State<PFees> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Previous Payment",
+                      "Previous Payment".tr(),
                       style:
                           FontConstant.k22w5008471Text.copyWith(fontSize: 22),
                     ),
@@ -156,7 +156,7 @@ class _PFeesState extends State<PFees> {
                                               CrossAxisAlignment.start,
                                           children: [
                                             Text(
-                                              "Paid to",
+                                              "Paid to".tr(),
                                               style:
                                                   FontConstant.k16w400B7A4Text,
                                             ),

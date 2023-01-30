@@ -141,7 +141,7 @@ class _TSchoolProfileState extends State<TSchoolProfile> {
                 ],
               ),
               SizedBox(height: 32),
-              TeacherCard(),
+              // TeacherCard(),
               SizedBox(height: 38),
               SizedBox(
                 height: 52,

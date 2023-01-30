@@ -124,13 +124,14 @@ class _PHomeScreenState extends State<PHomeScreen> {
             Padding(
               padding: const EdgeInsets.only(top: 15.0),
               child: Text("${"Hello".tr()} ${'_name.hello' ?? ''}",
+                  overflow: TextOverflow.ellipsis,
                   style: FontConstant2.k32w5008267text.copyWith(fontSize: 25)),
             ),
           ],
         ),
         actions: [
           SizedBox(
-            width: 164,
+            width: 158,
             child: Padding(
               padding: const EdgeInsets.only(top: 15.0),
               child: Row(
@@ -290,8 +291,9 @@ class _PHomeScreenState extends State<PHomeScreen> {
                                           )));
                                 },
                                 child: Container(
-                                  width: 260.w,
+                                  //width: 260,
                                   // height: 100,
+                                  margin: EdgeInsets.only(left: 16),
                                   decoration: BoxDecoration(
                                     // color: Colors.red,
                                     borderRadius: BorderRadius.circular(16),
@@ -376,7 +378,7 @@ class _PHomeScreenState extends State<PHomeScreen> {
                                   log(index.toString());
                                 });
                               },
-                              viewportFraction: 0.7,
+                              viewportFraction: 0.9,
                               //enlargeCenterPage: true,
                               padEnds: false,
                               //pageSnapping: false,
@@ -525,7 +527,7 @@ class PStudentcard extends StatelessWidget {
     return Container(
       width: 260.w,
       decoration: BoxDecoration(
-        color: Colors.black,
+        //color: Colors.black,
         borderRadius: BorderRadius.circular(16),
         image: DecorationImage(
           image: AssetImage("assets/images/Student Card.png"),
