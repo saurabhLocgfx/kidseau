@@ -123,9 +123,9 @@ class _PHomeScreenState extends State<PHomeScreen> {
           children: [
             Padding(
               padding: const EdgeInsets.only(top: 15.0),
-              child: Text("${"Hello".tr()} ${'_name.hello' ?? ''}",
+              child: Text("${"Hello".tr()} ${_activityModel.greet ?? ''}",
                   overflow: TextOverflow.ellipsis,
-                  style: FontConstant2.k32w5008267text.copyWith(fontSize: 25)),
+                  style: FontConstant2.k32w5008267text.copyWith(fontSize: 22)),
             ),
           ],
         ),

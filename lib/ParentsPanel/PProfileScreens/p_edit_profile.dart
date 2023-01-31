@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:kidseau/Constants/colors.dart';
 import 'package:kidseau/Widgets/buttons.dart';
@@ -17,7 +18,9 @@ import 'package:kidseau/api/Teacherpanelapi/teacher_profile_api/teacher_update_p
 import 'package:kidseau/api/Teacherpanelapi/teacher_profile_api/teacher_update_profile_picture.dart';
 import 'package:kidseau/api/Teacherpanelapi/teacher_profile_api/teacher_verify_update_otp.dart';
 import 'package:kidseau/api/models/parent_models/parent_profile_models/parent_profile_model.dart';
+import 'package:kidseau/api/parent_panel_apis/parent_profile_apis/parent_update_number_email_api.dart';
 import 'package:kidseau/api/parent_panel_apis/parent_profile_apis/parent_update_profile_api.dart';
+import 'package:kidseau/api/parent_panel_apis/parent_profile_apis/update_field_otp_api.dart';
 import 'package:kidseau/api/parent_panel_apis/parent_profile_apis/update_parent_profile_pic.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
@@ -132,12 +135,30 @@ class _PEditProfileScreenState extends State<PEditProfileScreen> {
   Widget _showBottomSheet() {
     return StatefulBuilder(builder: (context, sheetState) {
       return ParentBottomSheetWidget(
-          /* model: widget.model,
+        onPop: (val, val2, val3) {
+          setState(() {
+            if (val3) {
+              _motherEmailController.text = val;
+              _motherNumberController.text = val2;
+            } else {
+              _fatherEmailController.text = val;
+              _fatherNumberController.text = val2;
+            }
+          });
+        },
+        email: _isFather
+            ? _fatherEmailController.text
+            : _motherEmailController.text,
+        number: _isFather
+            ? _fatherNumberController.text
+            : _motherNumberController.text,
+        isFather: _isFather,
+        /* model: widget.model,
         onPop: (val, val2) {
           widget.model.email = val;
           widget.model.phoneNumber = val2;
         },*/
-          );
+      );
     });
   }
 
@@ -290,6 +311,7 @@ class _PEditProfileScreenState extends State<PEditProfileScreen> {
                               final resp = UpdateParentProfilePic()
                                   .get(pickedImg: _pickedFile);
                               resp.then((value) {
+                                log(value.toString());
                                 if (value['status'] == 1) {
                                   setState(() {
                                     profileImageUrl = value['image'];
@@ -368,7 +390,7 @@ class _PEditProfileScreenState extends State<PEditProfileScreen> {
                         Text("Kid's Father".tr(),
                             style: FontConstant2.k24w5008471text),
                         SizedBox(height: 24),
-                        Text('Name'.tr(),
+                        Text("Father's name".tr(),
                             style: _fatherNameFocus.hasFocus
                                 ? FontConstant.k16w5008471Text
                                 : FontConstant.k16w500331FText),
@@ -402,7 +424,7 @@ class _PEditProfileScreenState extends State<PEditProfileScreen> {
                                   curved: true),
                         ),
                         SizedBox(height: 16),
-                        Text('Email'.tr(),
+                        Text('Email address'.tr(),
                             style: _fatherEmailFocus.hasFocus
                                 ? FontConstant.k16w5008471Text
                                 : FontConstant.k16w500331FText),
@@ -440,7 +462,7 @@ class _PEditProfileScreenState extends State<PEditProfileScreen> {
                         Text("Kid’s Mother".tr(),
                             style: FontConstant2.k24w5008471text),
                         SizedBox(height: 24),
-                        Text('Name'.tr(),
+                        Text("Mother's name".tr(),
                             style: _motherNameFocus.hasFocus
                                 ? FontConstant.k16w5008471Text
                                 : FontConstant.k16w500331FText),
@@ -478,7 +500,7 @@ class _PEditProfileScreenState extends State<PEditProfileScreen> {
                         SizedBox(
                           height: 16,
                         ),
-                        Text('Email'.tr(),
+                        Text('Email address'.tr(),
                             style: _motherEmailFocus.hasFocus
                                 ? FontConstant.k16w5008471Text
                                 : FontConstant.k16w500331FText),
@@ -606,7 +628,17 @@ class _PEditProfileScreenState extends State<PEditProfileScreen> {
 class ParentBottomSheetWidget extends StatefulWidget {
   /*final TeacherProfileDetailsModel model;
   final Function(String, String) onPop;*/
-  const ParentBottomSheetWidget({Key? key}) : super(key: key);
+  final Function(String, String, bool) onPop;
+  final String email;
+  final String number;
+  final bool isFather;
+  const ParentBottomSheetWidget(
+      {Key? key,
+      required this.isFather,
+      required this.number,
+      required this.email,
+      required this.onPop})
+      : super(key: key);
 
   @override
   State<ParentBottomSheetWidget> createState() =>
@@ -629,14 +661,15 @@ class _ParentBottomSheetWidgetState extends State<ParentBottomSheetWidget> {
   String val2 = '';
   @override
   void initState() {
-    /* _emailController.text = widget.model.email ?? '';
-    _numberController.text = widget.model.phoneNumber ?? '';
+    _emailController.text = widget.email ?? '';
+    _numberController.text = widget.number ?? '';
+    _isMother = widget.isFather ? false : true;
     _emailNode.addListener(() {
       setState(() {});
     });
     _phoneNode.addListener(() {
       setState(() {});
-    });*/
+    });
     super.initState();
   }
 
@@ -716,14 +749,21 @@ class _ParentBottomSheetWidgetState extends State<ParentBottomSheetWidget> {
                           ? () {}
                           : () {
                               if (_key.currentState!.validate()) {
-                                final resp = TeacherUpdateEmailNumberApi()
-                                    .get(field: _emailController.text);
+                                final resp = ParentUpdateNumberEmailApi().get(
+                                    email: _emailController.text == widget.email
+                                        ? ""
+                                        : _emailController.text,
+                                    phone:
+                                        _numberController.text == widget.number
+                                            ? ""
+                                            : _numberController.text,
+                                    isMother: _isMother);
                                 resp.then((value) {
                                   log(value.toString());
                                   if (value['status'] == 1) {
                                     setState(() {
                                       _start = 59;
-                                      _emailTimer = true;
+                                      _numberTimer = true;
                                       _showField = true;
                                     });
                                     _startTimer();
@@ -806,8 +846,15 @@ class _ParentBottomSheetWidgetState extends State<ParentBottomSheetWidget> {
                           ? () {}
                           : () {
                               if (_key.currentState!.validate()) {
-                                final resp = TeacherUpdateEmailNumberApi()
-                                    .get(field: _numberController.text);
+                                final resp = ParentUpdateNumberEmailApi().get(
+                                    email: _emailController.text == widget.email
+                                        ? ""
+                                        : _emailController.text,
+                                    phone:
+                                        _numberController.text == widget.number
+                                            ? ""
+                                            : _numberController.text,
+                                    isMother: _isMother);
                                 resp.then((value) {
                                   log(value.toString());
                                   if (value['status'] == 1) {
@@ -903,9 +950,14 @@ class _ParentBottomSheetWidgetState extends State<ParentBottomSheetWidget> {
                     ),
                     value: _isMother,
                     onChanged: (val) {
-                      setState(() {
-                        _isMother = !_isMother;
-                      });
+                      if (_showField) {
+                        Fluttertoast.showToast(
+                            msg: 'OTP already sent. You cannot change now.');
+                      } else {
+                        setState(() {
+                          _isMother = !_isMother;
+                        });
+                      }
                     }),
                 SizedBox(
                   height: 8,
@@ -916,7 +968,7 @@ class _ParentBottomSheetWidgetState extends State<ParentBottomSheetWidget> {
                   child: MainButton(
                       onTap: _showField
                           ? () {
-                              final resp = TeacherVerifyUpdateOTP()
+                              final resp = UpdateFieldOTP()
                                   .get(otp: pinTextController.text);
                               resp.then((value) {
                                 Navigator.of(context).pop();
@@ -925,7 +977,7 @@ class _ParentBottomSheetWidgetState extends State<ParentBottomSheetWidget> {
                                       context, 'Updated successfully');
                                   val = _emailController.text;
                                   val2 = _numberController.text;
-                                  // widget.onPop(val, val2);
+                                  widget.onPop(val, val2, _isMother);
                                 } else {
                                   CustomSnackBar.customErrorSnackBar(
                                       context, value['msg']);

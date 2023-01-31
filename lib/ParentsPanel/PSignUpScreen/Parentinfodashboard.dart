@@ -7,7 +7,9 @@ import 'package:kidseau/Theme.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
 class Parentinfodashboard extends StatefulWidget {
-  const Parentinfodashboard({Key? key}) : super(key: key);
+  Parentinfodashboard({
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<Parentinfodashboard> createState() => _ParentinfodashboardState();
@@ -100,7 +102,9 @@ class _ParentinfodashboardState extends State<Parentinfodashboard>
                           );
                         },
                       ),
-                      MedicalInfo()
+                      MedicalInfo(
+                        newKid: false,
+                      )
                     ],
                   ),
                 ),

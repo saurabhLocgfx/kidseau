@@ -1,23 +1,22 @@
 import 'dart:convert';
-import 'dart:developer';
-import 'dart:io';
 
 import 'package:http/http.dart' as http;
 import 'package:kidseau/Constants/string_const.dart';
 import 'package:kidseau/shard_prefs/shared_prefs.dart';
 
-class UpdateParentProfilePic {
-  Future<dynamic> get({required File pickedImg}) async {
+class UpdateFieldOTP {
+  Future<dynamic> get({required String otp}) async {
     String? cookie = UserPrefs.getCookies();
-    var headers = {'Cookie': 'PHPSESSID=$cookie'};
-    var request = http.MultipartRequest(
-        'POST',
+    var headers = {
+      'Content-Type': 'application/json',
+      'Cookie': 'PHPSESSID=$cookie'
+    };
+    var request = http.Request(
+        'GET',
         Uri.parse(
-            '$kAPIConst/kids/api_parent_profile/parent_image_upadte.php'));
-    request.files.add(
-        await http.MultipartFile.fromPath('update_image_pt', pickedImg.path));
+            '$kAPIConst/kids/api_parent_profile/number_change_and_verified/check_change_num_email.php'));
+    request.body = json.encode({"enter_otp": otp});
     request.headers.addAll(headers);
-    log(request.files.toString());
 
     http.StreamedResponse response = await request.send();
 

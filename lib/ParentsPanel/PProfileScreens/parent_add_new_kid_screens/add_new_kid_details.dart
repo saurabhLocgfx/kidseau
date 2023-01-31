@@ -9,7 +9,9 @@ import '../../../Theme.dart';
 import '../../PSignUpScreen/Parentinfodashboard.dart';
 
 class ParentAddNewKidDetail extends StatefulWidget {
-  const ParentAddNewKidDetail({Key? key}) : super(key: key);
+  final bool newKid;
+  const ParentAddNewKidDetail({Key? key, required this.newKid})
+      : super(key: key);
 
   @override
   State<ParentAddNewKidDetail> createState() => _ParentAddNewKidDetailState();
@@ -58,7 +60,9 @@ class _ParentAddNewKidDetailState extends State<ParentAddNewKidDetail> {
                       );
                     },
                   ),
-                  MedicalInfo()
+                  MedicalInfo(
+                    newKid: widget.newKid,
+                  )
                 ],
               ),
             )

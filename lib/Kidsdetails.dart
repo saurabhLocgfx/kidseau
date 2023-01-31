@@ -96,15 +96,17 @@ class _KidsDetailsState extends State<KidsDetails> {
     final resp = GetSections().get();
     resp.then((value) {
       log(value.toString());
-      setState(() {
-        for (var v in value['allSection']) {
-          sectionList.add(v['sec_name']);
-          //langListId.add(v['sec_id']);
-          _map.add({'name': v['sec_name'], 'id': v['sec_id']});
-        }
-        _selectedSection = sectionList[0];
-        selectedSection = {'name': _map[0]['name'], 'id': _map[0]['id']};
-      });
+      if (value['status'] == 1) {
+        setState(() {
+          for (var v in value['allSection']) {
+            sectionList.add(v['sec_name']);
+            //langListId.add(v['sec_id']);
+            _map.add({'name': v['sec_name'], 'id': v['sec_id']});
+          }
+          _selectedSection = sectionList[0];
+          selectedSection = {'name': _map[0]['name'], 'id': _map[0]['id']};
+        });
+      } else {}
     }).then((value) {
       _getGroups(_map[0]['id']);
     });
@@ -655,13 +657,14 @@ class _KidsDetailsState extends State<KidsDetails> {
                                   final resp = KidsSignupInfo().get(
                                     kidName: kidNameController.text,
                                     kidSection: selectedSection['id'],
+                                    kidGroup: selectedGroup['id'],
                                     kidAge: kidAgeController.text,
                                     kidBirthday: kidBirthdayController.text,
                                     kidGender: _selectedText,
                                     pickedImage: _pickedImage,
                                   );
                                   resp.then((value) {
-                                    print(value);
+                                    log(value.toString());
                                     if (value['status'] == 0) {
                                       Fluttertoast.showToast(msg: value['msg']);
                                       setState(() {

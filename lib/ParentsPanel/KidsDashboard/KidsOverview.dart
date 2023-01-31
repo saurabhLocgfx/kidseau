@@ -532,7 +532,7 @@ class _PKidsOverviewState extends State<PKidsOverview> {
           ),
           SizedBox(height: 16),
           Container(
-            height: 194.h,
+            height: 194,
             width: 392.w,
             decoration: BoxDecoration(
                 color: Colors.white, borderRadius: BorderRadius.circular(16)),

@@ -121,11 +121,10 @@ class _PParentsProfileState extends State<PParentsProfile> {
                           if (index >= model.kid!.length) {
                             return InkWell(
                               onTap: () {
-                                //TODO: fix navigation
                                 Navigator.of(context).push(MaterialPageRoute(
-                                    builder: (ctx) =>
-                                        ParentAddNewKidDetail() //PSignupCode()
-                                    ));
+                                    builder: (ctx) => PSignupCode(
+                                          newKid: true,
+                                        )));
                               },
                               child: Container(
                                 padding: EdgeInsets.symmetric(horizontal: 16),
@@ -222,7 +221,7 @@ class _PParentsProfileState extends State<PParentsProfile> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Info".tr(),
+                        "info".tr(),
                         style: FontConstant2.k22w5008471text,
                       ),
                       Row(
@@ -270,7 +269,7 @@ class _PParentsProfileState extends State<PParentsProfile> {
                           SizedBox(
                             width: 130,
                             child: Text(
-                              "Email".tr(),
+                              "Email address".tr(),
                               style: FontConstant.k16w500331FText,
                             ),
                           ),
@@ -290,7 +289,7 @@ class _PParentsProfileState extends State<PParentsProfile> {
                           SizedBox(
                             width: 130,
                             child: Text(
-                              "Number".tr(),
+                              "Phone Number".tr(),
                               style: FontConstant.k16w500331FText,
                             ),
                           ),

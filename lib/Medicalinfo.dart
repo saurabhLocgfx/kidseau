@@ -13,7 +13,8 @@ import 'package:kidseau/api/parent_signup_apis/parent_medical_info.dart';
 import 'Widgets/buttons.dart';
 
 class MedicalInfo extends StatefulWidget {
-  const MedicalInfo({Key? key}) : super(key: key);
+  final bool newKid;
+  const MedicalInfo({Key? key, required this.newKid}) : super(key: key);
 
   @override
   State<MedicalInfo> createState() => _MedicalInfoState();
@@ -105,6 +106,7 @@ class _MedicalInfoState extends State<MedicalInfo> {
                         // height: 56.h,
                         width: 1.sw,
                         child: TextFormField(
+                          keyboardType: TextInputType.number,
                           validator: (address) {
                             if (address == null || address.isEmpty) {
                               return "This field cannot be empty".tr();
@@ -134,6 +136,7 @@ class _MedicalInfoState extends State<MedicalInfo> {
                         // height: 56.h,
                         width: 1.sw,
                         child: TextFormField(
+                          keyboardType: TextInputType.number,
                           validator: (address) {
                             if (address == null || address.isEmpty) {
                               return "This field cannot be empty".tr();
@@ -171,7 +174,7 @@ class _MedicalInfoState extends State<MedicalInfo> {
                           },
                           style: FontConstant.k18w5008471Text,
                           decoration: CustomInputDecoration(
-                                  hintText: "Select medical status".tr())
+                                  hintText: "Enter medical status".tr())
                               .decoration(),
                           controller: medicalStatusController,
                           /*  controller: controller,*/
@@ -486,6 +489,16 @@ class _MedicalInfoState extends State<MedicalInfo> {
                                   setState(() {
                                     _btnLoading = true;
                                   });
+                                  log(_fatherVaccines.toString());
+                                  log(_motherVaccines.toString());
+                                  log(_kidVaccines.toString());
+                                  log(_birth.toString());
+                                  log(_2months.toString());
+                                  log(_4months.toString());
+                                  log(_11months.toString());
+                                  log(_12months.toString());
+                                  log(_18months.toString());
+                                  log(_6years.toString());
                                   final resp = ParentMedicalInfo().get(
                                       bloodGrp: bloodGroupController.text,
                                       weight: weightController.text,

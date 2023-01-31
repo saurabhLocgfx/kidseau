@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:ui';
 
 import 'package:easy_localization/easy_localization.dart';
@@ -53,6 +54,7 @@ class _PKidsDetailsState extends State<PKidsDetails> {
 
   @override
   void initState() {
+    log(widget.kidId);
     _getData();
     super.initState();
   }
@@ -62,6 +64,7 @@ class _PKidsDetailsState extends State<PKidsDetails> {
     _isLoading = true;
     final resp = PKidDetailApi().get(kidId: widget.kidId);
     resp.then((value) {
+      log(value.toString());
       if (value['status'] == 1) {
         setState(() {
           model = PKidsDetailModel.fromJson(value);
@@ -163,7 +166,7 @@ class _PKidsDetailsState extends State<PKidsDetails> {
                                   height: 128,
                                   width: 96,
                                   child: Image.network(
-                                    model.image!.toString(),
+                                    model.image.toString() ?? '',
                                     errorBuilder: (q, w, e) => Image.asset(
                                         "assets/images/profileperson.png"),
                                     fit: BoxFit.cover,
@@ -178,7 +181,7 @@ class _PKidsDetailsState extends State<PKidsDetails> {
                                       style: FontConstant.k24w500brownText,
                                     ),
                                     Text(
-                                        "${model.gender!.toLowerCase() == 'm' ? 'S/O ' : model.gender!.toLowerCase() == 'f' ? 'D/O ' : 'C/O '} - ${model.fatherName}",
+                                        "${model.gender!.toLowerCase().toString() == 'm' ? 'S/O ' : model.gender!.toLowerCase().toString() == 'f' ? 'D/O ' : 'C/O '} - ${model.fatherName}",
                                         style: FontConstant.k16w5008471Text),
                                     Row(
                                       children: [
@@ -976,7 +979,8 @@ class _PKidsDetailsState extends State<PKidsDetails> {
                                               Row(
                                                 children: [
                                                   Text(
-                                                    model.otherVaccination![i],
+                                                    model.otherVaccination![i]
+                                                        .replaceAll('@', ' '),
                                                     style: FontConstant
                                                         .k16w500331FText,
                                                   ),

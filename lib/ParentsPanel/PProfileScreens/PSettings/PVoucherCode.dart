@@ -4,8 +4,11 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:kidseau/Constants/colors.dart';
 import 'package:kidseau/Theme.dart';
 import 'package:kidseau/Widgets/buttons.dart';
+import 'package:kidseau/api/models/parent_models/parent_profile_models/kid_voucher_detail_model.dart';
+import 'package:kidseau/api/parent_panel_apis/parent_profile_apis/parent_get_app_vouchers_api.dart';
 
 class PVouchercode extends StatefulWidget {
   PVouchercode({Key? key}) : super(key: key);
@@ -16,10 +19,31 @@ class PVouchercode extends StatefulWidget {
 
 class _PVouchercodeState extends State<PVouchercode> {
   @override
+  void initState() {
+    _getData();
+    super.initState();
+  }
+
+  List<KidVoucherDetailModel> modelList = [];
+  bool _isLoading = false;
+  _getData() {
+    _isLoading = true;
+    final resp = ParentGetAllVouchers().get();
+    resp.then((value) {
+      setState(() {
+        for (var v in value) {
+          modelList.add(KidVoucherDetailModel.fromJson(v));
+        }
+        _isLoading = false;
+      });
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Container(
       height: 896.h,
-      width: 414.w,
+      width: 1.sw,
       child: Scaffold(
           extendBodyBehindAppBar: true,
           appBar: AppBar(
@@ -60,122 +84,192 @@ class _PVouchercodeState extends State<PVouchercode> {
               ],
             ),
           ),
-          body: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: Column(
-              children: [
-                SizedBox(height: 110),
-                Container(
-                  height: 93.h,
-                  width: 1.sw,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      image: DecorationImage(
-                          image: AssetImage("assets/images/vouchercard.png"),
-                          fit: BoxFit.cover)),
+          body: _isLoading
+              ? Center(
+                  child: CircularProgressIndicator(),
+                )
+              : SingleChildScrollView(
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16.0),
                     child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text("Current Code".tr(),
-                                style: FontConstant.k16w4008471Text
-                                    .copyWith(color: Colors.white)),
-                            Text("Valid till".tr(),
-                                style: FontConstant.k16w4008471Text
-                                    .copyWith(color: Colors.white)),
-                          ],
+                        SizedBox(height: 110),
+                        MediaQuery.removePadding(
+                          context: context,
+                          removeTop: true,
+                          child: ListView.separated(
+                            itemBuilder: (context, index) {
+                              return InkWell(
+                                onTap: () {
+                                  /*Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: (context) => changevouchercode(),
+                                    ),
+                                  );*/
+                                },
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Container(
+                                      height: 93.h,
+                                      width: 1.sw,
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(20),
+                                          image: DecorationImage(
+                                              image: AssetImage(
+                                                  "assets/images/vouchercard.png"),
+                                              fit: BoxFit.cover)),
+                                      child: Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 16.0),
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Text("Current Code".tr(),
+                                                    style: FontConstant
+                                                        .k16w4008471Text
+                                                        .copyWith(
+                                                            color:
+                                                                Colors.white)),
+                                                Text("Valid till".tr(),
+                                                    style: FontConstant
+                                                        .k16w4008471Text
+                                                        .copyWith(
+                                                            color:
+                                                                Colors.white)),
+                                              ],
+                                            ),
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                SizedBox(
+                                                  width: 200,
+                                                  child: Text(
+                                                    modelList[index]
+                                                        .currentCode
+                                                        .toString(),
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
+                                                    style: FontConstant2
+                                                        .k24w5008267text
+                                                        .copyWith(
+                                                            color:
+                                                                Colors.white),
+                                                  ),
+                                                ),
+                                                Text(
+                                                  modelList[index]
+                                                      .validTill
+                                                      .toString(),
+                                                  style: FontConstant
+                                                      .k18w500331FText
+                                                      .copyWith(
+                                                          color: Colors.white),
+                                                ),
+                                              ],
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(height: 16),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          "Issued by".tr(),
+                                          style: FontConstant.k16w400331FText,
+                                        ),
+                                        Text(
+                                          modelList[index].issuedBy.toString(),
+                                          style: FontConstant.k16w4008471Text,
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(height: 12),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          "Issued date".tr(),
+                                          style: FontConstant.k16w400331FText,
+                                        ),
+                                        Text(
+                                          modelList[index]
+                                              .issuedData
+                                              .toString()
+                                              .split(' ')
+                                              .first,
+                                          style: FontConstant.k16w4008471Text,
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(height: 12),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          "Issued for".tr(),
+                                          style: FontConstant.k16w400331FText,
+                                        ),
+                                        Text(
+                                          modelList[index].issuedFor.toString(),
+                                          style: FontConstant.k16w4008471Text,
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              );
+                            },
+                            separatorBuilder: (ctx, ind) => Divider(
+                              color: AppColors().bgColor,
+                              thickness: 2,
+                            ),
+                            itemCount: modelList.length,
+                            physics: NeverScrollableScrollPhysics(),
+                            shrinkWrap: true,
+                          ),
                         ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              "JKAHDIUWCE",
-                              style: FontConstant2.k24w5008267text
-                                  .copyWith(color: Colors.white),
-                            ),
-                            Text(
-                              "JKAHDIUWCE",
-                              style: FontConstant.k18w500331FText
-                                  .copyWith(color: Colors.white),
-                            ),
-                          ],
+                        /*Expanded(
+                    child: Align(
+                      alignment: Alignment.bottomCenter,
+                      child: SizedBox(
+                        height: 52,
+                        width: 382,
+                        child: MainButton(
+                            onTap: () {
+                              // Navigator.of(context).push(
+                              //   MaterialPageRoute(
+                              //     builder: (context) => changevouchercode(),
+                              //   ),
+                              // );
+                            },
+                            title: "Change Voucher Code".tr(),
+                            textStyleColor: Colors.white,
+                            backgroundColor: ThemeColor.primarycolor),
+                      ),
+                    ),
+                  ),*/
+                        SizedBox(
+                          height: 50,
                         )
                       ],
                     ),
                   ),
-                ),
-                SizedBox(height: 16),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "Issued by".tr(),
-                      style: FontConstant.k16w400331FText,
-                    ),
-                    Text(
-                      "ABC Nursery School".tr(),
-                      style: FontConstant.k16w4008471Text,
-                    ),
-                  ],
-                ),
-                SizedBox(height: 12),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "Issued date".tr(),
-                      style: FontConstant.k16w400331FText,
-                    ),
-                    Text(
-                      "January 2022",
-                      style: FontConstant.k16w4008471Text,
-                    ),
-                  ],
-                ),
-                SizedBox(height: 12),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "Issued by".tr(),
-                      style: FontConstant.k16w400331FText,
-                    ),
-                    Text(
-                      "Nobita",
-                      style: FontConstant.k16w4008471Text,
-                    ),
-                  ],
-                ),
-                Expanded(
-                  child: Align(
-                    alignment: Alignment.bottomCenter,
-                    child: SizedBox(
-                      height: 52,
-                      width: 382,
-                      child: MainButton(
-                          onTap: () {
-                            // Navigator.of(context).push(
-                            //   MaterialPageRoute(
-                            //     builder: (context) => changevouchercode(),
-                            //   ),
-                            // );
-                          },
-                          title: "Change Voucher Code".tr(),
-                          textStyleColor: Colors.white,
-                          backgroundColor: ThemeColor.primarycolor),
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 50,
-                )
-              ],
-            ),
-          )),
+                )),
     );
   }
 }

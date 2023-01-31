@@ -147,7 +147,9 @@ class _PSignupOtpVerificationState extends State<PSignupOtpVerification> {
                                           Navigator.of(context).push(
                                               MaterialPageRoute(
                                                   builder: (context) =>
-                                                      PSignupCode()));
+                                                      PSignupCode(
+                                                        newKid: false,
+                                                      )));
 
                                           /*Fluttertoast.showToast(
                                             msg: 'Your Voucher is ${value['voucher']}');*/

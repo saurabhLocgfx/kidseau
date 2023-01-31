@@ -349,7 +349,7 @@ class _PSyllabusState extends State<PSyllabus> {
                                       height: 24,
                                       color: Color(0xff84717F),
                                     ),
-                                    hint: Text(selected),
+                                    hint: Text(selected.tr()),
                                     items: <String>[
                                       'Sunday'.tr(),
                                       'Monday'.tr(),

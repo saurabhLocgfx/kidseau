@@ -154,7 +154,7 @@ class _PParentNurseryWidgetState extends State<PParentNurseryWidget> {
                         SizedBox(
                           width: 200,
                           child: Text(
-                            'Email'.tr(),
+                            'Email address'.tr(),
                             style: FontConstant2.k16w5008267text,
                           ),
                         ),

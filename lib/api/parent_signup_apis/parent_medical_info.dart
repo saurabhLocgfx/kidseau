@@ -22,6 +22,39 @@ class ParentMedicalInfo {
       required bool twelveMonth,
       required bool eighteenMonth,
       required bool sixYears}) async {
+    List<String> covidVac = [];
+    List<String> otherVac = [];
+    if (father) {
+      covidVac.add('father');
+    }
+    if (mother) {
+      covidVac.add('mother');
+    }
+    if (kid) {
+      covidVac.add('kid');
+    }
+
+    if (birth) {
+      otherVac.add('BCG/AVB@Birth');
+    }
+    if (twoMonth) {
+      otherVac.add('VPI-HVB@2 Months');
+    }
+    if (fourMonth) {
+      otherVac.add('VPI-AVB@4 Months');
+    }
+    if (elevenMonth) {
+      otherVac.add('ROR@11 Months');
+    }
+    if (twelveMonth) {
+      otherVac.add('VPI-HVB@12 Months');
+    }
+    if (eighteenMonth) {
+      otherVac.add('ROR@18 Months');
+    }
+    if (sixYears) {
+      otherVac.add('D-TCA@6 Years');
+    }
     String? cookie = UserPrefs.getCookies();
     var headers = {'Cookie': 'PHPSESSID=$cookie'};
     var request = http.MultipartRequest('POST',
@@ -32,16 +65,8 @@ class ParentMedicalInfo {
       'height': height,
       'medical_status': medicalStatus,
       'ex_care': exCare,
-      if (father) 'covid_vaccination[]': 'father',
-      if (mother) 'covid_vaccination[]': 'mother',
-      if (kid) 'covid_vaccination[]': 'kid',
-      if (birth) 'other_vacc[]': 'BCG/AVB@Birth',
-      if (twoMonth) 'other_vacc[]': 'VPI-HVB@2 Months',
-      if (fourMonth) 'other_vacc[]': 'VPI-AVB@4 Months',
-      if (elevenMonth) 'other_vacc[]': 'ROR@11 Months',
-      if (twelveMonth) 'other_vacc[]': 'VPI-HVB@12 Months',
-      if (eighteenMonth) 'other_vacc[]': 'ROR@18 Months',
-      if (sixYears) 'other_vacc[]': 'D-TCA@6 Years',
+      'covid_vaccination': '$covidVac',
+      'other_vacc': '$otherVac',
     });
     log(request.fields.toString());
 
