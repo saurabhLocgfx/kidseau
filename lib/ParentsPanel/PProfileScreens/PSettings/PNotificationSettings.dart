@@ -108,7 +108,7 @@ class _PNotificationsettingsState extends State<PNotificationsettings> {
                       height: 30,
                       width: 156,
                       child: Text(
-                        "Notification Settings",
+                        "Notification Settings".tr(),
                         style: FontConstant.k18w500331FText,
                       ),
                     ),

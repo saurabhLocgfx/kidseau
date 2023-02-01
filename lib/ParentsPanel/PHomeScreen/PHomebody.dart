@@ -161,6 +161,11 @@ class Tutorials extends StatefulWidget {
 
 class _TutorialsState extends State<Tutorials> {
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: 220,

@@ -6,6 +6,7 @@
   "We offer a new way to track your children and watch them grow.": "Nous offrons une nouvelle méthode de noter les enfants et de les former pour un avenir meilleur",
 
   "By proceeding you agree to our ": "En continuant, vous acceptez notre ",
+  "Voucher Code": "Code d'entrée",
 
   "Privacy Policy & ": "Politique de confidentialité & ",
   "Terms and Conditions": "conditions générales",
@@ -244,7 +245,12 @@
 
   "New Activity":"Nouvelle activité",
 
-  "New Message ":"Nouveau message",
+  "New Message":"Nouveau message",
+  "Current Code": "Code actuel",
+  "Valid till": "Valable jusqu'au",
+  "Issued by": "Délivré par",
+  "Issued date": "Date d'émission",
+  "Issued for": "Émis pour",
 
   "Mark as unread":"Marquer comme non lu",
 

@@ -108,6 +108,7 @@
   "kid Profile": "Kid Profile",
 
   "Parent": "Parent",
+  "Voucher Code": "Voucher Code",
 
   "Mother's name": "Mother's name",
 
@@ -125,12 +126,14 @@
 
   "Weight":  "Weight",
 
+  "Current Code": "Current Code",
   "Height": "Height",
 
   "Current treatment": "Current treatment",
 
   "Vaccinations": "Vaccinations",
 
+  "Valid till": "Valid till",
   "view all": "view all",
 
   "Activity": "Activity",
@@ -201,6 +204,9 @@
   "Write here...": "Write here...",
   "Tag": "Tag",
   "Tag students": "Tag students",
+  "Issued by": "Issued by",
+  "Issued date": "Issued date",
+  "Issued for": "Issued for",
   "days": "days",
 
   "Caption": "Caption",
@@ -227,7 +233,7 @@
 
   "New Activity": "New Activity",
 
-  "New Message ": "New Message ",
+  "New Message": "New Message ",
 
   "Mark as unread": "Mark as unread",
 

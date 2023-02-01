@@ -9,6 +9,7 @@
   "Login/create a new account to track your kids’ activities.":"تسجيل الدخول / إنشاء حساب جديد لتتبع أنشطة طفلك",
 
   "Email/Phone number":"البريد الإلكتروني / رقم الهاتف",
+  "Voucher Code": "كود الدخول",
 
   "Enter your email/phone number":"أدخل بريدك الإلكتروني / رقم هاتفك",
 
@@ -164,6 +165,11 @@
   "By proceeding you agree to our ": "بالمتابعة فإنك توافق على",
 
   "Current treatment": "العلاج الحالي",
+  "Current Code": "الكود الحالي",
+  "Valid till": "صالح لغاية",
+  "Issued by": "صادر عن",
+  "Issued date": "تاريخ الإصدار",
+  "Issued for": "أصدرت لـ",
 
   "Vaccinations": "تلقيح",
 
@@ -273,7 +279,7 @@
 
   "New Activity": " نشاط جديد",
 
-  "New Message ":" رسالة جديدة",
+  "New Message":" رسالة جديدة",
 
   "Mark as unread": "اجعلها رسالة غير مقروؤة",
 

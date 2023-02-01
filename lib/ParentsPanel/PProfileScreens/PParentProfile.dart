@@ -78,12 +78,16 @@ class _PParentsProfileState extends State<PParentsProfile> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
-                        height: 140,
+                        height: 128,
                         width: 96.2,
+                        clipBehavior: Clip.hardEdge,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(16)),
                         child: Image.network(
                           model.parentImage.toString(),
                           errorBuilder: (q, w, e) =>
                               Image.asset("assets/images/profileperson.png"),
+                          fit: BoxFit.fitHeight,
                         ),
                       ),
                       SizedBox(width: 16),

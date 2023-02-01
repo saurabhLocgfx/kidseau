@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kidseau/Constants/colors.dart';
+import 'package:kidseau/ParentsPanel/PProfileScreens/PSettings/PChangeVoucherScreen.dart';
 import 'package:kidseau/Theme.dart';
 import 'package:kidseau/Widgets/buttons.dart';
 import 'package:kidseau/api/models/parent_models/parent_profile_models/kid_voucher_detail_model.dart';
@@ -101,11 +102,18 @@ class _PVouchercodeState extends State<PVouchercode> {
                             itemBuilder: (context, index) {
                               return InkWell(
                                 onTap: () {
-                                  /*Navigator.of(context).push(
+                                  Navigator.of(context).push(
                                     MaterialPageRoute(
-                                      builder: (context) => changevouchercode(),
+                                      builder: (context) =>
+                                          PChangeVoucherScreen(
+                                        onPop: () {
+                                          _getData();
+                                        },
+                                        kidId:
+                                            modelList[index].kidId.toString(),
+                                      ),
                                     ),
-                                  );*/
+                                  );
                                 },
                                 child: Column(
                                   mainAxisSize: MainAxisSize.min,
@@ -166,15 +174,23 @@ class _PVouchercodeState extends State<PVouchercode> {
                                                                 Colors.white),
                                                   ),
                                                 ),
-                                                Text(
-                                                  modelList[index]
-                                                      .validTill
-                                                      .toString(),
-                                                  style: FontConstant
-                                                      .k18w500331FText
-                                                      .copyWith(
-                                                          color: Colors.white),
-                                                ),
+                                                modelList[index]
+                                                            .validTill
+                                                            .toString() ==
+                                                        ""
+                                                    ? Text('')
+                                                    : Text(
+                                                        DateFormat.yMMM().format(
+                                                            DateTime.parse(
+                                                                modelList[index]
+                                                                    .validTill
+                                                                    .toString())),
+                                                        style: FontConstant
+                                                            .k18w500331FText
+                                                            .copyWith(
+                                                                color: Colors
+                                                                    .white),
+                                                      ),
                                               ],
                                             )
                                           ],

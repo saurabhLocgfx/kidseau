@@ -64,6 +64,7 @@ class _PEditProfileScreenState extends State<PEditProfileScreen> {
     _motherEmailController.text = widget.model.motherEmail.toString();
     _motherNumberController.text = widget.model.motherPhoneNumber.toString();
     _addressController.text = widget.model.parentAddress.toString();
+    profileImageUrl = widget.model.parentImage.toString();
     if (widget.model.info.toString().toLowerCase() == 'father') {
       _isFather = true;
     } else {
