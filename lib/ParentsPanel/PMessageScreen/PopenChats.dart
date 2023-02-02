@@ -1,3 +1,5 @@
+import 'dart:developer';
+import 'dart:io';
 import 'dart:ui';
 
 import 'package:easy_localization/easy_localization.dart';
@@ -7,9 +9,15 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:grouped_list/grouped_list.dart';
 import 'package:kidseau/Theme.dart';
 import 'package:kidseau/Widgets/popups.dart';
+import 'package:kidseau/api/message_apis/all_message_api.dart';
+import 'package:kidseau/api/models/message_models/all_messages_model.dart';
+import 'package:kidseau/api/message_apis/send_message_api.dart';
 
 class POpenChats extends StatefulWidget {
-  const POpenChats({Key? key}) : super(key: key);
+  final String userId;
+  final String userType;
+  const POpenChats({Key? key, required this.userId, required this.userType})
+      : super(key: key);
 
   @override
   State<POpenChats> createState() => _POpenChatsState();
@@ -36,6 +44,36 @@ class _POpenChatsState extends State<POpenChats> {
         isSentByme: false),
   ];
 
+  AllMessagesModel messageModel = AllMessagesModel();
+  final TextEditingController _controller = TextEditingController();
+
+  @override
+  void initState() {
+    _getData();
+    super.initState();
+  }
+
+  bool _isLoading = false;
+  _getData() {
+    _isLoading = true;
+    final resp =
+        AllMessagesApi().get(userId: widget.userId, userType: widget.userType);
+    resp.then((value) {
+      //log(value.toString());
+      if (value['status'] == 1) {
+        setState(() {
+          messageModel = AllMessagesModel.fromJson(value);
+          _isLoading = false;
+        });
+      } else {
+        setState(() {
+          _isLoading = false;
+        });
+      }
+    });
+  }
+
+  var _pickedImg = File('');
   bool _isVisible = false;
   void showToast() {
     setState(() {
@@ -88,11 +126,8 @@ class _POpenChatsState extends State<POpenChats> {
           children: [
             Expanded(
               child: TextField(
-                onSubmitted: (text) {
-                  final message = Messages(
-                      text: text, date: DateTime.now(), isSentByme: true);
-                  setState(() => messages.add(message));
-                },
+                controller: _controller,
+                onSubmitted: (text) {},
                 decoration: InputDecoration(
                   enabledBorder: OutlineInputBorder(
                     borderSide: BorderSide(width: 2, color: Color(0xffDBE8FA)),
@@ -102,11 +137,30 @@ class _POpenChatsState extends State<POpenChats> {
                   ),
                   fillColor: Color(0xffF0F4FA),
                   hintText: "Type here.".tr(),
-                  /*AppLoaclizations.of(context)!
-                                .translate("Type here."),*/
                   hintStyle: FontConstant.k16w400B7A4Text,
                   suffixIcon: GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      if (_controller.text.isNotEmpty) {
+                        log('message');
+                        final resp = SendMessageApi().get(
+                            message: _controller.text,
+                            sendToId: widget.userId,
+                            receiverUserType: widget.userType,
+                            image: _pickedImg);
+                        resp.then((value) {
+                          if (value['status'] == 1) {
+                            final message = Messages(
+                                text: _controller.text,
+                                date: DateTime.now(),
+                                isSentByme: true);
+                            setState(() => messages.add(message));
+                            _controller.clear();
+                          } else {
+                            log(value.toString());
+                          }
+                        });
+                      }
+                    },
                     child: Padding(
                       padding: const EdgeInsets.all(10.0),
                       child: ImageIcon(
@@ -133,116 +187,126 @@ class _POpenChatsState extends State<POpenChats> {
           ],
         ),
       ),
-      body: SingleChildScrollView(
-        child: Container(
-          // height: 896.h,
-          // width: 414.w,
-          decoration: BoxDecoration(
-            image: DecorationImage(
-                image: AssetImage(
-                  "assets/images/framemessages.png",
+      body: _isLoading
+          ? Center(
+              child: CircularProgressIndicator(),
+            )
+          : SingleChildScrollView(
+              child: Container(
+                // height: 896.h,
+                // width: 414.w,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                      image: AssetImage(
+                        "assets/images/framemessages.png",
+                      ),
+                      colorFilter: ColorFilter.mode(
+                        Colors.transparent.withOpacity(0.4),
+                        BlendMode.modulate,
+                      ),
+                      fit: BoxFit.cover),
                 ),
-                colorFilter: ColorFilter.mode(
-                  Colors.transparent.withOpacity(0.4),
-                  BlendMode.modulate,
-                ),
-                fit: BoxFit.cover),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.only(left: 16.0, right: 16),
-            child: Column(
-              children: [
-                SizedBox(
-                  height: 140,
-                ),
-                GestureDetector(
-                  onTap: () {
-                    // Navigator.of(context).push(
-                    //   MaterialPageRoute(
-                    //     builder: (context) => PChats(),
-                    //   ),
-                    // );
-                  },
-                  child: Container(
-                    child: Row(
-                      children: [
-                        Container(
-                          height: 112,
-                          width: 84,
-                          decoration: BoxDecoration(
-                              image: DecorationImage(
-                                  image: AssetImage(
-                                      "assets/images/teacher1.png"))),
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 16.0, right: 16),
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        height: 140,
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          // Navigator.of(context).push(
+                          //   MaterialPageRoute(
+                          //     builder: (context) => PChats(),
+                          //   ),
+                          // );
+                        },
+                        child: Container(
+                          child: Row(
+                            children: [
+                              Container(
+                                height: 112,
+                                width: 84,
+                                decoration: BoxDecoration(
+                                    image: DecorationImage(
+                                        image: AssetImage(
+                                            "assets/images/teacher1.png"))),
+                              ),
+                              SizedBox(
+                                width: 16,
+                              ),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text("Mohammad Umar",
+                                      style: FontConstant.k24w500brownText
+                                          .copyWith(
+                                              color: ThemeColor.primarycolor)),
+                                  Text(
+                                    "Class teacher",
+                                    style: FontConstant.k16w400B7A4Text,
+                                  ),
+                                  Text(
+                                    "English, French, Arabic",
+                                    style: FontConstant.k16w4008471Text,
+                                  )
+                                ],
+                              )
+                            ],
+                          ),
                         ),
-                        SizedBox(
-                          width: 16,
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text("Mohammad Umar",
-                                style: FontConstant.k24w500brownText
-                                    .copyWith(color: ThemeColor.primarycolor)),
-                            Text(
-                              "Class teacher",
-                              style: FontConstant.k16w400B7A4Text,
-                            ),
-                            Text(
-                              "English, French, Arabic",
-                              style: FontConstant.k16w4008471Text,
-                            )
-                          ],
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 500,
-                  child: GroupedListView<Messages, DateTime>(
-                    reverse: true,
-                    order: GroupedListOrder.DESC,
-                    padding: EdgeInsets.all(16),
-                    elements: messages,
-                    groupBy: (messages) => DateTime(messages.date.year,
-                        messages.date.month, messages.date.day),
-                    groupHeaderBuilder: (Messages messages) => SizedBox(),
-                    itemBuilder: (context, Messages messages) => Align(
-                      alignment: messages.isSentByme
-                          ? Alignment.centerRight
-                          : Alignment.centerLeft,
-                      child: Align(
-                        alignment: messages.isSentByme
-                            ? Alignment.centerRight
-                            : Alignment.centerLeft,
-                        child: Padding(
-                          padding: const EdgeInsets.only(bottom: 32.0),
-                          child: Container(
-                            decoration: BoxDecoration(
-                                color: messages.isSentByme
-                                    ? Color(0xffF2F1F8)
-                                    : Color(0xffDBE8FA),
-                                borderRadius: BorderRadius.circular(6)),
-                            child: Padding(
-                              padding: EdgeInsets.all(12),
-                              child: Text(
-                                messages.text,
-                                style: FontConstant.k16w4008471Text
-                                    .copyWith(color: Color(0xff5E5C70)),
+                      ),
+                      SizedBox(
+                        height: 500,
+                        child: GroupedListView<AllMsg, DateTime>(
+                          reverse: true,
+                          order: GroupedListOrder.DESC,
+                          padding: EdgeInsets.all(16),
+                          elements: messageModel.allMsg!,
+                          groupBy: (messages) => DateTime(
+                              int.parse(DateFormat.y()
+                                  .format(DateTime.parse(messages.createdAt!))),
+                              int.parse(DateFormat.m()
+                                  .format(DateTime.parse(messages.createdAt!))),
+                              int.parse(DateFormat.d().format(
+                                  DateTime.parse(messages.createdAt!)))),
+                          groupHeaderBuilder: (AllMsg messages) => SizedBox(),
+                          itemBuilder: (context, AllMsg messages) => Align(
+                            alignment: messages.senderUserType == "parent"
+                                ? Alignment.centerRight
+                                : Alignment.centerLeft,
+                            child: Align(
+                              alignment: messages.senderUserType == "parent"
+                                  ? Alignment.centerRight
+                                  : Alignment.centerLeft,
+                              child: Padding(
+                                padding: const EdgeInsets.only(bottom: 32.0),
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                      color: messages.senderUserType == "parent"
+                                          ? Color(0xffF2F1F8)
+                                          : Color(0xffDBE8FA),
+                                      borderRadius: BorderRadius.circular(6)),
+                                  child: Padding(
+                                    padding: EdgeInsets.all(12),
+                                    child: Text(
+                                      messages.message.toString(),
+                                      style: FontConstant.k16w4008471Text
+                                          .copyWith(color: Color(0xff5E5C70)),
+                                    ),
+                                  ),
+                                ),
                               ),
                             ),
                           ),
                         ),
                       ),
-                    ),
-                  ),
-                ),
-                popuptextfield(isVisible: _isVisible),
-                SizedBox(
-                  height: 8.h,
-                ),
-                /* Container(
+                      popuptextfield(isVisible: _isVisible),
+                      SizedBox(
+                        height: 8.h,
+                      ),
+                      /* Container(
                   height: 52.h,
                   width: 382.w,
                   child: TextField(
@@ -289,14 +353,14 @@ class _POpenChatsState extends State<POpenChats> {
                     ),
                   ),
                 ),*/
-                SizedBox(
-                  height: 32.h,
+                      SizedBox(
+                        height: 32.h,
+                      ),
+                    ],
+                  ),
                 ),
-              ],
+              ),
             ),
-          ),
-        ),
-      ),
     );
   }
 }

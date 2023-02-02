@@ -87,8 +87,13 @@ class _PTeachersState extends State<PTeachers> {
               itemBuilder: (BuildContext context, int index) {
                 return GestureDetector(
                   onTap: () {
-                    Navigator.of(context).push(
-                        MaterialPageRoute(builder: (context) => POpenChats()));
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => POpenChats(
+                              userId:
+                                  model.allTeahcer![index].teacherId.toString(),
+                              userType:
+                                  model.allTeahcer![index].userType.toString(),
+                            )));
                   },
                   child: Container(
                     //height: 150.h,

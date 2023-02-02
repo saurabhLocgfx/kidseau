@@ -1,8 +1,11 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kidseau/ParentsPanel/PMessageScreen/PopenChats.dart';
 import 'package:kidseau/Theme.dart';
 import 'package:kidseau/Widgets/dialogs.dart';
+import 'package:kidseau/api/message_apis/recent_chat_api.dart';
+import 'package:kidseau/api/models/message_models/recent_chat_model.dart';
 
 class PMessages extends StatefulWidget {
   const PMessages({Key? key}) : super(key: key);
@@ -52,78 +55,114 @@ class _PMessagesState extends State<PMessages> {
   }
 
   @override
+  void initState() {
+    _getData();
+    super.initState();
+  }
+
+  List<RecentMessageModel> modelList = [];
+  bool _isLoading = false;
+  _getData() {
+    _isLoading = true;
+    final resp = RecentChatApi().get();
+    resp.then((value) {
+      setState(() {
+        for (var v in value) {
+          modelList.add(RecentMessageModel.fromJson(v));
+        }
+        _isLoading = false;
+      });
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ListView.builder(
-          itemCount: images.length,
-          physics: NeverScrollableScrollPhysics(),
-          scrollDirection: Axis.vertical,
-          shrinkWrap: true,
-          itemBuilder: (BuildContext context, int index) {
-            return GestureDetector(
-              onTap: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => POpenChats(),
-                  ),
-                );
-              },
-              child: Container(
-                  height: 90,
-                  width: 382.w,
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 16, right: 16),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
+      body: _isLoading
+          ? Center(
+              child: CircularProgressIndicator(),
+            )
+          : ListView.builder(
+              itemCount: modelList.length,
+              physics: AlwaysScrollableScrollPhysics(),
+              scrollDirection: Axis.vertical,
+              shrinkWrap: true,
+              itemBuilder: (BuildContext context, int index) {
+                return GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => POpenChats(
+                          userId: modelList[index].userId.toString(),
+                          userType: modelList[index].userType.toString(),
+                        ),
+                      ),
+                    );
+                  },
+                  child: Container(
+                      height: 90,
+                      width: 1.sw,
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 16, right: 16),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            Container(
-                              height: 70,
-                              width: 50,
-                              decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                      image: AssetImage(images[index]))),
-                            ),
-                            SizedBox(width: 16),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
+                            Row(
                               children: [
-                                Row(
+                                Container(
+                                  height: 70,
+                                  width: 50,
+                                  clipBehavior: Clip.hardEdge,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(8)),
+                                  child: Image.network(
+                                    modelList[index].userProfile.toString(),
+                                    fit: BoxFit.fitHeight,
+                                    errorBuilder: (q, w, e) => Image.asset(
+                                        "assets/images/messageperson1.png"),
+                                  ),
+                                ),
+                                SizedBox(width: 16),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text(
-                                      name[index],
-                                      style: FontConstant.k18w5008471Text
-                                          .copyWith(
-                                              fontSize: 18,
-                                              fontWeight: FontWeight.w500,
-                                              color: Color(0xff331F2D)),
+                                    Row(
+                                      children: [
+                                        Text(
+                                          modelList[index].userName.toString(),
+                                          style: FontConstant.k18w5008471Text
+                                              .copyWith(
+                                                  fontSize: 18,
+                                                  fontWeight: FontWeight.w500,
+                                                  color: Color(0xff331F2D)),
+                                        ),
+                                      ],
                                     ),
+                                    Text(modelList[index].userType.toString(),
+                                        style: FontConstant.k14w4008471Text),
+                                    Text(
+                                        "${"last message".tr()} - ${DateFormat.yMMM().format(DateTime.parse(modelList[index].messageTime.toString()))}",
+                                        style: FontConstant.k12w4008267Text),
                                   ],
                                 ),
-                                Text(title[index],
-                                    style: FontConstant.k14w4008471Text),
-                                Text("last message - 2 days ago",
-                                    style: FontConstant.k12w4008267Text),
                               ],
+                            ),
+                            Container(
+                              child: Stack(children: [
+                                Image.asset(
+                                  "assets/images/dots2.png",
+                                  height: 48.h,
+                                  width: 48.w,
+                                ),
+                                messageoptiondialog(),
+                              ]),
                             ),
                           ],
                         ),
-                        Container(
-                          child: Stack(children: [
-                            Image.asset(
-                              "assets/images/dots2.png",
-                              height: 48.h,
-                              width: 48.w,
-                            ),
-                            messageoptiondialog(),
-                          ]),
-                        ),
-                      ],
-                    ),
-                  )),
-            );
-          }),
+                      )),
+                );
+              }),
     );
   }
 }
