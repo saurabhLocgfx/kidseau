@@ -1,9 +1,12 @@
+import 'dart:developer';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kidseau/ParentsPanel/PMessageScreen/PopenChats.dart';
 import 'package:kidseau/Theme.dart';
 import 'package:kidseau/Widgets/dialogs.dart';
+import 'package:kidseau/api/message_apis/delete_chat_api.dart';
 import 'package:kidseau/api/message_apis/recent_chat_api.dart';
 import 'package:kidseau/api/models/message_models/recent_chat_model.dart';
 
@@ -66,6 +69,7 @@ class _PMessagesState extends State<PMessages> {
     _isLoading = true;
     final resp = RecentChatApi().get();
     resp.then((value) {
+      log(value.toString());
       setState(() {
         for (var v in value) {
           modelList.add(RecentMessageModel.fromJson(v));
@@ -93,6 +97,9 @@ class _PMessagesState extends State<PMessages> {
                     Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (context) => POpenChats(
+                          profilePic: modelList[index].userProfile.toString(),
+                          name: modelList[index].userName.toString(),
+                          language: modelList[index].lang.toString(),
                           userId: modelList[index].userId.toString(),
                           userType: modelList[index].userType.toString(),
                         ),
@@ -102,6 +109,7 @@ class _PMessagesState extends State<PMessages> {
                   child: Container(
                       height: 90,
                       width: 1.sw,
+                      color: Colors.transparent,
                       child: Padding(
                         padding: const EdgeInsets.only(left: 16, right: 16),
                         child: Row(
@@ -155,7 +163,62 @@ class _PMessagesState extends State<PMessages> {
                                   height: 48.h,
                                   width: 48.w,
                                 ),
-                                messageoptiondialog(),
+                                PopupMenuButton(
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(16)),
+                                    iconSize: 10,
+                                    icon: ImageIcon(
+                                      AssetImage(
+                                        "assets/images/dots2.png",
+                                      ),
+                                    ),
+                                    itemBuilder: (context) {
+                                      return [
+                                        PopupMenuItem(
+                                          enabled: false,
+                                          child: InkWell(
+                                            onTap: () {
+                                              final resp = DeleteChat().get(
+                                                  userId: modelList[index]
+                                                      .userId
+                                                      .toString(),
+                                                  userType: modelList[index]
+                                                      .userType
+                                                      .toString());
+                                              resp.then((value) {
+                                                log(value.toString());
+                                                if (value['status'] == 1) {
+                                                  setState(() {
+                                                    modelList.removeAt(index);
+                                                  });
+                                                }
+                                                Navigator.of(context).pop();
+                                              });
+                                            },
+                                            child: Padding(
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                      vertical: 32.0),
+                                              child: Row(
+                                                children: [
+                                                  Image.asset(
+                                                    "assets/images/trashicon.png",
+                                                    height: 24,
+                                                  ),
+                                                  SizedBox(width: 24),
+                                                  Text(
+                                                    "Delete chat".tr(),
+                                                    style: FontConstant
+                                                        .k18w5008471Text,
+                                                  )
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ];
+                                    })
                               ]),
                             ),
                           ],

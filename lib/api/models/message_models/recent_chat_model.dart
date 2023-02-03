@@ -4,16 +4,19 @@ class RecentMessageModel {
   String? userType;
   String? userProfile;
   String? messageTime;
+  String? lang;
 
   RecentMessageModel(
       {this.userId,
       this.userName,
       this.userType,
+      this.lang,
       this.userProfile,
       this.messageTime});
 
   RecentMessageModel.fromJson(Map<String, dynamic> json) {
     userId = json['user_id'];
+    lang = json['lang'];
     userName = json['user_name'];
     userType = json['user_type'];
     userProfile = json['user_profile'];

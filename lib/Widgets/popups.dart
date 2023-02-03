@@ -26,7 +26,7 @@ class _popuptextfieldState extends State<popuptextfield> {
         width: 382.w,
         decoration: BoxDecoration(
           boxShadow: [
-            new BoxShadow(
+            BoxShadow(
               offset: Offset(2, 2),
               blurRadius: 12,
               color: Color.fromRGBO(93, 61, 143, 0.2),

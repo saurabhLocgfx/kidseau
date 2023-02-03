@@ -1,3 +1,4 @@
+import 'dart:developer' as l;
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -57,6 +58,7 @@ class _PTeachersState extends State<PTeachers> {
     _isLoading = true;
     final resp = ParentMsgTeacherApi().get();
     resp.then((value) {
+      l.log(value.toString());
       if (value['status'] == 1) {
         setState(() {
           model = ParentMsgTeacherModel.fromJson(value);
@@ -89,6 +91,11 @@ class _PTeachersState extends State<PTeachers> {
                   onTap: () {
                     Navigator.of(context).push(MaterialPageRoute(
                         builder: (context) => POpenChats(
+                              profilePic: model.allTeahcer![index].techProfile
+                                  .toString(),
+                              name: model.allTeahcer![index].fName.toString(),
+                              language:
+                                  model.allTeahcer![index].langId.toString(),
                               userId:
                                   model.allTeahcer![index].teacherId.toString(),
                               userType:
@@ -101,7 +108,7 @@ class _PTeachersState extends State<PTeachers> {
                     // clipBehavior: Clip.hardEdge,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(16),
-                        //color: Colors.blue,
+                        color: Colors.transparent,
                         image: DecorationImage(
                             image: AssetImage("assets/images/purplecard.png"),
                             fit: BoxFit.fill)),
