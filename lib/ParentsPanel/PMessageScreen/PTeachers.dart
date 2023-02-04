@@ -54,6 +54,7 @@ class _PTeachersState extends State<PTeachers> {
 
   ParentMsgTeacherModel model = ParentMsgTeacherModel();
   bool _isLoading = false;
+
   _getData() {
     _isLoading = true;
     final resp = ParentMsgTeacherApi().get();

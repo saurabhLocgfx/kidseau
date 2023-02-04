@@ -47,6 +47,7 @@ class _PHomeScreenState extends State<PHomeScreen> {
     _isLoading = true;
     final resp = ParentKidApi().get();
     resp.then((value) {
+      log(value.toString());
       if (value['status'] == 1) {
         setState(() {
           _kidModel = ParentKidHomeModel.fromJson(value);
@@ -125,7 +126,7 @@ class _PHomeScreenState extends State<PHomeScreen> {
               padding: const EdgeInsets.only(top: 15.0),
               child: Text("${"Hello".tr()} ${_activityModel.greet ?? ''}",
                   overflow: TextOverflow.ellipsis,
-                  style: FontConstant2.k32w5008267text.copyWith(fontSize: 22)),
+                  style: FontConstant2.k32w5008267text.copyWith(fontSize: 20)),
             ),
           ],
         ),

@@ -103,7 +103,7 @@ class _THomeScreenState extends State<THomeScreen> {
             Padding(
               padding: const EdgeInsets.only(top: 15.0),
               child: Text("${"Hello".tr()} ${_name.hello ?? ''}",
-                  style: FontConstant2.k32w5008267text.copyWith(fontSize: 25)),
+                  style: FontConstant2.k32w5008267text.copyWith(fontSize: 20)),
             ),
           ],
         ),
