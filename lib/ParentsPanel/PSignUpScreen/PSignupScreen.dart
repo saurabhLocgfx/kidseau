@@ -199,23 +199,26 @@ class _PSignupScreenState extends State<PSignupScreen> {
                                     backgroundColor: ThemeColor.primarycolor),
                               ),
                               SizedBox(height: 20),
-                              Center(
-                                child: RichText(
-                                    text: TextSpan(children: [
-                                  TextSpan(
-                                    text:
-                                        "By proceeding you agree to our ".tr(),
-                                    style: FontConstant.k14w400B7A4Text,
-                                  ),
-                                  TextSpan(
-                                    text: "Privacy Policy & ".tr(),
-                                    style: FontConstant.k14w500B7A4TextU,
-                                  ),
-                                  TextSpan(
-                                    text: "Terms and Conditions".tr(),
-                                    style: FontConstant.k14w500B7A4TextU,
-                                  ),
-                                ])),
+                              Align(
+                                alignment: Alignment.bottomCenter,
+                                child: Center(
+                                  child: RichText(
+                                      text: TextSpan(children: [
+                                    TextSpan(
+                                      text: "By proceeding you agree to our "
+                                          .tr(),
+                                      style: FontConstant.k14w400B7A4Text,
+                                    ),
+                                    TextSpan(
+                                      text: "Privacy Policy & ".tr(),
+                                      style: FontConstant.k14w500B7A4TextU,
+                                    ),
+                                    TextSpan(
+                                      text: "Terms and Conditions".tr(),
+                                      style: FontConstant.k14w500B7A4TextU,
+                                    ),
+                                  ])),
+                                ),
                               ),
                               SizedBox(height: 13.h),
                             ],

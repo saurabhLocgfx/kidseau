@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:kidseau/ParentsPanel/PMessageScreen/PopenChats.dart';
 import 'package:kidseau/Theme.dart';
 import 'package:kidseau/Widgets/buttons.dart';
 import 'package:kidseau/api/models/parent_models/parent_home_models/parent_activity_detail_model.dart';
@@ -37,6 +38,7 @@ class _PLearningAplphabetsState extends State<PLearningAplphabets> {
     _isLoading = true;
     final resp = ParentActivityDetailApi().get(actId: widget.actId);
     resp.then((value) {
+      print(value);
       if (value['status'] == 1) {
         setState(() {
           model = ParentActivityDetailModel.fromJson(value);
@@ -304,7 +306,13 @@ class _PLearningAplphabetsState extends State<PLearningAplphabets> {
                       materialButton(context, () {
                         Navigator.of(context).push(
                           MaterialPageRoute(
-                            builder: (context) => TChats(),
+                            builder: (context) => POpenChats(
+                              userId: model.activity!.teachId.toString(),
+                              userType: 'teacher',
+                              profilePic: model.activity!.teachImage.toString(),
+                              name: model.activity!.teacherName.toString(),
+                              language: model.activity!.lang.toString(),
+                            ),
                           ),
                         );
                       }, "Ask Question".tr(), ThemeColor.primarycolor, 52.0),

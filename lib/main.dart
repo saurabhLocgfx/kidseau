@@ -70,6 +70,28 @@ class MyAppState extends State<MyApp> {
     return Locale(languageCode, countryCode);
   }*/
 
+  Widget getRoute() {
+    if (UserPrefs.getCookies() == null) {
+      if (UserPrefs.getIsTeacher() == null) {
+        return PSplashScreen();
+      } else {
+        if (UserPrefs.getIsTeacher()!) {
+          return PSplashScreen();
+        } else {
+          return PSplashScreen();
+        }
+      }
+    } else {
+      if (UserPrefs.getIsTeacher() == null) {
+        return PSplashScreen();
+      } else if (UserPrefs.getIsTeacher()!) {
+        return TDashboard();
+      } else {
+        return PDashboard();
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     SystemChrome.setPreferredOrientations([
@@ -84,28 +106,28 @@ class MyAppState extends State<MyApp> {
         builder: (context, child) {
           return Portal(
             child: GetMaterialApp(
-              textDirection: TextDirection.ltr,
-              theme: ThemeData().copyWith(
-                colorScheme: ThemeData().colorScheme.copyWith(
-                      primary: ThemeColor.primarycolor,
-                    ),
-              ),
-              supportedLocales: context.supportedLocales,
-              /*supportedLocales: [
+                textDirection: TextDirection.ltr,
+                theme: ThemeData().copyWith(
+                  colorScheme: ThemeData().colorScheme.copyWith(
+                        primary: ThemeColor.primarycolor,
+                      ),
+                ),
+                supportedLocales: context.supportedLocales,
+                /*supportedLocales: [
                 Locale('en', 'US'),
                 Locale('ar', 'AR'),
                 Locale('fr', 'FR'),
               ],*/
-              /* locale: _locale,*/
-              locale: context.locale,
-              localizationsDelegates: context.localizationDelegates,
-              /* localizationsDelegates: [
+                /* locale: _locale,*/
+                locale: context.locale,
+                localizationsDelegates: context.localizationDelegates,
+                /* localizationsDelegates: [
                 AppLoaclizations.delegate,
                 GlobalMaterialLocalizations.delegate,
                 GlobalWidgetsLocalizations.delegate,
                 const FallbackCupertinoLocalisationsDelegate(),
               ],*/
-              /*localeResolutionCallback: (locale, supportedLocales) {
+                /*localeResolutionCallback: (locale, supportedLocales) {
                 for (var supportedLocales in supportedLocales) {
                   if (supportedLocales.languageCode == locale?.languageCode &&
                       supportedLocales.countryCode == locale?.countryCode) {
@@ -113,19 +135,19 @@ class MyAppState extends State<MyApp> {
                   }
                 }
               },*/
-              debugShowCheckedModeBanner: false,
-              home: /*TPersonalDetails(
+                debugShowCheckedModeBanner: false,
+                home: /*TPersonalDetails(
                 isEmail: false,
               ),*/
-                  // Parentinfodashboard()
-                  // KidsDetails(),
-                  // ParentInfo()
-                  // TWaitingScreen()
-                  // PSignupCode()
-                      TDashboard(),
-                  //PDashboard(),
-               //PSplashScreen(),
-            ),
+                    // Parentinfodashboard()
+                    // KidsDetails(),
+                    // ParentInfo()
+                    // TWaitingScreen()
+                    // PSignupCode()
+                    // TDashboard(),
+                    // PDashboard(),
+                    //PSplashScreen(),
+                    getRoute()),
           );
         });
   }

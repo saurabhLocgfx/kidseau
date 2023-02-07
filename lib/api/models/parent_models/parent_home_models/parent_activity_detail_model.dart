@@ -28,6 +28,7 @@ class Activity {
   String? actTime;
   String? teacherName;
   String? teachImage;
+  String? teachId;
   int? classTeacher;
   String? lang;
 
@@ -36,6 +37,7 @@ class Activity {
       this.actImage,
       this.actDecription,
       this.actTime,
+      this.teachId,
       this.teacherName,
       this.teachImage,
       this.classTeacher,
@@ -46,6 +48,7 @@ class Activity {
     actImage = json['actImage'];
     actDecription = json['actDecription'];
     actTime = json['actTime'];
+    teachId = json['teacher_id'];
     teacherName = json['teacherName'];
     teachImage = json['teachImage'];
     classTeacher = json['classTeacher'];
@@ -59,6 +62,7 @@ class Activity {
     data['actDecription'] = this.actDecription;
     data['actTime'] = this.actTime;
     data['teacherName'] = this.teacherName;
+    data['teacher_id'] = this.teachId;
     data['teachImage'] = this.teachImage;
     data['classTeacher'] = this.classTeacher;
     data['lang'] = this.lang;

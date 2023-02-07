@@ -5,6 +5,7 @@ import 'package:kidseau/ParentsPanel/POnboardingScreens/POnboardingScreen.dart';
 import 'package:kidseau/Theme.dart';
 import 'package:kidseau/Widgets/buttons.dart';
 import 'package:kidseau/Widgets/widgets.dart';
+import 'package:kidseau/shard_prefs/shared_prefs.dart';
 
 import '../../TeachersPanel/OnboardingScreens/TOnboardingScreen.dart';
 

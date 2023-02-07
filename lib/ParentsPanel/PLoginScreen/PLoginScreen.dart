@@ -145,7 +145,8 @@ class PLoginScreen extends StatelessWidget {
                                                         PLoginOtpVerification(
                                                           loginField:
                                                               emailController
-                                                                  .text,
+                                                                  .text
+                                                                  .trim(),
                                                         )));
                                             Fluttertoast.showToast(
                                                 msg:
@@ -169,7 +170,7 @@ class PLoginScreen extends StatelessWidget {
                                       SizedBox(
                                         width: 5.w,
                                       ),
-                                      Text("First time on Kidseau",
+                                      Text("First time on Kidseau".tr(),
                                           style: FontConstant.k16w4008471Text),
                                       SizedBox(
                                         width: 5.w,

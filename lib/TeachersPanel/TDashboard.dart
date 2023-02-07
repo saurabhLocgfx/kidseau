@@ -42,36 +42,41 @@ class _TDashboardState extends State<TDashboard> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      extendBody: true,
-      appBar: AppBar(
-        toolbarHeight: 0,
-        elevation: 0,
-        systemOverlayStyle: SystemUiOverlayStyle(
-          statusBarBrightness: Brightness.light,
-        ),
-        backgroundColor: Colors.transparent,
-      ),
-      bottomNavigationBar: buildMyNavBar(context),
-      body: PageView(
-        controller: _pageController,
-        physics: NeverScrollableScrollPhysics(),
-        onPageChanged: (page) {
-          setState(
-            () {
-              pageIndex = page;
-            },
-          );
-        },
-        children: <Widget>[
-          THomeScreen(),
-          TProfileDashBoard(),
-          TPostsDashBoard(
-            postIndex: widget.postIndex,
+    return WillPopScope(
+      onWillPop: () async {
+        return false;
+      },
+      child: Scaffold(
+        extendBody: true,
+        appBar: AppBar(
+          toolbarHeight: 0,
+          elevation: 0,
+          systemOverlayStyle: SystemUiOverlayStyle(
+            statusBarBrightness: Brightness.light,
           ),
-          TStudentScreen(),
-          TMessageDashboard()
-        ],
+          backgroundColor: Colors.transparent,
+        ),
+        bottomNavigationBar: buildMyNavBar(context),
+        body: PageView(
+          controller: _pageController,
+          physics: NeverScrollableScrollPhysics(),
+          onPageChanged: (page) {
+            setState(
+              () {
+                pageIndex = page;
+              },
+            );
+          },
+          children: <Widget>[
+            THomeScreen(),
+            TProfileDashBoard(),
+            TPostsDashBoard(
+              postIndex: widget.postIndex,
+            ),
+            TStudentScreen(),
+            TMessageDashboard()
+          ],
+        ),
       ),
     );
   }

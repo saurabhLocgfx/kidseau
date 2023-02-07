@@ -11,6 +11,7 @@ import 'package:kidseau/Widgets/textfields.dart';
 import 'package:kidseau/api/parent_signup_apis/parent_medical_info.dart';
 
 import 'Widgets/buttons.dart';
+import 'shard_prefs/shared_prefs.dart';
 
 class MedicalInfo extends StatefulWidget {
   final bool newKid;
@@ -522,6 +523,7 @@ class _MedicalInfoState extends State<MedicalInfo> {
                                       setState(() {
                                         _btnLoading = false;
                                       });
+                                      UserPrefs.setIsTeacher(false);
                                       Navigator.of(context).push(
                                           MaterialPageRoute(
                                               builder: (ctx) => PDashboard()));

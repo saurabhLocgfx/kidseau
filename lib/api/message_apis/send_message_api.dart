@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:core';
+import 'dart:developer';
 import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:kidseau/Constants/string_const.dart';
@@ -25,10 +26,13 @@ class SendMessageApi {
     }
     request.headers.addAll(headers);
 
+    log(request.fields.toString());
     http.StreamedResponse response = await request.send();
 
     var v = jsonDecode(await response.stream.bytesToString());
     if (response.statusCode == 200) {
+      log(v.toString());
+      print(v);
       return v;
     } else {
       print(response.reasonPhrase);

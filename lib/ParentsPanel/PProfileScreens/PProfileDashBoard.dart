@@ -4,14 +4,18 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:kidseau/ParentsPanel/POnboardingScreens/PStartScreen.dart';
 import 'package:kidseau/ParentsPanel/PProfileScreens/PParentProfile.dart';
 import 'package:kidseau/ParentsPanel/PProfileScreens/PSchoolProfile.dart';
 import 'package:kidseau/ParentsPanel/PProfileScreens/PSettings/PSettings.dart';
 import 'package:kidseau/ParentsPanel/PProfileScreens/PSyllabus.dart';
 import 'package:kidseau/ParentsPanel/PProfileScreens/p_parent_nursery_widget.dart';
 import 'package:kidseau/Theme.dart';
+import 'package:kidseau/Widgets/custom_snack_bar.dart';
+import 'package:kidseau/api/logout_api/logout_api.dart';
 import 'package:kidseau/api/models/parent_models/parent_profile_models/parent_profile_model.dart';
 import 'package:kidseau/api/parent_panel_apis/parent_profile_apis/parent_profile_api.dart';
+import 'package:kidseau/shard_prefs/shared_prefs.dart';
 
 import 'PFees.dart';
 
@@ -394,6 +398,41 @@ class Pprofilepopup extends StatelessWidget {
                     SizedBox(width: 15),
                     Text(
                       "Settings".tr(),
+                      style: FontConstant.k18w5008471Text,
+                    )
+                  ],
+                ),
+              ),
+            ),
+            PopupMenuItem(
+              enabled: false,
+              child: GestureDetector(
+                onTap: () {
+                  final resp = LogoutApi().get();
+                  resp.then((value) {
+                    if (value['status'] == 1) {
+                      UserPrefs.clearData(UserPrefs.cookies);
+                      Navigator.of(context).pushAndRemoveUntil(
+                          MaterialPageRoute(builder: (ctx) => PStartScreen()),
+                          (route) => false);
+                      CustomSnackBar.customSnackBar(
+                          context, 'Logged out successfully.');
+                    } else {}
+                  });
+                },
+                child: Row(
+                  children: [
+                    /*Image.asset(
+                      "assets/images/gearicon.png",
+                      height: 24,
+                    )*/
+                    Icon(
+                      Icons.logout,
+                      color: Color(0xff331F2D),
+                    ),
+                    SizedBox(width: 15),
+                    Text(
+                      "Logout".tr(),
                       style: FontConstant.k18w5008471Text,
                     )
                   ],

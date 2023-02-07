@@ -135,8 +135,12 @@ class _PTeachersState extends State<PTeachers> {
                             Container(
                               height: 80,
                               width: 60,
+                              clipBehavior: Clip.hardEdge,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(8)),
                               child: Image.network(
                                 model.allTeahcer![index].techProfile.toString(),
+                                fit: BoxFit.fill,
                                 errorBuilder: (q, w, e) =>
                                     Image.asset("assets/images/teacher1.png"),
                               ),

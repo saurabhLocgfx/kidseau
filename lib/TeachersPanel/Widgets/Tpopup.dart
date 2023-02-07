@@ -4,6 +4,11 @@ import 'package:kidseau/TeachersPanel/TProfileScreen/TSettings.dart';
 import 'package:kidseau/TeachersPanel/TProfileScreen/TSyllabus.dart';
 import 'package:kidseau/Theme.dart';
 
+import '../../ParentsPanel/POnboardingScreens/PStartScreen.dart';
+import '../../Widgets/custom_snack_bar.dart';
+import '../../api/logout_api/logout_api.dart';
+import '../../shard_prefs/shared_prefs.dart';
+
 class TProfilepopup extends StatelessWidget {
   const TProfilepopup({
     Key? key,
@@ -24,89 +29,91 @@ class TProfilepopup extends StatelessWidget {
           return [
             PopupMenuItem(
               enabled: false,
-              child: Padding(
-                padding: const EdgeInsets.only(left: 15.0, top: 15, bottom: 15),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.pop(context);
-                        Navigator.of(context).push(
-                          MaterialPageRoute(builder: (context) => TSyllabus()),
-                        );
-                      },
-                      child: Row(
-                        children: [
-                          Image.asset(
-                            "assets/images/syllabusicon.png",
-                            height: 24,
-                          ),
-                          SizedBox(width: 15),
-                          Text(
-                            "Syllabus".tr(),
-                            /*AppLoaclizations.of(context)!
-                                .translate("Syllabus")
-                                .toString(),*/
-                            style: FontConstant.k18w5008471Text,
-                          )
-                        ],
-                      ),
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.pop(context);
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => TSettings(),
                     ),
-                    /*SizedBox(height: 20),
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.pop(context);
-                        // Navigator.of(context).push(
-                        //   MaterialPageRoute(
-                        //     builder: (context) => Fees(),
-                        //   ),
-                        // );
-                      },
-                      child: Row(
-                        children: [
-                          Image.asset(
-                            "assets/images/feesicon.png",
-                            height: 24,
-                          ),
-                          SizedBox(width: 15),
-                          Text(
-                            AppLoaclizations.of(context)!
-                                .translate("Fees")
-                                .toString(),
-                            style: FontConstant.k18w5008471Text,
-                          )
-                        ],
-                      ),
-                    ),*/
-                    SizedBox(height: 20),
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.pop(context);
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) => TSettings(),
-                          ),
-                        );
-                      },
-                      child: Row(
-                        children: [
-                          Image.asset(
-                            "assets/images/gearicon.png",
-                            height: 24,
-                          ),
-                          SizedBox(width: 15),
-                          Text(
-                            "Settings".tr(),
-                            /*AppLoaclizations.of(context)!
+                  );
+                },
+                child: Row(
+                  children: [
+                    Image.asset(
+                      "assets/images/gearicon.png",
+                      height: 24,
+                    ),
+                    SizedBox(width: 15),
+                    Text(
+                      "Settings".tr(),
+                      /*AppLoaclizations.of(context)!
                                 .translate("Settings")
                                 .toString(),*/
-                            style: FontConstant.k18w5008471Text,
-                          )
-                        ],
-                      ),
+                      style: FontConstant.k18w5008471Text,
+                    )
+                  ],
+                ),
+              ),
+            ),
+            PopupMenuItem(
+              enabled: false,
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.pop(context);
+                  Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => TSyllabus()),
+                  );
+                },
+                child: Row(
+                  children: [
+                    Image.asset(
+                      "assets/images/syllabusicon.png",
+                      height: 24,
                     ),
+                    SizedBox(width: 15),
+                    Text(
+                      "Syllabus".tr(),
+                      /*AppLoaclizations.of(context)!
+                                .translate("Syllabus")
+                                .toString(),*/
+                      style: FontConstant.k18w5008471Text,
+                    )
+                  ],
+                ),
+              ),
+            ),
+            PopupMenuItem(
+              enabled: false,
+              child: GestureDetector(
+                onTap: () {
+                  final resp = LogoutApi().get();
+                  resp.then((value) {
+                    if (value['status'] == 1) {
+                      UserPrefs.clearData(UserPrefs.cookies);
+                      Navigator.of(context).pushAndRemoveUntil(
+                          MaterialPageRoute(builder: (ctx) => PStartScreen()),
+                          (route) => false);
+                      CustomSnackBar.customSnackBar(
+                          context, 'Logged out successfully.');
+                    } else {}
+                  });
+                },
+                child: Row(
+                  children: [
+                    /*Image.asset(
+                      "assets/images/gearicon.png",
+                      height: 24,
+                    )*/
+                    Icon(
+                      Icons.logout,
+                      color: Color(0xff331F2D),
+                    ),
+                    SizedBox(width: 15),
+                    Text(
+                      "Logout".tr(),
+                      style: FontConstant.k18w5008471Text,
+                    )
                   ],
                 ),
               ),

@@ -222,7 +222,7 @@ class _PKidsDetailsState extends State<PKidsDetails> {
                                 Row(
                                   children: [
                                     Container(
-                                      width: 104.w,
+                                      width: 154.w,
                                       height: 33.h,
                                       child: Column(
                                         crossAxisAlignment:
@@ -251,7 +251,7 @@ class _PKidsDetailsState extends State<PKidsDetails> {
                                 Row(
                                   children: [
                                     Container(
-                                      width: 104.w,
+                                      width: 154.w,
                                       height: 33.h,
                                       child: Column(
                                         crossAxisAlignment:
@@ -280,7 +280,7 @@ class _PKidsDetailsState extends State<PKidsDetails> {
                                 Row(
                                   children: [
                                     Container(
-                                      width: 104.w,
+                                      width: 154.w,
                                       height: 33.h,
                                       child: Column(
                                         crossAxisAlignment:
@@ -309,7 +309,7 @@ class _PKidsDetailsState extends State<PKidsDetails> {
                                 Row(
                                   children: [
                                     Container(
-                                      width: 104.w,
+                                      width: 154.w,
                                       height: 33.h,
                                       child: Column(
                                         crossAxisAlignment:
@@ -340,7 +340,7 @@ class _PKidsDetailsState extends State<PKidsDetails> {
                                 Row(
                                   children: [
                                     Container(
-                                      width: 104.w,
+                                      width: 154.w,
                                       height: 33.h,
                                       child: Column(
                                         crossAxisAlignment:

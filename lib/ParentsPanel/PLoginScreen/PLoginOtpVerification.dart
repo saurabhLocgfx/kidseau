@@ -5,6 +5,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:kidseau/Constants/colors.dart';
 import 'package:kidseau/Theme.dart';
 import 'package:kidseau/Widgets/buttons.dart';
+import 'package:kidseau/shard_prefs/shared_prefs.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
 import '../../api/parent_login_apis/parent_login_otp_api.dart';
@@ -124,6 +125,7 @@ class PLoginOtpVerification extends StatelessWidget {
                               if (value['status'] == 0) {
                                 Fluttertoast.showToast(msg: value['msg']);
                               } else {
+                                UserPrefs.setIsTeacher(false);
                                 Navigator.of(context).push(MaterialPageRoute(
                                     builder: (context) => PDashboard()));
                               }

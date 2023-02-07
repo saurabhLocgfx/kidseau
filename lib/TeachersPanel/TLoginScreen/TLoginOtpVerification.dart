@@ -11,6 +11,7 @@ import 'package:kidseau/TeachersPanel/TDashboard.dart';
 import 'package:kidseau/Theme.dart';
 import 'package:kidseau/Widgets/buttons.dart';
 import 'package:kidseau/api/Teacherpanelapi/teacher_login_apis/teacher_otp_check.dart';
+import 'package:kidseau/shard_prefs/shared_prefs.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
 import '../../api/Teacherpanelapi/teacher_login_apis/teacher_login_api.dart';
@@ -239,6 +240,7 @@ class _TLoginOtpVerificationState extends State<TLoginOtpVerification> {
                                                 }
                                                 if (value['status'] == 1) {
                                                   print(widget.mobileText);
+                                                  UserPrefs.setIsTeacher(true);
                                                   Navigator.of(context).push(
                                                       MaterialPageRoute(
                                                           builder: (context) =>

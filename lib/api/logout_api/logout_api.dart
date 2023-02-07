@@ -4,17 +4,11 @@ import 'package:http/http.dart' as http;
 import 'package:kidseau/Constants/string_const.dart';
 import 'package:kidseau/shard_prefs/shared_prefs.dart';
 
-class AllMessagesApi {
-  Future<dynamic> get(
-      {required String userId,
-      required String userType,
-      required String scroll}) async {
+class LogoutApi {
+  Future<dynamic> get() async {
     String? cookie = UserPrefs.getCookies();
     var headers = {'Cookie': 'PHPSESSID=$cookie'};
-    var request = http.Request(
-        'GET',
-        Uri.parse(
-            '$kAPIConst/kids/api_message/getMessage.php?user_id=$userId&user_type=$userType&scrol=$scroll'));
+    var request = http.Request('GET', Uri.parse('$kAPIConst/kids/logout.php'));
 
     request.headers.addAll(headers);
 

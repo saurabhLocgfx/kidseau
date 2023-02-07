@@ -50,6 +50,7 @@ class _PMessagesState extends State<PMessages> {
     "Class teacher",
     "Class teacher",
   ];
+
   bool _isVisible = false;
   void showToast() {
     setState(() {
@@ -86,146 +87,180 @@ class _PMessagesState extends State<PMessages> {
           ? Center(
               child: CircularProgressIndicator(),
             )
-          : ListView.builder(
-              itemCount: modelList.length,
-              physics: AlwaysScrollableScrollPhysics(),
-              scrollDirection: Axis.vertical,
-              shrinkWrap: true,
-              itemBuilder: (BuildContext context, int index) {
-                return GestureDetector(
-                  onTap: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => POpenChats(
-                          profilePic: modelList[index].userProfile.toString(),
-                          name: modelList[index].userName.toString(),
-                          language: modelList[index].lang.toString(),
-                          userId: modelList[index].userId.toString(),
-                          userType: modelList[index].userType.toString(),
-                        ),
+          : modelList.isEmpty
+              ? Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Image.asset(
+                        "assets/images/empty_message.png",
+                        width: 300,
                       ),
-                    );
-                  },
-                  child: Container(
-                      height: 90,
-                      width: 1.sw,
-                      color: Colors.transparent,
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 16, right: 16),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Row(
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Text(
+                        'No messages',
+                        style: FontConstant.k18w500Primary,
+                      )
+                    ],
+                  ),
+                )
+              : ListView.builder(
+                  itemCount: modelList.length,
+                  physics: AlwaysScrollableScrollPhysics(),
+                  scrollDirection: Axis.vertical,
+                  shrinkWrap: true,
+                  itemBuilder: (BuildContext context, int index) {
+                    return GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => POpenChats(
+                              profilePic:
+                                  modelList[index].userProfile.toString(),
+                              name: modelList[index].userName.toString(),
+                              language: modelList[index].lang.toString(),
+                              userId: modelList[index].userId.toString(),
+                              userType: modelList[index].userType.toString(),
+                            ),
+                          ),
+                        );
+                      },
+                      child: Container(
+                          height: 90,
+                          width: 1.sw,
+                          color: Colors.transparent,
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 16, right: 16),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                Container(
-                                  height: 70,
-                                  width: 50,
-                                  clipBehavior: Clip.hardEdge,
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(8)),
-                                  child: Image.network(
-                                    modelList[index].userProfile.toString(),
-                                    fit: BoxFit.fitHeight,
-                                    errorBuilder: (q, w, e) => Image.asset(
-                                        "assets/images/messageperson1.png"),
-                                  ),
-                                ),
-                                SizedBox(width: 16),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                Row(
                                   children: [
-                                    Row(
+                                    Container(
+                                      height: 70,
+                                      width: 50,
+                                      clipBehavior: Clip.hardEdge,
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(8)),
+                                      child: Image.network(
+                                        modelList[index].userProfile.toString(),
+                                        fit: BoxFit.fitHeight,
+                                        errorBuilder: (q, w, e) => Image.asset(
+                                            "assets/images/messageperson1.png"),
+                                      ),
+                                    ),
+                                    SizedBox(width: 16),
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
-                                        Text(
-                                          modelList[index].userName.toString(),
-                                          style: FontConstant.k18w5008471Text
-                                              .copyWith(
-                                                  fontSize: 18,
-                                                  fontWeight: FontWeight.w500,
-                                                  color: Color(0xff331F2D)),
+                                        Row(
+                                          children: [
+                                            Text(
+                                              modelList[index]
+                                                  .userName
+                                                  .toString(),
+                                              style: FontConstant
+                                                  .k18w5008471Text
+                                                  .copyWith(
+                                                      fontSize: 18,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      color: Color(0xff331F2D)),
+                                            ),
+                                          ],
                                         ),
+                                        Text(
+                                            modelList[index]
+                                                .userType
+                                                .toString(),
+                                            style:
+                                                FontConstant.k14w4008471Text),
+                                        Text(
+                                            "${"last message".tr()} - ${DateFormat.yMMM().format(DateTime.parse(modelList[index].messageTime.toString()))}",
+                                            style:
+                                                FontConstant.k12w4008267Text),
                                       ],
                                     ),
-                                    Text(modelList[index].userType.toString(),
-                                        style: FontConstant.k14w4008471Text),
-                                    Text(
-                                        "${"last message".tr()} - ${DateFormat.yMMM().format(DateTime.parse(modelList[index].messageTime.toString()))}",
-                                        style: FontConstant.k12w4008267Text),
                                   ],
+                                ),
+                                Container(
+                                  child: Stack(children: [
+                                    Image.asset(
+                                      "assets/images/dots2.png",
+                                      height: 48.h,
+                                      width: 48.w,
+                                    ),
+                                    PopupMenuButton(
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(16)),
+                                        iconSize: 10,
+                                        icon: ImageIcon(
+                                          AssetImage(
+                                            "assets/images/dots2.png",
+                                          ),
+                                        ),
+                                        itemBuilder: (context) {
+                                          return [
+                                            PopupMenuItem(
+                                              enabled: false,
+                                              child: InkWell(
+                                                onTap: () {
+                                                  final resp = DeleteChat().get(
+                                                      userId: modelList[index]
+                                                          .userId
+                                                          .toString(),
+                                                      userType: modelList[index]
+                                                          .userType
+                                                          .toString());
+                                                  resp.then((value) {
+                                                    log(value.toString());
+                                                    if (value['status'] == 1) {
+                                                      setState(() {
+                                                        modelList
+                                                            .removeAt(index);
+                                                      });
+                                                    }
+                                                    Navigator.of(context).pop();
+                                                  });
+                                                },
+                                                child: Padding(
+                                                  padding: const EdgeInsets
+                                                          .symmetric(
+                                                      vertical: 32.0),
+                                                  child: Row(
+                                                    children: [
+                                                      Image.asset(
+                                                        "assets/images/trashicon.png",
+                                                        height: 24,
+                                                      ),
+                                                      SizedBox(width: 24),
+                                                      Text(
+                                                        "Delete chat".tr(),
+                                                        style: FontConstant
+                                                            .k18w5008471Text,
+                                                      )
+                                                    ],
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ];
+                                        })
+                                  ]),
                                 ),
                               ],
                             ),
-                            Container(
-                              child: Stack(children: [
-                                Image.asset(
-                                  "assets/images/dots2.png",
-                                  height: 48.h,
-                                  width: 48.w,
-                                ),
-                                PopupMenuButton(
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(16)),
-                                    iconSize: 10,
-                                    icon: ImageIcon(
-                                      AssetImage(
-                                        "assets/images/dots2.png",
-                                      ),
-                                    ),
-                                    itemBuilder: (context) {
-                                      return [
-                                        PopupMenuItem(
-                                          enabled: false,
-                                          child: InkWell(
-                                            onTap: () {
-                                              final resp = DeleteChat().get(
-                                                  userId: modelList[index]
-                                                      .userId
-                                                      .toString(),
-                                                  userType: modelList[index]
-                                                      .userType
-                                                      .toString());
-                                              resp.then((value) {
-                                                log(value.toString());
-                                                if (value['status'] == 1) {
-                                                  setState(() {
-                                                    modelList.removeAt(index);
-                                                  });
-                                                }
-                                                Navigator.of(context).pop();
-                                              });
-                                            },
-                                            child: Padding(
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                      vertical: 32.0),
-                                              child: Row(
-                                                children: [
-                                                  Image.asset(
-                                                    "assets/images/trashicon.png",
-                                                    height: 24,
-                                                  ),
-                                                  SizedBox(width: 24),
-                                                  Text(
-                                                    "Delete chat".tr(),
-                                                    style: FontConstant
-                                                        .k18w5008471Text,
-                                                  )
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ];
-                                    })
-                              ]),
-                            ),
-                          ],
-                        ),
-                      )),
-                );
-              }),
+                          )),
+                    );
+                  }),
     );
   }
 }

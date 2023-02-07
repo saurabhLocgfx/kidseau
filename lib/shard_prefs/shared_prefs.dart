@@ -7,9 +7,22 @@ class UserPrefs {
   static const ismother = 'ismother';
   static const isfather = 'isfather';
   static const enteredVal = 'enteredVal';
+  static const Teacher = 'Teacher';
   static SharedPreferences? prefs;
   static Future init() async {
     prefs = await SharedPreferences.getInstance();
+  }
+
+  static Future clearData(String key) async {
+    prefs?.remove(key);
+  }
+
+  static Future setIsTeacher(bool isTeacher) async {
+    return await prefs?.setBool(Teacher, isTeacher);
+  }
+
+  static bool? getIsTeacher() {
+    return prefs?.getBool(Teacher);
   }
 
   static Future setIsMother(bool isMother) async {
