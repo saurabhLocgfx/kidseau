@@ -175,10 +175,15 @@ class _PFeesState extends State<PFees> {
                                       Container(
                                         height: 100,
                                         width: 72,
+                                        clipBehavior: Clip.hardEdge,
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(8)),
                                         child: Image.network(
                                           _kidModel
                                               .parentKidId![index].profilePic
                                               .toString(),
+                                          fit: BoxFit.fill,
                                           errorBuilder: (q, w, e) => Image.asset(
                                               "assets/images/Rectangle 2715.png"),
                                         ),

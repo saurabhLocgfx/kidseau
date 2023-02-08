@@ -67,6 +67,7 @@ dependencies:
   permission_handler: ^10.2.0
   contacts_service: ^0.6.3
   record: ^4.4.4
+  video_player: ^2.5.1
 
 dev_dependencies:
   flutter_test:

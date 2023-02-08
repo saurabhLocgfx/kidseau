@@ -307,6 +307,7 @@ class _PLearningAplphabetsState extends State<PLearningAplphabets> {
                         Navigator.of(context).push(
                           MaterialPageRoute(
                             builder: (context) => POpenChats(
+                              onPop: () {},
                               userId: model.activity!.teachId.toString(),
                               userType: 'teacher',
                               profilePic: model.activity!.teachImage.toString(),

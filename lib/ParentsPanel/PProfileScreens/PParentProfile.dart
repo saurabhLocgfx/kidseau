@@ -167,8 +167,13 @@ class _PParentsProfileState extends State<PParentsProfile> {
                                     Container(
                                       height: 96,
                                       width: 72,
+                                      clipBehavior: Clip.hardEdge,
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(8)),
                                       child: Image.network(
                                         model.kid![index].profilePic.toString(),
+                                        fit: BoxFit.fill,
                                         errorBuilder: (q, w, e) => Image.asset(
                                             "assets/images/Rectangle 2715.png"),
                                       ),

@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:kidseau/ParentsPanel/PMessageScreen/PopenChats.dart';
 import 'package:kidseau/Theme.dart';
 import 'package:kidseau/Widgets/Calender/calendermodel.dart';
 import 'package:kidseau/Widgets/buttons.dart';
@@ -897,7 +898,26 @@ class _PKidsOverviewState extends State<PKidsOverview> {
               height: 52,
               width: 1.sw,
               child: MainButton(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (ctx) => POpenChats(
+                            userId: widget
+                                .model.kidDetails!.teacherDetails!.teacherId
+                                .toString(),
+                            userType: widget
+                                .model.kidDetails!.teacherDetails!.type
+                                .toString(),
+                            onPop: () {},
+                            profilePic: widget
+                                .model.kidDetails!.teacherDetails!.teacherImage
+                                .toString(),
+                            name: widget
+                                .model.kidDetails!.teacherDetails!.teacherName
+                                .toString(),
+                            language: widget
+                                .model.kidDetails!.teacherDetails!.lang
+                                .toString())));
+                  },
                   title: "Talk to class teacher".tr(),
                   textStyleColor: Colors.white,
                   backgroundColor: ThemeColor.primarycolor)),

@@ -37,6 +37,7 @@ android {
     defaultConfig {
         applicationId "com.locgfx.kidseau"
         minSdkVersion 19//flutter.minSdkVersion
+        multiDexEnabled true
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName

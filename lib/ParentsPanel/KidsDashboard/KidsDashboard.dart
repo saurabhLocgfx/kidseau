@@ -7,6 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kidseau/ParentsPanel/KidsDashboard/KidsOverview.dart';
 import 'package:kidseau/ParentsPanel/KidsDashboard/Kidsgallery.dart';
 import 'package:kidseau/Theme.dart';
+import 'package:kidseau/api/models/holiday_model/holiday_model.dart';
 import 'package:kidseau/api/models/parent_models/kid_details_models/parent_kid_overview_model.dart';
 import 'package:kidseau/api/parent_panel_apis/parent_kid_details_api/parent_kid_overview_api.dart';
 
@@ -63,6 +64,7 @@ class _PKidsDashboardState extends State<PKidsDashboard> {
     });
   }
 
+  HolidayApiModel holidayModel = HolidayApiModel();
   ParentKidOverviewModel overviewModel = ParentKidOverviewModel();
   /* final PageController _pageController = PageController(
     initialPage: 0,

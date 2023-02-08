@@ -311,10 +311,15 @@ class _PHomeScreenState extends State<PHomeScreen> {
                                       Container(
                                         height: 100,
                                         width: 72,
+                                        clipBehavior: Clip.hardEdge,
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(8)),
                                         child: Image.network(
                                           _kidModel
                                               .parentKidId![index].profilePic
                                               .toString(),
+                                          fit: BoxFit.fill,
                                           errorBuilder: (q, w, e) => Image.asset(
                                               "assets/images/Rectangle 2715.png"),
                                         ),
@@ -355,7 +360,8 @@ class _PHomeScreenState extends State<PHomeScreen> {
                                             ],
                                           ),
                                           Text(
-                                            _kidModel.parentKidId![index].grpId
+                                            _kidModel
+                                                .parentKidId![index].grpName
                                                 .toString()
                                                 .tr(),
                                             style: FontConstant.k12w400White,

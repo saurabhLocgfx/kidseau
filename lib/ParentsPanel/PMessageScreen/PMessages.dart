@@ -71,6 +71,7 @@ class _PMessagesState extends State<PMessages> {
     final resp = RecentChatApi().get();
     resp.then((value) {
       log(value.toString());
+      modelList.clear();
       setState(() {
         for (var v in value) {
           modelList.add(RecentMessageModel.fromJson(v));
@@ -119,6 +120,9 @@ class _PMessagesState extends State<PMessages> {
                         Navigator.of(context).push(
                           MaterialPageRoute(
                             builder: (context) => POpenChats(
+                              onPop: () {
+                                _getData();
+                              },
                               profilePic:
                                   modelList[index].userProfile.toString(),
                               name: modelList[index].userName.toString(),

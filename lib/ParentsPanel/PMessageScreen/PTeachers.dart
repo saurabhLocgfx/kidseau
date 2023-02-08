@@ -92,6 +92,7 @@ class _PTeachersState extends State<PTeachers> {
                   onTap: () {
                     Navigator.of(context).push(MaterialPageRoute(
                         builder: (context) => POpenChats(
+                              onPop: () {},
                               profilePic: model.allTeahcer![index].techProfile
                                   .toString(),
                               name: model.allTeahcer![index].fName.toString(),

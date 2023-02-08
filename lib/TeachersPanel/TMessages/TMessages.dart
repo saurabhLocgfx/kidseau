@@ -73,6 +73,7 @@ class _TMessagesState extends State<TMessages> {
     final resp = RecentChatApi().get();
     resp.then((value) {
       log(value.toString());
+      modelList.clear();
       setState(() {
         for (var v in value) {
           modelList.add(RecentMessageModel.fromJson(v));
@@ -121,6 +122,9 @@ class _TMessagesState extends State<TMessages> {
                         Navigator.of(context).push(
                           MaterialPageRoute(
                             builder: (context) => PChats(
+                              onPop: () {
+                                _getData();
+                              },
                               profilePic:
                                   modelList[index].userProfile.toString(),
                               name: modelList[index].userName.toString(),

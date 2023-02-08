@@ -27,10 +27,12 @@ class POpenChats extends StatefulWidget {
   final String profilePic;
   final String name;
   final String language;
+  final Function onPop;
   const POpenChats(
       {Key? key,
       required this.userId,
       required this.userType,
+      required this.onPop,
       required this.profilePic,
       required this.name,
       required this.language})
@@ -88,6 +90,7 @@ class _POpenChatsState extends State<POpenChats> {
     _timer?.cancel();
     _scrollController.dispose();
     record.stop();
+    widget.onPop();
     super.dispose();
   }
 
@@ -230,7 +233,7 @@ class _POpenChatsState extends State<POpenChats> {
       if (await record.hasPermission()) {
         // Start recording
         await record.start(
-          //path: 'aFullPath/myFile.m4a',
+          // path: 'example.wav',
           encoder: AudioEncoder.wav, // by default
           bitRate: 128000, // by default
           //sampleRate: 44100, // by default

@@ -121,6 +121,7 @@ class _TParentsState extends State<TParents> {
                       onTap: () {
                         Navigator.of(context).push(MaterialPageRoute(
                             builder: (context) => PChats(
+                                onPop: () {},
                                 userId: modelList[index].parentId.toString(),
                                 userType: 'parent',
                                 profilePic:

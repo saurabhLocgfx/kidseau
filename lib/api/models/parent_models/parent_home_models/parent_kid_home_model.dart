@@ -28,6 +28,7 @@ class ParentKidId {
   String? kidId;
   String? name;
   String? grpId;
+  String? grpName;
   String? profilePic;
   String? secName;
   String? schTimeIn;
@@ -37,6 +38,7 @@ class ParentKidId {
       {this.kidId,
       this.name,
       this.grpId,
+      this.grpName,
       this.profilePic,
       this.secName,
       this.schTimeIn,
@@ -45,6 +47,7 @@ class ParentKidId {
   ParentKidId.fromJson(Map<String, dynamic> json) {
     kidId = json['kid_id'];
     name = json['name'];
+    grpName = json['grp_name'];
     grpId = json['grp_id'];
     profilePic = json['profile_pic'];
     secName = json['sec_name'];
@@ -57,6 +60,7 @@ class ParentKidId {
     data['kid_id'] = this.kidId;
     data['name'] = this.name;
     data['grp_id'] = this.grpId;
+    data['grp_name'] = this.grpName;
     data['profile_pic'] = this.profilePic;
     data['sec_name'] = this.secName;
     data['sch_time_in'] = this.schTimeIn;

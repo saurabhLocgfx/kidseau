@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'dart:io';
 import 'dart:ui';
 
+import 'package:contacts_service/contacts_service.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -17,6 +18,7 @@ import 'package:kidseau/api/message_apis/delete_message_api.dart';
 import 'package:kidseau/api/message_apis/get_latest_message_api.dart';
 import 'package:kidseau/api/models/message_models/all_messages_model.dart';
 import 'package:kidseau/api/message_apis/send_message_api.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class PChats extends StatefulWidget {
   final String userId;
@@ -24,9 +26,11 @@ class PChats extends StatefulWidget {
   final String profilePic;
   final String name;
   final String language;
+  final Function onPop;
   const PChats(
       {Key? key,
       required this.userId,
+      required this.onPop,
       required this.userType,
       required this.profilePic,
       required this.name,
@@ -83,6 +87,7 @@ class _PChatsState extends State<PChats> {
   void dispose() {
     _timer?.cancel();
     _scrollController.dispose();
+    widget.onPop();
     super.dispose();
   }
 
@@ -169,6 +174,48 @@ class _PChatsState extends State<PChats> {
     setState(() {
       _isVisible = !_isVisible;
     });
+  }
+
+  List<Contact> contactList = [];
+  _getContactPermission() async {
+    var a = await Permission.contacts.request();
+    if (a.isGranted) {
+      log('granted');
+      contactList = await ContactsService.getContacts();
+      //log(contactList[0].phones![0].value.toString());
+      showDialog(
+          context: context,
+          builder: (ctx) {
+            return AlertDialog(
+              content: Container(
+                height: 300,
+                width: 1.sw,
+                child: ListView.separated(
+                    shrinkWrap: true,
+                    itemBuilder: (context, index) {
+                      return ListTile(
+                        contentPadding: EdgeInsets.all(0),
+                        onTap: () {
+                          _controller.text =
+                              "${contactList[index].phones![0].value} \n ${contactList[index].displayName}";
+                          Navigator.of(context).pop();
+                          setState(() {
+                            _isVisible = false;
+                          });
+                        },
+                        title: Text(contactList[index].displayName ?? ''),
+                        subtitle:
+                            Text(contactList[index].phones![0].value ?? ''),
+                      );
+                    },
+                    separatorBuilder: (ctx, ind) => Divider(),
+                    itemCount: contactList.length),
+              ),
+            );
+          }).then((value) {});
+    } else {
+      await Permission.contacts.request();
+    }
   }
 
   ScrollController _scrollController = ScrollController();
@@ -615,20 +662,35 @@ class _PChatsState extends State<PChats> {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceEvenly,
                                 children: [
-                                  Column(
-                                    children: [
-                                      Image.asset(
-                                        "assets/images/micicon.png",
-                                        height: 24.h,
-                                      ),
-                                      Text(
-                                        "Voice note".tr(),
-                                        /*AppLoaclizations.of(context)!
+                                  InkWell(
+                                    onTap: () {
+                                      /*
+                                      if (isRecording) {
+                                        record.stop();
+                                      } else {
+
+                                      }*/
+                                      // _getVoicePermission();
+                                      //log(isRecording.toString());
+                                    },
+                                    child: Container(
+                                      color: Colors.transparent,
+                                      child: Column(
+                                        children: [
+                                          Image.asset(
+                                            "assets/images/micicon.png",
+                                            height: 24.h,
+                                          ),
+                                          Text(
+                                            "Voice note".tr(),
+                                            /*AppLoaclizations.of(context)!
                             .translate("Voice note")
                             .toString(),*/
-                                        style: FontConstant.k16w5008471Text,
+                                            style: FontConstant.k16w5008471Text,
+                                          ),
+                                        ],
                                       ),
-                                    ],
+                                    ),
                                   ),
                                   InkWell(
                                     onTap: () async {
@@ -658,20 +720,26 @@ class _PChatsState extends State<PChats> {
                                       ),
                                     ),
                                   ),
-                                  Column(
-                                    children: [
-                                      Image.asset(
-                                        "assets/images/contacticon.png",
-                                        height: 24.h,
+                                  InkWell(
+                                    onTap: () async {
+                                      // log('message');
+                                      _getContactPermission();
+                                    },
+                                    child: Container(
+                                      color: Colors.transparent,
+                                      child: Column(
+                                        children: [
+                                          Image.asset(
+                                            "assets/images/contacticon.png",
+                                            height: 24.h,
+                                          ),
+                                          Text(
+                                            "Contact".tr(),
+                                            style: FontConstant.k16w5008471Text,
+                                          ),
+                                        ],
                                       ),
-                                      Text(
-                                        "Contact".tr(),
-                                        /* AppLoaclizations.of(context)!
-                            .translate("Contact")
-                            .toString(),*/
-                                        style: FontConstant.k16w5008471Text,
-                                      ),
-                                    ],
+                                    ),
                                   ),
                                 ],
                               ),

@@ -38,6 +38,7 @@ class KidDetails {
   String? workingDay;
   String? kidAttendDay;
   String? holiDay;
+  TeacherDetails? teacherDetails;
 
   KidDetails(
       {this.kidId,
@@ -55,7 +56,8 @@ class KidDetails {
       this.actvity,
       this.workingDay,
       this.kidAttendDay,
-      this.holiDay});
+      this.holiDay,
+      this.teacherDetails});
 
   KidDetails.fromJson(Map<String, dynamic> json) {
     kidId = json['Kid_id'];
@@ -81,6 +83,9 @@ class KidDetails {
     workingDay = json['workingDay'];
     kidAttendDay = json['kidAttendDay'];
     holiDay = json['holiDay'];
+    teacherDetails = json['teacherDetails'] != null
+        ? new TeacherDetails.fromJson(json['teacherDetails'])
+        : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -105,6 +110,9 @@ class KidDetails {
     data['workingDay'] = this.workingDay;
     data['kidAttendDay'] = this.kidAttendDay;
     data['holiDay'] = this.holiDay;
+    if (this.teacherDetails != null) {
+      data['teacherDetails'] = this.teacherDetails!.toJson();
+    }
     return data;
   }
 }
@@ -155,6 +163,35 @@ class Actvity {
     data['act_name'] = this.actName;
     data['pfm_sum'] = this.pfmSum;
     data['total_sub'] = this.totalSub;
+    return data;
+  }
+}
+
+class TeacherDetails {
+  String? teacherId;
+  String? teacherName;
+  String? teacherImage;
+  String? type;
+  String? lang;
+
+  TeacherDetails(
+      {this.teacherId, this.teacherName, this.teacherImage, this.type});
+
+  TeacherDetails.fromJson(Map<String, dynamic> json) {
+    teacherId = json['teacher_id'];
+    teacherName = json['teacher_name'];
+    teacherImage = json['teacher_image'];
+    type = json['type'];
+    lang = json['lang'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['teacher_id'] = this.teacherId;
+    data['teacher_name'] = this.teacherName;
+    data['teacher_image'] = this.teacherImage;
+    data['type'] = this.type;
+    data['lang'] = this.lang;
     return data;
   }
 }
