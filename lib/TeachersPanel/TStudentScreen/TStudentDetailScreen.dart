@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kidseau/Constants/colors.dart';
+import 'package:kidseau/TeachersPanel/TStudentScreen/TSutdentDetailEditScreen.dart';
 import 'package:kidseau/api/Teacherpanelapi/teacher_student_performance_apis/student_detail_api.dart';
 import 'package:kidseau/api/models/kid_detail_model/kid_performance_detail_model.dart';
 import 'package:kidseau/shard_prefs/shared_prefs.dart';
@@ -1127,7 +1128,15 @@ class _TStudentDetailScreenState extends State<TStudentDetailScreen> {
                                         height: 52.h,
                                         width: 382.w,
                                         child: MainButton(
-                                            onTap: () {},
+                                            onTap: () {
+                                              Navigator.of(context).push(
+                                                  MaterialPageRoute(
+                                                      builder: (ctx) =>
+                                                          TStudentDetailEditScreen(
+                                                            model: model,
+                                                            kidId: widget.kidId,
+                                                          )));
+                                            },
                                             title: "Edit".tr(),
                                             textStyleColor: Colors.white,
                                             backgroundColor:

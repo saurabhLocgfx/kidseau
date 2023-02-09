@@ -6,6 +6,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kidseau/Theme.dart';
 
+import '../../../api/app_details_api/app_details_api.dart';
+
 class PAboutus extends StatefulWidget {
   PAboutus({Key? key}) : super(key: key);
 
@@ -14,6 +16,32 @@ class PAboutus extends StatefulWidget {
 }
 
 class _PAboutusState extends State<PAboutus> {
+  bool _isLoading = false;
+  String data = '';
+
+  @override
+  void initState() {
+    _getData();
+    super.initState();
+  }
+
+  _getData() {
+    _isLoading = true;
+    final resp = AppDetailsApi().get(id: '1');
+    resp.then((value) {
+      if (value['status'] == 1) {
+        setState(() {
+          data = value['appData'];
+          _isLoading = false;
+        });
+      } else {
+        setState(() {
+          _isLoading = false;
+        });
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -60,6 +88,26 @@ class _PAboutusState extends State<PAboutus> {
             ],
           ),
         ),
+        body: _isLoading
+            ? Center(
+                child: CircularProgressIndicator(),
+              )
+            : SingleChildScrollView(
+                child: Container(
+                  padding: EdgeInsets.all(16),
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        height: 100,
+                      ),
+                      Text(
+                        data,
+                        style: FontConstant.k16blackboldText,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
       ),
     );
   }

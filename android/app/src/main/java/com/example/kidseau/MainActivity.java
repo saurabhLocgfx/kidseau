@@ -1,4 +1,4 @@
-package com.example.kidseau;
+package com.locgfx.kidseau;
 
 import io.flutter.embedding.android.FlutterActivity;
 

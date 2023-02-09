@@ -8,6 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:image_downloader/image_downloader.dart';
 import 'package:kidseau/ParentsPanel/PReminderScreen/PReminderScreen.dart';
 import 'package:kidseau/Theme.dart';
 import 'package:kidseau/api/models/parent_models/parent_post_models/parent_post_school_model.dart';
@@ -16,8 +18,10 @@ import 'package:kidseau/api/parent_panel_apis/parent_post_api/parent_post_school
 import 'package:kidseau/restartappwidget/restartwidgets.dart';
 import 'package:kidseau/shard_prefs/shared_prefs.dart';
 
+import '../../Widgets/custom_snack_bar.dart';
 import '../../api/Teacherpanelapi/teacher_post_api/post_apis/teacher_hide_post_api.dart';
 import '../../api/models/parent_models/kid_details_models/parent_post_model.dart';
+import '../../api/report_post_api/report_post_api.dart';
 import '../../enlarged_image_screen.dart';
 import '../KidsDashboard/Kidsgallery.dart';
 
@@ -566,8 +570,90 @@ class _PPostScreenState extends State<PPostScreen> {
                                                                           shape:
                                                                               RoundedRectangleBorder(borderRadius: BorderRadius.only(topLeft: const Radius.circular(20.0), topRight: const Radius.circular(20.0))),
                                                                           context: context,
+                                                                          isScrollControlled: true,
                                                                           builder: (builder) {
-                                                                            return ReportBottomSheet();
+                                                                            return SingleChildScrollView(
+                                                                              child: Container(
+                                                                                  decoration: BoxDecoration(
+                                                                                      // color: Colors.transparent,
+                                                                                      borderRadius: BorderRadius.only(topLeft: const Radius.circular(20.0), topRight: const Radius.circular(20.0))),
+                                                                                  child: Padding(
+                                                                                    padding: const EdgeInsets.only(left: 16),
+                                                                                    child: Column(
+                                                                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                                                                      children: [
+                                                                                        SizedBox(
+                                                                                          height: 10,
+                                                                                        ),
+                                                                                        Text(
+                                                                                          "Report".tr(),
+                                                                                          style: FontConstant.k24w50084717FText,
+                                                                                        ),
+                                                                                        SizedBox(
+                                                                                          height: 34,
+                                                                                        ),
+                                                                                        ListTile(
+                                                                                          onTap: () {
+                                                                                            final resp = ReportPostApi().get(postId: _postList[index].postId.toString(), reportDesc: "I don’t like this".tr());
+                                                                                            resp.then((value) {
+                                                                                              print(value);
+                                                                                              if (value['status'] == 1) {
+                                                                                                Navigator.of(context).pop();
+                                                                                                CustomSnackBar.customSnackBar(context, 'Reported successfully');
+                                                                                              } else {
+                                                                                                Navigator.of(context).pop();
+                                                                                                CustomSnackBar.customErrorSnackBar(context, 'Report failed');
+                                                                                              }
+                                                                                            });
+                                                                                          },
+                                                                                          title: Text(
+                                                                                            "I don’t like this".tr(),
+                                                                                            style: FontConstant.k16w500331FText,
+                                                                                          ),
+                                                                                        ),
+                                                                                        ListTile(
+                                                                                          onTap: () {
+                                                                                            final resp = ReportPostApi().get(postId: _postList[index].postId.toString(), reportDesc: "Not from the same group".tr());
+                                                                                            resp.then((value) {
+                                                                                              if (value['status'] == 1) {
+                                                                                                Navigator.of(context).pop();
+                                                                                                CustomSnackBar.customSnackBar(context, 'Reported successfully');
+                                                                                              } else {
+                                                                                                Navigator.of(context).pop();
+                                                                                                CustomSnackBar.customErrorSnackBar(context, 'Report failed');
+                                                                                              }
+                                                                                            });
+                                                                                          },
+                                                                                          title: Text(
+                                                                                            "Not from the same group".tr(),
+                                                                                            style: FontConstant.k16w500331FText,
+                                                                                          ),
+                                                                                        ),
+                                                                                        ListTile(
+                                                                                          onTap: () {
+                                                                                            final resp = ReportPostApi().get(postId: _postList[index].postId.toString(), reportDesc: "Inappropriate content".tr());
+                                                                                            resp.then((value) {
+                                                                                              if (value['status'] == 1) {
+                                                                                                Navigator.of(context).pop();
+                                                                                                CustomSnackBar.customSnackBar(context, 'Reported successfully');
+                                                                                              } else {
+                                                                                                Navigator.of(context).pop();
+                                                                                                CustomSnackBar.customErrorSnackBar(context, 'Report failed');
+                                                                                              }
+                                                                                            });
+                                                                                          },
+                                                                                          title: Text(
+                                                                                            "Inappropriate content".tr(),
+                                                                                            style: FontConstant.k16w500331FText,
+                                                                                          ),
+                                                                                        ),
+                                                                                        SizedBox(
+                                                                                          height: 50,
+                                                                                        )
+                                                                                      ],
+                                                                                    ),
+                                                                                  )),
+                                                                            );
                                                                           });
                                                                     },
                                                                     child:
@@ -608,11 +694,25 @@ class _PPostScreenState extends State<PPostScreen> {
                                                                       false,
                                                                   child:
                                                                       InkWell(
-                                                                    onTap: () {
-                                                                      log('Download');
-                                                                      Navigator.of(
-                                                                              context)
-                                                                          .pop();
+                                                                    onTap:
+                                                                        () async {
+                                                                      for (var url
+                                                                          in _postList[index]
+                                                                              .images!) {
+                                                                        try {
+                                                                          var imageId = await ImageDownloader.downloadImage(url
+                                                                              .fileName
+                                                                              .toString());
+                                                                          var path =
+                                                                              await ImageDownloader.findPath(imageId!);
+                                                                        } catch (error) {
+                                                                          print(
+                                                                              error);
+                                                                        }
+                                                                      }
+                                                                      Fluttertoast
+                                                                          .showToast(
+                                                                              msg: 'Download complete');
                                                                     },
                                                                     child:
                                                                         Container(
@@ -646,17 +746,6 @@ class _PPostScreenState extends State<PPostScreen> {
                                                                 ),
                                                               ];
                                                             }),
-                                                        // PostOptionsDialog(),
-                                                        /*GestureDetector(
-                            onTap: () {},
-                            child: Container(
-                              color: Colors.transparent,
-                              child: Image.asset(
-                                "assets/images/dots.png",
-                                height: 40,
-                              ),
-                            ),
-                          ),*/
                                                       ],
                                                     ),
                                                     SizedBox(height: 08),

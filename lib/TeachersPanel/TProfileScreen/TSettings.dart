@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:kidseau/ParentsPanel/PProfileScreens/PSettings/PAboutus.dart';
 import 'package:kidseau/ParentsPanel/PProfileScreens/PSettings/PPrivacyPolicy.dart';
+import 'package:kidseau/ParentsPanel/PProfileScreens/PSettings/PTermsAndConditions.dart';
 import 'package:kidseau/TeachersPanel/TProfileScreen/TNotificationSetttings.dart';
 import 'package:kidseau/Theme.dart';
 
@@ -104,9 +105,6 @@ class _TSettingsState extends State<TSettings> {
                     children: [
                       Text(
                         "Privacy Policy".tr(),
-                        /*AppLoaclizations.of(context)!
-                            .translate("Privacy Policy")
-                            .toString(),*/
                         style: FontConstant.k18w500331FText,
                       ),
                       Image.asset(
@@ -133,6 +131,32 @@ class _TSettingsState extends State<TSettings> {
                     children: [
                       Text(
                         "About Us".tr(),
+                        style: FontConstant.k18w500331FText,
+                      ),
+                      Image.asset(
+                        "assets/images/rightarrow.png",
+                        height: 20,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              SizedBox(height: 20),
+              GestureDetector(
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => PTermsAndConditions(),
+                    ),
+                  );
+                },
+                child: Container(
+                  color: Colors.transparent,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "Terms and Conditions".tr(),
                         style: FontConstant.k18w500331FText,
                       ),
                       Image.asset(

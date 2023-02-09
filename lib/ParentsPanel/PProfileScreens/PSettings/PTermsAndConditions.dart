@@ -7,14 +7,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kidseau/Theme.dart';
 import 'package:kidseau/api/app_details_api/app_details_api.dart';
 
-class PPrivacypolicy extends StatefulWidget {
-  PPrivacypolicy({Key? key}) : super(key: key);
+class PTermsAndConditions extends StatefulWidget {
+  PTermsAndConditions({Key? key}) : super(key: key);
 
   @override
-  State<PPrivacypolicy> createState() => _PPrivacypolicyState();
+  State<PTermsAndConditions> createState() => _PTermsAndConditions();
 }
 
-class _PPrivacypolicyState extends State<PPrivacypolicy> {
+class _PTermsAndConditions extends State<PTermsAndConditions> {
   bool _isLoading = false;
   String data = '';
 
@@ -26,7 +26,7 @@ class _PPrivacypolicyState extends State<PPrivacypolicy> {
 
   _getData() {
     _isLoading = true;
-    final resp = AppDetailsApi().get(id: '2');
+    final resp = AppDetailsApi().get(id: '3');
     resp.then((value) {
       if (value['status'] == 1) {
         setState(() {

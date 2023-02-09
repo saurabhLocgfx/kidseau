@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "38434211867",
+    "project_id": "kidseau-71295",
+    "storage_bucket": "kidseau-71295.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:38434211867:android:5370e1b88cf0ac20c850be",
+        "android_client_info": {
+          "package_name": "com.locgfx.kidseau"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "38434211867-881ln4o402bbf2jbjgte6c2in1bcah3f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCDfI90wgas1GDFfjsvJhUZO5QEMXZouM4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "38434211867-881ln4o402bbf2jbjgte6c2in1bcah3f.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

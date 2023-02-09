@@ -185,8 +185,11 @@ class TeacherCard extends StatelessWidget {
             Container(
               height: 96,
               width: 72,
+              clipBehavior: Clip.hardEdge,
+              decoration: BoxDecoration(borderRadius: BorderRadius.circular(8)),
               child: Image.network(
                 list[index].directorImage.toString(),
+                fit: BoxFit.fill,
                 errorBuilder: (q, w, e) =>
                     Image.asset("assets/images/leaning alp person.png"),
               ),

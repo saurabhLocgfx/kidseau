@@ -4,6 +4,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:image_downloader/image_downloader.dart';
 import 'package:kidseau/TeachersPanel/TPostsScreen/TEditPostScreen.dart';
 import 'package:kidseau/api/Teacherpanelapi/teacher_post_api/teacher_delete_post_api.dart';
 import 'package:kidseau/api/Teacherpanelapi/teacher_post_api/teacher_my_post_api.dart';
@@ -238,9 +240,26 @@ class _TMyPostsState extends State<TMyPosts> {
                                             PopupMenuItem(
                                               enabled: false,
                                               child: InkWell(
-                                                onTap: () {
-                                                  log('Download');
-                                                  Navigator.of(context).pop();
+                                                onTap: () async {
+                                                  for (var url
+                                                      in _postList[index]
+                                                          .images!) {
+                                                    try {
+                                                      var imageId =
+                                                          await ImageDownloader
+                                                              .downloadImage(url
+                                                                  .fileImage
+                                                                  .toString());
+                                                      var path =
+                                                          await ImageDownloader
+                                                              .findPath(
+                                                                  imageId!);
+                                                    } catch (error) {
+                                                      print(error);
+                                                    }
+                                                  }
+                                                  Fluttertoast.showToast(
+                                                      msg: 'Download complete');
                                                 },
                                                 child: Container(
                                                   padding: EdgeInsets.only(

@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart' as local;
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mentions/flutter_mentions.dart';
@@ -16,6 +17,7 @@ import 'TeachersPanel/TDashboard.dart';
 GlobalKey<MyAppState> globalKey = GlobalKey<MyAppState>();
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   await local.EasyLocalization.ensureInitialized();
   await UserPrefs.init();
   runApp(local.EasyLocalization(
