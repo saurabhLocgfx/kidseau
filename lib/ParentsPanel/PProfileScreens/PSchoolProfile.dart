@@ -157,10 +157,15 @@ class _PSchoolProfileState extends State<PSchoolProfile> {
                         Container(
                           height: 128,
                           width: 96,
+                          clipBehavior: Clip.hardEdge,
                           decoration: BoxDecoration(
-                              image: DecorationImage(
-                                  image: AssetImage(
-                                      "assets/images/profileperson.png"))),
+                              borderRadius: BorderRadius.circular(12)),
+                          child: Image.network(
+                            model.schoolImage.toString(),
+                            fit: BoxFit.fill,
+                            errorBuilder: (q, w, e) =>
+                                Image.asset("assets/images/profileperson.png"),
+                          ),
                         ),
                         SizedBox(width: 16),
                         Align(

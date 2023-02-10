@@ -32,6 +32,7 @@ class _ParentinfodashboardState extends State<Parentinfodashboard>
   }
 
   int selectedIndex = 0;
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -53,7 +54,7 @@ class _ParentinfodashboardState extends State<Parentinfodashboard>
         return false;
       },
       child: Scaffold(
-        resizeToAvoidBottomInset: true,
+        //resizeToAvoidBottomInset: true,
         body: Container(
           color: ThemeColor.primarycolor.withOpacity(.06),
           child: SingleChildScrollView(

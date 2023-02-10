@@ -210,9 +210,13 @@ class _TStudentDetailEditScreenState extends State<TStudentDetailEditScreen> {
                                       Container(
                                         height: 128,
                                         width: 96,
+                                        clipBehavior: Clip.hardEdge,
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(8)),
                                         child: Image.network(
                                           widget.model.kidImage.toString(),
-                                          fit: BoxFit.fitHeight,
+                                          fit: BoxFit.fill,
                                           errorBuilder: (q, w, e) => Image.asset(
                                               "assets/images/profileperson.png"),
                                         ),

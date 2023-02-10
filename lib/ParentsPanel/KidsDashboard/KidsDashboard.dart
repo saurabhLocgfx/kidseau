@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:ui';
 
 import 'package:easy_localization/easy_localization.dart';
@@ -54,6 +55,8 @@ class _PKidsDashboardState extends State<PKidsDashboard> {
       if (value['Status'] == 1) {
         setState(() {
           overviewModel = ParentKidOverviewModel.fromJson(value);
+          var v = overviewModel.kidDetails!.actvity!.toSet().toList();
+          log(v.toString());
           _isLoading = false;
         });
       } else {
@@ -70,6 +73,7 @@ class _PKidsDashboardState extends State<PKidsDashboard> {
     initialPage: 0,
   );
 */
+
   int pageIndex = 0;
   @override
   Widget build(BuildContext context) {
@@ -156,9 +160,13 @@ class _PKidsDashboardState extends State<PKidsDashboard> {
                                 Container(
                                   height: 128,
                                   width: 96,
+                                  clipBehavior: Clip.hardEdge,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(8)),
                                   child: Image.network(
                                     overviewModel.kidDetails!.kidImage
                                         .toString(),
+                                    fit: BoxFit.fill,
                                     errorBuilder: (q, w, e) => Image.asset(
                                         "assets/images/profileperson.png"),
                                   ),

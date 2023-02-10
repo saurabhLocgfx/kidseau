@@ -6,6 +6,7 @@ import 'package:kidseau/Theme.dart';
 import 'package:kidseau/Widgets/Calender/calendermodel.dart';
 import 'package:kidseau/Widgets/buttons.dart';
 import 'package:kidseau/api/models/parent_models/kid_details_models/parent_kid_overview_model.dart';
+import 'package:kidseau/performance_chart/performance_chart.dart';
 
 import '../../Constants/colors.dart';
 
@@ -460,7 +461,7 @@ class _PKidsOverviewState extends State<PKidsOverview> {
                                               children: [
                                                 Image.asset(
                                                   "assets/images/bars1.png",
-                                                  height: 24,
+                                                  height: 16,
                                                 )
                                               ],
                                             ),
@@ -470,8 +471,8 @@ class _PKidsOverviewState extends State<PKidsOverview> {
                                               children: [
                                                 Text(
                                                   "${_attendanceVal.length}/${widget.model.kidDetails!.attendance!.toJson().length}",
-                                                  style: FontConstant2
-                                                      .k24w4008267text,
+                                                  style:
+                                                      FontConstant.k16w5008471,
                                                 ),
                                                 Text(
                                                   "days".tr(),
@@ -488,7 +489,6 @@ class _PKidsOverviewState extends State<PKidsOverview> {
                                 ),
                               ),
                             ),
-
                             /*Expanded(
                               child: Column(
                                 */ /*mainAxisAlignment:
@@ -532,35 +532,41 @@ class _PKidsOverviewState extends State<PKidsOverview> {
             ],
           ),
           SizedBox(height: 16),
-          Container(
-            height: 194,
-            width: 1.sw,
-            decoration: BoxDecoration(
-                color: Colors.white, borderRadius: BorderRadius.circular(16)),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "Activity Tracker".tr(),
-                        style: FontConstant.k16w5008471Text,
-                      ),
-                      Image.asset(
-                        "assets/images/bar3.png",
-                        height: 24,
-                      )
-                    ],
-                  ),
-                  // SizedBox(height: 15),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Expanded(
+          widget.model.kidDetails!.actvity!.isEmpty
+              ? SizedBox.shrink()
+              : Container(
+                  height: 210,
+                  width: 1.sw,
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(16)),
+                  child: Padding(
+                    padding: const EdgeInsets.only(right: 16.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(left: 16.0),
+                              child: Text(
+                                "Activity Tracker".tr(),
+                                style: FontConstant.k16w5008471Text,
+                              ),
+                            ),
+                            Image.asset(
+                              "assets/images/bar3.png",
+                              height: 24,
+                            )
+                          ],
+                        ),
+                        // SizedBox(height: 15),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            /*Expanded(
                         child: Column(
                           children: [
                             Row(
@@ -621,8 +627,9 @@ class _PKidsOverviewState extends State<PKidsOverview> {
                                             width: 6.w,
                                             decoration: BoxDecoration(
                                                 color: Color(0xff8267AC),
-                                                borderRadius: BorderRadius.all(
-                                                    Radius.circular(12))),
+                                                borderRadius:
+                                                    BorderRadius.all(
+                                                        Radius.circular(12))),
                                           ),
                                         ),
                                       ],
@@ -656,8 +663,9 @@ class _PKidsOverviewState extends State<PKidsOverview> {
                                             width: 6.w,
                                             decoration: BoxDecoration(
                                                 color: Color(0xff8267AC),
-                                                borderRadius: BorderRadius.all(
-                                                    Radius.circular(12))),
+                                                borderRadius:
+                                                    BorderRadius.all(
+                                                        Radius.circular(12))),
                                           ),
                                         ),
                                       ],
@@ -691,8 +699,9 @@ class _PKidsOverviewState extends State<PKidsOverview> {
                                             width: 6.w,
                                             decoration: BoxDecoration(
                                                 color: Color(0xff8267AC),
-                                                borderRadius: BorderRadius.all(
-                                                    Radius.circular(12))),
+                                                borderRadius:
+                                                    BorderRadius.all(
+                                                        Radius.circular(12))),
                                           ),
                                         ),
                                       ],
@@ -726,8 +735,9 @@ class _PKidsOverviewState extends State<PKidsOverview> {
                                             width: 6.w,
                                             decoration: BoxDecoration(
                                                 color: Color(0xff8267AC),
-                                                borderRadius: BorderRadius.all(
-                                                    Radius.circular(12))),
+                                                borderRadius:
+                                                    BorderRadius.all(
+                                                        Radius.circular(12))),
                                           ),
                                         ),
                                       ],
@@ -761,8 +771,9 @@ class _PKidsOverviewState extends State<PKidsOverview> {
                                             width: 6.w,
                                             decoration: BoxDecoration(
                                                 color: Color(0xff8267AC),
-                                                borderRadius: BorderRadius.all(
-                                                    Radius.circular(12))),
+                                                borderRadius:
+                                                    BorderRadius.all(
+                                                        Radius.circular(12))),
                                           ),
                                         ),
                                       ],
@@ -777,42 +788,59 @@ class _PKidsOverviewState extends State<PKidsOverview> {
                             )
                           ],
                         ),
-                      ),
-                      Expanded(
-                        child: SizedBox(
-                          height: 140,
-                          child: ListView.builder(
-                              shrinkWrap: true,
-                              padding: EdgeInsets.zero,
-                              physics: NeverScrollableScrollPhysics(),
-                              itemCount: shortnames.length,
-                              itemBuilder: (BuildContext context, int index) {
-                                return Row(
-                                  children: [
-                                    Text(shortnames[index],
-                                        style: FontConstant.k14w4008471Text
-                                            .copyWith(
-                                                color: Color(0xff331F2D))),
-                                    SizedBox(width: 10),
-                                    Icon(
-                                      Icons.circle,
-                                      size: 4,
-                                      color: Color(0xff84717F),
-                                    ),
-                                    SizedBox(width: 10),
-                                    Text(fullnames[index],
-                                        style: FontConstant.k12w5008471Text),
-                                  ],
-                                );
-                              }),
-                        ),
-                      )
-                    ],
-                  )
-                ],
-              ),
-            ),
-          ),
+                      ),*/
+                            SizedBox(
+                              width: 1.sw / 2,
+                              height: 180,
+                              child: BarChartSample1(
+                                  activityList:
+                                      widget.model.kidDetails!.actvity ?? []),
+                            ),
+                            Expanded(
+                              //height: 140,
+                              //width: 1.sw / 2,
+                              child: ListView.builder(
+                                  shrinkWrap: true,
+                                  padding: EdgeInsets.zero,
+                                  physics: NeverScrollableScrollPhysics(),
+                                  itemCount:
+                                      widget.model.kidDetails!.actvity!.length,
+                                  itemBuilder:
+                                      (BuildContext context, int index) {
+                                    return Row(
+                                      children: [
+                                        Text(
+                                            widget.model.kidDetails!
+                                                    .actvity![index].actName![0]
+                                                    .toUpperCase() +
+                                                widget.model.kidDetails!
+                                                    .actvity![index].actName![1]
+                                                    .toUpperCase(),
+                                            style: FontConstant.k14w4008471Text
+                                                .copyWith(
+                                                    color: Color(0xff331F2D))),
+                                        SizedBox(width: 10),
+                                        Icon(
+                                          Icons.circle,
+                                          size: 4,
+                                          color: Color(0xff84717F),
+                                        ),
+                                        SizedBox(width: 10),
+                                        Text(
+                                            widget.model.kidDetails!
+                                                .actvity![index].actName!,
+                                            style:
+                                                FontConstant.k12w5008471Text),
+                                      ],
+                                    );
+                                  }),
+                            )
+                          ],
+                        )
+                      ],
+                    ),
+                  ),
+                ),
           SizedBox(height: 16),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,

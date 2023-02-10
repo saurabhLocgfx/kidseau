@@ -9,6 +9,8 @@ import 'package:kidseau/ParentsPanel/PProfileScreens/PSettings/PPrivacyPolicy.da
 import 'package:kidseau/ParentsPanel/PProfileScreens/PSettings/PVoucherCode.dart';
 import 'package:kidseau/Theme.dart';
 
+import 'PTermsAndConditions.dart';
+
 class PSettings extends StatefulWidget {
   PSettings({Key? key}) : super(key: key);
 
@@ -72,18 +74,21 @@ class _PSettingsState extends State<PSettings> {
                     ),
                   );
                 },
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "Notification Settings".tr(),
-                      style: FontConstant.k18w500331FText,
-                    ),
-                    Image.asset(
-                      "assets/images/rightarrow.png",
-                      height: 20,
-                    ),
-                  ],
+                child: Container(
+                  color: Colors.transparent,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "Notification Settings".tr(),
+                        style: FontConstant.k18w500331FText,
+                      ),
+                      Image.asset(
+                        "assets/images/rightarrow.png",
+                        height: 20,
+                      ),
+                    ],
+                  ),
                 ),
               ),
               SizedBox(height: 20),
@@ -95,18 +100,21 @@ class _PSettingsState extends State<PSettings> {
                     ),
                   );
                 },
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "Voucher Code".tr(),
-                      style: FontConstant.k18w500331FText,
-                    ),
-                    Image.asset(
-                      "assets/images/rightarrow.png",
-                      height: 20,
-                    ),
-                  ],
+                child: Container(
+                  color: Colors.transparent,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "Voucher Code".tr(),
+                        style: FontConstant.k18w500331FText,
+                      ),
+                      Image.asset(
+                        "assets/images/rightarrow.png",
+                        height: 20,
+                      ),
+                    ],
+                  ),
                 ),
               ),
               SizedBox(height: 20),
@@ -118,18 +126,21 @@ class _PSettingsState extends State<PSettings> {
                     ),
                   );
                 },
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "Privacy Policy".tr(),
-                      style: FontConstant.k18w500331FText,
-                    ),
-                    Image.asset(
-                      "assets/images/rightarrow.png",
-                      height: 20,
-                    ),
-                  ],
+                child: Container(
+                  color: Colors.transparent,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "Privacy Policy".tr(),
+                        style: FontConstant.k18w500331FText,
+                      ),
+                      Image.asset(
+                        "assets/images/rightarrow.png",
+                        height: 20,
+                      ),
+                    ],
+                  ),
                 ),
               ),
               SizedBox(height: 20),
@@ -141,18 +152,49 @@ class _PSettingsState extends State<PSettings> {
                     ),
                   );
                 },
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "About Us".tr(),
-                      style: FontConstant.k18w500331FText,
+                child: Container(
+                  color: Colors.transparent,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "About Us".tr(),
+                        style: FontConstant.k18w500331FText,
+                      ),
+                      Image.asset(
+                        "assets/images/rightarrow.png",
+                        height: 20,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              GestureDetector(
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => PTermsAndConditions(),
                     ),
-                    Image.asset(
-                      "assets/images/rightarrow.png",
-                      height: 20,
-                    ),
-                  ],
+                  );
+                },
+                child: Container(
+                  color: Colors.transparent,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "Terms and Conditions".tr(),
+                        style: FontConstant.k18w500331FText,
+                      ),
+                      Image.asset(
+                        "assets/images/rightarrow.png",
+                        height: 20,
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ],

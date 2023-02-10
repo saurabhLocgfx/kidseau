@@ -8,6 +8,7 @@ class UserPrefs {
   static const isfather = 'isfather';
   static const enteredVal = 'enteredVal';
   static const Teacher = 'Teacher';
+  static const FirebaseToken = 'FirebaseToken';
   static SharedPreferences? prefs;
   static Future init() async {
     prefs = await SharedPreferences.getInstance();
@@ -71,5 +72,13 @@ class UserPrefs {
 
   static String? getCookies() {
     return prefs?.getString(cookies);
+  }
+
+  static Future setFCM(String fcm) async {
+    return await prefs?.setString(FirebaseToken, fcm);
+  }
+
+  static String? getFCM() {
+    return prefs?.getString(FirebaseToken);
   }
 }

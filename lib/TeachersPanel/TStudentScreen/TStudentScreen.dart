@@ -482,6 +482,7 @@ class _TStudentScreenState extends State<TStudentScreen> {
                                                     .performance![index]
                                                     .profilePic
                                                     .toString(),
+                                                fit: BoxFit.fill,
                                                 errorBuilder: (q, w, e) =>
                                                     Image.asset(
                                                         'assets/images/Rectangle 2715.png'),

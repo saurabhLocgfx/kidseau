@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:ui';
 
 import 'package:easy_localization/easy_localization.dart';
@@ -13,6 +14,7 @@ import 'package:kidseau/shard_prefs/shared_prefs.dart';
 import '../../Theme.dart';
 import '../../Widgets/Calender/calendermodel.dart';
 import '../../Widgets/buttons.dart';
+import '../../performance_chart/performance_chart.dart';
 
 class TStudentDetailScreen extends StatefulWidget {
   final String kidId;
@@ -59,6 +61,7 @@ class _TStudentDetailScreenState extends State<TStudentDetailScreen> {
     _isLoading = true;
     final resp = TStudentDetailAPi().get(kidId: widget.kidId);
     resp.then((value) {
+      log(value.toString());
       if (value['status'] == 1) {
         setState(() {
           model = KidPerformanceDetailModel.fromJson(value);
@@ -209,9 +212,13 @@ class _TStudentDetailScreenState extends State<TStudentDetailScreen> {
                                     Container(
                                       height: 128,
                                       width: 96,
+                                      clipBehavior: Clip.hardEdge,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(8),
+                                      ),
                                       child: Image.network(
                                         model.kidImage.toString(),
-                                        fit: BoxFit.fitHeight,
+                                        fit: BoxFit.fill,
                                         errorBuilder: (q, w, e) => Image.asset(
                                             "assets/images/profileperson.png"),
                                       ),
@@ -698,260 +705,13 @@ class _TStudentDetailScreenState extends State<TStudentDetailScreen> {
                                             SizedBox(height: 15),
                                             Row(
                                               children: [
-                                                Expanded(
-                                                  child: Column(
-                                                    children: [
-                                                      Row(
-                                                        children: [
-                                                          Text(
-                                                            "75%",
-                                                            style: FontConstant
-                                                                .k14w400B7A4Text,
-                                                          ),
-                                                          SizedBox(
-                                                            width: 5,
-                                                          ),
-                                                          Text(
-                                                            "50%",
-                                                            style: FontConstant
-                                                                .k14w400B7A4Text,
-                                                          ),
-                                                          SizedBox(
-                                                            width: 5,
-                                                          ),
-                                                          Text(
-                                                            "10%",
-                                                            style: FontConstant
-                                                                .k14w400B7A4Text,
-                                                          ),
-                                                          SizedBox(
-                                                            width: 5,
-                                                          ),
-                                                          Text(
-                                                            "100%",
-                                                            style: FontConstant
-                                                                .k14w400B7A4Text,
-                                                          ),
-                                                          SizedBox(
-                                                            width: 5,
-                                                          ),
-                                                          Text(
-                                                            "5%",
-                                                            style: FontConstant
-                                                                .k14w400B7A4Text,
-                                                          )
-                                                        ],
-                                                      ),
-                                                      Row(
-                                                        children: [
-                                                          Column(
-                                                            children: [
-                                                              Stack(
-                                                                children: [
-                                                                  Container(
-                                                                    height:
-                                                                        110.h,
-                                                                    width: 6.w,
-                                                                    decoration: BoxDecoration(
-                                                                        color: Color(0xff8267AC).withOpacity(
-                                                                            0.28),
-                                                                        borderRadius:
-                                                                            BorderRadius.all(Radius.circular(12))),
-                                                                  ),
-                                                                  Positioned(
-                                                                    bottom: 0,
-                                                                    child:
-                                                                        Container(
-                                                                      height:
-                                                                          82.h,
-                                                                      width:
-                                                                          6.w,
-                                                                      decoration: BoxDecoration(
-                                                                          color: Color(
-                                                                              0xff8267AC),
-                                                                          borderRadius:
-                                                                              BorderRadius.all(Radius.circular(12))),
-                                                                    ),
-                                                                  ),
-                                                                ],
-                                                              ),
-                                                              Text(
-                                                                "PG",
-                                                                style: FontConstant
-                                                                    .k14w400B7A4Text,
-                                                              )
-                                                            ],
-                                                          ),
-                                                          SizedBox(
-                                                            width: 15,
-                                                          ),
-                                                          Column(
-                                                            children: [
-                                                              Stack(
-                                                                children: [
-                                                                  Container(
-                                                                    height:
-                                                                        110.h,
-                                                                    width: 6.w,
-                                                                    decoration: BoxDecoration(
-                                                                        color: Color(0xff8267AC).withOpacity(
-                                                                            0.28),
-                                                                        borderRadius:
-                                                                            BorderRadius.all(Radius.circular(12))),
-                                                                  ),
-                                                                  Positioned(
-                                                                    bottom: 0,
-                                                                    child:
-                                                                        Container(
-                                                                      height:
-                                                                          55.h,
-                                                                      width:
-                                                                          6.w,
-                                                                      decoration: BoxDecoration(
-                                                                          color: Color(
-                                                                              0xff8267AC),
-                                                                          borderRadius:
-                                                                              BorderRadius.all(Radius.circular(12))),
-                                                                    ),
-                                                                  ),
-                                                                ],
-                                                              ),
-                                                              Text(
-                                                                "RS",
-                                                                style: FontConstant
-                                                                    .k14w400B7A4Text,
-                                                              )
-                                                            ],
-                                                          ),
-                                                          SizedBox(
-                                                            width: 15,
-                                                          ),
-                                                          Column(
-                                                            children: [
-                                                              Stack(
-                                                                children: [
-                                                                  Container(
-                                                                    height:
-                                                                        110.h,
-                                                                    width: 6.w,
-                                                                    decoration: BoxDecoration(
-                                                                        color: Color(0xff8267AC).withOpacity(
-                                                                            0.28),
-                                                                        borderRadius:
-                                                                            BorderRadius.all(Radius.circular(12))),
-                                                                  ),
-                                                                  Positioned(
-                                                                    bottom: 0,
-                                                                    child:
-                                                                        Container(
-                                                                      height:
-                                                                          11.h,
-                                                                      width:
-                                                                          6.w,
-                                                                      decoration: BoxDecoration(
-                                                                          color: Color(
-                                                                              0xff8267AC),
-                                                                          borderRadius:
-                                                                              BorderRadius.all(Radius.circular(12))),
-                                                                    ),
-                                                                  ),
-                                                                ],
-                                                              ),
-                                                              Text(
-                                                                "Re",
-                                                                style: FontConstant
-                                                                    .k14w400B7A4Text,
-                                                              )
-                                                            ],
-                                                          ),
-                                                          SizedBox(
-                                                            width: 15,
-                                                          ),
-                                                          Column(
-                                                            children: [
-                                                              Stack(
-                                                                children: [
-                                                                  Container(
-                                                                    height:
-                                                                        110.h,
-                                                                    width: 6.w,
-                                                                    decoration: BoxDecoration(
-                                                                        color: Color(0xff8267AC).withOpacity(
-                                                                            0.28),
-                                                                        borderRadius:
-                                                                            BorderRadius.all(Radius.circular(12))),
-                                                                  ),
-                                                                  Positioned(
-                                                                    bottom: 0,
-                                                                    child:
-                                                                        Container(
-                                                                      height:
-                                                                          110.h,
-                                                                      width:
-                                                                          6.w,
-                                                                      decoration: BoxDecoration(
-                                                                          color: Color(
-                                                                              0xff8267AC),
-                                                                          borderRadius:
-                                                                              BorderRadius.all(Radius.circular(12))),
-                                                                    ),
-                                                                  ),
-                                                                ],
-                                                              ),
-                                                              Text(
-                                                                "LA",
-                                                                style: FontConstant
-                                                                    .k14w400B7A4Text,
-                                                              )
-                                                            ],
-                                                          ),
-                                                          SizedBox(
-                                                            width: 15,
-                                                          ),
-                                                          Column(
-                                                            children: [
-                                                              Stack(
-                                                                children: [
-                                                                  Container(
-                                                                    height:
-                                                                        110.h,
-                                                                    width: 6.w,
-                                                                    decoration: BoxDecoration(
-                                                                        color: Color(0xff8267AC).withOpacity(
-                                                                            0.28),
-                                                                        borderRadius:
-                                                                            BorderRadius.all(Radius.circular(12))),
-                                                                  ),
-                                                                  Positioned(
-                                                                    bottom: 0,
-                                                                    child:
-                                                                        Container(
-                                                                      height:
-                                                                          5.h,
-                                                                      width:
-                                                                          6.w,
-                                                                      decoration: BoxDecoration(
-                                                                          color: Color(
-                                                                              0xff8267AC),
-                                                                          borderRadius:
-                                                                              BorderRadius.all(Radius.circular(12))),
-                                                                    ),
-                                                                  ),
-                                                                ],
-                                                              ),
-                                                              Text(
-                                                                "VP",
-                                                                style: FontConstant
-                                                                    .k14w400B7A4Text,
-                                                              )
-                                                            ],
-                                                          ),
-                                                        ],
-                                                      )
-                                                    ],
-                                                  ),
+                                                SizedBox(
+                                                  width: 1.sw / 2,
+                                                  height: 180,
+                                                  child: BarChartSample1(
+                                                      activityList:
+                                                          model.actvity ?? []),
                                                 ),
-                                                SizedBox(width: 8),
                                                 Expanded(
                                                   child: SizedBox(
                                                     // height: 140,
@@ -961,8 +721,8 @@ class _TStudentDetailScreenState extends State<TStudentDetailScreen> {
                                                             EdgeInsets.zero,
                                                         physics:
                                                             NeverScrollableScrollPhysics(),
-                                                        itemCount:
-                                                            shortnames.length,
+                                                        itemCount: model
+                                                            .actvity!.length,
                                                         itemBuilder:
                                                             (BuildContext
                                                                     context,
@@ -970,15 +730,25 @@ class _TStudentDetailScreenState extends State<TStudentDetailScreen> {
                                                           return Row(
                                                             children: [
                                                               Text(
-                                                                  shortnames[
-                                                                      index],
+                                                                  model
+                                                                          .actvity![
+                                                                              index]
+                                                                          .actName![
+                                                                              0]
+                                                                          .toUpperCase() +
+                                                                      model
+                                                                          .actvity![
+                                                                              index]
+                                                                          .actName![
+                                                                              1]
+                                                                          .toUpperCase(),
                                                                   style: FontConstant
                                                                       .k14w4008471Text
                                                                       .copyWith(
                                                                           color:
                                                                               Color(0xff331F2D))),
                                                               SizedBox(
-                                                                  width: 5),
+                                                                  width: 10),
                                                               Icon(
                                                                 Icons.circle,
                                                                 size: 4,
@@ -986,20 +756,14 @@ class _TStudentDetailScreenState extends State<TStudentDetailScreen> {
                                                                     0xff84717F),
                                                               ),
                                                               SizedBox(
-                                                                  width: 5),
-                                                              Expanded(
-                                                                child: Text(
-                                                                    fullnames[
-                                                                            index]
-                                                                        .tr(),
-                                                                    /* AppLoaclizations.of(
-                                                                context)!
-                                                            .translate(
-                                                                fullnames[index])
-                                                            .toString(),*/
-                                                                    style: FontConstant
-                                                                        .k12w5008471Text),
-                                                              ),
+                                                                  width: 10),
+                                                              Text(
+                                                                  model
+                                                                      .actvity![
+                                                                          index]
+                                                                      .actName!,
+                                                                  style: FontConstant
+                                                                      .k12w5008471Text),
                                                             ],
                                                           );
                                                         }),

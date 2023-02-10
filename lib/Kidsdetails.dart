@@ -687,6 +687,12 @@ class _KidsDetailsState extends State<KidsDetails> {
                               title: "Continue",
                               textStyleColor: Colors.white,
                               backgroundColor: ThemeColor.primarycolor)),
+                  /* AnimatedContainer(
+                      height: fatherNode.hasFocus ? 400 : 0,
+                      duration: Duration(milliseconds: 100)),
+                  AnimatedContainer(
+                      height: addressNode.hasFocus ? 400 : 0,
+                      duration: Duration(milliseconds: 100)),*/
                   SizedBox(
                     height: 300.h,
                   ),

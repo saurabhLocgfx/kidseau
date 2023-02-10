@@ -117,18 +117,21 @@ class Attendance {
 class Actvity {
   String? actName;
   String? pfmSum;
+  String? totalSub;
 
   Actvity({this.actName, this.pfmSum});
 
   Actvity.fromJson(Map<String, dynamic> json) {
     actName = json['act_name'];
     pfmSum = json['pfm_sum'];
+    totalSub = json['total_sub'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['act_name'] = this.actName;
     data['pfm_sum'] = this.pfmSum;
+    data['total_sub'] = this.totalSub;
     return data;
   }
 }
