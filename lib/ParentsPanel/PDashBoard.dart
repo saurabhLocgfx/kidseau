@@ -97,111 +97,116 @@ class _PDashboardState extends State<PDashboard> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      extendBody: true,
-      appBar: AppBar(
-        toolbarHeight: 0,
-        elevation: 0,
-        systemOverlayStyle: SystemUiOverlayStyle(
-          statusBarBrightness: Brightness.light,
+    return WillPopScope(
+      onWillPop: () async {
+        return false;
+      },
+      child: Scaffold(
+        extendBody: true,
+        appBar: AppBar(
+          toolbarHeight: 0,
+          elevation: 0,
+          systemOverlayStyle: SystemUiOverlayStyle(
+            statusBarBrightness: Brightness.light,
+          ),
+          backgroundColor: Colors.transparent,
         ),
-        backgroundColor: Colors.transparent,
-      ),
-      bottomNavigationBar: buildMyNavBar(context),
-      // bottomNavigationBar: Padding(
-      //   padding: const EdgeInsets.all(20.0),
-      //   child: CustomNavigationBar(
-      //     strokeColor: ThemeColor.primarycolor,
-      //     borderRadius: Radius.circular(120.0),
-      //     currentIndex: currentIndex,
-      //     selectedColor: Colors.purple,
-      //     unSelectedColor: Colors.red,
-      //     backgroundColor: Colors.white,
-      //     onTap: (value) {
-      //       currentIndex = value;
-      //       _pageController.animateToPage(
-      //         value,
-      //         duration: Duration(milliseconds: 200),
-      //         curve: Curves.linear,
-      //       );
-      //       setState(() {});
-      //     },
-      //     items: [
-      //       CustomNavigationBarItem(
-      //         icon: ImageIcon(AssetImage("assets/images/iconhome.png")),
-      //         title: Text(
-      //           "Home",
-      //           style: TextStyle(
-      //             fontWeight: FontWeight.w500,
-      //             fontSize: 14,
-      //             color: currentIndex == currentIndex
-      //                 ? Color(0xff8267AC)
-      //                 : Colors.red,
-      //           ),
-      //         ),
-      //       ),
-      //       CustomNavigationBarItem(
-      //         icon: Icon(Icons.shopping_cart),
-      //         title: Text(
-      //           "Cart",
-      //           style: TextStyle(
-      //             fontWeight: FontWeight.w500,
-      //             fontSize: 14,
-      //             color: currentIndex == currentIndex
-      //                 ? Color(0xff8267AC)
-      //                 : Colors.red,
-      //           ),
-      //         ),
-      //       ),
-      //       CustomNavigationBarItem(
-      //         icon: Icon(Icons.lightbulb_outline),
-      //         title: Text(
-      //           "Explore",
-      //           style: TextStyle(
-      //             fontWeight: FontWeight.w500,
-      //             fontSize: 14,
-      //             color: currentIndex == currentIndex
-      //                 ? Color(0xff8267AC)
-      //                 : Colors.green,
-      //           ),
-      //         ),
-      //       ),
-      //       CustomNavigationBarItem(
-      //         icon: Icon(Icons.search),
-      //         title: Text(
-      //           "Search",
-      //           style: TextStyle(
-      //             fontWeight: FontWeight.w500,
-      //             fontSize: 14,
-      //             color: currentIndex == currentIndex
-      //                 ? Color(0xff8267AC)
-      //                 : Colors.red,
-      //           ),
-      //         ),
-      //       ),
-      //     ],
-      //   ),
-      // ),
-      body: PageView(
-        controller: _pageController,
-        onPageChanged: (page) {
-          setState(
-            () {
-              pageIndex = page;
-            },
-          );
-        },
-        children: <Widget>[
-          PHomeScreen(),
-          PProfileDashBoard(),
-          PPostScreen(),
-          PNotificationScreen(),
-          PMessageDashboard(),
-          // HomeProfile(),
-          // Posts(),
-          // NotificationScreen(),
-          // MessageScreen()
-        ],
+        bottomNavigationBar: buildMyNavBar(context),
+        // bottomNavigationBar: Padding(
+        //   padding: const EdgeInsets.all(20.0),
+        //   child: CustomNavigationBar(
+        //     strokeColor: ThemeColor.primarycolor,
+        //     borderRadius: Radius.circular(120.0),
+        //     currentIndex: currentIndex,
+        //     selectedColor: Colors.purple,
+        //     unSelectedColor: Colors.red,
+        //     backgroundColor: Colors.white,
+        //     onTap: (value) {
+        //       currentIndex = value;
+        //       _pageController.animateToPage(
+        //         value,
+        //         duration: Duration(milliseconds: 200),
+        //         curve: Curves.linear,
+        //       );
+        //       setState(() {});
+        //     },
+        //     items: [
+        //       CustomNavigationBarItem(
+        //         icon: ImageIcon(AssetImage("assets/images/iconhome.png")),
+        //         title: Text(
+        //           "Home",
+        //           style: TextStyle(
+        //             fontWeight: FontWeight.w500,
+        //             fontSize: 14,
+        //             color: currentIndex == currentIndex
+        //                 ? Color(0xff8267AC)
+        //                 : Colors.red,
+        //           ),
+        //         ),
+        //       ),
+        //       CustomNavigationBarItem(
+        //         icon: Icon(Icons.shopping_cart),
+        //         title: Text(
+        //           "Cart",
+        //           style: TextStyle(
+        //             fontWeight: FontWeight.w500,
+        //             fontSize: 14,
+        //             color: currentIndex == currentIndex
+        //                 ? Color(0xff8267AC)
+        //                 : Colors.red,
+        //           ),
+        //         ),
+        //       ),
+        //       CustomNavigationBarItem(
+        //         icon: Icon(Icons.lightbulb_outline),
+        //         title: Text(
+        //           "Explore",
+        //           style: TextStyle(
+        //             fontWeight: FontWeight.w500,
+        //             fontSize: 14,
+        //             color: currentIndex == currentIndex
+        //                 ? Color(0xff8267AC)
+        //                 : Colors.green,
+        //           ),
+        //         ),
+        //       ),
+        //       CustomNavigationBarItem(
+        //         icon: Icon(Icons.search),
+        //         title: Text(
+        //           "Search",
+        //           style: TextStyle(
+        //             fontWeight: FontWeight.w500,
+        //             fontSize: 14,
+        //             color: currentIndex == currentIndex
+        //                 ? Color(0xff8267AC)
+        //                 : Colors.red,
+        //           ),
+        //         ),
+        //       ),
+        //     ],
+        //   ),
+        // ),
+        body: PageView(
+          controller: _pageController,
+          onPageChanged: (page) {
+            setState(
+              () {
+                pageIndex = page;
+              },
+            );
+          },
+          children: <Widget>[
+            PHomeScreen(),
+            PProfileDashBoard(),
+            PPostScreen(),
+            PNotificationScreen(),
+            PMessageDashboard(),
+            // HomeProfile(),
+            // Posts(),
+            // NotificationScreen(),
+            // MessageScreen()
+          ],
+        ),
       ),
     );
   }

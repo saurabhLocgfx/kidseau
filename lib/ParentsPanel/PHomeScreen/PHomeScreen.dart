@@ -39,9 +39,12 @@ class _PHomeScreenState extends State<PHomeScreen> {
   @override
   void initState() {
     _getData();
+
+    // cookie = UserPrefs.getCookies()!;
     super.initState();
   }
 
+  // String cookie = '';
   bool _isLoading = false;
   _getData() {
     _isLoading = true;
@@ -275,6 +278,7 @@ class _PHomeScreenState extends State<PHomeScreen> {
                     SizedBox(height: 30),
                     Column(
                       children: [
+                        //Text(cookie),
                         Container(
                           margin: EdgeInsets.symmetric(horizontal: 0.w),
                           // color: Colors.black,
@@ -283,14 +287,20 @@ class _PHomeScreenState extends State<PHomeScreen> {
                             itemCount: _kidModel.parentKidId!.length,
                             itemBuilder: (ctx, index, realIndex) {
                               return InkWell(
-                                onTap: () {
-                                  Navigator.of(context).push(MaterialPageRoute(
-                                      builder: (ctx) => PKidsDashboard(
-                                            kidId: _kidModel
-                                                .parentKidId![index].kidId
-                                                .toString(),
-                                          )));
-                                },
+                                onTap: _kidModel.parentKidId![index].kidId ==
+                                        null
+                                    ? () {}
+                                    : () {
+                                        Navigator.of(context).push(
+                                            MaterialPageRoute(
+                                                builder: (ctx) =>
+                                                    PKidsDashboard(
+                                                      kidId: _kidModel
+                                                          .parentKidId![index]
+                                                          .kidId
+                                                          .toString(),
+                                                    )));
+                                      },
                                 child: Container(
                                   //width: 260,
                                   // height: 100,
@@ -331,41 +341,65 @@ class _PHomeScreenState extends State<PHomeScreen> {
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
                                         children: [
-                                          /*SizedBox(
-                                      height: 8,
-                                    ),*/
                                           Text(
                                             _kidModel.parentKidId![index].name
                                                 .toString(),
                                             style: FontConstant.k16w500White,
                                           ),
-                                          Text(
-                                            _kidModel
-                                                .parentKidId![index].secName
-                                                .toString(),
-                                            style: FontConstant.k14w400White,
-                                          ),
-                                          Row(
-                                            children: [
-                                              Text(
-                                                "${"From".tr()} ${DateFormat.jm().format(DateFormat("hh:mm:ss").parse(_kidModel.parentKidId![index].schTimeIn.toString().split('.').first))} ",
-                                                style:
-                                                    FontConstant.k14w400White,
-                                              ),
-                                              Text(
-                                                "${"To".tr()} ${DateFormat.jm().format(DateFormat("hh:mm:ss").parse(_kidModel.parentKidId![index].schTimeOut.toString().split('.').first))}",
-                                                style:
-                                                    FontConstant.k14w400White,
-                                              ),
-                                            ],
-                                          ),
-                                          Text(
-                                            _kidModel
-                                                .parentKidId![index].grpName
-                                                .toString()
-                                                .tr(),
-                                            style: FontConstant.k12w400White,
-                                          ),
+                                          _kidModel.parentKidId![index].kidId ==
+                                                  null
+                                              ? Container(
+                                                  padding: EdgeInsets.symmetric(
+                                                      horizontal: 10,
+                                                      vertical: 5),
+                                                  decoration: BoxDecoration(
+                                                      color: Colors.red,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              20)),
+                                                  child: Text(
+                                                    "Voucher expired!",
+                                                    style: FontConstant
+                                                        .k14w400White,
+                                                  ),
+                                                )
+                                              : Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      _kidModel
+                                                          .parentKidId![index]
+                                                          .secName
+                                                          .toString(),
+                                                      style: FontConstant
+                                                          .k14w400White,
+                                                    ),
+                                                    Row(
+                                                      children: [
+                                                        Text(
+                                                          "${"From".tr()} ${DateFormat.jm().format(DateFormat("hh:mm:ss").parse(_kidModel.parentKidId![index].schTimeIn.toString().split('.').first))} ",
+                                                          style: FontConstant
+                                                              .k14w400White,
+                                                        ),
+                                                        Text(
+                                                          "${"To".tr()} ${DateFormat.jm().format(DateFormat("hh:mm:ss").parse(_kidModel.parentKidId![index].schTimeOut.toString().split('.').first))}",
+                                                          style: FontConstant
+                                                              .k14w400White,
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    Text(
+                                                      _kidModel
+                                                          .parentKidId![index]
+                                                          .grpName
+                                                          .toString()
+                                                          .tr(),
+                                                      style: FontConstant
+                                                          .k12w400White,
+                                                    ),
+                                                  ],
+                                                ),
                                         ],
                                       ),
                                     ],
@@ -446,8 +480,30 @@ class _PHomeScreenState extends State<PHomeScreen> {
                                 ? Center(
                                     child: CircularProgressIndicator(),
                                   )
-                                : Activity(
-                                    model: _activityModel, length: length),
+                                : _activityModel.kidAndActivity!.isEmpty
+                                    ? Column(
+                                        children: [
+                                          Image.asset(
+                                            "assets/images/chicken.png",
+                                            width: 1.sw,
+                                            height: 200,
+                                          ),
+                                          SizedBox(
+                                            height: 20,
+                                          ),
+                                          Text(
+                                            "Oops!",
+                                            style:
+                                                FontConstant2.k24w5008267text,
+                                          ),
+                                          Text(
+                                            "No activity available for the kid.",
+                                            style: FontConstant.k16w4008471Text,
+                                          ),
+                                        ],
+                                      )
+                                    : Activity(
+                                        model: _activityModel, length: length),
                             SizedBox(height: 10),
                             length == _activityModel.kidAndActivity!.length
                                 ? SizedBox.shrink()

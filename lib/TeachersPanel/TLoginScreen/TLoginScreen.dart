@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -135,9 +137,10 @@ class TLoginScreen extends StatelessWidget {
                                               if (_formKey.currentState!
                                                   .validate()) {
                                                 final resp = TeacherLogin().get(
-                                                    email: controller.text);
+                                                    email:
+                                                        controller.text.trim());
                                                 resp.then((value) {
-                                                  print(value);
+                                                  log(value.toString());
                                                   if (value['status'] == 0) {
                                                     Fluttertoast.showToast(
                                                         msg: value['msg']);

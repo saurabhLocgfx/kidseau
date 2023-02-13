@@ -180,10 +180,6 @@ class _PPostScreenState extends State<PPostScreen> {
                 Padding(
                     padding: const EdgeInsets.all(15.0),
                     child: PopupMenuButton(
-                        child: Image.asset(
-                          "assets/images/Languageicon.png",
-                          height: 24,
-                        ),
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(16)),
                         itemBuilder: (context) {
@@ -274,7 +270,11 @@ class _PPostScreenState extends State<PPostScreen> {
                               ),
                             ),
                           ];
-                        })),
+                        },
+                        child: Image.asset(
+                          "assets/images/Languageicon.png",
+                          height: 24,
+                        ))),
                 InkWell(
                   onTap: () {
                     Navigator.push(

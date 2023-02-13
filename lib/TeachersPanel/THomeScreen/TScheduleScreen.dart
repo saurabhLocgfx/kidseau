@@ -44,8 +44,8 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
         });
       }
       //print(_schedule.schedule!.length);
-     // print(_schedule.schedule!.length);
-     // print(_schedule.schedule![0].actTitle);
+      // print(_schedule.schedule!.length);
+      // print(_schedule.schedule![0].actTitle);
     });
   }
 
@@ -94,37 +94,40 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
       ),
       body: loading
           ? Center(child: CircularProgressIndicator())
-          :_schedule.schdule!.isEmpty? Center(child: Text('No schedule found')) :SingleChildScrollView(
-        child: Container(
-          height: 1.sh,
-          color: Color(0xff8267AC).withOpacity(.06),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-          //  mainAxisSize: MainAxisSize.max,
-            children: [
-              Row(),
-              SizedBox(height: 24),
-              Padding(
-                padding: EdgeInsets.all(16),
-                child: Text(
-                  "Schedule".tr(),
-                  /* AppLoaclizations.of(context)!.translate("Schedule").toString(),*/
-                  style: FontConstant2.baloothampifont,
-                ),
-              ),
-              SizedBox(
-                height: 5.h,
-              ),
-               Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16),
-                      child: TActivity(
-                        schedule: _schedule,
-                      ),
+          : _schedule.schdule!.isEmpty
+              ? Center(child: Text('No schedule found'))
+              : Container(
+                  height: 1.sh,
+                  color: Color(0xff8267AC).withOpacity(.06),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      //  mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Row(),
+                        SizedBox(height: 24),
+                        Padding(
+                          padding: EdgeInsets.all(16),
+                          child: Text(
+                            "Schedule".tr(),
+                            /* AppLoaclizations.of(context)!.translate("Schedule").toString(),*/
+                            style: FontConstant2.baloothampifont,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 5.h,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(
+                              left: 16, right: 16, bottom: 16),
+                          child: TActivity(
+                            schedule: _schedule,
+                          ),
+                        ),
+                      ],
                     ),
-            ],
-          ),
-        ),
-      ),
+                  ),
+                ),
     );
   }
 }

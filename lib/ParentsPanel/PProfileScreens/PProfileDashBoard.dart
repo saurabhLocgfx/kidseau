@@ -412,6 +412,7 @@ class Pprofilepopup extends StatelessWidget {
                   resp.then((value) {
                     if (value['status'] == 1) {
                       UserPrefs.clearData(UserPrefs.cookies);
+                      UserPrefs.clearData(UserPrefs.Teacher);
                       Navigator.of(context).pushAndRemoveUntil(
                           MaterialPageRoute(builder: (ctx) => PStartScreen()),
                           (route) => false);

@@ -22,7 +22,7 @@ class _PSettingsState extends State<PSettings> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        extendBodyBehindAppBar: true,
+        // extendBodyBehindAppBar: true,
         appBar: AppBar(
           toolbarHeight: 70.0,
           flexibleSpace: ClipRect(
@@ -65,7 +65,7 @@ class _PSettingsState extends State<PSettings> {
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
           child: Column(
             children: [
-              SizedBox(height: 110),
+              SizedBox(height: 16),
               GestureDetector(
                 onTap: () {
                   Navigator.of(context).push(

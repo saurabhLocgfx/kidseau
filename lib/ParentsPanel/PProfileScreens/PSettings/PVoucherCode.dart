@@ -46,7 +46,7 @@ class _PVouchercodeState extends State<PVouchercode> {
       height: 896.h,
       width: 1.sw,
       child: Scaffold(
-          extendBodyBehindAppBar: true,
+          // extendBodyBehindAppBar: true,
           appBar: AppBar(
             toolbarHeight: 70.0,
             flexibleSpace: ClipRect(
@@ -94,7 +94,7 @@ class _PVouchercodeState extends State<PVouchercode> {
                     padding: const EdgeInsets.symmetric(horizontal: 16.0),
                     child: Column(
                       children: [
-                        SizedBox(height: 110),
+                        SizedBox(height: 16),
                         MediaQuery.removePadding(
                           context: context,
                           removeTop: true,

@@ -70,6 +70,7 @@ class _PParentsProfileState extends State<PParentsProfile> {
       body: _isLoading
           ? Center(child: CircularProgressIndicator())
           : Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(height: 24),
                 Padding(

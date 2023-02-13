@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -27,6 +29,8 @@ class _POnboardingScreenState extends State<POnboardingScreen> {
   void initState() {
     ezarabic2 = UserPrefs.getArbBool() ?? false;
 
+    log(UserPrefs.getCookies().toString());
+    log(UserPrefs.getIsTeacher().toString());
     super.initState();
   }
 
@@ -194,7 +198,8 @@ class _POnboardingScreenState extends State<POnboardingScreen> {
                               ),
                             ),
                           ],
-                        ),*/ /*
+                        ),*/
+                    /*
                             ],
                           )
                         : */

@@ -33,6 +33,7 @@ AndroidNotificationChannel androidChannel = AndroidNotificationChannel(
 
 FlutterLocalNotificationsPlugin flutterPlugin =
     FlutterLocalNotificationsPlugin();
+
 fn(RemoteMessage message) async {
   //log(message.data['content']['payload']['type'].toString());
   //AwesomeNotifications().createdStream.listen((event) {});
@@ -320,9 +321,11 @@ class MyAppState extends State<MyApp> {
       } else if (UserPrefs.getIsTeacher() == true) {
         log('teacher true');
         return TDashboard();
-      } else {
+      } else if (UserPrefs.getIsTeacher() == false) {
         log('teacher false');
         return PDashboard();
+      } else {
+        return PSplashScreen();
       }
     }
   }

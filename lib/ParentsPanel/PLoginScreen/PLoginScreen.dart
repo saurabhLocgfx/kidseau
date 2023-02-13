@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -130,10 +132,10 @@ class PLoginScreen extends StatelessWidget {
                                 child: MainButton(
                                     onTap: () {
                                       if (_formKey.currentState!.validate()) {
-                                        final resp = ParentLogin()
-                                            .get(email: emailController.text);
+                                        final resp = ParentLogin().get(
+                                            email: emailController.text.trim());
                                         resp.then((value) {
-                                          print(value);
+                                          log(value.toString());
                                           if (value['status'] == 0) {
                                             Fluttertoast.showToast(
                                                 msg: value['msg']);

@@ -1,21 +1,37 @@
+import 'dart:developer';
 import 'dart:ui';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:kidseau/Constants/colors.dart';
 import 'package:kidseau/Theme.dart';
 import 'package:kidseau/Widgets/buttons.dart';
+import 'package:kidseau/Widgets/custom_snack_bar.dart';
 import 'package:kidseau/Widgets/textfields.dart';
+import 'package:kidseau/api/reminder_apis/add_reminder_api.dart';
 
 class TAddReminder extends StatefulWidget {
-  const TAddReminder({Key? key}) : super(key: key);
+  final Function onPop;
+  const TAddReminder({Key? key, required this.onPop}) : super(key: key);
 
   @override
   State<TAddReminder> createState() => _TAddReminderState();
 }
 
 class _TAddReminderState extends State<TAddReminder> {
+  final TextEditingController _controller = TextEditingController();
+  String date = 'select date';
+  String time = 'select time';
+  bool _btnLoading = false;
+
+  @override
+  void dispose() {
+    widget.onPop();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -72,7 +88,8 @@ class _TAddReminderState extends State<TAddReminder> {
             style: FontConstant.k18w5008471Text,
           ),
         ),
-        body: Padding(
+        body: Container(
+          color: AppColors().bgColor,
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
           child: Column(
             children: [
@@ -88,7 +105,24 @@ class _TAddReminderState extends State<TAddReminder> {
                   SizedBox(
                     height: 4.h,
                   ),
-                  textfield(context, "Enter reminder’s title".tr())
+                  Container(
+                    //height: 64.h,
+                    width: 1.sw,
+                    child: TextFormField(
+                      validator: (val) {
+                        if (val == null || val.isEmpty) {
+                          return 'This field cannot be empty'.tr();
+                        } else {
+                          return null;
+                        }
+                      },
+                      style: FontConstant.k18w5008471Text,
+                      decoration: CustomInputDecoration(
+                              hintText: "Enter reminder’s title".tr())
+                          .decoration(),
+                      controller: _controller,
+                    ),
+                  ),
                 ],
               ),
               SizedBox(height: 8.h),
@@ -104,15 +138,22 @@ class _TAddReminderState extends State<TAddReminder> {
                     height: 4.h,
                   ),
                   InkWell(
-                    onTap: () {
-                      showTimePicker(
+                    onTap: () async {
+                      var v = await showTimePicker(
                         context: context,
                         initialTime: TimeOfDay(hour: 12, minute: 00),
                       );
+                      if (v != null) {
+                        final now = DateTime.now();
+                        setState(() {
+                          time = DateFormat.jm().format(DateTime(
+                              now.year, now.month, now.day, v.hour, v.minute));
+                        });
+                      }
                     },
                     child: IgnorePointer(
                       child: IconTextfield(
-                          Icon: "assets/images/clock.png", title: "12:00"),
+                          Icon: "assets/images/clock.png", title: time),
                     ),
                   )
                 ],
@@ -130,17 +171,21 @@ class _TAddReminderState extends State<TAddReminder> {
                     height: 4.h,
                   ),
                   InkWell(
-                    onTap: () {
-                      showDatePicker(
+                    onTap: () async {
+                      var v = await showDatePicker(
                           context: context,
                           initialDate: DateTime.now(),
-                          firstDate: DateTime(1970),
+                          firstDate: DateTime.now(),
                           lastDate: DateTime(2100));
+                      if (v != null) {
+                        setState(() {
+                          date = DateFormat("yyyy-MM-dd").format(v);
+                        });
+                      }
                     },
                     child: IgnorePointer(
                       child: IconTextfield(
-                          Icon: "assets/images/calendericon.png",
-                          title: "dd/mm/yyyy"),
+                          Icon: "assets/images/calendericon.png", title: date),
                     ),
                   )
                 ],
@@ -148,21 +193,59 @@ class _TAddReminderState extends State<TAddReminder> {
             ],
           ),
         ),
-        bottomNavigationBar: Padding(
+        bottomNavigationBar: Container(
+          color: AppColors().bgColor,
           padding: EdgeInsets.symmetric(horizontal: 16, vertical: 30),
           child: SizedBox(
             height: 52.h,
-            width: 382.w,
-            child: MainButton(
-                onTap: () {
-                  Reminderaddeddialog(context);
-                },
-                title: "Save".tr(),
-                /*AppLoaclizations.of(context)!
+            width: 1.sw,
+            child: _btnLoading
+                ? Center(
+                    child: CircularProgressIndicator(),
+                  )
+                : MainButton(
+                    onTap: () {
+                      if (date == 'select date') {
+                        CustomSnackBar.customErrorSnackBar(
+                            context, "Date not selected");
+                        return;
+                      }
+                      if (time == 'select time') {
+                        CustomSnackBar.customErrorSnackBar(
+                            context, "Time not selected");
+                        return;
+                      }
+                      if (_controller.text.isNotEmpty) {
+                        setState(() {
+                          _btnLoading = true;
+                        });
+                        final resp = AddReminderApi().get(
+                            title: _controller.text.trim(),
+                            date: date,
+                            time: time.split(' ').first);
+                        resp.then((value) {
+                          log(value.toString());
+                          if (value['status'] == 1) {
+                            setState(() {
+                              _btnLoading = false;
+                            });
+                            Reminderaddeddialog(context);
+                          } else {
+                            setState(() {
+                              _btnLoading = false;
+                            });
+                            CustomSnackBar.customErrorSnackBar(
+                                context, "Reminder not added");
+                          }
+                        });
+                      }
+                    },
+                    title: "Save".tr(),
+                    /*AppLoaclizations.of(context)!
                           .translate("Save")
                           .toString(),*/
-                textStyleColor: Colors.white,
-                backgroundColor: ThemeColor.primarycolor),
+                    textStyleColor: Colors.white,
+                    backgroundColor: ThemeColor.primarycolor),
           ),
         ),
       ),
