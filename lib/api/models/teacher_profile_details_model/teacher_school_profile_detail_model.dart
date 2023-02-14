@@ -14,17 +14,17 @@ class TeacherSchoolProfileDetailsModel {
 
   TeacherSchoolProfileDetailsModel(
       {this.status,
-        this.schoolImage,
-        this.schoolName,
-        this.schoolTime,
-        this.schoolEmail,
-        this.schoolPhone,
-        this.schoolAddress,
-        this.socialMedia,
-        this.directorImage,
-        this.directorName,
-        this.directorEmail,
-        this.directorPhone});
+      this.schoolImage,
+      this.schoolName,
+      this.schoolTime,
+      this.schoolEmail,
+      this.schoolPhone,
+      this.schoolAddress,
+      this.socialMedia,
+      this.directorImage,
+      this.directorName,
+      this.directorEmail,
+      this.directorPhone});
 
   TeacherSchoolProfileDetailsModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];
@@ -68,14 +68,21 @@ class SocialMedia {
   String? twitter;
   String? linkedIn;
   String? instagram;
+  String? mapLocation;
 
-  SocialMedia({this.facebook, this.twitter, this.linkedIn, this.instagram});
+  SocialMedia(
+      {this.facebook,
+      this.twitter,
+      this.linkedIn,
+      this.instagram,
+      this.mapLocation});
 
   SocialMedia.fromJson(Map<String, dynamic> json) {
     facebook = json['facebook'];
     twitter = json['twitter'];
     linkedIn = json['linkedIn'];
     instagram = json['instagram'];
+    mapLocation = json['mapLocation'];
   }
 
   Map<String, dynamic> toJson() {
@@ -84,6 +91,7 @@ class SocialMedia {
     data['twitter'] = this.twitter;
     data['linkedIn'] = this.linkedIn;
     data['instagram'] = this.instagram;
+    data['mapLocation'] = this.mapLocation;
     return data;
   }
 }

@@ -31,6 +31,7 @@ class Performance {
   String? fatherName;
   String? attendance;
   String? performanceRate;
+  String? gender;
 
   Performance(
       {this.kidId,
@@ -38,11 +39,13 @@ class Performance {
       this.profilePic,
       this.fatherName,
       this.attendance,
+      this.gender,
       this.performanceRate});
 
   Performance.fromJson(Map<String, dynamic> json) {
     kidId = json['kid_id'];
     name = json['name'];
+    gender = json['gender'];
     profilePic = json['profile_pic'];
     fatherName = json['father_name'];
     attendance = json['attendance'];
@@ -53,6 +56,7 @@ class Performance {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['kid_id'] = this.kidId;
     data['name'] = this.name;
+    data['gender'] = this.gender;
     data['profile_pic'] = this.profilePic;
     data['father_name'] = this.fatherName;
     data['attendance'] = this.attendance;

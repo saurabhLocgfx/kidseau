@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:developer';
 
 import 'package:easy_localization/easy_localization.dart';
@@ -7,6 +8,7 @@ import 'package:kidseau/ParentsPanel/PMessageScreen/PopenChats.dart';
 import 'package:kidseau/Theme.dart';
 import 'package:kidseau/Widgets/dialogs.dart';
 import 'package:kidseau/api/message_apis/delete_chat_api.dart';
+import 'package:kidseau/api/message_apis/read_unread_msg_api.dart';
 import 'package:kidseau/api/message_apis/recent_chat_api.dart';
 import 'package:kidseau/api/models/message_models/recent_chat_model.dart';
 
@@ -60,10 +62,21 @@ class _TMessagesState extends State<TMessages> {
     });
   }
 
+  Timer? _timer;
   @override
   void initState() {
     _getData();
+    _timer = Timer.periodic(Duration(seconds: 4), (timer) {
+      _getData();
+    });
+
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    super.dispose();
   }
 
   List<RecentMessageModel> modelList = [];
@@ -82,6 +95,8 @@ class _TMessagesState extends State<TMessages> {
       });
     });
   }
+
+  bool _isRead = false;
 
   @override
   Widget build(BuildContext context) {
@@ -156,7 +171,7 @@ class _TMessagesState extends State<TMessages> {
                                               BorderRadius.circular(8)),
                                       child: Image.network(
                                         modelList[index].userProfile.toString(),
-                                        fit: BoxFit.fitHeight,
+                                        fit: BoxFit.fill,
                                         errorBuilder: (q, w, e) => Image.asset(
                                             "assets/images/messageperson1.png"),
                                       ),
@@ -180,6 +195,50 @@ class _TMessagesState extends State<TMessages> {
                                                           FontWeight.w500,
                                                       color: Color(0xff331F2D)),
                                             ),
+                                            SizedBox(
+                                              width: 10,
+                                            ),
+                                            /* modelList[index].msgUnread == null
+                                                ? Container(
+                                                    padding:
+                                                        EdgeInsets.symmetric(
+                                                            horizontal: 5,
+                                                            vertical: 2),
+                                                    decoration: BoxDecoration(
+                                                        color: Colors.red,
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(20)),
+                                                    child: Text(
+                                                      '',
+                                                      style: FontConstant
+                                                          .k12w400White,
+                                                    ),
+                                                  )
+                                                :*/
+                                            modelList[index]
+                                                        .msgUnread
+                                                        .toString() ==
+                                                    '0'
+                                                ? SizedBox.shrink()
+                                                : Container(
+                                                    padding:
+                                                        EdgeInsets.symmetric(
+                                                            horizontal: 5,
+                                                            vertical: 2),
+                                                    decoration: BoxDecoration(
+                                                        color: Colors.red,
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(20)),
+                                                    child: Text(
+                                                      modelList[index]
+                                                          .msgUnread
+                                                          .toString(),
+                                                      style: FontConstant
+                                                          .k12w400White,
+                                                    ),
+                                                  )
                                           ],
                                         ),
                                         Text(
@@ -219,6 +278,62 @@ class _TMessagesState extends State<TMessages> {
                                               enabled: false,
                                               child: InkWell(
                                                 onTap: () {
+                                                  final resp =
+                                                      ReadUnreadMsgApi().get(
+                                                          userID:
+                                                              modelList[index]
+                                                                  .userId
+                                                                  .toString(),
+                                                          receiverType:
+                                                              "parent");
+                                                  resp.then((value) {
+                                                    log(value.toString());
+                                                    if (value['status'] == 1) {
+                                                      setState(() {
+                                                        if (value['mark'] ==
+                                                            1) {
+                                                          modelList[index]
+                                                              .msgUnread = "0";
+                                                        } else {
+                                                          modelList[index]
+                                                              .msgUnread = "1";
+                                                        }
+                                                      });
+                                                      Navigator.of(context)
+                                                          .pop();
+                                                    } else {}
+                                                  });
+                                                },
+                                                child: Padding(
+                                                  padding: const EdgeInsets
+                                                      .symmetric(vertical: 6.0),
+                                                  child: Row(
+                                                    children: [
+                                                      Image.asset(
+                                                        "assets/images/markicon.png",
+                                                        height: 24,
+                                                      ),
+                                                      SizedBox(width: 24),
+                                                      Text(
+                                                        modelList[index]
+                                                                    .msgUnread ==
+                                                                '0'
+                                                            ? "Mark as unread"
+                                                                .tr()
+                                                            : "Mark as read"
+                                                                .tr(),
+                                                        style: FontConstant
+                                                            .k18w5008471Text,
+                                                      )
+                                                    ],
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                            PopupMenuItem(
+                                              enabled: false,
+                                              child: InkWell(
+                                                onTap: () {
                                                   final resp = DeleteChat().get(
                                                       userId: modelList[index]
                                                           .userId
@@ -239,8 +354,7 @@ class _TMessagesState extends State<TMessages> {
                                                 },
                                                 child: Padding(
                                                   padding: const EdgeInsets
-                                                          .symmetric(
-                                                      vertical: 32.0),
+                                                      .symmetric(vertical: 6.0),
                                                   child: Row(
                                                     children: [
                                                       Image.asset(

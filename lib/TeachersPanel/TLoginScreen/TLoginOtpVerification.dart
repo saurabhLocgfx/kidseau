@@ -101,15 +101,15 @@ class _TLoginOtpVerificationState extends State<TLoginOtpVerification> {
                               TextSpan(
                                 recognizer: TapGestureRecognizer()
                                   ..onTap = () {
-                                    //log('');
                                     final resp = TeacherLogin()
-                                        .get(email: widget.mobileText);
+                                        .get(email: widget.mobileText.trim());
                                     resp.then((value) {
                                       print(value);
                                       if (value['status'] == 0) {
                                         Fluttertoast.showToast(
                                             msg: value['msg']);
                                       } else {
+                                        UserPrefs.setCookies(value['key']);
                                         Fluttertoast.showToast(
                                             msg: 'Your OTP is ${value['OTP']}');
                                       }

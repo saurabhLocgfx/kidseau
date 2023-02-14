@@ -514,7 +514,14 @@ class _TStudentScreenState extends State<TStudentScreen> {
                                                           ),
                                                           SizedBox(height: 0),
                                                           Text(
-                                                            'Guardian - ${_studentPerformanceModel.performance![index].fatherName.toString()}',
+                                                            _studentPerformanceModel
+                                                                        .performance![
+                                                                            index]
+                                                                        .gender!
+                                                                        .toLowerCase() ==
+                                                                    'm'
+                                                                ? "S/O ${_studentPerformanceModel.performance![index].fatherName}"
+                                                                : "D/O ${_studentPerformanceModel.performance![index].fatherName}",
                                                             style: FontConstant
                                                                 .k16w400B7A4B2Text,
                                                           ),

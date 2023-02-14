@@ -439,12 +439,32 @@ class _TStudentDetailScreenState extends State<TStudentDetailScreen> {
                                                         ],
                                                       ),
                                                       Row(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .end,
                                                         children: [
                                                           Text(
-                                                            model.rank
-                                                                .toString(),
+                                                            '${model.rank}',
                                                             style: FontConstant2
                                                                 .k32w5008267text,
+                                                            textAlign:
+                                                                TextAlign.end,
+                                                          ),
+                                                          Text(
+                                                            model.rank.toString() ==
+                                                                    '1'
+                                                                ? 'st Place'
+                                                                : model.rank.toString() ==
+                                                                        '2'
+                                                                    ? 'nd Place'
+                                                                    : model.rank.toString() ==
+                                                                            '3'
+                                                                        ? 'rd Place'
+                                                                        : 'th  Place',
+                                                            style: FontConstant
+                                                                .k16w400B7A4B2Text,
+                                                            textAlign:
+                                                                TextAlign.end,
                                                           ),
                                                         ],
                                                       )
@@ -474,7 +494,7 @@ class _TStudentDetailScreenState extends State<TStudentDetailScreen> {
                                                         child: Column(
                                                           mainAxisAlignment:
                                                               MainAxisAlignment
-                                                                  .start,
+                                                                  .spaceAround,
                                                           crossAxisAlignment:
                                                               CrossAxisAlignment
                                                                   .start,

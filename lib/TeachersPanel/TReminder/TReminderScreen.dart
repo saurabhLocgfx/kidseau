@@ -26,28 +26,6 @@ class TReminderScreen extends StatefulWidget {
 }
 
 class _TReminderScreenState extends State<TReminderScreen> {
-  bool val1 = false;
-  bool val2 = false;
-  bool val3 = false;
-
-  onChangedFunction1(bool newvalue1) {
-    setState(() {
-      val1 = newvalue1;
-    });
-  }
-
-  onChangedFunction2(bool newvalue2) {
-    setState(() {
-      val2 = newvalue2;
-    });
-  }
-
-  onChangedFunction3(bool newvalue3) {
-    setState(() {
-      val3 = newvalue3;
-    });
-  }
-
   NotificationServices notificationServices = NotificationServices();
 
   @override

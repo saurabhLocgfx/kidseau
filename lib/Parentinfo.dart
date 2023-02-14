@@ -59,12 +59,6 @@ class _ParentInfoState extends State<ParentInfo> {
       fatherPhoneController.text = enteredVal;
     } else {}
 
-    addressNode.addListener(() {
-      setState(() {});
-    });
-    fatherNode.addListener(() {
-      setState(() {});
-    });
     super.initState();
   }
 
@@ -74,8 +68,6 @@ class _ParentInfoState extends State<ParentInfo> {
 
   bool _btnLoading = false;
 
-  final FocusNode addressNode = FocusNode();
-  final FocusNode fatherNode = FocusNode();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -189,6 +181,9 @@ class _ParentInfoState extends State<ParentInfo> {
                         validator: (motherEmail) {
                           if (motherEmail == null || motherEmail.isEmpty) {
                             return 'Enter mother email';
+                          } else if (!motherEmail.contains('@') ||
+                              !motherEmail.contains('.')) {
+                            return 'Enter a valid email';
                           }
                           return null;
                         },
@@ -286,13 +281,15 @@ class _ParentInfoState extends State<ParentInfo> {
                     // height: 56.h,
                     width: 1.sw,
                     child: TextFormField(
-                      focusNode: fatherNode,
                       keyboardType: TextInputType.emailAddress,
                       enabled:
                           !_isMother && enteredVal.contains('@') ? false : true,
                       validator: (fatherEmail) {
                         if (fatherEmail == null || fatherEmail.isEmpty) {
                           return 'Enter father email';
+                        } else if (!fatherEmail.contains('@') ||
+                            !fatherEmail.contains('.')) {
+                          return 'Enter a valid email';
                         }
                         return null;
                       },
@@ -313,7 +310,6 @@ class _ParentInfoState extends State<ParentInfo> {
                     // height: 56.h,
                     width: 1.sw,
                     child: TextFormField(
-                      focusNode: addressNode,
                       validator: (address) {
                         if (address == null || address.isEmpty) {
                           return "This field cannot be empty".tr();
@@ -435,14 +431,8 @@ class _ParentInfoState extends State<ParentInfo> {
                               title: "Continue",
                               textStyleColor: Colors.white,
                               backgroundColor: ThemeColor.primarycolor)),
-                  AnimatedContainer(
-                      height: fatherNode.hasFocus ? 400 : 0,
-                      duration: Duration(milliseconds: 100)),
-                  AnimatedContainer(
-                      height: addressNode.hasFocus ? 400 : 0,
-                      duration: Duration(milliseconds: 100)),
                   SizedBox(
-                    height: 300,
+                    height: 700,
                   )
                 ],
               ),

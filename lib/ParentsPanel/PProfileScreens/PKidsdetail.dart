@@ -165,6 +165,9 @@ class _PKidsDetailsState extends State<PKidsDetails> {
                                 Container(
                                   height: 128,
                                   width: 96,
+                                  clipBehavior: Clip.hardEdge,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(8)),
                                   child: Image.network(
                                     model.image.toString() ?? '',
                                     errorBuilder: (q, w, e) => Image.asset(

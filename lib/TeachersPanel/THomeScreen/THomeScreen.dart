@@ -265,7 +265,12 @@ class _THomeScreenState extends State<THomeScreen> {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => TGroupScreen()),
+                                        builder: (context) => TGroupScreen(
+                                              grpId: _name
+                                                  .groupInCard![index].grpId
+                                                  .toString(),
+                                              index: index,
+                                            )),
                                   );
                                 },
                                 child: Groupcard(

@@ -1,32 +1,19 @@
 import 'dart:convert';
-import 'dart:developer';
 
 import 'package:http/http.dart' as http;
 import 'package:kidseau/Constants/string_const.dart';
 import 'package:kidseau/shard_prefs/shared_prefs.dart';
 
-class TeacherUpdateProfile {
-  Future<dynamic> update(
-      {required String dob,
-      required String education,
-      required String experience,
-      required String gender,
-      required String address}) async {
+class ReadUnreadMsgApi {
+  Future<dynamic> get(
+      {required String userID, required String receiverType}) async {
     String? cookie = UserPrefs.getCookies();
     var headers = {'Cookie': 'PHPSESSID=$cookie'};
-    var request = http.MultipartRequest(
-        'POST',
+    var request = http.Request(
+        'GET',
         Uri.parse(
-            '$kAPIConst/kids/api_teacher_login/teacher_profile/teach_update_profile.php'));
-    request.fields.addAll({
-      'dob': dob,
-      'edu': education,
-      'exp': experience,
-      'gender': gender,
-      'address': address
-    });
+            '$kAPIConst/kids/api_message/read_and_unread.php?user_id=$userID&type=$receiverType'));
 
-    log(request.fields.toString());
     request.headers.addAll(headers);
 
     http.StreamedResponse response = await request.send();

@@ -11,6 +11,7 @@ import 'package:kidseau/Widgets/buttons.dart';
 import 'package:kidseau/api/Teacherpanelapi/teacher_profile_api/teacher_school_profile_api.dart';
 import 'package:kidseau/api/models/teacher_profile_details_model/teacher_profile_details_model.dart';
 import 'package:kidseau/api/models/teacher_profile_details_model/teacher_school_profile_detail_model.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class PSchoolProfile extends StatefulWidget {
   const PSchoolProfile({Key? key}) : super(key: key);
@@ -35,6 +36,16 @@ class _PSchoolProfileState extends State<PSchoolProfile> {
   bool _isLoading = false;
 
   TeacherSchoolProfileDetailsModel model = TeacherSchoolProfileDetailsModel();
+
+  static Future<void> openMap(String latitude, String longitude) async {
+    String googleUrl =
+        'https://www.google.com/maps/search/?api=1&query=$latitude,$longitude';
+    if (await canLaunchUrl(Uri.parse(googleUrl))) {
+      await launchUrl(Uri.parse(googleUrl));
+    } else {
+      throw 'Could not open the map.';
+    }
+  }
 
   bool _noDataFound = false;
   _getData() {
@@ -263,7 +274,10 @@ class _PSchoolProfileState extends State<PSchoolProfile> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          launchUrl(Uri.parse(
+                              model.socialMedia!.facebook.toString()));
+                        },
                         child: CircleAvatar(
                             radius: 24,
                             backgroundImage: AssetImage(
@@ -271,7 +285,10 @@ class _PSchoolProfileState extends State<PSchoolProfile> {
                             )),
                       ),
                       InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          launchUrl(
+                              Uri.parse(model.socialMedia!.twitter.toString()));
+                        },
                         child: CircleAvatar(
                             radius: 24,
                             backgroundImage: AssetImage(
@@ -279,7 +296,10 @@ class _PSchoolProfileState extends State<PSchoolProfile> {
                             )),
                       ),
                       InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          launchUrl(Uri.parse(
+                              model.socialMedia!.linkedIn.toString()));
+                        },
                         child: CircleAvatar(
                             radius: 24,
                             backgroundImage: AssetImage(
@@ -287,7 +307,10 @@ class _PSchoolProfileState extends State<PSchoolProfile> {
                             )),
                       ),
                       InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          launchUrl(Uri.parse(
+                              model.socialMedia!.instagram.toString()));
+                        },
                         child: CircleAvatar(
                             radius: 24,
                             backgroundImage: AssetImage(
@@ -303,9 +326,16 @@ class _PSchoolProfileState extends State<PSchoolProfile> {
                   SizedBox(height: 68),
                   SizedBox(
                     height: 52.h,
-                    width: 382.w,
+                    width: 1.sw,
                     child: MainButton(
-                        onTap: () {},
+                        onTap: () {
+                          openMap(
+                              model.socialMedia!.mapLocation!
+                                  .split(",")
+                                  .first
+                                  .toString(),
+                              model.socialMedia!.mapLocation!.split(",").last);
+                        },
                         title: "Locate us".tr(),
                         textStyleColor: Colors.white,
                         backgroundColor: ThemeColor.primarycolor),

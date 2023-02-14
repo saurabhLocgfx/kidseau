@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -8,6 +9,7 @@ import 'package:kidseau/Widgets/buttons.dart';
 import 'package:kidseau/shard_prefs/shared_prefs.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
+import '../../api/parent_login_apis/parent_login_api.dart';
 import '../../api/parent_login_apis/parent_login_otp_api.dart';
 import '../PDashBoard.dart';
 
@@ -92,13 +94,40 @@ class PLoginOtpVerification extends StatelessWidget {
                             .translate("OTP verification")
                             .toString(),*/
                         style: FontConstant.k24w500brownText),
-                    Text(
-                      "A OTP has been sent to “$loginField”. Please enter the OTP here."
-                          .tr(),
-                      style:
-                          FontConstant.k16w400B7A4Text.copyWith(fontSize: 15),
-                      textAlign: TextAlign.start,
-                    ),
+                    RichText(
+                        text: TextSpan(children: [
+                      TextSpan(
+                        text:
+                            "A OTP has been sent to “$loginField”. Please enter the OTP here."
+                                .tr(),
+                        /*AppLoaclizations.of(context)!
+                                    .translate(
+                                        "A OTP has been sent to “9876543210”. Please enter the OTP here.")
+                                    .toString(),*/
+                        style:
+                            FontConstant.k16w400B7A4Text.copyWith(fontSize: 15),
+                      ),
+                      TextSpan(
+                        recognizer: TapGestureRecognizer()
+                          ..onTap = () {
+                            //log('');
+                            final resp =
+                                ParentLogin().get(email: loginField.trim());
+                            resp.then((value) {
+                              // log(value.toString());
+                              if (value['status'] == 0) {
+                                Fluttertoast.showToast(msg: value['msg']);
+                              } else {
+                                UserPrefs.setCookies(value['key']);
+                                Fluttertoast.showToast(
+                                    msg: 'Your OTP is ${value['OTP']}');
+                              }
+                            });
+                          },
+                        text: "  Resend",
+                        style: FontConstant.k16w4008471Text,
+                      ),
+                    ])),
                     SizedBox(height: 43),
                     PinCodeTextField(
                       controller: pinTextController,

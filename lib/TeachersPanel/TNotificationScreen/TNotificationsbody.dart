@@ -225,6 +225,7 @@ Future<dynamic> Tnotificationdialog(BuildContext context) {
                           height: 52,
                           //width: 170,
                           child: MaterialButton(
+                            padding: EdgeInsets.symmetric(horizontal: 10),
                             elevation: 0,
                             onPressed: () {
                               Navigator.push(
@@ -248,13 +249,16 @@ Future<dynamic> Tnotificationdialog(BuildContext context) {
                                   height: 24,
                                   color: Colors.white,
                                 ),
-                                SizedBox(width: 8),
-                                Text("Add Reminder".tr(),
-                                    /* AppLoaclizations.of(context)!
-                                        .translate("Add Reminder")
-                                        .toString(),*/
-                                    style: FontConstant.k16w5008267Text
-                                        .copyWith(color: Colors.white)),
+                                SizedBox(
+                                  width: 4,
+                                ),
+                                Expanded(
+                                  child: Text("Add Reminder".tr(),
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: FontConstant.k16w5008267Text
+                                          .copyWith(color: Colors.white)),
+                                ),
                               ],
                             ),
                           ),

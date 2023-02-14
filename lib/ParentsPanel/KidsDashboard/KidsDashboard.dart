@@ -166,7 +166,7 @@ class _PKidsDashboardState extends State<PKidsDashboard> {
                                   child: Image.network(
                                     overviewModel.kidDetails!.kidImage
                                         .toString(),
-                                    fit: BoxFit.fill,
+                                    fit: BoxFit.cover,
                                     errorBuilder: (q, w, e) => Image.asset(
                                         "assets/images/profileperson.png"),
                                   ),

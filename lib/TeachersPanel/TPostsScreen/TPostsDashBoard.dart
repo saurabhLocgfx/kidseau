@@ -299,7 +299,7 @@ class _TPostsDashBoardState extends State<TPostsDashBoard> {
   Container PostsTab() {
     return Container(
       height: 56.h,
-      width: 320.w,
+      width: 1.sw,
       margin: EdgeInsets.symmetric(horizontal: 20),
       decoration: BoxDecoration(
         color: Colors.white,

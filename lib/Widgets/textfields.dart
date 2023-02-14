@@ -262,6 +262,14 @@ class CustomInputDecoration {
         borderRadius: BorderRadius.circular(30),
         borderSide: BorderSide.none,
       ),
+      errorBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.all(Radius.circular(30.0)),
+        borderSide: BorderSide(color: Colors.redAccent, width: 1.0),
+      ),
+      focusedErrorBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.all(Radius.circular(30.0)),
+        borderSide: BorderSide(color: Colors.redAccent, width: 1.0),
+      ),
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.all(Radius.circular(30.0)),
         borderSide: BorderSide(color: Color(0xffBE74AA), width: 1.0),

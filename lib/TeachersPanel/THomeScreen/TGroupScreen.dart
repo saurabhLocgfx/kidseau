@@ -24,9 +24,10 @@ import 'TKidsDetails.dart';
 import 'TLearningAlphabets.dart';
 
 class TGroupScreen extends StatefulWidget {
-  TGroupScreen({
-    Key? key,
-  }) : super(key: key);
+  final String grpId;
+  final int index;
+  TGroupScreen({Key? key, required this.grpId, required this.index})
+      : super(key: key);
 
   @override
   State<TGroupScreen> createState() => _TGroupScreenState();
@@ -66,6 +67,8 @@ class _TGroupScreenState extends State<TGroupScreen> {
 
   @override
   void initState() {
+    _grpId = widget.grpId;
+    current = widget.index;
     _getData();
     super.initState();
   }

@@ -15,7 +15,6 @@ class TeacherLogin {
       return resp;
     } else {
       print(response.reasonPhrase);
-
       return resp;
     }
   }

@@ -455,7 +455,7 @@ class _TEditProfileScreenState extends State<TEditProfileScreen> {
                                 dob: _birthday,
                                 education: _educationController.text,
                                 experience: _yearController.text,
-                                gender: _gender.toLowerCase(),
+                                gender: _gender[0].toLowerCase(),
                                 address: _addressController.text);
                             resp.then((value) {
                               if (value['status'] == 1) {
