@@ -8,6 +8,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:kidseau/Theme.dart';
 import 'package:kidseau/Widgets/buttons.dart';
+import 'package:kidseau/Widgets/custom_snack_bar.dart';
 import 'package:kidseau/Widgets/textfields.dart';
 import 'package:kidseau/shard_prefs/shared_prefs.dart';
 
@@ -88,14 +89,14 @@ class _ParentInfoState extends State<ParentInfo> {
                   Align(
                     alignment: Alignment.bottomLeft,
                     child: Text(
-                      "Parent’s Information",
+                      "Parent’s Information".tr(),
                       style: FontConstant2.k24w500331Ftext,
                       textAlign: TextAlign.start,
                     ),
                   ),
                   SizedBox(height: 24),
                   Text(
-                    "Mother’s name",
+                    "Mother’s name".tr(),
                     style: FontConstant.k16w500331FText,
                   ),
                   SizedBox(height: 5),
@@ -105,19 +106,19 @@ class _ParentInfoState extends State<ParentInfo> {
                     child: TextFormField(
                       validator: (motherName) {
                         if (motherName == null || motherName.isEmpty) {
-                          return 'Enter mother name';
+                          return 'Enter mother name'.tr();
                         }
                       },
                       style: FontConstant.k18w5008471Text,
-                      decoration:
-                          CustomInputDecoration(hintText: "Enter mother's name")
-                              .decoration(),
+                      decoration: CustomInputDecoration(
+                              hintText: "Enter mother's name".tr())
+                          .decoration(),
                       controller: motherNameController,
                     ),
                   ),
                   SizedBox(height: 4),
                   Text(
-                    "Mother’s Occupation",
+                    "Mother’s Occupation".tr(),
                     style: FontConstant.k16w500331FText,
                   ),
                   SizedBox(height: 5),
@@ -127,19 +128,19 @@ class _ParentInfoState extends State<ParentInfo> {
                     child: TextFormField(
                         validator: (occupation) {
                           if (occupation == null || occupation.isEmpty) {
-                            return 'Enter Mother Occupation';
+                            return 'Enter Mother Occupation'.tr();
                           }
                           return null;
                         },
                         style: FontConstant.k18w5008471Text,
                         decoration: CustomInputDecoration(
-                                hintText: "Enter mother's occupation")
+                                hintText: "Enter mother's occupation".tr())
                             .decoration(),
                         controller: motherOccupation),
                   ),
                   SizedBox(height: 4),
                   Text(
-                    "Mother’s Phone number",
+                    "Mother’s Phone number".tr(),
                     style: FontConstant.k16w500331FText,
                   ),
                   SizedBox(height: 5),
@@ -154,19 +155,19 @@ class _ParentInfoState extends State<ParentInfo> {
                         validator: (phoneNumberMother) {
                           if (phoneNumberMother == null ||
                               phoneNumberMother.isEmpty) {
-                            return 'Enter Mother Phone number';
+                            return 'Enter Mother Phone number'.tr();
                           }
                           return null;
                         },
                         style: FontConstant.k18w5008471Text,
                         decoration: CustomInputDecoration(
-                                hintText: "Enter mother's phone number")
+                                hintText: "Enter mother's phone number".tr())
                             .decoration(),
                         controller: motherContactController),
                   ),
                   SizedBox(height: 4),
                   Text(
-                    "Mother’s email",
+                    "Mother’s email".tr(),
                     style: FontConstant.k16w500331FText,
                   ),
                   SizedBox(height: 5),
@@ -180,10 +181,10 @@ class _ParentInfoState extends State<ParentInfo> {
                             : true,
                         validator: (motherEmail) {
                           if (motherEmail == null || motherEmail.isEmpty) {
-                            return 'Enter mother email';
+                            return 'Enter mother email'.tr();
                           } else if (!motherEmail.contains('@') ||
                               !motherEmail.contains('.')) {
-                            return 'Enter a valid email';
+                            return 'Enter a valid email'.tr();
                           }
                           return null;
                         },
@@ -196,7 +197,7 @@ class _ParentInfoState extends State<ParentInfo> {
                   ),
                   SizedBox(height: 4),
                   Text(
-                    "Father’s name",
+                    "Father’s name".tr(),
                     style: FontConstant.k16w500331FText,
                   ),
                   SizedBox(height: 5),
@@ -206,21 +207,21 @@ class _ParentInfoState extends State<ParentInfo> {
                     child: TextFormField(
                       validator: (fatherName) {
                         if (fatherName == null || fatherName.isEmpty) {
-                          return 'Enter father name';
+                          return 'Enter father name'.tr();
                         }
                         return null;
                       },
                       style: FontConstant.k18w5008471Text,
-                      decoration:
-                          CustomInputDecoration(hintText: "Enter father's name")
-                              .decoration(),
+                      decoration: CustomInputDecoration(
+                              hintText: "Enter father's name".tr())
+                          .decoration(),
                       controller: fatherNameController,
                       /*  controller: controller,*/
                     ),
                   ),
                   SizedBox(height: 4),
                   Text(
-                    "Father’s Occupation",
+                    "Father’s Occupation".tr(),
                     style: FontConstant.k16w500331FText,
                   ),
                   SizedBox(height: 5),
@@ -231,19 +232,19 @@ class _ParentInfoState extends State<ParentInfo> {
                         validator: (fatherOccupation) {
                           if (fatherOccupation == null ||
                               fatherOccupation.isEmpty) {
-                            return 'Enter father occupation';
+                            return 'Enter father occupation'.tr();
                           }
                           return null;
                         },
                         style: FontConstant.k18w5008471Text,
                         decoration: CustomInputDecoration(
-                                hintText: "Enter father's occupation")
+                                hintText: "Enter father's occupation".tr())
                             .decoration(),
                         controller: fatherOccupationController),
                   ),
                   SizedBox(height: 4),
                   Text(
-                    "Father’s phone number",
+                    "Father’s phone number".tr(),
                     style: FontConstant.k16w500331FText,
                   ),
                   SizedBox(height: 5),
@@ -258,13 +259,13 @@ class _ParentInfoState extends State<ParentInfo> {
                       validator: (fatherPhoneNumber) {
                         if (fatherPhoneNumber == null ||
                             fatherPhoneNumber.isEmpty) {
-                          return 'Enter father phone number';
+                          return 'Enter father phone number'.tr();
                         }
                         return null;
                       },
                       style: FontConstant.k18w5008471Text,
                       decoration: CustomInputDecoration(
-                              hintText: "Enter father's phone number")
+                              hintText: "Enter father's phone number".tr())
                           .decoration(),
                       controller: fatherPhoneController,
 
@@ -273,7 +274,7 @@ class _ParentInfoState extends State<ParentInfo> {
                   ),
                   SizedBox(height: 5),
                   Text(
-                    "Father’s email",
+                    "Father’s email".tr(),
                     style: FontConstant.k16w500331FText,
                   ),
                   SizedBox(height: 5),
@@ -286,23 +287,23 @@ class _ParentInfoState extends State<ParentInfo> {
                           !_isMother && enteredVal.contains('@') ? false : true,
                       validator: (fatherEmail) {
                         if (fatherEmail == null || fatherEmail.isEmpty) {
-                          return 'Enter father email';
+                          return 'Enter father email'.tr();
                         } else if (!fatherEmail.contains('@') ||
                             !fatherEmail.contains('.')) {
-                          return 'Enter a valid email';
+                          return 'Enter a valid email'.tr();
                         }
                         return null;
                       },
                       style: FontConstant.k18w5008471Text,
                       decoration: CustomInputDecoration(
-                              hintText: "Enter father's email")
+                              hintText: "Enter father's email".tr())
                           .decoration(),
                       controller: fatherEmailController,
                       /*  controller: controller,*/
                     ),
                   ),
                   Text(
-                    "Address",
+                    "Address".tr(),
                     style: FontConstant.k16w500331FText,
                   ),
                   SizedBox(height: 4),
@@ -326,7 +327,7 @@ class _ParentInfoState extends State<ParentInfo> {
                   ),
                   SizedBox(height: 4),
                   Text(
-                    "Profile Photo",
+                    "Profile Photo".tr(),
                     style: FontConstant.k16w500331FText,
                   ),
                   SizedBox(height: 4),
@@ -358,8 +359,8 @@ class _ParentInfoState extends State<ParentInfo> {
                               padding: const EdgeInsets.only(left: 10.0),
                               child: Text(
                                 _pickedImage.path == ""
-                                    ? "Upload primary photo"
-                                    : "1 image selected",
+                                    ? "Upload primary photo".tr()
+                                    : "1 image selected".tr(),
                                 overflow: TextOverflow.ellipsis,
                                 style: FontConstant.k14w400lightText.copyWith(
                                     color: Color(0xffB7A4B2),
@@ -387,48 +388,51 @@ class _ParentInfoState extends State<ParentInfo> {
                             )
                           : MainButton(
                               onTap: () {
-                                if (_formKey.currentState!.validate()) {
-                                  log('message');
-                                  setState(() {
-                                    _btnLoading = true;
-                                  });
-                                  final resp = ParentSignUpInfo().get(
-                                    motherName: motherNameController.text,
-                                    motherOccupation: motherOccupation.text,
-                                    motherContact: motherContactController.text,
-                                    motherEmail: motherEmailController.text,
-                                    fatherName: fatherNameController.text,
-                                    fatherOccupation:
-                                        fatherOccupationController.text,
-                                    fatherContact: fatherPhoneController.text,
-                                    fatherEmail: fatherEmailController.text,
-                                    address: addressController.text,
-                                    // parents: parent,
-                                    pickedImage: _pickedImage,
-                                  );
-                                  resp.then((value) {
-                                    log(value.toString());
-                                    if (value['status'] == 0) {
-                                      Fluttertoast.showToast(msg: value['msg']);
-                                      setState(() {
-                                        _btnLoading = false;
-                                      });
-                                    } else {
-                                      //navigate to
-                                      //UserPrefs.setCookies(value['key']);
-                                      setState(() {
-                                        _btnLoading = false;
-                                      });
-                                      widget.onContinue();
-                                      /*Navigator.of(context).push(MaterialPageRoute(
-                                      builder: (context) => KidsDetails()));*/
-                                    }
-                                  });
-                                  /*Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => KidsDetails()));*/
+                                // if (_formKey.currentState!.validate()) {
+                                if (_pickedImage.path == '') {
+                                  CustomSnackBar.customErrorSnackBar(
+                                      context, "Select an image first");
+                                  return;
                                 }
+                                log('message');
+                                setState(() {
+                                  _btnLoading = true;
+                                });
+                                final resp = ParentSignUpInfo().get(
+                                  motherName: motherNameController.text,
+                                  motherOccupation: motherOccupation.text,
+                                  motherContact: motherContactController.text,
+                                  motherEmail: motherEmailController.text,
+                                  fatherName: fatherNameController.text,
+                                  fatherOccupation:
+                                      fatherOccupationController.text,
+                                  fatherContact: fatherPhoneController.text,
+                                  fatherEmail: fatherEmailController.text,
+                                  address: addressController.text,
+                                  // parents: parent,
+                                  pickedImage: _pickedImage,
+                                );
+                                resp.then((value) {
+                                  log(value.toString());
+                                  if (value['status'] == 0) {
+                                    Fluttertoast.showToast(msg: value['msg']);
+                                    setState(() {
+                                      _btnLoading = false;
+                                    });
+                                  } else {
+                                    //navigate to
+                                    //UserPrefs.setCookies(value['key']);
+                                    setState(() {
+                                      _btnLoading = false;
+                                    });
+                                    widget.onContinue();
+                                    /*Navigator.of(context).push(MaterialPageRoute(
+                                      builder: (context) => KidsDetails()));*/
+                                  }
+                                });
+                                //}
                               },
-                              title: "Continue",
+                              title: "Continue".tr(),
                               textStyleColor: Colors.white,
                               backgroundColor: ThemeColor.primarycolor)),
                   SizedBox(

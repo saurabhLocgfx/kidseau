@@ -12,14 +12,15 @@ List<PUnbordingContent> Pcontents = [
       title: "Watch Your kid grow",
       image: 'assets/images/parentonboard1.png',
       discription:
-          "Know what your kid is doing in school and track their activities"),
+          "Track the activities and grades of your kid regularly at one portal."),
   PUnbordingContent(
       title: 'Create memories',
       image: 'assets/images/parentonboard2.png',
-      discription: "Save all photos of your kid and save memories."),
+      discription:
+          "Keep records of the sweetest memories of your kids at school in form of photos & videos."),
   PUnbordingContent(
       title: 'Chat with Teachers',
       image: 'assets/images/parenonboard3.png',
       discription:
-          "Know what your kid is doing in school and track their activities"),
+          "Chat with teachers to regularly monitor the growth of your child."),
 ];

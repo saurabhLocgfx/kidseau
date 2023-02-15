@@ -149,75 +149,76 @@ class _PHomeScreenState extends State<PHomeScreen> {
                           itemBuilder: (context) {
                             return [
                               PopupMenuItem(
-                                enabled: true,
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    GestureDetector(
-                                      onTap: () {
-                                        UserPrefs.setEArbBool(false);
-                                        context.locale = Locale('en', 'US');
-                                        RestartWidget.restartApp(context);
-                                        setState(() {
-                                          colorChange;
-                                        });
-                                      },
-                                      child: Row(
-                                        children: [
-                                          Text(
-                                            ("English".tr()),
-                                            style: colorChange
-                                                ? FontConstant.k16w5008267Text
-                                                : FontConstant.k18w5008471Text,
-                                          )
-                                        ],
-                                      ),
-                                    ),
-                                    SizedBox(height: 20),
-                                    GestureDetector(
-                                      onTap: () {
-                                        UserPrefs.setEArbBool(false);
-                                        context.locale = Locale('fr', 'FR');
-                                        RestartWidget.restartApp(context);
-                                        setState(() {
-                                          colorChange;
-                                        });
-                                      },
-                                      child: Row(
-                                        children: [
-                                          Text(
-                                            ("French".tr()),
-                                            style: colorChange
-                                                ? FontConstant.k16w5008267Text
-                                                : FontConstant.k18w5008471Text,
-                                          )
-                                        ],
-                                      ),
-                                    ),
-                                    SizedBox(height: 20),
-                                    GestureDetector(
-                                      onTap: () {
-                                        UserPrefs.setEArbBool(true);
-                                        context.locale = Locale('ar', 'AR');
-                                        RestartWidget.restartApp(context);
+                                enabled: false,
+                                child: GestureDetector(
+                                  onTap: () {
+                                    UserPrefs.setEArbBool(false);
+                                    UserPrefs.setLang('English');
+                                    context.locale = Locale('en', 'US');
+                                    RestartWidget.restartApp(context);
+                                    setState(() {
+                                      colorChange;
+                                    });
+                                  },
+                                  child: Row(
+                                    children: [
+                                      Text(
+                                        ("English".tr()),
+                                        style: colorChange
+                                            ? FontConstant.k16w5008267Text
+                                            : FontConstant.k18w5008471Text,
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              PopupMenuItem(
+                                enabled: false,
+                                child: GestureDetector(
+                                  onTap: () {
+                                    UserPrefs.setEArbBool(false);
+                                    UserPrefs.setLang('French');
+                                    context.locale = Locale('fr', 'FR');
+                                    RestartWidget.restartApp(context);
+                                    setState(() {
+                                      colorChange;
+                                    });
+                                  },
+                                  child: Row(
+                                    children: [
+                                      Text(
+                                        ("French".tr()),
+                                        style: colorChange
+                                            ? FontConstant.k16w5008267Text
+                                            : FontConstant.k18w5008471Text,
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              PopupMenuItem(
+                                enabled: false,
+                                child: GestureDetector(
+                                  onTap: () {
+                                    UserPrefs.setEArbBool(true);
+                                    UserPrefs.setLang('Arabic');
+                                    context.locale = Locale('ar', 'AR');
+                                    RestartWidget.restartApp(context);
 
-                                        setState(() {
-                                          colorChange;
-                                        });
-                                      },
-                                      child: Row(
-                                        children: [
-                                          Text(
-                                            ("Arabic".tr()),
-                                            style: colorChange
-                                                ? FontConstant.k16w5008267Text
-                                                : FontConstant.k18w5008471Text,
-                                          )
-                                        ],
-                                      ),
-                                    ),
-                                  ],
+                                    setState(() {
+                                      colorChange;
+                                    });
+                                  },
+                                  child: Row(
+                                    children: [
+                                      Text(
+                                        ("Arabic".tr()),
+                                        style: colorChange
+                                            ? FontConstant.k16w5008267Text
+                                            : FontConstant.k18w5008471Text,
+                                      )
+                                    ],
+                                  ),
                                 ),
                               ),
                             ];

@@ -89,11 +89,13 @@ class _PNotificationScreenState extends State<PNotificationScreen> {
         ),
         body: SingleChildScrollView(
             child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             SizedBox(
               height: 30,
             ),
-            Align(
+            Center(child: Text("No new Notifications")),
+            /* Align(
               alignment: Alignment.center,
               child: Text(
                 "Today".tr(),
@@ -147,8 +149,8 @@ class _PNotificationScreenState extends State<PNotificationScreen> {
                 // AnnouncementDialog(context);
               },
               child: Container(
-                /* height: 99,
-                width: 414,*/
+                */ /* height: 99,
+                width: 414,*/ /*
                 color: ThemeColor.primarycolor.withOpacity(0.16),
                 child: Padding(
                   padding: const EdgeInsets.only(left: 16.0),
@@ -217,7 +219,7 @@ class _PNotificationScreenState extends State<PNotificationScreen> {
             Padding(
               padding: const EdgeInsets.only(bottom: 30.0),
               child: Plist2(),
-            ),
+            ),*/
           ],
         )),
       ),

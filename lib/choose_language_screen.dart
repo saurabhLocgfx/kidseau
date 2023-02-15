@@ -78,6 +78,7 @@ class ChooseLanguageScreen extends StatelessWidget {
                           onTap: () {
                             UserPrefs.setEArbBool(false);
                             UserPrefs.setIsFirst(true);
+                            UserPrefs.setLang('English');
                             context.locale = Locale('en', 'US');
                             RestartWidget.restartApp(context);
                             Navigator.of(context).push(MaterialPageRoute(
@@ -90,6 +91,7 @@ class ChooseLanguageScreen extends StatelessWidget {
                           onTap: () {
                             UserPrefs.setEArbBool(false);
                             UserPrefs.setIsFirst(true);
+                            UserPrefs.setLang('French');
                             context.locale = Locale('fr', 'FR');
                             RestartWidget.restartApp(context);
                             Navigator.of(context).push(MaterialPageRoute(
@@ -102,6 +104,7 @@ class ChooseLanguageScreen extends StatelessWidget {
                           onTap: () {
                             UserPrefs.setEArbBool(true);
                             UserPrefs.setIsFirst(true);
+                            UserPrefs.setLang('Arabic');
                             context.locale = Locale('ar', 'AR');
                             RestartWidget.restartApp(context);
                             Navigator.of(context).push(MaterialPageRoute(

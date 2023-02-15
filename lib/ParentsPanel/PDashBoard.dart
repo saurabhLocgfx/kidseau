@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -46,7 +48,7 @@ class _PDashboardState extends State<PDashboard> {
     }
 
     UserPrefs.setFCM(_fcmToken);
-    print('Firebase token: $firebaseAppToken');
+    log('Firebase token: $firebaseAppToken');
     /*var _prefs = await SharedPreferences.getInstance();
       _prefs.setString('fcmToken', firebaseAppToken);*/
     // UserPrefs.setFcm(_fcmToken);
@@ -112,80 +114,6 @@ class _PDashboardState extends State<PDashboard> {
           backgroundColor: Colors.transparent,
         ),
         bottomNavigationBar: buildMyNavBar(context),
-        // bottomNavigationBar: Padding(
-        //   padding: const EdgeInsets.all(20.0),
-        //   child: CustomNavigationBar(
-        //     strokeColor: ThemeColor.primarycolor,
-        //     borderRadius: Radius.circular(120.0),
-        //     currentIndex: currentIndex,
-        //     selectedColor: Colors.purple,
-        //     unSelectedColor: Colors.red,
-        //     backgroundColor: Colors.white,
-        //     onTap: (value) {
-        //       currentIndex = value;
-        //       _pageController.animateToPage(
-        //         value,
-        //         duration: Duration(milliseconds: 200),
-        //         curve: Curves.linear,
-        //       );
-        //       setState(() {});
-        //     },
-        //     items: [
-        //       CustomNavigationBarItem(
-        //         icon: ImageIcon(AssetImage("assets/images/iconhome.png")),
-        //         title: Text(
-        //           "Home",
-        //           style: TextStyle(
-        //             fontWeight: FontWeight.w500,
-        //             fontSize: 14,
-        //             color: currentIndex == currentIndex
-        //                 ? Color(0xff8267AC)
-        //                 : Colors.red,
-        //           ),
-        //         ),
-        //       ),
-        //       CustomNavigationBarItem(
-        //         icon: Icon(Icons.shopping_cart),
-        //         title: Text(
-        //           "Cart",
-        //           style: TextStyle(
-        //             fontWeight: FontWeight.w500,
-        //             fontSize: 14,
-        //             color: currentIndex == currentIndex
-        //                 ? Color(0xff8267AC)
-        //                 : Colors.red,
-        //           ),
-        //         ),
-        //       ),
-        //       CustomNavigationBarItem(
-        //         icon: Icon(Icons.lightbulb_outline),
-        //         title: Text(
-        //           "Explore",
-        //           style: TextStyle(
-        //             fontWeight: FontWeight.w500,
-        //             fontSize: 14,
-        //             color: currentIndex == currentIndex
-        //                 ? Color(0xff8267AC)
-        //                 : Colors.green,
-        //           ),
-        //         ),
-        //       ),
-        //       CustomNavigationBarItem(
-        //         icon: Icon(Icons.search),
-        //         title: Text(
-        //           "Search",
-        //           style: TextStyle(
-        //             fontWeight: FontWeight.w500,
-        //             fontSize: 14,
-        //             color: currentIndex == currentIndex
-        //                 ? Color(0xff8267AC)
-        //                 : Colors.red,
-        //           ),
-        //         ),
-        //       ),
-        //     ],
-        //   ),
-        // ),
         body: PageView(
           controller: _pageController,
           onPageChanged: (page) {

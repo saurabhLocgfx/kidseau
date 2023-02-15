@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kidseau/Kidsdetails.dart';
@@ -37,7 +38,7 @@ class _ParentinfodashboardState extends State<Parentinfodashboard>
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        if (_pageController.page!.round() == 0) {
+        /*if (_pageController.page!.round() == 0) {
           Navigator.pop(context);
         } else {
           _pageController
@@ -50,7 +51,7 @@ class _ParentinfodashboardState extends State<Parentinfodashboard>
               pageIndex = _pageController.page!.round();
             });
           });
-        }
+        }*/
         return false;
       },
       child: Scaffold(
@@ -176,13 +177,13 @@ class _ParentinfodashboardState extends State<Parentinfodashboard>
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text("Parent info", style: FontConstant.k14w5008267AC),
-              Text("Kids info",
+              Text("Parent info".tr(), style: FontConstant.k14w5008267AC),
+              Text("Kids info".tr(),
                   style: FontConstant.k14w5008267AC.copyWith(
                       color: pageIndex == 1 || pageIndex == 2
                           ? ThemeColor.primarycolor
                           : ThemeColor.b7A4B2)),
-              Text("Medical",
+              Text("Medical".tr(),
                   style: FontConstant.k14w500B7A4Text.copyWith(
                       color: pageIndex == 2
                           ? ThemeColor.primarycolor

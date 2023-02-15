@@ -365,10 +365,10 @@ class _PEditProfileScreenState extends State<PEditProfileScreen> {
                             title: Text("Father".tr()),
                             value: _isFather,
                             onChanged: (val) {
-                              setState(() {
+                              /*setState(() {
                                 _isMother = false;
                                 _isFather = true;
-                              });
+                              });*/
                             }),
                         CheckboxListTile(
                             controlAffinity: ListTileControlAffinity.leading,
@@ -380,10 +380,10 @@ class _PEditProfileScreenState extends State<PEditProfileScreen> {
                             title: Text("Mother".tr()),
                             value: _isMother,
                             onChanged: (val) {
-                              setState(() {
+                              /* setState(() {
                                 _isMother = true;
                                 _isFather = false;
-                              });
+                              });*/
                             }),
                         SizedBox(
                           height: 25,
@@ -722,6 +722,13 @@ class _ParentBottomSheetWidgetState extends State<ParentBottomSheetWidget> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                Text(
+                  'Updated details will be your login credentials',
+                  style: FontConstant.k16w400F97070,
+                ),
+                SizedBox(
+                  height: 20,
+                ),
                 Text('Email address'.tr(),
                     style: _emailNode.hasFocus
                         ? FontConstant.k16w5008471Text

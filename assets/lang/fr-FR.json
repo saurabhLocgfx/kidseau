@@ -8,6 +8,29 @@
   "By proceeding you agree to our ": "En continuant, vous acceptez notre ",
   "Voucher Code": "Code d'entrée",
 
+  "Parent’s Information": "Informations de parent",
+  "Mother’s name": "Nom de la maman",
+  "Profile Photo": "La photo de profil",
+  "Enter mother's email": "Entrez l'email de la maman",
+  "Enter father's name": "Entrez le nom du papa",
+  "Enter father's occupation": "Entrez l'Occupation du papa",
+  "Enter father's email": "Entrez l'email du papa",
+  "Enter father's phone number": "Entrez le numéro de téléphone du papa",
+  "Parent info": "infos parent",
+  "Kids info": "infos enfant",
+  "Father": "Le papa",
+  "Enter mother's phone number": "Entrez le numéro de téléphone de la maman",
+  "Mother": "la maman",
+  "Enter mother's name": "Entrez le nom de la maman",
+  "Enter mother's occupation": "Entrez l'occupation de la maman",
+  "You are": "Vous êtes",
+  "Mother’s Occupation": "Occupation de la maman",
+  "Mother’s Phone number": "Numéro de téléphone de la maman",
+  "Mother’s email": "Email de la maman",
+  "Father’s name": "Nom du papa",
+  "Father’s email": "Email du papa",
+  "Father’s Occupation": "Occupation du papa",
+  "Father’s phone number": "Numéro de téléphone du papa",
   "Privacy Policy & ": "Politique de confidentialité & ",
   "Terms and Conditions": "conditions générales",
   "Tutorials": "Tutoriels",
@@ -116,7 +139,7 @@
 
   "Age":"Âge",
 
-  "Birthday":"Date de naisance",
+  "Birthday":"Naisance",
 
   "Gender":"Le genre",
 

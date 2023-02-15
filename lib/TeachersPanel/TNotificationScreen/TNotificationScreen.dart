@@ -119,11 +119,15 @@ class _TNotificationScreenState extends State<TNotificationScreen> {
         ),
         body: SingleChildScrollView(
             child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             SizedBox(
               height: 30,
             ),
-            Align(
+            Center(
+              child: Text('No new notifications'),
+            )
+            /*Align(
               alignment: Alignment.center,
               child: Text(
                 "Today".tr(),
@@ -187,8 +191,8 @@ class _TNotificationScreenState extends State<TNotificationScreen> {
                 // AnnouncementDialog(context);
               },
               child: Container(
-                /* height: 99,
-                width: 414,*/
+                */ /* height: 99,
+                width: 414,*/ /*
                 color: ThemeColor.primarycolor.withOpacity(0.16),
                 child: Padding(
                   padding: EdgeInsets.all(16.0),
@@ -250,7 +254,7 @@ class _TNotificationScreenState extends State<TNotificationScreen> {
               ),
             ),
             SizedBox(height: 10),
-            Tnotificationlist2(),
+            Tnotificationlist2(),*/
           ],
         )),
       ),

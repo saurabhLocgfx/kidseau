@@ -122,6 +122,7 @@ class _PPostScreenState extends State<PPostScreen> {
         grpId: model.kidSch![_index].grpId.toString(),
         secId: model.kidSch![_index].secId.toString());
     resp.then((value) {
+      log(value.toString());
       if (value['status'] == 1) {
         setState(() {
           for (var v in value['post']) {
@@ -185,88 +186,76 @@ class _PPostScreenState extends State<PPostScreen> {
                         itemBuilder: (context) {
                           return [
                             PopupMenuItem(
-                              enabled: true,
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  GestureDetector(
-                                    onTap: () {
-                                      UserPrefs.setEArbBool(false);
-                                      context.locale = Locale('en', 'US');
-                                      RestartWidget.restartApp(context);
+                              enabled: false,
+                              child: GestureDetector(
+                                onTap: () {
+                                  UserPrefs.setEArbBool(false);
+                                  UserPrefs.setLang('English');
+                                  context.locale = Locale('en', 'US');
+                                  RestartWidget.restartApp(context);
+                                  setState(() {
+                                    colorChange;
+                                  });
+                                },
+                                child: Row(
+                                  children: [
+                                    Text(
+                                      ("English".tr()),
+                                      style: colorChange
+                                          ? FontConstant.k16w5008267Text
+                                          : FontConstant.k18w5008471Text,
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ),
+                            PopupMenuItem(
+                              enabled: false,
+                              child: GestureDetector(
+                                onTap: () {
+                                  UserPrefs.setEArbBool(false);
+                                  UserPrefs.setLang('French');
+                                  context.locale = Locale('fr', 'FR');
+                                  RestartWidget.restartApp(context);
+                                  setState(() {
+                                    colorChange;
+                                  });
+                                },
+                                child: Row(
+                                  children: [
+                                    Text(
+                                      ("French".tr()),
+                                      style: colorChange
+                                          ? FontConstant.k16w5008267Text
+                                          : FontConstant.k18w5008471Text,
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ),
+                            PopupMenuItem(
+                              enabled: false,
+                              child: GestureDetector(
+                                onTap: () {
+                                  UserPrefs.setEArbBool(true);
+                                  UserPrefs.setLang('Arabic');
+                                  context.locale = Locale('ar', 'AR');
+                                  RestartWidget.restartApp(context);
 
-                                      setState(() {
-                                        colorChange;
-                                      });
-                                    },
-                                    child: Row(
-                                      children: [
-                                        Text(
-                                          ("English".tr()),
-                                          style: colorChange
-                                              ? FontConstant.k16w5008267Text
-                                              : FontConstant.k18w5008471Text,
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                  SizedBox(height: 20),
-                                  GestureDetector(
-                                    onTap: () {
-                                      UserPrefs.setEArbBool(false);
-                                      context.locale = Locale('fr', 'FR');
-                                      RestartWidget.restartApp(context);
-
-                                      setState(() {
-                                        colorChange;
-                                      });
-                                      // Navigator.of(context).push(
-                                      //   MaterialPageRoute(
-                                      //     builder: (context) => Fees(),
-                                      //   ),
-                                      // );
-                                    },
-                                    child: Row(
-                                      children: [
-                                        Text(
-                                          ("French".tr()),
-                                          style: colorChange
-                                              ? FontConstant.k16w5008267Text
-                                              : FontConstant.k18w5008471Text,
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                  SizedBox(height: 20),
-                                  GestureDetector(
-                                    onTap: () {
-                                      UserPrefs.setEArbBool(true);
-                                      context.locale = Locale('ar', 'AR');
-                                      RestartWidget.restartApp(context);
-                                      setState(() {
-                                        colorChange;
-                                      });
-                                      /* Navigator.pop(context);
-                                          Navigator.of(context).push(
-                                            MaterialPageRoute(
-                                              builder: (context) =>
-                                                  TSettings(),
-                                            ),
-                                          );*/
-                                    },
-                                    child: Row(
-                                      children: [
-                                        Text(
-                                          ("Arabic".tr()),
-                                          style: colorChange
-                                              ? FontConstant.k16w5008267Text
-                                              : FontConstant.k18w5008471Text,
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                ],
+                                  setState(() {
+                                    colorChange;
+                                  });
+                                },
+                                child: Row(
+                                  children: [
+                                    Text(
+                                      ("Arabic".tr()),
+                                      style: colorChange
+                                          ? FontConstant.k16w5008267Text
+                                          : FontConstant.k18w5008471Text,
+                                    )
+                                  ],
+                                ),
                               ),
                             ),
                           ];
@@ -350,20 +339,21 @@ class _PPostScreenState extends State<PPostScreen> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            InkWell(
-                              onTap: () {
-                                _controller.previousPage();
-                              },
-                              child: Container(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 16, vertical: 8),
-                                child: Image.asset(
-                                  "assets/images/arrleft.png",
-                                  height: 24,
-                                  width: 24,
+                            if (model.kidSch!.length > 1)
+                              InkWell(
+                                onTap: () {
+                                  _controller.previousPage();
+                                },
+                                child: Container(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 16, vertical: 8),
+                                  child: Image.asset(
+                                    "assets/images/arrleft.png",
+                                    height: 24,
+                                    width: 24,
+                                  ),
                                 ),
                               ),
-                            ),
                             SizedBox(
                               width: 200,
                               child: CarouselSlider.builder(
@@ -392,20 +382,21 @@ class _PPostScreenState extends State<PPostScreen> {
                                 ),
                               ),
                             ),
-                            InkWell(
-                              onTap: () {
-                                _controller.nextPage();
-                              },
-                              child: Container(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 16, vertical: 8),
-                                child: Image.asset(
-                                  "assets/images/arrright.png",
-                                  height: 24,
-                                  width: 24,
+                            if (model.kidSch!.length > 1)
+                              InkWell(
+                                onTap: () {
+                                  _controller.nextPage();
+                                },
+                                child: Container(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 16, vertical: 8),
+                                  child: Image.asset(
+                                    "assets/images/arrright.png",
+                                    height: 24,
+                                    width: 24,
+                                  ),
                                 ),
                               ),
-                            ),
                           ],
                         ),
                         SizedBox(height: 38),
@@ -432,7 +423,7 @@ class _PPostScreenState extends State<PPostScreen> {
                                           child: CircularProgressIndicator(),
                                         )
                                       : ListView.builder(
-                                          itemCount: 3,
+                                          itemCount: _postList.length,
                                           physics:
                                               NeverScrollableScrollPhysics(),
                                           shrinkWrap: true,
@@ -710,9 +701,9 @@ class _PPostScreenState extends State<PPostScreen> {
                                                                               error);
                                                                         }
                                                                       }
-                                                                      Fluttertoast
-                                                                          .showToast(
-                                                                              msg: 'Download complete');
+                                                                      /*Navigator.of(
+                                                                              context)
+                                                                          .pop();*/
                                                                     },
                                                                     child:
                                                                         Container(
@@ -923,7 +914,8 @@ class _PPostScreenState extends State<PPostScreen> {
                         width: 24,
                       ),
                     ],
-                  ),*/ /*
+                  ),*/
+                  /*
                   SizedBox(height: 38),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -973,7 +965,8 @@ class _PPostScreenState extends State<PPostScreen> {
                               image: DecorationImage(
                                   image: AssetImage(
                                       "assets/images/childrenposts.png"))),
-                        ),*/ /*
+                        ),*/
+                  /*
                     ],
                   ),
                   SizedBox(

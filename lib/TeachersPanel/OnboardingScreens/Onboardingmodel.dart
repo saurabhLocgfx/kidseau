@@ -9,16 +9,18 @@ class UnbordingContent {
 
 List<UnbordingContent> contents = [
   UnbordingContent(
-      title: 'kkm',
+      title: 'Keep track of student progress',
       image: 'assets/images/owlreadingimage.png',
       discription:
-          "Know what your kid is doing in school and track their activities"),
+          "You can maintain all the academic records of a student at one portal so that can be checked easily whenever required."),
   UnbordingContent(
       title: 'Build the Future',
       image: 'assets/images/owlcalculatorimage.png',
-      discription: "Give the marks to the kid to help them grow faster."),
+      discription:
+          "Provide students the opportunity to learn from best-in-class teachers along with the attest academic curriculum."),
   UnbordingContent(
       title: 'Chat with Parents',
       image: 'assets/images/owlmobileimage.png',
-      discription: "Talk to the parents"),
+      discription:
+          "You can keep the parents updated about every possible step related to their kid directly using this application."),
 ];

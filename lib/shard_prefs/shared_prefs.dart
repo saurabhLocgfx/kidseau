@@ -9,6 +9,7 @@ class UserPrefs {
   static const enteredVal = 'enteredVal';
   static const Teacher = 'Teacher';
   static const FirebaseToken = 'FirebaseToken';
+  static const SetLang = 'SetLang';
   static SharedPreferences? prefs;
   static Future init() async {
     prefs = await SharedPreferences.getInstance();
@@ -16,6 +17,14 @@ class UserPrefs {
 
   static Future clearData(String key) async {
     prefs?.remove(key);
+  }
+
+  static Future setLang(String val) async {
+    return await prefs?.setString(SetLang, val);
+  }
+
+  static String? getLang() {
+    return prefs?.getString(SetLang);
   }
 
   static Future setIsTeacher(bool isTeacher) async {

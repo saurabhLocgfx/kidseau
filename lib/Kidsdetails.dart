@@ -301,7 +301,7 @@ class _KidsDetailsState extends State<KidsDetails> {
                             dropdownColor: Color(0xffffffff),
                             isExpanded: true,
                             hint: Text(
-                              "Select group",
+                              "Select group".tr(),
                             ),
                             icon: Center(
                               child: Padding(
@@ -420,7 +420,7 @@ class _KidsDetailsState extends State<KidsDetails> {
                         readOnly: true,
                         validator: (birth) {
                           if (birth == null || birth.isEmpty) {
-                            return 'Enter date of birth';
+                            return 'Enter date of birth'.tr();
                           }
                           return null;
                         },

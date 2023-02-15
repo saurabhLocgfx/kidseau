@@ -96,6 +96,7 @@ class _PChatsState extends State<PChats> {
   bool _noMessageFound = false;
   int scroll = 0;
 
+  bool _msgLoading = false;
   _getReloadedData() {
     scroll++;
     //_isLoading = true;
@@ -311,56 +312,73 @@ class _PChatsState extends State<PChats> {
                         fillColor: Color(0xffF0F4FA),
                         hintText: "Type here.".tr(),
                         hintStyle: FontConstant.k16w400B7A4Text,
-                        suffixIcon: GestureDetector(
-                          onTap: () {
-                            if (_controller.text.isNotEmpty ||
-                                _pickedImg.path != '') {
-                              log('message');
-                              final resp = SendMessageApi().get(
-                                  message: _controller.text,
-                                  sendToId: widget.userId,
-                                  receiverUserType: widget.userType,
-                                  image: _pickedImg);
-                              resp.then((value) {
-                                log(value.toString());
-                                if (value['status'] == 1) {
-                                  setState(() {
-                                    messageModel.allMsg!.add(AllMsg.fromJson({
-                                      'message_id': '${value['msg_id']}',
-                                      'message': '${value['msg']}',
-                                      'file_url': value['file'] == null
-                                          ? ''
-                                          : "${value['file']}",
-                                      'created_at': '${value['date_time']}',
-                                      'read_at': '',
-                                      'send_to_id': widget.userId,
-                                      'is_deleted': '0',
-                                      'sender_user_type': 'teacher',
-                                      'reciever_user_type': widget.userType,
-                                    }));
-                                  });
-                                  /*final message = Messages(
+                        suffixIcon: _msgLoading
+                            ? Container(
+                                padding: EdgeInsets.all(10),
+                                width: 10,
+                                height: 10,
+                                child: CircularProgressIndicator(),
+                              )
+                            : GestureDetector(
+                                onTap: () {
+                                  if (_controller.text.isNotEmpty ||
+                                      _pickedImg.path != '') {
+                                    setState(() {
+                                      _msgLoading = true;
+                                    });
+                                    log('message');
+                                    final resp = SendMessageApi().get(
+                                        message: _controller.text,
+                                        sendToId: widget.userId,
+                                        receiverUserType: widget.userType,
+                                        image: _pickedImg);
+                                    resp.then((value) {
+                                      log(value.toString());
+                                      if (value['status'] == 1) {
+                                        setState(() {
+                                          messageModel.allMsg!
+                                              .add(AllMsg.fromJson({
+                                            'message_id': '${value['msg_id']}',
+                                            'message': '${value['msg']}',
+                                            'file_url': value['file'] == null
+                                                ? ''
+                                                : "${value['file']}",
+                                            'created_at':
+                                                '${value['date_time']}',
+                                            'read_at': '',
+                                            'send_to_id': widget.userId,
+                                            'is_deleted': '0',
+                                            'sender_user_type': 'teacher',
+                                            'reciever_user_type':
+                                                widget.userType,
+                                          }));
+                                          _msgLoading = false;
+                                        });
+                                        /*final message = Messages(
                                       text: _controller.text,
                                       date: DateTime.now(),
                                       isSentByme: true);
                                   setState(() => messages.add(message));*/
-                                  _controller.clear();
-                                  _pickedImg = File('');
-                                } else {
-                                  log(value.toString());
-                                }
-                              });
-                            }
-                          },
-                          child: Padding(
-                            padding: const EdgeInsets.all(10.0),
-                            child: ImageIcon(
-                              AssetImage("assets/images/sendicon.png"),
-                              size: 12,
-                              color: ThemeColor.primarycolor,
-                            ),
-                          ),
-                        ),
+                                        _controller.clear();
+                                        _pickedImg = File('');
+                                      } else {
+                                        log(value.toString());
+                                        setState(() {
+                                          _msgLoading = false;
+                                        });
+                                      }
+                                    });
+                                  }
+                                },
+                                child: Padding(
+                                  padding: const EdgeInsets.all(10.0),
+                                  child: ImageIcon(
+                                    AssetImage("assets/images/sendicon.png"),
+                                    size: 12,
+                                    color: ThemeColor.primarycolor,
+                                  ),
+                                ),
+                              ),
                         prefixIcon: Padding(
                           padding: const EdgeInsets.all(10.0),
                           child: GestureDetector(

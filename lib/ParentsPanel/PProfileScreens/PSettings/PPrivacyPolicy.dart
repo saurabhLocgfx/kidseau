@@ -4,6 +4,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:kidseau/Theme.dart';
 import 'package:kidseau/api/app_details_api/app_details_api.dart';
 
@@ -96,9 +97,9 @@ class _PPrivacypolicyState extends State<PPrivacypolicy> {
                     SizedBox(
                       height: 100,
                     ),
-                    Text(
+                    HtmlWidget(
                       data,
-                      style: FontConstant.k16blackboldText,
+                      textStyle: FontConstant.k16blackboldText,
                     ),
                   ],
                 ),

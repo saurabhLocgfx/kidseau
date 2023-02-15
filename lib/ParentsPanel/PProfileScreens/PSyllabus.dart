@@ -199,20 +199,21 @@ class _PSyllabusState extends State<PSyllabus> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            InkWell(
-                              onTap: () {
-                                _controller.previousPage();
-                              },
-                              child: Container(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 16, vertical: 8),
-                                child: Image.asset(
-                                  "assets/images/arrleft.png",
-                                  height: 24,
-                                  width: 24,
+                            if (model.kidSch!.length > 1)
+                              InkWell(
+                                onTap: () {
+                                  _controller.previousPage();
+                                },
+                                child: Container(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 16, vertical: 8),
+                                  child: Image.asset(
+                                    "assets/images/arrleft.png",
+                                    height: 24,
+                                    width: 24,
+                                  ),
                                 ),
                               ),
-                            ),
                             SizedBox(
                               width: 200,
                               child: CarouselSlider.builder(
@@ -244,20 +245,21 @@ class _PSyllabusState extends State<PSyllabus> {
                                 ),
                               ),
                             ),
-                            InkWell(
-                              onTap: () {
-                                _controller.nextPage();
-                              },
-                              child: Container(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 16, vertical: 8),
-                                child: Image.asset(
-                                  "assets/images/arrright.png",
-                                  height: 24,
-                                  width: 24,
+                            if (model.kidSch!.length > 1)
+                              InkWell(
+                                onTap: () {
+                                  _controller.nextPage();
+                                },
+                                child: Container(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 16, vertical: 8),
+                                  child: Image.asset(
+                                    "assets/images/arrright.png",
+                                    height: 24,
+                                    width: 24,
+                                  ),
                                 ),
                               ),
-                            ),
                           ],
                         ),
                         SizedBox(

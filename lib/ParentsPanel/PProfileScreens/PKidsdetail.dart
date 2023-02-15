@@ -814,7 +814,9 @@ class _PKidsDetailsState extends State<PKidsDetails> {
                                   SizedBox(height: 10),
                                   Row(
                                     children: [
-                                      Expanded(
+                                      Container(
+                                        width: 154.w,
+                                        height: 33.h,
                                         child: Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
@@ -846,7 +848,9 @@ class _PKidsDetailsState extends State<PKidsDetails> {
                                   ),
                                   Row(
                                     children: [
-                                      Expanded(
+                                      Container(
+                                        width: 154.w,
+                                        height: 33.h,
                                         child: Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
@@ -878,7 +882,9 @@ class _PKidsDetailsState extends State<PKidsDetails> {
                                   ),
                                   Row(
                                     children: [
-                                      Expanded(
+                                      Container(
+                                        width: 154.w,
+                                        height: 33.h,
                                         child: Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
@@ -910,7 +916,9 @@ class _PKidsDetailsState extends State<PKidsDetails> {
                                   ),
                                   Row(
                                     children: [
-                                      Expanded(
+                                      Container(
+                                        width: 154.w,
+                                        height: 33.h,
                                         child: Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,

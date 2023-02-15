@@ -57,192 +57,198 @@ class _PSignupCodeState extends State<PSignupCode> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 896.h,
-      width: 414.w,
-      child: Scaffold(
-        backgroundColor: Color(0xfff7f6fa),
-        body: _isLoading
-            ? Center(
-                child: CircularProgressIndicator(),
-              )
-            : SingleChildScrollView(
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 16, right: 16),
-                  child: Form(
-                    key: _formKey,
-                    child: Center(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          SizedBox(height: 80),
-                          mainlogo(),
-                          SizedBox(height: 08),
-                          Center(
-                            child: Text(
-                              "We offer a new way to track your children and watch them grow"
-                                  .tr(),
-                              style: FontConstant.k16w4008471Text,
-                              textAlign: TextAlign.center,
+    return WillPopScope(
+      onWillPop: () async {
+        return false;
+      },
+      child: Container(
+        height: 896.h,
+        width: 414.w,
+        child: Scaffold(
+          backgroundColor: Color(0xfff7f6fa),
+          body: _isLoading
+              ? Center(
+                  child: CircularProgressIndicator(),
+                )
+              : SingleChildScrollView(
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 16, right: 16),
+                    child: Form(
+                      key: _formKey,
+                      child: Center(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            SizedBox(height: 80),
+                            mainlogo(),
+                            SizedBox(height: 08),
+                            Center(
+                              child: Text(
+                                "We offer a new way to track your children and watch them grow"
+                                    .tr(),
+                                style: FontConstant.k16w4008471Text,
+                                textAlign: TextAlign.center,
+                              ),
                             ),
-                          ),
-                          SizedBox(height: 35),
-                          Text(
-                            "Voucher’s code".tr(),
-                            style: FontConstant.k16w500331FText,
-                            textAlign: TextAlign.start,
-                          ),
-                          SizedBox(height: 5),
-                          Container(
-                            //height: 56.h,
-                            width: 1.sw,
-                            child: TextFormField(
-                              validator: (voucherCode) {
-                                if (voucherCode == null ||
-                                    voucherCode.isEmpty) {
-                                  return 'Enter Voucher code'.tr();
-                                }
-                                return null;
+                            SizedBox(height: 35),
+                            Text(
+                              "Voucher’s code".tr(),
+                              style: FontConstant.k16w500331FText,
+                              textAlign: TextAlign.start,
+                            ),
+                            SizedBox(height: 5),
+                            Container(
+                              //height: 56.h,
+                              width: 1.sw,
+                              child: TextFormField(
+                                validator: (voucherCode) {
+                                  if (voucherCode == null ||
+                                      voucherCode.isEmpty) {
+                                    return 'Enter Voucher code'.tr();
+                                  }
+                                  return null;
+                                },
+                                controller: voucherCodeText,
+                                style: FontConstant.k18w5008471Text,
+                                decoration: CustomInputDecoration(
+                                        hintText:
+                                            "Enter your Voucher’s code".tr())
+                                    .decoration(),
+                                /*  controller: controller,*/
+                              ),
+                            ),
+                            SizedBox(height: 04),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 14.0),
+                              child: Text(
+                                "Vouchers are given by kid’s school".tr(),
+                                style: FontConstant.k14w400B7A4Text,
+                              ),
+                            ),
+                            SizedBox(height: 25),
+                            InkWell(
+                              onTap: () {
+                                showDialog(
+                                    context: context,
+                                    builder: (ctx) {
+                                      return VoucherVideoDialog(model: model);
+                                    });
                               },
-                              controller: voucherCodeText,
-                              style: FontConstant.k18w5008471Text,
-                              decoration: CustomInputDecoration(
-                                      hintText:
-                                          "Enter your Voucher’s code".tr())
-                                  .decoration(),
-                              /*  controller: controller,*/
+                              child: Center(
+                                child: Container(
+                                    height: 214.h,
+                                    // width: 382.w,
+                                    clipBehavior: Clip.hardEdge,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(12),
+                                    ),
+                                    child: Image.network(
+                                      model.appVideo?[0].vPoster.toString() ??
+                                          '',
+                                      errorBuilder: (q, w, e) => Image.asset(
+                                          "assets/images/laptopbackgroundplay.png",
+                                          fit: BoxFit.fitWidth),
+                                    ) /*Center(
+                                child: Image.asset(
+                            "assets/images/playicon.png",
+                            height: 46,
+                            width: 46,
+                          )),*/
+                                    ),
+                              ),
                             ),
-                          ),
-                          SizedBox(height: 04),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 14.0),
-                            child: Text(
-                              "Vouchers are given by kid’s school".tr(),
-                              style: FontConstant.k14w400B7A4Text,
+                            SizedBox(
+                              height: 40,
                             ),
-                          ),
-                          SizedBox(height: 25),
-                          InkWell(
-                            onTap: () {
-                              showDialog(
-                                  context: context,
-                                  builder: (ctx) {
-                                    return VoucherVideoDialog(model: model);
-                                  });
-                            },
-                            child: Center(
-                              child: Container(
-                                  height: 214.h,
-                                  // width: 382.w,
-                                  clipBehavior: Clip.hardEdge,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(12),
-                                  ),
-                                  child: Image.network(
-                                    model.appVideo?[0].vPoster.toString() ?? '',
-                                    errorBuilder: (q, w, e) => Image.asset(
-                                        "assets/images/laptopbackgroundplay.png",
-                                        fit: BoxFit.fitWidth),
-                                  ) /*Center(
-                              child: Image.asset(
-                          "assets/images/playicon.png",
-                          height: 46,
-                          width: 46,
-                        )),*/
-                                  ),
-                            ),
-                          ),
-                          SizedBox(
-                            height: 40,
-                          ),
-                          Align(
-                            alignment: Alignment.bottomCenter,
-                            child: SizedBox(
-                              height: 52.h,
-                              width: 382.w,
-                              child: MainButton(
-                                  onTap: widget.newKid
-                                      ? () {
-                                          if (_formKey.currentState!
-                                              .validate()) {
-                                            final resp = VoucherCode().get(
-                                                Vouchercode:
-                                                    voucherCodeText.text);
-                                            resp.then((value) {
-                                              print(value);
-                                              if (value['status'] == 0) {
-                                                Fluttertoast.showToast(
-                                                    msg: value['msg']);
-                                              } else {
-                                                //navigate to
-                                                //UserPrefs.setCookies(value['key']);
-                                                Navigator.of(context).push(
-                                                    MaterialPageRoute(
-                                                        builder: (context) =>
-                                                            ParentAddNewKidDetail(
-                                                              newKid:
-                                                                  widget.newKid,
-                                                            )));
-                                                /* Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => PDashboard()),
-                                  );*/
-                                                /*Fluttertoast.showToast(
-                                      msg: 'Your OTP is ${value['voucher']}');*/
-                                              }
-                                            });
-                                            print(voucherCodeText.text);
+                            Align(
+                              alignment: Alignment.bottomCenter,
+                              child: SizedBox(
+                                height: 52.h,
+                                width: 382.w,
+                                child: MainButton(
+                                    onTap: widget.newKid
+                                        ? () {
+                                            if (_formKey.currentState!
+                                                .validate()) {
+                                              final resp = VoucherCode().get(
+                                                  Vouchercode:
+                                                      voucherCodeText.text);
+                                              resp.then((value) {
+                                                print(value);
+                                                if (value['status'] == 0) {
+                                                  Fluttertoast.showToast(
+                                                      msg: value['msg']);
+                                                } else {
+                                                  //navigate to
+                                                  //UserPrefs.setCookies(value['key']);
+                                                  Navigator.of(context).push(
+                                                      MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              ParentAddNewKidDetail(
+                                                                newKid: widget
+                                                                    .newKid,
+                                                              )));
+                                                  /* Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => PDashboard()),
+                                    );*/
+                                                  /*Fluttertoast.showToast(
+                                        msg: 'Your OTP is ${value['voucher']}');*/
+                                                }
+                                              });
+                                              print(voucherCodeText.text);
+                                            }
                                           }
-                                        }
-                                      : () {
-                                          if (_formKey.currentState!
-                                              .validate()) {
-                                            final resp = VoucherCode().get(
-                                                Vouchercode:
-                                                    voucherCodeText.text);
-                                            resp.then((value) {
-                                              print(value);
-                                              if (value['status'] == 0) {
-                                                Fluttertoast.showToast(
-                                                    msg: value['msg']);
-                                              } else {
-                                                //navigate to
-                                                //UserPrefs.setCookies(value['key']);
-                                                Navigator.of(context).push(
-                                                    MaterialPageRoute(
-                                                        builder: (context) =>
-                                                            Parentinfodashboard()));
-                                                /* Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => PDashboard()),
-                                  );*/
-                                                /*Fluttertoast.showToast(
-                                      msg: 'Your OTP is ${value['voucher']}');*/
-                                              }
-                                            });
-                                            print(voucherCodeText.text);
+                                        : () {
+                                            if (_formKey.currentState!
+                                                .validate()) {
+                                              final resp = VoucherCode().get(
+                                                  Vouchercode:
+                                                      voucherCodeText.text);
+                                              resp.then((value) {
+                                                print(value);
+                                                if (value['status'] == 0) {
+                                                  Fluttertoast.showToast(
+                                                      msg: value['msg']);
+                                                } else {
+                                                  //navigate to
+                                                  //UserPrefs.setCookies(value['key']);
+                                                  Navigator.of(context).push(
+                                                      MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              Parentinfodashboard()));
+                                                  /* Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => PDashboard()),
+                                    );*/
+                                                  /*Fluttertoast.showToast(
+                                        msg: 'Your OTP is ${value['voucher']}');*/
+                                                }
+                                              });
+                                              print(voucherCodeText.text);
+                                            }
                                           }
-                                        }
-                                  // Navigator.push(
-                                  //   context,
-                                  // MaterialPageRoute(
-                                  //     builder: (context) => Informationfill()),
-                                  // );
-                                  ,
-                                  title: "Continue".tr(),
-                                  textStyleColor: Colors.white,
-                                  backgroundColor: ThemeColor.primarycolor),
+                                    // Navigator.push(
+                                    //   context,
+                                    // MaterialPageRoute(
+                                    //     builder: (context) => Informationfill()),
+                                    // );
+                                    ,
+                                    title: "Continue".tr(),
+                                    textStyleColor: Colors.white,
+                                    backgroundColor: ThemeColor.primarycolor),
+                              ),
                             ),
-                          ),
-                          SizedBox(height: 13.h),
-                        ],
+                            SizedBox(height: 13.h),
+                          ],
+                        ),
                       ),
                     ),
                   ),
                 ),
-              ),
+        ),
       ),
     );
   }
