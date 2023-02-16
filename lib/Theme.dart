@@ -194,6 +194,8 @@ class FontConstant2 {
       fontWeight: FontWeight.w500, fontSize: 32, color: Color(0xff8267AC));
   static TextStyle k32w500331Ftext = GoogleFonts.balooThambi2(
       fontWeight: FontWeight.w500, fontSize: 32, color: Color(0xff331F2D));
+  static TextStyle k32w500331FtextLine = GoogleFonts.balooThambi2(
+      fontWeight: FontWeight.w500, fontSize: 32, color: Color(0xff331F2D));
   static TextStyle k16w5008267text = GoogleFonts.balooThambi2(
       fontWeight: FontWeight.w500, fontSize: 16, color: Color(0xff331F2D));
   static TextStyle k16w400B7A4text = GoogleFonts.balooThambi2(

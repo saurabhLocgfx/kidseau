@@ -37,6 +37,7 @@ class _ParentInfoState extends State<ParentInfo> {
   TextEditingController fatherPhoneController = TextEditingController();
   TextEditingController fatherEmailController = TextEditingController();
   TextEditingController addressController = TextEditingController();
+  FocusNode addressNode = FocusNode();
   final _formKey = GlobalKey<FormState>();
   final _picker = ImagePicker();
   XFile? _image;
@@ -45,6 +46,9 @@ class _ParentInfoState extends State<ParentInfo> {
 
   @override
   void initState() {
+    addressNode.addListener(() {
+      setState(() {});
+    });
     log(UserPrefs.getIsMother().toString());
     log(UserPrefs.getIsFather().toString());
     enteredVal = UserPrefs.getEnteredVal() ?? "";
@@ -311,6 +315,7 @@ class _ParentInfoState extends State<ParentInfo> {
                     // height: 56.h,
                     width: 1.sw,
                     child: TextFormField(
+                      focusNode: addressNode,
                       validator: (address) {
                         if (address == null || address.isEmpty) {
                           return "This field cannot be empty".tr();
@@ -389,11 +394,11 @@ class _ParentInfoState extends State<ParentInfo> {
                           : MainButton(
                               onTap: () {
                                 // if (_formKey.currentState!.validate()) {
-                                if (_pickedImage.path == '') {
+                                /*if (_pickedImage.path == '') {
                                   CustomSnackBar.customErrorSnackBar(
                                       context, "Select an image first");
                                   return;
-                                }
+                                }*/
                                 log('message');
                                 setState(() {
                                   _btnLoading = true;
@@ -435,9 +440,11 @@ class _ParentInfoState extends State<ParentInfo> {
                               title: "Continue".tr(),
                               textStyleColor: Colors.white,
                               backgroundColor: ThemeColor.primarycolor)),
-                  SizedBox(
-                    height: 700,
-                  )
+                  AnimatedContainer(
+                    duration: Duration(milliseconds: 500),
+                    curve: Curves.fastOutSlowIn,
+                    height: addressNode.hasFocus ? 700 : 320,
+                  ),
                 ],
               ),
             ),

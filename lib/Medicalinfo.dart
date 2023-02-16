@@ -80,12 +80,12 @@ class _MedicalInfoState extends State<MedicalInfo> {
                     // height: 56.h,
                     width: 1.sw,
                     child: TextFormField(
-                      validator: (address) {
+                      /*validator: (address) {
                         if (address == null || address.isEmpty) {
                           return "This field cannot be empty".tr();
                         }
                         return null;
-                      },
+                      },*/
                       style: FontConstant.k18w5008471Text,
                       decoration: CustomInputDecoration(
                               hintText: "Enter kid’s blood group".tr())
@@ -108,12 +108,12 @@ class _MedicalInfoState extends State<MedicalInfo> {
                         width: 1.sw,
                         child: TextFormField(
                           keyboardType: TextInputType.number,
-                          validator: (address) {
+                          /*validator: (address) {
                             if (address == null || address.isEmpty) {
                               return "This field cannot be empty".tr();
                             }
                             return null;
-                          },
+                          },*/
                           style: FontConstant.k18w5008471Text,
                           decoration: CustomInputDecoration(
                                   hintText: "Enter kid’s weight in kg".tr())
@@ -138,12 +138,12 @@ class _MedicalInfoState extends State<MedicalInfo> {
                         width: 1.sw,
                         child: TextFormField(
                           keyboardType: TextInputType.number,
-                          validator: (address) {
+                          /*validator: (address) {
                             if (address == null || address.isEmpty) {
                               return "This field cannot be empty".tr();
                             }
                             return null;
-                          },
+                          },*/
                           style: FontConstant.k18w5008471Text,
                           decoration: CustomInputDecoration(
                                   hintText: "Enter kid’s height in ft".tr())
@@ -167,12 +167,12 @@ class _MedicalInfoState extends State<MedicalInfo> {
                         // height: 56.h,
                         width: 1.sw,
                         child: TextFormField(
-                          validator: (address) {
+                          /*validator: (address) {
                             if (address == null || address.isEmpty) {
                               return "This field cannot be empty".tr();
                             }
                             return null;
-                          },
+                          },*/
                           style: FontConstant.k18w5008471Text,
                           decoration: CustomInputDecoration(
                                   hintText: "Enter medical status".tr())
@@ -196,12 +196,12 @@ class _MedicalInfoState extends State<MedicalInfo> {
                         // height: 56.h,
                         width: 1.sw,
                         child: TextFormField(
-                          validator: (address) {
+                          /*validator: (address) {
                             if (address == null || address.isEmpty) {
                               return "This field cannot be empty".tr();
                             }
                             return null;
-                          },
+                          },*/
                           style: FontConstant.k18w5008471Text,
                           maxLines: 5,
                           decoration: CustomInputDecoration(
@@ -567,7 +567,7 @@ class _MedicalInfoState extends State<MedicalInfo> {
                               title: "Continue",
                               textStyleColor: Colors.white,
                               backgroundColor: ThemeColor.primarycolor)),
-                  SizedBox(height: 400),
+                  SizedBox(height: 320),
                 ],
               ),
             ),

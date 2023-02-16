@@ -175,19 +175,31 @@ class _ParentinfodashboardState extends State<Parentinfodashboard>
             ],
           ),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text("Parent info".tr(), style: FontConstant.k14w5008267AC),
-              Text("Kids info".tr(),
-                  style: FontConstant.k14w5008267AC.copyWith(
-                      color: pageIndex == 1 || pageIndex == 2
-                          ? ThemeColor.primarycolor
-                          : ThemeColor.b7A4B2)),
-              Text("Medical".tr(),
-                  style: FontConstant.k14w500B7A4Text.copyWith(
-                      color: pageIndex == 2
-                          ? ThemeColor.primarycolor
-                          : ThemeColor.b7A4B2)),
+              Expanded(
+                child: Text("Parent info".tr(),
+                    textAlign: TextAlign.center,
+                    maxLines: 2,
+                    style: FontConstant.k14w5008267AC),
+              ),
+              Expanded(
+                child: Text("Kids info".tr(),
+                    textAlign: TextAlign.center,
+                    maxLines: 2,
+                    style: FontConstant.k14w5008267AC.copyWith(
+                        color: pageIndex == 1 || pageIndex == 2
+                            ? ThemeColor.primarycolor
+                            : ThemeColor.b7A4B2)),
+              ),
+              Expanded(
+                child: Text("Medical".tr(),
+                    textAlign: TextAlign.center,
+                    maxLines: 2,
+                    style: FontConstant.k14w500B7A4Text.copyWith(
+                        color: pageIndex == 2
+                            ? ThemeColor.primarycolor
+                            : ThemeColor.b7A4B2)),
+              ),
             ],
           ),
         ],

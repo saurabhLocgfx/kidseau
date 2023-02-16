@@ -101,10 +101,7 @@ class _TReminderScreenState extends State<TReminderScreen> {
             ],
           ),
           title: InkWell(
-            onTap: () {
-              notificationServices.scheduleNotification(
-                  title: "title", body: "body");
-            },
+            onTap: () {},
             child: Text(
               "Reminder".tr(),
               /*AppLoaclizations.of(context)!.translate("Reminder").toString(),*/

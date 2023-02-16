@@ -388,7 +388,7 @@ class _PEditProfileScreenState extends State<PEditProfileScreen> {
                         SizedBox(
                           height: 25,
                         ),
-                        Text("Kid's Father".tr(),
+                        Text("Kid's father".tr(),
                             style: FontConstant2.k24w5008471text),
                         SizedBox(height: 24),
                         Text("Father's name".tr(),
@@ -460,7 +460,7 @@ class _PEditProfileScreenState extends State<PEditProfileScreen> {
                                   curved: true),
                         ),
                         SizedBox(height: 16),
-                        Text("Kid’s Mother".tr(),
+                        Text("Kid's mother".tr(),
                             style: FontConstant2.k24w5008471text),
                         SizedBox(height: 24),
                         Text("Mother's name".tr(),
@@ -723,7 +723,7 @@ class _ParentBottomSheetWidgetState extends State<ParentBottomSheetWidget> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Updated details will be your login credentials',
+                  'Updated details will be your login credentials'.tr(),
                   style: FontConstant.k16w400F97070,
                 ),
                 SizedBox(

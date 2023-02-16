@@ -1,5 +1,5 @@
 {
-  "i'm a teacher": "Je suis éducatrice (eur)",
+  "i'm a Teacher": "Je suis éducatrice",
   "i'm a parent": "Je suis un parent",
   "We offer a new way to mark the children and shape them for better future.":"Nous offrons une nouvelle méthode de noter les enfants et de les former pour un avenir meilleur",
   "Account":"Compte",
@@ -51,6 +51,20 @@
   "Login/create a new account to track your kids’ activities.":"Connectez-vous/créez un nouveau compte pour suivre les activités de votre enfant",
 
   "Email/Phone number":"E-mail/Numéro de téléphone",
+  "Updated details will be your login credentials": "Les détails mis à jour seront vos informations d'identification de connexion",
+  "Changed email/phone number belongs to Mother": "Le courrier électronique / numéro de téléphone modifié appartient à la mère",
+  "Note: The email/phone number belongs to mother": "Remarque: le numéro de messagerie / téléphone appartient à la mère",
+  "COVID Vaccination": "Vaccination covide",
+  "I don’t like this": "Je n'aime pas ca",
+  "Not from the same group": "C'est pas mon groupe",
+  "Inappropriate content": "Contenu indesirable",
+  "Kid's father": "Le père de l'enfant",
+  "Kid's mother": "La mère d'un enfant",
+  "select time": "Sélectionner l'heure",
+  "select date": "sélectionner une date",
+  "First time on Kidseau": "Première fois sur Kidseau",
+  "Register": "Enregistrer",
+  "Welcome": "Bienvenu",
 
   "Enter your email/phone number": "Entrez votre email/numéro de téléphone",
 
@@ -58,7 +72,9 @@
 
   "OTP verification":"Vérification OTP",
 
-  "A OTP has been sent to “9876543210”. Please enter the OTP here.":"Un OTP a été envoyé au “9876543210”. Veuillez entrer l'OTP",
+  "A OTP has been sent to . ": "Un OTP a été envoyé au . ",
+
+  "Please enter the OTP here.": "Veuillez entrer l'OTP",
 
   "Continue":"Continuez",
 
@@ -320,8 +336,6 @@
   "Build the Future": "Construire l'avenir",
 
   "i'm a Parent": "je suis un parent",
-
-  "i'm a Teacher":"je suis un enseignant",
 
   "Chat with Teachers": "Discutez avec les enseignants",
 

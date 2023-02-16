@@ -11,7 +11,7 @@ class KidsSignupInfo {
       {required String kidName,
       required String kidSection,
       required String kidGroup,
-      required String kidAge,
+      //required String kidAge,
       required String kidBirthday,
       required String kidGender,
       required File pickedImage}) async {
@@ -25,7 +25,7 @@ class KidsSignupInfo {
     request.fields.addAll({
       'kid_name': kidName,
       'sec_grp': kidGroup,
-      'age': kidAge,
+      //'age': kidAge,
       'birth_date': kidBirthday,
       'gender': kidGender == 'Male'
           ? 'M'
@@ -35,8 +35,10 @@ class KidsSignupInfo {
       //'profile_pic': "$pickedImage"
     });
     log(request.fields.toString());
-    request.files.add(
-        await http.MultipartFile.fromPath('profile_pic', pickedImage.path));
+    if (pickedImage.path.isNotEmpty) {
+      request.files.add(
+          await http.MultipartFile.fromPath('profile_pic', pickedImage.path));
+    }
     request.headers.addAll(headers);
 
     http.StreamedResponse response = await request.send();

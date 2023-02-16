@@ -74,7 +74,7 @@ class _ParentAddNewKidDetailState extends State<ParentAddNewKidDetail> {
 
   Widget dottab() {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 60.w),
+      padding: EdgeInsets.symmetric(horizontal: 100.w),
       child: Column(
         children: [
           Row(

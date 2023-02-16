@@ -151,7 +151,7 @@ class _PParentsProfileState extends State<PParentsProfile> {
                           } else {
                             return InkWell(
                               child: Container(
-                                width: 260,
+                                width: 300,
                                 decoration: BoxDecoration(
                                   //color: Colors.black,
                                   borderRadius: BorderRadius.circular(16),

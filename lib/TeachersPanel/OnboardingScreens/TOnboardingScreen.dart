@@ -109,7 +109,7 @@ class _TOnboardingScreenState extends State<TOnboardingScreen> {
                                 ),
                                 Spacer(),
                                 Text(contents[i].title.tr(),
-                                    style: FontConstant2.k32w500331Ftext),
+                                    style: FontConstant2.k32w500331FtextLine),
                                 SizedBox(
                                   width: 1.sw,
                                   child: Text(contents[i].discription.tr(),

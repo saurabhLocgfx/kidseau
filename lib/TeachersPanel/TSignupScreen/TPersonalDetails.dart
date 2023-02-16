@@ -459,12 +459,6 @@ class _TPersonalDetailsState extends State<TPersonalDetails> {
                       ),
                       SizedBox(height: 4),
                       TextFormField(
-                        validator: (edu) {
-                          if (edu == null || edu.isEmpty) {
-                            return "Enter your education";
-                          }
-                          return null;
-                        },
                         controller: educationController,
                         style: FontConstant.k18w5008471Text,
                         decoration: InputDecoration(
@@ -503,13 +497,8 @@ class _TPersonalDetailsState extends State<TPersonalDetails> {
                       ),
                       SizedBox(height: 4),
                       TextFormField(
-                        validator: (year) {
-                          if (year == null || year.isEmpty) {
-                            return "Enter your education";
-                          }
-                          return null;
-                        },
                         controller: yearController,
+                        keyboardType: TextInputType.number,
                         style: FontConstant.k18w5008471Text,
                         decoration: InputDecoration(
                           contentPadding: EdgeInsets.all(14.0),
@@ -604,12 +593,6 @@ class _TPersonalDetailsState extends State<TPersonalDetails> {
                       ),
                       SizedBox(height: 4),
                       TextFormField(
-                        validator: (add) {
-                          if (add == null || add.isEmpty) {
-                            return "Enter your address";
-                          }
-                          return null;
-                        },
                         controller: addressController,
                         style: FontConstant.k18w5008471Text,
                         decoration: InputDecoration(
@@ -643,7 +626,7 @@ class _TPersonalDetailsState extends State<TPersonalDetails> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Languages",
+                        "Languages".tr(),
                         style: FontConstant.k16w500331FText,
                       ),
                       SizedBox(height: 4),

@@ -45,7 +45,7 @@ class TeacherInfoFill {
               ? 'F'
               : 'O',
       'address': address,
-      'lang[]': '$language',
+      'lang': '$language',
     });
     log(request.fields.toString());
     request.headers.addAll(headers);

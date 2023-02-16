@@ -242,6 +242,205 @@ class _PKidsOverviewState extends State<PKidsOverview> {
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(16)),
                       child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  "Attendance".tr(),
+                                  style: FontConstant.k16w5008471Text,
+                                ),
+                                Image.asset(
+                                  "assets/images/bars1.png",
+                                  height: 24,
+                                )
+                              ],
+                            ),
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                Expanded(
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Container(
+                                        width: 6,
+                                        height: widget.model.kidDetails!
+                                                        .attendance!.day1 ==
+                                                    null ||
+                                                widget.model.kidDetails!
+                                                        .attendance!.day1 ==
+                                                    '0'
+                                            ? 24
+                                            : 44,
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(18),
+                                          color: widget.model.kidDetails!
+                                                          .attendance!.day1 ==
+                                                      null ||
+                                                  widget.model.kidDetails!
+                                                          .attendance!.day1 ==
+                                                      '0'
+                                              ? AppColors()
+                                                  .k8267AC
+                                                  .withOpacity(0.2)
+                                              : AppColors().k8267AC,
+                                        ),
+                                      ),
+                                      Container(
+                                        width: 6,
+                                        height: widget.model.kidDetails!
+                                                        .attendance!.day2 ==
+                                                    null ||
+                                                widget.model.kidDetails!
+                                                        .attendance!.day2 ==
+                                                    '0'
+                                            ? 24
+                                            : 44,
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(18),
+                                          color: widget.model.kidDetails!
+                                                          .attendance!.day2 ==
+                                                      null ||
+                                                  widget.model.kidDetails!
+                                                          .attendance!.day2 ==
+                                                      '0'
+                                              ? AppColors()
+                                                  .k8267AC
+                                                  .withOpacity(0.2)
+                                              : AppColors().k8267AC,
+                                        ),
+                                      ),
+                                      Container(
+                                        width: 6,
+                                        height: widget.model.kidDetails!
+                                                        .attendance!.day3 ==
+                                                    null ||
+                                                widget.model.kidDetails!
+                                                        .attendance!.day3 ==
+                                                    '0'
+                                            ? 24
+                                            : 44,
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(18),
+                                          color: widget.model.kidDetails!
+                                                          .attendance!.day3 ==
+                                                      null ||
+                                                  widget.model.kidDetails!
+                                                          .attendance!.day3 ==
+                                                      '0'
+                                              ? AppColors()
+                                                  .k8267AC
+                                                  .withOpacity(0.2)
+                                              : AppColors().k8267AC,
+                                        ),
+                                      ),
+                                      Container(
+                                        width: 6,
+                                        height: widget.model.kidDetails!
+                                                        .attendance!.day4 ==
+                                                    null ||
+                                                widget.model.kidDetails!
+                                                        .attendance!.day4 ==
+                                                    '0'
+                                            ? 24
+                                            : 44,
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(18),
+                                          color: widget.model.kidDetails!
+                                                          .attendance!.day4 ==
+                                                      null ||
+                                                  widget.model.kidDetails!
+                                                          .attendance!.day4 ==
+                                                      '0'
+                                              ? AppColors()
+                                                  .k8267AC
+                                                  .withOpacity(0.2)
+                                              : AppColors().k8267AC,
+                                        ),
+                                      ),
+                                      Container(
+                                        width: 6,
+                                        height: widget.model.kidDetails!
+                                                        .attendance!.day5 ==
+                                                    null ||
+                                                widget.model.kidDetails!
+                                                        .attendance!.day5 ==
+                                                    '0'
+                                            ? 24
+                                            : 44,
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(18),
+                                          color: widget.model.kidDetails!
+                                                          .attendance!.day5 ==
+                                                      null ||
+                                                  widget.model.kidDetails!
+                                                          .attendance!.day5 ==
+                                                      '0'
+                                              ? AppColors()
+                                                  .k8267AC
+                                                  .withOpacity(0.2)
+                                              : AppColors().k8267AC,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 10,
+                                ),
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          "${_attendanceVal.length}/${widget.model.kidDetails!.attendance!.toJson().length}",
+                                          style: FontConstant2.k24w4008267text,
+                                        ),
+                                        Text(
+                                          "days".tr(),
+                                          style: FontConstant2.k16w400B7A4text,
+                                        ),
+                                      ],
+                                    )
+                                  ],
+                                )
+                              ],
+                            ),
+                            /*Row(
+                              children: [
+                                Text(
+                                  widget.model.kidDetails!.rank.toString(),
+                                  style: FontConstant2.k32w5008267text,
+                                ),
+                              ],
+                            )*/
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  /* Expanded(
+                    child: Container(
+                      height: 116,
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(16)),
+                      child: Padding(
                         padding: const EdgeInsets.symmetric(
                             horizontal: 16.0, vertical: 4),
                         child: Row(
@@ -396,10 +595,10 @@ class _PKidsOverviewState extends State<PKidsOverview> {
                             ),
                             Expanded(
                               child: Column(
-                                /*mainAxisAlignment:
+                                 mainAxisAlignment:
                                                   MainAxisAlignment.center,
                                               crossAxisAlignment:
-                                                  CrossAxisAlignment.center,*/
+                                                  CrossAxisAlignment.center,
                                 children: [
                                   Row(
                                     mainAxisAlignment:
@@ -431,7 +630,7 @@ class _PKidsOverviewState extends State<PKidsOverview> {
                         ),
                       ),
                     ),
-                  ),
+                  ),*/
                 ],
               ),
             ],
@@ -470,6 +669,7 @@ class _PKidsOverviewState extends State<PKidsOverview> {
                         // SizedBox(height: 15),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             /*Expanded(
                         child: Column(
@@ -759,11 +959,13 @@ class _PKidsOverviewState extends State<PKidsOverview> {
                 children: [
                   Row(
                     children: [
-                      Text(
-                        "Working Days".tr(),
-                        style: FontConstant.k16w500331FText,
+                      SizedBox(
+                        width: 150.w,
+                        child: Text(
+                          "Working Days".tr(),
+                          style: FontConstant.k16w500331FText,
+                        ),
                       ),
-                      SizedBox(width: 16),
                       Text(
                         "${widget.model.kidDetails!.workingDay} ${"days".tr()}",
                         style: FontConstant.k16w5008471Text,
@@ -773,11 +975,13 @@ class _PKidsOverviewState extends State<PKidsOverview> {
                   SizedBox(height: 10),
                   Row(
                     children: [
-                      Text(
-                        "Attended days".tr(),
-                        style: FontConstant.k16w500331FText,
+                      SizedBox(
+                        width: 150.w,
+                        child: Text(
+                          "Attended days".tr(),
+                          style: FontConstant.k16w500331FText,
+                        ),
                       ),
-                      SizedBox(width: 16),
                       Text(
                         "${widget.model.kidDetails!.kidAttendDay} ${"days".tr()}",
                         style: FontConstant.k16w5008471Text,
@@ -787,11 +991,13 @@ class _PKidsOverviewState extends State<PKidsOverview> {
                   SizedBox(height: 10),
                   Row(
                     children: [
-                      Text(
-                        "Holidays".tr(),
-                        style: FontConstant.k16w500331FText,
+                      SizedBox(
+                        width: 150.w,
+                        child: Text(
+                          "Holidays".tr(),
+                          style: FontConstant.k16w500331FText,
+                        ),
                       ),
-                      SizedBox(width: 16),
                       Text(
                         "${widget.model.kidDetails!.holiDay} ${"days".tr()}",
                         style: FontConstant.k16w5008471Text,

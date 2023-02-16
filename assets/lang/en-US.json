@@ -4,6 +4,7 @@
   "We offer a new way to mark the children and shape them for better future.":"We offer a new way to mark the children and shape them for better future.",
 
   "We offer a new way to track your children and watch them grow.": "We offer a new way to track your children and watch them grow.",
+  "By proceeding you agree to our ": "By proceeding you agree to our ",
   "Account": "Account",
 
   "Parent’s Information": "Parent’s Information",
@@ -51,13 +52,28 @@
 
   "Enter your email/phone number": "Enter your email/phone number",
 
+  "Updated details will be your login credentials": "Updated details will be your login credentials",
+  "Changed email/phone number belongs to Mother": "Changed email/phone number belongs to Mother",
+  "Note: The email/phone number belongs to mother": "Note: The email/phone number belongs to mother",
+  "COVID Vaccination": "COVID Vaccination",
+  "I don’t like this": "I don’t like this",
+  "Not from the same group": "Not from the same group",
+  "Inappropriate content": "Inappropriate content",
+  "Kid's father": "Kid's father",
+  "select time": "select time",
+  "First time on Kidseau": "First time on Kidseau",
+  "Register": "Register",
+  "select date": "select date",
+  "Kid's mother": "Kid's mother",
   "Login with OTP": "Login with OTP",
 
   "OTP verification": "OTP verification",
   "Verify": "Verify",
 
 
-  "A OTP has been sent to “9876543210”. Please enter the OTP here.":  "A OTP has been sent to “9876543210”. Please enter the OTP here.",
+  "A OTP has been sent to . ":  "A OTP has been sent to . ",
+
+  "Please enter the OTP here.": "Please enter the OTP here.",
 
   "Continue": "Continue",
 
@@ -149,6 +165,7 @@
   "Allergy":  "Allergy",
 
   "Weight":  "Weight",
+  "Welcome": "Welcome",
 
   "Current Code": "Current Code",
   "Height": "Height",

@@ -81,7 +81,7 @@ class _POnboardingScreenState extends State<POnboardingScreen> {
                   children: [
                     SizedBox(
                       //color: Colors.orange,
-                      height: 500.h,
+                      height: 510.h,
                       child: PageView.builder(
                         controller: controller,
                         itemCount: Pcontents.length,
@@ -115,7 +115,7 @@ class _POnboardingScreenState extends State<POnboardingScreen> {
                                 Text(Pcontents[i].title.tr(),
                                     style: FontConstant2.k32w500331Ftext),
                                 SizedBox(
-                                  width: 200.w,
+                                  width: 1.sw,
                                   child: Text(Pcontents[i].discription.tr(),
                                       maxLines: 2,
                                       style: FontConstant.k16w4008471Text),

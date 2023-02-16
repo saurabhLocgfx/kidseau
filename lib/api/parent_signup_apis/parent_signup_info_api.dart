@@ -39,12 +39,14 @@ class ParentSignUpInfo {
       'address': address,
       //'profile_photo': "$pickedImage"
     });
-    request.files.add(
-        await http.MultipartFile.fromPath('profile_photo', pickedImage.path));
+    if (pickedImage.path.isNotEmpty) {
+      request.files.add(
+          await http.MultipartFile.fromPath('profile_photo', pickedImage.path));
+    }
 
     request.headers.addAll(headers);
     log(request.fields.toString());
-    log(request.files[0].toString());
+    //log(request.files[0].toString());
     http.StreamedResponse response = await request.send();
     //http.StreamedResponse response = await request.send();
     var rsp = jsonDecode(await response.stream.bytesToString());

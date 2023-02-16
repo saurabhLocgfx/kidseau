@@ -958,96 +958,130 @@ class _PKidsDetailsState extends State<PKidsDetails> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text("Current treatment".tr(),
-                                    style: FontConstant2.k22w5008471text),
-                                SizedBox(height: 4),
-                                Text(
-                                  model.medicalStatus.toString(),
-                                  style: FontConstant.k16w5008471Text,
-                                ),
-                                SizedBox(height: 32),
+                                if (model.medicalStatus != '')
+                                  Text("Current treatment".tr(),
+                                      style: FontConstant2.k22w5008471text),
+                                if (model.medicalStatus != '')
+                                  SizedBox(height: 4),
+                                if (model.medicalStatus != '')
+                                  Text(
+                                    model.medicalStatus.toString(),
+                                    style: FontConstant.k16w5008471Text,
+                                  ),
+                                if (model.medicalStatus != '')
+                                  SizedBox(height: 32),
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text("Vaccinations".tr(),
-                                        style: FontConstant2.k22w5008471text),
-                                    SizedBox(height: 4),
-                                    for (int i = 0;
+                                    if (model.otherVaccination!.isNotEmpty)
+                                      Text("Vaccinations".tr(),
+                                          style: FontConstant2.k22w5008471text),
+                                    if (model.otherVaccination!.isNotEmpty)
+                                      SizedBox(height: 4),
+                                    /*for (int i = 0;
                                         i < model.otherVaccination!.length;
-                                        i++)
-                                      GestureDetector(
-                                        onTap: () {
-                                          setState(() {
-                                            isChecked[i] = !isChecked[i];
-                                          });
-                                        },
-                                        child: Container(
-                                          color: Colors.transparent,
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Row(
-                                                children: [
-                                                  Text(
-                                                    model.otherVaccination![i]
-                                                        .replaceAll('@', ' '),
-                                                    style: FontConstant
-                                                        .k16w500331FText,
-                                                  ),
-                                                  SizedBox(width: 16),
-                                                  /*Text(time[i],
-                                                      style: FontConstant
-                                                          .k16w400B7A4Text
-                                                          .copyWith(
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w500)),*/
-                                                ],
-                                              ),
-                                              Checkbox(
-                                                activeColor: Color(0xffBE74AA),
-                                                checkColor: Colors.white,
-                                                shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(5),
+                                        i++)*/
+                                    if (model.otherVaccination!.isNotEmpty)
+                                      MediaQuery.removePadding(
+                                        context: context,
+                                        removeTop: true,
+                                        child: ListView.builder(
+                                          shrinkWrap: true,
+                                          itemCount:
+                                              model.otherVaccination!.length,
+                                          itemBuilder: (ctx, i) {
+                                            return GestureDetector(
+                                              onTap: () {
+                                                setState(() {
+                                                  isChecked[i] = !isChecked[i];
+                                                });
+                                              },
+                                              child: Container(
+                                                color: Colors.transparent,
+                                                child: Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: [
+                                                    Row(
+                                                      children: [
+                                                        Text(
+                                                          model
+                                                              .otherVaccination![
+                                                                  i]
+                                                              .replaceAll(
+                                                                  '@', ' '),
+                                                          style: FontConstant
+                                                              .k16w500331FText,
+                                                        ),
+                                                        SizedBox(width: 16),
+                                                        /*Text(time[i],
+                                                        style: FontConstant
+                                                            .k16w400B7A4Text
+                                                            .copyWith(
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w500)),*/
+                                                      ],
+                                                    ),
+                                                    Checkbox(
+                                                      activeColor:
+                                                          Color(0xffBE74AA),
+                                                      checkColor: Colors.white,
+                                                      shape:
+                                                          RoundedRectangleBorder(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(5),
+                                                      ),
+                                                      value:
+                                                          true, // isChecked[i],
+                                                      onChanged: (bool? value) {
+                                                        /*setState(() {
+                                                      isChecked[i] = value!;
+                                                    });*/
+                                                      },
+                                                    ),
+                                                  ],
                                                 ),
-                                                value: true, // isChecked[i],
-                                                onChanged: (bool? value) {
-                                                  /*setState(() {
-                                                    isChecked[i] = value!;
-                                                  });*/
-                                                },
                                               ),
-                                            ],
-                                          ),
+                                            );
+                                          },
                                         ),
                                       ),
                                     SizedBox(height: 20),
-                                    Text("Covid Vaccination".tr(),
-                                        style: FontConstant2.k22w5008471text),
-                                    MediaQuery.removePadding(
-                                      context: context,
-                                      removeTop: true,
-                                      child: ListView.builder(
-                                        itemBuilder: (ctx, index) =>
-                                            CheckboxListTile(
-                                          contentPadding:
-                                              EdgeInsets.only(left: 0),
-                                          activeColor: Color(0xffBE74AA),
-                                          checkColor: Colors.white,
-                                          checkboxShape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(5),
-                                          ),
-                                          title: Text(
-                                            model.covidVaccination![index],
-                                            style: FontConstant.k16w500331FText,
-                                          ),
-                                          value: true,
-                                          onChanged: (val) {
-                                            setState(() {
-                                              /*if (val == true) {
+                                    model.covidVaccination!.isEmpty
+                                        ? SizedBox.shrink()
+                                        : Text("COVID Vaccination".tr(),
+                                            style:
+                                                FontConstant2.k22w5008471text),
+                                    model.covidVaccination!.isEmpty
+                                        ? SizedBox.shrink()
+                                        : MediaQuery.removePadding(
+                                            context: context,
+                                            removeTop: true,
+                                            child: ListView.builder(
+                                              itemBuilder: (ctx, index) =>
+                                                  CheckboxListTile(
+                                                contentPadding:
+                                                    EdgeInsets.only(left: 0),
+                                                activeColor: Color(0xffBE74AA),
+                                                checkColor: Colors.white,
+                                                checkboxShape:
+                                                    RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(5),
+                                                ),
+                                                title: Text(
+                                                  model.covidVaccination![index]
+                                                      .tr(),
+                                                  style: FontConstant
+                                                      .k16w500331FText,
+                                                ),
+                                                value: true,
+                                                onChanged: (val) {
+                                                  setState(() {
+                                                    /*if (val == true) {
                                               _allVaccines = true;
                                               _fatherVaccines = true;
                                               _motherVaccines = true;
@@ -1058,17 +1092,19 @@ class _PKidsDetailsState extends State<PKidsDetails> {
                                               _motherVaccines = false;
                                               _kidVaccines = false;
                                             }*/
-                                            });
-                                          },
-                                          controlAffinity:
-                                              ListTileControlAffinity.trailing,
-                                        ),
-                                        shrinkWrap: true,
-                                        physics: NeverScrollableScrollPhysics(),
-                                        itemCount:
-                                            model.covidVaccination!.length,
-                                      ),
-                                    ),
+                                                  });
+                                                },
+                                                controlAffinity:
+                                                    ListTileControlAffinity
+                                                        .trailing,
+                                              ),
+                                              shrinkWrap: true,
+                                              physics:
+                                                  NeverScrollableScrollPhysics(),
+                                              itemCount: model
+                                                  .covidVaccination!.length,
+                                            ),
+                                          ),
                                     /*  Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,

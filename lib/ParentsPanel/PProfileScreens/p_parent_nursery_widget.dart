@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kidseau/api/models/parent_models/parent_profile_models/kid_school_detail_model.dart';
 import 'package:kidseau/api/parent_panel_apis/parent_profile_apis/nursery_data_api.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../TeachersPanel/THomeScreen/TActivityScreen.dart';
 import '../../Theme.dart';
@@ -62,8 +63,12 @@ class _PParentNurseryWidgetState extends State<PParentNurseryWidget> {
                               Container(
                                 height: 128,
                                 width: 96,
+                                clipBehavior: Clip.hardEdge,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(8)),
                                 child: Image.network(
                                   dataList[index].schoolImage.toString(),
+                                  fit: BoxFit.fill,
                                   errorBuilder: (q, w, e) => Image.asset(
                                       "assets/images/profileperson.png"),
                                 ),
@@ -198,26 +203,58 @@ class _PParentNurseryWidgetState extends State<PParentNurseryWidget> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        CircleAvatar(
-                            radius: 24,
-                            backgroundImage: AssetImage(
-                              "assets/images/facebookicon.png",
-                            )),
-                        CircleAvatar(
-                            radius: 24,
-                            backgroundImage: AssetImage(
-                              "assets/images/Twittericon.png",
-                            )),
-                        CircleAvatar(
-                            radius: 24,
-                            backgroundImage: AssetImage(
-                              "assets/images/linkedicon.png",
-                            )),
-                        CircleAvatar(
-                            radius: 24,
-                            backgroundImage: AssetImage(
-                              "assets/images/instagramicon.png",
-                            )),
+                        InkWell(
+                          onTap: () {
+                            launchUrl(Uri.parse(dataList[currentIndex]
+                                .socialMedia!
+                                .facebook
+                                .toString()));
+                          },
+                          child: CircleAvatar(
+                              radius: 24,
+                              backgroundImage: AssetImage(
+                                "assets/images/facebookicon.png",
+                              )),
+                        ),
+                        InkWell(
+                          onTap: () {
+                            launchUrl(Uri.parse(dataList[currentIndex]
+                                .socialMedia!
+                                .twitter
+                                .toString()));
+                          },
+                          child: CircleAvatar(
+                              radius: 24,
+                              backgroundImage: AssetImage(
+                                "assets/images/Twittericon.png",
+                              )),
+                        ),
+                        InkWell(
+                          onTap: () {
+                            launchUrl(Uri.parse(dataList[currentIndex]
+                                .socialMedia!
+                                .linkedIn
+                                .toString()));
+                          },
+                          child: CircleAvatar(
+                              radius: 24,
+                              backgroundImage: AssetImage(
+                                "assets/images/linkedicon.png",
+                              )),
+                        ),
+                        InkWell(
+                          onTap: () {
+                            launchUrl(Uri.parse(dataList[currentIndex]
+                                .socialMedia!
+                                .instagram
+                                .toString()));
+                          },
+                          child: CircleAvatar(
+                              radius: 24,
+                              backgroundImage: AssetImage(
+                                "assets/images/instagramicon.png",
+                              )),
+                        ),
                       ],
                     ),
                     SizedBox(height: 32),

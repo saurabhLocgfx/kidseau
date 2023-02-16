@@ -10,6 +10,7 @@ import 'package:kidseau/Theme.dart';
 import 'package:kidseau/Widgets/buttons.dart';
 import 'package:kidseau/shard_prefs/shared_prefs.dart';
 
+import '../../Widgets/textfields.dart';
 import '../../api/parent_login_apis/parent_login_api.dart';
 
 class PLoginScreen extends StatelessWidget {
@@ -45,7 +46,7 @@ class PLoginScreen extends StatelessWidget {
                       children: [
                         Padding(
                           padding:
-                              EdgeInsets.only(top: 160.h, left: 16, right: 16),
+                              EdgeInsets.only(top: 150.h, left: 16, right: 16),
                           child: Container(
                             child: Center(
                               child: Column(
@@ -93,13 +94,14 @@ class PLoginScreen extends StatelessWidget {
                                   validator: (phoneText) {
                                     if (phoneText == null ||
                                         phoneText.isEmpty) {
-                                      return 'Enter mobile or email';
+                                      return "Enter your email/phone number"
+                                          .tr();
                                     }
                                     return null;
                                   },
                                   controller: emailController,
                                   style: FontConstant.k18w5008471Text,
-                                  decoration: InputDecoration(
+                                  decoration: /*InputDecoration(
                                     contentPadding: EdgeInsets.all(14.0),
                                     border: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(30),
@@ -121,7 +123,12 @@ class PLoginScreen extends StatelessWidget {
                                             color: Color(0xffB7A4B2),
                                             fontSize: 16.0,
                                             fontWeight: FontWeight.w400),
-                                  ),
+                                  )*/
+                                      CustomInputDecoration(
+                                              hintText:
+                                                  "Enter your email/phone number"
+                                                      .tr())
+                                          .decoration(),
                                   /*  controller: controller,*/
                                 ),
                               ),
@@ -165,32 +172,37 @@ class PLoginScreen extends StatelessWidget {
                                 height: 40,
                               ),
                               Center(
-                                child: Container(
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      SizedBox(
-                                        width: 5.w,
-                                      ),
-                                      Text("First time on Kidseau".tr(),
-                                          style: FontConstant.k16w4008471Text),
-                                      SizedBox(
-                                        width: 5.w,
-                                      ),
-                                      Text("?",
-                                          style: FontConstant.k16w4008471Text),
-                                      SizedBox(width: 5.w),
-                                      GestureDetector(
-                                          onTap: () {
-                                            Navigator.of(context).push(
-                                                MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        PSignupScreen()));
-                                          },
-                                          child: Text("Register",
-                                              style: FontConstant
-                                                  .k16w500purpleText))
-                                    ],
+                                child: GestureDetector(
+                                  onTap: () {
+                                    Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                PSignupScreen()));
+                                  },
+                                  child: Container(
+                                    color: Colors.transparent,
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        SizedBox(
+                                          width: 5.w,
+                                        ),
+                                        Text("First time on Kidseau".tr(),
+                                            style:
+                                                FontConstant.k16w4008471Text),
+                                        SizedBox(
+                                          width: 5.w,
+                                        ),
+                                        Text("?",
+                                            style:
+                                                FontConstant.k16w4008471Text),
+                                        SizedBox(width: 5.w),
+                                        Text("Register".tr(),
+                                            style:
+                                                FontConstant.k16w500purpleText)
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ),

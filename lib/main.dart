@@ -13,6 +13,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:kidseau/ParentsPanel/POnboardingScreens/PSplashScreen.dart';
 import 'package:kidseau/Theme.dart';
+import 'package:kidseau/reminder_notifications_class.dart';
 import 'package:kidseau/restartappwidget/restartwidgets.dart';
 import 'package:kidseau/shard_prefs/shared_prefs.dart';
 import 'dart:ui' as ui;
@@ -212,6 +213,7 @@ class MyAppState extends State<MyApp> {
     //FirebaseMessaging.onMessageOpenedApp.listen(_handleMessage);
   }
 
+  NotificationServices notificationServices = NotificationServices();
   @override
   void initState() {
     FirebaseMessaging.onMessage.listen(
@@ -306,6 +308,7 @@ class MyAppState extends State<MyApp> {
         //log('onMessageOpened' + event.data.toString());
       },
     );
+    notificationServices.initializeNotification();
     super.initState();
   }
 

@@ -9,8 +9,22 @@
   "Login/create a new account to track your kids’ activities.":"تسجيل الدخول / إنشاء حساب جديد لتتبع أنشطة طفلك",
 
   "Email/Phone number":"البريد الإلكتروني / رقم الهاتف",
+  "Updated details will be your login credentials": "ستكون التفاصيل المحدثة هي بيانات اعتماد تسجيل الدخول الخاصة بك",
   "Voucher Code": "كود الدخول",
+  "Changed email/phone number belongs to Mother":"تم تغيير البريد الإلكتروني/رقم الهاتف إلى الأم",
 
+  "I don’t like this": "أنا لا أحب هذا",
+  "Not from the same group":"ليس من نفس المجموعة",
+  "Inappropriate content":"محتوى غير لائق",
+  "Kid's father":"والد الطفل",
+  "Kid's mother": "والدة الطفل",
+  "select time":"حدد الوقت",
+  "COVID Vaccination":"التطعيم covid",
+  "First time on Kidseau":" لأول مرة على Kidseau",
+  "Register": "تسجيل",
+  "Welcome":"مرحباً",
+  "select date":"حدد تاريخ",
+  "Note: The email/phone number belongs to mother":"ملاحظة: ينتمي البريد الإلكتروني/رقم الهاتف إلى الأم",
   "Enter your email/phone number":"أدخل بريدك الإلكتروني / رقم هاتفك",
 
   "Login with OTP":"otpتسجيل الدخول باستخدام",
@@ -43,7 +57,9 @@
   "Ask Question": "إطرح سؤال",
   "Overview": "ملخص",
 
-  "A OTP has been sent to “9876543210”. Please enter the OTP here.":"تم إرسال  الرمز على الرقم ”9876543210“. الرجاء إدخاله",
+  "A OTP has been sent to . ":"تم إرسال  الرمز على الرقم . ",
+
+  "Please enter the OTP here.": "الرجاء إدخاله",
 
   "Continue":"استمر",
 

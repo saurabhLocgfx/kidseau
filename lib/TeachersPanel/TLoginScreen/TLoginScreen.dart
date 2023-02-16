@@ -188,19 +188,20 @@ class TLoginScreen extends StatelessWidget {
                                 child: RichText(
                                   text: TextSpan(children: [
                                     TextSpan(
-                                      text: ("By proceeding you agree to our "),
+                                      text: "By proceeding you agree to our "
+                                          .tr(),
                                       style: FontConstant.k14w400B7A4Text,
                                     ),
                                     TextSpan(
-                                      text: ("Privacy Policy"),
+                                      text: "Privacy Policy".tr(),
                                       style: FontConstant.k14w500B7A4TextU,
                                     ),
                                     TextSpan(
-                                      text: " & ",
+                                      text: " & ".tr(),
                                       style: FontConstant.k14w400B7A4Text,
                                     ),
                                     TextSpan(
-                                      text: ("Terms and Conditions"),
+                                      text: "Terms and Conditions".tr(),
                                       style: FontConstant.k14w500B7A4TextU,
                                     ),
                                   ]),

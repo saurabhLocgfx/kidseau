@@ -66,7 +66,8 @@ class _TLoginOtpVerificationState extends State<TLoginOtpVerification> {
                               width: 173.w,
                             ),
                             Text(
-                              "We offer a new way to track your children and watch them grow.",
+                              "We offer a new way to mark the children and shape them for better future."
+                                  .tr(),
                               style: FontConstant.k16w4008471Text,
                               textAlign: TextAlign.center,
                             ),
@@ -88,9 +89,9 @@ class _TLoginOtpVerificationState extends State<TLoginOtpVerification> {
                             RichText(
                                 text: TextSpan(children: [
                               TextSpan(
-                                text:
-                                    "A OTP has been sent to “${widget.mobileText}”. Please enter the OTP here."
-                                        .tr(),
+                                text: "A OTP has been sent to . ".tr() +
+                                    widget.mobileText +
+                                    "Please enter the OTP here.".tr(),
                                 /*AppLoaclizations.of(context)!
                                     .translate(
                                         "A OTP has been sent to “9876543210”. Please enter the OTP here.")
@@ -266,19 +267,19 @@ class _TLoginOtpVerificationState extends State<TLoginOtpVerification> {
                               child: RichText(
                                   text: TextSpan(children: [
                                 TextSpan(
-                                  text: "By proceeding you agree to our ",
+                                  text: "By proceeding you agree to our ".tr(),
                                   style: FontConstant.k14w400B7A4Text,
                                 ),
                                 TextSpan(
-                                  text: "Privacy Policy",
+                                  text: "Privacy Policy".tr(),
                                   style: FontConstant.k14w500B7A4TextU,
                                 ),
                                 TextSpan(
-                                  text: " & ",
+                                  text: " & ".tr(),
                                   style: FontConstant.k14w400B7A4Text,
                                 ),
                                 TextSpan(
-                                  text: "Terms and Conditions",
+                                  text: "Terms and Conditions".tr(),
                                   style: FontConstant.k14w500B7A4TextU,
                                 ),
                               ])),

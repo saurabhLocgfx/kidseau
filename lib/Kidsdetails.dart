@@ -26,7 +26,7 @@ class KidsDetails extends StatefulWidget {
 
 class _KidsDetailsState extends State<KidsDetails> {
   TextEditingController kidNameController = TextEditingController();
-  TextEditingController kidAgeController = TextEditingController();
+  //TextEditingController kidAgeController = TextEditingController();
   TextEditingController datepicker = TextEditingController();
   TextEditingController kidBirthdayController = TextEditingController();
   // TextEditingController kidGenderController = TextEditingController();
@@ -38,7 +38,7 @@ class _KidsDetailsState extends State<KidsDetails> {
 
   String groupid = '';
   // String sectionid = '';
-  String _selectedText = 'Male';
+  String _selectedText = 'Male'.tr();
   String _selectedgroup = '';
   String _selectedsection = '';
 
@@ -353,7 +353,7 @@ class _KidsDetailsState extends State<KidsDetails> {
                             },
                           ),
                   ),
-                  SizedBox(height: 10),
+                  /*SizedBox(height: 10),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -382,7 +382,7 @@ class _KidsDetailsState extends State<KidsDetails> {
                         ),
                       )
                     ],
-                  ),
+                  ),*/
                   SizedBox(height: 10),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -658,7 +658,7 @@ class _KidsDetailsState extends State<KidsDetails> {
                                     kidName: kidNameController.text,
                                     kidSection: selectedSection['id'],
                                     kidGroup: selectedGroup['id'],
-                                    kidAge: kidAgeController.text,
+                                    //kidAge: kidAgeController.text,
                                     kidBirthday: kidBirthdayController.text,
                                     kidGender: _selectedText,
                                     pickedImage: _pickedImage,
@@ -694,7 +694,7 @@ class _KidsDetailsState extends State<KidsDetails> {
                       height: addressNode.hasFocus ? 400 : 0,
                       duration: Duration(milliseconds: 100)),*/
                   SizedBox(
-                    height: 300.h,
+                    height: 320,
                   ),
                 ],
               ),

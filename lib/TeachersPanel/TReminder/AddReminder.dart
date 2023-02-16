@@ -6,11 +6,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kidseau/Constants/colors.dart';
+import 'package:kidseau/TeachersPanel/TReminder/TReminderScreen.dart';
 import 'package:kidseau/Theme.dart';
 import 'package:kidseau/Widgets/buttons.dart';
 import 'package:kidseau/Widgets/custom_snack_bar.dart';
 import 'package:kidseau/Widgets/textfields.dart';
 import 'package:kidseau/api/reminder_apis/add_reminder_api.dart';
+import 'package:kidseau/reminder_notifications_class.dart';
 
 class TAddReminder extends StatefulWidget {
   final Function onPop;
@@ -22,16 +24,25 @@ class TAddReminder extends StatefulWidget {
 
 class _TAddReminderState extends State<TAddReminder> {
   final TextEditingController _controller = TextEditingController();
-  String date = 'select date';
-  String time = 'select time';
+  String date = 'select date'.tr();
+  String time = 'select time'.tr();
   bool _btnLoading = false;
 
+  NotificationServices notificationServices = NotificationServices();
   @override
   void dispose() {
     widget.onPop();
     super.dispose();
   }
 
+  @override
+  void initState() {
+    notificationServices.initializeNotification();
+    super.initState();
+  }
+
+  DateTime? v;
+  TimeOfDay? q;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -131,7 +142,6 @@ class _TAddReminderState extends State<TAddReminder> {
                 children: [
                   Text(
                     "Time".tr(),
-                    /*AppLoaclizations.of(context)!.translate("Time").toString(),*/
                     style: FontConstant.k16w500331FText,
                   ),
                   SizedBox(
@@ -139,15 +149,16 @@ class _TAddReminderState extends State<TAddReminder> {
                   ),
                   InkWell(
                     onTap: () async {
-                      var v = await showTimePicker(
+                      q = await showTimePicker(
                         context: context,
                         initialTime: TimeOfDay(hour: 12, minute: 00),
                       );
-                      if (v != null) {
+                      if (q != null) {
+                        log(q.toString());
                         final now = DateTime.now();
                         setState(() {
-                          time = DateFormat.jm().format(DateTime(
-                              now.year, now.month, now.day, v.hour, v.minute));
+                          time = DateFormat.jm().format(DateTime(now.year,
+                              now.month, now.day, q!.hour, q!.minute));
                         });
                       }
                     },
@@ -164,7 +175,6 @@ class _TAddReminderState extends State<TAddReminder> {
                 children: [
                   Text(
                     "Date".tr(),
-                    /*  AppLoaclizations.of(context)!.translate("Date").toString(),*/
                     style: FontConstant.k16w500331FText,
                   ),
                   SizedBox(
@@ -172,14 +182,14 @@ class _TAddReminderState extends State<TAddReminder> {
                   ),
                   InkWell(
                     onTap: () async {
-                      var v = await showDatePicker(
+                      v = await showDatePicker(
                           context: context,
                           initialDate: DateTime.now(),
                           firstDate: DateTime.now(),
                           lastDate: DateTime(2100));
                       if (v != null) {
                         setState(() {
-                          date = DateFormat("yyyy-MM-dd").format(v);
+                          date = DateFormat("yyyy-MM-dd").format(v!);
                         });
                       }
                     },
@@ -229,6 +239,13 @@ class _TAddReminderState extends State<TAddReminder> {
                             setState(() {
                               _btnLoading = false;
                             });
+                            var dateTime = DateTime(
+                                v!.year, v!.month, v!.day, q!.hour, q!.minute);
+                            notificationServices.scheduleNotification(
+                                id: value["id"],
+                                title: value['title'],
+                                body: '',
+                                datetime: dateTime);
                             Reminderaddeddialog(context);
                           } else {
                             setState(() {
@@ -241,9 +258,6 @@ class _TAddReminderState extends State<TAddReminder> {
                       }
                     },
                     title: "Save".tr(),
-                    /*AppLoaclizations.of(context)!
-                          .translate("Save")
-                          .toString(),*/
                     textStyleColor: Colors.white,
                     backgroundColor: ThemeColor.primarycolor),
           ),
@@ -281,7 +295,8 @@ class _TAddReminderState extends State<TAddReminder> {
                       width: 250.w,
                       child: MainButton(
                           onTap: () {
-                            Navigator.pop(context);
+                            int count = 0;
+                            Navigator.of(context).popUntil((_) => count++ >= 2);
                           },
                           title: "Close".tr(),
                           /*AppLoaclizations.of(context)!
