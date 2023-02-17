@@ -8,6 +8,7 @@ import 'package:kidseau/ParentsPanel/PHomeScreen/PHomeScreen.dart';
 import 'package:kidseau/TeachersPanel/THomeScreen/TAttendanceScreen.dart';
 import 'package:kidseau/Theme.dart';
 
+import '../../ParentsPanel/PMessageScreen/PopenChats.dart';
 import '../../api/models/parent_models/parent_profile_models/kid_school_detail_model.dart';
 
 class TActivityScreen extends StatefulWidget {
@@ -171,53 +172,72 @@ class TeacherCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 128,
-      width: 382,
-      decoration: BoxDecoration(
-          image: DecorationImage(
-              image:
-                  AssetImage("assets/images/Teacher card leaarning ap.png"))),
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Row(
-          children: [
-            Container(
-              height: 96,
-              width: 72,
-              clipBehavior: Clip.hardEdge,
-              decoration: BoxDecoration(borderRadius: BorderRadius.circular(8)),
-              child: Image.network(
-                list[index].directorImage.toString(),
-                fit: BoxFit.fill,
-                errorBuilder: (q, w, e) =>
-                    Image.asset("assets/images/leaning alp person.png"),
-              ),
+    return InkWell(
+      onTap: () {
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => POpenChats(
+              onPop: () {
+                // _getData();
+              },
+              profilePic: list[index].directorImage.toString(),
+              name: list[index].directorName.toString(),
+              language: '',
+              userId: list[index].schoolId.toString(),
+              userType: list[index].userType.toString(),
             ),
-            SizedBox(width: 12),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  list[index].directorName.toString(),
-                  style: FontConstant.k18w500whiteText,
+          ),
+        );
+      },
+      child: Container(
+        height: 128,
+        width: 1.sw,
+        decoration: BoxDecoration(
+            image: DecorationImage(
+                image:
+                    AssetImage("assets/images/Teacher card leaarning ap.png"))),
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Row(
+            children: [
+              Container(
+                height: 96,
+                width: 72,
+                clipBehavior: Clip.hardEdge,
+                decoration:
+                    BoxDecoration(borderRadius: BorderRadius.circular(8)),
+                child: Image.network(
+                  list[index].directorImage.toString(),
+                  fit: BoxFit.fill,
+                  errorBuilder: (q, w, e) =>
+                      Image.asset("assets/images/leaning alp person.png"),
                 ),
-                Text(list[index].directorEmail.toString(),
-                    style: FontConstant.k18w500whiteText.copyWith(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w400,
-                      color: Colors.white.withOpacity(0.6),
-                    )),
-                Text(list[index].directorPhone.toString(),
-                    style: FontConstant.k18w500whiteText.copyWith(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w400,
-                      color: Colors.white.withOpacity(0.74),
-                    )),
-              ],
-            )
-          ],
+              ),
+              SizedBox(width: 12),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    list[index].directorName.toString(),
+                    style: FontConstant.k18w500whiteText,
+                  ),
+                  Text(list[index].directorEmail.toString(),
+                      style: FontConstant.k18w500whiteText.copyWith(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w400,
+                        color: Colors.white.withOpacity(0.6),
+                      )),
+                  Text(list[index].directorPhone.toString(),
+                      style: FontConstant.k18w500whiteText.copyWith(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w400,
+                        color: Colors.white.withOpacity(0.74),
+                      )),
+                ],
+              )
+            ],
+          ),
         ),
       ),
     );

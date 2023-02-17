@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:kidseau/ParentsPanel/PMessageScreen/PChats.dart';
 import 'package:kidseau/ParentsPanel/PMessageScreen/PopenChats.dart';
 import 'package:kidseau/Theme.dart';
 import 'package:kidseau/Widgets/buttons.dart';
@@ -339,77 +340,89 @@ class TeacherCard extends StatelessWidget {
   ];
   @override
   Widget build(BuildContext context) {
-    return Container(
-      //height: 150.h,
-      //margin: EdgeInsets.symmetric(horizontal: 16),
-      // clipBehavior: Clip.hardEdge,
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(16),
-          //color: Colors.blue,
-          image: DecorationImage(
-              image: AssetImage("assets/images/purplecard.png"),
-              fit: BoxFit.fill)),
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-      child: Stack(
-        children: [
-          Positioned(
-            right: 0,
-            bottom: 2,
-            child: SizedBox(
-              width: 60,
-              height: 60,
-              child: Image.asset(
-                birds[0],
-                fit: BoxFit.fill,
-              ),
-            ),
-          ),
-          Row(
-            //mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Container(
-                height: 80,
+    return InkWell(
+      onTap: () {
+        Navigator.of(context).push(MaterialPageRoute(
+            builder: (ctx) => PChats(
+                userId: model.schoolId.toString(),
+                onPop: () {},
+                userType: model.userType.toString(),
+                profilePic: model.directorImage.toString(),
+                name: model.directorName.toString(),
+                language: '')));
+      },
+      child: Container(
+        //height: 150.h,
+        //margin: EdgeInsets.symmetric(horizontal: 16),
+        // clipBehavior: Clip.hardEdge,
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(16),
+            //color: Colors.blue,
+            image: DecorationImage(
+                image: AssetImage("assets/images/purplecard.png"),
+                fit: BoxFit.fill)),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+        child: Stack(
+          children: [
+            Positioned(
+              right: 0,
+              bottom: 2,
+              child: SizedBox(
                 width: 60,
-                clipBehavior: Clip.hardEdge,
-                decoration:
-                    BoxDecoration(borderRadius: BorderRadius.circular(8)),
-                child: Image.network(
-                  model.directorImage.toString(),
-                  errorBuilder: (q, w, e) => Text('Image not loaded'),
+                height: 60,
+                child: Image.asset(
+                  birds[0],
                   fit: BoxFit.fill,
                 ),
               ),
-              SizedBox(
-                width: 12.w,
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(model.directorName.toString(),
-                      style: FontConstant.k18w5008471Text.copyWith(
-                        color: Colors.white,
-                      )),
-                  Text('Director',
-                      style: FontConstant.k14w4008471Text
-                          .copyWith(color: Colors.white.withOpacity(0.74))),
-                  Text(model.directorPhone.toString(),
-                      style: FontConstant.k16w4008471Text
-                          .copyWith(color: Colors.white.withOpacity(0.80))),
-                ],
-              ),
-              /* Padding(
-                          padding: const EdgeInsets.only(top: 30, bottom: 10),
-                          child: Align(
-                              alignment: Alignment.centerRight,
-                              child: Image.asset(
-                                bird[index],
-                                fit: BoxFit.fill,
-                              )),
-                        ),*/
-            ],
-          ),
-        ],
+            ),
+            Row(
+              //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Container(
+                  height: 80,
+                  width: 60,
+                  clipBehavior: Clip.hardEdge,
+                  decoration:
+                      BoxDecoration(borderRadius: BorderRadius.circular(8)),
+                  child: Image.network(
+                    model.directorImage.toString(),
+                    errorBuilder: (q, w, e) => Text('Image not loaded'),
+                    fit: BoxFit.fill,
+                  ),
+                ),
+                SizedBox(
+                  width: 12.w,
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(model.directorName.toString(),
+                        style: FontConstant.k18w5008471Text.copyWith(
+                          color: Colors.white,
+                        )),
+                    Text('Director',
+                        style: FontConstant.k14w4008471Text
+                            .copyWith(color: Colors.white.withOpacity(0.74))),
+                    Text(model.directorPhone.toString(),
+                        style: FontConstant.k16w4008471Text
+                            .copyWith(color: Colors.white.withOpacity(0.80))),
+                  ],
+                ),
+                /* Padding(
+                            padding: const EdgeInsets.only(top: 30, bottom: 10),
+                            child: Align(
+                                alignment: Alignment.centerRight,
+                                child: Image.asset(
+                                  bird[index],
+                                  fit: BoxFit.fill,
+                                )),
+                          ),*/
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

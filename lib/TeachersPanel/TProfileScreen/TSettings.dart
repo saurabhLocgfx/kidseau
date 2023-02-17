@@ -9,6 +9,8 @@ import 'package:kidseau/ParentsPanel/PProfileScreens/PSettings/PTermsAndConditio
 import 'package:kidseau/TeachersPanel/TProfileScreen/TNotificationSetttings.dart';
 import 'package:kidseau/Theme.dart';
 
+import '../../ParentsPanel/PMessageScreen/PChats.dart';
+
 class TSettings extends StatefulWidget {
   TSettings({Key? key}) : super(key: key);
 
@@ -59,115 +61,150 @@ class _TSettingsState extends State<TSettings> {
             ],
           ),
         ),
-        body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
-          child: Column(
-            children: [
-              SizedBox(height: 140),
-              GestureDetector(
-                onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => TNotificationsettings(),
+        body: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: Column(
+              children: [
+                SizedBox(height: 16),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => TNotificationsettings(),
+                      ),
+                    );
+                  },
+                  child: Container(
+                    color: Colors.transparent,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "Notification Settings".tr(),
+                          style: FontConstant.k18w500331FText,
+                        ),
+                        Image.asset(
+                          "assets/images/rightarrow.png",
+                          height: 20,
+                        ),
+                      ],
                     ),
-                  );
-                },
-                child: Container(
-                  color: Colors.transparent,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "Notification Settings".tr(),
-                        style: FontConstant.k18w500331FText,
-                      ),
-                      Image.asset(
-                        "assets/images/rightarrow.png",
-                        height: 20,
-                      ),
-                    ],
                   ),
                 ),
-              ),
-              SizedBox(height: 20),
-              GestureDetector(
-                onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => PPrivacypolicy(),
+                SizedBox(height: 20),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => PPrivacypolicy(),
+                      ),
+                    );
+                  },
+                  child: Container(
+                    color: Colors.transparent,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "Privacy Policy".tr(),
+                          style: FontConstant.k18w500331FText,
+                        ),
+                        Image.asset(
+                          "assets/images/rightarrow.png",
+                          height: 20,
+                        ),
+                      ],
                     ),
-                  );
-                },
-                child: Container(
-                  color: Colors.transparent,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "Privacy Policy".tr(),
-                        style: FontConstant.k18w500331FText,
-                      ),
-                      Image.asset(
-                        "assets/images/rightarrow.png",
-                        height: 20,
-                      ),
-                    ],
                   ),
                 ),
-              ),
-              SizedBox(height: 20),
-              GestureDetector(
-                onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => PAboutus(),
+                SizedBox(height: 20),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => PAboutus(),
+                      ),
+                    );
+                  },
+                  child: Container(
+                    color: Colors.transparent,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "About Us".tr(),
+                          style: FontConstant.k18w500331FText,
+                        ),
+                        Image.asset(
+                          "assets/images/rightarrow.png",
+                          height: 20,
+                        ),
+                      ],
                     ),
-                  );
-                },
-                child: Container(
-                  color: Colors.transparent,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "About Us".tr(),
-                        style: FontConstant.k18w500331FText,
-                      ),
-                      Image.asset(
-                        "assets/images/rightarrow.png",
-                        height: 20,
-                      ),
-                    ],
                   ),
                 ),
-              ),
-              SizedBox(height: 20),
-              GestureDetector(
-                onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => PTermsAndConditions(),
+                SizedBox(height: 20),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => PTermsAndConditions(),
+                      ),
+                    );
+                  },
+                  child: Container(
+                    color: Colors.transparent,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "Terms and Conditions".tr(),
+                          style: FontConstant.k18w500331FText,
+                        ),
+                        Image.asset(
+                          "assets/images/rightarrow.png",
+                          height: 20,
+                        ),
+                      ],
                     ),
-                  );
-                },
-                child: Container(
-                  color: Colors.transparent,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "Terms and Conditions".tr(),
-                        style: FontConstant.k18w500331FText,
-                      ),
-                      Image.asset(
-                        "assets/images/rightarrow.png",
-                        height: 20,
-                      ),
-                    ],
                   ),
                 ),
-              ),
-            ],
+                SizedBox(height: 20),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => PChats(
+                          onPop: () {},
+                          profilePic: '',
+                          name: 'Kidseau support',
+                          language: '',
+                          userId: '1',
+                          userType: 'admin',
+                        ),
+                      ),
+                    );
+                  },
+                  child: Container(
+                    color: Colors.transparent,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "Kidseau support".tr(),
+                          style: FontConstant.k18w500331FText,
+                        ),
+                        Image.asset(
+                          "assets/images/rightarrow.png",
+                          height: 20,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
         ));
   }

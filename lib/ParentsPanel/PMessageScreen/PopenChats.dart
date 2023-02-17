@@ -261,6 +261,10 @@ class _POpenChatsState extends State<POpenChats> {
             ),
           ),
         ),
+        title: Text(
+          widget.name,
+          style: FontConstant.k18w5008471Text,
+        ),
         automaticallyImplyLeading: false,
         elevation: 0,
         systemOverlayStyle: SystemUiOverlayStyle(
@@ -441,96 +445,209 @@ class _POpenChatsState extends State<POpenChats> {
           ? Center(
               child: CircularProgressIndicator(),
             )
-          : Container(
-              // height: 896.h,
-              // width: 414.w,
-              constraints: BoxConstraints(maxHeight: 1.sh),
-              decoration: BoxDecoration(
-                //color: Colors.black,
-                image: DecorationImage(
-                    image: AssetImage(
-                      "assets/images/framemessages.png",
-                    ),
-                    colorFilter: ColorFilter.mode(
-                      Colors.transparent.withOpacity(0.4),
-                      BlendMode.modulate,
-                    ),
-                    fit: BoxFit.cover),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.only(left: 16.0, right: 16),
-                child: Column(
-                  children: [
-                    SizedBox(
-                      height: 140,
-                    ),
-                    Container(
-                      color: Colors.transparent,
-                      child: Row(
-                        children: [
-                          Container(
-                            height: 112,
-                            width: 84,
-                            clipBehavior: Clip.hardEdge,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(8)),
-                            child: Image.network(
-                              widget.profilePic,
-                              fit: BoxFit.fill,
-                              errorBuilder: (q, w, e) =>
-                                  Image.asset("assets/images/teacher1.png"),
-                            ),
-                          ),
-                          SizedBox(
-                            width: 16,
-                          ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(widget.name,
-                                  style: FontConstant.k24w500brownText.copyWith(
-                                      color: ThemeColor.primarycolor)),
-                              Text(
-                                widget.userType,
-                                style: FontConstant.k16w400B7A4Text,
-                              ),
-                              Text(
-                                widget.language,
-                                style: FontConstant.k16w4008471Text,
-                              )
-                            ],
-                          )
-                        ],
+          : SafeArea(
+              child: Container(
+                // height: 896.h,
+                // width: 414.w,
+                constraints: BoxConstraints(maxHeight: 1.sh),
+                decoration: BoxDecoration(
+                  //color: Colors.black,
+                  image: DecorationImage(
+                      image: AssetImage(
+                        "assets/images/framemessages.png",
                       ),
-                    ),
-                    Expanded(
-                      //height: 500,
-                      child: GroupedListView<AllMsg, DateTime>(
-                        controller: _scrollController,
-                        //itemExtent: messageModel.allMsg!.length.toDouble(),
-                        reverse: true,
-                        order: GroupedListOrder.DESC,
-                        padding: EdgeInsets.all(16),
-                        elements: messageModel.allMsg!,
-                        groupBy: (messages) =>
-                            DateTime.parse(messages.createdAt!),
-                        groupHeaderBuilder: (AllMsg messages) => SizedBox(),
-                        indexedItemBuilder:
-                            (context, AllMsg messages, int index) =>
-                                GestureDetector(
-                          onLongPress: messages.senderUserType == "parent"
-                              ? () {
-                                  showDialog(
-                                      barrierDismissible: true,
-                                      context: context,
-                                      builder: (ctx) {
-                                        return AlertDialog(
-                                          title: Text(
-                                            'Delete Message',
-                                            style: FontConstant.k18w500F970Text,
-                                          ),
-                                          content: Column(
+                      colorFilter: ColorFilter.mode(
+                        Colors.transparent.withOpacity(0.4),
+                        BlendMode.modulate,
+                      ),
+                      fit: BoxFit.cover),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 16.0, right: 16),
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        height: 16,
+                      ),
+                      /*Container(
+                        color: Colors.transparent,
+                        child: Row(
+                          children: [
+                            Container(
+                              height: 112,
+                              width: 84,
+                              clipBehavior: Clip.hardEdge,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(8)),
+                              child: Image.network(
+                                widget.profilePic,
+                                fit: BoxFit.fill,
+                                errorBuilder: (q, w, e) =>
+                                    Image.asset("assets/images/teacher1.png"),
+                              ),
+                            ),
+                            SizedBox(
+                              width: 16,
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(widget.name,
+                                    style: FontConstant.k24w500brownText.copyWith(
+                                        color: ThemeColor.primarycolor)),
+                                Text(
+                                  widget.userType,
+                                  style: FontConstant.k16w400B7A4Text,
+                                ),
+                                Text(
+                                  widget.language,
+                                  style: FontConstant.k16w4008471Text,
+                                )
+                              ],
+                            )
+                          ],
+                        ),
+                      ),*/
+                      Expanded(
+                        //height: 500,
+                        child: GroupedListView<AllMsg, DateTime>(
+                          controller: _scrollController,
+                          //itemExtent: messageModel.allMsg!.length.toDouble(),
+                          reverse: true,
+                          order: GroupedListOrder.DESC,
+                          padding: EdgeInsets.all(16),
+                          elements: messageModel.allMsg!,
+                          groupBy: (messages) =>
+                              DateTime.parse(messages.createdAt!),
+                          groupHeaderBuilder: (AllMsg messages) => SizedBox(),
+                          indexedItemBuilder:
+                              (context, AllMsg messages, int index) =>
+                                  GestureDetector(
+                            onLongPress: messages.senderUserType == "parent"
+                                ? () {
+                                    showDialog(
+                                        barrierDismissible: true,
+                                        context: context,
+                                        builder: (ctx) {
+                                          return AlertDialog(
+                                            title: Text(
+                                              'Delete Message',
+                                              style:
+                                                  FontConstant.k18w500F970Text,
+                                            ),
+                                            content: Column(
+                                              mainAxisSize: MainAxisSize.min,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                messages.fileUrl! == ''
+                                                    ? SizedBox.shrink()
+                                                    : Container(
+                                                        constraints:
+                                                            BoxConstraints(
+                                                                // maxWidth: 200,
+                                                                maxHeight: 150),
+                                                        margin: EdgeInsets.only(
+                                                            bottom: 10),
+                                                        child: Image.network(
+                                                          messages.fileUrl
+                                                              .toString(),
+                                                          errorBuilder:
+                                                              (q, w, e) => Text(
+                                                                  'Image not found'),
+                                                          fit: BoxFit.fitWidth,
+                                                        ),
+                                                      ),
+                                                Text(
+                                                  messages.message.toString(),
+                                                  style: FontConstant
+                                                      .k16w4008471Text
+                                                      .copyWith(
+                                                          color: Color(
+                                                              0xff5E5C70)),
+                                                ),
+                                              ],
+                                            ),
+                                            actions: [
+                                              TextButton(
+                                                  onPressed: () {
+                                                    Navigator.of(context).pop();
+                                                  },
+                                                  child: Text('Cancel')),
+                                              TextButton(
+                                                  onPressed: () {
+                                                    final resp =
+                                                        DeleteMessageApi()
+                                                            .delete(
+                                                                msgId: messages
+                                                                    .messageId
+                                                                    .toString());
+                                                    resp.then((value) {
+                                                      log(value.toString());
+                                                      if (value['status'] ==
+                                                          1) {
+                                                        setState(() {
+                                                          messageModel
+                                                                  .allMsg![index]
+                                                                  .message =
+                                                              'This message has been deleted';
+                                                          messageModel
+                                                              .allMsg![index]
+                                                              .fileUrl = '';
+                                                          messageModel
+                                                              .allMsg![index]
+                                                              .isDeleted = '1';
+                                                          messages.isDeleted =
+                                                              '1';
+                                                        });
+                                                        Navigator.of(context)
+                                                            .pop();
+                                                      } else {
+                                                        Navigator.of(context)
+                                                            .pop();
+                                                        CustomSnackBar
+                                                            .customErrorSnackBar(
+                                                                context,
+                                                                value['msg']);
+                                                      }
+                                                    });
+                                                  },
+                                                  child: Text(
+                                                    'Delete',
+                                                    style: FontConstant
+                                                        .k16w400F97070,
+                                                  )),
+                                            ],
+                                          );
+                                        });
+                                  }
+                                : () {},
+                            child: Align(
+                              alignment: messages.senderUserType == "parent"
+                                  ? Alignment.centerRight
+                                  : Alignment.centerLeft,
+                              child: Padding(
+                                padding: const EdgeInsets.only(bottom: 32.0),
+                                child: Container(
+                                  constraints: BoxConstraints(
+                                    maxWidth: 250,
+                                  ),
+                                  decoration: BoxDecoration(
+                                      color: messages.senderUserType == "parent"
+                                          ? Color(0xffF2F1F8)
+                                          : Color(0xffDBE8FA),
+                                      borderRadius: BorderRadius.circular(6)),
+                                  child: Padding(
+                                    padding: EdgeInsets.all(12),
+                                    child: messages.isDeleted == '1'
+                                        ? Text(
+                                            'This message has been deleted!',
+                                            style: FontConstant.k16w4008471Text
+                                                .copyWith(
+                                                    color: Colors.red.shade400),
+                                          )
+                                        : Column(
                                             mainAxisSize: MainAxisSize.min,
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
@@ -540,7 +657,7 @@ class _POpenChatsState extends State<POpenChats> {
                                                   : Container(
                                                       constraints:
                                                           BoxConstraints(
-                                                              // maxWidth: 200,
+                                                              maxWidth: 200,
                                                               maxHeight: 150),
                                                       margin: EdgeInsets.only(
                                                           bottom: 10),
@@ -550,7 +667,6 @@ class _POpenChatsState extends State<POpenChats> {
                                                         errorBuilder:
                                                             (q, w, e) => Text(
                                                                 'Image not found'),
-                                                        fit: BoxFit.fitWidth,
                                                       ),
                                                     ),
                                               Text(
@@ -563,288 +679,186 @@ class _POpenChatsState extends State<POpenChats> {
                                               ),
                                             ],
                                           ),
-                                          actions: [
-                                            TextButton(
-                                                onPressed: () {
-                                                  Navigator.of(context).pop();
-                                                },
-                                                child: Text('Cancel')),
-                                            TextButton(
-                                                onPressed: () {
-                                                  final resp =
-                                                      DeleteMessageApi().delete(
-                                                          msgId: messages
-                                                              .messageId
-                                                              .toString());
-                                                  resp.then((value) {
-                                                    log(value.toString());
-                                                    if (value['status'] == 1) {
-                                                      setState(() {
-                                                        messageModel
-                                                                .allMsg![index]
-                                                                .message =
-                                                            'This message has been deleted';
-                                                        messageModel
-                                                            .allMsg![index]
-                                                            .fileUrl = '';
-                                                        messageModel
-                                                            .allMsg![index]
-                                                            .isDeleted = '1';
-                                                        messages.isDeleted =
-                                                            '1';
-                                                      });
-                                                      Navigator.of(context)
-                                                          .pop();
-                                                    } else {
-                                                      Navigator.of(context)
-                                                          .pop();
-                                                      CustomSnackBar
-                                                          .customErrorSnackBar(
-                                                              context,
-                                                              value['msg']);
-                                                    }
-                                                  });
-                                                },
-                                                child: Text(
-                                                  'Delete',
-                                                  style: FontConstant
-                                                      .k16w400F97070,
-                                                )),
-                                          ],
-                                        );
-                                      });
-                                }
-                              : () {},
-                          child: Align(
-                            alignment: messages.senderUserType == "parent"
-                                ? Alignment.centerRight
-                                : Alignment.centerLeft,
-                            child: Padding(
-                              padding: const EdgeInsets.only(bottom: 32.0),
-                              child: Container(
-                                constraints: BoxConstraints(
-                                  maxWidth: 250,
-                                ),
-                                decoration: BoxDecoration(
-                                    color: messages.senderUserType == "parent"
-                                        ? Color(0xffF2F1F8)
-                                        : Color(0xffDBE8FA),
-                                    borderRadius: BorderRadius.circular(6)),
-                                child: Padding(
-                                  padding: EdgeInsets.all(12),
-                                  child: messages.isDeleted == '1'
-                                      ? Text(
-                                          'This message has been deleted!',
-                                          style: FontConstant.k16w4008471Text
-                                              .copyWith(
-                                                  color: Colors.red.shade400),
-                                        )
-                                      : Column(
-                                          mainAxisSize: MainAxisSize.min,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            messages.fileUrl! == ''
-                                                ? SizedBox.shrink()
-                                                : Container(
-                                                    constraints: BoxConstraints(
-                                                        maxWidth: 200,
-                                                        maxHeight: 150),
-                                                    margin: EdgeInsets.only(
-                                                        bottom: 10),
-                                                    child: Image.network(
-                                                      messages.fileUrl
-                                                          .toString(),
-                                                      errorBuilder: (q, w, e) =>
-                                                          Text(
-                                                              'Image not found'),
-                                                    ),
-                                                  ),
-                                            Text(
-                                              messages.message.toString(),
-                                              style: FontConstant
-                                                  .k16w4008471Text
-                                                  .copyWith(
-                                                      color: Color(0xff5E5C70)),
-                                            ),
-                                          ],
-                                        ),
+                                  ),
                                 ),
                               ),
                             ),
                           ),
                         ),
                       ),
-                    ),
-                    Visibility(
-                      visible: _isVisible,
-                      child: Container(
-                        height: 115.h,
-                        width: 382.w,
-                        decoration: BoxDecoration(
-                          boxShadow: [
-                            BoxShadow(
-                              offset: Offset(2, 2),
-                              blurRadius: 12,
-                              color: Color.fromRGBO(93, 61, 143, 0.2),
-                            )
-                          ],
-                          color: Colors.white,
-                          borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(62.0),
-                              topRight: Radius.circular(97.0),
-                              bottomRight: Radius.circular(97.0)),
-                        ),
+                      Visibility(
+                        visible: _isVisible,
                         child: Container(
-                          height: 67.h,
+                          height: 115.h,
                           width: 382.w,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  InkWell(
-                                    onTap: () {
-                                      /*
-                                      if (isRecording) {
-                                        record.stop();
-                                      } else {
-
-                                      }*/
-                                      _getVoicePermission();
-                                      //log(isRecording.toString());
-                                    },
-                                    child: Container(
-                                      color: Colors.transparent,
-                                      child: Column(
-                                        children: [
-                                          Image.asset(
-                                            "assets/images/micicon.png",
-                                            height: 24.h,
-                                          ),
-                                          Text(
-                                            "Voice note".tr(),
-                                            /*AppLoaclizations.of(context)!
-                            .translate("Voice note")
-                            .toString(),*/
-                                            style: FontConstant.k16w5008471Text,
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                  InkWell(
-                                    onTap: () async {
-                                      XFile? image = await _picker.pickImage(
-                                          source: ImageSource.gallery,
-                                          imageQuality: 50);
-                                      if (image != null) {
-                                        setState(() {
-                                          _pickedImg = File(image.path);
-                                          _isVisible = false;
-                                        });
-                                      }
-                                    },
-                                    child: Container(
-                                      color: Colors.transparent,
-                                      child: Column(
-                                        children: [
-                                          Image.asset(
-                                            "assets/images/galleryicon.png",
-                                            height: 24.h,
-                                          ),
-                                          Text(
-                                            "Gallery".tr(),
-                                            style: FontConstant.k16w5008471Text,
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                  InkWell(
-                                    onTap: () async {
-                                      // log('message');
-                                      _getContactPermission();
-                                    },
-                                    child: Container(
-                                      color: Colors.transparent,
-                                      child: Column(
-                                        children: [
-                                          Image.asset(
-                                            "assets/images/contacticon.png",
-                                            height: 24.h,
-                                          ),
-                                          Text(
-                                            "Contact".tr(),
-                                            style: FontConstant.k16w5008471Text,
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
+                          decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                offset: Offset(2, 2),
+                                blurRadius: 12,
+                                color: Color.fromRGBO(93, 61, 143, 0.2),
+                              )
                             ],
+                            color: Colors.white,
+                            borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(62.0),
+                                topRight: Radius.circular(97.0),
+                                bottomRight: Radius.circular(97.0)),
+                          ),
+                          child: Container(
+                            height: 67.h,
+                            width: 382.w,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    InkWell(
+                                      onTap: () {
+                                        /*
+                                        if (isRecording) {
+                                          record.stop();
+                                        } else {
+
+                                        }*/
+                                        _getVoicePermission();
+                                        //log(isRecording.toString());
+                                      },
+                                      child: Container(
+                                        color: Colors.transparent,
+                                        child: Column(
+                                          children: [
+                                            Image.asset(
+                                              "assets/images/micicon.png",
+                                              height: 24.h,
+                                            ),
+                                            Text(
+                                              "Voice note".tr(),
+                                              /*AppLoaclizations.of(context)!
+                              .translate("Voice note")
+                              .toString(),*/
+                                              style:
+                                                  FontConstant.k16w5008471Text,
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                    InkWell(
+                                      onTap: () async {
+                                        XFile? image = await _picker.pickImage(
+                                            source: ImageSource.gallery,
+                                            imageQuality: 50);
+                                        if (image != null) {
+                                          setState(() {
+                                            _pickedImg = File(image.path);
+                                            _isVisible = false;
+                                          });
+                                        }
+                                      },
+                                      child: Container(
+                                        color: Colors.transparent,
+                                        child: Column(
+                                          children: [
+                                            Image.asset(
+                                              "assets/images/galleryicon.png",
+                                              height: 24.h,
+                                            ),
+                                            Text(
+                                              "Gallery".tr(),
+                                              style:
+                                                  FontConstant.k16w5008471Text,
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                    InkWell(
+                                      onTap: () async {
+                                        // log('message');
+                                        _getContactPermission();
+                                      },
+                                      child: Container(
+                                        color: Colors.transparent,
+                                        child: Column(
+                                          children: [
+                                            Image.asset(
+                                              "assets/images/contacticon.png",
+                                              height: 24.h,
+                                            ),
+                                            Text(
+                                              "Contact".tr(),
+                                              style:
+                                                  FontConstant.k16w5008471Text,
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ),
+                      SizedBox(
+                        height: 8.h,
+                      ),
+                      /* Container(
+                height: 52.h,
+                width: 382.w,
+                child: TextField(
+                  onSubmitted: (text) {
+                    final message = Messages(
+                        text: text, date: DateTime.now(), isSentByme: true);
+                    setState(() => messages.add(message));
+                  },
+                  decoration: InputDecoration(
+                    enabledBorder: OutlineInputBorder(
+                      borderSide:
+                          BorderSide(width: 2, color: Color(0xffDBE8FA)),
                     ),
-                    SizedBox(
-                      height: 8.h,
+                    focusedBorder: OutlineInputBorder(
+                      borderSide:
+                          BorderSide(width: 2, color: Color(0xffDBE8FA)),
                     ),
-                    /* Container(
-              height: 52.h,
-              width: 382.w,
-              child: TextField(
-                onSubmitted: (text) {
-                  final message = Messages(
-                      text: text, date: DateTime.now(), isSentByme: true);
-                  setState(() => messages.add(message));
-                },
-                decoration: InputDecoration(
-                  enabledBorder: OutlineInputBorder(
-                    borderSide:
-                        BorderSide(width: 2, color: Color(0xffDBE8FA)),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide:
-                        BorderSide(width: 2, color: Color(0xffDBE8FA)),
-                  ),
-                  fillColor: Color(0xffF0F4FA),
-                  hintText: "Type here.".tr(),
-                  */ /* AppLoaclizations.of(context)!.translate("Type here."),*/ /*
-                  hintStyle: FontConstant.k16w400B7A4Text,
-                  suffixIcon: GestureDetector(
-                    onTap: () {},
-                    child: Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: ImageIcon(
-                        AssetImage("assets/images/sendicon.png"),
-                        size: 12,
-                        color: ThemeColor.primarycolor,
+                    fillColor: Color(0xffF0F4FA),
+                    hintText: "Type here.".tr(),
+                    */ /* AppLoaclizations.of(context)!.translate("Type here."),*/ /*
+                    hintStyle: FontConstant.k16w400B7A4Text,
+                    suffixIcon: GestureDetector(
+                      onTap: () {},
+                      child: Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: ImageIcon(
+                          AssetImage("assets/images/sendicon.png"),
+                          size: 12,
+                          color: ThemeColor.primarycolor,
+                        ),
                       ),
                     ),
-                  ),
-                  prefixIcon: Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: GestureDetector(
-                      onTap: showToast,
-                      child: ImageIcon(
-                        AssetImage("assets/images/add-circle.png"),
-                        size: 12,
-                        color: ThemeColor.darkpurple,
+                    prefixIcon: Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: GestureDetector(
+                        onTap: showToast,
+                        child: ImageIcon(
+                          AssetImage("assets/images/add-circle.png"),
+                          size: 12,
+                          color: ThemeColor.darkpurple,
+                        ),
                       ),
                     ),
                   ),
                 ),
-              ),
-            ),*/
-                    /*SizedBox(
-                      height: 32.h,
-                    ),*/
-                  ],
+              ),*/
+                      /*SizedBox(
+                        height: 32.h,
+                      ),*/
+                    ],
+                  ),
                 ),
               ),
             ),

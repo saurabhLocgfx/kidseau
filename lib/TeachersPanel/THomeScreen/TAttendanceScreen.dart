@@ -372,11 +372,14 @@ class _TAttendanceScreenState extends State<TAttendanceScreen> {
                                                 Container(
                                                   height: 67,
                                                   width: 50,
+                                                  clipBehavior: Clip.hardEdge,
                                                   decoration: BoxDecoration(
                                                       /*image: DecorationImage(
                                           image: AssetImage(image[index],),
                                           fit: BoxFit.cover)*/
-                                                      ),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              8)),
                                                   child: Image.network(
                                                       model.groupAllkid![index]
                                                           .profilePic

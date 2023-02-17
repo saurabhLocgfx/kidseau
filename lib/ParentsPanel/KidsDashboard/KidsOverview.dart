@@ -185,9 +185,14 @@ class _PKidsOverviewState extends State<PKidsOverview> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text(
-                                  "Growth Rank".tr(),
-                                  style: FontConstant.k16w5008471Text,
+                                SizedBox(
+                                  width: 110,
+                                  child: Text(
+                                    "Growth Rank".tr(),
+                                    overflow: TextOverflow.ellipsis,
+                                    maxLines: 1,
+                                    style: FontConstant.k16w5008471Text,
+                                  ),
                                 ),
                                 Image.asset(
                                   "assets/images/batchicon.png",

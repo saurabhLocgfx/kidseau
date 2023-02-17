@@ -134,6 +134,8 @@
   "Address":"العنوان",
 
   "Nursery": "حضانة",
+  "No Post available": "لا يوجد منشور متاح",
+  "No tagged Photo": "لا صورة موسومة",
 
   "years": "سنوات",
 
@@ -375,8 +377,14 @@
 
   "Year of Experience":"سنوات الخبرة",
   "Enter your years of experience": "أدخل سنوات خبرتك",
-
+  "New Account": "حساب جديد",
+  "Create a new account to track your kids’ activities.": "قم بإنشاء حساب جديد لتتبع أنشطة أطفالك.",
+  "Keeping track of kids progress": "تتبع تطور مهارات الأطفال",
+  "You can maintain all the academic records of a student at one portal so that can be checked easily whenever required": "يمكنك الحفاظ على جميع السجلات الأكاديمية للطالب في بوابة واحدة بحيث يمكن فحصها بسهولة عند الحاجة",
   "Select your gender":"أختر جنسك",
+
+  "You can keep the parents updated about every possible step related to their kid directly using this application.": "يمكنك إعلام الوالدين حول كل خطوة ممكنة تتعلق بأطفالهم باستخدام هذا التطبيق مباشرة.",
+  "Build the future": "إبني المستقبل",
 
   "Enter your parmanent address":"أدخل عنوانك",
 
@@ -393,10 +401,28 @@
   "i'm a Parent": "أنا والد",
 
 
+  "Note: The email/phone number belongs to Father by default": "ابدأ المحادثة مع أحد مربيين طفلك",
   "info": "معلومات",
+  "Provide kids the opportunity to learn from best-in-class teachers along with the attest academic curriculum.": "وفر للأطفال الفرصة للتعلم من أفضل المعلمين في فئتها إلى جانب المناهج الدراسية الأكاديمية.",
 
+  "Oops!": "أُووبس!",
+  "No activity available for the kid.": "لا يوجد نشاط متاح للطفل",
+  "Change Profile Photo": "تغيير صورة الملف الشخصي",
+  "View Fees Structure": "عرض هيكل الرسوم",
+  "Logout": "تسجيل خروج",
+  "Paid to": " المدفوعة ل",
+  "Previous Payment": "الدفع السابق",
+  "Total Paid fees": "إجمالي المبلغ المدفوع",
+  "Remaining fees": "المبلغ المتبقي",
   "Group":"مجموعة",
+  "  Resend": "  إعادة إرسال",
+  "Start conversation with one of your kid’s educator": "ابدأ المحادثة مع أحد مربيين طفلك",
+  "You don’t have any notification": "ليس لديك أي إشعار",
 
+  "Track the activities and grades of your kid regularly at one portal": "تتبع أنشطة ودرجات ابنك بانتظام ",
+  "Chat with Educators": "الدردشة مع المربيين",
+  "Chat with educators to regularly monitor the growth of your child.": "الدردشة مع المربيين لمراقبة نمو طفلك بانتظام.",
+  "Keep records of the sweetest memories of your kids at school in form of photos & videos": "احتفظ بسجلات أحلى ذكريات أطفالك في المدرسة في شكل صور ومقاطع فيديو",
   "Activity Tracker": "تعقب النشاط",
 
   "Talk to class teacher":"تحدث إلى مدرس الفصل",

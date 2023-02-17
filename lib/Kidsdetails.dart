@@ -128,9 +128,14 @@ class _KidsDetailsState extends State<KidsDetails> {
       setState(() {
         for (var v in value['allGroup']) {
           groupList.add(v['grp_name']);
-          _groupMap.add({'name': v['group_name'], 'id': v['group_id']});
-          selectedGroup = {'name': _map[0]['name'], 'id': _map[0]['id']};
+          _groupMap.add({'name': v['grp_name'], 'id': v['grp_id']});
         }
+        log("Groups " + _groupMap[0]['id'].toString());
+        log("Groups " + _groupMap[0]['name'].toString());
+        selectedGroup = {
+          'name': _groupMap[0]['name'],
+          'id': _groupMap[0]['id']
+        };
         _selectedGroup = groupList[0] ?? '';
         _grpLoading = false;
       });
@@ -654,6 +659,7 @@ class _KidsDetailsState extends State<KidsDetails> {
                                   setState(() {
                                     _btnLoading = true;
                                   });
+                                  log(selectedGroup.toString());
                                   final resp = KidsSignupInfo().get(
                                     kidName: kidNameController.text,
                                     kidSection: selectedSection['id'],

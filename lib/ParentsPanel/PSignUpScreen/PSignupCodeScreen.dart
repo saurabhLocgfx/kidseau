@@ -136,25 +136,37 @@ class _PSignupCodeState extends State<PSignupCode> {
                               },
                               child: Center(
                                 child: Container(
-                                    height: 214.h,
-                                    // width: 382.w,
-                                    clipBehavior: Clip.hardEdge,
-                                    decoration: BoxDecoration(
+                                  height: 214.h,
+                                  // width: 382.w,
+                                  clipBehavior: Clip.hardEdge,
+                                  decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(12),
+                                      image: DecorationImage(
+                                          image: NetworkImage(
+                                            model.appVideo![0].vPoster
+                                                .toString(),
+                                          ),
+                                          fit: BoxFit.fitWidth)),
+                                  child: Center(
+                                    child: Image.asset(
+                                      "assets/images/play.png",
+                                      width: 40,
+                                      height: 40,
                                     ),
-                                    child: Image.network(
-                                      model.appVideo?[0].vPoster.toString() ??
+                                  ),
+                                  /* Image.network(
+                                       ??
                                           '',
                                       errorBuilder: (q, w, e) => Image.asset(
                                           "assets/images/laptopbackgroundplay.png",
                                           fit: BoxFit.fitWidth),
-                                    ) /*Center(
+                                    ) Center(
                                 child: Image.asset(
                             "assets/images/playicon.png",
                             height: 46,
                             width: 46,
                           )),*/
-                                    ),
+                                ),
                               ),
                             ),
                             SizedBox(

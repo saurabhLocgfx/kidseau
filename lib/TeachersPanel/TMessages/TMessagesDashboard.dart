@@ -10,6 +10,7 @@ import 'package:kidseau/TeachersPanel/TNotificationScreen/TNotificationScreen.da
 import 'package:kidseau/Theme.dart';
 import 'package:kidseau/shard_prefs/shared_prefs.dart';
 
+import '../../Constants/colors.dart';
 import '../../ParentsPanel/PMessageScreen/PMessages.dart';
 import '../../restartappwidget/restartwidgets.dart';
 import '../TReminder/TReminderScreen.dart';
@@ -49,6 +50,7 @@ class _TMessageDashboardState extends State<TMessageDashboard> {
         ], begin: Alignment.topCenter, end: Alignment.bottomCenter),
       ),
       child: Scaffold(
+        //backgroundColor: AppColors().bgColor,
         appBar: AppBar(
           toolbarHeight: 70.0,
           flexibleSpace: ClipRect(

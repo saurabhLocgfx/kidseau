@@ -127,9 +127,13 @@ class _PHomeScreenState extends State<PHomeScreen> {
           children: [
             Padding(
               padding: const EdgeInsets.only(top: 15.0),
-              child: Text("${"Hello".tr()} ${_activityModel.greet ?? ''}",
-                  overflow: TextOverflow.ellipsis,
-                  style: FontConstant2.k32w5008267text.copyWith(fontSize: 20)),
+              child: SizedBox(
+                width: 180,
+                child: Text("${"Hello".tr()} ${_activityModel.greet ?? ''}",
+                    overflow: TextOverflow.ellipsis,
+                    style:
+                        FontConstant2.k32w5008267text.copyWith(fontSize: 20)),
+              ),
             ),
           ],
         ),
@@ -493,12 +497,13 @@ class _PHomeScreenState extends State<PHomeScreen> {
                                             height: 20,
                                           ),
                                           Text(
-                                            "Oops!",
+                                            "Oops!".tr(),
                                             style:
                                                 FontConstant2.k24w5008267text,
                                           ),
                                           Text(
-                                            "No activity available for the kid.",
+                                            "No activity available for the kid."
+                                                .tr(),
                                             style: FontConstant.k16w4008471Text,
                                           ),
                                         ],

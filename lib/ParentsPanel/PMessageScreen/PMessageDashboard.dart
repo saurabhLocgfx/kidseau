@@ -223,7 +223,7 @@ class _PMessageDashboardState extends State<PMessageDashboard> {
   Container PageviewTab() {
     return Container(
       height: 56.h,
-      width: 248.w,
+      width: 270.w,
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(76),

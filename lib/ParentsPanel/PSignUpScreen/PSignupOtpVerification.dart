@@ -78,9 +78,11 @@ class _PSignupOtpVerificationState extends State<PSignupOtpVerification> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(top: 199.0),
+                    padding:
+                        const EdgeInsets.only(top: 199.0, left: 16, right: 16),
                     child: Container(
                       child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Image.asset(
                             "assets/images/logo.png",
@@ -111,7 +113,7 @@ class _PSignupOtpVerificationState extends State<PSignupOtpVerification> {
                           text: TextSpan(children: [
                         TextSpan(
                           text: "A OTP has been sent to . ".tr() +
-                              widget.signUpField +
+                              "${widget.signUpField} " +
                               "Please enter the OTP here.".tr(),
                           /*AppLoaclizations.of(context)!
                                   .translate(
@@ -139,7 +141,7 @@ class _PSignupOtpVerificationState extends State<PSignupOtpVerification> {
                                 }
                               });
                             },
-                          text: "  Resend",
+                          text: "  Resend".tr(),
                           style: FontConstant.k16w500purpleText,
                         ),
                       ])),

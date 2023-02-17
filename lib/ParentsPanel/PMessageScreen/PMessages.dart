@@ -104,23 +104,27 @@ class _PMessagesState extends State<PMessages> {
             )
           : modelList.isEmpty
               ? Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Image.asset(
-                        "assets/images/empty_message.png",
-                        width: 300,
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Text(
-                        'No messages',
-                        style: FontConstant.k18w500Primary,
-                      )
-                    ],
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Image.asset(
+                          "assets/images/empty_message.png",
+                          width: 300,
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Text(
+                          'Start conversation with one of your kid’s educator'
+                              .tr(),
+                          style: FontConstant.k18w500Primary,
+                        ),
+                      ],
+                    ),
                   ),
                 )
               : ListView.builder(

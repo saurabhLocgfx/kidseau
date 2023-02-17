@@ -55,6 +55,7 @@
   "Changed email/phone number belongs to Mother": "Le courrier électronique / numéro de téléphone modifié appartient à la mère",
   "Note: The email/phone number belongs to mother": "Remarque: le numéro de messagerie / téléphone appartient à la mère",
   "COVID Vaccination": "Vaccination covide",
+  "Note: The email/phone number belongs to Father by default": "Commencez une conversation avec une des educatrices de votre enfant",
   "I don’t like this": "Je n'aime pas ca",
   "Not from the same group": "C'est pas mon groupe",
   "Inappropriate content": "Contenu indesirable",
@@ -161,7 +162,9 @@
 
   "Address":"Adresse",
 
-  "Nursery":"Garderie",
+  "Nursery":"Crèche",
+  "No Post available": "Pas de message disponible",
+  "No tagged Photo": "Pas de photo taguée",
 
   "years":"ans",
 
@@ -377,6 +380,29 @@
 
   "Year of Experience":"Année d'expérience",
   "Enter your years of experience": "Entrez votre année d'expérience",
+  "New Account": "Nouveau compte",
+  "Create a new account to track your kids’ activities.": "Créez un nouveau compte pour suivre les activités de vos enfants.",
+  "Keeping track of kids progress": "Suivi du développement des compétences des enfants",
+  "You can maintain all the academic records of a student at one portal so that can be checked easily whenever required": "Vous pouvez maintenir tous les enregistrements académiques d'un étudiant sur un portail afin que cela puisse être vérifié facilement chaque fois que",
+  "Build the future": "Construit l'avenir",
+  "  Resend": "  Renvoyer",
+  "Oops!": "OOPS!",
+  "Total Paid fees": "Frais totaux payés",
+  "Previous Payment": "Paiement précédent",
+  "View Fees Structure": "Consulter la structure des frais",
+  "Provide kids the opportunity to learn from best-in-class teachers along with the attest academic curriculum.": "Offrez aux enfants la possibilité d'apprendre de meilleurs enseignants en classe ainsi que du programme scolaire ATTEST.",
+  "Paid to": " Versée à",
+  "Remaining fees": "Frais restants",
+  "Logout": "Se déconnecter",
+  "No activity available for the kid.": "Aucune activité disponible pour l'enfant",
+  "Change Profile Photo": "modifier la photo de profil",
+  "You don’t have any notification": "Vous n'avez aucune notification",
+  "Start conversation with one of your kid’s educator": "Commencez une conversation avec une des educatrices de votre enfant",
+  "You can keep the parents updated about every possible step related to their kid directly using this application.": "Vous pouvez tenir les parents au courant de toutes les étapes possibles liées à leur enfant directement en utilisant cette application.",
+  "Track the activities and grades of your kid regularly at one portal": "Suivez régulièrement les activités et les notes de votre enfant",
+  "Keep records of the sweetest memories of your kids at school in form of photos & videos": "Gardez les registres des souvenirs les plus doux de vos enfants à l'école sous forme de photos et de vidéos",
+  "Chat with Educators": "Discuter avec les educatrices",
+  "Chat with educators to regularly monitor the growth of your child.": "Discutez avec les educatrices pour surveiller régulièrement la croissance de votre enfant.",
 
   "Select your gender": "Selectionnez votre genre ",
 

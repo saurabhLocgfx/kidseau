@@ -178,7 +178,8 @@ class _TStudentDetailScreenState extends State<TStudentDetailScreen> {
                             image: AssetImage(
                               "assets/images/Group8270.png",
                             ),
-                            fit: BoxFit.cover)),
+                            fit: BoxFit.fitWidth,
+                            alignment: Alignment.topLeft)),
                     child: Container(
                       decoration: BoxDecoration(
                         gradient: LinearGradient(
@@ -485,6 +486,226 @@ class _TStudentDetailScreenState extends State<TStudentDetailScreen> {
                                                 child: Padding(
                                                   padding: const EdgeInsets
                                                           .symmetric(
+                                                      horizontal: 16.0),
+                                                  child: Column(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      Row(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .spaceBetween,
+                                                        children: [
+                                                          Text(
+                                                            "Attendance".tr(),
+                                                            style: FontConstant
+                                                                .k16w5008471Text,
+                                                          ),
+                                                          Image.asset(
+                                                            "assets/images/bars1.png",
+                                                            height: 24,
+                                                          )
+                                                        ],
+                                                      ),
+                                                      Row(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .end,
+                                                        children: [
+                                                          Expanded(
+                                                            child: Row(
+                                                              mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .spaceBetween,
+                                                              children: [
+                                                                Container(
+                                                                  width: 6,
+                                                                  height: model.attendance!.day1 ==
+                                                                              null ||
+                                                                          model.attendance!.day1 ==
+                                                                              '0'
+                                                                      ? 24
+                                                                      : 44,
+                                                                  decoration:
+                                                                      BoxDecoration(
+                                                                    borderRadius:
+                                                                        BorderRadius.circular(
+                                                                            18),
+                                                                    color: model.attendance!.day1 ==
+                                                                                null ||
+                                                                            model.attendance!.day1 ==
+                                                                                '0'
+                                                                        ? AppColors()
+                                                                            .k8267AC
+                                                                            .withOpacity(
+                                                                                0.2)
+                                                                        : AppColors()
+                                                                            .k8267AC,
+                                                                  ),
+                                                                ),
+                                                                Container(
+                                                                  width: 6,
+                                                                  height: model.attendance!.day2 ==
+                                                                              null ||
+                                                                          model.attendance!.day2 ==
+                                                                              '0'
+                                                                      ? 24
+                                                                      : 44,
+                                                                  decoration:
+                                                                      BoxDecoration(
+                                                                    borderRadius:
+                                                                        BorderRadius.circular(
+                                                                            18),
+                                                                    color: model.attendance!.day2 ==
+                                                                                null ||
+                                                                            model.attendance!.day2 ==
+                                                                                '0'
+                                                                        ? AppColors()
+                                                                            .k8267AC
+                                                                            .withOpacity(
+                                                                                0.2)
+                                                                        : AppColors()
+                                                                            .k8267AC,
+                                                                  ),
+                                                                ),
+                                                                Container(
+                                                                  width: 6,
+                                                                  height: model.attendance!.day3 ==
+                                                                              null ||
+                                                                          model.attendance!.day3 ==
+                                                                              '0'
+                                                                      ? 24
+                                                                      : 44,
+                                                                  decoration:
+                                                                      BoxDecoration(
+                                                                    borderRadius:
+                                                                        BorderRadius.circular(
+                                                                            18),
+                                                                    color: model.attendance!.day3 ==
+                                                                                null ||
+                                                                            model.attendance!.day3 ==
+                                                                                '0'
+                                                                        ? AppColors()
+                                                                            .k8267AC
+                                                                            .withOpacity(
+                                                                                0.2)
+                                                                        : AppColors()
+                                                                            .k8267AC,
+                                                                  ),
+                                                                ),
+                                                                Container(
+                                                                  width: 6,
+                                                                  height: model.attendance!.day4 ==
+                                                                              null ||
+                                                                          model.attendance!.day4 ==
+                                                                              '0'
+                                                                      ? 24
+                                                                      : 44,
+                                                                  decoration:
+                                                                      BoxDecoration(
+                                                                    borderRadius:
+                                                                        BorderRadius.circular(
+                                                                            18),
+                                                                    color: model.attendance!.day4 ==
+                                                                                null ||
+                                                                            model.attendance!.day4 ==
+                                                                                '0'
+                                                                        ? AppColors()
+                                                                            .k8267AC
+                                                                            .withOpacity(
+                                                                                0.2)
+                                                                        : AppColors()
+                                                                            .k8267AC,
+                                                                  ),
+                                                                ),
+                                                                Container(
+                                                                  width: 6,
+                                                                  height: model.attendance!.day5 ==
+                                                                              null ||
+                                                                          model.attendance!.day5 ==
+                                                                              '0'
+                                                                      ? 24
+                                                                      : 44,
+                                                                  decoration:
+                                                                      BoxDecoration(
+                                                                    borderRadius:
+                                                                        BorderRadius.circular(
+                                                                            18),
+                                                                    color: model.attendance!.day5 ==
+                                                                                null ||
+                                                                            model.attendance!.day5 ==
+                                                                                '0'
+                                                                        ? AppColors()
+                                                                            .k8267AC
+                                                                            .withOpacity(
+                                                                                0.2)
+                                                                        : AppColors()
+                                                                            .k8267AC,
+                                                                  ),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ),
+                                                          SizedBox(
+                                                            width: 10,
+                                                          ),
+                                                          Column(
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .center,
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .center,
+                                                            children: [
+                                                              Column(
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .start,
+                                                                children: [
+                                                                  Text(
+                                                                    "${_attendanceVal.length}/${model.attendance!.toJson().length}",
+                                                                    style: FontConstant2
+                                                                        .k24w4008267text,
+                                                                  ),
+                                                                  Text(
+                                                                    "days".tr(),
+                                                                    style: FontConstant2
+                                                                        .k16w400B7A4text,
+                                                                  ),
+                                                                ],
+                                                              )
+                                                            ],
+                                                          )
+                                                        ],
+                                                      ),
+                                                      /*Row(
+                              children: [
+                                Text(
+                                  widget.model.kidDetails!.rank.toString(),
+                                  style: FontConstant2.k32w5008267text,
+                                ),
+                              ],
+                            )*/
+                                                    ],
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                            /*Expanded(
+                                              child: Container(
+                                                height: 116,
+                                                decoration: BoxDecoration(
+                                                    color: Colors.white,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            16)),
+                                                child: Padding(
+                                                  padding: const EdgeInsets
+                                                          .symmetric(
                                                       horizontal: 16.0,
                                                       vertical: 4),
                                                   child: Row(
@@ -644,10 +865,10 @@ class _TStudentDetailScreenState extends State<TStudentDetailScreen> {
                                                       ),
                                                       Expanded(
                                                         child: Column(
-                                                          /*mainAxisAlignment:
+                                                          */ /*mainAxisAlignment:
                                                   MainAxisAlignment.center,
                                               crossAxisAlignment:
-                                                  CrossAxisAlignment.center,*/
+                                                  CrossAxisAlignment.center,*/ /*
                                                           children: [
                                                             Row(
                                                               mainAxisAlignment:
@@ -684,7 +905,7 @@ class _TStudentDetailScreenState extends State<TStudentDetailScreen> {
                                                   ),
                                                 ),
                                               ),
-                                            ),
+                                            ),*/
                                           ],
                                         ),
                                       ],

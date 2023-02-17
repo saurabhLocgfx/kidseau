@@ -116,7 +116,7 @@ class _TLoginOtpVerificationState extends State<TLoginOtpVerification> {
                                       }
                                     });
                                   },
-                                text: "  Resend",
+                                text: "  Resend".tr(),
                                 style: FontConstant.k16w4008471Text,
                               ),
                             ])),

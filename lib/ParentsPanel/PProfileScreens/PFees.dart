@@ -44,6 +44,7 @@ class _PFeesState extends State<PFees> {
     _isLoading = true;
     final resp = ParentKidApi().get();
     resp.then((value) {
+      log(value.toString());
       if (value['status'] == 1) {
         setState(() {
           _kidModel = ParentKidHomeModel.fromJson(value);
@@ -63,6 +64,7 @@ class _PFeesState extends State<PFees> {
     log(kidId);
     final resp = ParentFeesApi().get(kidId: kidId);
     resp.then((value) {
+      log(value.toString());
       if (value['status'] == 1) {
         setState(() {
           feesModel = ParentKidFeesModel.fromJson(value);
@@ -337,6 +339,8 @@ class _PFeesState extends State<PFees> {
                                                     Container(
                                                       height: 67,
                                                       width: 50,
+                                                      clipBehavior:
+                                                          Clip.hardEdge,
                                                       decoration: BoxDecoration(
                                                         borderRadius:
                                                             BorderRadius
@@ -348,6 +352,7 @@ class _PFeesState extends State<PFees> {
                                                                 index]
                                                             .schoolImage
                                                             .toString(),
+                                                        fit: BoxFit.fill,
                                                         errorBuilder: (q, w,
                                                                 e) =>
                                                             Image.asset(

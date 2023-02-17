@@ -214,10 +214,15 @@ class _TAllStudentsState extends State<TAllStudents> {
                                             Container(
                                               height: 96,
                                               width: 72,
+                                              clipBehavior: Clip.hardEdge,
+                                              decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(8)),
                                               child: Image.network(
                                                 modelList[index]
                                                     .image
                                                     .toString(),
+                                                fit: BoxFit.fill,
                                                 errorBuilder: (q, w, e) =>
                                                     Image.asset(
                                                         "assets/images/Rectangle 2715.png"),

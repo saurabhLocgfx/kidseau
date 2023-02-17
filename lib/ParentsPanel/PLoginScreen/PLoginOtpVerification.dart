@@ -124,7 +124,7 @@ class PLoginOtpVerification extends StatelessWidget {
                             }
                           });
                         },
-                      text: "  Resend",
+                      text: "  Resend".tr(),
                       style: FontConstant.k16w500purpleText,
                     ),
                   ])),

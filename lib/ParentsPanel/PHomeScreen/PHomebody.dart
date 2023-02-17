@@ -230,16 +230,30 @@ class _VideoWidgetState extends State<VideoWidget> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Container(
-              height: 148,
-              width: 349,
-              clipBehavior: Clip.hardEdge,
-              decoration: BoxDecoration(borderRadius: BorderRadius.circular(8)),
-              child: Image.network(
+                height: 148,
+                width: 349,
+                clipBehavior: Clip.hardEdge,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8),
+                    image: DecorationImage(
+                        image: NetworkImage(
+                          widget.model.videoTutorial![widget.index].vPoster
+                              .toString(),
+                        ),
+                        fit: BoxFit.fitWidth)),
+                child: Center(
+                  child: Image.asset(
+                    "assets/images/play.png",
+                    width: 40,
+                    height: 40,
+                  ),
+                )
+                /*Image.network(
                 widget.model.videoTutorial![widget.index].vPoster.toString(),
                 fit: BoxFit.fitWidth,
                 errorBuilder: (q, w, e) => Text("Image not loaded"),
-              ),
-            ),
+              ),*/
+                ),
             Text(
               widget.model.videoTutorial![widget.index].vTitle.toString(),
               style: FontConstant.k16w500brownText,

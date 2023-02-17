@@ -31,8 +31,30 @@
   "Father’s email": "Father’s email",
   "Profile Photo": "Profile Photo",
   "You are": "You are",
+  "Keeping track of kids progress": "Keeping track of kids progress",
+  "  Resend": "  Resend",
+  "Oops!": "OOPS!",
+  "View Fees Structure": "View Fees Structure",
+  "No activity available for the kid.": "No activity available for the kid.",
+  "Change Profile Photo": "Change Profile Photo",
+  "Logout": "Logout",
+  "Remaining fees": "Remaining fees",
+  "Previous Payment": "Previous Payment",
+  "Paid to": "Paid to",
+  "Total Paid fees": "Total Paid fees",
+  "You don’t have any notification": "You don’t have any notification",
+  "Start conversation with one of your kid’s educator": "Start conversation with one of your kid’s educator",
+  "You can maintain all the academic records of a student at one portal so that can be checked easily whenever required": "You can maintain all the academic records of a student at one portal so that can be checked easily whenever required",
+  "Build the future": "Build the future",
+  "You can keep the parents updated about every possible step related to their kid directly using this application.": "You can keep the parents updated about every possible step related to their kid directly using this application.",
+  "Track the activities and grades of your kid regularly at one portal": "Track the activities and grades of your kid regularly at one portal",
+  "Keep records of the sweetest memories of your kids at school in form of photos & videos": "Keep records of the sweetest memories of your kids at school in form of photos & videos",
   "Tutorials": "Tutorials",
+  "Chat with Educators": "Chat with Educators",
+  "Chat with educators to regularly monitor the growth of your child.": "Chat with educators to regularly monitor the growth of your child.",
   "Login/create a new account to track your kids’ activities.": "Login/create a new account to track your kids’ activities.",
+  "New Account": "New Account",
+  "Create a new account to track your kids’ activities.": "Create a new account to track your kids’ activities.",
 
   "Mother’s email": "Mother’s email",
   "Father’s name": "Father’s name",
@@ -104,7 +126,9 @@
   "Posts": "Posts",
 
   "Kids": "Kids",
+  "Note: The email/phone number belongs to Father by default": "Note: The email/phone number belongs to Father by default",
 
+  "Provide kids the opportunity to learn from best-in-class teachers along with the attest academic curriculum.": "Provide kids the opportunity to learn from best-in-class teachers along with the attest academic curriculum.",
   "Message": "Message",
 
   "Back": "Back",
@@ -141,6 +165,8 @@
   "Address": "Address",
 
   "Nursery": "Nursery",
+  "No tagged Photo": "No tagged Photo",
+  "No Post available": "No Post available",
 
   "years": "years",
 

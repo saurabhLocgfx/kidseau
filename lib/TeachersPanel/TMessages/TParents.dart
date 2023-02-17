@@ -68,6 +68,7 @@ class _TParentsState extends State<TParents> {
     _scroll++;
     final resp = TeacherGetParentApi().get(scroll: '$_scroll');
     resp.then((value) {
+      l.log(value.toString());
       if (value['status'] == 1) {
         setState(() {
           for (var v in value['paretntInfo']) {
@@ -83,6 +84,7 @@ class _TParentsState extends State<TParents> {
     _isLoading = true;
     final resp = TeacherGetParentApi().get(scroll: '0');
     resp.then((value) {
+      l.log(value.toString());
       if (value['status'] == 1) {
         setState(() {
           for (var v in value['paretntInfo']) {

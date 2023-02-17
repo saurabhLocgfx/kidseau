@@ -174,7 +174,8 @@ class _TStudentDetailEditScreenState extends State<TStudentDetailEditScreen> {
                             image: AssetImage(
                               "assets/images/Group8270.png",
                             ),
-                            fit: BoxFit.cover)),
+                            fit: BoxFit.fitWidth,
+                            alignment: Alignment.topLeft)),
                     child: Container(
                       height: 1.sh,
                       decoration: BoxDecoration(

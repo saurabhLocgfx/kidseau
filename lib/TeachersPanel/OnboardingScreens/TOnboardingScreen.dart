@@ -77,7 +77,7 @@ class _TOnboardingScreenState extends State<TOnboardingScreen> {
                   children: [
                     SizedBox(
                       //color: Colors.orange,
-                      height: 504.h,
+                      height: 508.h,
                       child: PageView.builder(
                         controller: controller,
                         itemCount: contents.length,
@@ -99,15 +99,18 @@ class _TOnboardingScreenState extends State<TOnboardingScreen> {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     SizedBox(
-                                      height: 300.h,
-                                      width: 350.w,
+                                      height: 280.h,
+                                      width: 340.w,
                                       child: Image.asset(
                                         contents[i].image,
                                       ),
                                     ),
                                   ],
                                 ),
-                                Spacer(),
+                                //Spacer(),
+                                SizedBox(
+                                  height: 30,
+                                ),
                                 Text(contents[i].title.tr(),
                                     style: FontConstant2.k32w500331FtextLine),
                                 SizedBox(

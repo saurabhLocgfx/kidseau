@@ -87,55 +87,57 @@ class _PProfileDashBoardState extends State<PProfileDashBoard> {
                           .copyWith(fontSize: 28)))),
           actions: [Pprofilepopup()],
         ),
-        body: SizedBox(
-          width: 1.sw,
-          height: 1.sh,
-          child: Stack(children: [
-            Container(
-              child: Image.asset(
-                "assets/images/postsbackground.png",
-                height: 414.h,
-                width: 1.sw,
-                fit: BoxFit.fitWidth,
-              ),
-            ),
-            Positioned(
-              top: 100,
-              left: 0,
-              right: 0,
-              bottom: 0,
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    //SizedBox(height: 100.h),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [SizedBox(height: 40), Pageviewtabprofile()],
-                    ),
-                    SizedBox(height: 24.h),
-                    SizedBox(
-                      height: 1.sh,
-                      child: PageView(
-                        physics: PageScrollPhysics(),
-                        controller: _pageController,
-                        onPageChanged: (page) {
-                          setState(
-                            () {
-                              pageIndex = page;
-                            },
-                          );
-                        },
-                        children: <Widget>[
-                          PParentsProfile(),
-                          PParentNurseryWidget()
-                        ],
-                      ),
-                    ),
-                  ],
+        body: SafeArea(
+          child: SizedBox(
+            width: 1.sw,
+            height: 1.sh,
+            child: Stack(children: [
+              Container(
+                child: Image.asset(
+                  "assets/images/postsbackground.png",
+                  height: 414.h,
+                  width: 1.sw,
+                  fit: BoxFit.fitWidth,
                 ),
               ),
-            )
-          ]),
+              Positioned(
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      //SizedBox(height: 100.h),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [SizedBox(height: 40), Pageviewtabprofile()],
+                      ),
+                      SizedBox(height: 24.h),
+                      SizedBox(
+                        height: 1.sh,
+                        child: PageView(
+                          physics: PageScrollPhysics(),
+                          controller: _pageController,
+                          onPageChanged: (page) {
+                            setState(
+                              () {
+                                pageIndex = page;
+                              },
+                            );
+                          },
+                          children: <Widget>[
+                            PParentsProfile(),
+                            PParentNurseryWidget()
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              )
+            ]),
+          ),
         ),
       ),
     );

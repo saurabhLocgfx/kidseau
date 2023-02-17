@@ -406,10 +406,19 @@ class _PPostScreenState extends State<PPostScreen> {
                           color: Colors.white,
                         ),
                         _postList.isEmpty
-                            ? Image.asset(
-                                'assets/images/emptypost.png',
-                                width: 200,
-                                height: 300,
+                            ? Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Image.asset(
+                                    'assets/images/emptypost.png',
+                                    width: 200,
+                                    height: 200,
+                                  ),
+                                  Text(
+                                    "No Post available".tr(),
+                                    style: FontConstant.k16w4008471Text,
+                                  )
+                                ],
                               )
                             : Container(
                                 width: 1.sw,

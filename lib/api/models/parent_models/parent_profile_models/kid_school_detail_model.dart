@@ -1,5 +1,6 @@
 class PKidSchoolDetailModel {
   int? status;
+  String? schoolId;
   String? schoolImage;
   String? schoolName;
   String? schoolTime;
@@ -11,9 +12,11 @@ class PKidSchoolDetailModel {
   String? directorName;
   String? directorEmail;
   String? directorPhone;
+  String? userType;
 
   PKidSchoolDetailModel(
       {this.status,
+      this.schoolId,
       this.schoolImage,
       this.schoolName,
       this.schoolTime,
@@ -24,10 +27,12 @@ class PKidSchoolDetailModel {
       this.directorImage,
       this.directorName,
       this.directorEmail,
-      this.directorPhone});
+      this.directorPhone,
+      this.userType});
 
   PKidSchoolDetailModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];
+    schoolId = json['schoolId'];
     schoolImage = json['schoolImage'];
     schoolName = json['schoolName'];
     schoolTime = json['schoolTime'];
@@ -41,11 +46,13 @@ class PKidSchoolDetailModel {
     directorName = json['directorName'];
     directorEmail = json['directorEmail'];
     directorPhone = json['directorPhone'];
+    userType = json['user_type'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['status'] = this.status;
+    data['schoolId'] = this.schoolId;
     data['schoolImage'] = this.schoolImage;
     data['schoolName'] = this.schoolName;
     data['schoolTime'] = this.schoolTime;
@@ -59,6 +66,7 @@ class PKidSchoolDetailModel {
     data['directorName'] = this.directorName;
     data['directorEmail'] = this.directorEmail;
     data['directorPhone'] = this.directorPhone;
+    data['user_type'] = this.userType;
     return data;
   }
 }
@@ -68,14 +76,21 @@ class SocialMedia {
   String? twitter;
   String? linkedIn;
   String? instagram;
+  String? mapLocation;
 
-  SocialMedia({this.facebook, this.twitter, this.linkedIn, this.instagram});
+  SocialMedia(
+      {this.facebook,
+      this.twitter,
+      this.linkedIn,
+      this.instagram,
+      this.mapLocation});
 
   SocialMedia.fromJson(Map<String, dynamic> json) {
     facebook = json['facebook'];
     twitter = json['twitter'];
     linkedIn = json['linkedIn'];
     instagram = json['instagram'];
+    mapLocation = json['mapLocation'];
   }
 
   Map<String, dynamic> toJson() {
@@ -84,6 +99,7 @@ class SocialMedia {
     data['twitter'] = this.twitter;
     data['linkedIn'] = this.linkedIn;
     data['instagram'] = this.instagram;
+    data['mapLocation'] = this.mapLocation;
     return data;
   }
 }

@@ -1,5 +1,6 @@
 class TeacherSchoolProfileDetailsModel {
   String? status;
+  String? schoolId;
   String? schoolImage;
   String? schoolName;
   String? schoolTime;
@@ -11,9 +12,11 @@ class TeacherSchoolProfileDetailsModel {
   String? directorName;
   String? directorEmail;
   String? directorPhone;
+  String? userType;
 
   TeacherSchoolProfileDetailsModel(
       {this.status,
+      this.schoolId,
       this.schoolImage,
       this.schoolName,
       this.schoolTime,
@@ -24,10 +27,12 @@ class TeacherSchoolProfileDetailsModel {
       this.directorImage,
       this.directorName,
       this.directorEmail,
-      this.directorPhone});
+      this.directorPhone,
+      this.userType});
 
   TeacherSchoolProfileDetailsModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];
+    schoolId = json['schoolId'];
     schoolImage = json['schoolImage'];
     schoolName = json['schoolName'];
     schoolTime = json['schoolTime'];
@@ -41,11 +46,13 @@ class TeacherSchoolProfileDetailsModel {
     directorName = json['directorName'];
     directorEmail = json['directorEmail'];
     directorPhone = json['directorPhone'];
+    userType = json['user_type'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['status'] = this.status;
+    data['schoolId'] = this.schoolId;
     data['schoolImage'] = this.schoolImage;
     data['schoolName'] = this.schoolName;
     data['schoolTime'] = this.schoolTime;
@@ -59,6 +66,7 @@ class TeacherSchoolProfileDetailsModel {
     data['directorName'] = this.directorName;
     data['directorEmail'] = this.directorEmail;
     data['directorPhone'] = this.directorPhone;
+    data['user_type'] = this.userType;
     return data;
   }
 }

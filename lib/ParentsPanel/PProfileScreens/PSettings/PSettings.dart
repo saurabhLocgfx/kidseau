@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:kidseau/ParentsPanel/PMessageScreen/PopenChats.dart';
 import 'package:kidseau/ParentsPanel/PProfileScreens/PSettings/PAboutus.dart';
 import 'package:kidseau/ParentsPanel/PProfileScreens/PSettings/PNotificationSettings.dart';
 import 'package:kidseau/ParentsPanel/PProfileScreens/PSettings/PPrivacyPolicy.dart';
@@ -187,6 +188,41 @@ class _PSettingsState extends State<PSettings> {
                     children: [
                       Text(
                         "Terms and Conditions".tr(),
+                        style: FontConstant.k18w500331FText,
+                      ),
+                      Image.asset(
+                        "assets/images/rightarrow.png",
+                        height: 20,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              GestureDetector(
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => POpenChats(
+                        onPop: () {},
+                        profilePic: '',
+                        name: 'Kidseau support',
+                        language: '',
+                        userId: '1',
+                        userType: 'admin',
+                      ),
+                    ),
+                  );
+                },
+                child: Container(
+                  color: Colors.transparent,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "Kidseau support".tr(),
                         style: FontConstant.k18w500331FText,
                       ),
                       Image.asset(

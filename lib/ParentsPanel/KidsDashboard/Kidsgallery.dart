@@ -534,10 +534,19 @@ class _PKidsGalleryState extends State<PKidsGallery> {
                       ),
                     );
                   } else if (_postList.isEmpty) {
-                    return Image.asset(
-                      'assets/images/emptypost.png',
-                      width: 200,
-                      height: 300,
+                    return Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Image.asset(
+                          'assets/images/emptypost.png',
+                          width: 200,
+                          height: 200,
+                        ),
+                        Text(
+                          "No tagged Photo".tr(),
+                          style: FontConstant.k16w4008471Text,
+                        )
+                      ],
                     );
                   } else if (reloadedVal == 'no_post_found') {
                     return Center(child: Text('No Posts found.'));

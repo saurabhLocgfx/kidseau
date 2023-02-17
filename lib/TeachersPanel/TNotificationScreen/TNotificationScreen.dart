@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kidseau/TeachersPanel/TDashboard.dart';
 import 'package:kidseau/TeachersPanel/TNotificationScreen/TNotificationsbody.dart';
 import 'package:kidseau/Theme.dart';
@@ -124,9 +125,26 @@ class _TNotificationScreenState extends State<TNotificationScreen> {
             SizedBox(
               height: 30,
             ),
-            Center(
-              child: Text('No new notifications'),
-            )
+            Padding(
+              padding: EdgeInsets.only(top: 100.h),
+              child: Center(
+                  child: Image.asset(
+                "assets/images/nonotification.png",
+                width: 200,
+                height: 200,
+              )),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Text(
+              "Oops!".tr(),
+              style: FontConstant2.k24w5008267text,
+            ),
+            Text(
+              "You don’t have any notification".tr(),
+              style: FontConstant.k16w4008471Text,
+            ),
             /*Align(
               alignment: Alignment.center,
               child: Text(
