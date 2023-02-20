@@ -37,10 +37,10 @@ class _PSignupScreenState extends State<PSignupScreen> {
                 width: 1.sw,
                 decoration: BoxDecoration(
                   image: DecorationImage(
-                    opacity: 0.2,
-                    image: AssetImage("assets/images/postsbackground.png"),
-                    fit: BoxFit.cover,
-                  ),
+                      opacity: 0.4,
+                      image: AssetImage("assets/images/postsbackground.png"),
+                      fit: BoxFit.fitWidth,
+                      alignment: Alignment.topLeft),
                 ),
                 child: SingleChildScrollView(
                   child: Column(

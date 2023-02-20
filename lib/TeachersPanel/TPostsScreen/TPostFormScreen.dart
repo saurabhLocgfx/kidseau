@@ -80,16 +80,21 @@ class _TPostFormScreenState extends State<TPostFormScreen> {
     });
     final resp = TeacherGetGroup().get(secId: secId);
     resp.then((value) {
-      // log(value.toString());
+      log(value.toString());
       groupList.clear();
       _groupMap.clear();
       _selectedGroup = '';
       setState(() {
         for (var v in value['Group']) {
           groupList.add(v['grp_name']);
-          _groupMap.add({'name': v['group_name'], 'id': v['group_id']});
-          selectedGroup = {'name': _map[0]['name'], 'id': _map[0]['id']};
+          _groupMap.add({'name': v['grp_name'], 'id': v['grp_id']});
+          // selectedGroup = {'name': _map[0]['name'], 'id': _map[0]['id']};
         }
+        log("selected grp ${_groupMap[0]}");
+        selectedGroup = {
+          'name': _groupMap[0]['name'],
+          'id': _groupMap[0]['id']
+        };
         _selectedGroup = groupList[0] ?? '';
         _isLoading = false;
       });
@@ -605,6 +610,7 @@ class _TPostFormScreenState extends State<TPostFormScreen> {
               } else {
                 ScreenLoader().onLoading(context);
                 FocusScope.of(context).unfocus();
+                log(_selectedGroup.toString());
                 final resp = TeacherPostAPI().get(
                     idList: taggedStudentsId,
                     caption: _captionController.text,

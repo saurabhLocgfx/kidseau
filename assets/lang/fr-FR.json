@@ -328,7 +328,9 @@
 
   "Talk to the parents": "Parlez aux parents",
 
-  "Students" : "Élèves",
+  "Add reminder to get notification": "Ajouter un rappel pour obtenir une notification",
+  "No set reminder": "Aucun rappel",
+  "Students" : "Enfants",
 
   "Give the marks to the kid to help them grow faster.": "Donnez les notes à l'enfant pour l'aider à grandir plus vite.",
 
@@ -417,6 +419,10 @@
   "Thank you for your patience": "Merci pour votre patience",
 
   "info": "info",
+  "Info": "Info",
+  "Enter announcement's title": "Entrez le titre de l'annonce",
+  "Select date (optional)": "Sélectionner la date (facultative)",
+  "Select time (optional)": "Sélectionnez l'heure (facultative)",
 
   "Group":"Groupe",
 

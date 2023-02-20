@@ -37,12 +37,13 @@ class TLoginScreen extends StatelessWidget {
                     width: 1.sw,
                     decoration: BoxDecoration(
                       image: DecorationImage(
-                        opacity: 0.2,
+                        opacity: 0.8,
                         colorFilter: ColorFilter.linearToSrgbGamma(),
                         image: AssetImage(
                           "assets/images/postsbackground.png",
                         ),
-                        fit: BoxFit.cover,
+                        alignment: Alignment.topLeft,
+                        fit: BoxFit.fitWidth,
                       ),
                     ),
                     child: Column(

@@ -89,19 +89,21 @@ class _PTermsAndConditions extends State<PTermsAndConditions> {
           ? Center(
               child: CircularProgressIndicator(),
             )
-          : SingleChildScrollView(
-              child: Container(
-                padding: EdgeInsets.all(16),
-                child: Column(
-                  children: [
-                    SizedBox(
-                      height: 100,
-                    ),
-                    HtmlWidget(
-                      data,
-                      textStyle: FontConstant.k16blackboldText,
-                    ),
-                  ],
+          : SafeArea(
+              child: SingleChildScrollView(
+                child: Container(
+                  padding: EdgeInsets.all(16),
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        height: 16,
+                      ),
+                      HtmlWidget(
+                        data,
+                        textStyle: FontConstant.k16blackboldText,
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),

@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:kidseau/Constants/string_const.dart';
@@ -19,6 +20,7 @@ class NotificationApi {
       "device_type": Platform.isAndroid ? "android" : "ios"
     });
     request.headers.addAll(headers);
+    log(request.body);
 
     http.StreamedResponse response = await request.send();
 

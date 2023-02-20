@@ -587,12 +587,15 @@ class _PEditProfileScreenState extends State<PEditProfileScreen> {
                           () {
                             ScreenLoader().onLoading(context);
                             final resp = ParentUpdateApi().get(
-                                mName: _motherNameController.text,
-                                mOccupation: _motherOccupationController.text,
-                                fName: _fatherNameController.text,
-                                fOccupation: _fatherOccupationController.text,
+                                mName: _motherNameController.text.trim(),
+                                mOccupation:
+                                    _motherOccupationController.text.trim(),
+                                fName: _fatherNameController.text.trim(),
+                                fOccupation:
+                                    _fatherOccupationController.text.trim(),
                                 address: _addressController.text);
                             resp.then((value) {
+                              log(value.toString());
                               if (value['status'] == 1) {
                                 setState(() {
                                   CustomSnackBar.customSnackBar(
@@ -603,7 +606,7 @@ class _PEditProfileScreenState extends State<PEditProfileScreen> {
                                 });
                               } else {
                                 CustomSnackBar.customErrorSnackBar(
-                                    context, "Profile not updated");
+                                    context, value['msg']);
                                 Navigator.of(context).pop();
                               }
                             });

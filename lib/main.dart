@@ -42,7 +42,7 @@ fn(RemoteMessage message) async {
   //AwesomeNotifications().dismissedStream.listen((event) {});
   //AwesomeNotifications().setGlobalBadgeCounter(0);
   log(message.data.toString());
-  String t = message.data['content'];
+  String t = message.data['other_data'];
   Map a = jsonDecode(t);
   http.Response response = await http.get(Uri.parse(a['bigPicture']));
   final bytes = response.bodyBytes;

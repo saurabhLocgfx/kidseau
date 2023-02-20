@@ -21,8 +21,8 @@ class AddAnnouncement extends StatefulWidget {
 class _AddAnnouncementState extends State<AddAnnouncement> {
   DateTime? _pickedDate;
   TimeOfDay? _pickedTime;
-  String dobString = 'Select date (optional)';
-  String timeString = 'Select time (optional)';
+  String dobString = 'Select date (optional)'.tr();
+  String timeString = 'Select time (optional)'.tr();
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _titleController = TextEditingController();
@@ -82,7 +82,7 @@ class _AddAnnouncementState extends State<AddAnnouncement> {
                       TextFormField(
                         validator: (val) {
                           if (_titleController.text.isEmpty) {
-                            return 'This field cannot be empty';
+                            return 'This field cannot be empty'.tr();
                           } else {
                             return null;
                           }
@@ -90,7 +90,7 @@ class _AddAnnouncementState extends State<AddAnnouncement> {
                         controller: _titleController,
                         decoration: TextFieldDecoration().curvedWhiteDecoration(
                           curved: true,
-                          label: 'Enter announcement\'s title',
+                          label: 'Enter announcement\'s title'.tr(),
                         ),
                       ),
                       SizedBox(height: 16),
@@ -103,7 +103,7 @@ class _AddAnnouncementState extends State<AddAnnouncement> {
                       TextFormField(
                         validator: (val) {
                           if (_descController.text.isEmpty) {
-                            return 'This field cannot be empty';
+                            return 'This field cannot be empty'.tr();
                           } else {
                             return null;
                           }
@@ -112,7 +112,7 @@ class _AddAnnouncementState extends State<AddAnnouncement> {
                         maxLines: 6,
                         decoration: TextFieldDecoration().curvedWhiteDecoration(
                           curved: false,
-                          label: 'Write here...',
+                          label: 'Write here...'.tr(),
                         ),
                       ),
                       SizedBox(height: 16),

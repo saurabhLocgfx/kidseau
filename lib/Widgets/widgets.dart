@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kidseau/Theme.dart';
 
+import '../ParentsPanel/PProfileScreens/PSettings/PNotificationSettings.dart';
 import '../TeachersPanel/TProfileScreen/TNotificationSetttings.dart';
 
 Center mainlogo() {
@@ -378,7 +379,7 @@ class Notificationpopup extends StatelessWidget {
                         Navigator.pop(context);
                         Navigator.of(context).push(
                           MaterialPageRoute(
-                            builder: (context) => TNotificationsettings(),
+                            builder: (context) => PNotificationsettings(),
                           ),
                         );
                       },

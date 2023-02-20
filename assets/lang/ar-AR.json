@@ -136,6 +136,8 @@
   "Nursery": "حضانة",
   "No Post available": "لا يوجد منشور متاح",
   "No tagged Photo": "لا صورة موسومة",
+  "No set reminder": "لا تذكير مجموعة",
+  "Add reminder to get notification": "أضف تذكير للحصول على إشعار",
 
   "years": "سنوات",
 
@@ -403,8 +405,12 @@
 
   "Note: The email/phone number belongs to Father by default": "ابدأ المحادثة مع أحد مربيين طفلك",
   "info": "معلومات",
+  "Info": "معلومات",
   "Provide kids the opportunity to learn from best-in-class teachers along with the attest academic curriculum.": "وفر للأطفال الفرصة للتعلم من أفضل المعلمين في فئتها إلى جانب المناهج الدراسية الأكاديمية.",
 
+  "Select date (optional)": "حدد التاريخ (اختياري)",
+  "Select time (optional)": "حدد الوقت (اختياري)",
+  "Enter announcement's title": "أدخل عنوان الإعلان",
   "Oops!": "أُووبس!",
   "No activity available for the kid.": "لا يوجد نشاط متاح للطفل",
   "Change Profile Photo": "تغيير صورة الملف الشخصي",

@@ -112,7 +112,8 @@ class _TProfileDashBoardState extends State<TProfileDashBoard> {
                           image: AssetImage(
                             "assets/images/Group8270.png",
                           ),
-                          fit: BoxFit.cover)),
+                          fit: BoxFit.fitWidth,
+                          alignment: Alignment.topLeft)),
                   child: Container(
                     decoration: BoxDecoration(
                       gradient: LinearGradient(

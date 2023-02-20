@@ -7,11 +7,20 @@ import 'package:kidseau/shard_prefs/shared_prefs.dart';
 class TeacherGroupStudentsAPi {
   Future<dynamic> get({required String grpId, required String page}) async {
     String? cookie = UserPrefs.getCookies();
+    String? selectedLang = UserPrefs.getLang();
+    String langId = '';
+    if (selectedLang.toString() == 'English') {
+      langId = '0';
+    } else if (selectedLang.toString() == 'French') {
+      langId = '2';
+    } else {
+      langId = '1';
+    }
     var headers = {'Cookie': 'PHPSESSID=$cookie'};
     var request = http.Request(
         'GET',
         Uri.parse(
-            '$kAPIConst/kids/api_teacher_login/teacher_home_page/teach_class_all_kid.php?grp_id=$grpId&page_no=$page'));
+            '$kAPIConst/kids/api_teacher_login/teacher_home_page/teach_class_all_kid.php?grp_id=$grpId&page_no=$page&lang=$langId'));
 
     request.headers.addAll(headers);
 

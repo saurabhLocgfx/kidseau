@@ -112,7 +112,7 @@ class _TOnboardingScreenState extends State<TOnboardingScreen> {
                                   height: 30,
                                 ),
                                 Text(contents[i].title.tr(),
-                                    style: FontConstant2.k32w500331FtextLine),
+                                    style: FontConstant2.k26w500331FtextLine),
                                 SizedBox(
                                   width: 1.sw,
                                   child: Text(contents[i].discription.tr(),

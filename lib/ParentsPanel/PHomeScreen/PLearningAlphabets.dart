@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:kidseau/ParentsPanel/PMessageScreen/PChats.dart';
 import 'package:kidseau/ParentsPanel/PMessageScreen/PopenChats.dart';
 import 'package:kidseau/Theme.dart';
@@ -206,8 +207,8 @@ class _PLearningAplphabetsState extends State<PLearningAplphabets> {
                         ],
                       ),
                       SizedBox(height: 24),
-                      Text(model.activity!.actDecription.toString(),
-                          style: FontConstant.k14w4008471Text.copyWith(
+                      HtmlWidget(model.activity!.actDecription.toString(),
+                          textStyle: FontConstant.k14w4008471Text.copyWith(
                               fontWeight: FontWeight.w400, fontSize: 18)),
                       SizedBox(height: 30),
                       Align(

@@ -28,7 +28,8 @@ class TSignupScreen extends StatelessWidget {
                   decoration: BoxDecoration(
                     image: DecorationImage(
                       image: AssetImage("assets/images/postsbackground.png"),
-                      fit: BoxFit.cover,
+                      alignment: Alignment.topLeft,
+                      fit: BoxFit.fitWidth,
                     ),
                   ),
                 ),

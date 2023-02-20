@@ -202,7 +202,7 @@ class _TNotificationsettingsState extends State<TNotificationsettings> {
                       Icon(Icons.circle, size: 6, color: Color(0xff331F2D)),
                       SizedBox(width: 10),
                       Text(
-                        "New Message ".tr(),
+                        "New Message".tr(),
                         /*AppLoaclizations.of(context)!
                             .translate("New Message ")
                             .toString(),*/

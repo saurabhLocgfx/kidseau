@@ -115,100 +115,124 @@ class _TMyPostsState extends State<TMyPosts> {
                 ))
             : Column(
                 children: [
-                  ListView.separated(
-                      shrinkWrap: true,
-                      physics: NeverScrollableScrollPhysics(),
-                      itemBuilder: (context, index) {
-                        if (index < _postList.length) {
-                          return Container(
-                            margin: EdgeInsets.only(top: 10),
-                            padding:
-                                const EdgeInsets.only(left: 16.0, right: 16),
-                            child: Column(
-                              children: [
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
+                  _postList.isEmpty
+                      ? Center(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              SizedBox(
+                                height: 150,
+                              ),
+                              Image.asset(
+                                'assets/images/emptypost.png',
+                                width: 200,
+                                height: 200,
+                              ),
+                              Text(
+                                "No Post available".tr(),
+                                style: FontConstant.k16w4008471Text,
+                              )
+                            ],
+                          ),
+                        )
+                      : ListView.separated(
+                          shrinkWrap: true,
+                          physics: NeverScrollableScrollPhysics(),
+                          itemBuilder: (context, index) {
+                            if (index < _postList.length) {
+                              return Container(
+                                margin: EdgeInsets.only(top: 10),
+                                padding: const EdgeInsets.only(
+                                    left: 16.0, right: 16),
+                                child: Column(
                                   children: [
                                     Row(
                                       mainAxisAlignment:
-                                          MainAxisAlignment.start,
+                                          MainAxisAlignment.spaceBetween,
                                       children: [
-                                        Image.network(
-                                          _postList[index]
-                                              .techProfile
-                                              .toString(),
-                                          errorBuilder: (q, w, e) =>
-                                              Image.asset(
-                                            "assets/images/person2.png",
-                                            height: 40,
-                                            width: 40,
-                                          ),
-                                          height: 40,
-                                          width: 40,
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          children: [
+                                            Image.network(
+                                              _postList[index]
+                                                  .techProfile
+                                                  .toString(),
+                                              errorBuilder: (q, w, e) =>
+                                                  Image.asset(
+                                                "assets/images/person2.png",
+                                                height: 40,
+                                                width: 40,
+                                              ),
+                                              height: 40,
+                                              width: 40,
+                                            ),
+                                            SizedBox(
+                                              width: 08,
+                                            ),
+                                            Text(
+                                              _postList[index].fName.toString(),
+                                              style:
+                                                  FontConstant2.k16w5008267text,
+                                            ),
+                                          ],
                                         ),
-                                        SizedBox(
-                                          width: 08,
-                                        ),
-                                        Text(
-                                          _postList[index].fName.toString(),
-                                          style: FontConstant2.k16w5008267text,
-                                        ),
-                                      ],
-                                    ),
-                                    PopupMenuButton(
-                                        shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(16)),
-                                        iconSize: 40,
-                                        icon: ImageIcon(
-                                          AssetImage(
-                                            "assets/images/dots2.png",
-                                          ),
-                                        ),
-                                        itemBuilder: (context) {
-                                          return <PopupMenuItem<Widget>>[
-                                            PopupMenuItem(
-                                              enabled: false,
-                                              child: InkWell(
-                                                onTap: () {
-                                                  log('Edit');
-                                                  Navigator.of(context).pop();
-                                                  Navigator.of(context).push(
-                                                      MaterialPageRoute(
-                                                          builder: (ctx) =>
-                                                              TEditPostFormScreen(
-                                                                posts:
-                                                                    _postList,
-                                                                index: index,
-                                                                onPop: (val) {
-                                                                  _getData();
-                                                                },
-                                                              )));
-                                                },
-                                                child: Container(
-                                                  padding: EdgeInsets.only(
-                                                      left: 16,
-                                                      top: 16,
-                                                      bottom: 16),
-                                                  child: Row(
-                                                    children: [
-                                                      Image.asset(
-                                                        "assets/images/edit.png",
-                                                        height: 24,
-                                                      ),
-                                                      SizedBox(width: 24),
-                                                      Text(
-                                                        "Edit".tr(),
-                                                        style: FontConstant
-                                                            .k18w5008471Text,
-                                                      )
-                                                    ],
-                                                  ),
-                                                ),
+                                        PopupMenuButton(
+                                            shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(16)),
+                                            iconSize: 40,
+                                            icon: ImageIcon(
+                                              AssetImage(
+                                                "assets/images/dots2.png",
                                               ),
                                             ),
-                                            /*PopupMenuItem(
+                                            itemBuilder: (context) {
+                                              return <PopupMenuItem<Widget>>[
+                                                PopupMenuItem(
+                                                  enabled: false,
+                                                  child: InkWell(
+                                                    onTap: () {
+                                                      log('Edit');
+                                                      Navigator.of(context)
+                                                          .pop();
+                                                      Navigator.of(context).push(
+                                                          MaterialPageRoute(
+                                                              builder: (ctx) =>
+                                                                  TEditPostFormScreen(
+                                                                    posts:
+                                                                        _postList,
+                                                                    index:
+                                                                        index,
+                                                                    onPop:
+                                                                        (val) {
+                                                                      _getData();
+                                                                    },
+                                                                  )));
+                                                    },
+                                                    child: Container(
+                                                      padding: EdgeInsets.only(
+                                                          left: 16,
+                                                          top: 16,
+                                                          bottom: 16),
+                                                      child: Row(
+                                                        children: [
+                                                          Image.asset(
+                                                            "assets/images/edit.png",
+                                                            height: 24,
+                                                          ),
+                                                          SizedBox(width: 24),
+                                                          Text(
+                                                            "Edit".tr(),
+                                                            style: FontConstant
+                                                                .k18w5008471Text,
+                                                          )
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                                /*PopupMenuItem(
                                               enabled: false,
                                               child: InkWell(
                                                 onTap: () {
@@ -237,134 +261,139 @@ class _TMyPostsState extends State<TMyPosts> {
                                                 ),
                                               ),
                                             ),*/
-                                            PopupMenuItem(
-                                              enabled: false,
-                                              child: InkWell(
-                                                onTap: () async {
-                                                  for (var url
-                                                      in _postList[index]
-                                                          .images!) {
-                                                    try {
-                                                      var imageId =
-                                                          await ImageDownloader
-                                                              .downloadImage(url
-                                                                  .fileImage
-                                                                  .toString());
-                                                      var path =
-                                                          await ImageDownloader
-                                                              .findPath(
-                                                                  imageId!);
-                                                    } catch (error) {
-                                                      print(error);
-                                                    }
-                                                  }
-                                                  Fluttertoast.showToast(
-                                                      msg: 'Download complete');
-                                                },
-                                                child: Container(
-                                                  padding: EdgeInsets.only(
-                                                      left: 16,
-                                                      top: 16,
-                                                      bottom: 16),
-                                                  child: Row(
-                                                    children: [
-                                                      Image.asset(
-                                                        "assets/images/downloadicon.png",
-                                                        height: 24,
+                                                PopupMenuItem(
+                                                  enabled: false,
+                                                  child: InkWell(
+                                                    onTap: () async {
+                                                      for (var url
+                                                          in _postList[index]
+                                                              .images!) {
+                                                        try {
+                                                          var imageId =
+                                                              await ImageDownloader
+                                                                  .downloadImage(url
+                                                                      .fileImage
+                                                                      .toString());
+                                                          var path =
+                                                              await ImageDownloader
+                                                                  .findPath(
+                                                                      imageId!);
+                                                        } catch (error) {
+                                                          print(error);
+                                                        }
+                                                      }
+                                                      Fluttertoast.showToast(
+                                                          msg:
+                                                              'Download complete');
+                                                    },
+                                                    child: Container(
+                                                      padding: EdgeInsets.only(
+                                                          left: 16,
+                                                          top: 16,
+                                                          bottom: 16),
+                                                      child: Row(
+                                                        children: [
+                                                          Image.asset(
+                                                            "assets/images/downloadicon.png",
+                                                            height: 24,
+                                                          ),
+                                                          SizedBox(width: 24),
+                                                          Text(
+                                                            "Download".tr(),
+                                                            style: FontConstant
+                                                                .k18w5008471Text,
+                                                          )
+                                                        ],
                                                       ),
-                                                      SizedBox(width: 24),
-                                                      Text(
-                                                        "Download".tr(),
-                                                        style: FontConstant
-                                                            .k18w5008471Text,
-                                                      )
-                                                    ],
+                                                    ),
                                                   ),
                                                 ),
-                                              ),
-                                            ),
-                                            PopupMenuItem(
-                                              enabled: false,
-                                              child: InkWell(
-                                                onTap: () {
-                                                  final resp =
-                                                      TeacherDeletePostApi()
-                                                          .delete(
-                                                              postId: _postList[
-                                                                      index]
-                                                                  .postId
-                                                                  .toString());
-                                                  resp.then((value) {
-                                                    log(value.toString());
-                                                    if (value['status'] == 1) {
-                                                      setState(() {
-                                                        _postList
-                                                            .removeAt(index);
-                                                        Navigator.of(context)
-                                                            .pop();
+                                                PopupMenuItem(
+                                                  enabled: false,
+                                                  child: InkWell(
+                                                    onTap: () {
+                                                      final resp =
+                                                          TeacherDeletePostApi()
+                                                              .delete(
+                                                                  postId: _postList[
+                                                                          index]
+                                                                      .postId
+                                                                      .toString());
+                                                      resp.then((value) {
+                                                        log(value.toString());
+                                                        if (value['status'] ==
+                                                            1) {
+                                                          setState(() {
+                                                            _postList.removeAt(
+                                                                index);
+                                                            Navigator.of(
+                                                                    context)
+                                                                .pop();
+                                                          });
+                                                        }
                                                       });
-                                                    }
-                                                  });
-                                                },
-                                                child: Container(
-                                                  padding: EdgeInsets.only(
-                                                      left: 16,
-                                                      top: 16,
-                                                      bottom: 16),
-                                                  child: Row(
-                                                    children: [
-                                                      Image.asset(
-                                                        "assets/images/trash.png",
-                                                        height: 24,
+                                                    },
+                                                    child: Container(
+                                                      padding: EdgeInsets.only(
+                                                          left: 16,
+                                                          top: 16,
+                                                          bottom: 16),
+                                                      child: Row(
+                                                        children: [
+                                                          Image.asset(
+                                                            "assets/images/trash.png",
+                                                            height: 24,
+                                                          ),
+                                                          SizedBox(width: 24),
+                                                          Text(
+                                                            "Delete".tr(),
+                                                            style: FontConstant
+                                                                .k18w500F970Text,
+                                                          )
+                                                        ],
                                                       ),
-                                                      SizedBox(width: 24),
-                                                      Text(
-                                                        "Delete".tr(),
-                                                        style: FontConstant
-                                                            .k18w500F970Text,
-                                                      )
-                                                    ],
+                                                    ),
                                                   ),
                                                 ),
-                                              ),
-                                            ),
-                                          ];
-                                        })
-                                  ],
-                                ),
-                                SizedBox(height: 08),
-                                Row(
-                                  children: [
-                                    Expanded(
-                                      child: Text(
-                                        _postList[index].captions.toString(),
-                                        style: FontConstant.k16w4008471Text,
-                                      ),
+                                              ];
+                                            })
+                                      ],
                                     ),
-                                  ],
-                                ),
-                                SizedBox(height: 6),
-                                SizedBox(
-                                  height: 300,
-                                  //width: 1.sw,
-                                  child: PageView.builder(
-                                      //controller: PageController(viewportFraction: 0.6),
-                                      itemCount:
-                                          _postList[index].images!.length,
-                                      onPageChanged: (currentIndex) {},
-                                      itemBuilder: (ctx, indexx) {
-                                        return ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(8),
-                                          child: Container(
-                                            // margin: EdgeInsets.only(right: 16),
-                                            decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(8)),
-                                            child: InkWell(
-                                              onTap: () {
-                                                Navigator.of(context).push(
-                                                    MaterialPageRoute(
+                                    SizedBox(height: 08),
+                                    Row(
+                                      children: [
+                                        Expanded(
+                                          child: Text(
+                                            _postList[index]
+                                                .captions
+                                                .toString(),
+                                            style: FontConstant.k16w4008471Text,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(height: 6),
+                                    SizedBox(
+                                      height: 300,
+                                      //width: 1.sw,
+                                      child: PageView.builder(
+                                          //controller: PageController(viewportFraction: 0.6),
+                                          itemCount:
+                                              _postList[index].images!.length,
+                                          onPageChanged: (currentIndex) {},
+                                          itemBuilder: (ctx, indexx) {
+                                            return ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(8),
+                                              child: Container(
+                                                // margin: EdgeInsets.only(right: 16),
+                                                decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            8)),
+                                                child: InkWell(
+                                                  onTap: () {
+                                                    Navigator.of(context).push(MaterialPageRoute(
                                                         builder: (ctx) =>
                                                             ShowEnlargedPictureScreen(
                                                                 imageUrl: _postList[
@@ -375,67 +404,69 @@ class _TMyPostsState extends State<TMyPosts> {
                                                                     .toString(),
                                                                 tag:
                                                                     myPostTag)));
-                                              },
-                                              child: Hero(
-                                                tag: myPostTag,
-                                                child: Image.network(
-                                                  _postList[index]
-                                                      .images![indexx]
-                                                      .fileImage
-                                                      .toString(),
-                                                  fit: BoxFit.fitWidth,
-                                                  loadingBuilder: (q, w, e) {
-                                                    if (e == null) {
-                                                      return w;
-                                                    } else {
-                                                      return SpinKitThreeBounce(
-                                                        size: 30,
-                                                        color: Colors.grey,
-                                                      );
-                                                    }
                                                   },
-                                                  errorBuilder: (q, w, e) =>
-                                                      SizedBox(
-                                                          width: 1.sw,
-                                                          child: Center(
-                                                              child: Text(
-                                                                  'No image found'))),
-                                                  width: 1.sw,
+                                                  child: Hero(
+                                                    tag: myPostTag,
+                                                    child: Image.network(
+                                                      _postList[index]
+                                                          .images![indexx]
+                                                          .fileImage
+                                                          .toString(),
+                                                      fit: BoxFit.fitWidth,
+                                                      loadingBuilder:
+                                                          (q, w, e) {
+                                                        if (e == null) {
+                                                          return w;
+                                                        } else {
+                                                          return SpinKitThreeBounce(
+                                                            size: 30,
+                                                            color: Colors.grey,
+                                                          );
+                                                        }
+                                                      },
+                                                      errorBuilder: (q, w, e) =>
+                                                          SizedBox(
+                                                              width: 1.sw,
+                                                              child: Center(
+                                                                  child: Text(
+                                                                      'No image found'))),
+                                                      width: 1.sw,
+                                                    ),
+                                                  ),
                                                 ),
                                               ),
-                                            ),
-                                          ),
-                                        );
-                                      }),
+                                            );
+                                          }),
+                                    ),
+                                    SizedBox(
+                                      height: 16.5,
+                                    ),
+                                    MyPostInteraction(
+                                      index: index,
+                                      postList: _postList,
+                                    ),
+                                    SizedBox(height: 16),
+                                    Container(
+                                      width: 1.sw,
+                                      height: 3,
+                                      color: Colors.white,
+                                    ),
+                                    SizedBox(height: 5),
+                                  ],
                                 ),
-                                SizedBox(
-                                  height: 16.5,
-                                ),
-                                MyPostInteraction(
-                                  index: index,
-                                  postList: _postList,
-                                ),
-                                SizedBox(height: 16),
-                                Container(
-                                  width: 1.sw,
-                                  height: 3,
-                                  color: Colors.white,
-                                ),
-                                SizedBox(height: 5),
-                              ],
-                            ),
-                          );
-                        } else if (reloadedVal == 'no_post_found') {
-                          return Center(child: Text('No Posts found.'));
-                        } else if (_scrollController.position.maxScrollExtent ==
-                            _scrollController.offset) {
-                          return Center(child: CircularProgressIndicator());
-                        } else {
-                          return SizedBox.shrink();
-                        }
-                      },
-                      separatorBuilder: (ctx, ind) => SizedBox(),
-                      itemCount: _postList.length + 1),
+                              );
+                            } else if (reloadedVal == 'no_post_found') {
+                              return Center(child: Text('No Posts found.'));
+                            } else if (_scrollController
+                                    .position.maxScrollExtent ==
+                                _scrollController.offset) {
+                              return Center(child: CircularProgressIndicator());
+                            } else {
+                              return SizedBox.shrink();
+                            }
+                          },
+                          separatorBuilder: (ctx, ind) => SizedBox(),
+                          itemCount: _postList.length + 1),
                   SizedBox(height: 150)
                 ],
               ),

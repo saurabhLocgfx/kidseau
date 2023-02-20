@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -50,6 +52,7 @@ class _PParentsProfileState extends State<PParentsProfile> {
     _isLoading = true;
     final resp = ParentProfileApi().get();
     resp.then((value) {
+      log(value.toString());
       if (value['status'] == 1) {
         setState(() {
           model = ParentProfileModel.fromJson(value);
@@ -73,46 +76,87 @@ class _PParentsProfileState extends State<PParentsProfile> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(height: 24),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                        height: 128,
-                        width: 96.2,
-                        clipBehavior: Clip.hardEdge,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(16)),
-                        child: Image.network(
-                          model.parentImage.toString(),
-                          errorBuilder: (q, w, e) =>
-                              Image.asset("assets/images/profileperson.png"),
-                          fit: BoxFit.fitHeight,
+                model.info.toString() == "Father"
+                    ? Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              height: 128,
+                              width: 96.2,
+                              clipBehavior: Clip.hardEdge,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(16)),
+                              child: Image.network(
+                                model.parentImage.toString(),
+                                errorBuilder: (q, w, e) => Image.asset(
+                                    "assets/images/profileperson.png"),
+                                fit: BoxFit.fitHeight,
+                              ),
+                            ),
+                            SizedBox(width: 16),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  model.fatherName.toString(),
+                                  style: FontConstant.k24w500brownText,
+                                ),
+                                Text(
+                                  model.foccupation.toString(),
+                                  style: FontConstant.k16w400B7A4Text,
+                                ),
+                                Text(model.number.toString(),
+                                    style: FontConstant.k16w5008471Text),
+                                Text(model.email.toString(),
+                                    style: FontConstant.k16w5008471Text),
+                              ],
+                            ),
+                          ],
+                        ),
+                      )
+                    : Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              height: 128,
+                              width: 96.2,
+                              clipBehavior: Clip.hardEdge,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(16)),
+                              child: Image.network(
+                                model.parentImage.toString(),
+                                errorBuilder: (q, w, e) => Image.asset(
+                                    "assets/images/profileperson.png"),
+                                fit: BoxFit.fitHeight,
+                              ),
+                            ),
+                            SizedBox(width: 16),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  model.motherName.toString(),
+                                  style: FontConstant.k24w500brownText,
+                                ),
+                                Text(
+                                  model.mOccupation.toString(),
+                                  style: FontConstant.k16w400B7A4Text,
+                                ),
+                                Text(model.motherPhoneNumber.toString(),
+                                    style: FontConstant.k16w5008471Text),
+                                Text(model.motherEmail.toString(),
+                                    style: FontConstant.k16w5008471Text),
+                              ],
+                            ),
+                          ],
                         ),
                       ),
-                      SizedBox(width: 16),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            model.fatherName.toString(),
-                            style: FontConstant.k24w500brownText,
-                          ),
-                          Text(
-                            model.foccupation.toString(),
-                            style: FontConstant.k16w400B7A4Text,
-                          ),
-                          Text(model.number.toString(),
-                              style: FontConstant.k16w5008471Text),
-                          Text(model.email.toString(),
-                              style: FontConstant.k16w5008471Text),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
                 SizedBox(height: 35),
                 Padding(
                   padding: const EdgeInsets.only(right: 10.0),
@@ -225,118 +269,241 @@ class _PParentsProfileState extends State<PParentsProfile> {
                 SizedBox(
                   height: 32,
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "info".tr(),
-                        style: FontConstant2.k22w5008471text,
+                model.info.toString() == "Father"
+                    ? Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "info".tr(),
+                              style: FontConstant2.k22w5008471text,
+                            ),
+                            if (model.motherName != '')
+                              Row(
+                                children: [
+                                  SizedBox(
+                                    width: 130,
+                                    child: Text(
+                                      "Mother's name".tr(),
+                                      style: FontConstant.k16w500331FText,
+                                    ),
+                                  ),
+                                  SizedBox(width: 16),
+                                  Expanded(
+                                    child: Text(
+                                      model.motherName.toString(),
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: FontConstant.k16w5008471Text,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            if (model.mOccupation != '')
+                              Row(
+                                children: [
+                                  SizedBox(
+                                    width: 130,
+                                    child: Text(
+                                      "Occupation".tr(),
+                                      style: FontConstant.k16w500331FText,
+                                    ),
+                                  ),
+                                  SizedBox(width: 16),
+                                  Expanded(
+                                    child: Text(
+                                      model.mOccupation.toString(),
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: FontConstant.k16w5008471Text,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            if (model.motherEmail != '')
+                              Row(
+                                children: [
+                                  SizedBox(
+                                    width: 130,
+                                    child: Text(
+                                      "Email address".tr(),
+                                      style: FontConstant.k16w500331FText,
+                                    ),
+                                  ),
+                                  SizedBox(width: 16),
+                                  Expanded(
+                                    child: Text(
+                                      model.motherEmail.toString(),
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: FontConstant.k16w5008471Text,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            if (model.motherPhoneNumber != '')
+                              Row(
+                                children: [
+                                  SizedBox(
+                                    width: 130,
+                                    child: Text(
+                                      "Phone Number".tr(),
+                                      style: FontConstant.k16w500331FText,
+                                    ),
+                                  ),
+                                  SizedBox(width: 16),
+                                  Expanded(
+                                    child: Text(
+                                      model.motherPhoneNumber.toString(),
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: FontConstant.k16w5008471Text,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            if (model.parentAddress != '')
+                              Row(
+                                children: [
+                                  SizedBox(
+                                    width: 130,
+                                    child: Text(
+                                      "Address".tr(),
+                                      style: FontConstant.k16w500331FText,
+                                    ),
+                                  ),
+                                  SizedBox(width: 16),
+                                  Expanded(
+                                    child: Text(
+                                      model.parentAddress.toString(),
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: FontConstant.k16w5008471Text,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                          ],
+                        ),
+                      )
+                    : Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "info".tr(),
+                              style: FontConstant2.k22w5008471text,
+                            ),
+                            if (model.fatherName != '')
+                              Row(
+                                children: [
+                                  SizedBox(
+                                    width: 130,
+                                    child: Text(
+                                      "Father's name".tr(),
+                                      style: FontConstant.k16w500331FText,
+                                    ),
+                                  ),
+                                  SizedBox(width: 16),
+                                  Expanded(
+                                    child: Text(
+                                      model.fatherName.toString(),
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: FontConstant.k16w5008471Text,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            if (model.foccupation != '')
+                              Row(
+                                children: [
+                                  SizedBox(
+                                    width: 130,
+                                    child: Text(
+                                      "Occupation".tr(),
+                                      style: FontConstant.k16w500331FText,
+                                    ),
+                                  ),
+                                  SizedBox(width: 16),
+                                  Expanded(
+                                    child: Text(
+                                      model.foccupation.toString(),
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: FontConstant.k16w5008471Text,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            if (model.email != '')
+                              Row(
+                                children: [
+                                  SizedBox(
+                                    width: 130,
+                                    child: Text(
+                                      "Email address".tr(),
+                                      style: FontConstant.k16w500331FText,
+                                    ),
+                                  ),
+                                  SizedBox(width: 16),
+                                  Expanded(
+                                    child: Text(
+                                      model.email.toString(),
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: FontConstant.k16w5008471Text,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            if (model.number != '')
+                              Row(
+                                children: [
+                                  SizedBox(
+                                    width: 130,
+                                    child: Text(
+                                      "Phone Number".tr(),
+                                      style: FontConstant.k16w500331FText,
+                                    ),
+                                  ),
+                                  SizedBox(width: 16),
+                                  Expanded(
+                                    child: Text(
+                                      model.number.toString(),
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: FontConstant.k16w5008471Text,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            if (model.parentAddress != '')
+                              Row(
+                                children: [
+                                  SizedBox(
+                                    width: 130,
+                                    child: Text(
+                                      "Address".tr(),
+                                      style: FontConstant.k16w500331FText,
+                                    ),
+                                  ),
+                                  SizedBox(width: 16),
+                                  Expanded(
+                                    child: Text(
+                                      model.parentAddress.toString(),
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: FontConstant.k16w5008471Text,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                          ],
+                        ),
                       ),
-                      Row(
-                        children: [
-                          SizedBox(
-                            width: 130,
-                            child: Text(
-                              "Mother's name".tr(),
-                              style: FontConstant.k16w500331FText,
-                            ),
-                          ),
-                          SizedBox(width: 16),
-                          Expanded(
-                            child: Text(
-                              model.motherName.toString(),
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: FontConstant.k16w5008471Text,
-                            ),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          SizedBox(
-                            width: 130,
-                            child: Text(
-                              "Occupation".tr(),
-                              style: FontConstant.k16w500331FText,
-                            ),
-                          ),
-                          SizedBox(width: 16),
-                          Expanded(
-                            child: Text(
-                              model.mOccupation.toString(),
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: FontConstant.k16w5008471Text,
-                            ),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          SizedBox(
-                            width: 130,
-                            child: Text(
-                              "Email address".tr(),
-                              style: FontConstant.k16w500331FText,
-                            ),
-                          ),
-                          SizedBox(width: 16),
-                          Expanded(
-                            child: Text(
-                              model.motherEmail.toString(),
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: FontConstant.k16w5008471Text,
-                            ),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          SizedBox(
-                            width: 130,
-                            child: Text(
-                              "Phone Number".tr(),
-                              style: FontConstant.k16w500331FText,
-                            ),
-                          ),
-                          SizedBox(width: 16),
-                          Expanded(
-                            child: Text(
-                              model.motherPhoneNumber.toString(),
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: FontConstant.k16w5008471Text,
-                            ),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          SizedBox(
-                            width: 130,
-                            child: Text(
-                              "Address".tr(),
-                              style: FontConstant.k16w500331FText,
-                            ),
-                          ),
-                          SizedBox(width: 16),
-                          Expanded(
-                            child: Text(
-                              model.parentAddress.toString(),
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: FontConstant.k16w5008471Text,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
                 SizedBox(height: 32),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16),

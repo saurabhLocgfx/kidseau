@@ -48,10 +48,10 @@ class _TLoginOtpVerificationState extends State<TLoginOtpVerification> {
                   width: 1.sw,
                   decoration: BoxDecoration(
                     image: DecorationImage(
-                      opacity: 0.2,
-                      image: AssetImage("assets/images/postsbackground.png"),
-                      fit: BoxFit.cover,
-                    ),
+                        opacity: 0.6,
+                        image: AssetImage("assets/images/postsbackground.png"),
+                        fit: BoxFit.fitWidth,
+                        alignment: Alignment.topLeft),
                   ),
                   child: Column(
                     children: [

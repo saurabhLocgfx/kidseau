@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:kidseau/ParentsPanel/PHomeScreen/PHomeScreen.dart';
 import 'package:kidseau/Theme.dart';
 import 'package:kidseau/Widgets/buttons.dart';
@@ -204,8 +205,9 @@ class _TLearningAlphabetsState extends State<TLearningAlphabets> {
                         ],
                       ),
                       SizedBox(height: 24),
-                      Text(_model.learningAlaphabets!.description.toString(),
-                          style: FontConstant.k14w4008471Text.copyWith(
+                      HtmlWidget(
+                          _model.learningAlaphabets!.description.toString(),
+                          textStyle: FontConstant.k14w4008471Text.copyWith(
                               fontWeight: FontWeight.w400, fontSize: 18)),
                       SizedBox(height: 30),
                       _model.weakStudent!.isEmpty
@@ -290,8 +292,11 @@ class TStudentcard extends StatelessWidget {
           Container(
             height: 96,
             width: 72,
+            clipBehavior: Clip.hardEdge,
+            decoration: BoxDecoration(borderRadius: BorderRadius.circular(8)),
             child: Image.network(
               model.weakStudent![index].image.toString(),
+              fit: BoxFit.fill,
               errorBuilder: (q, w, e) =>
                   Image.asset('assets/images/Rectangle 2715.png'),
             ),

@@ -12,8 +12,10 @@
   "Mother’s Occupation": "Mother’s Occupation",
   "Mother’s Phone number": "Mother’s Phone number",
 
+  "Add reminder to get notification": "Add reminder to get notification",
   "Father’s Occupation": "Father’s Occupation",
   "Students": "Students",
+  "No set reminder": "No set reminder",
 "Ask Question": "Ask Question",
   "Enter mother's occupation": "Enter mother's occupation",
   "Father’s phone number": "Father’s phone number",
@@ -389,6 +391,10 @@
   "Thank you for your patience":  "Thank you for your patience",
 
   "info": "info",
+  "Info": "Info",
+  "Enter announcement's title": "Enter announcement's title",
+  "Select date (optional)": "Select date (optional)",
+  "Select time (optional)": "Select time (optional)",
 
   "Group": "Group",
 

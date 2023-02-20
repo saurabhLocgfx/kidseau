@@ -125,63 +125,87 @@ class _TReminderScreenState extends State<TReminderScreen> {
             : Container(
                 //color: AppColors().bgColor,
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                child: ListView.separated(
-                    shrinkWrap: true,
-                    itemBuilder: (context, index) {
-                      return Container(
-                        padding: EdgeInsets.symmetric(vertical: 16),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                child: modelList.isEmpty
+                    ? Center(
+                        child: Column(
                           children: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  modelList[index].title.toString(),
-                                  style: FontConstant2.k18w500331Ftext,
-                                ),
-                                Text(
-                                  "${"Scheduled  at".tr()} ${modelList[index].remTime} - ${modelList[index].remDate}",
-                                  style: FontConstant.k16w4008471Text,
-                                ),
-                              ],
+                            SizedBox(
+                              height: 150,
                             ),
-                            InkWell(
-                              onTap: () {
-                                ScreenLoader().onLoading(context);
-                                final resp = DeleteReminderApi().get(
-                                    reminderId: modelList[index].id.toString());
-                                resp.then((value) {
-                                  if (value['status'] == 1) {
-                                    setState(() {
-                                      modelList.removeAt(index);
-                                      Navigator.of(context).pop();
-                                    });
-                                  } else {
-                                    Navigator.of(context).pop();
-                                  }
-                                });
-                              },
-                              child: Container(
-                                padding: EdgeInsets.all(16),
-                                color: Colors.transparent,
-                                child: SizedBox(
-                                    width: 48.w,
-                                    height: 24.w,
-                                    child:
-                                        Image.asset("assets/images/trash.png")),
-                              ),
+                            Image.asset(
+                              "assets/images/reminder.png",
+                              width: 200,
+                              height: 200,
+                            ),
+                            Text(
+                              "No set reminder".tr(),
+                              style: FontConstant2.k24w500331Ftext,
+                            ),
+                            Text(
+                              "Add reminder to get notification".tr(),
+                              style: FontConstant.k16w4008471Text,
                             ),
                           ],
                         ),
-                      );
-                    },
-                    separatorBuilder: (ctx, ind) => Divider(
-                          thickness: 2,
-                          color: AppColors().bgColor,
-                        ),
-                    itemCount: modelList.length),
+                      )
+                    : ListView.separated(
+                        shrinkWrap: true,
+                        itemBuilder: (context, index) {
+                          return Container(
+                            padding: EdgeInsets.symmetric(vertical: 16),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      modelList[index].title.toString(),
+                                      style: FontConstant2.k18w500331Ftext,
+                                    ),
+                                    Text(
+                                      "${"Scheduled  at".tr()} ${modelList[index].remTime} - ${modelList[index].remDate}",
+                                      style: FontConstant.k16w4008471Text,
+                                    ),
+                                  ],
+                                ),
+                                InkWell(
+                                  onTap: () {
+                                    ScreenLoader().onLoading(context);
+                                    final resp = DeleteReminderApi().get(
+                                        reminderId:
+                                            modelList[index].id.toString());
+                                    resp.then((value) {
+                                      if (value['status'] == 1) {
+                                        setState(() {
+                                          modelList.removeAt(index);
+                                          Navigator.of(context).pop();
+                                        });
+                                      } else {
+                                        Navigator.of(context).pop();
+                                      }
+                                    });
+                                  },
+                                  child: Container(
+                                    padding: EdgeInsets.all(16),
+                                    color: Colors.transparent,
+                                    child: SizedBox(
+                                        width: 48.w,
+                                        height: 24.w,
+                                        child: Image.asset(
+                                            "assets/images/trash.png")),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          );
+                        },
+                        separatorBuilder: (ctx, ind) => Divider(
+                              thickness: 2,
+                              color: AppColors().bgColor,
+                            ),
+                        itemCount: modelList.length),
               ),
         bottomNavigationBar: Container(
             //color: AppColors().bgColor,

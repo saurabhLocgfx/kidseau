@@ -88,29 +88,63 @@ class _PNotificationsettingsState extends State<PNotificationsettings> {
             ],
           ),
         ),
-        body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
-          child: Column(
-            children: [
-              SizedBox(height: 110),
-              GestureDetector(
-                onTap: () {
-                  // Navigator.of(context).push(
-                  //   MaterialPageRoute(
-                  //     builder: (context) => const SongScreen(),
-                  //   ),
-                  // );
-                },
-                child: Row(
+        body: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: Column(
+              children: [
+                SizedBox(height: 16),
+                GestureDetector(
+                  onTap: () {
+                    // Navigator.of(context).push(
+                    //   MaterialPageRoute(
+                    //     builder: (context) => const SongScreen(),
+                    //   ),
+                    // );
+                  },
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Container(
+                        height: 30,
+                        width: 156,
+                        child: Text(
+                          "Notification Settings".tr(),
+                          style: FontConstant.k18w500331FText,
+                        ),
+                      ),
+                      SizedBox(
+                          width: 48.w,
+                          height: 24.w,
+                          child: FlutterSwitch(
+                              toggleSize: 18,
+                              inactiveColor: ThemeColor.b7A4B2,
+                              activeColor: ThemeColor.primarycolor,
+                              value: val1,
+                              onToggle: (v) {
+                                setState(() {
+                                  val1 = v;
+                                  val2 = v;
+                                  val3 = v;
+                                  val4 = v;
+                                });
+                              })),
+                    ],
+                  ),
+                ),
+                SizedBox(height: 20),
+                Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Container(
-                      height: 30,
-                      width: 156,
-                      child: Text(
-                        "Notification Settings".tr(),
-                        style: FontConstant.k18w500331FText,
-                      ),
+                    Row(
+                      children: [
+                        Icon(Icons.circle, size: 6, color: Color(0xff331F2D)),
+                        SizedBox(width: 10),
+                        Text(
+                          "New Post".tr(),
+                          style: FontConstant.k18w500331FText,
+                        ),
+                      ],
                     ),
                     SizedBox(
                         width: 48.w,
@@ -119,106 +153,74 @@ class _PNotificationsettingsState extends State<PNotificationsettings> {
                             toggleSize: 18,
                             inactiveColor: ThemeColor.b7A4B2,
                             activeColor: ThemeColor.primarycolor,
-                            value: val1,
+                            value: val2,
                             onToggle: (v) {
                               setState(() {
-                                val1 = v;
                                 val2 = v;
+                              });
+                            })),
+                  ],
+                ),
+                SizedBox(height: 20),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      children: [
+                        Icon(Icons.circle, size: 6, color: Color(0xff331F2D)),
+                        SizedBox(width: 10),
+                        Text(
+                          "New Activity".tr(),
+                          style: FontConstant.k18w500331FText,
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                        width: 48.w,
+                        height: 24.w,
+                        child: FlutterSwitch(
+                            toggleSize: 18,
+                            inactiveColor: ThemeColor.b7A4B2,
+                            activeColor: ThemeColor.primarycolor,
+                            value: val3,
+                            onToggle: (v) {
+                              setState(() {
                                 val3 = v;
+                              });
+                            })),
+                  ],
+                ),
+                SizedBox(height: 20),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      children: [
+                        Icon(Icons.circle, size: 6, color: Color(0xff331F2D)),
+                        SizedBox(width: 10),
+                        Text(
+                          "New Message".tr(),
+                          style: FontConstant.k18w500331FText,
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                        width: 48.w,
+                        height: 24.w,
+                        child: FlutterSwitch(
+                            toggleSize: 18,
+                            inactiveColor: ThemeColor.b7A4B2,
+                            activeColor: ThemeColor.primarycolor,
+                            value: val4,
+                            onToggle: (v) {
+                              setState(() {
                                 val4 = v;
                               });
                             })),
                   ],
                 ),
-              ),
-              SizedBox(height: 20),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
-                    children: [
-                      Icon(Icons.circle, size: 6, color: Color(0xff331F2D)),
-                      SizedBox(width: 10),
-                      Text(
-                        "New Post".tr(),
-                        style: FontConstant.k18w500331FText,
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                      width: 48.w,
-                      height: 24.w,
-                      child: FlutterSwitch(
-                          toggleSize: 18,
-                          inactiveColor: ThemeColor.b7A4B2,
-                          activeColor: ThemeColor.primarycolor,
-                          value: val2,
-                          onToggle: (v) {
-                            setState(() {
-                              val2 = v;
-                            });
-                          })),
-                ],
-              ),
-              SizedBox(height: 20),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
-                    children: [
-                      Icon(Icons.circle, size: 6, color: Color(0xff331F2D)),
-                      SizedBox(width: 10),
-                      Text(
-                        "New Activity".tr(),
-                        style: FontConstant.k18w500331FText,
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                      width: 48.w,
-                      height: 24.w,
-                      child: FlutterSwitch(
-                          toggleSize: 18,
-                          inactiveColor: ThemeColor.b7A4B2,
-                          activeColor: ThemeColor.primarycolor,
-                          value: val3,
-                          onToggle: (v) {
-                            setState(() {
-                              val3 = v;
-                            });
-                          })),
-                ],
-              ),
-              SizedBox(height: 20),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
-                    children: [
-                      Icon(Icons.circle, size: 6, color: Color(0xff331F2D)),
-                      SizedBox(width: 10),
-                      Text(
-                        "New Message".tr(),
-                        style: FontConstant.k18w500331FText,
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                      width: 48.w,
-                      height: 24.w,
-                      child: FlutterSwitch(
-                          toggleSize: 18,
-                          inactiveColor: ThemeColor.b7A4B2,
-                          activeColor: ThemeColor.primarycolor,
-                          value: val4,
-                          onToggle: (v) {
-                            setState(() {
-                              val4 = v;
-                            });
-                          })),
-                ],
-              ),
-            ],
+              ],
+            ),
           ),
         ));
   }

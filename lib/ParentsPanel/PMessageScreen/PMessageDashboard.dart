@@ -10,6 +10,7 @@ import 'package:kidseau/ParentsPanel/PReminderScreen/PReminderScreen.dart';
 import 'package:kidseau/Theme.dart';
 import 'package:kidseau/shard_prefs/shared_prefs.dart';
 
+import '../../TeachersPanel/TReminder/TReminderScreen.dart';
 import '../../restartappwidget/restartwidgets.dart';
 
 class PMessageDashboard extends StatefulWidget {
@@ -173,7 +174,7 @@ class _PMessageDashboardState extends State<PMessageDashboard> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (_) => PReminderScreen(),
+                            builder: (_) => TReminderScreen(),
                           ),
                         );
                       },

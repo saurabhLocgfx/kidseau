@@ -113,7 +113,7 @@ class _POnboardingScreenState extends State<POnboardingScreen> {
                                 ),
                                 Spacer(),
                                 Text(Pcontents[i].title.tr(),
-                                    style: FontConstant2.k32w500331Ftext),
+                                    style: FontConstant2.k26w500331FtextLine),
                                 SizedBox(
                                   width: 1.sw,
                                   child: Text(Pcontents[i].discription.tr(),

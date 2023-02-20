@@ -129,104 +129,107 @@ class _PKidsDashboardState extends State<PKidsDashboard> {
             ? Center(
                 child: CircularProgressIndicator(),
               )
-            : SingleChildScrollView(
-                child: Column(
-                  children: [
-                    Container(
-                      //height: 414.h,
-                      //width: 414.w,
-                      decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            begin: Alignment.topCenter,
-                            end: Alignment.bottomCenter,
-                            colors: [
-                              Color(0xffD9D9D9).withOpacity(.100),
-                              Color(0xffD9D9D9).withOpacity(.0),
-                            ],
-                          ),
-                          image: DecorationImage(
-                              opacity: 0.2,
-                              image: AssetImage(
-                                  "assets/images/postsbackground.png"),
-                              fit: BoxFit.fitWidth,
-                              alignment: Alignment.topLeft)),
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                        child: Column(
-                          children: [
-                            SizedBox(height: 110),
-                            Row(
-                              children: [
-                                Container(
-                                  height: 128,
-                                  width: 96,
-                                  clipBehavior: Clip.hardEdge,
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(8)),
-                                  child: Image.network(
-                                    overviewModel.kidDetails!.kidImage
-                                        .toString(),
-                                    fit: BoxFit.cover,
-                                    errorBuilder: (q, w, e) => Image.asset(
-                                        "assets/images/profileperson.png"),
-                                  ),
-                                ),
-                                SizedBox(width: 20),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      overviewModel.kidDetails!.kidName
-                                          .toString(),
-                                      style: FontConstant2.k32w500331Ftext,
-                                    ),
-                                    Text(
-                                      overviewModel.kidDetails!.kidGender
-                                                  .toString()
-                                                  .toLowerCase() ==
-                                              'm'
-                                          ? "S/O -  ${overviewModel.kidDetails!.kidFather.toString()}"
-                                          : "D/O -  ${overviewModel.kidDetails!.kidFather.toString()}",
-                                      style: FontConstant.k16w5008471Text,
-                                    ),
-                                    Text(
-                                        overviewModel.kidDetails!.kidVoucher
-                                            .toString(),
-                                        style: FontConstant.k16w5008471Text),
-                                  ],
-                                ),
+            : SafeArea(
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      Container(
+                        //height: 414.h,
+                        //width: 414.w,
+                        decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                              begin: Alignment.topCenter,
+                              end: Alignment.bottomCenter,
+                              colors: [
+                                Color(0xffD9D9D9).withOpacity(.100),
+                                Color(0xffD9D9D9).withOpacity(.0),
                               ],
                             ),
-                            SizedBox(height: 40),
-                            Pageviewtabprofile(),
-                            SizedBox(height: 20),
-                            pageIndex == 0
-                                ? PKidsOverview(
-                                    model: overviewModel,
-                                  )
-                                : PKidsGallery(
-                                    kidId: overviewModel.kidDetails!.kidId
-                                        .toString(),
-                                  )
-                            /* SizedBox(
-                    height: 1350.h,
-                    child: PageView(
-                      controller: _pageController,
-                      onPageChanged: (page) {
-                        setState(
-                          () {
-                            pageIndex = page;
-                          },
-                        );
-                      },
-                      children: [],
-                    ),
-                  ),*/
-                          ],
+                            image: DecorationImage(
+                                opacity: 0.2,
+                                image: AssetImage(
+                                    "assets/images/postsbackground.png"),
+                                fit: BoxFit.fitWidth,
+                                alignment: Alignment.topLeft)),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                          child: Column(
+                            children: [
+                              SizedBox(height: 16),
+                              Row(
+                                children: [
+                                  Container(
+                                    height: 128,
+                                    width: 96,
+                                    clipBehavior: Clip.hardEdge,
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(8)),
+                                    child: Image.network(
+                                      overviewModel.kidDetails!.kidImage
+                                          .toString(),
+                                      fit: BoxFit.cover,
+                                      errorBuilder: (q, w, e) => Image.asset(
+                                          "assets/images/profileperson.png"),
+                                    ),
+                                  ),
+                                  SizedBox(width: 20),
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        overviewModel.kidDetails!.kidName
+                                            .toString(),
+                                        style: FontConstant2.k32w500331Ftext,
+                                      ),
+                                      Text(
+                                        overviewModel.kidDetails!.kidGender
+                                                    .toString()
+                                                    .toLowerCase() ==
+                                                'm'
+                                            ? "S/O -  ${overviewModel.kidDetails!.kidFather.toString()}"
+                                            : "D/O -  ${overviewModel.kidDetails!.kidFather.toString()}",
+                                        style: FontConstant.k16w5008471Text,
+                                      ),
+                                      Text(
+                                          overviewModel.kidDetails!.kidVoucher
+                                              .toString(),
+                                          style: FontConstant.k16w5008471Text),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                              SizedBox(height: 40),
+                              Pageviewtabprofile(),
+                              SizedBox(height: 20),
+                              pageIndex == 0
+                                  ? PKidsOverview(
+                                      model: overviewModel,
+                                    )
+                                  : PKidsGallery(
+                                      kidId: overviewModel.kidDetails!.kidId
+                                          .toString(),
+                                    )
+                              /* SizedBox(
+                      height: 1350.h,
+                      child: PageView(
+                        controller: _pageController,
+                        onPageChanged: (page) {
+                          setState(
+                            () {
+                              pageIndex = page;
+                            },
+                          );
+                        },
+                        children: [],
+                      ),
+                    ),*/
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
       ),

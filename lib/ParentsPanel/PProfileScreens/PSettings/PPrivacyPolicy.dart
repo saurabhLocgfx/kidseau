@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:ui';
 
 import 'package:easy_localization/easy_localization.dart';
@@ -29,6 +30,7 @@ class _PPrivacypolicyState extends State<PPrivacypolicy> {
     _isLoading = true;
     final resp = AppDetailsApi().get(id: '2');
     resp.then((value) {
+      log(value.toString());
       if (value['status'] == 1) {
         setState(() {
           data = value['appData'];
@@ -89,19 +91,21 @@ class _PPrivacypolicyState extends State<PPrivacypolicy> {
           ? Center(
               child: CircularProgressIndicator(),
             )
-          : SingleChildScrollView(
-              child: Container(
-                padding: EdgeInsets.all(16),
-                child: Column(
-                  children: [
-                    SizedBox(
-                      height: 100,
-                    ),
-                    HtmlWidget(
-                      data,
-                      textStyle: FontConstant.k16blackboldText,
-                    ),
-                  ],
+          : SafeArea(
+              child: SingleChildScrollView(
+                child: Container(
+                  padding: EdgeInsets.all(16),
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        height: 16,
+                      ),
+                      HtmlWidget(
+                        data,
+                        textStyle: FontConstant.k16blackboldText,
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
