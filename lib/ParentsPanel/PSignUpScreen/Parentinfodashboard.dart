@@ -183,7 +183,7 @@ class _ParentinfodashboardState extends State<Parentinfodashboard>
                     style: FontConstant.k14w5008267AC),
               ),
               Expanded(
-                child: Text("Kids info".tr(),
+                child: Text("Kid's info".tr(),
                     textAlign: TextAlign.center,
                     maxLines: 2,
                     style: FontConstant.k14w5008267AC.copyWith(

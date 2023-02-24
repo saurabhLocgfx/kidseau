@@ -22,51 +22,56 @@ class _ParentAddNewKidDetailState extends State<ParentAddNewKidDetail> {
   int pageIndex = 0;
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Container(
-              color: ThemeColor.primarycolor.withOpacity(.06),
-              height: 100,
-            ),
-            Container(
-              child: dottab(),
-              color: ThemeColor.primarycolor.withOpacity(.06),
-            ),
-            Container(
-              color: ThemeColor.primarycolor.withOpacity(.06),
-              height: 20,
-            ),
-            SizedBox(
-              height: 1.sh,
-              child: PageView(
-                physics: NeverScrollableScrollPhysics(),
-                controller: _pageController,
-                onPageChanged: (page) {
-                  setState(
-                    () {
-                      pageIndex = page;
-                    },
-                  );
-                },
-                children: <Widget>[
-                  KidsDetails(
-                    onContinue: () {
-                      _pageController.animateToPage(
-                        1,
-                        duration: Duration(milliseconds: 300),
-                        curve: Curves.fastOutSlowIn,
-                      );
-                    },
-                  ),
-                  MedicalInfo(
-                    newKid: widget.newKid,
-                  )
-                ],
+    return WillPopScope(
+      onWillPop: () async {
+        return false;
+      },
+      child: Scaffold(
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              Container(
+                color: ThemeColor.primarycolor.withOpacity(.06),
+                height: 100,
               ),
-            )
-          ],
+              Container(
+                child: dottab(),
+                color: ThemeColor.primarycolor.withOpacity(.06),
+              ),
+              Container(
+                color: ThemeColor.primarycolor.withOpacity(.06),
+                height: 20,
+              ),
+              SizedBox(
+                height: 1.sh,
+                child: PageView(
+                  physics: NeverScrollableScrollPhysics(),
+                  controller: _pageController,
+                  onPageChanged: (page) {
+                    setState(
+                      () {
+                        pageIndex = page;
+                      },
+                    );
+                  },
+                  children: <Widget>[
+                    KidsDetails(
+                      onContinue: () {
+                        _pageController.animateToPage(
+                          1,
+                          duration: Duration(milliseconds: 300),
+                          curve: Curves.fastOutSlowIn,
+                        );
+                      },
+                    ),
+                    MedicalInfo(
+                      newKid: widget.newKid,
+                    )
+                  ],
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
@@ -111,7 +116,7 @@ class _ParentAddNewKidDetailState extends State<ParentAddNewKidDetail> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text("Kid info".tr(), style: FontConstant.k14w5008267AC),
+              Text("Kid's info".tr(), style: FontConstant.k14w5008267AC),
               Text("Medical".tr(),
                   style: FontConstant.k14w500B7A4Text.copyWith(
                       color: pageIndex == 1

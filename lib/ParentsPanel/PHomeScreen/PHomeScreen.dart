@@ -140,7 +140,7 @@ class _PHomeScreenState extends State<PHomeScreen> {
             Padding(
               padding: const EdgeInsets.only(top: 15.0),
               child: SizedBox(
-                width: 180,
+                width: 180.w,
                 child: Text("${"Hello".tr()} ${_activityModel.greet ?? ''}",
                     overflow: TextOverflow.ellipsis,
                     style:
@@ -340,6 +340,9 @@ class _PHomeScreenState extends State<PHomeScreen> {
                             )
                           ],
                         ),
+                      ),
+                      SizedBox(
+                        height: 16,
                       ),
                       Column(
                         children: [

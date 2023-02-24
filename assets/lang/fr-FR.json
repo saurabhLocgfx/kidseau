@@ -17,7 +17,10 @@
   "Enter father's email": "Entrez l'email du papa",
   "Enter father's phone number": "Entrez le numéro de téléphone du papa",
   "Parent info": "infos parent",
-  "Kids info": "infos enfant",
+  "Kid's info": "infos enfant",
+  "Kid's medical status": "Statut médical d'enfant",
+  "All": "Tous",
+  "Kid's Information": "Infos Enfant",
   "Father": "Le papa",
   "Enter mother's phone number": "Entrez le numéro de téléphone de la maman",
   "Mother": "la maman",
@@ -149,7 +152,8 @@
 
   "5 years":"5 ans",
 
-  "kid":"Enfant",
+  "Kid":"L'enfant",
+  "Enter kid’s weight in kg": "Entrez le poids de votre enfant en kg",
   "Email Address": "Adresse mail",
 
   "Class":"Groupe",
@@ -181,7 +185,7 @@
 
   "Phone Number":"Numéro de téléphone",
 
-  "Medical":"Informations Médical",
+  "Medical":"Médicale",
 
   "Blood group":"Groupe sanguin",
 
@@ -421,8 +425,12 @@
   "info": "info",
   "Info": "Info",
   "Enter announcement's title": "Entrez le titre de l'annonce",
+  "Select medical status": "Sélectionnez le statut médical",
+  "Any extra to take care": "y a-t-il autre chose pour prendre soin?",
+  "Enter kid’s height in cm": "Entrez la taille de votre enfant en cm",
   "Select date (optional)": "Sélectionner la date (facultative)",
   "Select time (optional)": "Sélectionnez l'heure (facultative)",
+  "Add kid": "Ajouter un enfant",
 
   "Group":"Groupe",
 

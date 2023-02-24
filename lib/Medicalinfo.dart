@@ -146,7 +146,7 @@ class _MedicalInfoState extends State<MedicalInfo> {
                           },*/
                           style: FontConstant.k18w5008471Text,
                           decoration: CustomInputDecoration(
-                                  hintText: "Enter kid’s height in ft".tr())
+                                  hintText: "Enter kid’s height in cm".tr())
                               .decoration(),
                           controller: heightController,
                           /*  controller: controller,*/
@@ -159,7 +159,7 @@ class _MedicalInfoState extends State<MedicalInfo> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Kid’s medical status".tr(),
+                        "Kid's medical status".tr(),
                         style: FontConstant.k16w500331FText,
                       ),
                       SizedBox(height: 4),
@@ -175,7 +175,7 @@ class _MedicalInfoState extends State<MedicalInfo> {
                           },*/
                           style: FontConstant.k18w5008471Text,
                           decoration: CustomInputDecoration(
-                                  hintText: "Enter medical status".tr())
+                                  hintText: "Select medical status".tr())
                               .decoration(),
                           controller: medicalStatusController,
                           /*  controller: controller,*/

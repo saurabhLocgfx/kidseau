@@ -18,6 +18,7 @@
   "Inappropriate content":"محتوى غير لائق",
   "Kid's father":"والد الطفل",
   "Kid's mother": "والدة الطفل",
+  "Kid's medical status": "الحالة المرضية لطفلك",
   "select time":"حدد الوقت",
   "COVID Vaccination":"التطعيم covid",
   "First time on Kidseau":" لأول مرة على Kidseau",
@@ -30,6 +31,7 @@
   "Login with OTP":"otpتسجيل الدخول باستخدام",
   "Father": "الأب",
   "Mother": "الأم",
+  "All": "الكل",
   "Enter mother's name":"أدخل إسم الأم",
   "Enter mother's occupation": "أدخل مهنة الأم",
   "Enter mother's phone number": "أدخل رقم هاتف الأم",
@@ -38,7 +40,8 @@
   "Enter father's phone number": "أدخل رقم هاتف الأب",
   "Enter father's email": "أدخل إيميل  الأب",
   "Parent info": "معلومات الأولياء",
-  "Kids info": "معلومات الطفل",
+  "Kid's info": "معلومات الطفل",
+  "Kid's Information": "معلومات الطفل",
   "Enter mother's email": "أدخل إيميل الأم",
 
   "You are": "هل أنت",
@@ -120,7 +123,8 @@
   "5 years": "5سنوات",
   "Verify": "تحقق",
 
-  "kid":"الطفل",
+  "Kid":"الطفل",
+  "Enter kid’s weight in kg":"أدخل وزن  طفلك بالكغ",
   "Email Address": "البريد الالكتروني",
 
   "Class":"القسم",
@@ -156,7 +160,7 @@
 
   "Phone Number": "رقم الهاتف",
 
-  "Medical": " معلومات طبية",
+  "Medical": "طبية",
 
   "Blood group": "زمرة الدم",
 
@@ -410,7 +414,11 @@
 
   "Select date (optional)": "حدد التاريخ (اختياري)",
   "Select time (optional)": "حدد الوقت (اختياري)",
+  "Add kid": "أضف طفل",
   "Enter announcement's title": "أدخل عنوان الإعلان",
+  "Select medical status": "أختر الحالة المرضية",
+  "Any extra to take care": "هل من إضافة للعناية؟",
+  "Enter kid’s height in cm": "أدخل الطول بالسم",
   "Oops!": "أُووبس!",
   "No activity available for the kid.": "لا يوجد نشاط متاح للطفل",
   "Change Profile Photo": "تغيير صورة الملف الشخصي",

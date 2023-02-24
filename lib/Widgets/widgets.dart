@@ -9,8 +9,8 @@ import '../TeachersPanel/TProfileScreen/TNotificationSetttings.dart';
 Center mainlogo() {
   return Center(
       child: SizedBox(
-          width: 173,
-          height: 172,
+          width: 170.w,
+          height: 170.w,
           child: Image.asset('assets/images/logo.png')));
 }
 

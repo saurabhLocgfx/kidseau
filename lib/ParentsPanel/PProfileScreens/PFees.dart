@@ -138,7 +138,9 @@ class _PFeesState extends State<PFees> {
                     color: Color(0xffD9D9D9),
                   ),
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    padding: const EdgeInsets.only(
+                      left: 16.0,
+                    ),
                     child: SingleChildScrollView(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -273,163 +275,170 @@ class _PFeesState extends State<PFees> {
                               ? Center(
                                   child: CircularProgressIndicator(),
                                 )
-                              : Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(
-                                          "Remaining fees".tr(),
-                                          style: FontConstant.k24w500brownText,
-                                        ),
-                                        Text(
-                                          feesModel.remainingFees.toString(),
-                                          style: FontConstant.k24w500brownText,
-                                        ),
-                                      ],
-                                    ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(
-                                          "Total Paid fees".tr(),
-                                          style: FontConstant.k16w4008471Text,
-                                        ),
-                                        SizedBox(height: 16),
-                                        Text(
-                                          feesModel.totalFees.toString(),
-                                          style: FontConstant.k16w4008471Text,
-                                        ),
-                                      ],
-                                    ),
-                                    SizedBox(height: 20),
-                                    Align(
-                                      alignment: Alignment.center,
-                                      child: Text(
-                                        "View Fees Structure".tr(),
-                                        style: FontConstant.k18w5008267Text,
+                              : Padding(
+                                  padding: EdgeInsets.only(right: 16.0),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(
+                                            "Remaining fees".tr(),
+                                            style:
+                                                FontConstant.k24w500brownText,
+                                          ),
+                                          Text(
+                                            feesModel.remainingFees.toString(),
+                                            style:
+                                                FontConstant.k24w500brownText,
+                                          ),
+                                        ],
                                       ),
-                                    ),
-                                    SizedBox(height: 20),
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          "Previous Payment".tr(),
-                                          style: FontConstant.k22w5008471Text
-                                              .copyWith(fontSize: 22),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(
+                                            "Total Paid fees".tr(),
+                                            style: FontConstant.k16w4008471Text,
+                                          ),
+                                          SizedBox(height: 16),
+                                          Text(
+                                            feesModel.totalFees.toString(),
+                                            style: FontConstant.k16w4008471Text,
+                                          ),
+                                        ],
+                                      ),
+                                      SizedBox(height: 20),
+                                      Align(
+                                        alignment: Alignment.center,
+                                        child: Text(
+                                          "View Fees Structure".tr(),
+                                          style: FontConstant.k18w5008267Text,
                                         ),
-                                        SizedBox(
-                                          // width: 382.w,
-                                          // height: 400.h,
-                                          child: ListView.builder(
-                                              padding: EdgeInsets.zero,
-                                              shrinkWrap: true,
-                                              itemCount: feesModel
-                                                  .previousPayment!.length,
-                                              physics:
-                                                  NeverScrollableScrollPhysics(),
-                                              itemBuilder:
-                                                  (BuildContext context,
-                                                      int index) {
-                                                return Padding(
-                                                  padding: const EdgeInsets
-                                                      .symmetric(vertical: 8.0),
-                                                  child: Row(
-                                                    children: [
-                                                      Container(
-                                                        height: 67,
-                                                        width: 50,
-                                                        clipBehavior:
-                                                            Clip.hardEdge,
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(8),
+                                      ),
+                                      SizedBox(height: 20),
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            "Previous Payment".tr(),
+                                            style: FontConstant.k22w5008471Text
+                                                .copyWith(fontSize: 22),
+                                          ),
+                                          SizedBox(
+                                            // width: 382.w,
+                                            // height: 400.h,
+                                            child: ListView.builder(
+                                                padding: EdgeInsets.zero,
+                                                shrinkWrap: true,
+                                                itemCount: feesModel
+                                                    .previousPayment!.length,
+                                                physics:
+                                                    NeverScrollableScrollPhysics(),
+                                                itemBuilder:
+                                                    (BuildContext context,
+                                                        int index) {
+                                                  return Padding(
+                                                    padding: const EdgeInsets
+                                                            .symmetric(
+                                                        vertical: 8.0),
+                                                    child: Row(
+                                                      children: [
+                                                        Container(
+                                                          height: 67,
+                                                          width: 50,
+                                                          clipBehavior:
+                                                              Clip.hardEdge,
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        8),
+                                                          ),
+                                                          child: Image.network(
+                                                            feesModel
+                                                                .previousPayment![
+                                                                    index]
+                                                                .schoolImage
+                                                                .toString(),
+                                                            fit: BoxFit.fill,
+                                                            errorBuilder: (q, w,
+                                                                    e) =>
+                                                                Image.asset(
+                                                                    "assets/images/feesimage1.png"),
+                                                          ),
                                                         ),
-                                                        child: Image.network(
-                                                          feesModel
-                                                              .previousPayment![
-                                                                  index]
-                                                              .schoolImage
-                                                              .toString(),
-                                                          fit: BoxFit.fill,
-                                                          errorBuilder: (q, w,
-                                                                  e) =>
-                                                              Image.asset(
-                                                                  "assets/images/feesimage1.png"),
+                                                        SizedBox(width: 16),
+                                                        Expanded(
+                                                          child: Row(
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .spaceBetween,
+                                                            children: [
+                                                              Column(
+                                                                crossAxisAlignment:
+                                                                    CrossAxisAlignment
+                                                                        .start,
+                                                                children: [
+                                                                  Text(
+                                                                    "Paid to"
+                                                                        .tr(),
+                                                                    style: FontConstant
+                                                                        .k16w400B7A4Text,
+                                                                  ),
+                                                                  Text(
+                                                                    feesModel
+                                                                        .previousPayment![
+                                                                            index]
+                                                                        .schoolName
+                                                                        .toString(),
+                                                                    style: FontConstant
+                                                                        .k18w500331FText,
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                              Column(
+                                                                crossAxisAlignment:
+                                                                    CrossAxisAlignment
+                                                                        .end,
+                                                                children: [
+                                                                  Text(
+                                                                    feesModel
+                                                                        .previousPayment![
+                                                                            index]
+                                                                        .date
+                                                                        .toString(),
+                                                                    style: FontConstant
+                                                                        .k16w400B7A4Text,
+                                                                  ),
+                                                                  Text(
+                                                                    feesModel
+                                                                        .previousPayment![
+                                                                            index]
+                                                                        .paidFees
+                                                                        .toString(),
+                                                                    style: FontConstant
+                                                                        .k18w500331FText,
+                                                                  ),
+                                                                ],
+                                                              )
+                                                            ],
+                                                          ),
                                                         ),
-                                                      ),
-                                                      SizedBox(width: 16),
-                                                      Expanded(
-                                                        child: Row(
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .spaceBetween,
-                                                          children: [
-                                                            Column(
-                                                              crossAxisAlignment:
-                                                                  CrossAxisAlignment
-                                                                      .start,
-                                                              children: [
-                                                                Text(
-                                                                  "Paid to"
-                                                                      .tr(),
-                                                                  style: FontConstant
-                                                                      .k16w400B7A4Text,
-                                                                ),
-                                                                Text(
-                                                                  feesModel
-                                                                      .previousPayment![
-                                                                          index]
-                                                                      .schoolName
-                                                                      .toString(),
-                                                                  style: FontConstant
-                                                                      .k18w500331FText,
-                                                                ),
-                                                              ],
-                                                            ),
-                                                            Column(
-                                                              crossAxisAlignment:
-                                                                  CrossAxisAlignment
-                                                                      .end,
-                                                              children: [
-                                                                Text(
-                                                                  feesModel
-                                                                      .previousPayment![
-                                                                          index]
-                                                                      .date
-                                                                      .toString(),
-                                                                  style: FontConstant
-                                                                      .k16w400B7A4Text,
-                                                                ),
-                                                                Text(
-                                                                  feesModel
-                                                                      .previousPayment![
-                                                                          index]
-                                                                      .paidFees
-                                                                      .toString(),
-                                                                  style: FontConstant
-                                                                      .k18w500331FText,
-                                                                ),
-                                                              ],
-                                                            )
-                                                          ],
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                );
-                                              }),
-                                        )
-                                      ],
-                                    ),
-                                  ],
+                                                      ],
+                                                    ),
+                                                  );
+                                                }),
+                                          )
+                                        ],
+                                      ),
+                                    ],
+                                  ),
                                 )
                         ],
                       ),

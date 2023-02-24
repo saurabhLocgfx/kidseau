@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -9,6 +10,7 @@ import 'package:kidseau/ParentsPanel/PSignUpScreen/PSignupScreen.dart';
 import 'package:kidseau/Theme.dart';
 import 'package:kidseau/Widgets/buttons.dart';
 import 'package:kidseau/shard_prefs/shared_prefs.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../Widgets/textfields.dart';
 import '../../api/parent_login_apis/parent_login_api.dart';
@@ -217,6 +219,11 @@ class PLoginScreen extends StatelessWidget {
                                     style: FontConstant.k14w400B7A4Text,
                                   ),
                                   TextSpan(
+                                    recognizer: TapGestureRecognizer()
+                                      ..onTap = () {
+                                        launchUrl(Uri.parse(
+                                            "https://cerebal.locgfx.com/kidsue/kids/appDetails/privacy-policy.php"));
+                                      },
                                     text: "Privacy Policy".tr(),
                                     style: FontConstant.k14w500B7A4TextU,
                                   ),
@@ -225,6 +232,11 @@ class PLoginScreen extends StatelessWidget {
                                     style: FontConstant.k14w400B7A4Text,
                                   ),
                                   TextSpan(
+                                    recognizer: TapGestureRecognizer()
+                                      ..onTap = () {
+                                        launchUrl(Uri.parse(
+                                            "https://cerebal.locgfx.com/kidsue/kids/appDetails/terms-conditions.php"));
+                                      },
                                     text: "Terms and Conditions".tr(),
                                     style: FontConstant.k14w500B7A4TextU,
                                   ),

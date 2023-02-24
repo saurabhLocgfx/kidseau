@@ -31,7 +31,7 @@
     </queries>
 
     <application
-        android:label="kidseau"
+        android:label="Kidseau"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

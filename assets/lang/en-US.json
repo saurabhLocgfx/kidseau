@@ -21,13 +21,16 @@
   "Father’s phone number": "Father’s phone number",
   "Father": "Father",
   "Mother": "Mother",
+  "All": "All",
   "Enter mother's phone number": "Enter mother's phone number",
   "Enter mother's email": "Enter mother's email",
   "Enter father's occupation": "Enter father's occupation",
   "Enter father's phone number": "Enter father's phone number",
   "Enter father's email": "Enter father's email",
   "Parent info": "Parent info",
-  "Kids info": "Kids info",
+  "Kid's info": "Kid's info",
+  "Kid's medical status": "Kid's medical status",
+  "Kid's Information": "Kid's Information",
   "Enter father's name": "Enter father's name",
   "Enter mother's name": "Enter mother's name",
   "Father’s email": "Father’s email",
@@ -153,7 +156,8 @@
 
   "5 years": "5 years",
 
-  "kid": "kid",
+  "Kid": "Kid",
+  "Enter kid’s weight in kg": "Enter kid’s weight in kg",
   "Email Address": "Email Address",
 
   "Class": "Class",
@@ -382,6 +386,7 @@
 
   "All Present": "All Present",
 
+  "Add kid": "Add kid",
   "Wrong nursery code": "Wrong nursery code",
 
   "Educator": "Educator",
@@ -393,6 +398,9 @@
   "info": "info",
   "Info": "Info",
   "Enter announcement's title": "Enter announcement's title",
+  "Select medical status": "Select medical status",
+  "Any extra to take care": "Any extra to take care",
+  "Enter kid’s height in cm": "Enter kid’s height in cm",
   "Select date (optional)": "Select date (optional)",
   "Select time (optional)": "Select time (optional)",
 

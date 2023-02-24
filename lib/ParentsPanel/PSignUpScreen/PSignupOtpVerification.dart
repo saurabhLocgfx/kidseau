@@ -7,6 +7,7 @@ import 'package:kidseau/Theme.dart';
 import 'package:kidseau/Widgets/buttons.dart';
 import 'package:kidseau/api/parent_signup_apis/parent_signup_api.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../Constants/colors.dart';
 import '../../api/parent_signup_apis/parent_signup_otp_api.dart';
@@ -42,14 +43,24 @@ class _PSignupOtpVerificationState extends State<PSignupOtpVerification> {
                 style: FontConstant.k14w400B7A4Text,
               ),
               TextSpan(
+                recognizer: TapGestureRecognizer()
+                  ..onTap = () {
+                    launchUrl(Uri.parse(
+                        "https://cerebal.locgfx.com/kidsue/kids/appDetails/privacy-policy.php"));
+                  },
                 text: "Privacy Policy".tr(),
                 style: FontConstant.k14w500B7A4TextU,
               ),
               TextSpan(
-                text: " & ".tr(),
+                text: " & ",
                 style: FontConstant.k14w400B7A4Text,
               ),
               TextSpan(
+                recognizer: TapGestureRecognizer()
+                  ..onTap = () {
+                    launchUrl(Uri.parse(
+                        "https://cerebal.locgfx.com/kidsue/kids/appDetails/terms-conditions.php"));
+                  },
                 text: "Terms and Conditions".tr(),
                 style: FontConstant.k14w500B7A4TextU,
               ),

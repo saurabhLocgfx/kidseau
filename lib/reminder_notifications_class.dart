@@ -37,6 +37,7 @@ class NotificationServices {
             importance: Importance.max, priority: Priority.high);
     NotificationDetails notificationDetails =
         NotificationDetails(android: androidNotificationDetails);
+
     await _flutterLocalNotificationsPlugin.zonedSchedule(id, title, body,
         tz.TZDateTime.from(datetime, tz.local), notificationDetails,
         uiLocalNotificationDateInterpretation:
