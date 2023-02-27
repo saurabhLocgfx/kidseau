@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -14,10 +16,40 @@ import '../../api/parent_login_apis/parent_login_api.dart';
 import '../../api/parent_login_apis/parent_login_otp_api.dart';
 import '../PDashBoard.dart';
 
-class PLoginOtpVerification extends StatelessWidget {
+class PLoginOtpVerification extends StatefulWidget {
   final String loginField;
   PLoginOtpVerification({Key? key, required this.loginField}) : super(key: key);
+
+  @override
+  State<PLoginOtpVerification> createState() => _PLoginOtpVerificationState();
+}
+
+class _PLoginOtpVerificationState extends State<PLoginOtpVerification> {
   final TextEditingController pinTextController = TextEditingController();
+  Timer? timer;
+  int seconds = 30;
+
+  startTimer() {
+    timer = Timer.periodic(Duration(seconds: 1), (timer) {
+      if (seconds != 0) {
+        setState(() {});
+        seconds--;
+      }
+    });
+  }
+
+  @override
+  void initState() {
+    startTimer();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    timer!.cancel();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -109,7 +141,7 @@ class PLoginOtpVerification extends StatelessWidget {
                       text: TextSpan(children: [
                     TextSpan(
                       text: "A OTP has been sent to . ".tr() +
-                          loginField +
+                          widget.loginField +
                           "Please enter the OTP here.".tr(),
                       /*AppLoaclizations.of(context)!
                                   .translate(
@@ -118,7 +150,35 @@ class PLoginOtpVerification extends StatelessWidget {
                       style:
                           FontConstant.k16w400B7A4Text.copyWith(fontSize: 15),
                     ),
-                    TextSpan(
+                    seconds != 0
+                        ? TextSpan(
+                            text: ' $seconds',
+                            style: FontConstant.k16w500purpleText)
+                        : WidgetSpan(
+                            alignment: PlaceholderAlignment.baseline,
+                            baseline: TextBaseline.alphabetic,
+                            child: GestureDetector(
+                              onTap: () {
+                                final resp = ParentLogin()
+                                    .get(email: widget.loginField.trim());
+                                resp.then((value) {
+                                  // log(value.toString());
+                                  if (value['status'] == 0) {
+                                    Fluttertoast.showToast(msg: value['msg']);
+                                  } else {
+                                    UserPrefs.setCookies(value['key']);
+                                    Fluttertoast.showToast(
+                                        msg: 'Your OTP is ${value['OTP']}');
+                                  }
+                                });
+                              },
+                              child: Text(
+                                "  Resend".tr(),
+                                style: FontConstant.k16w500purpleText,
+                              ),
+                            ),
+                          ),
+                    /*TextSpan(
                       recognizer: TapGestureRecognizer()
                         ..onTap = () {
                           //log('');
@@ -137,7 +197,7 @@ class PLoginOtpVerification extends StatelessWidget {
                         },
                       text: "  Resend".tr(),
                       style: FontConstant.k16w500purpleText,
-                    ),
+                    ),*/
                   ])),
                   SizedBox(height: 43),
                   PinCodeTextField(

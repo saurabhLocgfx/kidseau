@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:developer';
 
 import 'package:easy_localization/easy_localization.dart';
@@ -19,7 +20,7 @@ import '../TSignupScreen/TSignupCode.dart';
 
 class TLoginOtpVerification extends StatefulWidget {
   final bool isEmail;
-  String mobileText;
+  final String mobileText;
   TLoginOtpVerification(
       {Key? key, required this.isEmail, required this.mobileText})
       : super(key: key);
@@ -31,6 +32,31 @@ class TLoginOtpVerification extends StatefulWidget {
 class _TLoginOtpVerificationState extends State<TLoginOtpVerification> {
   final TextEditingController pinTextController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+
+  Timer? timer;
+  int seconds = 30;
+
+  startTimer() {
+    timer = Timer.periodic(Duration(seconds: 1), (timer) {
+      if (seconds != 0) {
+        setState(() {});
+        seconds--;
+      }
+    });
+  }
+
+  @override
+  void initState() {
+    startTimer();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    timer!.cancel();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -99,7 +125,38 @@ class _TLoginOtpVerificationState extends State<TLoginOtpVerification> {
                                 style: FontConstant.k16w400B7A4Text
                                     .copyWith(fontSize: 15),
                               ),
-                              TextSpan(
+                              seconds != 0
+                                  ? TextSpan(
+                                      text: ' $seconds',
+                                      style: FontConstant.k16w500purpleText)
+                                  : WidgetSpan(
+                                      alignment: PlaceholderAlignment.baseline,
+                                      baseline: TextBaseline.alphabetic,
+                                      child: GestureDetector(
+                                        onTap: () {
+                                          final resp = TeacherLogin().get(
+                                              email: widget.mobileText.trim());
+                                          resp.then((value) {
+                                            print(value);
+                                            if (value['status'] == 0) {
+                                              Fluttertoast.showToast(
+                                                  msg: value['msg']);
+                                            } else {
+                                              UserPrefs.setCookies(
+                                                  value['key']);
+                                              Fluttertoast.showToast(
+                                                  msg:
+                                                      'Your OTP is ${value['OTP']}');
+                                            }
+                                          });
+                                        },
+                                        child: Text(
+                                          "  Resend".tr(),
+                                          style: FontConstant.k16w500purpleText,
+                                        ),
+                                      ),
+                                    ),
+                              /*TextSpan(
                                 recognizer: TapGestureRecognizer()
                                   ..onTap = () {
                                     final resp = TeacherLogin()
@@ -118,7 +175,7 @@ class _TLoginOtpVerificationState extends State<TLoginOtpVerification> {
                                   },
                                 text: "  Resend".tr(),
                                 style: FontConstant.k16w4008471Text,
-                              ),
+                              ),*/
                             ])),
                             /*  Row(
                       children: [
