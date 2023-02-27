@@ -158,113 +158,111 @@ class _PParentsProfileState extends State<PParentsProfile> {
                         ),
                       ),
                 SizedBox(height: 35),
-                Padding(
-                  padding: const EdgeInsets.only(right: 10.0),
-                  child: Container(
-                    height: 132,
-                    padding: EdgeInsets.only(left: 16),
-                    child: ListView.separated(
-                        shrinkWrap: true,
-                        scrollDirection: Axis.horizontal,
-                        itemBuilder: (context, index) {
-                          if (index >= model.kid!.length) {
-                            return InkWell(
-                              onTap: () {
-                                Navigator.of(context).push(MaterialPageRoute(
-                                    builder: (ctx) => PSignupCode(
-                                          newKid: true,
-                                        )));
-                              },
-                              child: Container(
-                                padding: EdgeInsets.symmetric(horizontal: 16),
-                                decoration: BoxDecoration(
-                                    color: Color(0xffD9D9D9),
-                                    borderRadius: BorderRadius.circular(16)),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Icon(Icons.add),
-                                    Text(
-                                      'Add kid'.tr(),
-                                      style: FontConstant.k18w500BlackText,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            );
-                          } else {
-                            return InkWell(
-                              child: Container(
-                                width: 300,
-                                decoration: BoxDecoration(
-                                  //color: Colors.black,
-                                  borderRadius: BorderRadius.circular(16),
-                                  image: DecorationImage(
-                                    image: AssetImage(
-                                        "assets/images/Student Card.png"),
-                                    fit: BoxFit.fill,
+                Container(
+                  height: 132,
+                  padding: EdgeInsets.only(left: 16),
+                  child: ListView.separated(
+                      shrinkWrap: true,
+                      scrollDirection: Axis.horizontal,
+                      itemBuilder: (context, index) {
+                        if (index >= model.kid!.length) {
+                          return InkWell(
+                            onTap: () {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (ctx) => PSignupCode(
+                                        newKid: true,
+                                      )));
+                            },
+                            child: Container(
+                              margin: EdgeInsets.only(right: 10),
+                              padding: EdgeInsets.symmetric(horizontal: 16),
+                              decoration: BoxDecoration(
+                                  color: Color(0xffD9D9D9),
+                                  borderRadius: BorderRadius.circular(16)),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Icon(Icons.add),
+                                  Text(
+                                    'Add kid'.tr(),
+                                    style: FontConstant.k18w500BlackText,
                                   ),
-                                ),
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 16.0, vertical: 8),
-                                child: Row(
-                                  children: [
-                                    Container(
-                                      height: 96,
-                                      width: 72,
-                                      clipBehavior: Clip.hardEdge,
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(8)),
-                                      child: Image.network(
-                                        model.kid![index].profilePic.toString(),
-                                        fit: BoxFit.fill,
-                                        errorBuilder: (q, w, e) => Image.asset(
-                                            "assets/images/Rectangle 2715.png"),
-                                      ),
-                                    ),
-                                    SizedBox(width: 16),
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        SizedBox(
-                                          height: 8,
-                                        ),
-                                        Text(
-                                          model.kid![index].name.toString(),
-                                          style: FontConstant.k16w500White,
-                                        ),
-                                        Text(
-                                          model.kid![index].grpName.toString(),
-                                          style: FontConstant.k14w400White,
-                                        ),
-                                        Text(
-                                          "${"From".tr()} ${DateFormat.jm().format(DateFormat("hh:mm:ss").parse(model.kid![index].schTimeIn.toString().split('.').first))} ${"To".tr()} ${DateFormat.jm().format(DateFormat("hh:mm:ss").parse(model.kid![index].schTimeOut.toString().split('.').first))}",
-                                          style: FontConstant.k12w400White,
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
+                                ],
                               ),
-                              onTap: () {
-                                Navigator.of(context).push(
-                                  MaterialPageRoute(
-                                    builder: (context) => PKidsDetails(
-                                      kidId: model.kid![index].kidId.toString(),
-                                    ),
-                                  ),
-                                );
-                              },
-                            );
-                          }
-                        },
-                        separatorBuilder: (ctx, ind) => SizedBox(
-                              width: 10,
                             ),
-                        itemCount: model.kid!.length + 1),
-                  ),
+                          );
+                        } else {
+                          return InkWell(
+                            child: Container(
+                              height: 145.h,
+                              width: 320,
+                              decoration: BoxDecoration(
+                                //color: Colors.black,
+                                borderRadius: BorderRadius.circular(16),
+                                image: DecorationImage(
+                                  image: AssetImage(
+                                      "assets/images/Student Card.png"),
+                                  fit: BoxFit.fitHeight,
+                                ),
+                              ),
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 16.0, vertical: 8),
+                              child: Row(
+                                children: [
+                                  Container(
+                                    height: 96,
+                                    width: 72,
+                                    clipBehavior: Clip.hardEdge,
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(8)),
+                                    child: Image.network(
+                                      model.kid![index].profilePic.toString(),
+                                      fit: BoxFit.cover,
+                                      errorBuilder: (q, w, e) => Image.asset(
+                                          "assets/images/Rectangle 2715.png"),
+                                    ),
+                                  ),
+                                  SizedBox(width: 16),
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      SizedBox(
+                                        height: 8,
+                                      ),
+                                      Text(
+                                        model.kid![index].name.toString(),
+                                        style: FontConstant.k16w500White,
+                                      ),
+                                      Text(
+                                        model.kid![index].grpName.toString(),
+                                        style: FontConstant.k14w400White,
+                                      ),
+                                      Text(
+                                        "${"From".tr()} ${DateFormat.jm().format(DateFormat("hh:mm:ss").parse(model.kid![index].schTimeIn.toString().split('.').first))} ${"To".tr()} ${DateFormat.jm().format(DateFormat("hh:mm:ss").parse(model.kid![index].schTimeOut.toString().split('.').first))}",
+                                        style: FontConstant.k12w400White,
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                            onTap: () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) => PKidsDetails(
+                                    kidId: model.kid![index].kidId.toString(),
+                                  ),
+                                ),
+                              );
+                            },
+                          );
+                        }
+                      },
+                      separatorBuilder: (ctx, ind) => SizedBox(
+                            width: 10,
+                          ),
+                      itemCount: model.kid!.length + 1),
                 ),
                 SizedBox(
                   height: 32,

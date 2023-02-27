@@ -154,7 +154,7 @@ class _ActivityState extends State<Activity> {
 }
 
 class Tutorials extends StatefulWidget {
-  ParentActivityHomeModel model;
+  final ParentActivityHomeModel model;
   Tutorials({Key? key, required this.model}) : super(key: key);
 
   @override
@@ -169,21 +169,19 @@ class _TutorialsState extends State<Tutorials> {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 220,
-      child: Padding(
-        padding: const EdgeInsets.only(right: 5.0, left: 5),
-        child: ListView.separated(
-            shrinkWrap: true,
-            scrollDirection: Axis.horizontal,
-            itemBuilder: (context, index) {
-              return VideoWidget(model: widget.model, index: index);
-            },
-            separatorBuilder: (ctx, ind) => SizedBox(
-                  width: 10,
-                ),
-            itemCount: widget.model.videoTutorial!.length),
-      ),
+    return Container(
+      height: 200,
+      padding: const EdgeInsets.only(right: 5.0, left: 5),
+      child: ListView.separated(
+          shrinkWrap: true,
+          scrollDirection: Axis.horizontal,
+          itemBuilder: (context, index) {
+            return VideoWidget(model: widget.model, index: index);
+          },
+          separatorBuilder: (ctx, ind) => SizedBox(
+                width: 10,
+              ),
+          itemCount: widget.model.videoTutorial!.length),
     );
   }
 }

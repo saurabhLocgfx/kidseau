@@ -92,13 +92,11 @@ class _PProfileDashBoardState extends State<PProfileDashBoard> {
             width: 1.sw,
             height: 1.sh,
             child: Stack(children: [
-              Container(
-                child: Image.asset(
-                  "assets/images/postsbackground.png",
-                  height: 414.h,
-                  width: 1.sw,
-                  fit: BoxFit.fitWidth,
-                ),
+              Image.asset(
+                "assets/images/postsbackground.png",
+                height: 414.h,
+                width: 1.sw,
+                fit: BoxFit.fitWidth,
               ),
               Positioned(
                 top: 0,

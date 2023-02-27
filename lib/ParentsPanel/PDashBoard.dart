@@ -116,6 +116,7 @@ class _PDashboardState extends State<PDashboard> {
         bottomNavigationBar: buildMyNavBar(context),
         body: PageView(
           controller: _pageController,
+          physics: NeverScrollableScrollPhysics(),
           onPageChanged: (page) {
             setState(
               () {

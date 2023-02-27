@@ -287,369 +287,328 @@ class _PHomeScreenState extends State<PHomeScreen> {
           ? Center(
               child: CircularProgressIndicator(),
             )
-          : SafeArea(
-              child: Container(
-                //color: AppColors().bgColor,
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      SizedBox(height: 16),
-                      Container(
-                        width: 1.sw,
-                        margin: EdgeInsets.symmetric(horizontal: 16),
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(16),
-                            color: AppColors().k8267AC.withOpacity(0.32)),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          : SingleChildScrollView(
+              child: Column(
+                children: [
+                  SizedBox(height: 16),
+                  Container(
+                    width: 1.sw,
+                    margin: EdgeInsets.symmetric(horizontal: 16),
+                    padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(16),
+                        color: AppColors().k8267AC.withOpacity(0.32)),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
                           children: [
-                            Row(
+                            Image.asset(
+                              "assets/images/clockfilled.png",
+                              width: 34,
+                              height: 34,
+                            ),
+                            SizedBox(
+                              width: 12,
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Image.asset(
-                                  "assets/images/clockfilled.png",
-                                  width: 34,
-                                  height: 34,
+                                Text(
+                                  "Bring notebook",
+                                  style: FontConstant2.k18w500331Ftext,
                                 ),
                                 SizedBox(
-                                  width: 12,
+                                  height: 2,
                                 ),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      "Bring notebook",
-                                      style: FontConstant2.k18w500331Ftext,
-                                    ),
-                                    SizedBox(
-                                      height: 2,
-                                    ),
-                                    Text(
-                                      "Bring notebook",
-                                      style: FontConstant.k16w4008471Text,
-                                    ),
-                                  ],
+                                Text(
+                                  "Bring notebook",
+                                  style: FontConstant.k16w4008471Text,
                                 ),
                               ],
                             ),
-                            Container(
-                              color: Colors.transparent,
-                              padding: EdgeInsets.all(12),
-                              child: Icon(Icons.close),
-                            )
                           ],
                         ),
-                      ),
-                      SizedBox(
-                        height: 16,
-                      ),
-                      Column(
-                        children: [
-                          //Text(cookie),
-                          Container(
-                            padding: EdgeInsets.only(left: 16),
-                            // color: Colors.black,
-                            child: CarouselSlider.builder(
-                              carouselController: _controller,
-                              itemCount: _kidModel.parentKidId!.length,
-                              itemBuilder: (ctx, index, realIndex) {
-                                return InkWell(
-                                  onTap: _kidModel.parentKidId![index].kidId ==
-                                          null
-                                      ? () {}
-                                      : () {
-                                          Navigator.of(context).push(
-                                              MaterialPageRoute(
-                                                  builder: (ctx) =>
-                                                      PKidsDashboard(
-                                                        kidId: _kidModel
-                                                            .parentKidId![index]
-                                                            .kidId
-                                                            .toString(),
-                                                      )));
-                                        },
-                                  child: Container(
-                                    //width: 260,
-                                    // height: 100,
-                                    margin: EdgeInsets.only(right: 16),
+                        Container(
+                          color: Colors.transparent,
+                          padding: EdgeInsets.all(12),
+                          child: Icon(Icons.close),
+                        )
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: 16),
+                  Column(
+                    children: [
+                      //Text(cookie),
+                      CarouselSlider.builder(
+                        carouselController: _controller,
+                        itemCount: _kidModel.parentKidId!.length,
+                        itemBuilder: (ctx, index, realIndex) {
+                          return InkWell(
+                            onTap: _kidModel.parentKidId![index].kidId == null
+                                ? () {}
+                                : () {
+                                    Navigator.of(context)
+                                        .push(MaterialPageRoute(
+                                            builder: (ctx) => PKidsDashboard(
+                                                  kidId: _kidModel
+                                                      .parentKidId![index].kidId
+                                                      .toString(),
+                                                )));
+                                  },
+                            child: Container(
+                              //width: 330,
+                              // height: 100,
+                              margin: EdgeInsets.only(
+                                  right: 16, left: index == 0 ? 16 : 0),
+                              decoration: BoxDecoration(
+                                // color: Colors.red,
+                                borderRadius: BorderRadius.circular(16),
+                                image: DecorationImage(
+                                  image: AssetImage(
+                                      "assets/images/Student Card.png"),
+                                  fit: BoxFit.fitHeight,
+                                ),
+                              ),
+                              padding: const EdgeInsets.all(16),
+                              child: Row(
+                                children: [
+                                  Container(
+                                    height: 100,
+                                    width: 72,
+                                    clipBehavior: Clip.hardEdge,
                                     decoration: BoxDecoration(
-                                      // color: Colors.red,
-                                      borderRadius: BorderRadius.circular(16),
-                                      image: DecorationImage(
-                                        image: AssetImage(
-                                            "assets/images/Student Card.png"),
-                                        fit: BoxFit.fill,
-                                      ),
+                                        borderRadius: BorderRadius.circular(8)),
+                                    child: Image.network(
+                                      _kidModel.parentKidId![index].profilePic
+                                          .toString(),
+                                      fit: BoxFit.cover,
+                                      errorBuilder: (q, w, e) => Image.asset(
+                                          "assets/images/Rectangle 2715.png"),
                                     ),
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 16.0, vertical: 8),
-                                    child: Row(
-                                      children: [
-                                        Container(
-                                          height: 100,
-                                          width: 72,
-                                          clipBehavior: Clip.hardEdge,
-                                          decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(8)),
-                                          child: Image.network(
-                                            _kidModel
-                                                .parentKidId![index].profilePic
-                                                .toString(),
-                                            fit: BoxFit.fill,
-                                            errorBuilder: (q, w, e) => Image.asset(
-                                                "assets/images/Rectangle 2715.png"),
-                                          ),
-                                        ),
-                                        SizedBox(width: 16),
-                                        Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            Text(
-                                              _kidModel.parentKidId![index].name
-                                                  .toString(),
-                                              style: FontConstant.k16w500White,
-                                            ),
-                                            _kidModel.parentKidId![index]
-                                                        .kidId ==
-                                                    null
-                                                ? Container(
-                                                    padding:
-                                                        EdgeInsets.symmetric(
-                                                            horizontal: 10,
-                                                            vertical: 5),
-                                                    decoration: BoxDecoration(
-                                                        color: Colors.red,
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(20)),
-                                                    child: Text(
-                                                      "Voucher expired!",
+                                  ),
+                                  SizedBox(width: 16),
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        _kidModel.parentKidId![index].name
+                                            .toString(),
+                                        style: FontConstant.k16w500White,
+                                      ),
+                                      _kidModel.parentKidId![index].kidId ==
+                                              null
+                                          ? Container(
+                                              padding: EdgeInsets.symmetric(
+                                                  horizontal: 10, vertical: 5),
+                                              decoration: BoxDecoration(
+                                                  color: Colors.red,
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          20)),
+                                              child: Text(
+                                                "Voucher expired!",
+                                                style:
+                                                    FontConstant.k14w400White,
+                                              ),
+                                            )
+                                          : Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  _kidModel.parentKidId![index]
+                                                      .secName
+                                                      .toString(),
+                                                  style:
+                                                      FontConstant.k14w400White,
+                                                ),
+                                                Row(
+                                                  children: [
+                                                    Text(
+                                                      "${"From".tr()} ${DateFormat.jm().format(DateFormat("hh:mm:ss").parse(_kidModel.parentKidId![index].schTimeIn.toString().split('.').first))} ",
                                                       style: FontConstant
                                                           .k14w400White,
                                                     ),
-                                                  )
-                                                : Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      Text(
-                                                        _kidModel
-                                                            .parentKidId![index]
-                                                            .secName
-                                                            .toString(),
-                                                        style: FontConstant
-                                                            .k14w400White,
-                                                      ),
-                                                      Row(
-                                                        children: [
-                                                          Text(
-                                                            "${"From".tr()} ${DateFormat.jm().format(DateFormat("hh:mm:ss").parse(_kidModel.parentKidId![index].schTimeIn.toString().split('.').first))} ",
-                                                            style: FontConstant
-                                                                .k14w400White,
-                                                          ),
-                                                          Text(
-                                                            "${"To".tr()} ${DateFormat.jm().format(DateFormat("hh:mm:ss").parse(_kidModel.parentKidId![index].schTimeOut.toString().split('.').first))}",
-                                                            style: FontConstant
-                                                                .k14w400White,
-                                                          ),
-                                                        ],
-                                                      ),
-                                                      Text(
-                                                        _kidModel
-                                                            .parentKidId![index]
-                                                            .grpName
-                                                            .toString()
-                                                            .tr(),
-                                                        style: FontConstant
-                                                            .k12w400White,
-                                                      ),
-                                                    ],
-                                                  ),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
+                                                    Text(
+                                                      "${"To".tr()} ${DateFormat.jm().format(DateFormat("hh:mm:ss").parse(_kidModel.parentKidId![index].schTimeOut.toString().split('.').first))}",
+                                                      style: FontConstant
+                                                          .k14w400White,
+                                                    ),
+                                                  ],
+                                                ),
+                                                Text(
+                                                  _kidModel.parentKidId![index]
+                                                      .grpName
+                                                      .toString()
+                                                      .tr(),
+                                                  style:
+                                                      FontConstant.k12w400White,
+                                                ),
+                                              ],
+                                            ),
+                                    ],
                                   ),
-                                );
-                              },
-                              options: CarouselOptions(
-                                height: 150,
-                                onPageChanged: (index, reason) {
-                                  setState(() {
-                                    // _index = index;
-                                    _isActivityLoading = true;
-                                    _getActivity(_kidModel
-                                        .parentKidId![index].kidId
-                                        .toString());
-                                    log(index.toString());
-                                  });
-                                },
-                                viewportFraction: 0.9,
-                                //enlargeCenterPage: true,
-                                padEnds: false,
-                                //pageSnapping: false,
-                                enableInfiniteScroll: false,
+                                ],
                               ),
                             ),
-                          ),
-                          /*Row(
-                      //mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => PKidsDashboard()),
+                          );
+                        },
+                        options: CarouselOptions(
+                          height: 145.h,
+                          onPageChanged: (index, reason) {
+                            setState(() {
+                              // _index = index;
+                              _isActivityLoading = true;
+                              _getActivity(_kidModel.parentKidId![index].kidId
+                                  .toString());
+                              log(index.toString());
+                            });
+                          },
+                          viewportFraction:
+                              _kidModel.parentKidId!.length == 1 ? 1 : 0.9,
+                          //enlargeCenterPage: true,
+                          padEnds: false,
+                          //pageSnapping: false,
+                          enableInfiniteScroll: false,
+                        ),
+                      ),
+                      /*Row(
+                //mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => PKidsDashboard()),
+                      );
+                    },
+                    child: Container(
+                      height: 132,
+                      width: MediaQuery.of(context).size.width * 0.98,
+                      padding: EdgeInsets.only(left: 16),
+                      child: ListView.builder(
+                          shrinkWrap: true,
+                          scrollDirection: Axis.horizontal,
+                          itemBuilder: (context, index) {
+                            return Padding(
+                              padding: const EdgeInsets.only(right: 15.0),
+                              child: PStudentcard(),
                             );
                           },
-                          child: Container(
-                            height: 132,
-                            width: MediaQuery.of(context).size.width * 0.98,
-                            padding: EdgeInsets.only(left: 16),
-                            child: ListView.builder(
-                                shrinkWrap: true,
-                                scrollDirection: Axis.horizontal,
-                                itemBuilder: (context, index) {
-                                  return Padding(
-                                    padding: const EdgeInsets.only(right: 15.0),
-                                    child: PStudentcard(),
-                                  );
-                                },
-                                itemCount: 3),
-                          ),
-                        ),
-                        SizedBox(width: 5),
-                      ],
-                    ),*/
+                          itemCount: 3),
+                    ),
+                  ),
+                  SizedBox(width: 5),
+                ],
+              ),*/
+                      SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.01),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
                           SizedBox(
-                              height:
-                                  MediaQuery.of(context).size.height * 0.01),
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              SizedBox(
-                                height: 15.h,
-                              ),
-                              Padding(
-                                padding: EdgeInsets.only(left: 16.0),
-                                child: Text(
-                                  "Activity".tr(),
-                                  style: FontConstant2.baloothampifont,
-                                ),
-                              ),
-                              SizedBox(
-                                height: 5.h,
-                              ),
-                              _isActivityLoading
-                                  ? Center(
-                                      child: CircularProgressIndicator(),
-                                    )
-                                  : _activityModel.kidAndActivity!.isEmpty
-                                      ? Column(
-                                          children: [
-                                            Image.asset(
-                                              "assets/images/chicken.png",
-                                              width: 1.sw,
-                                              height: 200,
-                                            ),
-                                            SizedBox(
-                                              height: 20,
-                                            ),
-                                            Text(
-                                              "Oops!".tr(),
-                                              style:
-                                                  FontConstant2.k24w5008267text,
-                                            ),
-                                            Text(
-                                              "No activity available for the kid."
-                                                  .tr(),
-                                              style:
-                                                  FontConstant.k16w4008471Text,
-                                            ),
-                                          ],
-                                        )
-                                      : Activity(
-                                          model: _activityModel,
-                                          length: length),
-                              SizedBox(height: 10),
-                              length == _activityModel.kidAndActivity!.length
-                                  ? SizedBox.shrink()
-                                  : Center(
-                                      child: GestureDetector(
-                                        onTap: () {
-                                          Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (_) => PScheduleScreen(
-                                                model: _activityModel,
-                                              ),
-                                            ),
-                                          );
-                                        },
-                                        child: Container(
-                                          color: Colors.transparent,
-                                          padding: EdgeInsets.all(16),
-                                          child: Text("See more".tr(),
-                                              style: FontConstant
-                                                  .k16w500purpleText
-                                                  .copyWith(
-                                                fontSize: 18,
-                                              )),
+                            height: 15.h,
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(left: 16.0),
+                            child: Text(
+                              "Activity".tr(),
+                              style: FontConstant2.baloothampifont,
+                            ),
+                          ),
+                          SizedBox(
+                            height: 5.h,
+                          ),
+                          _isActivityLoading
+                              ? Center(
+                                  child: CircularProgressIndicator(),
+                                )
+                              : _activityModel.kidAndActivity!.isEmpty
+                                  ? Column(
+                                      children: [
+                                        Image.asset(
+                                          "assets/images/chicken.png",
+                                          width: 1.sw,
+                                          height: 200,
                                         ),
-                                      ),
+                                        SizedBox(
+                                          height: 20,
+                                        ),
+                                        Text(
+                                          "Oops!".tr(),
+                                          style: FontConstant2.k24w5008267text,
+                                        ),
+                                        Text(
+                                          "No activity available for the kid."
+                                              .tr(),
+                                          style: FontConstant.k16w4008471Text,
+                                        ),
+                                      ],
+                                    )
+                                  : Activity(
+                                      model: _activityModel, length: length),
+                          SizedBox(height: 10),
+                          length == _activityModel.kidAndActivity!.length
+                              ? SizedBox.shrink()
+                              : Center(
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (_) => PScheduleScreen(
+                                            model: _activityModel,
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                    child: Container(
+                                      color: Colors.transparent,
+                                      padding: EdgeInsets.all(16),
+                                      child: Text("See more".tr(),
+                                          style: FontConstant.k16w500purpleText
+                                              .copyWith(
+                                            fontSize: 18,
+                                          )),
                                     ),
-                              /*Center(
-                                child: Text("See more".tr(),
-                                    style:
-                                        FontConstant.k16w500purpleText.copyWith(
-                                      fontSize: 18,
-                                    )),
-                              ),*/
-                            ],
-                          )
-                        ],
-                      ),
-                      _activityModel.videoTutorial!.isEmpty
-                          ? SizedBox.shrink()
-                          : Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                SizedBox(height: 20.h),
-                                Padding(
-                                  padding: EdgeInsets.only(left: 16.0),
-                                  child: Text(
-                                    "Tutorials".tr(),
-                                    style: FontConstant2.baloothampifont,
                                   ),
                                 ),
-                                SizedBox(
-                                  height: 10.h,
-                                ),
-                                Row(
-                                  children: [
-                                    Expanded(
-                                        child: Tutorials(
-                                      model: _activityModel,
-                                    )),
-                                  ],
-                                ),
-                              ],
-                            ),
-                      //Tutorials card
-                      SizedBox(
-                        height: 100.h,
+                          /*Center(
+                          child: Text("See more".tr(),
+                              style:
+                                  FontConstant.k16w500purpleText.copyWith(
+                                fontSize: 18,
+                              )),
+                        ),*/
+                        ],
                       )
                     ],
                   ),
-                ),
+                  if (_activityModel.videoTutorial!.isNotEmpty)
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(height: 20.h),
+                        Padding(
+                          padding: EdgeInsets.only(left: 16.0),
+                          child: Text(
+                            "Tutorials".tr(),
+                            style: FontConstant2.baloothampifont,
+                          ),
+                        ),
+                        SizedBox(height: 10.h),
+                        Tutorials(model: _activityModel),
+                      ],
+                    ),
+                  //Tutorials card
+                  SizedBox(height: 70)
+                ],
               ),
             ),
     );
