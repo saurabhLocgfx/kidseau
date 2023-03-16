@@ -236,6 +236,8 @@ class _FeedbackWidgetState extends State<FeedbackWidget> {
                                   _isLoading = false;
                                 });
                                 Navigator.of(context).pop();
+                                Fluttertoast.showToast(
+                                    msg: "Feedback submitted");
                               } else {
                                 setState(() {
                                   _isLoading = false;
