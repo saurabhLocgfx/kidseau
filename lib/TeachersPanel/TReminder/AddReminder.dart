@@ -43,6 +43,7 @@ class _TAddReminderState extends State<TAddReminder> {
 
   DateTime? v;
   TimeOfDay? q;
+  TimeOfDay holder = TimeOfDay.now();
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -152,14 +153,30 @@ class _TAddReminderState extends State<TAddReminder> {
                     onTap: () async {
                       q = await showTimePicker(
                         context: context,
-                        initialTime: TimeOfDay(hour: 12, minute: 00),
+                        initialTime: time == 'select time'.tr()
+                            ? TimeOfDay.now()
+                            : holder,
                       );
                       if (q != null) {
                         log(q.toString());
                         final now = DateTime.now();
+                        holder = q!;
                         setState(() {
                           time = DateFormat.jm().format(DateTime(now.year,
                               now.month, now.day, q!.hour, q!.minute));
+
+                          log(time);
+                          //log(DateFormat('HH:mm').format(DateTime(now.year, now.month, now.day, q!.hour, q!.minute)));
+                          /*log(int.parse(time.split(":").first).toString());
+                          log(int.parse(time.split(":").last.split(" ").first)
+                              .toString());*/
+                          /* log(DateFormat("HH:mm").format(DateTime(
+                              now.year,
+                              now.month,
+                              now.day,
+                              int.parse(time.split(":").first),
+                              int.parse(
+                                  time.split(":").last.split(" ").first))));*/
                         });
                       }
                     },
@@ -233,7 +250,9 @@ class _TAddReminderState extends State<TAddReminder> {
                         final resp = AddReminderApi().get(
                             title: _controller.text.trim(),
                             date: date,
-                            time: time.split(' ').first);
+                            time: time
+                                .split(" ")
+                                .first); //holder.toString().substring(10, 16));
                         resp.then((value) {
                           log(value.toString());
                           if (value['status'] == 1) {

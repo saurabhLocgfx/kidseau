@@ -324,7 +324,7 @@ class _THomeScreenState extends State<THomeScreen> {
                             Row(
                               children: [
                                 Image.asset(
-                                  "assets/images/clockFilled.png",
+                                  "assets/images/clockfilled.png",
                                   width: 34,
                                   height: 34,
                                 ),

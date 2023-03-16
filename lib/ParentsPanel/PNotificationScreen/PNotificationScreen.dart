@@ -159,14 +159,9 @@ class _PNotificationScreenState extends State<PNotificationScreen> {
                         return Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            if (i == 0)
-                              if (DateTime.parse(response
-                                      .allNotification[i].dateTime
-                                      .toString()) !=
-                                  DateTime.parse(response
-                                      .allNotification[i + 1].dateTime
-                                      .toString()))
-                                Padding(
+                            if (notifications.length == 1)
+                              Center(
+                                child: Padding(
                                   padding: const EdgeInsets.only(left: 16),
                                   child: Text(
                                     DateFormat('dd MMM, yyyy').format(
@@ -183,6 +178,34 @@ class _PNotificationScreenState extends State<PNotificationScreen> {
                                     style: FontConstant.k14w500B7A4Text,
                                   ),
                                 ),
+                              ),
+                            if (i == 0 && notifications.length > 1)
+                              if (DateTime.parse(response
+                                      .allNotification[i].dateTime
+                                      .toString()) !=
+                                  DateTime.parse(response
+                                      .allNotification[i + 1].dateTime
+                                      .toString()))
+                                Center(
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(left: 16),
+                                    child: Text(
+                                      DateFormat('dd MMM, yyyy').format(
+                                                  DateTime.parse(response
+                                                      .allNotification[i]
+                                                      .dateTime
+                                                      .toString())) ==
+                                              DateFormat('dd MMM, yyyy')
+                                                  .format(DateTime.now())
+                                          ? 'Today'.tr()
+                                          : DateFormat('dd MMM, yyyy').format(
+                                              DateTime.parse(response
+                                                  .allNotification[i].dateTime
+                                                  .toString())),
+                                      style: FontConstant.k14w500B7A4Text,
+                                    ),
+                                  ),
+                                ),
                             if (i != 0)
                               if (DateTime.parse(response
                                       .allNotification[i].dateTime
@@ -190,21 +213,24 @@ class _PNotificationScreenState extends State<PNotificationScreen> {
                                   DateTime.parse(response
                                       .allNotification[i - 1].dateTime
                                       .toString()))
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 16),
-                                  child: Text(
-                                    DateFormat('dd MMM, yyyy').format(
-                                                DateTime.parse(response
-                                                    .allNotification[i].dateTime
-                                                    .toString())) ==
-                                            DateFormat('dd MMM, yyyy')
-                                                .format(DateTime.now())
-                                        ? 'Today'.tr()
-                                        : DateFormat('dd MMM, yyyy').format(
-                                            DateTime.parse(response
-                                                .allNotification[i].dateTime
-                                                .toString())),
-                                    style: FontConstant.k14w500B7A4Text,
+                                Center(
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(left: 16),
+                                    child: Text(
+                                      DateFormat('dd MMM, yyyy').format(
+                                                  DateTime.parse(response
+                                                      .allNotification[i]
+                                                      .dateTime
+                                                      .toString())) ==
+                                              DateFormat('dd MMM, yyyy')
+                                                  .format(DateTime.now())
+                                          ? 'Today'.tr()
+                                          : DateFormat('dd MMM, yyyy').format(
+                                              DateTime.parse(response
+                                                  .allNotification[i].dateTime
+                                                  .toString())),
+                                      style: FontConstant.k14w500B7A4Text,
+                                    ),
                                   ),
                                 ),
                             SizedBox(height: 2),

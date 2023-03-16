@@ -9,6 +9,8 @@ import 'package:kidseau/api/message_apis/teacher_apis/teacher_get_parent_api.dar
 import 'package:kidseau/api/models/message_models/teacher_message_parents_model.dart';
 import 'package:lazy_load_scrollview/lazy_load_scrollview.dart';
 
+import '../../ParentsPanel/PMessageScreen/PChats.dart';
+
 class TParents extends StatefulWidget {
   const TParents({Key? key}) : super(key: key);
 
@@ -122,7 +124,7 @@ class _TParentsState extends State<TParents> {
                     return GestureDetector(
                       onTap: () {
                         Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => POpenChats(
+                            builder: (context) => PChats(
                                 onPop: () {},
                                 userId: modelList[index].parentId.toString(),
                                 userType: 'parent',

@@ -459,14 +459,14 @@ class _TStudentDetailScreenState extends State<TStudentDetailScreen> {
                                                           Text(
                                                             model.rank.toString() ==
                                                                     '1'
-                                                                ? 'st Place'
+                                                                ? 'st ${"Place".tr()}'
                                                                 : model.rank.toString() ==
                                                                         '2'
-                                                                    ? 'nd Place'
+                                                                    ? 'nd ${"Place".tr()}'
                                                                     : model.rank.toString() ==
                                                                             '3'
-                                                                        ? 'rd Place'
-                                                                        : 'th  Place',
+                                                                        ? 'rd ${"Place".tr()}'
+                                                                        : 'th ${"Place".tr()}',
                                                             style: FontConstant
                                                                 .k16w400B7A4B2Text,
                                                             textAlign:

@@ -8,6 +8,7 @@ import 'package:kidseau/ParentsPanel/PHomeScreen/PHomeScreen.dart';
 import 'package:kidseau/TeachersPanel/THomeScreen/TAttendanceScreen.dart';
 import 'package:kidseau/Theme.dart';
 
+import '../../ParentsPanel/PMessageScreen/PChats.dart';
 import '../../ParentsPanel/PMessageScreen/PopenChats.dart';
 import '../../api/models/parent_models/parent_profile_models/kid_school_detail_model.dart';
 

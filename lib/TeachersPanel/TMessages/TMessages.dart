@@ -10,6 +10,7 @@ import 'package:kidseau/api/message_apis/read_unread_msg_api.dart';
 import 'package:kidseau/api/message_apis/recent_chat_api.dart';
 import 'package:kidseau/api/models/message_models/recent_chat_model.dart';
 
+import '../../ParentsPanel/PMessageScreen/PChats.dart';
 import '../../ParentsPanel/PMessageScreen/PopenChats.dart';
 
 class TMessages extends StatefulWidget {
@@ -134,7 +135,7 @@ class _TMessagesState extends State<TMessages> {
                       onTap: () {
                         Navigator.of(context).push(
                           MaterialPageRoute(
-                            builder: (context) => POpenChats(
+                            builder: (context) => PChats(
                               onPop: () {
                                 _getData();
                               },

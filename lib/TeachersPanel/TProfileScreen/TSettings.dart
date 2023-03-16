@@ -8,6 +8,7 @@ import 'package:kidseau/ParentsPanel/PProfileScreens/PSettings/PPrivacyPolicy.da
 import 'package:kidseau/ParentsPanel/PProfileScreens/PSettings/PTermsAndConditions.dart';
 import 'package:kidseau/Theme.dart';
 
+import '../../ParentsPanel/PMessageScreen/PChats.dart';
 import '../../ParentsPanel/PMessageScreen/PopenChats.dart';
 import '../../ParentsPanel/PProfileScreens/PSettings/PNotificationSettings.dart';
 import '../../Widgets/feedback_widget.dart';
@@ -176,7 +177,7 @@ class _TSettingsState extends State<TSettings> {
                   onTap: () {
                     Navigator.of(context).push(
                       MaterialPageRoute(
-                        builder: (context) => POpenChats(
+                        builder: (context) => PChats(
                           onPop: () {},
                           profilePic: '',
                           name: 'Kidseau support',

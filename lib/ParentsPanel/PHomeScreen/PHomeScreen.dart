@@ -345,7 +345,7 @@ class _PHomeScreenState extends State<PHomeScreen> {
                           Row(
                             children: [
                               Image.asset(
-                                "assets/images/clockFilled.png",
+                                "assets/images/clockfilled.png",
                                 width: 34,
                                 height: 34,
                               ),

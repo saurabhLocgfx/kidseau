@@ -218,6 +218,8 @@ class _PChatsState extends State<PChats> {
     }
   }
 
+  File audio = File('');
+
   ScrollController _scrollController = ScrollController();
   @override
   Widget build(BuildContext context) {
@@ -303,8 +305,14 @@ class _PChatsState extends State<PChats> {
                   Expanded(
                     child: TextField(
                       maxLines: 5,
+                      minLines: 1,
+                      //keyboardType: TextInputType.multiline,
+                      inputFormatters: [
+                        LengthLimitingTextInputFormatter(500),
+                      ],
                       controller: _controller,
                       onSubmitted: (text) {},
+                      textInputAction: TextInputAction.done,
                       decoration: InputDecoration(
                         enabledBorder: OutlineInputBorder(
                           borderSide:
@@ -315,7 +323,9 @@ class _PChatsState extends State<PChats> {
                               BorderSide(width: 2, color: Color(0xffDBE8FA)),
                         ),
                         fillColor: Color(0xffF0F4FA),
-                        hintText: "Type here.".tr(),
+                        hintText: audio.path.isNotEmpty
+                            ? 'Audio File'.tr()
+                            : "Type here.".tr(),
                         hintStyle: FontConstant.k16w400B7A4Text,
                         suffixIcon: _msgLoading
                             ? Container(
@@ -376,6 +386,109 @@ class _PChatsState extends State<PChats> {
                                   }
                                 },
                                 child: Padding(
+                                  padding: const EdgeInsets.only(
+                                    left: 10.0,
+                                  ),
+                                  child: ImageIcon(
+                                    AssetImage("assets/images/sendicon.png"),
+                                    size: 12,
+                                    color: ThemeColor.primarycolor,
+                                  ),
+                                ),
+                              ),
+                        prefixIconConstraints:
+                            BoxConstraints(minHeight: 40, minWidth: 40),
+                        prefixIcon: GestureDetector(
+                          onTap: showToast,
+                          child: Padding(
+                            padding: EdgeInsets.only(
+                                left: 10.0, top: 10, bottom: 10, right: 20),
+                            child: ImageIcon(
+                              AssetImage("assets/images/add-circle.png"),
+                              //size: 19,
+                              color: ThemeColor.darkpurple,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  /*Expanded(
+                    child: TextField(
+                      maxLines: 5,
+                      controller: _controller,
+                      onSubmitted: (text) {},
+                      decoration: InputDecoration(
+                        enabledBorder: OutlineInputBorder(
+                          borderSide:
+                              BorderSide(width: 2, color: Color(0xffDBE8FA)),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide:
+                              BorderSide(width: 2, color: Color(0xffDBE8FA)),
+                        ),
+                        fillColor: Color(0xffF0F4FA),
+                        hintText: "Type here.".tr(),
+                        hintStyle: FontConstant.k16w400B7A4Text,
+                        suffixIcon: _msgLoading
+                            ? Container(
+                                padding: EdgeInsets.all(10),
+                                width: 10,
+                                height: 10,
+                                child: CircularProgressIndicator(),
+                              )
+                            : GestureDetector(
+                                onTap: () {
+                                  if (_controller.text.isNotEmpty ||
+                                      _pickedImg.path != '') {
+                                    setState(() {
+                                      _msgLoading = true;
+                                    });
+                                    log('message');
+                                    final resp = SendMessageApi().get(
+                                        message: _controller.text,
+                                        sendToId: widget.userId,
+                                        receiverUserType: widget.userType,
+                                        image: _pickedImg);
+                                    resp.then((value) {
+                                      log(value.toString());
+                                      if (value['status'] == 1) {
+                                        setState(() {
+                                          messageModel.allMsg!
+                                              .add(AllMsg.fromJson({
+                                            'message_id': '${value['msg_id']}',
+                                            'message': '${value['msg']}',
+                                            'file_url': value['file'] == null
+                                                ? ''
+                                                : "${value['file']}",
+                                            'created_at':
+                                                '${value['date_time']}',
+                                            'read_at': '',
+                                            'send_to_id': widget.userId,
+                                            'is_deleted': '0',
+                                            'sender_user_type': 'teacher',
+                                            'reciever_user_type':
+                                                widget.userType,
+                                          }));
+                                          _msgLoading = false;
+                                        });
+                                        */ /*final message = Messages(
+                                      text: _controller.text,
+                                      date: DateTime.now(),
+                                      isSentByme: true);
+                                  setState(() => messages.add(message));*/ /*
+                                        _controller.clear();
+                                        _pickedImg = File('');
+                                      } else {
+                                        log(value.toString());
+                                        setState(() {
+                                          _msgLoading = false;
+                                        });
+                                      }
+                                    });
+                                  }
+                                },
+                                child: Padding(
                                   padding: const EdgeInsets.all(10.0),
                                   child: ImageIcon(
                                     AssetImage("assets/images/sendicon.png"),
@@ -397,7 +510,7 @@ class _PChatsState extends State<PChats> {
                         ),
                       ),
                     ),
-                  ),
+                  ),*/
                 ],
               ),
             ),
