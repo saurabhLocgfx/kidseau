@@ -5,17 +5,14 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_switch/flutter_switch.dart';
-import 'package:kidseau/Constants/colors.dart';
 import 'package:kidseau/api/Teacherpanelapi/teacher_student_performance_apis/edit_performance_api.dart';
-import 'package:kidseau/api/Teacherpanelapi/teacher_student_performance_apis/student_detail_api.dart';
 import 'package:kidseau/api/models/kid_detail_model/kid_performance_detail_model.dart';
 import 'package:kidseau/api/models/perforamnce_models/edit_student_performance_model.dart';
-import 'package:kidseau/shard_prefs/shared_prefs.dart';
 
 import '../../Theme.dart';
-import '../../Widgets/Calender/calendermodel.dart';
 import '../../Widgets/buttons.dart';
+import '../../Widgets/custom_snack_bar.dart';
+import '../../api/Teacherpanelapi/teacher_student_performance_apis/submit_performance_api.dart';
 
 class TStudentDetailEditScreen extends StatefulWidget {
   final KidPerformanceDetailModel model;
@@ -97,6 +94,7 @@ class _TStudentDetailEditScreenState extends State<TStudentDetailEditScreen> {
   _getData() {
     final resp = EditStudentApi().get(kidId: widget.kidId, date: date);
     resp.then((value) {
+      print(value);
       if (value['status'] == 1) {
         setState(() {
           model = EditStudentPerformanceModel.fromJson(value);
@@ -167,274 +165,370 @@ class _TStudentDetailEditScreenState extends State<TStudentDetailEditScreen> {
               ? Center(
                   child: CircularProgressIndicator(),
                 )
-              : SingleChildScrollView(
+              : Container(
+                  decoration: BoxDecoration(
+                      image: DecorationImage(
+                          image: AssetImage(
+                            "assets/images/Group8270.png",
+                          ),
+                          fit: BoxFit.fitWidth,
+                          alignment: Alignment.topLeft)),
                   child: Container(
+                    height: 1.sh,
                     decoration: BoxDecoration(
-                        image: DecorationImage(
-                            image: AssetImage(
-                              "assets/images/Group8270.png",
-                            ),
-                            fit: BoxFit.fitWidth,
-                            alignment: Alignment.topLeft)),
-                    child: Container(
-                      height: 1.sh,
-                      decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          colors: [
-                            Color(0xffF8F6FA).withOpacity(0.7),
-                            Color(0xffF8F6FA),
-                            Color(0xffF8F6FA),
-                          ],
-                          begin: Alignment.topCenter,
-                          end: Alignment.bottomCenter,
-                          stops: [0.3, 0.6, 0.9],
-                        ),
+                      gradient: LinearGradient(
+                        colors: [
+                          Color(0xffF8F6FA).withOpacity(0.7),
+                          Color(0xffF8F6FA),
+                          Color(0xffF8F6FA),
+                        ],
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        stops: [0.3, 0.6, 0.9],
                       ),
-                      child: Stack(
-                        children: [
-                          Container(
-                            width: 1.sw,
-                          ),
-                          Container(
-                            width: 1.sw,
-                            height: 455,
-                          ),
-                          Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 16.0),
-                            child: SingleChildScrollView(
-                              child: Column(
-                                children: [
-                                  SizedBox(height: 30),
-                                  Row(
-                                    children: [
-                                      Container(
-                                        height: 128,
-                                        width: 96,
-                                        clipBehavior: Clip.hardEdge,
-                                        decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(8)),
-                                        child: Image.network(
-                                          widget.model.kidImage.toString(),
-                                          fit: BoxFit.fill,
-                                          errorBuilder: (q, w, e) => Image.asset(
-                                              "assets/images/profileperson.png"),
+                    ),
+                    child: Stack(
+                      children: [
+                        Container(
+                          width: 1.sw,
+                        ),
+                        Container(
+                          width: 1.sw,
+                          height: 455,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                          child: SingleChildScrollView(
+                            //physics: NeverScrollableScrollPhysics(),
+                            child: Column(
+                              children: [
+                                SizedBox(height: 30),
+                                Row(
+                                  children: [
+                                    Container(
+                                      height: 128,
+                                      width: 96,
+                                      clipBehavior: Clip.hardEdge,
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(8)),
+                                      child: Image.network(
+                                        widget.model.kidImage.toString(),
+                                        fit: BoxFit.fill,
+                                        errorBuilder: (q, w, e) => Image.asset(
+                                            "assets/images/profileperson.png"),
+                                      ),
+                                    ),
+                                    SizedBox(width: 16),
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          widget.model.kidName.toString(),
+                                          style: FontConstant2.k32w500331Ftext,
                                         ),
-                                      ),
-                                      SizedBox(width: 16),
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            widget.model.kidName.toString(),
-                                            style:
-                                                FontConstant2.k32w500331Ftext,
-                                          ),
-                                          Text(
-                                            widget.model.kidGender!
-                                                        .toLowerCase() ==
-                                                    'm'
-                                                ? 'S/O ${widget.model.kidFather}'
-                                                : 'D/O ${widget.model.kidFather}',
-                                            style: FontConstant.k16w5008471Text,
-                                          ),
-                                          Row(
-                                            children: [
-                                              Text(
-                                                  widget.model.kidGroup
-                                                      .toString(),
-                                                  style: FontConstant
-                                                      .k16w5008471Text),
-                                              SizedBox(
-                                                width: 4,
-                                              ),
-                                              Container(
-                                                width: 4,
-                                                height: 4,
-                                                decoration: BoxDecoration(
-                                                    shape: BoxShape.circle,
-                                                    color: Colors.black),
-                                              ),
-                                              SizedBox(
-                                                width: 4,
-                                              ),
-                                              Text(
-                                                  '${widget.model.kidAge} ${"years".tr()}',
-                                                  style: FontConstant
-                                                      .k16w5008471Text),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                  SizedBox(height: 50),
-                                  GroupTab(),
-                                  SizedBox(
-                                    height: 30,
-                                  ),
-                                  _performanceLoading
-                                      ? Center(
-                                          child: CircularProgressIndicator(),
-                                        )
-                                      : ListView.separated(
-                                          shrinkWrap: true,
-                                          physics:
-                                              NeverScrollableScrollPhysics(),
-                                          itemBuilder: (context, index) {
-                                            return Container(
-                                              width: 1.sw,
-                                              height: 148,
-                                              padding: EdgeInsets.all(16),
+                                        Text(
+                                          widget.model.kidGender!
+                                                      .toLowerCase() ==
+                                                  'm'
+                                              ? 'S/O ${widget.model.kidFather}'
+                                              : 'D/O ${widget.model.kidFather}',
+                                          style: FontConstant.k16w5008471Text,
+                                        ),
+                                        Row(
+                                          children: [
+                                            Text(
+                                                widget.model.kidGroup
+                                                    .toString(),
+                                                style: FontConstant
+                                                    .k16w5008471Text),
+                                            SizedBox(
+                                              width: 4,
+                                            ),
+                                            Container(
+                                              width: 4,
+                                              height: 4,
                                               decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(16),
-                                                color: Colors.white,
-                                                image: DecorationImage(
-                                                  fit: BoxFit.fill,
-                                                  image: AssetImage(
-                                                    'assets/images/sp.png',
-                                                  ),
-                                                ),
+                                                  shape: BoxShape.circle,
+                                                  color: Colors.black),
+                                            ),
+                                            SizedBox(
+                                              width: 4,
+                                            ),
+                                            Text(
+                                                '${widget.model.kidAge} ${"years".tr()}',
+                                                style: FontConstant
+                                                    .k16w5008471Text),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(height: 50),
+                                GroupTab(),
+                                SizedBox(
+                                  height: 30,
+                                ),
+                                _performanceLoading
+                                    ? Center(
+                                        child: CircularProgressIndicator(),
+                                      )
+                                    : model.pfmRate!.isEmpty
+                                        ? Column(
+                                            children: [
+                                              Image.asset(
+                                                "assets/images/chicken.png",
+                                                width: 1.sw,
+                                                height: 200,
                                               ),
-                                              child: Row(
-                                                children: [
-                                                  Expanded(
-                                                    child: Column(
-                                                      children: [
-                                                        Row(
-                                                          crossAxisAlignment:
-                                                              CrossAxisAlignment
-                                                                  .start,
-                                                          children: [
-                                                            Expanded(
-                                                              child: Column(
-                                                                crossAxisAlignment:
-                                                                    CrossAxisAlignment
-                                                                        .start,
-                                                                children: [
-                                                                  Text(
-                                                                    model
-                                                                        .pfmRate![
-                                                                            index]
-                                                                        .actTitle
-                                                                        .toString(),
-                                                                    style: FontConstant
-                                                                        .k18w500331FText,
-                                                                  ),
-                                                                  SizedBox(
-                                                                      height:
-                                                                          0),
-                                                                  Text(
-                                                                    '${"Teacher".tr()} - ${model.pfmRate![index].teacherName.toString()}',
-                                                                    style: FontConstant
-                                                                        .k16w400B7A4B2Text,
-                                                                  ),
-                                                                ],
-                                                              ),
-                                                            ),
-                                                            /*FlutterSwitch(
-                                                              width: 56,
-                                                              height: 32,
-                                                              toggleSize: 30,
-                                                              inactiveColor:
-                                                                  ThemeColor
-                                                                      .b7A4B2,
-                                                              activeColor:
-                                                                  ThemeColor
-                                                                      .primarycolor,
-                                                              inactiveIcon:
-                                                                  Image.asset(
-                                                                      'assets/images/sf.png'),
-                                                              activeIcon:
-                                                                  Image.asset(
-                                                                      'assets/images/baby.png'),
-                                                              value: false,
-                                                              onToggle: (v) {
-                                                                setState(() {
-                                                                  // _valueList[index] = v;
-                                                                });
-                                                              },
-                                                            ),*/
-                                                          ],
-                                                        ),
-                                                        /* Row(
-                                                      mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .start,
-                                                      children: [
-                                                        Container(
-                                                          padding: EdgeInsets
-                                                              .symmetric(
-                                                              horizontal:
-                                                              8,
-                                                              vertical:
-                                                              4),
-                                                          decoration: BoxDecoration(
-                                                              borderRadius:
-                                                              BorderRadius
-                                                                  .circular(
-                                                                  75),
-                                                              color: Color(
-                                                                  0xffF97070)
-                                                                  .withOpacity(
-                                                                  0.16)),
-                                                          child: Text(
-                                                            'Absent',
-                                                            style: FontConstant
-                                                                .k16w400F97070,
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    )
-                                                        :*/
-                                                        Slider(
-                                                          divisions: 5,
-                                                          label: model
-                                                              .pfmRate![index]
-                                                              .pfmRate!,
-                                                          activeColor:
-                                                              Color(0xFFF5C88E),
-                                                          inactiveColor:
-                                                              ThemeColor.ebe6F2,
-                                                          thumbColor:
-                                                              Color(0xFFF0AD56),
-                                                          min: 0,
-                                                          max: 5,
-                                                          value: double.parse(
-                                                              model
-                                                                  .pfmRate![
-                                                                      index]
-                                                                  .pfmRate!),
-                                                          onChanged: (val) {
-                                                            setState(() {});
-                                                          },
-                                                        ),
-                                                      ],
+                                              SizedBox(
+                                                height: 20,
+                                              ),
+                                              Text(
+                                                "Oops!".tr(),
+                                                style: FontConstant2
+                                                    .k24w5008267text,
+                                              ),
+                                              Text(
+                                                "No activity available for the kid."
+                                                    .tr(),
+                                                style: FontConstant
+                                                    .k16w4008471Text,
+                                              ),
+                                            ],
+                                          )
+                                        : ListView.separated(
+                                            shrinkWrap: true,
+                                            physics:
+                                                NeverScrollableScrollPhysics(),
+                                            itemBuilder: (context, index) {
+                                              return Container(
+                                                width: 1.sw,
+                                                height: 148,
+                                                padding: EdgeInsets.all(16),
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(16),
+                                                  color: Colors.white,
+                                                  image: DecorationImage(
+                                                    fit: BoxFit.fill,
+                                                    image: AssetImage(
+                                                      'assets/images/sp.png',
                                                     ),
                                                   ),
-                                                ],
-                                              ),
-                                            );
-                                          },
-                                          separatorBuilder: (ctx, ind) =>
-                                              SizedBox(
-                                                height: 16.h,
-                                              ),
-                                          itemCount: model.pfmRate!.length)
-                                ],
-                              ),
+                                                ),
+                                                child: Row(
+                                                  children: [
+                                                    Expanded(
+                                                      child: Column(
+                                                        children: [
+                                                          Row(
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .start,
+                                                            children: [
+                                                              Expanded(
+                                                                child: Column(
+                                                                  crossAxisAlignment:
+                                                                      CrossAxisAlignment
+                                                                          .start,
+                                                                  children: [
+                                                                    Text(
+                                                                      model
+                                                                          .pfmRate![
+                                                                              index]
+                                                                          .actTitle
+                                                                          .toString(),
+                                                                      style: FontConstant
+                                                                          .k18w500331FText,
+                                                                    ),
+                                                                    SizedBox(
+                                                                        height:
+                                                                            0),
+                                                                    Text(
+                                                                      '${"Teacher".tr()} - ${model.pfmRate![index].teacherName.toString()}',
+                                                                      style: FontConstant
+                                                                          .k16w400B7A4B2Text,
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                              ),
+                                                              /*FlutterSwitch(
+                                                          width: 56,
+                                                          height: 32,
+                                                          toggleSize: 30,
+                                                          inactiveColor:
+                                                              ThemeColor
+                                                                  .b7A4B2,
+                                                          activeColor:
+                                                              ThemeColor
+                                                                  .primarycolor,
+                                                          inactiveIcon:
+                                                              Image.asset(
+                                                                  'assets/images/sf.png'),
+                                                          activeIcon:
+                                                              Image.asset(
+                                                                  'assets/images/baby.png'),
+                                                          value: false,
+                                                          onToggle: (v) {
+                                                            setState(() {
+                                                              // _valueList[index] = v;
+                                                            });
+                                                          },
+                                                        ),*/
+                                                            ],
+                                                          ),
+                                                          /* Row(
+                                                  mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .start,
+                                                  children: [
+                                                    Container(
+                                                      padding: EdgeInsets
+                                                          .symmetric(
+                                                          horizontal:
+                                                          8,
+                                                          vertical:
+                                                          4),
+                                                      decoration: BoxDecoration(
+                                                          borderRadius:
+                                                          BorderRadius
+                                                              .circular(
+                                                              75),
+                                                          color: Color(
+                                                              0xffF97070)
+                                                              .withOpacity(
+                                                              0.16)),
+                                                      child: Text(
+                                                        'Absent',
+                                                        style: FontConstant
+                                                            .k16w400F97070,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                )
+                                                    :*/
+                                                          Slider(
+                                                            divisions: 5,
+                                                            label: model
+                                                                .pfmRate![index]
+                                                                .pfmRate!,
+                                                            activeColor: Color(
+                                                                0xFFF5C88E),
+                                                            inactiveColor:
+                                                                ThemeColor
+                                                                    .ebe6F2,
+                                                            thumbColor: Color(
+                                                                0xFFF0AD56),
+                                                            min: 0,
+                                                            max: 5,
+                                                            value: double.parse(
+                                                                model
+                                                                    .pfmRate![
+                                                                        index]
+                                                                    .pfmRate!),
+                                                            onChanged: (val) {
+                                                              setState(() {});
+                                                            },
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              );
+                                            },
+                                            separatorBuilder: (ctx, ind) =>
+                                                SizedBox(
+                                                  height: 16.h,
+                                                ),
+                                            itemCount: model.pfmRate!.length),
+                                if (date ==
+                                    DateFormat('yyyy-MM-dd')
+                                        .format(DateTime.now()))
+                                  if (!_performanceLoading)
+                                    if (model.pfmRate != null)
+                                      if (model.pfmRate!.isNotEmpty)
+                                        Container(
+                                          height: 56,
+                                          width: 1.sw,
+                                          margin: EdgeInsets.only(bottom: 100),
+                                          child: _btnLoading
+                                              ? Center(
+                                                  child:
+                                                      CircularProgressIndicator(),
+                                                )
+                                              : MainButton(
+                                                  onTap: () {
+                                                    setState(() {
+                                                      _btnLoading = true;
+                                                    });
+                                                    for (var v
+                                                        in _performanceStatus) {
+                                                      _performance.add(
+                                                        {
+                                                          "kid_id": v['id'],
+                                                          "pfm": v['performance'] ==
+                                                                  'null'
+                                                              ? 0
+                                                              : int.parse(v[
+                                                                  'performance']),
+                                                          "days_activity_id":
+                                                              _selectedMap['id']
+                                                        },
+                                                      );
+                                                    }
+                                                    final resp =
+                                                        SubmitPerformanceApi()
+                                                            .get(
+                                                                performance:
+                                                                    _performance);
+                                                    resp.then((value) {
+                                                      if (value['status'] ==
+                                                          1) {
+                                                        CustomSnackBar
+                                                            .customSnackBar(
+                                                                context,
+                                                                'Submitted successfully.');
+                                                        _getData();
+                                                        setState(() {
+                                                          current = 0;
+                                                          _btnLoading = false;
+                                                        });
+                                                      } else {
+                                                        CustomSnackBar
+                                                            .customErrorSnackBar(
+                                                                context,
+                                                                'Submit failed. Please try again later.');
+                                                        setState(() {
+                                                          _btnLoading = false;
+                                                        });
+                                                      }
+                                                    });
+                                                  },
+                                                  title: "Submit".tr(),
+                                                  textStyleColor: Colors.white,
+                                                  backgroundColor:
+                                                      ThemeColor.primarycolor),
+                                        ),
+                                SizedBox(height: 25),
+                              ],
                             ),
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
         ));
   }
+
+  List<Map<String, dynamic>> _performanceStatus = [];
+  List<Map<String, dynamic>> _performance = [];
+  Map<String, dynamic> _selectedMap = {};
+  bool _btnLoading = false;
 
   int current = 0;
   List<Map<String, String>> dayList = [];
@@ -443,6 +537,7 @@ class _TStudentDetailEditScreenState extends State<TStudentDetailEditScreen> {
     return Container(
       width: 414,
       height: 62,
+      clipBehavior: Clip.hardEdge,
       decoration: BoxDecoration(
           color: Colors.white, borderRadius: BorderRadius.circular(81)),
       child: ListView.builder(
@@ -461,6 +556,7 @@ class _TStudentDetailEditScreenState extends State<TStudentDetailEditScreen> {
                       date = dayList[index]['date']!;
                       _performanceLoading = true;
                       _getData();
+                      print(date);
                     });
                   },
                   child: AnimatedContainer(

@@ -5,7 +5,6 @@ import 'package:kidseau/ParentsPanel/POnboardingScreens/POnboardingScreen.dart';
 import 'package:kidseau/Theme.dart';
 import 'package:kidseau/Widgets/buttons.dart';
 import 'package:kidseau/Widgets/widgets.dart';
-import 'package:kidseau/shard_prefs/shared_prefs.dart';
 
 import '../../TeachersPanel/OnboardingScreens/TOnboardingScreen.dart';
 
@@ -124,7 +123,7 @@ class PStartScreen extends StatelessWidget {
                         ),*/
                         //Image.asset("assets/images/Made with ❤️ Locgfx.png"),
                         Text(
-                          'Made with ❤️ by Locgfx',
+                          'Made with ❤️ by HOMA DESIGN',
                           style: FontConstant.k16w400greyText,
                         ),
                       ],

@@ -68,7 +68,7 @@ dependencies:
   contacts_service: ^0.6.3
   record: ^4.4.4
   video_player: ^2.5.1
-  image_downloader: ^0.31.0
+  image_gallery_saver: 1.7.1
   firebase_messaging: ^13.0.3
   firebase_core:
   firebase_auth: ^3.3.19
@@ -78,6 +78,9 @@ dependencies:
   google_maps_flutter: ^2.2.3
   flutter_widget_from_html: ^0.8.5
   timezone: 0.8.0
+  audioplayers: 2.0.0
+  path_provider: 2.0.11
+  connectivity_plus: 3.0.2
 
 dev_dependencies:
   flutter_test:

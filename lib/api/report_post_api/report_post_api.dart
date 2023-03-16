@@ -16,6 +16,7 @@ class ReportPostApi {
     request.fields.addAll({'post_id': postId, 'report_dec': reportDesc});
 
     request.headers.addAll(headers);
+    print(request.fields);
 
     http.StreamedResponse response = await request.send();
 

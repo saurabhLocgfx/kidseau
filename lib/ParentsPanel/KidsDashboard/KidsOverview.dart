@@ -97,22 +97,22 @@ class _PKidsOverviewState extends State<PKidsOverview> {
                                   .toString(),*/
                             style: FontConstant.k16w500331FText,
                           ),
-                          SizedBox(height: 16),
+                          //SizedBox(height: 16),
                           Text(
                             "Group".tr(),
                             style: FontConstant.k16w500331FText,
                           ),
-                          SizedBox(height: 16),
+                          //SizedBox(height: 16),
                           Text(
                             "Age".tr(),
                             style: FontConstant.k16w500331FText,
                           ),
-                          SizedBox(height: 16),
+                          //SizedBox(height: 16),
                           Text(
                             "Birthday".tr(),
                             style: FontConstant.k16w500331FText,
                           ),
-                          SizedBox(height: 16),
+                          //SizedBox(height: 16),
                           Text(
                             "Gender".tr(),
                             style: FontConstant.k16w500331FText,
@@ -127,22 +127,25 @@ class _PKidsOverviewState extends State<PKidsOverview> {
                             widget.model.kidDetails!.sectionName.toString(),
                             style: FontConstant.k16w5008471Text,
                           ),
-                          SizedBox(height: 16),
+                          //SizedBox(height: 16),
                           Text(
                             widget.model.kidDetails!.kidClass.toString(),
                             style: FontConstant.k16w5008471Text,
                           ),
-                          SizedBox(height: 16),
+                          //SizedBox(height: 16),
                           Text(
                             "${widget.model.kidDetails!.kidAge} ${"years old".tr()}",
                             style: FontConstant.k16w5008471Text,
                           ),
-                          SizedBox(height: 16),
+                          //SizedBox(height: 16),
                           Text(
-                            widget.model.kidDetails!.kidDob.toString(),
+                            DateFormat('dd-MM-yyyy')
+                                .format(DateTime.parse(
+                                    widget.model.kidDetails!.kidDob.toString()))
+                                .toString(),
                             style: FontConstant.k16w5008471Text,
                           ),
-                          SizedBox(height: 16),
+                          //SizedBox(height: 16),
                           Text(
                             widget.model.kidDetails!.kidGender.toString(),
                             style: FontConstant.k16w5008471Text,
@@ -186,7 +189,7 @@ class _PKidsOverviewState extends State<PKidsOverview> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 SizedBox(
-                                  width: 110,
+                                  width: 110.w,
                                   child: Text(
                                     "Growth Rank".tr(),
                                     overflow: TextOverflow.ellipsis,
@@ -211,16 +214,16 @@ class _PKidsOverviewState extends State<PKidsOverview> {
                                 Text(
                                   widget.model.kidDetails!.rank.toString() ==
                                           '1'
-                                      ? 'st Place'
+                                      ? 'st ${"Place".tr()}'
                                       : widget.model.kidDetails!.rank
                                                   .toString() ==
                                               '2'
-                                          ? 'nd Place'
+                                          ? 'nd ${"Place".tr()}'
                                           : widget.model.kidDetails!.rank
                                                       .toString() ==
                                                   '3'
-                                              ? 'rd Place'
-                                              : 'th  Place',
+                                              ? 'rd ${"Place".tr()}'
+                                              : 'th  ${"Place".tr()}',
                                   style: FontConstant.k16w400B7A4B2Text,
                                   textAlign: TextAlign.end,
                                 ),
@@ -642,313 +645,311 @@ class _PKidsOverviewState extends State<PKidsOverview> {
           ),
           SizedBox(height: 16),
           widget.model.kidDetails!.actvity!.isEmpty
-              ? SizedBox.shrink()
+              ? Center(
+                  child: Text(
+                    'No Activity recorded yet.',
+                    style: FontConstant.k16w5008471Text,
+                  ),
+                )
               : Container(
-                  height: 210,
+                  height: 250,
                   width: 1.sw,
                   decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(16)),
-                  child: Padding(
-                    padding: const EdgeInsets.only(right: 16.0),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(left: 16.0),
-                              child: Text(
-                                "Activity Tracker".tr(),
-                                style: FontConstant.k16w5008471Text,
+                  padding: const EdgeInsets.all(16),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            "Activity Tracker".tr(),
+                            style: FontConstant.k16w5008471Text,
+                          ),
+                          Image.asset(
+                            "assets/images/bar3.png",
+                            height: 24,
+                          )
+                        ],
+                      ),
+                      // SizedBox(height: 15),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          /*Expanded(
+                      child: Column(
+                        children: [
+                          Row(
+                            children: [
+                              Text(
+                                "75%",
+                                style: FontConstant.k14w400B7A4Text,
                               ),
-                            ),
-                            Image.asset(
-                              "assets/images/bar3.png",
-                              height: 24,
-                            )
-                          ],
-                        ),
-                        // SizedBox(height: 15),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            /*Expanded(
-                        child: Column(
-                          children: [
-                            Row(
-                              children: [
-                                Text(
-                                  "75%",
-                                  style: FontConstant.k14w400B7A4Text,
-                                ),
-                                SizedBox(
-                                  width: 5,
-                                ),
-                                Text(
-                                  "50%",
-                                  style: FontConstant.k14w400B7A4Text,
-                                ),
-                                SizedBox(
-                                  width: 5,
-                                ),
-                                Text(
-                                  "10%",
-                                  style: FontConstant.k14w400B7A4Text,
-                                ),
-                                SizedBox(
-                                  width: 5,
-                                ),
-                                Text(
-                                  "100%",
-                                  style: FontConstant.k14w400B7A4Text,
-                                ),
-                                SizedBox(
-                                  width: 5,
-                                ),
-                                Text(
-                                  "5%",
-                                  style: FontConstant.k14w400B7A4Text,
-                                )
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                Column(
-                                  children: [
-                                    Stack(
-                                      children: [
-                                        Container(
+                              SizedBox(
+                                width: 5,
+                              ),
+                              Text(
+                                "50%",
+                                style: FontConstant.k14w400B7A4Text,
+                              ),
+                              SizedBox(
+                                width: 5,
+                              ),
+                              Text(
+                                "10%",
+                                style: FontConstant.k14w400B7A4Text,
+                              ),
+                              SizedBox(
+                                width: 5,
+                              ),
+                              Text(
+                                "100%",
+                                style: FontConstant.k14w400B7A4Text,
+                              ),
+                              SizedBox(
+                                width: 5,
+                              ),
+                              Text(
+                                "5%",
+                                style: FontConstant.k14w400B7A4Text,
+                              )
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Column(
+                                children: [
+                                  Stack(
+                                    children: [
+                                      Container(
+                                        height: 110.h,
+                                        width: 6.w,
+                                        decoration: BoxDecoration(
+                                            color: Color(0xff8267AC)
+                                                .withOpacity(0.28),
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(12))),
+                                      ),
+                                      Positioned(
+                                        bottom: 0,
+                                        child: Container(
+                                          height: 82.h,
+                                          width: 6.w,
+                                          decoration: BoxDecoration(
+                                              color: Color(0xff8267AC),
+                                              borderRadius:
+                                                  BorderRadius.all(
+                                                      Radius.circular(12))),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  Text(
+                                    "PG",
+                                    style: FontConstant.k14w400B7A4Text,
+                                  )
+                                ],
+                              ),
+                              SizedBox(
+                                width: 15,
+                              ),
+                              Column(
+                                children: [
+                                  Stack(
+                                    children: [
+                                      Container(
+                                        height: 110.h,
+                                        width: 6.w,
+                                        decoration: BoxDecoration(
+                                            color: Color(0xff8267AC)
+                                                .withOpacity(0.28),
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(12))),
+                                      ),
+                                      Positioned(
+                                        bottom: 0,
+                                        child: Container(
+                                          height: 55.h,
+                                          width: 6.w,
+                                          decoration: BoxDecoration(
+                                              color: Color(0xff8267AC),
+                                              borderRadius:
+                                                  BorderRadius.all(
+                                                      Radius.circular(12))),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  Text(
+                                    "RS",
+                                    style: FontConstant.k14w400B7A4Text,
+                                  )
+                                ],
+                              ),
+                              SizedBox(
+                                width: 15,
+                              ),
+                              Column(
+                                children: [
+                                  Stack(
+                                    children: [
+                                      Container(
+                                        height: 110.h,
+                                        width: 6.w,
+                                        decoration: BoxDecoration(
+                                            color: Color(0xff8267AC)
+                                                .withOpacity(0.28),
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(12))),
+                                      ),
+                                      Positioned(
+                                        bottom: 0,
+                                        child: Container(
+                                          height: 11.h,
+                                          width: 6.w,
+                                          decoration: BoxDecoration(
+                                              color: Color(0xff8267AC),
+                                              borderRadius:
+                                                  BorderRadius.all(
+                                                      Radius.circular(12))),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  Text(
+                                    "Re",
+                                    style: FontConstant.k14w400B7A4Text,
+                                  )
+                                ],
+                              ),
+                              SizedBox(
+                                width: 15,
+                              ),
+                              Column(
+                                children: [
+                                  Stack(
+                                    children: [
+                                      Container(
+                                        height: 110.h,
+                                        width: 6.w,
+                                        decoration: BoxDecoration(
+                                            color: Color(0xff8267AC)
+                                                .withOpacity(0.28),
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(12))),
+                                      ),
+                                      Positioned(
+                                        bottom: 0,
+                                        child: Container(
                                           height: 110.h,
                                           width: 6.w,
                                           decoration: BoxDecoration(
-                                              color: Color(0xff8267AC)
-                                                  .withOpacity(0.28),
-                                              borderRadius: BorderRadius.all(
-                                                  Radius.circular(12))),
+                                              color: Color(0xff8267AC),
+                                              borderRadius:
+                                                  BorderRadius.all(
+                                                      Radius.circular(12))),
                                         ),
-                                        Positioned(
-                                          bottom: 0,
-                                          child: Container(
-                                            height: 82.h,
-                                            width: 6.w,
-                                            decoration: BoxDecoration(
-                                                color: Color(0xff8267AC),
-                                                borderRadius:
-                                                    BorderRadius.all(
-                                                        Radius.circular(12))),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    Text(
-                                      "PG",
-                                      style: FontConstant.k14w400B7A4Text,
-                                    )
-                                  ],
-                                ),
-                                SizedBox(
-                                  width: 15,
-                                ),
-                                Column(
-                                  children: [
-                                    Stack(
-                                      children: [
-                                        Container(
-                                          height: 110.h,
+                                      ),
+                                    ],
+                                  ),
+                                  Text(
+                                    "LA",
+                                    style: FontConstant.k14w400B7A4Text,
+                                  )
+                                ],
+                              ),
+                              SizedBox(
+                                width: 15,
+                              ),
+                              Column(
+                                children: [
+                                  Stack(
+                                    children: [
+                                      Container(
+                                        height: 110.h,
+                                        width: 6.w,
+                                        decoration: BoxDecoration(
+                                            color: Color(0xff8267AC)
+                                                .withOpacity(0.28),
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(12))),
+                                      ),
+                                      Positioned(
+                                        bottom: 0,
+                                        child: Container(
+                                          height: 5.h,
                                           width: 6.w,
                                           decoration: BoxDecoration(
-                                              color: Color(0xff8267AC)
-                                                  .withOpacity(0.28),
-                                              borderRadius: BorderRadius.all(
-                                                  Radius.circular(12))),
+                                              color: Color(0xff8267AC),
+                                              borderRadius:
+                                                  BorderRadius.all(
+                                                      Radius.circular(12))),
                                         ),
-                                        Positioned(
-                                          bottom: 0,
-                                          child: Container(
-                                            height: 55.h,
-                                            width: 6.w,
-                                            decoration: BoxDecoration(
-                                                color: Color(0xff8267AC),
-                                                borderRadius:
-                                                    BorderRadius.all(
-                                                        Radius.circular(12))),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    Text(
-                                      "RS",
-                                      style: FontConstant.k14w400B7A4Text,
-                                    )
-                                  ],
-                                ),
-                                SizedBox(
-                                  width: 15,
-                                ),
-                                Column(
-                                  children: [
-                                    Stack(
-                                      children: [
-                                        Container(
-                                          height: 110.h,
-                                          width: 6.w,
-                                          decoration: BoxDecoration(
-                                              color: Color(0xff8267AC)
-                                                  .withOpacity(0.28),
-                                              borderRadius: BorderRadius.all(
-                                                  Radius.circular(12))),
-                                        ),
-                                        Positioned(
-                                          bottom: 0,
-                                          child: Container(
-                                            height: 11.h,
-                                            width: 6.w,
-                                            decoration: BoxDecoration(
-                                                color: Color(0xff8267AC),
-                                                borderRadius:
-                                                    BorderRadius.all(
-                                                        Radius.circular(12))),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    Text(
-                                      "Re",
-                                      style: FontConstant.k14w400B7A4Text,
-                                    )
-                                  ],
-                                ),
-                                SizedBox(
-                                  width: 15,
-                                ),
-                                Column(
-                                  children: [
-                                    Stack(
-                                      children: [
-                                        Container(
-                                          height: 110.h,
-                                          width: 6.w,
-                                          decoration: BoxDecoration(
-                                              color: Color(0xff8267AC)
-                                                  .withOpacity(0.28),
-                                              borderRadius: BorderRadius.all(
-                                                  Radius.circular(12))),
-                                        ),
-                                        Positioned(
-                                          bottom: 0,
-                                          child: Container(
-                                            height: 110.h,
-                                            width: 6.w,
-                                            decoration: BoxDecoration(
-                                                color: Color(0xff8267AC),
-                                                borderRadius:
-                                                    BorderRadius.all(
-                                                        Radius.circular(12))),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    Text(
-                                      "LA",
-                                      style: FontConstant.k14w400B7A4Text,
-                                    )
-                                  ],
-                                ),
-                                SizedBox(
-                                  width: 15,
-                                ),
-                                Column(
-                                  children: [
-                                    Stack(
-                                      children: [
-                                        Container(
-                                          height: 110.h,
-                                          width: 6.w,
-                                          decoration: BoxDecoration(
-                                              color: Color(0xff8267AC)
-                                                  .withOpacity(0.28),
-                                              borderRadius: BorderRadius.all(
-                                                  Radius.circular(12))),
-                                        ),
-                                        Positioned(
-                                          bottom: 0,
-                                          child: Container(
-                                            height: 5.h,
-                                            width: 6.w,
-                                            decoration: BoxDecoration(
-                                                color: Color(0xff8267AC),
-                                                borderRadius:
-                                                    BorderRadius.all(
-                                                        Radius.circular(12))),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    Text(
-                                      "VP",
-                                      style: FontConstant.k14w400B7A4Text,
-                                    )
-                                  ],
-                                ),
-                              ],
-                            )
-                          ],
-                        ),
-                      ),*/
-                            SizedBox(
-                              width: 1.sw / 2,
-                              height: 180,
-                              child: BarChartSample1(
-                                  activityList:
-                                      widget.model.kidDetails!.actvity ?? []),
-                            ),
-                            Expanded(
-                              //height: 140,
-                              //width: 1.sw / 2,
-                              child: ListView.builder(
-                                  shrinkWrap: true,
-                                  padding: EdgeInsets.zero,
-                                  physics: NeverScrollableScrollPhysics(),
-                                  itemCount:
-                                      widget.model.kidDetails!.actvity!.length,
-                                  itemBuilder:
-                                      (BuildContext context, int index) {
-                                    return Row(
-                                      children: [
-                                        Text(
-                                            widget.model.kidDetails!
-                                                    .actvity![index].actName![0]
-                                                    .toUpperCase() +
-                                                widget.model.kidDetails!
-                                                    .actvity![index].actName![1]
-                                                    .toUpperCase(),
-                                            style: FontConstant.k14w4008471Text
-                                                .copyWith(
-                                                    color: Color(0xff331F2D))),
-                                        SizedBox(width: 10),
-                                        Icon(
-                                          Icons.circle,
-                                          size: 4,
-                                          color: Color(0xff84717F),
-                                        ),
-                                        SizedBox(width: 10),
-                                        Text(
-                                            widget.model.kidDetails!
-                                                .actvity![index].actName!,
-                                            style:
-                                                FontConstant.k12w5008471Text),
-                                      ],
-                                    );
-                                  }),
-                            )
-                          ],
-                        )
-                      ],
-                    ),
+                                      ),
+                                    ],
+                                  ),
+                                  Text(
+                                    "VP",
+                                    style: FontConstant.k14w400B7A4Text,
+                                  )
+                                ],
+                              ),
+                            ],
+                          )
+                        ],
+                      ),
+                    ),*/
+                          SizedBox(
+                            width: 1.sw / 2,
+                            height: 180,
+                            child: BarChartSample1(
+                                activityList:
+                                    widget.model.kidDetails!.actvity ?? []),
+                          ),
+                          Expanded(
+                            //height: 140,
+                            //width: 1.sw / 2,
+                            child: ListView.builder(
+                                shrinkWrap: true,
+                                padding: EdgeInsets.zero,
+                                physics: NeverScrollableScrollPhysics(),
+                                itemCount:
+                                    widget.model.kidDetails!.actvity!.length,
+                                itemBuilder: (BuildContext context, int index) {
+                                  return Row(
+                                    children: [
+                                      Text(
+                                          widget.model.kidDetails!
+                                                  .actvity![index].actName![0]
+                                                  .toUpperCase() +
+                                              widget.model.kidDetails!
+                                                  .actvity![index].actName![1]
+                                                  .toUpperCase(),
+                                          style: FontConstant.k14w4008471Text
+                                              .copyWith(
+                                                  color: Color(0xff331F2D))),
+                                      SizedBox(width: 10),
+                                      Icon(
+                                        Icons.circle,
+                                        size: 4,
+                                        color: Color(0xff84717F),
+                                      ),
+                                      SizedBox(width: 10),
+                                      Text(
+                                          widget.model.kidDetails!
+                                              .actvity![index].actName!,
+                                          style: FontConstant.k12w5008471Text),
+                                    ],
+                                  );
+                                }),
+                          )
+                        ],
+                      )
+                    ],
                   ),
                 ),
           SizedBox(height: 16),
@@ -1023,10 +1024,7 @@ class _PKidsOverviewState extends State<PKidsOverview> {
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(30))),
               onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => CalendarPage2()),
-                );
+                showDialog(context: context, builder: (_) => CalendarPage3());
               },
               child: Center(
                 child: Text(

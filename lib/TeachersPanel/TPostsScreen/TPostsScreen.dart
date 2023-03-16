@@ -1,5 +1,3 @@
-import 'dart:developer';
-import 'dart:math';
 import 'dart:typed_data';
 
 import 'package:easy_localization/easy_localization.dart';
@@ -7,10 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:image_downloader/image_downloader.dart';
+import 'package:http/http.dart' as http;
+import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:kidseau/Theme.dart';
 import 'package:kidseau/Widgets/custom_snack_bar.dart';
-import 'package:kidseau/Widgets/dialogs.dart';
 import 'package:kidseau/api/Teacherpanelapi/teacher_post_api/post_apis/teacher_hide_post_api.dart';
 import 'package:kidseau/api/Teacherpanelapi/teacher_post_api/teacher_all_post_api.dart';
 import 'package:kidseau/api/Teacherpanelapi/teacher_post_api/teacher_like_post.dart';
@@ -19,7 +17,6 @@ import 'package:kidseau/api/models/Tschool_post_model/teacher_school_post_model.
 import 'package:kidseau/api/report_post_api/report_post_api.dart';
 
 import '../../enlarged_image_screen.dart';
-import 'TEditPostScreen.dart';
 
 class TPostsScreen extends StatefulWidget {
   const TPostsScreen({Key? key}) : super(key: key);
@@ -168,18 +165,25 @@ class _TPostsScreenState extends State<TPostsScreen> {
                                           mainAxisAlignment:
                                               MainAxisAlignment.start,
                                           children: [
-                                            Image.network(
-                                              _postList[index]
-                                                  .techProfile
-                                                  .toString(),
-                                              errorBuilder: (q, w, e) =>
-                                                  Image.asset(
-                                                "assets/images/person2.png",
+                                            Container(
+                                              clipBehavior: Clip.hardEdge,
+                                              decoration: BoxDecoration(
+                                                  color: Colors.white,
+                                                  shape: BoxShape.circle),
+                                              child: Image.network(
+                                                _postList[index]
+                                                    .techProfile
+                                                    .toString(),
+                                                fit: BoxFit.cover,
+                                                errorBuilder: (q, w, e) =>
+                                                    Image.asset(
+                                                  "assets/images/person2.png",
+                                                  height: 40,
+                                                  width: 40,
+                                                ),
                                                 height: 40,
                                                 width: 40,
                                               ),
-                                              height: 40,
-                                              width: 40,
                                             ),
                                             SizedBox(
                                               width: 08,
@@ -288,9 +292,7 @@ class _TPostsScreenState extends State<TPostsScreen> {
                                                                                 FontConstant.k24w50084717FText,
                                                                           ),
                                                                           SizedBox(
-                                                                            height:
-                                                                                34,
-                                                                          ),
+                                                                              height: 34),
                                                                           ListTile(
                                                                             onTap:
                                                                                 () {
@@ -386,15 +388,18 @@ class _TPostsScreenState extends State<TPostsScreen> {
                                                             in _postList[index]
                                                                 .image!) {
                                                           try {
-                                                            var imageId =
-                                                                await ImageDownloader
-                                                                    .downloadImage(url
+                                                            var response =
+                                                                await http.get(
+                                                                    Uri.parse(url
                                                                         .fileName
-                                                                        .toString());
-                                                            var path =
-                                                                await ImageDownloader
-                                                                    .findPath(
-                                                                        imageId!);
+                                                                        .toString()));
+                                                            final result = await ImageGallerySaver.saveImage(
+                                                                Uint8List.fromList(
+                                                                    response
+                                                                        .bodyBytes),
+                                                                quality: 60,
+                                                                name:
+                                                                    "newImage");
                                                           } catch (error) {
                                                             print(error);
                                                           }
@@ -566,15 +571,18 @@ class _TPostsScreenState extends State<TPostsScreen> {
                                                             in _postList[index]
                                                                 .image!) {
                                                           try {
-                                                            var imageId =
-                                                                await ImageDownloader
-                                                                    .downloadImage(url
+                                                            var response =
+                                                                await http.get(
+                                                                    Uri.parse(url
                                                                         .fileName
-                                                                        .toString());
-                                                            var path =
-                                                                await ImageDownloader
-                                                                    .findPath(
-                                                                        imageId!);
+                                                                        .toString()));
+                                                            final result = await ImageGallerySaver.saveImage(
+                                                                Uint8List.fromList(
+                                                                    response
+                                                                        .bodyBytes),
+                                                                quality: 60,
+                                                                name:
+                                                                    "newImage");
                                                           } catch (error) {
                                                             print(error);
                                                           }
@@ -698,7 +706,7 @@ class _TPostsScreenState extends State<TPostsScreen> {
                                                           .image![indexx]
                                                           .fileName
                                                           .toString(),
-                                                      fit: BoxFit.fitWidth,
+                                                      fit: BoxFit.cover,
                                                       loadingBuilder:
                                                           (q, w, e) {
                                                         if (e == null) {
@@ -963,7 +971,9 @@ class _PostInteractionState extends State<PostInteraction> {
               ),
             ],
           ),
-          Text(widget.postList[widget.index].postDate.toString(),
+          Text(
+              DateFormat('dd MMM').format(DateTime.parse(
+                  widget.postList[widget.index].postDate.toString())),
               style: FontConstant.k16w4008471Text.copyWith(fontSize: 14))
         ],
       ),

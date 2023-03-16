@@ -5,7 +5,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_switch/flutter_switch.dart';
-import 'package:kidseau/TeachersPanel/TNotificationScreen/TNotificationScreen.dart';
 import 'package:kidseau/Theme.dart';
 import 'package:kidseau/Widgets/Calender/calendermodel.dart';
 import 'package:kidseau/Widgets/custom_snack_bar.dart';
@@ -17,6 +16,7 @@ import 'package:kidseau/api/models/perforamnce_models/student_performance_model.
 import 'package:kidseau/api/models/teacher_group_model/teacher_group_model.dart';
 import 'package:kidseau/shard_prefs/shared_prefs.dart';
 
+import '../../ParentsPanel/PNotificationScreen/PNotificationScreen.dart';
 import '../../Widgets/buttons.dart';
 import '../../api/Teacherpanelapi/teacher_home_api/teacher_group_api.dart';
 import '../../restartappwidget/restartwidgets.dart';
@@ -48,6 +48,8 @@ class _TStudentScreenState extends State<TStudentScreen> {
   bool _isLoading = false;
   bool _activityLoading = false;
   String _grpId = '';
+  String date = DateFormat('dd MMM').format(DateTime.now());
+  String apiDate = DateFormat('yyyy-MM-dd').format(DateTime.now());
   PerformanceActivityModel _activityModel = PerformanceActivityModel();
   List<Map<String, dynamic>> _map = [];
   Map<String, dynamic> _selectedMap = {};
@@ -120,8 +122,8 @@ class _TStudentScreenState extends State<TStudentScreen> {
 
   List<bool> _valueList = [];
   _getPerformanceData() {
-    final resp =
-        GetStudentPerformance().get(grpId: _grpId, actId: _selectedMap['id']);
+    final resp = GetStudentPerformance()
+        .get(grpId: _grpId, actId: _selectedMap['id'], date: apiDate);
     resp.then((value) {
       _valueList.clear();
       _performanceStatus.clear();
@@ -134,9 +136,11 @@ class _TStudentScreenState extends State<TStudentScreen> {
                 .add({"performance": v.performanceRate, "id": v.kidId});
             _valueList.add(false);
           }
+          //print(_performanceStatus[0]['performance']);
           _studentPerformanceLoading = false;
           _isLoading = false;
           _activityLoading = false;
+          //print(_performanceStatus[0]['performance']);
         });
       } else {
         setState(() {
@@ -144,14 +148,29 @@ class _TStudentScreenState extends State<TStudentScreen> {
           _performanceStatus.clear();*/
           _studentPerformanceModel = StudentPerformanceModel.fromJson(value);
           _studentPerformanceLoading = false;
+          _isLoading = false;
+          _activityLoading = false;
         });
       }
+    });
+  }
+
+  getDate() {
+    setState(() {
+      apiDate = UserPrefs.getDate() != null
+          ? DateFormat('yyyy-MM-dd')
+              .format(DateTime.parse(UserPrefs.getDate()!))
+          : DateFormat('yyyy-MM-dd').format(DateTime.now());
+      date = UserPrefs.getDate() != null
+          ? DateFormat('dd MMM').format(DateTime.parse(UserPrefs.getDate()!))
+          : DateFormat('dd MMM').format(DateTime.now());
     });
   }
 
   bool _btnLoading = false;
   @override
   Widget build(BuildContext context) {
+    //print(_studentPerformanceModel.performance!.first.attendance!);
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 70.0,
@@ -172,7 +191,7 @@ class _TStudentScreenState extends State<TStudentScreen> {
               onTap: () {},
               child: Padding(
                 padding: const EdgeInsets.only(top: 15.0),
-                child: Text("students".tr(),
+                child: Text("Kids".tr(),
                     style:
                         FontConstant2.k32w5008267text.copyWith(fontSize: 25)),
               ),
@@ -180,7 +199,7 @@ class _TStudentScreenState extends State<TStudentScreen> {
           ],
         ),
         actions: [
-          Container(
+          SizedBox(
             width: 164,
             child: Padding(
               padding: const EdgeInsets.only(top: 15.0),
@@ -295,7 +314,7 @@ class _TStudentScreenState extends State<TStudentScreen> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => TNotificationScreen()),
+                            builder: (context) => PNotificationScreen()),
                       );
                     },
                     child: Padding(
@@ -380,7 +399,15 @@ class _TStudentScreenState extends State<TStudentScreen> {
                             showDialog(
                               context: context,
                               builder: (_) => CalendarPage2(),
-                            );
+                            ).then((value) {
+                              getDate();
+                              setState(() {
+                                _studentPerformanceLoading = true;
+                                _isLoading = true;
+                                _activityLoading = true;
+                              });
+                              _getPerformanceData();
+                            });
                           },
                           child: Container(
                             color: Colors.transparent,
@@ -388,11 +415,15 @@ class _TStudentScreenState extends State<TStudentScreen> {
                               children: [
                                 Image.asset(
                                   "assets/images/calendericon.png",
-                                  height: 16,
+                                  height: 24,
                                 ),
                                 SizedBox(width: 8),
                                 Text(
-                                  "Today".tr(),
+                                  date ==
+                                          DateFormat('dd MMM')
+                                              .format(DateTime.now())
+                                      ? "Today".tr()
+                                      : date,
                                   style: FontConstant.k16w500B7A4Text,
                                 ),
                               ],
@@ -401,238 +432,340 @@ class _TStudentScreenState extends State<TStudentScreen> {
                         ),
                       ],
                     ),
-                    SizedBox(height: 24),
+                    SizedBox(height: 16),
                     _studentPerformanceLoading
                         ? Center(
                             child: CircularProgressIndicator(),
                           )
-                        : _studentPerformanceModel.performance!.isEmpty
-                            ? Center(
-                                child: Text('No Students found.'),
-                              )
-                            : ListView.separated(
-                                shrinkWrap: true,
-                                physics: NeverScrollableScrollPhysics(),
-                                itemBuilder: (context, index) {
-                                  return GestureDetector(
-                                    onTap: () {},
-                                    child: Container(
-                                      width: 1.sw,
-                                      height: 148,
-                                      padding: EdgeInsets.all(16),
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(16),
-                                        color: Colors.white,
-                                        image: DecorationImage(
-                                          fit: BoxFit.fill,
-                                          image: AssetImage(
-                                            'assets/images/sp.png',
-                                          ),
-                                        ),
-                                      ),
-                                      child: Row(
-                                        children: [
-                                          GestureDetector(
-                                            onTap: () {
-                                              Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        TStudentDetailScreen(
-                                                          kidId:
-                                                              _studentPerformanceModel
-                                                                  .performance![
-                                                                      index]
-                                                                  .kidId
-                                                                  .toString(),
-                                                        )),
-                                              );
-                                            },
+                        : _studentPerformanceModel.performance != null
+                            ? _studentPerformanceModel.performance!.isEmpty
+                                ? Center(
+                                    child: Text('No kids found.'.tr()),
+                                  )
+                                : MediaQuery.removePadding(
+                                    context: context,
+                                    removeBottom: true,
+                                    child: ListView.separated(
+                                        shrinkWrap: true,
+                                        physics: NeverScrollableScrollPhysics(),
+                                        itemBuilder: (context, index) {
+                                          return GestureDetector(
+                                            onTap: () {},
                                             child: Container(
-                                              width: 80,
-                                              height: 105,
-                                              clipBehavior: Clip.hardEdge,
+                                              width: 1.sw,
+                                              height: 155,
+                                              padding: EdgeInsets.all(16),
                                               decoration: BoxDecoration(
                                                 borderRadius:
-                                                    BorderRadius.circular(8),
+                                                    BorderRadius.circular(16),
+                                                color: Colors.white,
+                                                image: DecorationImage(
+                                                  fit: BoxFit.cover,
+                                                  image: AssetImage(
+                                                    'assets/images/sp.png',
+                                                  ),
+                                                ),
                                               ),
-                                              child: Image.network(
-                                                _studentPerformanceModel
-                                                    .performance![index]
-                                                    .profilePic
-                                                    .toString(),
-                                                fit: BoxFit.fill,
-                                                errorBuilder: (q, w, e) =>
-                                                    Image.asset(
-                                                        'assets/images/Rectangle 2715.png'),
-                                              ),
-                                            ),
-                                          ),
-                                          SizedBox(width: 12),
-                                          Expanded(
-                                            child: Column(
-                                              children: [
-                                                Row(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    Expanded(
-                                                      child: Column(
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                        children: [
-                                                          Text(
-                                                            _studentPerformanceModel
-                                                                .performance![
-                                                                    index]
-                                                                .name
-                                                                .toString(),
-                                                            style: FontConstant
-                                                                .k18w500331FText,
+                                              child: Row(
+                                                children: [
+                                                  GestureDetector(
+                                                    onTap: () {
+                                                      Navigator.push(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              TStudentDetailScreen(
+                                                            kidId:
+                                                                _studentPerformanceModel
+                                                                    .performance![
+                                                                        index]
+                                                                    .kidId
+                                                                    .toString(),
                                                           ),
-                                                          SizedBox(height: 0),
-                                                          Text(
-                                                            _studentPerformanceModel
-                                                                        .performance![
-                                                                            index]
-                                                                        .gender!
-                                                                        .toLowerCase() ==
-                                                                    'm'
-                                                                ? "S/O ${_studentPerformanceModel.performance![index].fatherName}"
-                                                                : "D/O ${_studentPerformanceModel.performance![index].fatherName}",
-                                                            style: FontConstant
-                                                                .k16w400B7A4B2Text,
-                                                          ),
-                                                        ],
+                                                        ),
+                                                      );
+                                                    },
+                                                    child: Container(
+                                                      width: 80,
+                                                      height: 105,
+                                                      clipBehavior:
+                                                          Clip.hardEdge,
+                                                      decoration: BoxDecoration(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(8),
+                                                      ),
+                                                      child: Image.network(
+                                                        _studentPerformanceModel
+                                                            .performance![index]
+                                                            .profilePic
+                                                            .toString(),
+                                                        fit: BoxFit.cover,
+                                                        errorBuilder: (q, w,
+                                                                e) =>
+                                                            Image.asset(
+                                                                'assets/images/Rectangle 2715.png'),
                                                       ),
                                                     ),
-                                                    FlutterSwitch(
-                                                      width: 56,
-                                                      height: 32,
-                                                      toggleSize: 30,
-                                                      inactiveColor:
-                                                          ThemeColor.b7A4B2,
-                                                      activeColor: ThemeColor
-                                                          .primarycolor,
-                                                      inactiveIcon: Image.asset(
-                                                          'assets/images/sf.png'),
-                                                      activeIcon: Image.asset(
-                                                          'assets/images/baby.png'),
-                                                      value: _studentPerformanceModel
-                                                                      .performance![
-                                                                          index]
-                                                                      .attendance! ==
-                                                                  'null' ||
-                                                              _studentPerformanceModel
-                                                                      .performance![
-                                                                          index]
-                                                                      .attendance! ==
-                                                                  '0'
-                                                          ? false
-                                                          : _valueList[index],
-                                                      onToggle: (v) {
-                                                        setState(() {
-                                                          _valueList[index] = v;
-                                                        });
-                                                      },
-                                                    ),
-                                                  ],
-                                                ),
-                                                _studentPerformanceModel
-                                                                .performance![
-                                                                    index]
-                                                                .attendance! ==
-                                                            'null' ||
-                                                        _studentPerformanceModel
-                                                                .performance![
-                                                                    index]
-                                                                .attendance! ==
-                                                            '0'
-                                                    ? Row(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .start,
-                                                        children: [
-                                                          Container(
-                                                            padding: EdgeInsets
-                                                                .symmetric(
-                                                                    horizontal:
-                                                                        8,
-                                                                    vertical:
-                                                                        4),
-                                                            decoration: BoxDecoration(
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            75),
-                                                                color: Color(
-                                                                        0xffF97070)
-                                                                    .withOpacity(
-                                                                        0.16)),
-                                                            child: Text(
-                                                              'Absent',
-                                                              style: FontConstant
-                                                                  .k16w400F97070,
+                                                  ),
+                                                  SizedBox(width: 12),
+                                                  Expanded(
+                                                    child: Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Row(
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          children: [
+                                                            Expanded(
+                                                              child: Column(
+                                                                crossAxisAlignment:
+                                                                    CrossAxisAlignment
+                                                                        .start,
+                                                                children: [
+                                                                  Text(
+                                                                    _studentPerformanceModel
+                                                                        .performance![
+                                                                            index]
+                                                                        .name
+                                                                        .toString(),
+                                                                    style: FontConstant
+                                                                        .k18w500331FText,
+                                                                  ),
+                                                                  Text(
+                                                                    _studentPerformanceModel.performance![index].gender!.toLowerCase() ==
+                                                                            'm'
+                                                                        ? "S/O ${_studentPerformanceModel.performance![index].fatherName}"
+                                                                        : "D/O ${_studentPerformanceModel.performance![index].fatherName}",
+                                                                    style: FontConstant
+                                                                        .k16w400B7A4B2Text,
+                                                                  ),
+                                                                ],
+                                                              ),
                                                             ),
-                                                          ),
-                                                        ],
-                                                      )
-                                                    : Slider(
-                                                        divisions: 5,
-                                                        label: _performanceStatus[index]['performance'] == 'null'
-                                                            ? '1'
-                                                            : _performanceStatus[index]
-                                                                ['performance'],
-                                                        activeColor:
-                                                            Color(0xFFF5C88E),
-                                                        inactiveColor:
-                                                            ThemeColor.ebe6F2,
-                                                        thumbColor:
-                                                            Color(0xFFF0AD56),
-                                                        min: 0,
-                                                        max: 5,
-                                                        value: _performanceStatus[index]['performance'] == 'null'
-                                                            ? 0
-                                                            : int.parse(_performanceStatus[index]['performance'])
-                                                                .round()
-                                                                .toDouble(),
-                                                        onChanged:
-                                                            _valueList[index] ==
-                                                                    false
-                                                                ? null
-                                                                : (val) {
-                                                                    setState(
-                                                                        () {
-                                                                      value =
-                                                                          val;
-                                                                      _performanceStatus[index]['performance'] = val
-                                                                          .round()
-                                                                          .toString();
-                                                                      //_performanceStatus[index]['id'] = _studentPerformanceModel.performance![index].kidId;
-                                                                    });
-                                                                  }),
-                                              ],
+                                                            date !=
+                                                                    DateFormat(
+                                                                            'dd MMM')
+                                                                        .format(
+                                                                            DateTime.now())
+                                                                ? FlutterSwitch(
+                                                                    width: 56,
+                                                                    height: 32,
+                                                                    toggleSize:
+                                                                        30,
+                                                                    inactiveColor:
+                                                                        ThemeColor
+                                                                            .b7A4B2,
+                                                                    activeColor:
+                                                                        ThemeColor
+                                                                            .primarycolor,
+                                                                    inactiveIcon:
+                                                                        Image.asset(
+                                                                            'assets/images/sf.png'),
+                                                                    activeIcon:
+                                                                        Image.asset(
+                                                                            'assets/images/baby.png'),
+                                                                    value:
+                                                                        false,
+                                                                    onToggle:
+                                                                        (v) {
+                                                                      /*setState(
+                                                                          () {
+                                                                        _valueList[
+                                                                            index] = v;
+                                                                      });*/
+                                                                    },
+                                                                  )
+                                                                : FlutterSwitch(
+                                                                    width: 56,
+                                                                    height: 32,
+                                                                    toggleSize:
+                                                                        30,
+                                                                    inactiveColor:
+                                                                        ThemeColor
+                                                                            .b7A4B2,
+                                                                    activeColor:
+                                                                        ThemeColor
+                                                                            .primarycolor,
+                                                                    inactiveIcon:
+                                                                        Image.asset(
+                                                                            'assets/images/sf.png'),
+                                                                    activeIcon:
+                                                                        Image.asset(
+                                                                            'assets/images/baby.png'),
+                                                                    value: _studentPerformanceModel.performance![index].attendance! ==
+                                                                                'null' ||
+                                                                            _studentPerformanceModel.performance![index].attendance! ==
+                                                                                '0'
+                                                                        ? false
+                                                                        : _valueList[
+                                                                            index],
+                                                                    onToggle:
+                                                                        (v) {
+                                                                      setState(
+                                                                          () {
+                                                                        _valueList[
+                                                                            index] = v;
+                                                                      });
+                                                                    },
+                                                                  ),
+                                                          ],
+                                                        ),
+                                                        _studentPerformanceModel
+                                                                        .performance![
+                                                                            index]
+                                                                        .attendance! ==
+                                                                    'null' ||
+                                                                _studentPerformanceModel
+                                                                        .performance![
+                                                                            index]
+                                                                        .attendance! ==
+                                                                    '0'
+                                                            ? Row(
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .start,
+                                                                children: [
+                                                                  Container(
+                                                                    padding: EdgeInsets.symmetric(
+                                                                        horizontal:
+                                                                            8,
+                                                                        vertical:
+                                                                            4),
+                                                                    decoration: BoxDecoration(
+                                                                        borderRadius:
+                                                                            BorderRadius.circular(
+                                                                                75),
+                                                                        color: Color(0xffF97070)
+                                                                            .withOpacity(0.16)),
+                                                                    child: Text(
+                                                                      'Absent'
+                                                                          .tr(),
+                                                                      style: FontConstant
+                                                                          .k16w400F97070,
+                                                                    ),
+                                                                  ),
+                                                                ],
+                                                              )
+                                                            : Expanded(
+                                                                child: Slider(
+                                                                    divisions:
+                                                                        5,
+                                                                    label: _performanceStatus[index]
+                                                                                [
+                                                                                'performance'] ==
+                                                                            'null'
+                                                                        ? '1'
+                                                                        : _performanceStatus[index]
+                                                                            [
+                                                                            'performance'],
+                                                                    activeColor:
+                                                                        Color(
+                                                                            0xFFF5C88E),
+                                                                    inactiveColor:
+                                                                        ThemeColor
+                                                                            .ebe6F2,
+                                                                    thumbColor:
+                                                                        Color(
+                                                                            0xFFF0AD56),
+                                                                    min: 0,
+                                                                    max: 5,
+                                                                    value: _performanceStatus[index]['performance'] ==
+                                                                            'null'
+                                                                        ? 0
+                                                                        : int.parse(_performanceStatus[index]['performance'])
+                                                                            .round()
+                                                                            .toDouble(),
+                                                                    onChanged: _valueList[index] ==
+                                                                            false
+                                                                        ? null
+                                                                        : (val) {
+                                                                            setState(() {
+                                                                              value = val;
+                                                                              _performanceStatus[index]['performance'] = val.round().toString();
+                                                                              //_performanceStatus[index]['id'] = _studentPerformanceModel.performance![index].kidId;
+                                                                            });
+                                                                          }),
+                                                              ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
                                             ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  );
-                                },
-                                separatorBuilder: (ctx, ind) => SizedBox(
-                                      height: 16.h,
-                                    ),
-                                itemCount: _studentPerformanceModel
-                                    .performance!.length),
+                                          );
+                                        },
+                                        separatorBuilder: (ctx, ind) =>
+                                            SizedBox(height: 8),
+                                        itemCount: _studentPerformanceModel
+                                            .performance!.length),
+                                  )
+                            : Center(
+                                child: Text('No kids found.'.tr()),
+                              ),
+                    SizedBox(height: 24),
+                    if (_studentPerformanceModel.performance != null)
+                      if (_studentPerformanceModel.performance!.isNotEmpty)
+                        Container(
+                          height: 56,
+                          width: 1.sw,
+                          margin: EdgeInsets.only(bottom: 100),
+                          child: _btnLoading
+                              ? Center(
+                                  child: CircularProgressIndicator(),
+                                )
+                              : MainButton(
+                                  onTap: () {
+                                    setState(() {
+                                      _btnLoading = true;
+                                    });
+                                    for (var v in _performanceStatus) {
+                                      _performance.add(
+                                        {
+                                          "kid_id": v['id'],
+                                          "pfm": v['performance'] == 'null'
+                                              ? 0
+                                              : int.parse(v['performance']),
+                                          "days_activity_id": _selectedMap['id']
+                                        },
+                                      );
+                                    }
+                                    final resp = SubmitPerformanceApi()
+                                        .get(performance: _performance);
+                                    resp.then((value) {
+                                      if (value['status'] == 1) {
+                                        CustomSnackBar.customSnackBar(
+                                            context, 'Submitted successfully.');
+                                        _getData();
+                                        setState(() {
+                                          current = 0;
+                                          _btnLoading = false;
+                                        });
+                                      } else {
+                                        CustomSnackBar.customErrorSnackBar(
+                                            context,
+                                            'Submit failed. Please try again later.');
+                                        setState(() {
+                                          _btnLoading = false;
+                                        });
+                                      }
+                                    });
+                                  },
+                                  title: "Submit".tr(),
+                                  textStyleColor: Colors.white,
+                                  backgroundColor: ThemeColor.primarycolor),
+                        ),
                   ],
                 ),
               ),
             ),
-      bottomNavigationBar: Container(
+      /*bottomNavigationBar: Container(
         height: 55.h,
         width: 1.sw,
-        margin: EdgeInsets.only(bottom: 90, left: 16, right: 16),
+        margin: EdgeInsets.only(bottom: 100, left: 16, right: 16),
         child: _btnLoading
             ? Center(
                 child: CircularProgressIndicator(),
@@ -674,7 +807,7 @@ class _TStudentScreenState extends State<TStudentScreen> {
                 title: "Submit".tr(),
                 textStyleColor: Colors.white,
                 backgroundColor: ThemeColor.primarycolor),
-      ),
+      ),*/
     );
   }
 
@@ -690,61 +823,62 @@ class _TStudentScreenState extends State<TStudentScreen> {
   Container GroupTab() {
     return Container(
       width: 414,
-      height: 62,
+      height: 60,
+      clipBehavior: Clip.hardEdge,
       decoration: BoxDecoration(
           color: Colors.white, borderRadius: BorderRadius.circular(81)),
       child: ListView.builder(
-          shrinkWrap: true,
-          physics: const BouncingScrollPhysics(),
-          itemCount: model.groupInCard!.length,
-          scrollDirection: Axis.horizontal,
-          itemBuilder: (ctx, index) {
-            return Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      current = index;
-                      _grpId = model.groupInCard![index].grpId.toString();
-                      _activityLoading = true;
-                      _studentPerformanceLoading = true;
-                      _getPerformanceActivity();
-                    });
-                  },
-                  child: AnimatedContainer(
-                    duration: const Duration(milliseconds: 200),
-                    margin: const EdgeInsets.all(5),
-                    width: 72,
-                    height: 43,
-                    decoration: BoxDecoration(
-                      color: current == index
-                          ? Color(0xff8267AC).withOpacity(.08)
-                          : Colors.white,
-                      borderRadius: current == index
-                          ? BorderRadius.circular(69)
-                          : BorderRadius.circular(69),
-                      border: current == index
-                          ? Border.all(
-                              color: Color(0xff8267AC).withOpacity(.08),
-                              width: 0)
-                          : null,
-                    ),
-                    child: Center(
-                      child: Text(
-                        model.groupInCard![index].groupName.toString(),
-                        style: TextStyle(
-                            fontWeight: FontWeight.w500,
-                            color: current == index
-                                ? Color(0xff8267AC)
-                                : Color(0xffB7A4B2)),
-                      ),
+        shrinkWrap: true,
+        physics: const BouncingScrollPhysics(),
+        itemCount: model.groupInCard!.length,
+        scrollDirection: Axis.horizontal,
+        itemBuilder: (ctx, index) {
+          return Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              GestureDetector(
+                onTap: () {
+                  setState(() {
+                    current = index;
+                    _grpId = model.groupInCard![index].grpId.toString();
+                    _activityLoading = true;
+                    _studentPerformanceLoading = true;
+                    _getPerformanceActivity();
+                  });
+                },
+                child: AnimatedContainer(
+                  duration: const Duration(milliseconds: 200),
+                  margin: const EdgeInsets.all(8),
+                  width: 72,
+                  height: 43,
+                  decoration: BoxDecoration(
+                    color: current == index
+                        ? Color(0xff8267AC).withOpacity(.08)
+                        : Colors.white,
+                    borderRadius: current == index
+                        ? BorderRadius.circular(69)
+                        : BorderRadius.circular(69),
+                    border: current == index
+                        ? Border.all(
+                            color: Color(0xff8267AC).withOpacity(.08), width: 0)
+                        : null,
+                  ),
+                  child: Center(
+                    child: Text(
+                      model.groupInCard![index].groupName.toString(),
+                      style: TextStyle(
+                          fontWeight: FontWeight.w500,
+                          color: current == index
+                              ? Color(0xff8267AC)
+                              : Color(0xffB7A4B2)),
                     ),
                   ),
                 ),
-              ],
-            );
-          }),
+              ),
+            ],
+          );
+        },
+      ),
     );
   }
 }

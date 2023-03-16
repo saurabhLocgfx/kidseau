@@ -18,6 +18,12 @@ class TSignupScreen extends StatelessWidget {
       width: 414.w,
       child: Scaffold(
         backgroundColor: Color(0xfff7f6fa),
+        /*bottomNavigationBar: SingleChildScrollView(
+          child: Container(
+            padding: EdgeInsets.symmetric(horizontal: 16,vertical: 24),
+            child: ,
+          ),
+        ),*/
         body: SingleChildScrollView(
           child: Column(
             children: [

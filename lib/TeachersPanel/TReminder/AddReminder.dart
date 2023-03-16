@@ -6,13 +6,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kidseau/Constants/colors.dart';
-import 'package:kidseau/TeachersPanel/TReminder/TReminderScreen.dart';
 import 'package:kidseau/Theme.dart';
 import 'package:kidseau/Widgets/buttons.dart';
 import 'package:kidseau/Widgets/custom_snack_bar.dart';
 import 'package:kidseau/Widgets/textfields.dart';
 import 'package:kidseau/api/reminder_apis/add_reminder_api.dart';
 import 'package:kidseau/reminder_notifications_class.dart';
+import 'package:kidseau/shard_prefs/shared_prefs.dart';
 
 class TAddReminder extends StatefulWidget {
   final Function onPop;
@@ -76,6 +76,7 @@ class _TAddReminderState extends State<TAddReminder> {
             statusBarColor: Color(0xff8267AC).withOpacity(0.16),
           ),
           backgroundColor: Color(0xff8267AC).withOpacity(0.16),
+          centerTitle: false,
           leading: Row(
             children: [
               Padding(
@@ -242,10 +243,12 @@ class _TAddReminderState extends State<TAddReminder> {
                             var dateTime = DateTime(
                                 v!.year, v!.month, v!.day, q!.hour, q!.minute);
                             notificationServices.scheduleNotification(
-                                id: value["id"],
-                                title: value['title'],
-                                body: '',
-                                datetime: dateTime);
+                              id: value["id"],
+                              title: value['title'],
+                              body: '',
+                              datetime: DateTime.now(),
+                            );
+                            UserPrefs.setShowReminder(true);
                             Reminderaddeddialog(context);
                           } else {
                             setState(() {

@@ -8,7 +8,6 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:kidseau/Theme.dart';
 import 'package:kidseau/Widgets/buttons.dart';
-import 'package:kidseau/Widgets/custom_snack_bar.dart';
 import 'package:kidseau/Widgets/textfields.dart';
 import 'package:kidseau/shard_prefs/shared_prefs.dart';
 
@@ -38,6 +37,8 @@ class _ParentInfoState extends State<ParentInfo> {
   TextEditingController fatherEmailController = TextEditingController();
   TextEditingController addressController = TextEditingController();
   FocusNode addressNode = FocusNode();
+  FocusNode fEmail = FocusNode();
+  FocusNode oNode = FocusNode();
   final _formKey = GlobalKey<FormState>();
   final _picker = ImagePicker();
   XFile? _image;
@@ -47,6 +48,12 @@ class _ParentInfoState extends State<ParentInfo> {
   @override
   void initState() {
     addressNode.addListener(() {
+      setState(() {});
+    });
+    fEmail.addListener(() {
+      setState(() {});
+    });
+    oNode.addListener(() {
       setState(() {});
     });
     log(UserPrefs.getIsMother().toString());
@@ -90,6 +97,7 @@ class _ParentInfoState extends State<ParentInfo> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  SizedBox(height: 40),
                   Align(
                     alignment: Alignment.bottomLeft,
                     child: Text(
@@ -98,7 +106,7 @@ class _ParentInfoState extends State<ParentInfo> {
                       textAlign: TextAlign.start,
                     ),
                   ),
-                  SizedBox(height: 24),
+                  SizedBox(height: 16),
                   Text(
                     "Mother’s name".tr(),
                     style: FontConstant.k16w500331FText,
@@ -233,6 +241,7 @@ class _ParentInfoState extends State<ParentInfo> {
                     // height: 56.h,
                     width: 1.sw,
                     child: TextFormField(
+                        focusNode: oNode,
                         validator: (fatherOccupation) {
                           if (fatherOccupation == null ||
                               fatherOccupation.isEmpty) {
@@ -286,6 +295,7 @@ class _ParentInfoState extends State<ParentInfo> {
                     // height: 56.h,
                     width: 1.sw,
                     child: TextFormField(
+                      focusNode: fEmail,
                       keyboardType: TextInputType.emailAddress,
                       enabled:
                           !_isMother && enteredVal.contains('@') ? false : true,
@@ -384,8 +394,8 @@ class _ParentInfoState extends State<ParentInfo> {
                         )),
                   ),
                   SizedBox(height: 35),
-                  Container(
-                      height: 52.h,
+                  SizedBox(
+                      height: 56,
                       width: 1.sw,
                       child: _btnLoading
                           ? Center(
@@ -443,7 +453,11 @@ class _ParentInfoState extends State<ParentInfo> {
                   AnimatedContainer(
                     duration: Duration(milliseconds: 500),
                     curve: Curves.fastOutSlowIn,
-                    height: addressNode.hasFocus ? 700 : 320,
+                    height: addressNode.hasFocus ||
+                            fEmail.hasFocus ||
+                            oNode.hasFocus
+                        ? 700
+                        : 320,
                   ),
                 ],
               ),

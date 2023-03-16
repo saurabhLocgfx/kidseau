@@ -1,18 +1,18 @@
 import 'dart:developer';
+import 'dart:typed_data';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:image_downloader/image_downloader.dart';
+import 'package:http/http.dart' as http;
+import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:kidseau/Theme.dart';
-import 'package:kidseau/Widgets/dialogs.dart';
 import 'package:kidseau/api/models/parent_models/kid_details_models/parent_post_model.dart';
 import 'package:kidseau/api/parent_panel_apis/parent_kid_details_api/parent_kid_post_api.dart';
 import 'package:kidseau/api/parent_panel_apis/parent_post_api/parent_like_post_api.dart';
 
-import '../../TeachersPanel/TPostsScreen/TPostsScreen.dart';
 import '../../Widgets/custom_snack_bar.dart';
 import '../../api/Teacherpanelapi/teacher_post_api/post_apis/teacher_hide_post_api.dart';
 import '../../api/report_post_api/report_post_api.dart';
@@ -385,13 +385,17 @@ class _PKidsGalleryState extends State<PKidsGallery> {
                                           for (var url
                                               in _postList[index].images!) {
                                             try {
-                                              var imageId =
-                                                  await ImageDownloader
-                                                      .downloadImage(url
-                                                          .fileName
-                                                          .toString());
-                                              var path = await ImageDownloader
-                                                  .findPath(imageId!);
+                                              var response = await http.get(
+                                                  Uri.parse(
+                                                      url.fileName.toString()));
+                                              final result =
+                                                  await ImageGallerySaver
+                                                      .saveImage(
+                                                          Uint8List.fromList(
+                                                              response
+                                                                  .bodyBytes),
+                                                          quality: 60,
+                                                          name: "newImage");
                                             } catch (error) {
                                               print(error);
                                             }
@@ -483,7 +487,7 @@ class _PKidsGalleryState extends State<PKidsGallery> {
                                                 .images![indexx]
                                                 .fileName
                                                 .toString(),
-                                            fit: BoxFit.fitWidth,
+                                            fit: BoxFit.cover,
                                             loadingBuilder: (q, w, e) {
                                               if (e == null) {
                                                 return w;
@@ -643,7 +647,9 @@ class _ParentPostInteractionState extends State<ParentPostInteraction> {
               ),
             ],
           ),
-          Text(widget.postList[widget.index].postDate.toString(),
+          Text(
+              DateFormat('dd MMM').format(DateTime.parse(
+                  widget.postList[widget.index].postDate.toString())),
               style: FontConstant.k16w4008471Text.copyWith(fontSize: 14))
         ],
       ),

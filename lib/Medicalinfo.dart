@@ -4,7 +4,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:kidseau/Constants/decorations.dart';
 import 'package:kidseau/ParentsPanel/PDashBoard.dart';
 import 'package:kidseau/Theme.dart';
 import 'package:kidseau/Widgets/textfields.dart';
@@ -62,6 +61,7 @@ class _MedicalInfoState extends State<MedicalInfo> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  SizedBox(height: 40),
                   Align(
                     alignment: Alignment.bottomLeft,
                     child: Text(
@@ -70,7 +70,7 @@ class _MedicalInfoState extends State<MedicalInfo> {
                       textAlign: TextAlign.start,
                     ),
                   ),
-                  SizedBox(height: 24),
+                  SizedBox(height: 16),
                   Text(
                     "Blood group".tr(),
                     style: FontConstant.k16w500331FText,
@@ -346,7 +346,7 @@ class _MedicalInfoState extends State<MedicalInfo> {
                       style: FontConstant.k16w500331FText,
                     ),
                     subtitle: Text(
-                      '2 Months'.tr(),
+                      '2 ${'Months'.tr()}',
                       style: FontConstant.k16w500B7A4Text,
                     ),
                     value: _2months,
@@ -368,7 +368,7 @@ class _MedicalInfoState extends State<MedicalInfo> {
                       style: FontConstant.k16w500331FText,
                     ),
                     subtitle: Text(
-                      '4 Months'.tr(),
+                      '4 ${'Months'.tr()}',
                       style: FontConstant.k16w500B7A4Text,
                     ),
                     value: _4months,
@@ -390,7 +390,7 @@ class _MedicalInfoState extends State<MedicalInfo> {
                       style: FontConstant.k16w500331FText,
                     ),
                     subtitle: Text(
-                      '11 Months'.tr(),
+                      '11 ${'Months'.tr()}',
                       style: FontConstant.k16w500B7A4Text,
                     ),
                     value: _11months,
@@ -412,7 +412,7 @@ class _MedicalInfoState extends State<MedicalInfo> {
                       style: FontConstant.k16w500331FText,
                     ),
                     subtitle: Text(
-                      '12 Months'.tr(),
+                      '12 ${'Months'.tr()}',
                       style: FontConstant.k16w500B7A4Text,
                     ),
                     value: _12months,
@@ -434,7 +434,7 @@ class _MedicalInfoState extends State<MedicalInfo> {
                       style: FontConstant.k16w500331FText,
                     ),
                     subtitle: Text(
-                      '18 Months'.tr(),
+                      '18 ${'Months'.tr()}',
                       style: FontConstant.k16w500B7A4Text,
                     ),
                     value: _18months,
@@ -457,7 +457,7 @@ class _MedicalInfoState extends State<MedicalInfo> {
                     ),
                     value: _6years,
                     subtitle: Text(
-                      '6 years'.tr(),
+                      '6 ${'Years'.tr()}',
                       style: FontConstant.k16w500B7A4Text,
                     ),
                     onChanged: (val) {
@@ -471,7 +471,7 @@ class _MedicalInfoState extends State<MedicalInfo> {
                     height: 50,
                   ),
                   SizedBox(
-                      height: 52.h,
+                      height: 56,
                       width: 1.sw,
                       child: _btnLoading
                           ? Center(

@@ -1,8 +1,10 @@
+/*
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:kidseau/ParentsPanel/PNotificationScreen/PNotificationScreen.dart';
 import 'package:kidseau/Theme.dart';
 import 'package:kidseau/Widgets/widgets.dart';
+
+import '../../TeachersPanel/TNotificationScreen/TNotificationScreen.dart';
 
 class Plist2 extends StatelessWidget {
   const Plist2({
@@ -162,3 +164,4 @@ class Plist1 extends StatelessWidget {
     );
   }
 }
+*/

@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 import 'package:kidseau/TeachersPanel/THomeScreen/TLearningAlphabets.dart';
 import 'package:kidseau/Theme.dart';
-import 'package:kidseau/api/Teacherpanelapi/Tmodel/TScheduleModel.dart';
 import 'package:kidseau/api/models/T_all_schedule_model.dart';
 
 class TActivity extends StatefulWidget {
@@ -79,13 +77,17 @@ class _TActivityState extends State<TActivity> {
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Image.network(
-                        widget.schedule.schdule![index].actIcon.toString(),
-                        errorBuilder: (q, w, e) {
-                          return Text('Image not loaded');
-                        },
-                        height: 40,
-                        width: 40,
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(6),
+                        child: Image.network(
+                          widget.schedule.schdule![index].actIcon.toString(),
+                          errorBuilder: (q, w, e) {
+                            return Text('Image not loaded');
+                          },
+                          fit: BoxFit.cover,
+                          height: 40,
+                          width: 40,
+                        ),
                       ),
                       Padding(
                         padding: const EdgeInsets.only(left: 15.0),

@@ -125,7 +125,7 @@ class _TActivityScreenState extends State<TActivityScreen> {
                 Align(
                     alignment: Alignment.centerLeft,
                     child: Text(
-                      "Weak students".tr(),
+                      "Weak kids".tr(),
                       /*AppLoaclizations.of(context)!
                           .translate("Weak students")
                           .toString(),*/
@@ -145,6 +145,7 @@ class _TActivityScreenState extends State<TActivityScreen> {
                               context,
                               MaterialPageRoute(
                                   builder: (context) => TAttendanceScreen(
+                                        groupName: '',
                                         attendanceId: '',
                                       )),
                             );
@@ -190,54 +191,53 @@ class TeacherCard extends StatelessWidget {
         );
       },
       child: Container(
-        height: 128,
         width: 1.sw,
         decoration: BoxDecoration(
-            image: DecorationImage(
-                image:
-                    AssetImage("assets/images/Teacher card leaarning ap.png"))),
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Row(
-            children: [
-              Container(
-                height: 96,
-                width: 72,
-                clipBehavior: Clip.hardEdge,
-                decoration:
-                    BoxDecoration(borderRadius: BorderRadius.circular(8)),
-                child: Image.network(
-                  list[index].directorImage.toString(),
-                  fit: BoxFit.fill,
-                  errorBuilder: (q, w, e) =>
-                      Image.asset("assets/images/leaning alp person.png"),
-                ),
-              ),
-              SizedBox(width: 12),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    list[index].directorName.toString(),
-                    style: FontConstant.k18w500whiteText,
-                  ),
-                  Text(list[index].directorEmail.toString(),
-                      style: FontConstant.k18w500whiteText.copyWith(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w400,
-                        color: Colors.white.withOpacity(0.6),
-                      )),
-                  Text(list[index].directorPhone.toString(),
-                      style: FontConstant.k18w500whiteText.copyWith(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w400,
-                        color: Colors.white.withOpacity(0.74),
-                      )),
-                ],
-              )
-            ],
+          borderRadius: BorderRadius.circular(16),
+          image: DecorationImage(
+            image: AssetImage("assets/images/Teacher card leaarning ap.png"),
+            fit: BoxFit.cover,
           ),
+        ),
+        padding: const EdgeInsets.all(16.0),
+        child: Row(
+          children: [
+            Container(
+              height: 96,
+              width: 72,
+              clipBehavior: Clip.hardEdge,
+              decoration: BoxDecoration(borderRadius: BorderRadius.circular(8)),
+              child: Image.network(
+                list[index].directorImage.toString(),
+                fit: BoxFit.cover,
+                errorBuilder: (q, w, e) =>
+                    Image.asset("assets/images/leaning alp person.png"),
+              ),
+            ),
+            SizedBox(width: 12),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  list[index].directorName.toString(),
+                  style: FontConstant.k18w500whiteText,
+                ),
+                Text(list[index].directorEmail.toString(),
+                    style: FontConstant.k18w500whiteText.copyWith(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400,
+                      color: Colors.white.withOpacity(0.6),
+                    )),
+                Text(list[index].directorPhone.toString(),
+                    style: FontConstant.k18w500whiteText.copyWith(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w400,
+                      color: Colors.white.withOpacity(0.74),
+                    )),
+              ],
+            )
+          ],
         ),
       ),
     );

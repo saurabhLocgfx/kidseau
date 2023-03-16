@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:kidseau/ParentsPanel/PProfileScreens/parent_add_new_kid_screens/add_new_kid_details.dart';
 import 'package:kidseau/ParentsPanel/PSignUpScreen/Parentinfodashboard.dart';
 import 'package:kidseau/Theme.dart';
 import 'package:kidseau/Widgets/buttons.dart';
@@ -16,6 +15,8 @@ import 'package:kidseau/api/models/voucher_video_model/voucher_video_model.dart'
 import 'package:kidseau/api/parent_panel_apis/parent_voucher_video_api/parent_voucher_video_api.dart';
 import 'package:kidseau/api/parent_signup_apis/voucher_code_api.dart';
 import 'package:video_player/video_player.dart';
+
+import '../PProfileScreens/parent_add_new_kid_screens/add_new_kid_details.dart';
 
 class PSignupCode extends StatefulWidget {
   final bool newKid;
@@ -121,13 +122,19 @@ class _PSignupCodeState extends State<PSignupCode> {
                             print(value);
                             if (value['status'] == 0) {
                               Fluttertoast.showToast(msg: value['msg']);
+                              Navigator.pop(context);
                             } else {
+                              if (value['status'] == 1) {
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (context) => ParentAddNewKidDetail(
+                                          newKid: widget.newKid,
+                                        )));
+                              } else if (value['status'] == 2) {
+                                Navigator.pop(context);
+                              }
                               //navigate to
                               //UserPrefs.setCookies(value['key']);
-                              Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) => ParentAddNewKidDetail(
-                                        newKid: widget.newKid,
-                                      )));
+                              /**/
                               /* Navigator.push(
                                       context,
                                       MaterialPageRoute(
@@ -181,114 +188,130 @@ class _PSignupCodeState extends State<PSignupCode> {
                 child: CircularProgressIndicator(),
               )
             : SingleChildScrollView(
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 16, right: 16),
-                  child: Form(
-                    key: _formKey,
-                    child: Center(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          mainlogo(),
-                          SizedBox(height: 08),
-                          Center(
-                            child: Text(
-                              "We offer a new way to track your children and watch them grow"
-                                  .tr(),
-                              style: FontConstant.k16w4008471Text,
-                              textAlign: TextAlign.center,
-                            ),
-                          ),
-                          Text(
-                            "Voucher’s code".tr(),
-                            style: FontConstant.k16w500331FText,
-                            textAlign: TextAlign.start,
-                          ),
-                          SizedBox(height: 5),
-                          Container(
-                            //height: 56.h,
-                            width: 1.sw,
-                            child: TextFormField(
-                              validator: (voucherCode) {
-                                if (voucherCode == null ||
-                                    voucherCode.isEmpty) {
-                                  return 'Enter Voucher code'.tr();
-                                }
-                                return null;
-                              },
-                              controller: voucherCodeText,
-                              style: FontConstant.k18w5008471Text,
-                              decoration: CustomInputDecoration(
-                                      hintText:
-                                          "Enter your Voucher’s code".tr())
-                                  .decoration(),
-                              /*  controller: controller,*/
-                            ),
-                          ),
-                          SizedBox(height: 04),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 14.0),
-                            child: Text(
-                              "Vouchers are given by kid’s school".tr(),
-                              style: FontConstant.k14w400B7A4Text,
-                            ),
-                          ),
-                          SizedBox(height: 25),
-                          InkWell(
-                            onTap: () {
-                              showDialog(
-                                  context: context,
-                                  builder: (ctx) {
-                                    return VoucherVideoDialog(model: model);
-                                  });
-                            },
-                            child: Center(
-                              child: Container(
-                                height: 214.h,
-                                // width: 382.w,
-                                clipBehavior: Clip.hardEdge,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(12),
-                                    image: DecorationImage(
-                                        image: NetworkImage(
-                                          model.appVideo![0].vPoster.toString(),
-                                        ),
-                                        fit: BoxFit.fitWidth)),
-                                child: Center(
-                                  child: Image.asset(
-                                    "assets/images/play.png",
-                                    width: 40,
-                                    height: 40,
-                                  ),
-                                ),
-                                /* Image.network(
-                                     ??
-                                        '',
-                                    errorBuilder: (q, w, e) => Image.asset(
-                                        "assets/images/laptopbackgroundplay.png",
-                                        fit: BoxFit.fitWidth),
-                                  ) Center(
-                              child: Image.asset(
-                          "assets/images/playicon.png",
-                          height: 46,
-                          width: 46,
-                        )),*/
-                              ),
-                            ),
-                          ),
-                          SizedBox(height: 100),
-                          /*SizedBox(
-                            height: 40,
-                          ),
-                          Align(
-                            alignment: Alignment.bottomCenter,
-                            child: ,
-                          ),*/
-                          /*SizedBox(height: 13.h),*/
-                        ],
+                child: Stack(
+                  children: [
+                    Container(
+                      width: 1.sw,
+                      height: 300,
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: AssetImage("assets/images/bg23.png"),
+                          fit: BoxFit.fitWidth,
+                        ),
                       ),
                     ),
-                  ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 16, right: 16),
+                      child: Form(
+                        key: _formKey,
+                        child: Center(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              mainlogo(),
+                              SizedBox(height: 08),
+                              Center(
+                                child: Text(
+                                  "We offer a new way to track your children and watch them grow"
+                                      .tr(),
+                                  style: FontConstant.k16w4008471Text,
+                                  textAlign: TextAlign.center,
+                                ),
+                              ),
+                              SizedBox(height: 24),
+                              Text(
+                                "Voucher’s code".tr(),
+                                style: FontConstant.k16w500331FText,
+                                textAlign: TextAlign.start,
+                              ),
+                              SizedBox(height: 5),
+                              Container(
+                                //height: 56.h,
+                                width: 1.sw,
+                                child: TextFormField(
+                                  validator: (voucherCode) {
+                                    if (voucherCode == null ||
+                                        voucherCode.isEmpty) {
+                                      return 'Enter Voucher code'.tr();
+                                    }
+                                    return null;
+                                  },
+                                  controller: voucherCodeText,
+                                  style: FontConstant.k18w5008471Text,
+                                  decoration: CustomInputDecoration(
+                                          hintText:
+                                              "Enter your Voucher’s code".tr())
+                                      .decoration(),
+                                  /*  controller: controller,*/
+                                ),
+                              ),
+                              SizedBox(height: 04),
+                              Padding(
+                                padding: const EdgeInsets.only(left: 14.0),
+                                child: Text(
+                                  "Vouchers are given by kid’s school".tr(),
+                                  style: FontConstant.k14w400B7A4Text,
+                                ),
+                              ),
+                              SizedBox(height: 25),
+                              InkWell(
+                                onTap: () {
+                                  showDialog(
+                                      context: context,
+                                      builder: (ctx) {
+                                        return VoucherVideoDialog(model: model);
+                                      });
+                                },
+                                child: Center(
+                                  child: Container(
+                                    height: 214.h,
+                                    // width: 382.w,
+                                    clipBehavior: Clip.hardEdge,
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(12),
+                                        image: DecorationImage(
+                                            image: NetworkImage(
+                                              model.appVideo![0].vPoster
+                                                  .toString(),
+                                            ),
+                                            fit: BoxFit.fitWidth)),
+                                    child: Center(
+                                      child: Image.asset(
+                                        "assets/images/play.png",
+                                        width: 40,
+                                        height: 40,
+                                      ),
+                                    ),
+                                    /* Image.network(
+                                         ??
+                                            '',
+                                        errorBuilder: (q, w, e) => Image.asset(
+                                            "assets/images/laptopbackgroundplay.png",
+                                            fit: BoxFit.fitWidth),
+                                      ) Center(
+                                  child: Image.asset(
+                              "assets/images/playicon.png",
+                              height: 46,
+                              width: 46,
+                            )),*/
+                                  ),
+                                ),
+                              ),
+                              SizedBox(height: 100),
+                              /*SizedBox(
+                                height: 40,
+                              ),
+                              Align(
+                                alignment: Alignment.bottomCenter,
+                                child: ,
+                              ),*/
+                              /*SizedBox(height: 13.h),*/
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
       ),

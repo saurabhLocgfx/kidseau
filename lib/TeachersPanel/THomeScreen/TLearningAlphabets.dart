@@ -7,13 +7,10 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
-import 'package:kidseau/ParentsPanel/PHomeScreen/PHomeScreen.dart';
 import 'package:kidseau/Theme.dart';
-import 'package:kidseau/Widgets/buttons.dart';
 import 'package:kidseau/api/Teacherpanelapi/Tschedule_detail_api/Tschedule_detail_api.dart';
 import 'package:kidseau/api/models/Tschedule_detail_model.dart';
 
-import '../../TeachersPanel/TMessages/TChats.dart';
 import 'TKidsDetails.dart';
 
 class TLearningAlphabets extends StatefulWidget {
@@ -41,6 +38,7 @@ class _TLearningAlphabetsState extends State<TLearningAlphabets> {
       try {
         setState(() {
           _model = TScheduleDetailModel.fromJson(value);
+          //print(_model.learningAlaphabets!.time);
           _isLoading = false;
         });
       } catch (e) {
@@ -158,7 +156,7 @@ class _TLearningAlphabetsState extends State<TLearningAlphabets> {
                               Expanded(
                                 child: Container(
                                   /*height: 286,
-                            width: 382,*/
+                                width: 382,*/
                                   clipBehavior: Clip.hardEdge,
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(16),
@@ -177,31 +175,32 @@ class _TLearningAlphabetsState extends State<TLearningAlphabets> {
                                     },
                                     errorBuilder: (q, w, e) =>
                                         Text('Image not found'),
-                                    fit: BoxFit.fill,
+                                    fit: BoxFit.cover,
                                   ),
                                 ),
                               ),
                             ],
                           ),
                           SizedBox(height: 16),
-                          Row(
-                            children: [
-                              Image.asset(
-                                "assets/images/clock.png",
-                                height: 20,
-                                width: 20,
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(left: 06.0),
-                                child: Text(
-                                    "${_model.learningAlaphabets!.time!.split('-').first} to ${_model.learningAlaphabets!.time!.split('-').last}",
-                                    style: FontConstant.k14w400lightpurpleText
-                                        .copyWith(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w500)),
-                              ),
-                            ],
-                          ),
+                          if (_model.learningAlaphabets!.time != null)
+                            Row(
+                              children: [
+                                Image.asset(
+                                  "assets/images/clock.png",
+                                  height: 20,
+                                  width: 20,
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 06.0),
+                                  child: Text(
+                                      "${_model.learningAlaphabets!.time!.split('-').first} ${"To".tr()} ${_model.learningAlaphabets!.time!.split('-').last}",
+                                      style: FontConstant.k14w400lightpurpleText
+                                          .copyWith(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w500)),
+                                ),
+                              ],
+                            ),
                         ],
                       ),
                       SizedBox(height: 24),
@@ -215,12 +214,12 @@ class _TLearningAlphabetsState extends State<TLearningAlphabets> {
                           : Align(
                               alignment: Alignment.centerLeft,
                               child: Text(
-                                "Weak Students",
+                                "Weak kids".tr(),
                                 style: FontConstant2.baloothampifont,
                               )),
                       _model.weakStudent!.isEmpty
                           ? SizedBox.shrink()
-                          : SizedBox(height: 24),
+                          : SizedBox(height: 16),
                       ListView.separated(
                           shrinkWrap: true,
                           physics: NeverScrollableScrollPhysics(),
@@ -283,10 +282,10 @@ class TStudentcard extends StatelessWidget {
         borderRadius: BorderRadius.circular(16),
         image: DecorationImage(
           image: AssetImage("assets/images/Student Card.png"),
-          fit: BoxFit.fitWidth,
+          fit: BoxFit.cover,
         ),
       ),
-      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
+      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16),
       child: Row(
         children: [
           Container(
@@ -296,7 +295,7 @@ class TStudentcard extends StatelessWidget {
             decoration: BoxDecoration(borderRadius: BorderRadius.circular(8)),
             child: Image.network(
               model.weakStudent![index].image.toString(),
-              fit: BoxFit.fill,
+              fit: BoxFit.cover,
               errorBuilder: (q, w, e) =>
                   Image.asset('assets/images/Rectangle 2715.png'),
             ),

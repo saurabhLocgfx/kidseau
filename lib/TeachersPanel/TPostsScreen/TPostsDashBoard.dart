@@ -4,13 +4,13 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:kidseau/TeachersPanel/TNotificationScreen/TNotificationScreen.dart';
 import 'package:kidseau/TeachersPanel/TPostsScreen/TMyPosts.dart';
 import 'package:kidseau/TeachersPanel/TPostsScreen/TPostsScreen.dart';
 import 'package:kidseau/TeachersPanel/TReminder/TReminderScreen.dart';
 import 'package:kidseau/Theme.dart';
 import 'package:kidseau/shard_prefs/shared_prefs.dart';
 
+import '../../ParentsPanel/PNotificationScreen/PNotificationScreen.dart';
 import '../../restartappwidget/restartwidgets.dart';
 import 'TAddPostsScreen.dart';
 
@@ -194,7 +194,7 @@ class _TPostsDashBoardState extends State<TPostsDashBoard> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => TNotificationScreen()),
+                            builder: (context) => PNotificationScreen()),
                       );
                     },
                     child: Padding(
@@ -240,7 +240,8 @@ class _TPostsDashBoardState extends State<TPostsDashBoard> {
               left: 0,
               right: 0,
               bottom: 0,
-              child: Column(
+              child: ListView(
+                physics: NeverScrollableScrollPhysics(),
                 children: [
                   PostsTab(),
                   SizedBox(
@@ -285,144 +286,146 @@ class _TPostsDashBoardState extends State<TPostsDashBoard> {
         borderRadius: BorderRadius.circular(76),
       ),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          GestureDetector(
-            onTap: () {
-              selectedIndex = 0;
-              pageIndex = 0;
-              _pageController.jumpToPage(
-                pageIndex,
-              );
-            },
-            child: Container(
-              color: Colors.transparent,
-              child: Row(
-                children: [
-                  Container(
-                    height: 40,
-                    width: 40,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(93),
-                        color:
-                            pageIndex == 0 ? Color(0xffEBE6F2) : Colors.white),
-                    child: Center(
-                      child: Image.asset(
-                          pageIndex == 0
-                              ? "assets/images/addFil.png"
-                              : "assets/images/gallery-add.png",
-                          height: pageIndex == 0 ? 24 : 25),
+          Expanded(
+            child: GestureDetector(
+              onTap: () {
+                selectedIndex = 0;
+                pageIndex = 0;
+                _pageController.jumpToPage(
+                  pageIndex,
+                );
+              },
+              child: Container(
+                color: Colors.transparent,
+                child: Row(
+                  children: [
+                    Container(
+                      height: 40,
+                      width: 40,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(93),
+                          color: pageIndex == 0
+                              ? Color(0xffEBE6F2)
+                              : Colors.white),
+                      child: Center(
+                        child: Image.asset(
+                            pageIndex == 0
+                                ? "assets/images/addFil.png"
+                                : "assets/images/gallery-add.png",
+                            height: pageIndex == 0 ? 24 : 25),
+                      ),
                     ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 4.0),
-                    child: SizedBox(
+                    Padding(
+                      padding: const EdgeInsets.only(left: 4.0),
+                      child: SizedBox(
+                        width: 60.w,
+                        child: Text("Add".tr(),
+                            /* AppLoaclizations.of(context)!
+                                .translate("Add")
+                                .toString(),*/
+                            overflow: TextOverflow.ellipsis,
+                            style: FontConstant.k14w500B7A4Text.copyWith(
+                                color: pageIndex == 0
+                                    ? Color(0xff8267AC)
+                                    : Color(0xffB7A4B2))),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          // SizedBox(width: 5),
+          Expanded(
+            child: GestureDetector(
+              onTap: () {
+                setState(() {
+                  selectedIndex = 1;
+                  pageIndex = 1;
+                  _pageController.jumpToPage(
+                    pageIndex,
+                  );
+                });
+              },
+              child: Container(
+                color: Colors.transparent,
+                child: Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 4.0),
+                      child: Container(
+                        height: 40,
+                        width: 40,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(93),
+                            color: pageIndex == 1
+                                ? Color(0xffEBE6F2)
+                                : Colors.white),
+                        child: Center(
+                          child: Image.asset(
+                              pageIndex == 1
+                                  ? "assets/images/postsiconfill.png"
+                                  : "assets/images/Postsicon.png",
+                              height: 24),
+                        ),
+                      ),
+                    ),
+                    SizedBox(width: 8),
+                    SizedBox(
                       width: 60.w,
-                      child: Text("Add".tr(),
+                      child: Text("Posts".tr(),
                           /* AppLoaclizations.of(context)!
-                              .translate("Add")
+                              .translate("Posts")
                               .toString(),*/
                           overflow: TextOverflow.ellipsis,
                           style: FontConstant.k14w500B7A4Text.copyWith(
-                              color: pageIndex == 0
+                              color: pageIndex == 1
                                   ? Color(0xff8267AC)
                                   : Color(0xffB7A4B2))),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),
           // SizedBox(width: 5),
-          GestureDetector(
-            onTap: () {
-              setState(() {
-                selectedIndex = 1;
-                pageIndex = 1;
-                _pageController.jumpToPage(
-                  pageIndex,
-                );
-              });
-            },
-            child: Container(
-              color: Colors.transparent,
-              child: Row(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left: 4.0),
-                    child: Container(
-                      height: 40,
-                      width: 40,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(93),
-                          color: pageIndex == 1
-                              ? Color(0xffEBE6F2)
-                              : Colors.white),
-                      child: Center(
-                        child: Image.asset(
-                            pageIndex == 1
-                                ? "assets/images/postsiconfill.png"
-                                : "assets/images/Postsicon.png",
-                            height: 24),
+          Expanded(
+            child: GestureDetector(
+              onTap: () {
+                setState(() {
+                  selectedIndex = 2;
+                  pageIndex = 2;
+                  _pageController.jumpToPage(
+                    pageIndex,
+                  );
+                });
+              },
+              child: Container(
+                color: Colors.transparent,
+                child: Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 4.0),
+                      child: Container(
+                        height: 40,
+                        width: 40,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(93),
+                            color: pageIndex == 2
+                                ? Color(0xffEBE6F2)
+                                : Colors.white),
+                        child: Center(
+                          child: Image.asset(
+                              pageIndex == 2
+                                  ? "assets/images/galFil.png"
+                                  : "assets/images/gal.png",
+                              height: pageIndex == 2 ? 24 : 40),
+                        ),
                       ),
                     ),
-                  ),
-                  SizedBox(width: 8),
-                  SizedBox(
-                    width: 60.w,
-                    child: Text("Posts".tr(),
-                        /* AppLoaclizations.of(context)!
-                            .translate("Posts")
-                            .toString(),*/
-                        overflow: TextOverflow.ellipsis,
-                        style: FontConstant.k14w500B7A4Text.copyWith(
-                            color: pageIndex == 1
-                                ? Color(0xff8267AC)
-                                : Color(0xffB7A4B2))),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          // SizedBox(width: 5),
-          GestureDetector(
-            onTap: () {
-              setState(() {
-                selectedIndex = 2;
-                pageIndex = 2;
-                _pageController.jumpToPage(
-                  pageIndex,
-                );
-              });
-            },
-            child: Container(
-              color: Colors.transparent,
-              child: Row(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left: 4.0),
-                    child: Container(
-                      height: 40,
-                      width: 40,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(93),
-                          color: pageIndex == 2
-                              ? Color(0xffEBE6F2)
-                              : Colors.white),
-                      child: Center(
-                        child: Image.asset(
-                            pageIndex == 2
-                                ? "assets/images/galFil.png"
-                                : "assets/images/gal.png",
-                            height: pageIndex == 2 ? 24 : 40),
-                      ),
-                    ),
-                  ),
-                  SizedBox(width: 8),
-                  SizedBox(
-                    width: 60.w,
-                    child: Text("My Posts".tr(),
-                        overflow: TextOverflow.ellipsis,
+                    SizedBox(width: 8),
+                    Text("My Posts".tr(),
                         /* AppLoaclizations.of(context)!
                             .translate("My Posts")
                             .toString(),*/
@@ -430,8 +433,8 @@ class _TPostsDashBoardState extends State<TPostsDashBoard> {
                             color: pageIndex == 2
                                 ? Color(0xff8267AC)
                                 : Color(0xffB7A4B2))),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),

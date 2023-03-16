@@ -6,10 +6,10 @@ import 'package:flutter/services.dart';
 import 'package:kidseau/ParentsPanel/PProfileScreens/PSettings/PAboutus.dart';
 import 'package:kidseau/ParentsPanel/PProfileScreens/PSettings/PPrivacyPolicy.dart';
 import 'package:kidseau/ParentsPanel/PProfileScreens/PSettings/PTermsAndConditions.dart';
-import 'package:kidseau/TeachersPanel/TProfileScreen/TNotificationSetttings.dart';
 import 'package:kidseau/Theme.dart';
 
-import '../../ParentsPanel/PMessageScreen/PChats.dart';
+import '../../ParentsPanel/PMessageScreen/PopenChats.dart';
+import '../../ParentsPanel/PProfileScreens/PSettings/PNotificationSettings.dart';
 
 class TSettings extends StatefulWidget {
   TSettings({Key? key}) : super(key: key);
@@ -71,7 +71,7 @@ class _TSettingsState extends State<TSettings> {
                   onTap: () {
                     Navigator.of(context).push(
                       MaterialPageRoute(
-                        builder: (context) => TNotificationsettings(),
+                        builder: (context) => PNotificationsettings(),
                       ),
                     );
                   },
@@ -175,7 +175,7 @@ class _TSettingsState extends State<TSettings> {
                   onTap: () {
                     Navigator.of(context).push(
                       MaterialPageRoute(
-                        builder: (context) => PChats(
+                        builder: (context) => POpenChats(
                           onPop: () {},
                           profilePic: '',
                           name: 'Kidseau support',

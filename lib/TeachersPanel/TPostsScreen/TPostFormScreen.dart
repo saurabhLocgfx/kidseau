@@ -10,13 +10,12 @@ import 'package:image_cropper/image_cropper.dart';
 import 'package:kidseau/TeachersPanel/Widgets/Themes.dart';
 import 'package:kidseau/Theme.dart';
 import 'package:kidseau/Widgets/buttons.dart';
-import 'package:kidseau/Widgets/custom_snack_bar.dart';
-import 'package:kidseau/Widgets/screen_loader.dart';
-import 'package:kidseau/api/Teacherpanelapi/teacher_post_api/post_apis/teacher_announcement_api.dart';
 import 'package:kidseau/api/Teacherpanelapi/teacher_post_api/post_apis/teacher_get_group.dart';
 import 'package:kidseau/api/Teacherpanelapi/teacher_post_api/post_apis/teacher_get_sections.dart';
-import 'package:kidseau/api/Teacherpanelapi/teacher_post_api/post_apis/teacher_post_api.dart';
 import 'package:kidseau/api/Teacherpanelapi/teacher_post_api/post_apis/teacher_tag_kid_api.dart';
+
+import '../../Widgets/custom_snack_bar.dart';
+import '../../api/Teacherpanelapi/teacher_post_api/post_apis/teacher_post_api.dart';
 
 class TPostFormScreen extends StatefulWidget {
   List<File> pickedImages;
@@ -266,6 +265,7 @@ class _TPostFormScreenState extends State<TPostFormScreen> {
                       Text("Caption".tr(), style: FontConstant.k16w500331FText),
                       SizedBox(height: 4),
                       TextFormField(
+                        textInputAction: TextInputAction.done,
                         validator: (val) {
                           if (_captionController.text.isEmpty) {
                             return 'This field cannot be empty';
@@ -285,8 +285,8 @@ class _TPostFormScreenState extends State<TPostFormScreen> {
                           style: FontConstant.k16w500331FText),
                       SizedBox(height: 4),
                       Container(
-                        padding: EdgeInsets.only(left: 20, right: 20),
-                        height: 54.h,
+                        padding: EdgeInsets.only(left: 20),
+                        height: 54,
                         width: 1.sw,
                         decoration: BoxDecoration(
                             color: Color(0xffFFFFFF),
@@ -381,8 +381,8 @@ class _TPostFormScreenState extends State<TPostFormScreen> {
                           style: FontConstant.k16w500331FText),
                       SizedBox(height: 4),
                       Container(
-                        padding: EdgeInsets.only(left: 20, right: 20),
-                        height: 54.h,
+                        padding: EdgeInsets.only(left: 20),
+                        height: 54,
                         width: 1.sw,
                         decoration: BoxDecoration(
                             color: Color(0xffFFFFFF),
@@ -427,8 +427,8 @@ class _TPostFormScreenState extends State<TPostFormScreen> {
                                       if (_selectedGroup ==
                                           _groupMap[i]['name']) {
                                         selectedGroup = {
-                                          'name': _map[i]['name'],
-                                          'id': _map[i]['id']
+                                          'name': _groupMap[i]['name'],
+                                          'id': _groupMap[i]['id']
                                         };
                                       }
                                     }
@@ -495,7 +495,7 @@ class _TPostFormScreenState extends State<TPostFormScreen> {
                             color: Colors.white),
                         decoration: TextFieldDecoration().curvedWhiteDecoration(
                           curved: true,
-                          label: 'Tag students'.tr(),
+                          label: '@Tag ${'kids'.tr()}',
                         ),
                         mentions: [
                           Mention(
@@ -568,16 +568,34 @@ class _TPostFormScreenState extends State<TPostFormScreen> {
                                       color: TThemeColor.purplecolor,
                                       borderRadius: BorderRadius.circular(40)),
                                   child: Center(
-                                      child: Text(
-                                    _taggedStudents[index],
-                                    style: FontConstant.k16w400whiteText,
+                                      child: Row(
+                                    children: [
+                                      Text(
+                                        _taggedStudents[index],
+                                        style: FontConstant.k16w400whiteText,
+                                      ),
+                                      InkWell(
+                                        onTap: () {
+                                          setState(() {
+                                            _taggedStudents.removeAt(index);
+                                            taggedStudentsId.removeAt(index);
+                                          });
+                                        },
+                                        child: Container(
+                                          color: Colors.transparent,
+                                          padding: EdgeInsets.only(left: 15),
+                                          child: Icon(Icons.close),
+                                        ),
+                                      ),
+                                    ],
                                   )),
                                 );
                               },
                               separatorBuilder: (ctx, ind) => SizedBox(
                                     width: 5,
                                   ),
-                              itemCount: _taggedStudents.length)),
+                              itemCount:
+                                  _taggedStudents.toSet().toList().length)),
                       /*TextFormField(
                         validator: (val){
                           if(_tagController.text.isEmpty){
@@ -608,9 +626,9 @@ class _TPostFormScreenState extends State<TPostFormScreen> {
               if (!_isLoading) {
                 return;
               } else {
-                ScreenLoader().onLoading(context);
+                //ScreenLoader().onLoading(context);
                 FocusScope.of(context).unfocus();
-                log(_selectedGroup.toString());
+                log(selectedGroup['id'].toString());
                 final resp = TeacherPostAPI().get(
                     idList: taggedStudentsId,
                     caption: _captionController.text,
@@ -619,7 +637,7 @@ class _TPostFormScreenState extends State<TPostFormScreen> {
                     imgList: widget.pickedImages);
                 resp.then((value) {
                   log(value.toString());
-                  Navigator.of(context).pop();
+                  //Navigator.of(context).pop();
                   if (value['status'] == 1) {
                     CustomSnackBar.customSnackBar(context, value['msg']);
                     Navigator.of(context).pop();
@@ -630,7 +648,7 @@ class _TPostFormScreenState extends State<TPostFormScreen> {
                 });
               }
             },
-            "Posts".tr(),
+            "Post".tr(),
             ThemeColor.primarycolor,
             52.0,
           ),

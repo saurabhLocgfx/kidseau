@@ -29,6 +29,45 @@ class _PSignupScreenState extends State<PSignupScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xfff7f6fa),
+      bottomNavigationBar: SingleChildScrollView(
+        child: Container(
+          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 24),
+          child: Align(
+            alignment: Alignment.bottomCenter,
+            child: Center(
+              child: RichText(
+                  text: TextSpan(children: [
+                TextSpan(
+                  text: "By proceeding you agree to our ".tr(),
+                  style: FontConstant.k14w400B7A4Text,
+                ),
+                TextSpan(
+                  recognizer: TapGestureRecognizer()
+                    ..onTap = () {
+                      launchUrl(Uri.parse(
+                          "https://cerebal.locgfx.com/kidsue/kids/appDetails/privacy-policy.php"));
+                    },
+                  text: "Privacy Policy".tr(),
+                  style: FontConstant.k14w500B7A4TextU,
+                ),
+                TextSpan(
+                  text: " & ",
+                  style: FontConstant.k14w400B7A4Text,
+                ),
+                TextSpan(
+                  recognizer: TapGestureRecognizer()
+                    ..onTap = () {
+                      launchUrl(Uri.parse(
+                          "https://cerebal.locgfx.com/kidsue/kids/appDetails/terms-conditions.php"));
+                    },
+                  text: "Terms and Conditions".tr(),
+                  style: FontConstant.k14w500B7A4TextU,
+                ),
+              ])),
+            ),
+          ),
+        ),
+      ),
       body: SingleChildScrollView(
         child: Form(
           key: _formKey,
@@ -39,10 +78,11 @@ class _PSignupScreenState extends State<PSignupScreen> {
                 width: 1.sw,
                 decoration: BoxDecoration(
                   image: DecorationImage(
-                      opacity: 0.4,
-                      image: AssetImage("assets/images/postsbackground.png"),
-                      fit: BoxFit.fitWidth,
-                      alignment: Alignment.topLeft),
+                    opacity: 0.4,
+                    image: AssetImage("assets/images/postsbackground.png"),
+                    fit: BoxFit.fitWidth,
+                    alignment: Alignment.topLeft,
+                  ),
                 ),
                 child: SingleChildScrollView(
                   child: Column(
@@ -50,21 +90,19 @@ class _PSignupScreenState extends State<PSignupScreen> {
                       Padding(
                         padding:
                             EdgeInsets.only(top: 180.h, left: 16, right: 16),
-                        child: Container(
-                          child: Column(
-                            children: [
-                              Image.asset(
-                                "assets/images/logo.png",
-                                height: 172,
-                                width: 173,
-                              ),
-                              /*Text(
-                                "We offer a new way to track your children and watch them grow.",
-                                style: FontConstant.k16w4008471Text,
-                                textAlign: TextAlign.center,
-                              ),*/
-                            ],
-                          ),
+                        child: Column(
+                          children: [
+                            Image.asset(
+                              "assets/images/logo.png",
+                              height: 150.w,
+                              width: 150.w,
+                            ),
+                            /*Text(
+                              "We offer a new way to track your children and watch them grow.",
+                              style: FontConstant.k16w4008471Text,
+                              textAlign: TextAlign.center,
+                            ),*/
+                          ],
                         ),
                       ),
                       //Spacer(),
@@ -73,7 +111,7 @@ class _PSignupScreenState extends State<PSignupScreen> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            SizedBox(height: 10),
+                            //SizedBox(height: 40),
                             Text("New Account".tr(),
                                 style: FontConstant.k24w500brownText),
                             Text(
@@ -208,43 +246,7 @@ class _PSignupScreenState extends State<PSignupScreen> {
                                   textStyleColor: Colors.white,
                                   backgroundColor: ThemeColor.primarycolor),
                             ),
-                            SizedBox(height: 20),
-                            Align(
-                              alignment: Alignment.bottomCenter,
-                              child: Center(
-                                child: RichText(
-                                    text: TextSpan(children: [
-                                  TextSpan(
-                                    text:
-                                        "By proceeding you agree to our ".tr(),
-                                    style: FontConstant.k14w400B7A4Text,
-                                  ),
-                                  TextSpan(
-                                    recognizer: TapGestureRecognizer()
-                                      ..onTap = () {
-                                        launchUrl(Uri.parse(
-                                            "https://cerebal.locgfx.com/kidsue/kids/appDetails/privacy-policy.php"));
-                                      },
-                                    text: "Privacy Policy".tr(),
-                                    style: FontConstant.k14w500B7A4TextU,
-                                  ),
-                                  TextSpan(
-                                    text: " & ",
-                                    style: FontConstant.k14w400B7A4Text,
-                                  ),
-                                  TextSpan(
-                                    recognizer: TapGestureRecognizer()
-                                      ..onTap = () {
-                                        launchUrl(Uri.parse(
-                                            "https://cerebal.locgfx.com/kidsue/kids/appDetails/terms-conditions.php"));
-                                      },
-                                    text: "Terms and Conditions".tr(),
-                                    style: FontConstant.k14w500B7A4TextU,
-                                  ),
-                                ])),
-                              ),
-                            ),
-                            SizedBox(height: 13.h),
+                            SizedBox(height: 120),
                           ],
                         ),
                       ),

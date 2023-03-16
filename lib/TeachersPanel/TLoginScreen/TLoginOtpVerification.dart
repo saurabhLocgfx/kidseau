@@ -1,8 +1,6 @@
 import 'dart:async';
-import 'dart:developer';
 
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -64,6 +62,32 @@ class _TLoginOtpVerificationState extends State<TLoginOtpVerification> {
       width: 414,*/
       child: Scaffold(
         backgroundColor: Color(0xfff7f6fa),
+        bottomNavigationBar: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.only(bottom: 25),
+            child: Center(
+              child: RichText(
+                  text: TextSpan(children: [
+                TextSpan(
+                  text: "By proceeding you agree to our ".tr(),
+                  style: FontConstant.k14w400B7A4Text,
+                ),
+                TextSpan(
+                  text: "Privacy Policy".tr(),
+                  style: FontConstant.k14w500B7A4TextU,
+                ),
+                TextSpan(
+                  text: " & ".tr(),
+                  style: FontConstant.k14w400B7A4Text,
+                ),
+                TextSpan(
+                  text: "Terms and Conditions".tr(),
+                  style: FontConstant.k14w500B7A4TextU,
+                ),
+              ])),
+            ),
+          ),
+        ),
         body: SingleChildScrollView(
           child: Form(
             key: _formKey,
@@ -79,7 +103,7 @@ class _TLoginOtpVerificationState extends State<TLoginOtpVerification> {
                         fit: BoxFit.fitWidth,
                         alignment: Alignment.topLeft),
                   ),
-                  child: Column(
+                  child: ListView(
                     children: [
                       Padding(
                         padding:
@@ -100,7 +124,7 @@ class _TLoginOtpVerificationState extends State<TLoginOtpVerification> {
                           ],
                         ),
                       ),
-                      Spacer(),
+                      //Spacer(),
                       Padding(
                         padding: const EdgeInsets.only(left: 16.0, right: 16),
                         child: Column(
@@ -134,6 +158,9 @@ class _TLoginOtpVerificationState extends State<TLoginOtpVerification> {
                                       baseline: TextBaseline.alphabetic,
                                       child: GestureDetector(
                                         onTap: () {
+                                          setState(() {
+                                            seconds = 30;
+                                          });
                                           final resp = TeacherLogin().get(
                                               email: widget.mobileText.trim());
                                           resp.then((value) {
@@ -320,27 +347,6 @@ class _TLoginOtpVerificationState extends State<TLoginOtpVerification> {
                               ),
                             ),
                             SizedBox(height: 30),
-                            Center(
-                              child: RichText(
-                                  text: TextSpan(children: [
-                                TextSpan(
-                                  text: "By proceeding you agree to our ".tr(),
-                                  style: FontConstant.k14w400B7A4Text,
-                                ),
-                                TextSpan(
-                                  text: "Privacy Policy".tr(),
-                                  style: FontConstant.k14w500B7A4TextU,
-                                ),
-                                TextSpan(
-                                  text: " & ".tr(),
-                                  style: FontConstant.k14w400B7A4Text,
-                                ),
-                                TextSpan(
-                                  text: "Terms and Conditions".tr(),
-                                  style: FontConstant.k14w500B7A4TextU,
-                                ),
-                              ])),
-                            ),
                             // SizedBox(height: 13.h),
                           ],
                         ),

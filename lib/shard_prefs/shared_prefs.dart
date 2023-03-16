@@ -2,6 +2,11 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class UserPrefs {
   static const String cookies = "cookies";
+  static const String showReminder = 'show_reminder';
+  static const String selectedDate = 'selected_date';
+  static const String noti1 = 'post';
+  static const String noti2 = 'act';
+  static const String noti3 = 'msg';
   static const Ezarabic = 'Ezarabic';
   static const isFirst = 'isFirst';
   static const ismother = 'ismother';
@@ -17,6 +22,46 @@ class UserPrefs {
 
   static Future clearData(String key) async {
     prefs?.remove(key);
+  }
+
+  static Future setDate(String val) async {
+    return await prefs?.setString(selectedDate, val);
+  }
+
+  static String? getDate() {
+    return prefs?.getString(selectedDate);
+  }
+
+  static Future setShowReminder(bool val) async {
+    return await prefs?.setBool(showReminder, val);
+  }
+
+  static bool? getShowReminder() {
+    return prefs?.getBool(showReminder);
+  }
+
+  static Future setNoti1(bool val) async {
+    return await prefs?.setBool(noti1, val);
+  }
+
+  static bool? getNoti1() {
+    return prefs?.getBool(noti1);
+  }
+
+  static Future setNoti2(bool val) async {
+    return await prefs?.setBool(noti2, val);
+  }
+
+  static bool? getNoti2() {
+    return prefs?.getBool(noti2);
+  }
+
+  static Future setNoti3(bool val) async {
+    return await prefs?.setBool(noti3, val);
+  }
+
+  static bool? getNoti3() {
+    return prefs?.getBool(noti3);
   }
 
   static Future setLang(String val) async {

@@ -1,6 +1,6 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:timezone/timezone.dart' as tz;
 import 'package:timezone/data/latest.dart' as latest;
+import 'package:timezone/timezone.dart' as tz;
 
 class NotificationServices {
   final FlutterLocalNotificationsPlugin _flutterLocalNotificationsPlugin =
@@ -8,10 +8,14 @@ class NotificationServices {
 
   final AndroidInitializationSettings _androidInitializationSettings =
       AndroidInitializationSettings("ic_launcher");
+  final IOSInitializationSettings _iosInitializationSettings =
+      IOSInitializationSettings();
 
   void initializeNotification() async {
-    InitializationSettings initializationSettings =
-        InitializationSettings(android: _androidInitializationSettings);
+    InitializationSettings initializationSettings = InitializationSettings(
+      android: _androidInitializationSettings,
+      iOS: _iosInitializationSettings,
+    );
     latest.initializeTimeZones();
     await _flutterLocalNotificationsPlugin.initialize(initializationSettings);
   }
@@ -20,8 +24,11 @@ class NotificationServices {
     AndroidNotificationDetails androidNotificationDetails =
         AndroidNotificationDetails("channelId", "channelName",
             importance: Importance.max, priority: Priority.high);
-    NotificationDetails notificationDetails =
-        NotificationDetails(android: androidNotificationDetails);
+    IOSNotificationDetails iosNotificationDetails = IOSNotificationDetails();
+    NotificationDetails notificationDetails = NotificationDetails(
+      android: androidNotificationDetails,
+      iOS: iosNotificationDetails,
+    );
     await _flutterLocalNotificationsPlugin.show(
         0, "title", "body", notificationDetails);
   }
@@ -35,8 +42,9 @@ class NotificationServices {
     AndroidNotificationDetails androidNotificationDetails =
         AndroidNotificationDetails("channelId", "channelName",
             importance: Importance.max, priority: Priority.high);
-    NotificationDetails notificationDetails =
-        NotificationDetails(android: androidNotificationDetails);
+    IOSNotificationDetails iosNotificationDetails = IOSNotificationDetails();
+    NotificationDetails notificationDetails = NotificationDetails(
+        android: androidNotificationDetails, iOS: iosNotificationDetails);
 
     await _flutterLocalNotificationsPlugin.zonedSchedule(id, title, body,
         tz.TZDateTime.from(datetime, tz.local), notificationDetails,

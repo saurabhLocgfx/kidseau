@@ -1,14 +1,11 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:kidseau/ParentsPanel/POnboardingScreens/POnboardingScreen.dart';
 import 'package:kidseau/Theme.dart';
-import 'package:kidseau/Widgets/buttons.dart';
 import 'package:kidseau/Widgets/widgets.dart';
 import 'package:kidseau/restartappwidget/restartwidgets.dart';
 import 'package:kidseau/shard_prefs/shared_prefs.dart';
 
-import '../../TeachersPanel/OnboardingScreens/TOnboardingScreen.dart';
 import 'ParentsPanel/POnboardingScreens/PStartScreen.dart';
 
 class ChooseLanguageScreen extends StatelessWidget {
@@ -122,7 +119,7 @@ class ChooseLanguageScreen extends StatelessWidget {
                         ),*/
                         //Image.asset("assets/images/Made with ❤️ Locgfx.png"),
                         Text(
-                          'Made with ❤️ by Locgfx',
+                          'Made with ❤️ by HOMA DESIGN',
                           style: FontConstant.k16w400greyText,
                         ),
                       ],

@@ -1,8 +1,8 @@
-import 'dart:math';
 import 'dart:developer' as l;
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:kidseau/ParentsPanel/PMessageScreen/PChats.dart';
 import 'package:kidseau/ParentsPanel/PMessageScreen/PopenChats.dart';
 import 'package:kidseau/Theme.dart';
 import 'package:kidseau/api/message_apis/teacher_apis/teacher_get_parent_api.dart';
@@ -122,7 +122,7 @@ class _TParentsState extends State<TParents> {
                     return GestureDetector(
                       onTap: () {
                         Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => PChats(
+                            builder: (context) => POpenChats(
                                 onPop: () {},
                                 userId: modelList[index].parentId.toString(),
                                 userType: 'parent',

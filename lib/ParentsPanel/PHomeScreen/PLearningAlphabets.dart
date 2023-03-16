@@ -1,4 +1,3 @@
-import 'dart:math';
 import 'dart:ui';
 
 import 'package:easy_localization/easy_localization.dart';
@@ -7,15 +6,12 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
-import 'package:kidseau/ParentsPanel/PMessageScreen/PChats.dart';
 import 'package:kidseau/ParentsPanel/PMessageScreen/PopenChats.dart';
 import 'package:kidseau/Theme.dart';
 import 'package:kidseau/Widgets/buttons.dart';
 import 'package:kidseau/api/models/parent_models/parent_home_models/parent_activity_detail_model.dart';
 import 'package:kidseau/api/models/teacher_profile_details_model/teacher_school_profile_detail_model.dart';
 import 'package:kidseau/api/parent_panel_apis/parent_dashboard_api/parent_activity_detail_api.dart';
-
-import '../../TeachersPanel/TMessages/TChats.dart';
 
 class PLearningAplphabets extends StatefulWidget {
   final String actId;
@@ -344,7 +340,7 @@ class TeacherCard extends StatelessWidget {
     return InkWell(
       onTap: () {
         Navigator.of(context).push(MaterialPageRoute(
-            builder: (ctx) => PChats(
+            builder: (ctx) => POpenChats(
                 userId: model.schoolId.toString(),
                 onPop: () {},
                 userType: model.userType.toString(),

@@ -146,7 +146,7 @@ class _TDashboardState extends State<TDashboard> {
   Container buildMyNavBar(BuildContext context) {
     return Container(
       margin: EdgeInsets.all(20),
-      height: 56.h,
+      height: 57.h,
       width: 382.w,
       decoration: BoxDecoration(
         color: Colors.white,
@@ -275,7 +275,7 @@ class _TDashboardState extends State<TDashboard> {
                         : "assets/images/studenticon.png",
                     height: 24,
                   ),
-                  Text("Students".tr(),
+                  Text("Kids".tr(),
                       style: FontConstant.k12w400B7A4Text.copyWith(
                           color: pageIndex == 3
                               ? Color(0xff8267AC)

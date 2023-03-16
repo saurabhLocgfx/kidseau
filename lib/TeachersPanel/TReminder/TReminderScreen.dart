@@ -6,7 +6,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_switch/flutter_switch.dart';
 import 'package:kidseau/Constants/colors.dart';
 import 'package:kidseau/TeachersPanel/TReminder/AddReminder.dart';
 import 'package:kidseau/Theme.dart';
@@ -165,7 +164,7 @@ class _TReminderScreenState extends State<TReminderScreen> {
                                       style: FontConstant2.k18w500331Ftext,
                                     ),
                                     Text(
-                                      "${"Scheduled  at".tr()} ${modelList[index].remTime} - ${modelList[index].remDate}",
+                                      "${"Scheduled  at".tr()} ${DateFormat('dd MMM, hh:mm a').format(DateTime.parse('${modelList[index].remDate!} ${modelList[index].remTime!}'))}",
                                       style: FontConstant.k16w4008471Text,
                                     ),
                                   ],
@@ -188,7 +187,11 @@ class _TReminderScreenState extends State<TReminderScreen> {
                                     });
                                   },
                                   child: Container(
-                                    padding: EdgeInsets.all(16),
+                                    padding: EdgeInsets.only(
+                                      left: 10,
+                                      bottom: 10,
+                                      top: 10,
+                                    ),
                                     color: Colors.transparent,
                                     child: SizedBox(
                                         width: 48.w,

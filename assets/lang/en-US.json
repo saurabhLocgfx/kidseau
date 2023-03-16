@@ -1,4 +1,8 @@
 {
+  "Post": "Post",
+  "Upload kid photo": "Upload kid photo",
+  "Image uploaded": "Image uploaded",
+  "Place":"Place",
   "i'm a Teacher": "I'm an educator",
   "i'm a Parent": "I'm a parent",
   "We offer a new way to mark the children and shape them for better future.":"We offer a new way to mark the children and shape them for better future.",
@@ -140,7 +144,7 @@
 
   "Groups":  "Groups",
 
-  "View all students": "View all students",
+  "View all kids": "View all kids",
 
   "Search student": "Search student",
 

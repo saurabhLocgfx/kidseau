@@ -1,5 +1,4 @@
 import 'dart:developer';
-import 'dart:io';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -12,10 +11,6 @@ import 'package:kidseau/Theme.dart';
 import 'package:kidseau/Widgets/buttons.dart';
 import 'package:kidseau/Widgets/custom_snack_bar.dart';
 import 'package:kidseau/Widgets/screen_loader.dart';
-import 'package:kidseau/api/Teacherpanelapi/teacher_post_api/post_apis/teacher_announcement_api.dart';
-import 'package:kidseau/api/Teacherpanelapi/teacher_post_api/post_apis/teacher_get_group.dart';
-import 'package:kidseau/api/Teacherpanelapi/teacher_post_api/post_apis/teacher_get_sections.dart';
-import 'package:kidseau/api/Teacherpanelapi/teacher_post_api/post_apis/teacher_post_api.dart';
 import 'package:kidseau/api/Teacherpanelapi/teacher_post_api/post_apis/teacher_tag_kid_api.dart';
 import 'package:kidseau/api/Teacherpanelapi/teacher_post_api/teacher_edit_post_api.dart';
 import 'package:kidseau/api/models/Tschool_post_model/teacher_school_my_post_model.dart';
@@ -156,6 +151,7 @@ class _TEditPostFormScreenState extends State<TEditPostFormScreen> {
       color: Colors.white,
       child: Scaffold(
         backgroundColor: ThemeColor.primarycolor.withOpacity(0.06),
+        extendBody: true,
         appBar: AppBar(
           elevation: 0,
           toolbarHeight: 0,
@@ -225,6 +221,7 @@ class _TEditPostFormScreenState extends State<TEditPostFormScreen> {
                       Text("Caption".tr(), style: FontConstant.k16w500331FText),
                       SizedBox(height: 4),
                       TextFormField(
+                        textInputAction: TextInputAction.done,
                         validator: (val) {
                           if (_captionController.text.isEmpty) {
                             return 'This field cannot be empty';
@@ -294,7 +291,7 @@ class _TEditPostFormScreenState extends State<TEditPostFormScreen> {
                             color: Colors.white),
                         decoration: TextFieldDecoration().curvedWhiteDecoration(
                           curved: true,
-                          label: 'Tag students',
+                          label: '@Tag ${'kids'.tr()}',
                         ),
                         mentions: [
                           Mention(
@@ -396,15 +393,18 @@ class _TEditPostFormScreenState extends State<TEditPostFormScreen> {
                               separatorBuilder: (ctx, ind) => SizedBox(
                                     width: 5,
                                   ),
-                              itemCount: _taggedStudents.length)),
+                              itemCount:
+                                  _taggedStudents.toSet().toList().length)),
                     ],
                   ),
                 ),
               ),
+              SizedBox(height: 80),
             ],
           ),
         ),
-        bottomNavigationBar: Padding(
+        bottomNavigationBar: Container(
+          color: Colors.transparent,
           padding: EdgeInsets.symmetric(horizontal: 16, vertical: 20),
           child: materialButton(
             context,
@@ -418,7 +418,7 @@ class _TEditPostFormScreenState extends State<TEditPostFormScreen> {
                 final resp = TeacherEditPostApi().get(
                     postId: widget.posts[widget.index].postId.toString(),
                     caption: _captionController.text,
-                    tagId: taggedStudentsId);
+                    tagId: taggedStudentsId.toSet().toList());
                 resp.then((value) {
                   Navigator.of(context).pop();
                   if (value['status'] == 1) {

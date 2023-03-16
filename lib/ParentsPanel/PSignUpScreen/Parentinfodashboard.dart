@@ -72,7 +72,7 @@ class _ParentinfodashboardState extends State<Parentinfodashboard>
                 ),
                 SizedBox(height: 40),
                 dottab(),
-                SizedBox(height: 40),
+                //SizedBox(height: 40),
                 SizedBox(
                   height: 1.sh,
                   child: PageView(
@@ -119,11 +119,11 @@ class _ParentinfodashboardState extends State<Parentinfodashboard>
   }
 
   Widget dottab() {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 60.w),
-      child: Column(
-        children: [
-          Row(
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 60),
+          child: Row(
             children: [
               GestureDetector(
                   onTap: () {},
@@ -174,36 +174,36 @@ class _ParentinfodashboardState extends State<Parentinfodashboard>
                   )),
             ],
           ),
-          Row(
-            children: [
-              Expanded(
-                child: Text("Parent info".tr(),
-                    textAlign: TextAlign.center,
-                    maxLines: 2,
-                    style: FontConstant.k14w5008267AC),
-              ),
-              Expanded(
-                child: Text("Kid's info".tr(),
-                    textAlign: TextAlign.center,
-                    maxLines: 2,
-                    style: FontConstant.k14w5008267AC.copyWith(
-                        color: pageIndex == 1 || pageIndex == 2
-                            ? ThemeColor.primarycolor
-                            : ThemeColor.b7A4B2)),
-              ),
-              Expanded(
-                child: Text("Medical".tr(),
-                    textAlign: TextAlign.center,
-                    maxLines: 2,
-                    style: FontConstant.k14w500B7A4Text.copyWith(
-                        color: pageIndex == 2
-                            ? ThemeColor.primarycolor
-                            : ThemeColor.b7A4B2)),
-              ),
-            ],
-          ),
-        ],
-      ),
+        ),
+        Row(
+          children: [
+            Expanded(
+              child: Text("Parent info".tr(),
+                  textAlign: TextAlign.center,
+                  maxLines: 2,
+                  style: FontConstant.k14w5008267AC),
+            ),
+            Expanded(
+              child: Text("Kid's info".tr(),
+                  textAlign: TextAlign.center,
+                  maxLines: 2,
+                  style: FontConstant.k14w5008267AC.copyWith(
+                      color: pageIndex == 1 || pageIndex == 2
+                          ? ThemeColor.primarycolor
+                          : ThemeColor.b7A4B2)),
+            ),
+            Expanded(
+              child: Text("Medical".tr(),
+                  textAlign: TextAlign.center,
+                  maxLines: 2,
+                  style: FontConstant.k14w500B7A4Text.copyWith(
+                      color: pageIndex == 2
+                          ? ThemeColor.primarycolor
+                          : ThemeColor.b7A4B2)),
+            ),
+          ],
+        ),
+      ],
     );
   }
 

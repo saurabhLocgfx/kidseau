@@ -180,6 +180,7 @@ class _TSignupCodeState extends State<TSignupCode> {
                                 textStyleColor: Colors.white,
                                 backgroundColor: ThemeColor.primarycolor),
                       ),
+                      SizedBox(height: 25),
                     ],
                   ),
                 )

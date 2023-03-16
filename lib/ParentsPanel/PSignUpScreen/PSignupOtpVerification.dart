@@ -58,41 +58,177 @@ class _PSignupOtpVerificationState extends State<PSignupOtpVerification> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: Container(
-        //height: 50.h,
-        padding: EdgeInsets.only(left: 16, right: 16, bottom: 16),
-        child: SingleChildScrollView(
-          child: Center(
-            child: RichText(
-                text: TextSpan(children: [
-              TextSpan(
-                text: "By proceeding you agree to our ".tr(),
-                style: FontConstant.k14w400B7A4Text,
+      bottomNavigationBar: SingleChildScrollView(
+        child: Column(
+          children: [
+            Container(
+              //height: 50.h,
+              padding: EdgeInsets.only(
+                  left: 16,
+                  right: 16,
+                  bottom: MediaQuery.of(context).viewInsets.bottom),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text("OTP verification".tr(),
+                      style: FontConstant.k24w500brownText),
+                  RichText(
+                      text: TextSpan(children: [
+                    TextSpan(
+                      text: "A OTP has been sent to . ".tr() +
+                          "${widget.signUpField} " +
+                          "Please enter the OTP here.".tr(),
+                      /*AppLoaclizations.of(context)!
+                                      .translate(
+                                          "A OTP has been sent to “9876543210”. Please enter the OTP here.")
+                                      .toString(),*/
+                      style:
+                          FontConstant.k16w400B7A4Text.copyWith(fontSize: 15),
+                    ),
+                    seconds != 0
+                        ? TextSpan(
+                            text: ' $seconds',
+                            style: FontConstant.k16w500purpleText)
+                        : WidgetSpan(
+                            alignment: PlaceholderAlignment.baseline,
+                            baseline: TextBaseline.alphabetic,
+                            child: GestureDetector(
+                              onTap: () {
+                                final resp = ParentSignUp().get(
+                                  email: widget.signUpField.trim(),
+                                  parents: widget.parent,
+                                );
+                                resp.then((value) {
+                                  // log(value.toString());
+                                  if (value['status'] == 0) {
+                                    Fluttertoast.showToast(msg: value['msg']);
+                                  } else {
+                                    UserPrefs.setCookies(value['key']);
+                                    Fluttertoast.showToast(
+                                        msg: 'Your OTP is ${value['OTP']}');
+                                  }
+                                });
+                              },
+                              child: Text(
+                                "  Resend".tr(),
+                                style: FontConstant.k16w500purpleText,
+                              ),
+                            ),
+                          ),
+                    /*TextSpan(
+                              recognizer: TapGestureRecognizer()
+                                ..onTap = () {
+                                  //log('');
+
+                                },
+                              text: "  Resend".tr(),
+                              style: FontConstant.k16w500purpleText,
+                            ),*/
+                  ])),
+                  SizedBox(height: 43),
+                  PinCodeTextField(
+                    validator: (pinText) {
+                      if (pinText == null || pinText.isEmpty) {
+                        return "Enter pin";
+                      }
+                      return null;
+                    },
+                    controller: pinSignTextController,
+                    cursorColor: AppColors().k8267AC,
+                    keyboardType: TextInputType.number,
+                    appContext: context,
+                    length: 4,
+                    onChanged: (val) {},
+                    pinTheme: PinTheme(
+                      activeColor: AppColors().k8267AC,
+                      inactiveColor: AppColors().k8267AC,
+                    ),
+                  ),
+                  SizedBox(height: 32),
+                  // Spacer(),
+                  Center(
+                    child: SizedBox(
+                      height: 56,
+                      width: 382.w,
+                      child: Center(
+                        child: MainButton(
+                            onTap: () {
+                              if (_formKey.currentState!.validate()) {
+                                final resp = ParentSignUpOtp().get(
+                                    code:
+                                        int.parse(pinSignTextController.text));
+                                print(pinSignTextController.text);
+                                resp.then((value) {
+                                  print(value);
+                                  if (value['status'] == 0) {
+                                    Fluttertoast.showToast(msg: value['msg']);
+                                  } else {
+                                    //change for apk use
+                                    /* Navigator.of(context).push(MaterialPageRoute(
+                                              builder: (context) => PDashboard()));*/
+                                    // voucher use this
+                                    /* Navigator.of(context).push(
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        PDashboard()));*/
+                                    Navigator.of(context)
+                                        .push(MaterialPageRoute(
+                                            builder: (context) => PSignupCode(
+                                                  newKid: false,
+                                                )));
+
+                                    /*Fluttertoast.showToast(
+                                              msg: 'Your Voucher is ${value['voucher']}');*/
+                                  }
+                                });
+                              }
+                            },
+                            title: "Continue".tr(),
+                            textStyleColor: Colors.white,
+                            backgroundColor: ThemeColor.primarycolor),
+                      ),
+                    ),
+                  ),
+                ],
               ),
-              TextSpan(
-                recognizer: TapGestureRecognizer()
-                  ..onTap = () {
-                    launchUrl(Uri.parse(
-                        "https://cerebal.locgfx.com/kidsue/kids/appDetails/privacy-policy.php"));
-                  },
-                text: "Privacy Policy".tr(),
-                style: FontConstant.k14w500B7A4TextU,
+            ),
+            SizedBox(height: 40),
+            Center(
+              child: RichText(
+                text: TextSpan(
+                  children: [
+                    TextSpan(
+                      text: "By proceeding you agree to our ".tr(),
+                      style: FontConstant.k14w400B7A4Text,
+                    ),
+                    TextSpan(
+                      recognizer: TapGestureRecognizer()
+                        ..onTap = () {
+                          launchUrl(Uri.parse(
+                              "https://cerebal.locgfx.com/kidsue/kids/appDetails/privacy-policy.php"));
+                        },
+                      text: "Privacy Policy".tr(),
+                      style: FontConstant.k14w500B7A4TextU,
+                    ),
+                    TextSpan(
+                      text: " & ",
+                      style: FontConstant.k14w400B7A4Text,
+                    ),
+                    TextSpan(
+                      recognizer: TapGestureRecognizer()
+                        ..onTap = () {
+                          launchUrl(Uri.parse(
+                              "https://cerebal.locgfx.com/kidsue/kids/appDetails/terms-conditions.php"));
+                        },
+                      text: "Terms and Conditions".tr(),
+                      style: FontConstant.k14w500B7A4TextU,
+                    ),
+                  ],
+                ),
               ),
-              TextSpan(
-                text: " & ",
-                style: FontConstant.k14w400B7A4Text,
-              ),
-              TextSpan(
-                recognizer: TapGestureRecognizer()
-                  ..onTap = () {
-                    launchUrl(Uri.parse(
-                        "https://cerebal.locgfx.com/kidsue/kids/appDetails/terms-conditions.php"));
-                  },
-                text: "Terms and Conditions".tr(),
-                style: FontConstant.k14w500B7A4TextU,
-              ),
-            ])),
-          ),
+            ),
+            SizedBox(height: 25),
+          ],
         ),
       ),
       backgroundColor: Color(0xfff7f6fa),
@@ -106,7 +242,6 @@ class _PSignupOtpVerificationState extends State<PSignupOtpVerification> {
               children: [
                 Stack(children: [
                   Container(
-                    height: 414,
                     width: 1.sw,
                     decoration: BoxDecoration(
                       image: DecorationImage(
@@ -115,17 +250,16 @@ class _PSignupOtpVerificationState extends State<PSignupOtpVerification> {
                       ),
                     ),
                   ),
-                  Padding(
-                    padding:
-                        const EdgeInsets.only(top: 199.0, left: 16, right: 16),
-                    child: Container(
+                  Center(
+                    child: Padding(
+                      padding: EdgeInsets.only(top: 120.h, left: 16, right: 16),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Image.asset(
                             "assets/images/logo.png",
-                            height: 172,
-                            width: 173,
+                            height: 150.w,
+                            width: 150.w,
                           ),
                           Text(
                             "We offer a new way to track your children and watch them grow."
@@ -138,13 +272,12 @@ class _PSignupOtpVerificationState extends State<PSignupOtpVerification> {
                     ),
                   )
                 ]),
-                Padding(
+                /*Padding(
                   padding: const EdgeInsets.only(left: 16.0, right: 16),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      SizedBox(height: 25),
                       Text("OTP verification".tr(),
                           style: FontConstant.k24w500brownText),
                       RichText(
@@ -153,10 +286,10 @@ class _PSignupOtpVerificationState extends State<PSignupOtpVerification> {
                           text: "A OTP has been sent to . ".tr() +
                               "${widget.signUpField} " +
                               "Please enter the OTP here.".tr(),
-                          /*AppLoaclizations.of(context)!
+                          */ /*AppLoaclizations.of(context)!
                                   .translate(
                                       "A OTP has been sent to “9876543210”. Please enter the OTP here.")
-                                  .toString(),*/
+                                  .toString(),*/ /*
                           style: FontConstant.k16w400B7A4Text
                               .copyWith(fontSize: 15),
                         ),
@@ -191,7 +324,7 @@ class _PSignupOtpVerificationState extends State<PSignupOtpVerification> {
                                   ),
                                 ),
                               ),
-                        /*TextSpan(
+                        */ /*TextSpan(
                           recognizer: TapGestureRecognizer()
                             ..onTap = () {
                               //log('');
@@ -199,7 +332,7 @@ class _PSignupOtpVerificationState extends State<PSignupOtpVerification> {
                             },
                           text: "  Resend".tr(),
                           style: FontConstant.k16w500purpleText,
-                        ),*/
+                        ),*/ /*
                       ])),
                       SizedBox(height: 43),
                       PinCodeTextField(
@@ -241,13 +374,13 @@ class _PSignupOtpVerificationState extends State<PSignupOtpVerification> {
                                             msg: value['msg']);
                                       } else {
                                         //change for apk use
-                                        /* Navigator.of(context).push(MaterialPageRoute(
-                                          builder: (context) => PDashboard()));*/
+                                        */ /* Navigator.of(context).push(MaterialPageRoute(
+                                          builder: (context) => PDashboard()));*/ /*
                                         // voucher use this
-                                        /* Navigator.of(context).push(
+                                        */ /* Navigator.of(context).push(
                                             MaterialPageRoute(
                                                 builder: (context) =>
-                                                    PDashboard()));*/
+                                                    PDashboard()));*/ /*
                                         Navigator.of(context).push(
                                             MaterialPageRoute(
                                                 builder: (context) =>
@@ -255,8 +388,8 @@ class _PSignupOtpVerificationState extends State<PSignupOtpVerification> {
                                                       newKid: false,
                                                     )));
 
-                                        /*Fluttertoast.showToast(
-                                          msg: 'Your Voucher is ${value['voucher']}');*/
+                                        */ /*Fluttertoast.showToast(
+                                          msg: 'Your Voucher is ${value['voucher']}');*/ /*
                                       }
                                     });
                                   }
@@ -273,7 +406,7 @@ class _PSignupOtpVerificationState extends State<PSignupOtpVerification> {
                       // SizedBox(height: 13.h),
                     ],
                   ),
-                ),
+                ),*/
               ],
             ),
           ),

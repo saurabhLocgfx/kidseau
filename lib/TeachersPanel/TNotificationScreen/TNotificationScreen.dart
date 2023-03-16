@@ -4,12 +4,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:kidseau/TeachersPanel/TDashboard.dart';
-import 'package:kidseau/TeachersPanel/TNotificationScreen/TNotificationsbody.dart';
 import 'package:kidseau/Theme.dart';
 import 'package:kidseau/Widgets/widgets.dart';
-
-import '../TPostsScreen/TPostsScreen.dart';
 
 class TNotificationScreen extends StatefulWidget {
   const TNotificationScreen({Key? key}) : super(key: key);
@@ -96,7 +92,7 @@ class _TNotificationScreenState extends State<TNotificationScreen> {
               //     MaterialPageRoute(builder: (context) => MessageScreen()));
             },
             child: Text(
-              "Notifications".tr(),
+              "Notification".tr(),
               /*AppLoaclizations.of(context)!
                   .translate("Notification")
                   .toString(),*/
@@ -105,6 +101,7 @@ class _TNotificationScreenState extends State<TNotificationScreen> {
           ),
           actions: [
             Notificationpopup(
+              onMarkAllRead: () {},
               image: "assets/images/markicon.png",
               title: "Mark all as read".tr(),
               /* AppLoaclizations.of(context)!

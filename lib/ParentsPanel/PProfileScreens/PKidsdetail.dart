@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kidseau/Theme.dart';
-import 'package:kidseau/Widgets/buttons.dart';
 import 'package:kidseau/api/models/parent_models/parent_profile_models/parent_kid_detail_model.dart';
 import 'package:kidseau/api/parent_panel_apis/parent_profile_apis/p_kid_detail_api.dart';
 
@@ -156,7 +155,7 @@ class _PKidsDetailsState extends State<PKidsDetails> {
             ),*/
                       Column(
                         children: [
-                          SizedBox(height: 140),
+                          SizedBox(height: 150),
                           Padding(
                             padding:
                                 const EdgeInsets.symmetric(horizontal: 16.0),
@@ -175,7 +174,7 @@ class _PKidsDetailsState extends State<PKidsDetails> {
                                     fit: BoxFit.cover,
                                   ),
                                 ),
-                                SizedBox(width: 24),
+                                SizedBox(width: 16),
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
@@ -224,9 +223,9 @@ class _PKidsDetailsState extends State<PKidsDetails> {
                                 SizedBox(height: 10),
                                 Row(
                                   children: [
-                                    Container(
+                                    SizedBox(
                                       width: 154.w,
-                                      height: 33.h,
+                                      height: 35.h,
                                       child: Column(
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
@@ -253,9 +252,9 @@ class _PKidsDetailsState extends State<PKidsDetails> {
                                 ),
                                 Row(
                                   children: [
-                                    Container(
+                                    SizedBox(
                                       width: 154.w,
-                                      height: 33.h,
+                                      height: 35.h,
                                       child: Column(
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
@@ -282,9 +281,9 @@ class _PKidsDetailsState extends State<PKidsDetails> {
                                 ),
                                 Row(
                                   children: [
-                                    Container(
+                                    SizedBox(
                                       width: 154.w,
-                                      height: 33.h,
+                                      height: 35.h,
                                       child: Column(
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
@@ -302,7 +301,9 @@ class _PKidsDetailsState extends State<PKidsDetails> {
                                           CrossAxisAlignment.start,
                                       children: [
                                         Text(
-                                          model.birthday.toString(),
+                                          DateFormat('dd-MM-yyyy').format(
+                                              DateTime.parse(
+                                                  model.birthday.toString())),
                                           style: FontConstant.k16w5008471Text,
                                         )
                                       ],
@@ -311,9 +312,9 @@ class _PKidsDetailsState extends State<PKidsDetails> {
                                 ),
                                 Row(
                                   children: [
-                                    Container(
+                                    SizedBox(
                                       width: 154.w,
-                                      height: 33.h,
+                                      height: 35.h,
                                       child: Column(
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
@@ -342,9 +343,9 @@ class _PKidsDetailsState extends State<PKidsDetails> {
                                 ),
                                 Row(
                                   children: [
-                                    Container(
+                                    SizedBox(
                                       width: 154.w,
-                                      height: 33.h,
+                                      height: 35.h,
                                       child: Column(
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
@@ -814,9 +815,9 @@ class _PKidsDetailsState extends State<PKidsDetails> {
                                   SizedBox(height: 10),
                                   Row(
                                     children: [
-                                      Container(
+                                      SizedBox(
                                         width: 154.w,
-                                        height: 33.h,
+                                        height: 35.h,
                                         child: Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
@@ -848,9 +849,9 @@ class _PKidsDetailsState extends State<PKidsDetails> {
                                   ),
                                   Row(
                                     children: [
-                                      Container(
+                                      SizedBox(
                                         width: 154.w,
-                                        height: 33.h,
+                                        height: 35.h,
                                         child: Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
@@ -882,9 +883,9 @@ class _PKidsDetailsState extends State<PKidsDetails> {
                                   ),
                                   Row(
                                     children: [
-                                      Container(
+                                      SizedBox(
                                         width: 154.w,
-                                        height: 33.h,
+                                        height: 35.h,
                                         child: Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
@@ -916,9 +917,9 @@ class _PKidsDetailsState extends State<PKidsDetails> {
                                   ),
                                   Row(
                                     children: [
-                                      Container(
+                                      SizedBox(
                                         width: 154.w,
-                                        height: 33.h,
+                                        height: 35.h,
                                         child: Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
@@ -987,6 +988,8 @@ class _PKidsDetailsState extends State<PKidsDetails> {
                                         removeTop: true,
                                         child: ListView.builder(
                                           shrinkWrap: true,
+                                          physics:
+                                              NeverScrollableScrollPhysics(),
                                           itemCount:
                                               model.otherVaccination!.length,
                                           itemBuilder: (ctx, i) {
@@ -1124,7 +1127,7 @@ class _PKidsDetailsState extends State<PKidsDetails> {
                                         ),
                                       ],
                                     ),*/
-                                    SizedBox(height: 40),
+                                    //SizedBox(height: 40),
                                   ],
                                 ),
                               ],

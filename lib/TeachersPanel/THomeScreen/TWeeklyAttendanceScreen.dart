@@ -198,7 +198,7 @@ class _TWeeklyAttendanceScreenState extends State<TWeeklyAttendanceScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                            "74 ${"students".tr() /*AppLoaclizations.of(context)!.translate("students")*/}",
+                            "74 ${"Kids".tr() /*AppLoaclizations.of(context)!.translate("students")*/}",
                             style: FontConstant.k16w4008471Text),
                         Text("Present1".tr(),
                             /*AppLoaclizations.of(context)!

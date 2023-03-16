@@ -6,12 +6,10 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kidseau/TeachersPanel/TMessages/TMessages.dart';
 import 'package:kidseau/TeachersPanel/TMessages/TParents.dart';
-import 'package:kidseau/TeachersPanel/TNotificationScreen/TNotificationScreen.dart';
 import 'package:kidseau/Theme.dart';
 import 'package:kidseau/shard_prefs/shared_prefs.dart';
 
-import '../../Constants/colors.dart';
-import '../../ParentsPanel/PMessageScreen/PMessages.dart';
+import '../../ParentsPanel/PNotificationScreen/PNotificationScreen.dart';
 import '../../restartappwidget/restartwidgets.dart';
 import '../TReminder/TReminderScreen.dart';
 
@@ -193,7 +191,7 @@ class _TMessageDashboardState extends State<TMessageDashboard> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => TNotificationScreen()),
+                              builder: (context) => PNotificationScreen()),
                         );
                       },
                       child: Padding(
@@ -248,14 +246,15 @@ class _TMessageDashboardState extends State<TMessageDashboard> {
 
   Container PageviewTab() {
     return Container(
-      height: 56.h,
-      width: 248.w,
+      height: 56,
+      width: 250,
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(76),
       ),
+      padding: EdgeInsets.symmetric(horizontal: 2),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           GestureDetector(
             onTap: () {

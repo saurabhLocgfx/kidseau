@@ -2,7 +2,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:kidseau/Constants/colors.dart';
 import 'package:kidseau/ParentsPanel/PHomeScreen/PLearningAlphabets.dart';
 import 'package:kidseau/Theme.dart';
 import 'package:video_player/video_player.dart';
@@ -81,17 +80,23 @@ class _ActivityState extends State<Activity> {
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Image.network(
-                        widget.model.kidAndActivity![index].actIcon.toString(),
-                        errorBuilder: (q, w, e) {
-                          return Image.asset(
-                            "assets/images/book 1.png",
-                            height: 40,
-                            width: 40,
-                          );
-                        },
-                        height: 40,
-                        width: 40,
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(6),
+                        child: Image.network(
+                          widget.model.kidAndActivity![index].actIcon
+                              .toString(),
+                          fit: BoxFit.cover,
+                          errorBuilder: (q, w, e) {
+                            return Image.asset(
+                              "assets/images/book 1.png",
+                              height: 40,
+                              width: 40,
+                              fit: BoxFit.cover,
+                            );
+                          },
+                          height: 40,
+                          width: 40,
+                        ),
                       ),
                       Padding(
                         padding: EdgeInsets.only(left: 15.0),
@@ -170,7 +175,7 @@ class _TutorialsState extends State<Tutorials> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 200,
+      height: 280,
       padding: const EdgeInsets.only(right: 5.0, left: 5),
       child: ListView.separated(
           shrinkWrap: true,
@@ -179,7 +184,7 @@ class _TutorialsState extends State<Tutorials> {
             return VideoWidget(model: widget.model, index: index);
           },
           separatorBuilder: (ctx, ind) => SizedBox(
-                width: 10,
+                width: 8,
               ),
           itemCount: widget.model.videoTutorial!.length),
     );
@@ -222,7 +227,7 @@ class _VideoWidgetState extends State<VideoWidget> {
       child: Container(
         //color: Colors.black,
         decoration: BoxDecoration(borderRadius: BorderRadius.circular(8)),
-        padding: const EdgeInsets.only(left: 15, right: 15),
+        padding: const EdgeInsets.only(left: 15),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,

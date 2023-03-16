@@ -6,15 +6,12 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kidseau/ParentsPanel/POnboardingScreens/PStartScreen.dart';
 import 'package:kidseau/ParentsPanel/PProfileScreens/PParentProfile.dart';
-import 'package:kidseau/ParentsPanel/PProfileScreens/PSchoolProfile.dart';
 import 'package:kidseau/ParentsPanel/PProfileScreens/PSettings/PSettings.dart';
 import 'package:kidseau/ParentsPanel/PProfileScreens/PSyllabus.dart';
 import 'package:kidseau/ParentsPanel/PProfileScreens/p_parent_nursery_widget.dart';
 import 'package:kidseau/Theme.dart';
 import 'package:kidseau/Widgets/custom_snack_bar.dart';
 import 'package:kidseau/api/logout_api/logout_api.dart';
-import 'package:kidseau/api/models/parent_models/parent_profile_models/parent_profile_model.dart';
-import 'package:kidseau/api/parent_panel_apis/parent_profile_apis/parent_profile_api.dart';
 import 'package:kidseau/shard_prefs/shared_prefs.dart';
 
 import 'PFees.dart';
@@ -75,67 +72,64 @@ class _PProfileDashBoardState extends State<PProfileDashBoard> {
             statusBarColor: ThemeColor.lightpurple.withOpacity(0.16),
           ),
           backgroundColor: Color(0xff8267AC).withOpacity(0.16),
-          title: Padding(
-              padding: const EdgeInsets.only(top: 0.0),
-              child: GestureDetector(
-                  onTap: () {
-                    // Navigator.of(context).push(MaterialPageRoute(
-                    //     builder: (context) => NotificationScreen()));
-                  },
-                  child: Text("Profile".tr(),
-                      style: FontConstant2.k32w5008267text
-                          .copyWith(fontSize: 28)))),
+          centerTitle: false,
+          title: GestureDetector(
+              onTap: () {
+                // Navigator.of(context).push(MaterialPageRoute(
+                //     builder: (context) => NotificationScreen()));
+              },
+              child: Text("Profile".tr(),
+                  style:
+                      FontConstant2.k32w5008267text.copyWith(fontSize: 32.sp))),
           actions: [Pprofilepopup()],
         ),
-        body: SafeArea(
-          child: SizedBox(
-            width: 1.sw,
-            height: 1.sh,
-            child: Stack(children: [
-              Image.asset(
-                "assets/images/postsbackground.png",
-                height: 414.h,
-                width: 1.sw,
-                fit: BoxFit.fitWidth,
-              ),
-              Positioned(
-                top: 0,
-                left: 0,
-                right: 0,
-                bottom: 0,
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      //SizedBox(height: 100.h),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [SizedBox(height: 40), Pageviewtabprofile()],
+        body: SizedBox(
+          width: 1.sw,
+          height: 1.sh,
+          child: Stack(children: [
+            Image.asset(
+              "assets/images/postsbackground.png",
+              height: 414.h,
+              width: 1.sw,
+              fit: BoxFit.fitWidth,
+            ),
+            Positioned(
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              child: SizedBox(
+                height: 1.sh,
+                child: Column(
+                  children: [
+                    //SizedBox(height: 100.h),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [SizedBox(height: 112), Pageviewtabprofile()],
+                    ),
+                    SizedBox(height: 24.h),
+                    Expanded(
+                      child: PageView(
+                        physics: PageScrollPhysics(),
+                        controller: _pageController,
+                        onPageChanged: (page) {
+                          setState(
+                            () {
+                              pageIndex = page;
+                            },
+                          );
+                        },
+                        children: <Widget>[
+                          PParentsProfile(),
+                          PParentNurseryWidget()
+                        ],
                       ),
-                      SizedBox(height: 24.h),
-                      SizedBox(
-                        height: 1.sh,
-                        child: PageView(
-                          physics: PageScrollPhysics(),
-                          controller: _pageController,
-                          onPageChanged: (page) {
-                            setState(
-                              () {
-                                pageIndex = page;
-                              },
-                            );
-                          },
-                          children: <Widget>[
-                            PParentsProfile(),
-                            PParentNurseryWidget()
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-              )
-            ]),
-          ),
+              ),
+            )
+          ]),
         ),
       ),
     );
@@ -143,14 +137,15 @@ class _PProfileDashBoardState extends State<PProfileDashBoard> {
 
   Container Pageviewtabprofile() {
     return Container(
-      height: 56.h,
-      width: 248.w,
+      height: 56,
+      width: 250,
+      padding: EdgeInsets.symmetric(horizontal: 2),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(76),
       ),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           GestureDetector(
             onTap: () {

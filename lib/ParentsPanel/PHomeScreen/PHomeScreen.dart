@@ -9,19 +9,18 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kidseau/ParentsPanel/KidsDashboard/KidsDashboard.dart';
 import 'package:kidseau/ParentsPanel/PHomeScreen/PHomebody.dart';
 import 'package:kidseau/ParentsPanel/PHomeScreen/parent_all_schedule_screen.dart';
-import 'package:kidseau/ParentsPanel/PReminderScreen/PReminderScreen.dart';
 import 'package:kidseau/Theme.dart';
-import 'package:kidseau/api/models/Tschedule_detail_model.dart';
 import 'package:kidseau/api/models/parent_models/parent_home_models/parent_kid_home_model.dart';
 import 'package:kidseau/api/parent_panel_apis/parent_dashboard_api/parent_activity_home_api.dart';
 import 'package:kidseau/api/parent_panel_apis/parent_dashboard_api/parent_kid_api.dart';
 import 'package:kidseau/shard_prefs/shared_prefs.dart';
 
 import '../../Constants/colors.dart';
-import '../../TeachersPanel/THomeScreen/TScheduleScreen.dart';
 import '../../TeachersPanel/TReminder/TReminderScreen.dart';
 import '../../Widgets/custom_snack_bar.dart';
 import '../../api/models/parent_models/parent_home_models/parent_activity_home_model.dart';
+import '../../api/models/reminder_model/reminder_model.dart';
+import '../../api/reminder_apis/get_reminders_api.dart';
 import '../../restartappwidget/restartwidgets.dart';
 import '../POnboardingScreens/PStartScreen.dart';
 
@@ -38,9 +37,45 @@ class _PHomeScreenState extends State<PHomeScreen> {
   bool colorChange = false;
   bool Ezarabic = false;
 
+  setReminderFalse() {
+    UserPrefs.setShowReminder(false);
+    _getDataReminders();
+    getShowReminder();
+  }
+
+  getShowReminder() {
+    setState(() {
+      reminder = UserPrefs.getShowReminder() ?? false;
+    });
+  }
+
+  List<ReminderModel> modelList = [];
+  _getDataReminders() {
+    _isLoading = true;
+    final resp = GetRemindersApi().get();
+    resp.then((value) {
+      log(value.toString());
+      if (value['status'] == 1) {
+        modelList.clear();
+        setState(() {
+          for (var v in value['reminder']) {
+            modelList.add(ReminderModel.fromJson(v));
+          }
+          _isLoading = false;
+        });
+      } else {
+        setState(() {
+          _isLoading = false;
+        });
+      }
+    });
+  }
+
   @override
   void initState() {
+    getShowReminder();
     _getData();
+    _getDataReminders();
     // cookie = UserPrefs.getCookies()!;
     super.initState();
   }
@@ -74,7 +109,7 @@ class _PHomeScreenState extends State<PHomeScreen> {
         });
       }
     }).then((value) {
-      _getActivity(_kidModel.parentKidId![0].kidId.toString());
+      _getActivity(_kidModel.parentKidId![0].grpId.toString());
     });
   }
 
@@ -84,6 +119,7 @@ class _PHomeScreenState extends State<PHomeScreen> {
   _getActivity(String kidId) {
     final resp = ParentActivityHomeApi().get(kidId: kidId);
     resp.then((value) {
+      //print(value);
       if (value['status'] == 1) {
         setState(() {
           _activityModel = ParentActivityHomeModel.fromJson(value);
@@ -118,6 +154,8 @@ class _PHomeScreenState extends State<PHomeScreen> {
 
   // int _index = 0;
   ParentKidHomeModel _kidModel = ParentKidHomeModel();
+  final GlobalKey<PopupMenuButtonState> pop = GlobalKey<PopupMenuButtonState>();
+  bool reminder = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -135,152 +173,153 @@ class _PHomeScreenState extends State<PHomeScreen> {
         backgroundColor: Color(0xff8267AC).withAlpha(16),
         automaticallyImplyLeading: false,
         elevation: 0,
-        title: Row(
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(top: 15.0),
-              child: SizedBox(
-                width: 180.w,
-                child: Text("${"Hello".tr()} ${_activityModel.greet ?? ''}",
-                    overflow: TextOverflow.ellipsis,
-                    style:
-                        FontConstant2.k32w5008267text.copyWith(fontSize: 20)),
-              ),
-            ),
-          ],
+        centerTitle: false,
+        title: SizedBox(
+          width: 200.w,
+          child: Text("${"Hello".tr()} ${_activityModel.greet ?? ''}",
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: FontConstant2.k32w5008267text.copyWith(fontSize: 32.sp)),
         ),
         actions: [
-          SizedBox(
-            width: 158,
-            child: Padding(
-              padding: const EdgeInsets.only(top: 15.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Padding(
-                      padding: const EdgeInsets.all(15.0),
-                      child: PopupMenuButton(
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(16)),
-                          itemBuilder: (context) {
-                            return [
-                              PopupMenuItem(
-                                enabled: false,
-                                child: GestureDetector(
-                                  onTap: () {
-                                    UserPrefs.setEArbBool(false);
-                                    UserPrefs.setLang('English');
-                                    context.locale = Locale('en', 'US');
-                                    RestartWidget.restartApp(context);
-                                    setState(() {
-                                      colorChange;
-                                    });
-                                  },
-                                  child: Row(
-                                    children: [
-                                      Text(
-                                        ("English".tr()),
-                                        style: colorChange
-                                            ? FontConstant.k16w5008267Text
-                                            : FontConstant.k18w5008471Text,
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              PopupMenuItem(
-                                enabled: false,
-                                child: GestureDetector(
-                                  onTap: () {
-                                    UserPrefs.setEArbBool(false);
-                                    UserPrefs.setLang('French');
-                                    context.locale = Locale('fr', 'FR');
-                                    RestartWidget.restartApp(context);
-                                    setState(() {
-                                      colorChange;
-                                    });
-                                  },
-                                  child: Row(
-                                    children: [
-                                      Text(
-                                        ("French".tr()),
-                                        style: colorChange
-                                            ? FontConstant.k16w5008267Text
-                                            : FontConstant.k18w5008471Text,
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              PopupMenuItem(
-                                enabled: false,
-                                child: GestureDetector(
-                                  onTap: () {
-                                    UserPrefs.setEArbBool(true);
-                                    UserPrefs.setLang('Arabic');
-                                    context.locale = Locale('ar', 'AR');
-                                    RestartWidget.restartApp(context);
-
-                                    setState(() {
-                                      colorChange;
-                                    });
-                                  },
-                                  child: Row(
-                                    children: [
-                                      Text(
-                                        ("Arabic".tr()),
-                                        style: colorChange
-                                            ? FontConstant.k16w5008267Text
-                                            : FontConstant.k18w5008471Text,
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ];
-                          },
-                          child: Image.asset(
-                            "assets/images/Languageicon.png",
-                            height: 24,
-                          ))),
-                  InkWell(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (_) => TReminderScreen(),
+          InkWell(
+            onTap: () {
+              pop.currentState!.showButtonMenu();
+            },
+            child: Container(
+                color: Colors.transparent,
+                padding: EdgeInsets.all(10),
+                child: PopupMenuButton(
+                    key: pop,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(16)),
+                    itemBuilder: (context) {
+                      return [
+                        PopupMenuItem(
+                          enabled: false,
+                          child: GestureDetector(
+                            onTap: () {
+                              UserPrefs.setEArbBool(false);
+                              UserPrefs.setLang('English');
+                              context.locale = Locale('en', 'US');
+                              RestartWidget.restartApp(context);
+                              setState(() {
+                                colorChange;
+                              });
+                            },
+                            child: Row(
+                              children: [
+                                Text(
+                                  ("English".tr()),
+                                  style: colorChange
+                                      ? FontConstant.k16w5008267Text
+                                      : FontConstant.k18w5008471Text,
+                                )
+                              ],
+                            ),
+                          ),
                         ),
-                      );
+                        PopupMenuItem(
+                          enabled: false,
+                          child: GestureDetector(
+                            onTap: () {
+                              UserPrefs.setEArbBool(false);
+                              UserPrefs.setLang('French');
+                              context.locale = Locale('fr', 'FR');
+                              RestartWidget.restartApp(context);
+                              setState(() {
+                                colorChange;
+                              });
+                            },
+                            child: Row(
+                              children: [
+                                Text(
+                                  ("French".tr()),
+                                  style: colorChange
+                                      ? FontConstant.k16w5008267Text
+                                      : FontConstant.k18w5008471Text,
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
+                        PopupMenuItem(
+                          enabled: false,
+                          child: GestureDetector(
+                            onTap: () {
+                              UserPrefs.setEArbBool(true);
+                              UserPrefs.setLang('Arabic');
+                              context.locale = Locale('ar', 'AR');
+                              RestartWidget.restartApp(context);
+
+                              setState(() {
+                                colorChange;
+                              });
+                            },
+                            child: Row(
+                              children: [
+                                Text(
+                                  ("Arabic".tr()),
+                                  style: colorChange
+                                      ? FontConstant.k16w5008267Text
+                                      : FontConstant.k18w5008471Text,
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
+                      ];
                     },
-                    child: Padding(
-                      padding: const EdgeInsets.all(15.0),
-                      child: Image.asset(
-                        "assets/images/clockicon.png",
-                        height: 24,
-                      ),
-                    ),
-                  ),
-                  /*
-                InkWell(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => TNotificationScreen()),
-                      );
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.all(15.0),
-                      child: Image.asset(
-                        "assets/images/iconbell.png",
-                        height: 24,
-                      ),
-                    ),
-                  ),*/
-                ],
+                    child: Image.asset(
+                      "assets/images/Languageicon.png",
+                      height: 24,
+                      width: 24,
+                    ))),
+          ),
+          SizedBox(width: 8),
+          InkWell(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => TReminderScreen(),
+                ),
+              );
+            },
+            child: Container(
+              color: Colors.transparent,
+              padding: const EdgeInsets.all(10),
+              child: Image.asset(
+                "assets/images/clockicon.png",
+                height: 24,
+                width: 24,
               ),
             ),
-          )
+          ),
+          SizedBox(width: 8),
+          /*Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+
+              */ /*
+            InkWell(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => TNotificationScreen()),
+                  );
+                },
+                child: Padding(
+                  padding: const EdgeInsets.all(15.0),
+                  child: Image.asset(
+                    "assets/images/iconbell.png",
+                    height: 24,
+                  ),
+                ),
+              ),*/ /*
+            ],
+          )*/
         ],
       ),
       body: _isLoading
@@ -291,192 +330,191 @@ class _PHomeScreenState extends State<PHomeScreen> {
               child: Column(
                 children: [
                   SizedBox(height: 16),
-                  Container(
-                    width: 1.sw,
-                    margin: EdgeInsets.symmetric(horizontal: 16),
-                    padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(16),
-                        color: AppColors().k8267AC.withOpacity(0.32)),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: [
-                            Image.asset(
-                              "assets/images/clockfilled.png",
-                              width: 34,
-                              height: 34,
-                            ),
-                            SizedBox(
-                              width: 12,
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "Bring notebook",
-                                  style: FontConstant2.k18w500331Ftext,
-                                ),
-                                SizedBox(
-                                  height: 2,
-                                ),
-                                Text(
-                                  "Bring notebook",
-                                  style: FontConstant.k16w4008471Text,
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                        Container(
-                          color: Colors.transparent,
-                          padding: EdgeInsets.all(12),
-                          child: Icon(Icons.close),
-                        )
-                      ],
-                    ),
-                  ),
-                  SizedBox(height: 16),
-                  Column(
-                    children: [
-                      //Text(cookie),
-                      CarouselSlider.builder(
-                        carouselController: _controller,
-                        itemCount: _kidModel.parentKidId!.length,
-                        itemBuilder: (ctx, index, realIndex) {
-                          return InkWell(
-                            onTap: _kidModel.parentKidId![index].kidId == null
-                                ? () {}
-                                : () {
-                                    Navigator.of(context)
-                                        .push(MaterialPageRoute(
-                                            builder: (ctx) => PKidsDashboard(
-                                                  kidId: _kidModel
-                                                      .parentKidId![index].kidId
-                                                      .toString(),
-                                                )));
-                                  },
-                            child: Container(
-                              //width: 330,
-                              // height: 100,
-                              margin: EdgeInsets.only(
-                                  right: 16, left: index == 0 ? 16 : 0),
-                              decoration: BoxDecoration(
-                                // color: Colors.red,
-                                borderRadius: BorderRadius.circular(16),
-                                image: DecorationImage(
-                                  image: AssetImage(
-                                      "assets/images/Student Card.png"),
-                                  fit: BoxFit.fitHeight,
-                                ),
+                  if (modelList.isNotEmpty && reminder)
+                    Container(
+                      width: 1.sw,
+                      margin: EdgeInsets.symmetric(horizontal: 16),
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(16),
+                          color: AppColors().k8267AC.withOpacity(0.32)),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            children: [
+                              Image.asset(
+                                "assets/images/clockFilled.png",
+                                width: 34,
+                                height: 34,
                               ),
-                              padding: const EdgeInsets.all(16),
-                              child: Row(
+                              SizedBox(
+                                width: 12,
+                              ),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Container(
-                                    height: 100,
-                                    width: 72,
-                                    clipBehavior: Clip.hardEdge,
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(8)),
-                                    child: Image.network(
-                                      _kidModel.parentKidId![index].profilePic
-                                          .toString(),
-                                      fit: BoxFit.cover,
-                                      errorBuilder: (q, w, e) => Image.asset(
-                                          "assets/images/Rectangle 2715.png"),
-                                    ),
+                                  Text(
+                                    modelList.last.title.toString(),
+                                    style: FontConstant2.k18w500331Ftext,
                                   ),
-                                  SizedBox(width: 16),
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        _kidModel.parentKidId![index].name
-                                            .toString(),
-                                        style: FontConstant.k16w500White,
-                                      ),
-                                      _kidModel.parentKidId![index].kidId ==
-                                              null
-                                          ? Container(
-                                              padding: EdgeInsets.symmetric(
-                                                  horizontal: 10, vertical: 5),
-                                              decoration: BoxDecoration(
-                                                  color: Colors.red,
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          20)),
-                                              child: Text(
-                                                "Voucher expired!",
-                                                style:
-                                                    FontConstant.k14w400White,
-                                              ),
-                                            )
-                                          : Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Text(
-                                                  _kidModel.parentKidId![index]
-                                                      .secName
-                                                      .toString(),
-                                                  style:
-                                                      FontConstant.k14w400White,
-                                                ),
-                                                Row(
-                                                  children: [
-                                                    Text(
-                                                      "${"From".tr()} ${DateFormat.jm().format(DateFormat("hh:mm:ss").parse(_kidModel.parentKidId![index].schTimeIn.toString().split('.').first))} ",
-                                                      style: FontConstant
-                                                          .k14w400White,
-                                                    ),
-                                                    Text(
-                                                      "${"To".tr()} ${DateFormat.jm().format(DateFormat("hh:mm:ss").parse(_kidModel.parentKidId![index].schTimeOut.toString().split('.').first))}",
-                                                      style: FontConstant
-                                                          .k14w400White,
-                                                    ),
-                                                  ],
-                                                ),
-                                                Text(
-                                                  _kidModel.parentKidId![index]
-                                                      .grpName
-                                                      .toString()
-                                                      .tr(),
-                                                  style:
-                                                      FontConstant.k12w400White,
-                                                ),
-                                              ],
-                                            ),
-                                    ],
+                                  SizedBox(height: 2),
+                                  Text(
+                                    DateFormat('hh:mm a').format(DateTime.parse(
+                                        '${modelList.last.remDate!} ${modelList.last.remTime!}')),
+                                    style: FontConstant.k16w4008471Text,
                                   ),
                                 ],
                               ),
+                            ],
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              setReminderFalse();
+                            },
+                            child: Container(
+                              color: Colors.transparent,
+                              padding: EdgeInsets.all(12),
+                              child: Icon(Icons.close),
                             ),
-                          );
-                        },
-                        options: CarouselOptions(
-                          height: 145.h,
-                          onPageChanged: (index, reason) {
-                            setState(() {
-                              // _index = index;
-                              _isActivityLoading = true;
-                              _getActivity(_kidModel.parentKidId![index].kidId
-                                  .toString());
-                              log(index.toString());
-                            });
-                          },
-                          viewportFraction:
-                              _kidModel.parentKidId!.length == 1 ? 1 : 0.9,
-                          //enlargeCenterPage: true,
-                          padEnds: false,
-                          //pageSnapping: false,
-                          enableInfiniteScroll: false,
-                        ),
+                          ),
+                        ],
                       ),
-                      /*Row(
+                    ),
+                  SizedBox(height: 16),
+                  if (_kidModel.parentKidId != null)
+                    CarouselSlider.builder(
+                      carouselController: _controller,
+                      itemCount: _kidModel.parentKidId!.length,
+                      itemBuilder: (ctx, index, realIndex) {
+                        return InkWell(
+                          onTap: _kidModel.parentKidId![index].kidId == null
+                              ? () {}
+                              : () {
+                                  Navigator.of(context).push(MaterialPageRoute(
+                                      builder: (ctx) => PKidsDashboard(
+                                            kidId: _kidModel
+                                                .parentKidId![index].kidId
+                                                .toString(),
+                                          )));
+                                },
+                          child: Container(
+                            //width: 330,
+                            // height: 100,
+                            margin: EdgeInsets.only(
+                                right: 16, left: index == 0 ? 16 : 0),
+                            decoration: BoxDecoration(
+                              // color: Colors.red,
+                              borderRadius: BorderRadius.circular(16),
+                              image: DecorationImage(
+                                image: AssetImage(
+                                    "assets/images/Student Card.png"),
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                            padding: const EdgeInsets.all(16),
+                            child: Row(
+                              children: [
+                                Container(
+                                  height: 100,
+                                  width: 72,
+                                  clipBehavior: Clip.hardEdge,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(8)),
+                                  child: Image.network(
+                                    _kidModel.parentKidId![index].profilePic
+                                        .toString(),
+                                    fit: BoxFit.cover,
+                                    errorBuilder: (q, w, e) => Image.asset(
+                                        "assets/images/Rectangle 2715.png"),
+                                  ),
+                                ),
+                                SizedBox(width: 16),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      _kidModel.parentKidId![index].name
+                                          .toString(),
+                                      style: FontConstant.k16w500White,
+                                    ),
+                                    _kidModel.parentKidId![index].kidId == null
+                                        ? Container(
+                                            padding: EdgeInsets.symmetric(
+                                                horizontal: 10, vertical: 5),
+                                            decoration: BoxDecoration(
+                                                color: Colors.red,
+                                                borderRadius:
+                                                    BorderRadius.circular(20)),
+                                            child: Text(
+                                              "Voucher expired!",
+                                              style: FontConstant.k14w400White,
+                                            ),
+                                          )
+                                        : Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                _kidModel
+                                                    .parentKidId![index].secName
+                                                    .toString(),
+                                                style:
+                                                    FontConstant.k14w400White,
+                                              ),
+                                              Row(
+                                                children: [
+                                                  Text(
+                                                    "${"From".tr()} ${DateFormat.jm().format(DateFormat("hh:mm:ss").parse(_kidModel.parentKidId![index].schTimeIn.toString().split('.').first))} ",
+                                                    style: FontConstant
+                                                        .k14w400White,
+                                                  ),
+                                                  Text(
+                                                    "${"To".tr()} ${DateFormat.jm().format(DateFormat("hh:mm:ss").parse(_kidModel.parentKidId![index].schTimeOut.toString().split('.').first))}",
+                                                    style: FontConstant
+                                                        .k14w400White,
+                                                  ),
+                                                ],
+                                              ),
+                                              Text(
+                                                _kidModel
+                                                    .parentKidId![index].grpName
+                                                    .toString()
+                                                    .tr(),
+                                                style:
+                                                    FontConstant.k12w400White,
+                                              ),
+                                            ],
+                                          ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
+                      },
+                      options: CarouselOptions(
+                        height: 128,
+                        onPageChanged: (index, reason) {
+                          setState(() {
+                            // _index = index;
+                            _isActivityLoading = true;
+                            _getActivity(
+                                _kidModel.parentKidId![index].grpId.toString());
+                            log(index.toString());
+                          });
+                        },
+                        viewportFraction:
+                            _kidModel.parentKidId!.length == 1 ? 1 : 0.9,
+                        //enlargeCenterPage: true,
+                        padEnds: false,
+                        //pageSnapping: false,
+                        enableInfiniteScroll: false,
+                      ),
+                    ),
+                  /*Row(
                 //mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   GestureDetector(
@@ -506,108 +544,108 @@ class _PHomeScreenState extends State<PHomeScreen> {
                   SizedBox(width: 5),
                 ],
               ),*/
+                  SizedBox(height: MediaQuery.of(context).size.height * 0.01),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
                       SizedBox(
-                          height: MediaQuery.of(context).size.height * 0.01),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          SizedBox(
-                            height: 15.h,
-                          ),
-                          Padding(
-                            padding: EdgeInsets.only(left: 16.0),
-                            child: Text(
-                              "Activity".tr(),
-                              style: FontConstant2.baloothampifont,
-                            ),
-                          ),
-                          SizedBox(
-                            height: 5.h,
-                          ),
-                          _isActivityLoading
-                              ? Center(
-                                  child: CircularProgressIndicator(),
-                                )
-                              : _activityModel.kidAndActivity!.isEmpty
-                                  ? Column(
-                                      children: [
-                                        Image.asset(
-                                          "assets/images/chicken.png",
-                                          width: 1.sw,
-                                          height: 200,
+                        height: 15.h,
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(left: 16.0),
+                        child: Text(
+                          "Activity".tr(),
+                          style: FontConstant2.baloothampifont,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 5.h,
+                      ),
+                      if (_activityModel.kidAndActivity != null)
+                        _isActivityLoading
+                            ? Center(
+                                child: CircularProgressIndicator(),
+                              )
+                            : _activityModel.kidAndActivity!.isEmpty
+                                ? Column(
+                                    children: [
+                                      Image.asset(
+                                        "assets/images/chicken.png",
+                                        width: 1.sw,
+                                        height: 200,
+                                      ),
+                                      SizedBox(
+                                        height: 20,
+                                      ),
+                                      Text(
+                                        "Oops!".tr(),
+                                        style: FontConstant2.k24w5008267text,
+                                      ),
+                                      Text(
+                                        "No activity available for the kid."
+                                            .tr(),
+                                        style: FontConstant.k16w4008471Text,
+                                      ),
+                                    ],
+                                  )
+                                : Activity(
+                                    model: _activityModel, length: length),
+                      SizedBox(height: 10),
+                      if (_activityModel.kidAndActivity != null)
+                        length == _activityModel.kidAndActivity!.length
+                            ? SizedBox.shrink()
+                            : Center(
+                                child: GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (_) => PScheduleScreen(
+                                          model: _activityModel,
                                         ),
-                                        SizedBox(
-                                          height: 20,
-                                        ),
-                                        Text(
-                                          "Oops!".tr(),
-                                          style: FontConstant2.k24w5008267text,
-                                        ),
-                                        Text(
-                                          "No activity available for the kid."
-                                              .tr(),
-                                          style: FontConstant.k16w4008471Text,
-                                        ),
-                                      ],
-                                    )
-                                  : Activity(
-                                      model: _activityModel, length: length),
-                          SizedBox(height: 10),
-                          length == _activityModel.kidAndActivity!.length
-                              ? SizedBox.shrink()
-                              : Center(
-                                  child: GestureDetector(
-                                    onTap: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (_) => PScheduleScreen(
-                                            model: _activityModel,
-                                          ),
-                                        ),
-                                      );
-                                    },
-                                    child: Container(
-                                      color: Colors.transparent,
-                                      padding: EdgeInsets.all(16),
-                                      child: Text("See more".tr(),
-                                          style: FontConstant.k16w500purpleText
-                                              .copyWith(
-                                            fontSize: 18,
-                                          )),
-                                    ),
+                                      ),
+                                    );
+                                  },
+                                  child: Container(
+                                    color: Colors.transparent,
+                                    padding: EdgeInsets.all(16),
+                                    child: Text("See more".tr(),
+                                        style: FontConstant.k16w500purpleText
+                                            .copyWith(
+                                          fontSize: 18,
+                                        )),
                                   ),
                                 ),
-                          /*Center(
+                              ),
+                      /*Center(
                           child: Text("See more".tr(),
                               style:
                                   FontConstant.k16w500purpleText.copyWith(
                                 fontSize: 18,
                               )),
                         ),*/
-                        ],
-                      )
                     ],
                   ),
-                  if (_activityModel.videoTutorial!.isNotEmpty)
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(height: 20.h),
-                        Padding(
-                          padding: EdgeInsets.only(left: 16.0),
-                          child: Text(
-                            "Tutorials".tr(),
-                            style: FontConstant2.baloothampifont,
+                  if (_activityModel.videoTutorial != null)
+                    if (_activityModel.videoTutorial!.isNotEmpty)
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SizedBox(height: 20.h),
+                          Padding(
+                            padding: EdgeInsets.only(left: 16.0),
+                            child: Text(
+                              "Tutorials".tr(),
+                              style: FontConstant2.baloothampifont,
+                            ),
                           ),
-                        ),
-                        SizedBox(height: 10.h),
-                        Tutorials(model: _activityModel),
-                      ],
-                    ),
+                          SizedBox(height: 10.h),
+                          Tutorials(model: _activityModel),
+                        ],
+                      ),
                   //Tutorials card
-                  SizedBox(height: 70)
+                  SizedBox(height: 90),
                 ],
               ),
             ),

@@ -1,15 +1,10 @@
 import 'dart:ui';
 
-import 'package:easy_localization/easy_localization.dart';
+import 'package:easy_localization/easy_localization.dart' as local;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:kidseau/Widgets/THomeScreenWidgets/t_activity.dart';
-import 'package:kidseau/api/Teacherpanelapi/Tmodel/TScheduleModel.dart';
-import 'package:kidseau/api/Teacherpanelapi/Tschedule_api/schedule_api.dart';
-import 'package:kidseau/api/models/T_all_schedule_model.dart';
 import 'package:kidseau/api/models/parent_models/parent_home_models/parent_activity_home_model.dart';
 
 import '../../Theme.dart';
@@ -50,8 +45,7 @@ class _PScheduleScreenState extends State<PScheduleScreen> {
         ),
         backgroundColor: Color(0xff8267AC).withOpacity(0.16),
         title: Text(
-          "Back",
-          /* AppLoaclizations.of(context)!.translate("Back").toString(),*/
+          local.tr("Back"),
           style: FontConstant.k18w5008471Text,
         ),
         leading: Row(
@@ -85,8 +79,7 @@ class _PScheduleScreenState extends State<PScheduleScreen> {
               Padding(
                 padding: EdgeInsets.all(16),
                 child: Text(
-                  "Schedule",
-                  /* AppLoaclizations.of(context)!.translate("Schedule").toString(),*/
+                  local.tr('Schedule'),
                   style: FontConstant2.baloothampifont,
                 ),
               ),

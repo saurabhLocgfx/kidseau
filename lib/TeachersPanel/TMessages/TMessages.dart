@@ -4,15 +4,13 @@ import 'dart:developer';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:kidseau/ParentsPanel/PMessageScreen/PopenChats.dart';
 import 'package:kidseau/Theme.dart';
-import 'package:kidseau/Widgets/dialogs.dart';
 import 'package:kidseau/api/message_apis/delete_chat_api.dart';
 import 'package:kidseau/api/message_apis/read_unread_msg_api.dart';
 import 'package:kidseau/api/message_apis/recent_chat_api.dart';
 import 'package:kidseau/api/models/message_models/recent_chat_model.dart';
 
-import '../../ParentsPanel/PMessageScreen/PChats.dart';
+import '../../ParentsPanel/PMessageScreen/PopenChats.dart';
 
 class TMessages extends StatefulWidget {
   const TMessages({Key? key}) : super(key: key);
@@ -85,7 +83,7 @@ class _TMessagesState extends State<TMessages> {
     _isLoading = true;
     final resp = RecentChatApi().get();
     resp.then((value) {
-      log(value.toString());
+      //log(value.toString());
       modelList.clear();
       setState(() {
         for (var v in value) {
@@ -136,7 +134,7 @@ class _TMessagesState extends State<TMessages> {
                       onTap: () {
                         Navigator.of(context).push(
                           MaterialPageRoute(
-                            builder: (context) => PChats(
+                            builder: (context) => POpenChats(
                               onPop: () {
                                 _getData();
                               },

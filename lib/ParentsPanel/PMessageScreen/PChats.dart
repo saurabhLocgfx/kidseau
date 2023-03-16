@@ -12,12 +12,11 @@ import 'package:grouped_list/grouped_list.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:kidseau/Theme.dart';
 import 'package:kidseau/Widgets/custom_snack_bar.dart';
-import 'package:kidseau/Widgets/popups.dart';
 import 'package:kidseau/api/message_apis/all_message_api.dart';
 import 'package:kidseau/api/message_apis/delete_message_api.dart';
 import 'package:kidseau/api/message_apis/get_latest_message_api.dart';
-import 'package:kidseau/api/models/message_models/all_messages_model.dart';
 import 'package:kidseau/api/message_apis/send_message_api.dart';
+import 'package:kidseau/api/models/message_models/all_messages_model.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class PChats extends StatefulWidget {
@@ -234,6 +233,7 @@ class _PChatsState extends State<PChats> {
             ),
           ),
         ),
+        centerTitle: false,
         title: Text(
           widget.name,
           style: FontConstant.k18w5008471Text,
@@ -302,6 +302,7 @@ class _PChatsState extends State<PChats> {
                 children: [
                   Expanded(
                     child: TextField(
+                      maxLines: 5,
                       controller: _controller,
                       onSubmitted: (text) {},
                       decoration: InputDecoration(
@@ -428,9 +429,7 @@ class _PChatsState extends State<PChats> {
                   padding: const EdgeInsets.only(left: 16.0, right: 16),
                   child: Column(
                     children: [
-                      SizedBox(
-                        height: 16,
-                      ),
+                      SizedBox(height: 16),
                       /*Container(
                         color: Colors.transparent,
                         child: Row(
@@ -474,164 +473,32 @@ class _PChatsState extends State<PChats> {
                       Expanded(
                         //height: 500,
                         child: GroupedListView<AllMsg, DateTime>(
-                            controller: _scrollController,
-                            //itemExtent: messageModel.allMsg!.length.toDouble(),
-                            reverse: true,
-                            order: GroupedListOrder.DESC,
-                            padding: EdgeInsets.all(16),
-                            elements: messageModel.allMsg!,
-                            groupBy: (messages) =>
-                                DateTime.parse(messages.createdAt!),
-                            groupHeaderBuilder: (AllMsg messages) => SizedBox(),
-                            indexedItemBuilder:
-                                (context, AllMsg messages, int index) {
-                              log(messages.senderUserType.toString());
-                              return GestureDetector(
-                                onLongPress: messages.senderUserType ==
-                                        "teacher"
-                                    ? () {
-                                        showDialog(
-                                            barrierDismissible: true,
-                                            context: context,
-                                            builder: (ctx) {
-                                              return AlertDialog(
-                                                title: Text(
-                                                  'Delete Message',
-                                                  style: FontConstant
-                                                      .k18w500F970Text,
-                                                ),
-                                                content: Column(
-                                                  mainAxisSize:
-                                                      MainAxisSize.min,
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    messages.fileUrl! == ''
-                                                        ? SizedBox.shrink()
-                                                        : Container(
-                                                            constraints:
-                                                                BoxConstraints(
-                                                                    // maxWidth: 200,
-                                                                    maxHeight:
-                                                                        150),
-                                                            margin:
-                                                                EdgeInsets.only(
-                                                                    bottom: 10),
-                                                            child:
-                                                                Image.network(
-                                                              messages.fileUrl
-                                                                  .toString(),
-                                                              errorBuilder: (q,
-                                                                      w, e) =>
-                                                                  Text(
-                                                                      'Image not found'),
-                                                              fit: BoxFit
-                                                                  .fitWidth,
-                                                            ),
-                                                          ),
-                                                    Text(
-                                                      messages.message
-                                                          .toString(),
-                                                      style: FontConstant
-                                                          .k16w4008471Text
-                                                          .copyWith(
-                                                              color: Color(
-                                                                  0xff5E5C70)),
-                                                    ),
-                                                  ],
-                                                ),
-                                                actions: [
-                                                  TextButton(
-                                                      onPressed: () {
-                                                        Navigator.of(context)
-                                                            .pop();
-                                                      },
-                                                      child: Text('Cancel')),
-                                                  TextButton(
-                                                      onPressed: () {
-                                                        final resp =
-                                                            DeleteMessageApi().delete(
-                                                                msgId: messages
-                                                                    .messageId
-                                                                    .toString());
-                                                        resp.then((value) {
-                                                          log(value.toString());
-                                                          if (value['status'] ==
-                                                              1) {
-                                                            setState(() {
-                                                              messageModel
-                                                                      .allMsg![
-                                                                          index]
-                                                                      .message =
-                                                                  'This message has been deleted';
-                                                              messageModel
-                                                                  .allMsg![
-                                                                      index]
-                                                                  .fileUrl = '';
-                                                              messageModel
-                                                                      .allMsg![
-                                                                          index]
-                                                                      .isDeleted =
-                                                                  '1';
-                                                              messages.isDeleted =
-                                                                  '1';
-                                                            });
-                                                            Navigator.of(
-                                                                    context)
-                                                                .pop();
-                                                          } else {
-                                                            Navigator.of(
-                                                                    context)
-                                                                .pop();
-                                                            CustomSnackBar
-                                                                .customErrorSnackBar(
-                                                                    context,
-                                                                    value[
-                                                                        'msg']);
-                                                          }
-                                                        });
-                                                      },
-                                                      child: Text(
-                                                        'Delete',
-                                                        style: FontConstant
-                                                            .k16w400F97070,
-                                                      )),
-                                                ],
-                                              );
-                                            });
-                                      }
-                                    : () {},
-                                child: Align(
-                                  alignment:
-                                      messages.senderUserType == "teacher"
-                                          ? Alignment.centerRight
-                                          : Alignment.centerLeft,
-                                  child: Padding(
-                                    padding:
-                                        const EdgeInsets.only(bottom: 32.0),
-                                    child: Container(
-                                      constraints: BoxConstraints(
-                                        maxWidth: 250,
-                                      ),
-                                      decoration: BoxDecoration(
-                                          color: messages.senderUserType ==
-                                                  "teacher"
-                                              ? Color(0xffF2F1F8)
-                                              : Color(0xffDBE8FA),
-                                          borderRadius:
-                                              BorderRadius.circular(6)),
-                                      child: Padding(
-                                        padding: EdgeInsets.all(12),
-                                        child: messages.isDeleted == '1'
-                                            ? Text(
-                                                'This message has been deleted!',
+                          controller: _scrollController,
+                          //itemExtent: messageModel.allMsg!.length.toDouble(),
+                          reverse: true,
+                          order: GroupedListOrder.DESC,
+                          padding: EdgeInsets.all(16),
+                          elements: messageModel.allMsg!,
+                          groupBy: (messages) =>
+                              DateTime.parse(messages.createdAt!),
+                          groupHeaderBuilder: (AllMsg messages) => SizedBox(),
+                          indexedItemBuilder:
+                              (context, AllMsg messages, int index) {
+                            log(messages.senderUserType.toString());
+                            return GestureDetector(
+                              onLongPress: messages.senderUserType == "teacher"
+                                  ? () {
+                                      showDialog(
+                                          barrierDismissible: true,
+                                          context: context,
+                                          builder: (ctx) {
+                                            return AlertDialog(
+                                              title: Text(
+                                                'Delete Message',
                                                 style: FontConstant
-                                                    .k16w4008471Text
-                                                    .copyWith(
-                                                        color: Colors
-                                                            .red.shade400),
-                                              )
-                                            : Column(
+                                                    .k18w500F970Text,
+                                              ),
+                                              content: Column(
                                                 mainAxisSize: MainAxisSize.min,
                                                 crossAxisAlignment:
                                                     CrossAxisAlignment.start,
@@ -641,7 +508,7 @@ class _PChatsState extends State<PChats> {
                                                       : Container(
                                                           constraints:
                                                               BoxConstraints(
-                                                                  maxWidth: 200,
+                                                                  // maxWidth: 200,
                                                                   maxHeight:
                                                                       150),
                                                           margin:
@@ -654,6 +521,8 @@ class _PChatsState extends State<PChats> {
                                                                     e) =>
                                                                 Text(
                                                                     'Image not found'),
+                                                            fit:
+                                                                BoxFit.fitWidth,
                                                           ),
                                                         ),
                                                   Text(
@@ -666,12 +535,127 @@ class _PChatsState extends State<PChats> {
                                                   ),
                                                 ],
                                               ),
-                                      ),
+                                              actions: [
+                                                TextButton(
+                                                    onPressed: () {
+                                                      Navigator.of(context)
+                                                          .pop();
+                                                    },
+                                                    child: Text('Cancel')),
+                                                TextButton(
+                                                    onPressed: () {
+                                                      final resp =
+                                                          DeleteMessageApi().delete(
+                                                              msgId: messages
+                                                                  .messageId
+                                                                  .toString());
+                                                      resp.then((value) {
+                                                        log(value.toString());
+                                                        if (value['status'] ==
+                                                            1) {
+                                                          setState(() {
+                                                            messageModel
+                                                                    .allMsg![index]
+                                                                    .message =
+                                                                'This message has been deleted';
+                                                            messageModel
+                                                                .allMsg![index]
+                                                                .fileUrl = '';
+                                                            messageModel
+                                                                .allMsg![index]
+                                                                .isDeleted = '1';
+                                                            messages.isDeleted =
+                                                                '1';
+                                                          });
+                                                          Navigator.of(context)
+                                                              .pop();
+                                                        } else {
+                                                          Navigator.of(context)
+                                                              .pop();
+                                                          CustomSnackBar
+                                                              .customErrorSnackBar(
+                                                                  context,
+                                                                  value['msg']);
+                                                        }
+                                                      });
+                                                    },
+                                                    child: Text(
+                                                      'Delete',
+                                                      style: FontConstant
+                                                          .k16w400F97070,
+                                                    )),
+                                              ],
+                                            );
+                                          });
+                                    }
+                                  : () {},
+                              child: Align(
+                                alignment: messages.senderUserType == "teacher"
+                                    ? Alignment.centerRight
+                                    : Alignment.centerLeft,
+                                child: Padding(
+                                  padding: const EdgeInsets.only(bottom: 32.0),
+                                  child: Container(
+                                    constraints: BoxConstraints(
+                                      maxWidth: 250,
+                                    ),
+                                    decoration: BoxDecoration(
+                                        color:
+                                            messages.senderUserType == "teacher"
+                                                ? Color(0xffF2F1F8)
+                                                : Color(0xffDBE8FA),
+                                        borderRadius: BorderRadius.circular(6)),
+                                    child: Padding(
+                                      padding: EdgeInsets.all(12),
+                                      child: messages.isDeleted == '1'
+                                          ? Text(
+                                              'This message has been deleted!',
+                                              style: FontConstant
+                                                  .k16w4008471Text
+                                                  .copyWith(
+                                                      color:
+                                                          Colors.red.shade400),
+                                            )
+                                          : Column(
+                                              mainAxisSize: MainAxisSize.min,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                messages.fileUrl! == ''
+                                                    ? SizedBox.shrink()
+                                                    : Container(
+                                                        constraints:
+                                                            BoxConstraints(
+                                                                maxWidth: 200,
+                                                                maxHeight: 150),
+                                                        margin: EdgeInsets.only(
+                                                            bottom: 10),
+                                                        child: Image.network(
+                                                          messages.fileUrl
+                                                              .toString(),
+                                                          errorBuilder:
+                                                              (q, w, e) => Text(
+                                                                  'Image not found'),
+                                                        ),
+                                                      ),
+                                                Text(
+                                                  messages.message.toString(),
+                                                  maxLines: 5,
+                                                  style: FontConstant
+                                                      .k16w4008471Text
+                                                      .copyWith(
+                                                          color: Color(
+                                                              0xff5E5C70)),
+                                                ),
+                                              ],
+                                            ),
                                     ),
                                   ),
                                 ),
-                              );
-                            }),
+                              ),
+                            );
+                          },
+                        ),
                       ),
                       Visibility(
                         visible: _isVisible,
@@ -692,7 +676,7 @@ class _PChatsState extends State<PChats> {
                                 topRight: Radius.circular(97.0),
                                 bottomRight: Radius.circular(97.0)),
                           ),
-                          child: Container(
+                          child: SizedBox(
                             height: 67.h,
                             width: 382.w,
                             child: Column(

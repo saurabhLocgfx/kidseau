@@ -19,6 +19,7 @@ class MainButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialButton(
       elevation: 1,
+      height: 56,
       color: backgroundColor,
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(30))),
@@ -95,6 +96,23 @@ materialButton(context, onpressed, txt, c, h) {
     child: Text(
       txt,
       style: FontConstant.k18w500materialbuttonText,
+    ),
+  );
+}
+
+materialButton2(context, onPressed, txt, c, h) {
+  return MaterialButton(
+    onPressed: onPressed,
+    enableFeedback: true,
+    shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(30))),
+    height: h,
+    elevation: 0,
+    minWidth: MediaQuery.of(context).size.width * 0.92,
+    color: c,
+    child: Text(
+      txt,
+      style: FontConstant.k18w5008267Text,
     ),
   );
 }

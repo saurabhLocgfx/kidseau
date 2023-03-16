@@ -5,13 +5,9 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:kidseau/ParentsPanel/PHomeScreen/PHomeScreen.dart';
 import 'package:kidseau/TeachersPanel/THomeScreen/TAllStudentsScreen.dart';
-import 'package:kidseau/TeachersPanel/THomeScreen/THomeScreen.dart';
 import 'package:kidseau/Theme.dart';
 import 'package:kidseau/Widgets/buttons.dart';
-import 'package:kidseau/api/Teacherpanelapi/Tmodel/TScheduleModel.dart';
-import 'package:kidseau/api/Teacherpanelapi/Tschedule_api/schedule_api.dart';
 import 'package:kidseau/api/Teacherpanelapi/teacher_home_api/teacher_group_api.dart';
 import 'package:kidseau/api/Teacherpanelapi/teacher_home_api/teacher_group_schedule_api.dart';
 import 'package:kidseau/api/Teacherpanelapi/teacher_home_api/teacher_group_students_api.dart';
@@ -168,7 +164,7 @@ class _TGroupScreenState extends State<TGroupScreen> {
                         borderRadius: BorderRadius.circular(81),
                         child: Container(
                           width: 414,
-                          height: 62.h,
+                          height: 45,
                           decoration: BoxDecoration(
                             color: Colors.white,
                           ),
@@ -195,7 +191,7 @@ class _TGroupScreenState extends State<TGroupScreen> {
                                       child: Container(
                                         margin: const EdgeInsets.all(5),
                                         width: 72,
-                                        height: 43,
+                                        height: 35,
                                         decoration: BoxDecoration(
                                           color: current == index
                                               ? Color(0xff8267AC)
@@ -230,7 +226,7 @@ class _TGroupScreenState extends State<TGroupScreen> {
                         ),
                       ),
                       // GroupTab(),
-                      SizedBox(height: 15.h),
+                      SizedBox(height: 24),
                       Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
@@ -244,7 +240,8 @@ class _TGroupScreenState extends State<TGroupScreen> {
                             )
                           : Column(
                               children: [
-                                Container(
+                                SizedBox(height: 16),
+                                SizedBox(
                                   width: 1.sw,
                                   child: ListView.separated(
                                       separatorBuilder: (ctx, ind) => SizedBox(
@@ -287,16 +284,23 @@ class _TGroupScreenState extends State<TGroupScreen> {
                                                 crossAxisAlignment:
                                                     CrossAxisAlignment.center,
                                                 children: [
-                                                  Image.network(
-                                                    scheduelModel
-                                                        .schdule![index].actIcon
-                                                        .toString(),
-                                                    errorBuilder: (q, w, e) {
-                                                      return Text(
-                                                          'Image not loaded');
-                                                    },
-                                                    height: 40,
-                                                    width: 40,
+                                                  ClipRRect(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            6),
+                                                    child: Image.network(
+                                                      scheduelModel
+                                                          .schdule![index]
+                                                          .actIcon
+                                                          .toString(),
+                                                      fit: BoxFit.cover,
+                                                      errorBuilder: (q, w, e) {
+                                                        return Text(
+                                                            'Image not loaded');
+                                                      },
+                                                      height: 40,
+                                                      width: 40,
+                                                    ),
                                                   ),
                                                   Padding(
                                                     padding:
@@ -374,7 +378,7 @@ class _TGroupScreenState extends State<TGroupScreen> {
                                     : Align(
                                         alignment: Alignment.centerLeft,
                                         child: Text(
-                                          "Students".tr(),
+                                          "Kids".tr(),
                                           style: FontConstant2.baloothampifont,
                                         ),
                                       ),
@@ -383,13 +387,14 @@ class _TGroupScreenState extends State<TGroupScreen> {
                                     ? SizedBox.shrink()
                                     : ListView.builder(
                                         physics: NeverScrollableScrollPhysics(),
-                                        itemCount: 3,
+                                        itemCount:
+                                            _studentModel.student!.length,
                                         shrinkWrap: true,
                                         itemBuilder:
                                             (BuildContext context, int index) {
                                           return Padding(
                                             padding: const EdgeInsets.only(
-                                                bottom: 16.0),
+                                                bottom: 8.0),
                                             child: SizedBox(
                                                 height: 128,
                                                 width: 382,
@@ -417,11 +422,11 @@ class _TGroupScreenState extends State<TGroupScreen> {
                                         }),
                                 _studentModel.student!.isEmpty
                                     ? SizedBox.shrink()
-                                    : SizedBox(height: 32),
+                                    : SizedBox(height: 24),
                                 _studentModel.student!.isEmpty
                                     ? SizedBox.shrink()
                                     : SizedBox(
-                                        height: 52.h,
+                                        height: 56,
                                         width: 382.w,
                                         child: MainButton(
                                             onTap: () {
@@ -434,14 +439,14 @@ class _TGroupScreenState extends State<TGroupScreen> {
                                                         )),
                                               );
                                             },
-                                            title: "View all students".tr(),
+                                            title: "View all kids".tr(),
                                             textStyleColor: Colors.white,
                                             backgroundColor:
                                                 ThemeColor.primarycolor),
                                       ),
                               ],
                             ),
-                      SizedBox(height: 52),
+                      SizedBox(height: 25),
                     ],
                   ),
                 ),
@@ -533,7 +538,7 @@ class TStudentCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(16),
         image: DecorationImage(
           image: AssetImage("assets/images/Student Card.png"),
-          fit: BoxFit.fitWidth,
+          fit: BoxFit.cover,
         ),
       ),
       padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
@@ -546,7 +551,7 @@ class TStudentCard extends StatelessWidget {
             decoration: BoxDecoration(borderRadius: BorderRadius.circular(8)),
             child: Image.network(
               model.student![index].image.toString(),
-              fit: BoxFit.fill,
+              fit: BoxFit.cover,
               errorBuilder: (q, w, e) =>
                   Image.asset("assets/images/Rectangle 2715.png"),
             ),

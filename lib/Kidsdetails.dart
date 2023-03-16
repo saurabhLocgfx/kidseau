@@ -12,9 +12,9 @@ import 'package:kidseau/Widgets/buttons.dart';
 import 'package:kidseau/api/models/group_resp.dart';
 import 'package:kidseau/api/models/section_resp.dart';
 import 'package:kidseau/api/parent_signup_apis/get_sections.dart';
-import 'package:kidseau/api/parent_signup_apis/parent_signup_kidinfo_api.dart';
 
 import 'Widgets/textfields.dart';
+import 'api/parent_signup_apis/parent_signup_kidinfo_api.dart';
 
 class KidsDetails extends StatefulWidget {
   final Function onContinue;
@@ -51,6 +51,8 @@ class _KidsDetailsState extends State<KidsDetails> {
   }
 
   String _selectedSection = "";
+  String formattedDate = DateFormat('yyyy-MM-dd').format(DateTime.now());
+  String newDate = DateFormat('dd-MM-yyyy').format(DateTime.now());
   List<String> sectionList = [];
   List<Map<String, dynamic>> _map = [];
   Map<String, dynamic> selectedSection = {};
@@ -103,6 +105,7 @@ class _KidsDetailsState extends State<KidsDetails> {
             //langListId.add(v['sec_id']);
             _map.add({'name': v['sec_name'], 'id': v['sec_id']});
           }
+          print(_map);
           _selectedSection = sectionList[0];
           selectedSection = {'name': _map[0]['name'], 'id': _map[0]['id']};
         });
@@ -115,7 +118,7 @@ class _KidsDetailsState extends State<KidsDetails> {
   // bool _isLoading = false;
 
   _getGroups(String secId) {
-    // log('message');
+    log(secId);
     setState(() {
       _grpLoading = true;
     });
@@ -143,6 +146,9 @@ class _KidsDetailsState extends State<KidsDetails> {
   }
 
   bool _btnLoading = false;
+  bool buttonOpen1 = false;
+  bool buttonOpen2 = false;
+  bool buttonOpen = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -157,15 +163,16 @@ class _KidsDetailsState extends State<KidsDetails> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  SizedBox(height: 40),
                   Align(
                     alignment: Alignment.bottomLeft,
                     child: Text(
-                      "Kid’s Information".tr(),
+                      "Kid's Information".tr(),
                       style: FontConstant2.k24w500331Ftext,
                       textAlign: TextAlign.start,
                     ),
                   ),
-                  SizedBox(height: 24),
+                  SizedBox(height: 16),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -197,8 +204,8 @@ class _KidsDetailsState extends State<KidsDetails> {
                       style: FontConstant.k16w500331FText),
                   SizedBox(height: 4),
                   Container(
-                    padding: EdgeInsets.only(left: 20, right: 20),
-                    height: 54.h,
+                    padding: EdgeInsets.only(left: 20, right: 10),
+                    height: 56,
                     width: 1.sw,
                     decoration: BoxDecoration(
                         color: Color(0xffFFFFFF),
@@ -210,6 +217,10 @@ class _KidsDetailsState extends State<KidsDetails> {
                       isExpanded: true,
                       hint: Text(
                         "Select section".tr(),
+                        style: FontConstant.k14w400lightText.copyWith(
+                            color: Color(0xffB7A4B2),
+                            fontSize: 16.0,
+                            fontWeight: FontWeight.w400),
                       ),
                       icon: Center(
                         child: Padding(
@@ -292,8 +303,8 @@ class _KidsDetailsState extends State<KidsDetails> {
                       style: FontConstant.k16w500331FText),
                   SizedBox(height: 4),
                   Container(
-                    padding: EdgeInsets.only(left: 20, right: 20),
-                    height: 54.h,
+                    padding: EdgeInsets.only(left: 20, right: 10),
+                    height: 56,
                     width: 1.sw,
                     decoration: BoxDecoration(
                         color: Color(0xffFFFFFF),
@@ -307,6 +318,10 @@ class _KidsDetailsState extends State<KidsDetails> {
                             isExpanded: true,
                             hint: Text(
                               "Select group".tr(),
+                              style: FontConstant.k14w400lightText.copyWith(
+                                  color: Color(0xffB7A4B2),
+                                  fontSize: 16.0,
+                                  fontWeight: FontWeight.w400),
                             ),
                             icon: Center(
                               child: Padding(
@@ -336,8 +351,8 @@ class _KidsDetailsState extends State<KidsDetails> {
                                     i++) {
                                   if (_selectedGroup == _groupMap[i]['name']) {
                                     selectedGroup = {
-                                      'name': _map[i]['name'],
-                                      'id': _map[i]['id']
+                                      'name': _groupMap[i]['name'],
+                                      'id': _groupMap[i]['id']
                                     };
                                   }
                                 }
@@ -408,15 +423,16 @@ class _KidsDetailsState extends State<KidsDetails> {
                           if (pickedDate != null) {
                             print(
                                 pickedDate); //pickedDate output format => 2021-03-10 00:00:00.000
-                            String formattedDate =
+                            formattedDate =
                                 DateFormat('yyyy-MM-dd').format(pickedDate);
-                            print(
-                                formattedDate); //formatted date output using intl package =>  2021-03-16
+                            newDate =
+                                DateFormat('dd-MM-yyyy').format(pickedDate);
+                            //formatted date output using intl package =>  2021-03-16
                             //you can implement different kind of Date Format here according to your requirement
 
                             setState(() {
                               kidBirthdayController.text =
-                                  formattedDate; //set output date to TextField value.
+                                  newDate; //set output date to TextField value.
                             });
                           } else {
                             print("Date is not selected");
@@ -450,12 +466,14 @@ class _KidsDetailsState extends State<KidsDetails> {
                                   String formattedDate =
                                       DateFormat('yyyy-MM-dd')
                                           .format(pickedDate);
+                                  newDate = DateFormat('dd-MM-yyyy')
+                                      .format(pickedDate);
                                   print(
                                       formattedDate); //formatted date output using intl package =>  2021-03-16
                                   //you can implement different kind of Date Format here according to your requirement
                                   setState(() {
                                     kidBirthdayController.text =
-                                        formattedDate; //set output date to TextField value.
+                                        newDate; //set output date to TextField value.
                                   });
                                 } else {
                                   print("Date is not selected");
@@ -493,7 +511,7 @@ class _KidsDetailsState extends State<KidsDetails> {
                                 color: Color(0xffBE74AA), width: 1.0),
                           ),
                           isDense: true,
-                          hintText: "yyyy/mm/dd".tr(),
+                          hintText: "dd-MM-yyyy".tr(),
                           filled: true,
                           fillColor: Colors.white,
                           hintStyle: FontConstant.k14w400lightText.copyWith(
@@ -513,8 +531,8 @@ class _KidsDetailsState extends State<KidsDetails> {
                         style: FontConstant.k16w500331FText,
                       ),
                       Container(
-                        padding: EdgeInsets.only(left: 20),
-                        height: 60.h,
+                        padding: EdgeInsets.only(left: 20, right: 10),
+                        height: 56,
                         width: 1.sw,
                         decoration: BoxDecoration(
                             color: Color(0xffFFFFFF),
@@ -522,7 +540,12 @@ class _KidsDetailsState extends State<KidsDetails> {
                                 BorderRadius.all(Radius.circular(30))),
                         child: Center(
                           child: DropdownButton<String>(
-                            alignment: Alignment.topRight,
+                            onTap: () {
+                              setState(() {
+                                buttonOpen = true;
+                              });
+                            },
+                            alignment: Alignment.center,
                             borderRadius: BorderRadius.circular(30),
                             dropdownColor: Color(0xffffffff),
                             hint: Text(
@@ -581,7 +604,7 @@ class _KidsDetailsState extends State<KidsDetails> {
                           });
                         },
                         child: Container(
-                          height: 64.h,
+                          height: 56,
                           width: 1.sw,
                           decoration: BoxDecoration(
                             borderRadius:
@@ -595,8 +618,8 @@ class _KidsDetailsState extends State<KidsDetails> {
                                 padding: const EdgeInsets.only(left: 10.0),
                                 child: Text(
                                   _pickedImage.path == ""
-                                      ? "Upload primary photo".tr()
-                                      : "1 image selected".tr(),
+                                      ? "Upload kid photo".tr()
+                                      : "Image uploaded".tr(),
                                   style: FontConstant.k14w400lightText.copyWith(
                                       color: Color(0xffB7A4B2),
                                       fontSize: 16.0,
@@ -647,7 +670,7 @@ class _KidsDetailsState extends State<KidsDetails> {
                   ),
                   SizedBox(height: 35),
                   SizedBox(
-                      height: 52.h,
+                      height: 56,
                       width: 1.sw,
                       child: _btnLoading
                           ? Center(
@@ -659,13 +682,13 @@ class _KidsDetailsState extends State<KidsDetails> {
                                   setState(() {
                                     _btnLoading = true;
                                   });
-                                  log(selectedGroup.toString());
+                                  //log(selectedGroup['id'].toString());
                                   final resp = KidsSignupInfo().get(
                                     kidName: kidNameController.text,
                                     kidSection: selectedSection['id'],
                                     kidGroup: selectedGroup['id'],
                                     //kidAge: kidAgeController.text,
-                                    kidBirthday: kidBirthdayController.text,
+                                    kidBirthday: formattedDate,
                                     kidGender: _selectedText,
                                     pickedImage: _pickedImage,
                                   );
@@ -699,9 +722,7 @@ class _KidsDetailsState extends State<KidsDetails> {
                   AnimatedContainer(
                       height: addressNode.hasFocus ? 400 : 0,
                       duration: Duration(milliseconds: 100)),*/
-                  SizedBox(
-                    height: 320,
-                  ),
+                  SizedBox(height: 320),
                 ],
               ),
             ),

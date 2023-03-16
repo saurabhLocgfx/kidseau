@@ -119,7 +119,9 @@ class IconTextfield extends StatelessWidget {
         filled: true,
         fillColor: Colors.white,
         hintStyle: FontConstant.k14w400lightText.copyWith(
-            color: Color(0xffB7A4B2),
+            color: title.contains(':') || title.contains('-')
+                ? Colors.black
+                : Color(0xffB7A4B2),
             fontSize: 16.0,
             fontWeight: FontWeight.w400),
       ),

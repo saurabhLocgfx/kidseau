@@ -1,11 +1,13 @@
 import 'dart:developer';
+import 'dart:typed_data';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:image_downloader/image_downloader.dart';
+import 'package:http/http.dart' as http;
+import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:kidseau/TeachersPanel/TPostsScreen/TEditPostScreen.dart';
 import 'package:kidseau/api/Teacherpanelapi/teacher_post_api/teacher_delete_post_api.dart';
 import 'package:kidseau/api/Teacherpanelapi/teacher_post_api/teacher_my_post_api.dart';
@@ -154,18 +156,23 @@ class _TMyPostsState extends State<TMyPosts> {
                                           mainAxisAlignment:
                                               MainAxisAlignment.start,
                                           children: [
-                                            Image.network(
-                                              _postList[index]
-                                                  .techProfile
-                                                  .toString(),
-                                              errorBuilder: (q, w, e) =>
-                                                  Image.asset(
-                                                "assets/images/person2.png",
+                                            ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(50),
+                                              child: Image.network(
+                                                _postList[index]
+                                                    .techProfile
+                                                    .toString(),
+                                                fit: BoxFit.cover,
+                                                errorBuilder: (q, w, e) =>
+                                                    Image.asset(
+                                                  "assets/images/person2.png",
+                                                  height: 40,
+                                                  width: 40,
+                                                ),
                                                 height: 40,
                                                 width: 40,
                                               ),
-                                              height: 40,
-                                              width: 40,
                                             ),
                                             SizedBox(
                                               width: 08,
@@ -211,6 +218,7 @@ class _TMyPostsState extends State<TMyPosts> {
                                                                   )));
                                                     },
                                                     child: Container(
+                                                      width: 160,
                                                       padding: EdgeInsets.only(
                                                           left: 16,
                                                           top: 16,
@@ -265,19 +273,23 @@ class _TMyPostsState extends State<TMyPosts> {
                                                   enabled: false,
                                                   child: InkWell(
                                                     onTap: () async {
+                                                      Navigator.pop(context);
                                                       for (var url
                                                           in _postList[index]
                                                               .images!) {
                                                         try {
-                                                          var imageId =
-                                                              await ImageDownloader
-                                                                  .downloadImage(url
-                                                                      .fileImage
-                                                                      .toString());
-                                                          var path =
-                                                              await ImageDownloader
-                                                                  .findPath(
-                                                                      imageId!);
+                                                          var response = await http
+                                                              .get(Uri.parse(url
+                                                                  .fileImage
+                                                                  .toString()));
+                                                          final result =
+                                                              await ImageGallerySaver.saveImage(
+                                                                  Uint8List.fromList(
+                                                                      response
+                                                                          .bodyBytes),
+                                                                  quality: 60,
+                                                                  name:
+                                                                      "newImage");
                                                         } catch (error) {
                                                           print(error);
                                                         }
@@ -287,6 +299,7 @@ class _TMyPostsState extends State<TMyPosts> {
                                                               'Download complete');
                                                     },
                                                     child: Container(
+                                                      width: 160,
                                                       padding: EdgeInsets.only(
                                                           left: 16,
                                                           top: 16,
@@ -312,28 +325,39 @@ class _TMyPostsState extends State<TMyPosts> {
                                                   enabled: false,
                                                   child: InkWell(
                                                     onTap: () {
-                                                      final resp =
-                                                          TeacherDeletePostApi()
-                                                              .delete(
-                                                                  postId: _postList[
-                                                                          index]
-                                                                      .postId
-                                                                      .toString());
-                                                      resp.then((value) {
-                                                        log(value.toString());
-                                                        if (value['status'] ==
-                                                            1) {
-                                                          setState(() {
-                                                            _postList.removeAt(
-                                                                index);
-                                                            Navigator.of(
-                                                                    context)
-                                                                .pop();
-                                                          });
-                                                        }
-                                                      });
+                                                      Navigator.pop(context);
+                                                      showDialog(
+                                                        context: context,
+                                                        builder: (_) =>
+                                                            SuretyDialog(
+                                                          onYesTap: () {
+                                                            final resp = TeacherDeletePostApi().delete(
+                                                                postId: _postList[
+                                                                        index]
+                                                                    .postId
+                                                                    .toString());
+                                                            resp.then((value) {
+                                                              log(value
+                                                                  .toString());
+                                                              if (value[
+                                                                      'status'] ==
+                                                                  1) {
+                                                                setState(() {
+                                                                  _postList
+                                                                      .removeAt(
+                                                                          index);
+                                                                  Navigator.of(
+                                                                          context)
+                                                                      .pop();
+                                                                });
+                                                              }
+                                                            });
+                                                          },
+                                                        ),
+                                                      );
                                                     },
                                                     child: Container(
+                                                      width: 160,
                                                       padding: EdgeInsets.only(
                                                           left: 16,
                                                           top: 16,
@@ -412,7 +436,7 @@ class _TMyPostsState extends State<TMyPosts> {
                                                           .images![indexx]
                                                           .fileImage
                                                           .toString(),
-                                                      fit: BoxFit.fitWidth,
+                                                      fit: BoxFit.cover,
                                                       loadingBuilder:
                                                           (q, w, e) {
                                                         if (e == null) {
@@ -557,7 +581,9 @@ class _MyPostInteractionState extends State<MyPostInteraction> {
               ),
             ],
           ),
-          Text(widget.postList[widget.index].postDate.toString(),
+          Text(
+              DateFormat('dd MMM').format(DateTime.parse(
+                  widget.postList[widget.index].postDate.toString())),
               style: FontConstant.k16w4008471Text.copyWith(fontSize: 14))
         ],
       ),

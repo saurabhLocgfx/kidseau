@@ -4,7 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kidseau/Theme.dart';
 
 import '../ParentsPanel/PProfileScreens/PSettings/PNotificationSettings.dart';
-import '../TeachersPanel/TProfileScreen/TNotificationSetttings.dart';
 
 Center mainlogo() {
   return Center(
@@ -14,7 +13,13 @@ Center mainlogo() {
           child: Image.asset('assets/images/logo.png')));
 }
 
-Future<dynamic> notificationdialog(BuildContext context) {
+Future<dynamic> notificationDialog({
+  required BuildContext context,
+  required String title,
+  required String desc,
+  required Function onAddReminderTap,
+  required Function onPop,
+}) {
   return showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -30,17 +35,15 @@ Future<dynamic> notificationdialog(BuildContext context) {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    "Bring notebook (Title)",
+                    title,
                     style: FontConstant2.k24w500331Ftext,
                   ),
                   Text(
-                    "Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.",
+                    desc,
                     style: FontConstant.k16w4008471Text,
                   ),
                   SizedBox(height: 24),
                   Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Expanded(
                         child: SizedBox(
@@ -50,6 +53,7 @@ Future<dynamic> notificationdialog(BuildContext context) {
                             elevation: 0,
                             onPressed: () {
                               Navigator.pop(context);
+                              onPop();
                             },
                             color: Colors.white,
                             shape: RoundedRectangleBorder(
@@ -62,7 +66,8 @@ Future<dynamic> notificationdialog(BuildContext context) {
                               /*AppLoaclizations.of(context)!
                                   .translate("Close")
                                   .toString(),*/
-                              style: FontConstant.k16w5008267Text,
+                              style: FontConstant.k16w5008267Text
+                                  .copyWith(fontSize: 14),
                             ),
                           ),
                         ),
@@ -73,7 +78,9 @@ Future<dynamic> notificationdialog(BuildContext context) {
                           height: 52,
                           //width: 170,
                           child: MaterialButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              onAddReminderTap();
+                            },
                             elevation: 0,
                             color: ThemeColor.primarycolor,
                             shape: RoundedRectangleBorder(
@@ -88,14 +95,15 @@ Future<dynamic> notificationdialog(BuildContext context) {
                                   height: 24,
                                   color: Colors.white,
                                 ),
-                                SizedBox(width: 3),
+                                SizedBox(width: 8),
                                 Text("Add Reminder".tr(),
                                     /*AppLoaclizations.of(context)!
                                         .translate("Add Reminder")
                                         .toString(),*/
                                     overflow: TextOverflow.ellipsis,
                                     style: FontConstant.k16w5008267Text
-                                        .copyWith(color: Colors.white)),
+                                        .copyWith(
+                                            fontSize: 14, color: Colors.white)),
                               ],
                             ),
                           ),
@@ -108,7 +116,9 @@ Future<dynamic> notificationdialog(BuildContext context) {
             ),
           ),
         );
-      });
+      }).then((value) {
+    onPop();
+  });
 }
 
 class CustomBottomAppbar extends StatelessWidget {
@@ -322,12 +332,14 @@ class Notificationpopup extends StatelessWidget {
   final String image2;
   final String title;
   final String title2;
+  final Function onMarkAllRead;
   const Notificationpopup({
     Key? key,
     required this.image,
     required this.title,
     required this.image2,
     required this.title2,
+    required this.onMarkAllRead,
   }) : super(key: key);
 
   @override
@@ -355,7 +367,8 @@ class Notificationpopup extends StatelessWidget {
                   children: [
                     GestureDetector(
                       onTap: () {
-                        Navigator.pop(context);
+                        //Navigator.pop(context);
+                        onMarkAllRead();
                       },
                       child: Container(
                         color: Colors.transparent,

@@ -7,7 +7,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:kidseau/Constants/colors.dart';
-import 'package:kidseau/ParentsPanel/PHomeScreen/PHomebody.dart';
 import 'package:kidseau/TeachersPanel/THomeScreen/TLearningAlphabets.dart';
 import 'package:kidseau/Theme.dart';
 import 'package:kidseau/api/Teacherpanelapi/teacher_home_api/teacher_group_api.dart';
@@ -162,160 +161,174 @@ class _TSyllabusState extends State<TSyllabus> {
                   ),
                   Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 0.0),
-                      child: Column(
-                        children: [
-                          SizedBox(height: 130),
-                          GroupTab(),
-                          SizedBox(height: 15),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              SizedBox(
-                                width: 150,
-                                child: DropdownButton<String>(
-                                  borderRadius: BorderRadius.circular(8),
-                                  elevation: 1,
-                                  dropdownColor: Colors.white,
-                                  isExpanded: true,
-                                  icon: Image.asset(
-                                    "assets/images/arrowdown.png",
-                                    width: 24,
-                                    height: 24,
-                                    color: Color(0xff84717F),
+                      child: SingleChildScrollView(
+                        child: Column(
+                          children: [
+                            SizedBox(height: 130),
+                            GroupTab(),
+                            SizedBox(height: 15),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                SizedBox(
+                                  width: 150,
+                                  child: DropdownButton<String>(
+                                    borderRadius: BorderRadius.circular(8),
+                                    elevation: 1,
+                                    dropdownColor: Colors.white,
+                                    isExpanded: true,
+                                    icon: Image.asset(
+                                      "assets/images/arrowdown.png",
+                                      width: 24,
+                                      height: 24,
+                                      color: Color(0xff84717F),
+                                    ),
+                                    hint: Text(selected.tr()),
+                                    items: <String>[
+                                      'Sunday'.tr(),
+                                      'Monday'.tr(),
+                                      'Tuesday'.tr(),
+                                      'Wednesday'.tr(),
+                                      'Thursday'.tr(),
+                                    ].map((String value) {
+                                      return DropdownMenuItem<String>(
+                                        value: value,
+                                        child: Text(value),
+                                      );
+                                    }).toList(),
+                                    onChanged: (val) {
+                                      setState(() {
+                                        selected = val!;
+                                        _syllabusLoading = true;
+                                        _getSyllabus();
+                                      });
+                                    },
                                   ),
-                                  hint: Text(selected.tr()),
-                                  items: <String>[
-                                    'Sunday'.tr(),
-                                    'Monday'.tr(),
-                                    'Tuesday'.tr(),
-                                    'Wednesday'.tr(),
-                                    'Thursday'.tr(),
-                                  ].map((String value) {
-                                    return DropdownMenuItem<String>(
-                                      value: value,
-                                      child: Text(value),
-                                    );
-                                  }).toList(),
-                                  onChanged: (val) {
-                                    setState(() {
-                                      selected = val!;
-                                      _syllabusLoading = true;
-                                      _getSyllabus();
-                                    });
-                                  },
                                 ),
-                              ),
-                            ],
-                          ),
-                          SizedBox(height: 20),
-                          _syllabusLoading
-                              ? Center(
-                                  child: CircularProgressIndicator(),
-                                )
-                              : SizedBox(
-                                  // height: 300.h,
-                                  width: 1.sw,
-                                  child: ListView.separated(
-                                      separatorBuilder: (ctx, ind) => SizedBox(
-                                            height: 14.h,
-                                          ),
-                                      shrinkWrap: true,
-                                      padding: EdgeInsets.zero,
-                                      physics: NeverScrollableScrollPhysics(),
-                                      itemCount:
-                                          _syllabusModel.syllabus!.length,
-                                      scrollDirection: Axis.vertical,
-                                      itemBuilder:
-                                          (BuildContext context, int index) {
-                                        return InkWell(
-                                          onTap: () {
-                                            Navigator.of(context).push(
-                                                MaterialPageRoute(
-                                                    builder: (ctx) =>
-                                                        TLearningAlphabets(
-                                                            scheduleID:
-                                                                _syllabusModel
-                                                                    .syllabus![
-                                                                        index]
-                                                                    .actId
-                                                                    .toString())));
-                                          },
-                                          child: Container(
-                                            //height: 64.h,
-                                            padding: EdgeInsets.symmetric(
-                                                vertical: 12),
-                                            // width: Get.size.width * 0.93,
-                                            margin: EdgeInsets.symmetric(
-                                                horizontal: 16),
-                                            decoration: BoxDecoration(
-                                              color: Colors.white,
-                                              borderRadius:
-                                                  BorderRadius.circular(16),
+                              ],
+                            ),
+                            SizedBox(height: 20),
+                            _syllabusLoading
+                                ? Center(
+                                    child: CircularProgressIndicator(),
+                                  )
+                                : SizedBox(
+                                    // height: 300.h,
+                                    width: 1.sw,
+                                    child: ListView.separated(
+                                        separatorBuilder: (ctx, ind) =>
+                                            SizedBox(
+                                              height: 14.h,
                                             ),
-                                            child: Padding(
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                      horizontal: 15.0),
-                                              child: Row(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.center,
-                                                children: [
-                                                  Image.network(
-                                                    _syllabusModel
-                                                        .syllabus![index]
-                                                        .actIcon
-                                                        .toString(),
-                                                    errorBuilder: (q, w, e) =>
-                                                        Text(
-                                                            'Image not loaded'),
-                                                    height: 40,
-                                                    width: 40,
-                                                  ),
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            left: 15.0),
-                                                    child: Column(
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .center,
-                                                      children: [
-                                                        Text(
+                                        shrinkWrap: true,
+                                        padding: EdgeInsets.zero,
+                                        physics: NeverScrollableScrollPhysics(),
+                                        itemCount:
+                                            _syllabusModel.syllabus!.length,
+                                        scrollDirection: Axis.vertical,
+                                        itemBuilder:
+                                            (BuildContext context, int index) {
+                                          return InkWell(
+                                            onTap: () {
+                                              Navigator.of(context).push(
+                                                  MaterialPageRoute(
+                                                      builder: (ctx) =>
+                                                          TLearningAlphabets(
+                                                              scheduleID:
+                                                                  _syllabusModel
+                                                                      .syllabus![
+                                                                          index]
+                                                                      .actId
+                                                                      .toString())));
+                                            },
+                                            child: Container(
+                                              //height: 64.h,
+                                              padding: EdgeInsets.symmetric(
+                                                  vertical: 12),
+                                              // width: Get.size.width * 0.93,
+                                              margin: EdgeInsets.only(
+                                                  left: 16,
+                                                  right: 16,
+                                                  bottom: index ==
                                                           _syllabusModel
-                                                              .syllabus![index]
-                                                              .actTitle
-                                                              .toString(),
-                                                          style: FontConstant
-                                                              .k32w500blackText
-                                                              .copyWith(
-                                                                  fontSize: 16),
-                                                        ),
-                                                        Text(
-                                                          '${_syllabusModel.syllabus![index].timing}',
-                                                          style: FontConstant
-                                                              .k14w400lightpurpleText
-                                                              .copyWith(
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w400,
-                                                                  fontSize: 14,
-                                                                  color: Color(
-                                                                      0xffB7A4B2)),
-                                                        )
-                                                      ],
+                                                                  .syllabus!
+                                                                  .length -
+                                                              1
+                                                      ? 25
+                                                      : 0),
+                                              decoration: BoxDecoration(
+                                                color: Colors.white,
+                                                borderRadius:
+                                                    BorderRadius.circular(16),
+                                              ),
+                                              child: Padding(
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        horizontal: 15.0),
+                                                child: Row(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.center,
+                                                  children: [
+                                                    Image.network(
+                                                      _syllabusModel
+                                                          .syllabus![index]
+                                                          .actIcon
+                                                          .toString(),
+                                                      errorBuilder: (q, w, e) =>
+                                                          Text(
+                                                              'Image not loaded'),
+                                                      height: 40,
+                                                      width: 40,
                                                     ),
-                                                  ),
-                                                ],
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              left: 15.0),
+                                                      child: Column(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .center,
+                                                        children: [
+                                                          Text(
+                                                            _syllabusModel
+                                                                .syllabus![
+                                                                    index]
+                                                                .actTitle
+                                                                .toString(),
+                                                            style: FontConstant
+                                                                .k32w500blackText
+                                                                .copyWith(
+                                                                    fontSize:
+                                                                        16),
+                                                          ),
+                                                          Text(
+                                                            '${_syllabusModel.syllabus![index].timing}',
+                                                            style: FontConstant
+                                                                .k14w400lightpurpleText
+                                                                .copyWith(
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w400,
+                                                                    fontSize:
+                                                                        14,
+                                                                    color: Color(
+                                                                        0xffB7A4B2)),
+                                                          )
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
                                               ),
                                             ),
-                                          ),
-                                        );
-                                      }),
-                                ),
-                        ],
+                                          );
+                                        }),
+                                  ),
+                          ],
+                        ),
                       ))
                 ],
               ),
@@ -328,6 +341,7 @@ class _TSyllabusState extends State<TSyllabus> {
       width: 414,
       height: 62,
       margin: const EdgeInsets.all(10),
+      clipBehavior: Clip.hardEdge,
       decoration: BoxDecoration(
           color: Colors.white, borderRadius: BorderRadius.circular(81)),
       child: ListView.builder(

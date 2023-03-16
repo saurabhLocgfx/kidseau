@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:core';
 import 'dart:developer';
 import 'dart:io';
+
 import 'package:http/http.dart' as http;
 import 'package:kidseau/Constants/string_const.dart';
 import 'package:kidseau/shard_prefs/shared_prefs.dart';
@@ -21,6 +22,7 @@ class SendMessageApi {
       'send_to_id': sendToId,
       'reciever_user_type': receiverUserType
     });
+    print(image.path);
     if (image.path != "") {
       request.files.add(await http.MultipartFile.fromPath('file', image.path));
     }

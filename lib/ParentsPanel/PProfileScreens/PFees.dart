@@ -100,6 +100,7 @@ class _PFeesState extends State<PFees> {
           statusBarColor: Color(0xff8267AC).withOpacity(0.16),
         ),
         backgroundColor: Color(0xff8267AC).withOpacity(0.16),
+        centerTitle: false,
         title: Text(
           "Fees".tr(),
           style: FontConstant.k18w5008471Text,
@@ -231,13 +232,13 @@ class _PFeesState extends State<PFees> {
                                                 ),
                                               ],
                                             ),
-                                            Text(
+                                            /*Text(
                                               _kidModel
                                                   .parentKidId![index].grpId
                                                   .toString()
                                                   .tr(),
                                               style: FontConstant.k12w400White,
-                                            ),
+                                            ),*/
                                           ],
                                         ),
                                       ],
@@ -260,7 +261,8 @@ class _PFeesState extends State<PFees> {
                               log(index.toString());*/
                                   });
                                 },
-                                viewportFraction: 0.9,
+                                viewportFraction:
+                                    _kidModel.parentKidId!.length > 1 ? 0.9 : 1,
                                 //enlargeCenterPage: true,
                                 padEnds: false,
                                 //pageSnapping: false,
@@ -439,7 +441,8 @@ class _PFeesState extends State<PFees> {
                                       ),
                                     ],
                                   ),
-                                )
+                                ),
+                          SizedBox(height: 24),
                         ],
                       ),
                     ),

@@ -364,7 +364,12 @@ class _TStudentDetailScreenState extends State<TStudentDetailScreen> {
                                                         ),
                                                         SizedBox(height: 16),
                                                         Text(
-                                                          model.kidDob
+                                                          DateFormat(
+                                                                  'dd-MM-yyyy')
+                                                              .format(DateTime
+                                                                  .parse(model
+                                                                      .kidDob
+                                                                      .toString()))
                                                               .toString(),
                                                           style: FontConstant
                                                               .k16w5008471Text,
@@ -944,74 +949,89 @@ class _TStudentDetailScreenState extends State<TStudentDetailScreen> {
                                               ],
                                             ),
                                             SizedBox(height: 15),
-                                            Row(
-                                              children: [
-                                                SizedBox(
-                                                  width: 1.sw / 2,
-                                                  height: 180,
-                                                  child: BarChartSample1(
-                                                      activityList:
-                                                          model.actvity ?? []),
-                                                ),
-                                                Expanded(
-                                                  child: SizedBox(
-                                                    // height: 140,
-                                                    child: ListView.builder(
-                                                        shrinkWrap: true,
-                                                        padding:
-                                                            EdgeInsets.zero,
-                                                        physics:
-                                                            NeverScrollableScrollPhysics(),
-                                                        itemCount: model
-                                                            .actvity!.length,
-                                                        itemBuilder:
-                                                            (BuildContext
-                                                                    context,
-                                                                int index) {
-                                                          return Row(
-                                                            children: [
-                                                              Text(
-                                                                  model
-                                                                          .actvity![
-                                                                              index]
-                                                                          .actName![
-                                                                              0]
-                                                                          .toUpperCase() +
-                                                                      model
-                                                                          .actvity![
-                                                                              index]
-                                                                          .actName![
-                                                                              1]
-                                                                          .toUpperCase(),
-                                                                  style: FontConstant
-                                                                      .k14w4008471Text
-                                                                      .copyWith(
+                                            model.actvity!.isEmpty
+                                                ? Column(
+                                                    children: [
+                                                      Image.asset(
+                                                        "assets/images/chicken.png",
+                                                        width: 1.sw,
+                                                        height: 200,
+                                                      ),
+                                                      SizedBox(
+                                                        height: 20,
+                                                      ),
+                                                      Text(
+                                                        "Oops!".tr(),
+                                                        style: FontConstant2
+                                                            .k24w5008267text,
+                                                      ),
+                                                      Text(
+                                                        "No activity available for the kid."
+                                                            .tr(),
+                                                        style: FontConstant
+                                                            .k16w4008471Text,
+                                                      ),
+                                                    ],
+                                                  )
+                                                : Row(
+                                                    children: [
+                                                      SizedBox(
+                                                        width: 1.sw / 2,
+                                                        height: 180,
+                                                        child: BarChartSample1(
+                                                            activityList:
+                                                                model.actvity ??
+                                                                    []),
+                                                      ),
+                                                      Expanded(
+                                                        child: SizedBox(
+                                                          // height: 140,
+                                                          child:
+                                                              ListView.builder(
+                                                                  shrinkWrap:
+                                                                      true,
+                                                                  padding:
+                                                                      EdgeInsets
+                                                                          .zero,
+                                                                  physics:
+                                                                      NeverScrollableScrollPhysics(),
+                                                                  itemCount: model
+                                                                      .actvity!
+                                                                      .length,
+                                                                  itemBuilder:
+                                                                      (BuildContext
+                                                                              context,
+                                                                          int index) {
+                                                                    return Row(
+                                                                      children: [
+                                                                        Text(
+                                                                            model.actvity![index].actName![0].toUpperCase() +
+                                                                                model.actvity![index].actName![1].toUpperCase(),
+                                                                            style: FontConstant.k14w4008471Text.copyWith(color: Color(0xff331F2D))),
+                                                                        SizedBox(
+                                                                            width:
+                                                                                10),
+                                                                        Icon(
+                                                                          Icons
+                                                                              .circle,
+                                                                          size:
+                                                                              4,
                                                                           color:
-                                                                              Color(0xff331F2D))),
-                                                              SizedBox(
-                                                                  width: 10),
-                                                              Icon(
-                                                                Icons.circle,
-                                                                size: 4,
-                                                                color: Color(
-                                                                    0xff84717F),
-                                                              ),
-                                                              SizedBox(
-                                                                  width: 10),
-                                                              Text(
-                                                                  model
-                                                                      .actvity![
-                                                                          index]
-                                                                      .actName!,
-                                                                  style: FontConstant
-                                                                      .k12w5008471Text),
-                                                            ],
-                                                          );
-                                                        }),
-                                                  ),
-                                                )
-                                              ],
-                                            )
+                                                                              Color(0xff84717F),
+                                                                        ),
+                                                                        SizedBox(
+                                                                            width:
+                                                                                10),
+                                                                        Text(
+                                                                            model.actvity![index].actName!,
+                                                                            style: FontConstant.k12w5008471Text),
+                                                                      ],
+                                                                    );
+                                                                  }),
+                                                        ),
+                                                      )
+                                                    ],
+                                                  )
                                           ],
                                         ),
                                       ),
@@ -1099,7 +1119,7 @@ class _TStudentDetailScreenState extends State<TStudentDetailScreen> {
                                     ),
                                     SizedBox(height: 16),
                                     SizedBox(
-                                      height: 52.h,
+                                      height: 56,
                                       width: 382.w,
                                       child: MaterialButton(
                                         elevation: 0,
@@ -1111,7 +1131,7 @@ class _TStudentDetailScreenState extends State<TStudentDetailScreen> {
                                           showDialog(
                                             context: context,
                                             builder: (_) => CalendarPage2(),
-                                          );
+                                          ).then((value) {});
                                         },
                                         child: Center(
                                           child: Text(
@@ -1130,7 +1150,7 @@ class _TStudentDetailScreenState extends State<TStudentDetailScreen> {
                                     ),
                                     SizedBox(height: 32),
                                     SizedBox(
-                                        height: 52.h,
+                                        height: 56,
                                         width: 382.w,
                                         child: MainButton(
                                             onTap: () {

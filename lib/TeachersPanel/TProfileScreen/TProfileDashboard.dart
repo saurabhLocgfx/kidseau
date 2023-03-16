@@ -151,14 +151,15 @@ class _TProfileDashBoardState extends State<TProfileDashBoard> {
 
   Container pageViewTabProfile() {
     return Container(
-      height: 56.h,
-      width: 248.w,
+      height: 56,
+      width: 250,
+      padding: EdgeInsets.symmetric(horizontal: 2),
       decoration: BoxDecoration(
         //  color: Colors.white,
         borderRadius: BorderRadius.circular(76),
       ),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           GestureDetector(
             onTap: () {

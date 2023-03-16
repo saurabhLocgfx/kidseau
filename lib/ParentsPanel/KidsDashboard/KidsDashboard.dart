@@ -146,7 +146,7 @@ class _PKidsDashboardState extends State<PKidsDashboard> {
                               ],
                             ),
                             image: DecorationImage(
-                                opacity: 0.2,
+                                opacity: 1,
                                 image: AssetImage(
                                     "assets/images/postsbackground.png"),
                                 fit: BoxFit.fitWidth,
@@ -155,7 +155,7 @@ class _PKidsDashboardState extends State<PKidsDashboard> {
                           padding: const EdgeInsets.symmetric(horizontal: 16.0),
                           child: Column(
                             children: [
-                              SizedBox(height: 16),
+                              SizedBox(height: 40),
                               Row(
                                 children: [
                                   Container(
@@ -173,29 +173,39 @@ class _PKidsDashboardState extends State<PKidsDashboard> {
                                     ),
                                   ),
                                   SizedBox(width: 20),
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        overviewModel.kidDetails!.kidName
-                                            .toString(),
-                                        style: FontConstant2.k32w500331Ftext,
-                                      ),
-                                      Text(
-                                        overviewModel.kidDetails!.kidGender
-                                                    .toString()
-                                                    .toLowerCase() ==
-                                                'm'
-                                            ? "S/O -  ${overviewModel.kidDetails!.kidFather.toString()}"
-                                            : "D/O -  ${overviewModel.kidDetails!.kidFather.toString()}",
-                                        style: FontConstant.k16w5008471Text,
-                                      ),
-                                      Text(
-                                          overviewModel.kidDetails!.kidVoucher
-                                              .toString(),
-                                          style: FontConstant.k16w5008471Text),
-                                    ],
+                                  SizedBox(
+                                    height: 105,
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        SizedBox(
+                                          width: 250.w,
+                                          child: Text(
+                                            overviewModel.kidDetails!.kidName
+                                                .toString(),
+                                            maxLines: 1,
+                                            overflow: TextOverflow.ellipsis,
+                                            style:
+                                                FontConstant2.k32w500331Ftext,
+                                          ),
+                                        ),
+                                        Text(
+                                          overviewModel.kidDetails!.kidGender
+                                                      .toString()
+                                                      .toLowerCase() ==
+                                                  'm'
+                                              ? "S/O -  ${overviewModel.kidDetails!.kidFather.toString()}"
+                                              : "D/O -  ${overviewModel.kidDetails!.kidFather.toString()}",
+                                          style: FontConstant.k16w5008471Text,
+                                        ),
+                                        Text(
+                                            overviewModel.kidDetails!.kidVoucher
+                                                .toString(),
+                                            style:
+                                                FontConstant.k16w5008471Text),
+                                      ],
+                                    ),
                                   ),
                                 ],
                               ),
@@ -238,14 +248,15 @@ class _PKidsDashboardState extends State<PKidsDashboard> {
 
   Container Pageviewtabprofile() {
     return Container(
-      height: 56.h,
-      width: 248.w,
+      height: 56,
+      width: 250,
+      padding: EdgeInsets.symmetric(horizontal: 2),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(76),
       ),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           GestureDetector(
             onTap: () {
@@ -253,48 +264,45 @@ class _PKidsDashboardState extends State<PKidsDashboard> {
                 pageIndex = 0;
               });
             },
-            child: Container(
-              child: Row(
-                children: [
-                  GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        // selectedIndex = pageIndex = 0;
-                        /* _pageController.animateToPage(
-                          pageIndex,
-                          duration: Duration(milliseconds: 100),
-                          curve: Curves.linear,
-                        );*/
-                        pageIndex = 0;
-                      });
-                    },
-                    child: Container(
-                      height: 50,
-                      width: 50,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(93),
-                          color: pageIndex == 0
-                              ? Color(0xffEBE6F2)
-                              : Colors.white),
-                      child: Center(
-                        child: Image.asset(
-                            pageIndex == 0
-                                ? "assets/images/profileiconfill.png"
-                                : "assets/images/profileicon.png",
-                            height: 24),
-                      ),
+            child: Row(
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      // selectedIndex = pageIndex = 0;
+                      /* _pageController.animateToPage(
+                        pageIndex,
+                        duration: Duration(milliseconds: 100),
+                        curve: Curves.linear,
+                      );*/
+                      pageIndex = 0;
+                    });
+                  },
+                  child: Container(
+                    height: 50,
+                    width: 50,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(93),
+                        color:
+                            pageIndex == 0 ? Color(0xffEBE6F2) : Colors.white),
+                    child: Center(
+                      child: Image.asset(
+                          pageIndex == 0
+                              ? "assets/images/profileiconfill.png"
+                              : "assets/images/profileicon.png",
+                          height: 24),
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 4.0),
-                    child: Text("Overview".tr(),
-                        style: FontConstant.k14w500B7A4Text.copyWith(
-                            color: pageIndex == 0
-                                ? Color(0xff8267AC)
-                                : Color(0xffB7A4B2))),
-                  ),
-                ],
-              ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 4.0),
+                  child: Text("Overview".tr(),
+                      style: FontConstant.k14w500B7A4Text.copyWith(
+                          color: pageIndex == 0
+                              ? Color(0xff8267AC)
+                              : Color(0xffB7A4B2))),
+                ),
+              ],
             ),
           ),
           SizedBox(width: 10),

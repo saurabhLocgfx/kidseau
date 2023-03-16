@@ -29,6 +29,7 @@ class ParentKidApi {
     http.StreamedResponse response = await request.send();
 
     var v = jsonDecode(await response.stream.bytesToString());
+    //print(v);
     if (response.statusCode == 200) {
       return v;
     } else {

@@ -1,7 +1,9 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:kidseau/Constants/colors.dart';
 import 'package:kidseau/Theme.dart';
+import 'package:kidseau/Widgets/buttons.dart';
 
 class MyPostOptionsDialog extends StatelessWidget {
   const MyPostOptionsDialog({
@@ -416,5 +418,66 @@ class kidsgallerydialog extends StatelessWidget {
             ),
           ];
         });
+  }
+}
+
+class SuretyDialog extends StatefulWidget {
+  final Function onYesTap;
+  const SuretyDialog({Key? key, required this.onYesTap}) : super(key: key);
+
+  @override
+  State<SuretyDialog> createState() => _SuretyDialogState();
+}
+
+class _SuretyDialogState extends State<SuretyDialog> {
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      insetPadding: EdgeInsets.all(16),
+      contentPadding: EdgeInsets.zero,
+      backgroundColor: Colors.transparent,
+      content: Container(
+        padding: EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(16),
+        ),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Row(
+                children: [
+                  Text(
+                    'Delete',
+                    style: FontConstant.k18w500F970Text,
+                  ),
+                ],
+              ),
+              SizedBox(height: 8),
+              Text(
+                'Are you sure you want to delete this post?',
+                style: FontConstant.k16w500331FText,
+              ),
+              SizedBox(height: 16),
+              Row(
+                children: [
+                  Expanded(
+                    child: materialButton2(context, () {
+                      Navigator.pop(context);
+                    }, 'No', AppColors().kF8F6FA, 44.0),
+                  ),
+                  SizedBox(width: 16),
+                  Expanded(
+                    child: materialButton(context, () {
+                      widget.onYesTap();
+                    }, 'Yes, Delete', AppColors().k8267AC, 44.0),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }

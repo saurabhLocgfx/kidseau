@@ -61,11 +61,11 @@ class _TAddPostsScreenState extends State<TAddPostsScreen> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Image.asset(
-                              'assets/images/add.png',
+                              'assets/images/gallery2.png',
                               width: 50,
                               height: 50,
                             ),
-                            SizedBox(height: 30),
+                            SizedBox(height: 16),
                             Text("Add Photos".tr(),
                                 style: FontConstant.k18w500B7A4Text2),
                           ],

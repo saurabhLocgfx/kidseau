@@ -1,4 +1,26 @@
 {
+  "Who is taking this class": "Qui prend ce cours",
+  "This message has been deleted!": "Ce message a été supprimé",
+  "New Announcement": "Nouvelle annonce",
+  "Audio File": "Fichier audio",
+  "No Contacts Found.": "Aucun contact trouvé",
+  "Birth": "Naissance",
+  "Months": "Mois",
+  "Years": "Ans",
+  "Other Vaccination": "Autre vaccinations",
+  "Covid Vaccination": "La vaccination de COVID",
+  "Medical Information": "Informations médical",
+  "Enter kid’s blood group": "Entrez le groupe sanguin",
+  "Select group": "sélectionner un groupe",
+  "Select section": "Sélectionnez la section de classe",
+  "Enter your kid's name": "Entrez le nom de votre enfant",
+  "kid's name": "nom de l'enfant",
+  "Post": "Publier",
+  "No kids found.": "Aucun enfant trouvé.",
+  "last message": "Dernier message",
+  "Upload kid photo": "Chargez la photo de votre enfant",
+  "Image uploaded": "Image téléchargée",
+  "Place":"Position",
   "i'm a Teacher": "Je suis éducatrice",
   "i'm a parent": "Je suis un parent",
   "We offer a new way to mark the children and shape them for better future.":"Nous offrons une nouvelle méthode de noter les enfants et de les former pour un avenir meilleur",
@@ -135,7 +157,7 @@
 
   "Groups":"Groupes",
 
-  "View all students":"Voir tous les enfants",
+  "View all kids":"Voir tous les enfants",
 
   "Search student":"Rechercher des enfants ",
 

@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:developer';
 import 'dart:io';
 import 'dart:ui';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -13,10 +14,6 @@ import 'package:kidseau/Constants/colors.dart';
 import 'package:kidseau/Widgets/buttons.dart';
 import 'package:kidseau/Widgets/custom_snack_bar.dart';
 import 'package:kidseau/Widgets/screen_loader.dart';
-import 'package:kidseau/api/Teacherpanelapi/teacher_profile_api/teacher_update_email_number_api.dart';
-import 'package:kidseau/api/Teacherpanelapi/teacher_profile_api/teacher_update_profile.dart';
-import 'package:kidseau/api/Teacherpanelapi/teacher_profile_api/teacher_update_profile_picture.dart';
-import 'package:kidseau/api/Teacherpanelapi/teacher_profile_api/teacher_verify_update_otp.dart';
 import 'package:kidseau/api/models/parent_models/parent_profile_models/parent_profile_model.dart';
 import 'package:kidseau/api/parent_panel_apis/parent_profile_apis/parent_update_number_email_api.dart';
 import 'package:kidseau/api/parent_panel_apis/parent_profile_apis/parent_update_profile_api.dart';
@@ -25,7 +22,6 @@ import 'package:kidseau/api/parent_panel_apis/parent_profile_apis/update_parent_
 import 'package:pin_code_fields/pin_code_fields.dart';
 
 import '../../Theme.dart';
-import '../../api/models/teacher_profile_details_model/teacher_profile_details_model.dart';
 
 class PEditProfileScreen extends StatefulWidget {
   final ParentProfileModel model;
@@ -718,7 +714,7 @@ class _ParentBottomSheetWidgetState extends State<ParentBottomSheetWidget> {
         padding:
             EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
         child: Container(
-          padding: EdgeInsets.only(top: 32, left: 16, right: 16, bottom: 56),
+          padding: EdgeInsets.only(top: 32, left: 16, right: 16, bottom: 24),
           decoration: BoxDecoration(color: AppColors().bgColor),
           child: Form(
             key: _key,
@@ -918,7 +914,7 @@ class _ParentBottomSheetWidgetState extends State<ParentBottomSheetWidget> {
                     ),
                   ),
                 ),
-                SizedBox(height: 32),
+                if (_showField) SizedBox(height: 32),
                 _showField
                     ? Padding(
                         padding: EdgeInsets.symmetric(horizontal: 32),
@@ -946,18 +942,45 @@ class _ParentBottomSheetWidgetState extends State<ParentBottomSheetWidget> {
                           ),
                         ),
                       )
-                    : SizedBox.shrink(),
-                SizedBox(height: 32),
-                CheckboxListTile(
+                    : Container(),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 24),
+                  child: Row(
+                    children: [
+                      Checkbox(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                          value: _isMother,
+                          activeColor: Color(0xffBE74AA),
+                          checkColor: Colors.white,
+                          onChanged: (val) {
+                            if (_showField) {
+                              Fluttertoast.showToast(
+                                  msg:
+                                      'OTP already sent. You cannot change now.');
+                            } else {
+                              setState(() {
+                                _isMother = !_isMother;
+                              });
+                            }
+                          }),
+                      Expanded(
+                        child: Text(
+                          "Changed email/phone number belongs to Mother".tr(),
+                          maxLines: 2,
+                          style: FontConstant.k16w4008471Text,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                /*CheckboxListTile(
                     controlAffinity: ListTileControlAffinity.leading,
                     activeColor: Color(0xffBE74AA),
                     checkColor: Colors.white,
                     checkboxShape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(5),
-                    ),
-                    title: Text(
-                      "Changed email/phone number belongs to Mother".tr(),
-                      style: FontConstant.k16w4008471Text,
                     ),
                     value: _isMother,
                     onChanged: (val) {
@@ -969,10 +992,8 @@ class _ParentBottomSheetWidgetState extends State<ParentBottomSheetWidget> {
                           _isMother = !_isMother;
                         });
                       }
-                    }),
-                SizedBox(
-                  height: 8,
-                ),
+                    }),*/
+                //SizedBox(height: 24),
                 SizedBox(
                   height: 52,
                   width: 1.sw,

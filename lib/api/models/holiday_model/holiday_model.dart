@@ -9,16 +9,16 @@ class HolidayApiModel {
     if (json['allHoliday'] != null) {
       allHoliday = <AllHoliday>[];
       json['allHoliday'].forEach((v) {
-        allHoliday!.add(new AllHoliday.fromJson(v));
+        allHoliday!.add(AllHoliday.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['status'] = this.status;
-    if (this.allHoliday != null) {
-      data['allHoliday'] = this.allHoliday!.map((v) => v.toJson()).toList();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['status'] = status;
+    if (allHoliday != null) {
+      data['allHoliday'] = allHoliday!.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -38,10 +38,10 @@ class AllHoliday {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['holiday_id'] = this.holidayId;
-    data['holiday_date'] = this.holidayDate;
-    data['holiday_disc'] = this.holidayDisc;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['holiday_id'] = holidayId;
+    data['holiday_date'] = holidayDate;
+    data['holiday_disc'] = holidayDisc;
     return data;
   }
 }

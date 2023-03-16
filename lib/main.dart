@@ -1,7 +1,9 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
-import 'package:http/http.dart' as http;
+
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:easy_localization/easy_localization.dart' as local;
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -11,14 +13,15 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_mentions/flutter_mentions.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:kidseau/ParentsPanel/POnboardingScreens/PSplashScreen.dart';
+import 'package:http/http.dart' as http;
 import 'package:kidseau/Theme.dart';
+import 'package:kidseau/Widgets/THomeScreenWidgets/no_internet.dart';
 import 'package:kidseau/reminder_notifications_class.dart';
 import 'package:kidseau/restartappwidget/restartwidgets.dart';
 import 'package:kidseau/shard_prefs/shared_prefs.dart';
-import 'dart:ui' as ui;
 
 import 'ParentsPanel/PDashBoard.dart';
+import 'ParentsPanel/POnboardingScreens/PSplashScreen.dart';
 import 'TeachersPanel/TDashboard.dart';
 
 GlobalKey<MyAppState> globalKey = GlobalKey<MyAppState>();
@@ -309,28 +312,78 @@ class MyAppState extends State<MyApp> {
       },
     );
     notificationServices.initializeNotification();
+    initConnectivity();
+    _connectivitySubscription =
+        _connectivity.onConnectivityChanged.listen(_updateConnectionStatus);
     super.initState();
   }
 
-  Widget getRoute() {
-    if (UserPrefs.getCookies() == null) {
-      log('cookie null 1');
-      return PSplashScreen();
-    } else {
-      log('cookie not null');
-      if (UserPrefs.getIsTeacher() == null) {
-        log('cookie not null');
-        return PSplashScreen();
-      } else if (UserPrefs.getIsTeacher() == true) {
-        log('teacher true');
-        return TDashboard();
-      } else if (UserPrefs.getIsTeacher() == false) {
-        log('teacher false');
-        return PDashboard();
-      } else {
-        return PSplashScreen();
-      }
+  ConnectivityResult _connectionStatus = ConnectivityResult.none;
+  final Connectivity _connectivity = Connectivity();
+  late StreamSubscription<ConnectivityResult> _connectivitySubscription;
+
+  Future<void> initConnectivity() async {
+    late ConnectivityResult result;
+    // Platform messages may fail, so we use a try/catch PlatformException.
+    try {
+      result = await _connectivity.checkConnectivity();
+    } on PlatformException catch (e) {
+      log('Couldn\'t check connectivity status', error: e);
+      return;
     }
+
+    // If the widget was removed from the tree while the asynchronous platform
+    // message was in flight, we want to discard the reply rather than calling
+    // setState to update our non-existent appearance.
+    if (!mounted) {
+      return Future.value(null);
+    }
+
+    return _updateConnectionStatus(result);
+  }
+
+  Future<void> _updateConnectionStatus(ConnectivityResult result) async {
+    if (mounted) {
+      setState(() {
+        _connectionStatus = result;
+      });
+    }
+  }
+
+  Widget getRoute() {
+    print(_connectionStatus);
+    if ((_connectionStatus != ConnectivityResult.none)) {
+      if (UserPrefs.getCookies() == null) {
+        log('cookie null 1');
+        return PSplashScreen();
+      } else {
+        log('cookie not null');
+        if (UserPrefs.getIsTeacher() == null) {
+          log('cookie not null');
+          return PSplashScreen();
+        } else if (UserPrefs.getIsTeacher() == true) {
+          log('teacher true');
+          return TDashboard();
+        } else if (UserPrefs.getIsTeacher() == false) {
+          log('teacher false');
+          return PDashboard();
+        } else {
+          return PSplashScreen();
+        }
+      }
+    } else {
+      return NoInternet(
+        onRetryTap: () {
+          Connectivity().checkConnectivity();
+          RestartWidget.restartApp(context);
+        },
+      );
+    }
+    /*return NoInternet(
+      onRetryTap: () {
+        Connectivity().checkConnectivity();
+      },
+    );*/
   }
 
   @override

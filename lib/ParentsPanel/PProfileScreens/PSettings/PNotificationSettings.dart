@@ -6,6 +6,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:kidseau/Theme.dart';
+import 'package:kidseau/api/notification_api/notification_api.dart';
+import 'package:kidseau/shard_prefs/shared_prefs.dart';
 
 class PNotificationsettings extends StatefulWidget {
   PNotificationsettings({Key? key}) : super(key: key);
@@ -22,28 +24,34 @@ class _PNotificationsettingsState extends State<PNotificationsettings> {
   bool val3 = false;
   bool val4 = false;
 
-  onChangedFunction1(bool newvalue1) {
+  @override
+  void initState() {
+    getData();
+    super.initState();
+  }
+
+  getData() {
     setState(() {
-      val1 = newvalue1;
+      val2 = UserPrefs.getNoti1() ?? false;
+      val3 = UserPrefs.getNoti2() ?? false;
+      val4 = UserPrefs.getNoti3() ?? false;
+      if (val2 && val3 && val4) {
+        val1 = true;
+      }
     });
   }
 
-  onChangedFunction2(bool newvalue2) {
-    setState(() {
-      val2 = newvalue2;
-    });
-  }
-
-  onChangedFunction3(bool newvalue3) {
-    setState(() {
-      val3 = newvalue3;
-    });
-  }
-
-  onChangedFunction4(bool newvalue4) {
-    setState(() {
-      val4 = newvalue4;
-    });
+  setData() {
+    UserPrefs.setNoti1(val2);
+    UserPrefs.setNoti2(val3);
+    UserPrefs.setNoti3(val4);
+    NotificationApi()
+        .setNotificationSettings(
+          post: val2 ? '1' : '0',
+          announcement: val3 ? '1' : '0',
+          message: val4 ? '1' : '0',
+        )
+        .then((value) => print(value));
   }
 
   @override
@@ -66,26 +74,24 @@ class _PNotificationsettingsState extends State<PNotificationsettings> {
             statusBarColor: Color(0xff8267AC).withOpacity(0.16),
           ),
           backgroundColor: Color(0xff8267AC).withOpacity(0.16),
+          centerTitle: false,
           title: Text(
             "Notification settings".tr(),
             style: FontConstant.k18w5008471Text,
           ),
-          leading: Row(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 16.0),
-                child: GestureDetector(
-                  onTap: () {
-                    Navigator.pop(context);
-                  },
-                  child: Image.asset(
-                    "assets/images/backarrow.png",
-                    height: 24,
-                    width: 24,
-                  ),
-                ),
+          leading: GestureDetector(
+            onTap: () {
+              Navigator.pop(context);
+            },
+            child: Container(
+              color: Colors.transparent,
+              padding: EdgeInsets.symmetric(horizontal: 16),
+              child: Image.asset(
+                "assets/images/backarrow.png",
+                height: 24,
+                width: 24,
               ),
-            ],
+            ),
           ),
         ),
         body: SafeArea(
@@ -93,7 +99,7 @@ class _PNotificationsettingsState extends State<PNotificationsettings> {
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: Column(
               children: [
-                SizedBox(height: 16),
+                SizedBox(height: 40),
                 GestureDetector(
                   onTap: () {
                     // Navigator.of(context).push(
@@ -128,6 +134,7 @@ class _PNotificationsettingsState extends State<PNotificationsettings> {
                                   val3 = v;
                                   val4 = v;
                                 });
+                                setData();
                               })),
                     ],
                   ),
@@ -158,6 +165,7 @@ class _PNotificationsettingsState extends State<PNotificationsettings> {
                               setState(() {
                                 val2 = v;
                               });
+                              setData();
                             })),
                   ],
                 ),
@@ -170,7 +178,7 @@ class _PNotificationsettingsState extends State<PNotificationsettings> {
                         Icon(Icons.circle, size: 6, color: Color(0xff331F2D)),
                         SizedBox(width: 10),
                         Text(
-                          "New Activity".tr(),
+                          "New Announcement".tr(),
                           style: FontConstant.k18w500331FText,
                         ),
                       ],
@@ -187,6 +195,7 @@ class _PNotificationsettingsState extends State<PNotificationsettings> {
                               setState(() {
                                 val3 = v;
                               });
+                              setData();
                             })),
                   ],
                 ),
@@ -216,6 +225,7 @@ class _PNotificationsettingsState extends State<PNotificationsettings> {
                               setState(() {
                                 val4 = v;
                               });
+                              setData();
                             })),
                   ],
                 ),

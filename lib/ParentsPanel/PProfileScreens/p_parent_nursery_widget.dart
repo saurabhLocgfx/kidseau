@@ -2,6 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:kidseau/api/models/parent_models/parent_profile_models/kid_school_detail_model.dart';
 import 'package:kidseau/api/parent_panel_apis/parent_profile_apis/nursery_data_api.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -30,12 +31,14 @@ class _PParentNurseryWidgetState extends State<PParentNurseryWidget> {
     _isLoading = true;
     final resp = NurseryData().get();
     resp.then((value) {
-      setState(() {
-        for (var v in value) {
-          dataList.add(PKidSchoolDetailModel.fromJson(v));
-        }
-        _isLoading = false;
-      });
+      if (mounted) {
+        setState(() {
+          for (var v in value) {
+            dataList.add(PKidSchoolDetailModel.fromJson(v));
+          }
+          _isLoading = false;
+        });
+      }
     });
   }
 
@@ -53,64 +56,68 @@ class _PParentNurseryWidgetState extends State<PParentNurseryWidget> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     CarouselSlider.builder(
-                      itemCount: dataList.length,
+                      itemCount: dataList.toSet().toList().length,
                       itemBuilder: (ctx, index, realInd) {
-                        return Padding(
-                          padding: const EdgeInsets.only(top: 40),
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Container(
-                                height: 128,
-                                width: 96,
-                                clipBehavior: Clip.hardEdge,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(8)),
-                                child: Image.network(
-                                  dataList[index].schoolImage.toString(),
-                                  fit: BoxFit.fill,
-                                  errorBuilder: (q, w, e) => Image.asset(
-                                      "assets/images/profileperson.png"),
-                                ),
+                        return Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              height: 128,
+                              width: 96,
+                              clipBehavior: Clip.hardEdge,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(8)),
+                              child: Image.network(
+                                dataList
+                                    .toSet()
+                                    .toList()[index]
+                                    .schoolImage
+                                    .toString(),
+                                fit: BoxFit.cover,
+                                errorBuilder: (q, w, e) => Image.asset(
+                                    "assets/images/profileperson.png"),
                               ),
-                              SizedBox(width: 25),
-                              Align(
-                                alignment: Alignment.center,
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      dataList[index].schoolName.toString(),
-                                      style: FontConstant.k22w500brownText,
-                                    ),
-                                    Row(
-                                      children: [
-                                        Image.asset(
-                                          "assets/images/clockicon.png",
-                                          height: 24,
-                                        ),
-                                        SizedBox(width: 4),
-                                        Row(
-                                          children: [
-                                            Text(
-                                              "${"From".tr()} ${DateFormat.jm().format(DateFormat("hh:mm:ss").parse(dataList[index].schoolTime.toString().split('.').first))}",
-                                              style:
-                                                  FontConstant.k16w5008471Text,
-                                            ),
-                                            /*Text(
-                                        "${"To".tr()} ${DateFormat.jm().format(DateFormat("hh:mm:ss").parse(dataList[index].schoolTime.toString().split('.').first))}",
-                                        style: FontConstant.k14w400White,
-                                      ),*/
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
+                            ),
+                            SizedBox(width: 16),
+                            Align(
+                              alignment: Alignment.center,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    dataList
+                                        .toSet()
+                                        .toList()[index]
+                                        .schoolName
+                                        .toString(),
+                                    style: FontConstant.k22w500brownText,
+                                  ),
+                                  Row(
+                                    children: [
+                                      Image.asset(
+                                        "assets/images/clockicon.png",
+                                        height: 24,
+                                      ),
+                                      SizedBox(width: 4),
+                                      Row(
+                                        children: [
+                                          Text(
+                                            "${"From".tr()} ${DateFormat.jm().format(DateFormat("hh:mm:ss").parse(dataList.toSet().toList()[index].schoolTime.toString().split('.').first))}",
+                                            style: FontConstant.k16w5008471Text,
+                                          ),
+                                          /*Text(
+                                      "${"To".tr()} ${DateFormat.jm().format(DateFormat("hh:mm:ss").parse(dataList[index].schoolTime.toString().split('.').first))}",
+                                      style: FontConstant.k14w400White,
+                                    ),*/
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ],
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         );
                       },
                       options: CarouselOptions(
@@ -127,27 +134,25 @@ class _PParentNurseryWidgetState extends State<PParentNurseryWidget> {
                         enableInfiniteScroll: false,
                       ),
                     ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: List.generate(
-                        dataList.length,
-                        (index) {
-                          return Container(
-                            height: 4,
-                            width: currentIndex == index ? 20 : 9,
-                            margin: EdgeInsets.only(right: 5),
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(20),
-                                color: currentIndex == index
-                                    ? Color(0xffF0AD56)
-                                    : Color(0xffF0AD56).withOpacity(.40)),
-                          );
-                        },
+                    if (dataList.toSet().toList().length > 1)
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: List.generate(
+                          dataList.toSet().toList().length,
+                          (index) {
+                            return Container(
+                              height: 4,
+                              width: currentIndex == index ? 20 : 9,
+                              margin: EdgeInsets.only(right: 5),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
+                                  color: currentIndex == index
+                                      ? Color(0xffF0AD56)
+                                      : Color(0xffF0AD56).withOpacity(.40)),
+                            );
+                          },
+                        ),
                       ),
-                    ),
                     SizedBox(height: 15),
                     Text(
                       "Reception Info".tr(),
@@ -157,12 +162,13 @@ class _PParentNurseryWidgetState extends State<PParentNurseryWidget> {
                     Row(
                       children: [
                         SizedBox(
-                          width: 200,
+                          width: 130,
                           child: Text(
                             'Email address'.tr(),
                             style: FontConstant2.k16w5008267text,
                           ),
                         ),
+                        SizedBox(width: 16),
                         Text(
                           dataList[currentIndex].schoolEmail.toString(),
                           style: FontConstant.k16w5008471Text,
@@ -172,12 +178,13 @@ class _PParentNurseryWidgetState extends State<PParentNurseryWidget> {
                     Row(
                       children: [
                         SizedBox(
-                          width: 200,
+                          width: 130,
                           child: Text(
                             'Phone number'.tr(),
                             style: FontConstant2.k16w5008267text,
                           ),
                         ),
+                        SizedBox(width: 16),
                         Text(
                           dataList[currentIndex].schoolPhone.toString(),
                           style: FontConstant.k16w5008471Text,
@@ -187,12 +194,13 @@ class _PParentNurseryWidgetState extends State<PParentNurseryWidget> {
                     Row(
                       children: [
                         SizedBox(
-                          width: 200,
+                          width: 130,
                           child: Text(
                             'Address'.tr(),
                             style: FontConstant2.k16w5008267text,
                           ),
                         ),
+                        SizedBox(width: 16),
                         Text(
                           dataList[currentIndex].schoolAddress.toString(),
                           style: FontConstant.k16w5008471Text,
@@ -264,11 +272,21 @@ class _PParentNurseryWidgetState extends State<PParentNurseryWidget> {
                       height: 52,
                       width: 1.sw,
                       child: MainButton(
-                          onTap: () {},
+                          onTap: () async {
+                            String url =
+                                'https://www.google.com/maps/search/?api=1&query=${dataList[currentIndex].socialMedia!.mapLocation!.split(",").first.toString()},${dataList[currentIndex].socialMedia!.mapLocation!.split(",").last.toString()}';
+                            if (await canLaunchUrl(Uri.parse(url))) {
+                              await launchUrl(Uri.parse(url));
+                            } else {
+                              Fluttertoast.showToast(
+                                  msg: 'Could not open the map.');
+                            }
+                          },
                           title: "Locate us".tr(),
                           textStyleColor: Colors.white,
                           backgroundColor: ThemeColor.primarycolor),
                     ),
+                    SizedBox(height: 90),
                   ],
                 ),
               ),

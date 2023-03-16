@@ -1,4 +1,27 @@
 {
+  "Who is taking this class": "من يأخذ هذا الفصل",
+  "This message has been deleted!": "تم حذف هذه الرسالة",
+  "New Announcement": "إعلان جديد",
+  "Audio File": "ملف صوتي",
+  "No Contacts Found.": "لم يتم العثور على جهات اتصال",
+  "Birth": "الولادة",
+  "Months": "شهر",
+  "Years": "سنة",
+  "Other Vaccination": "تلقيحات أخرى",
+  "Covid Vaccination": "تلقيح الكوفيد",
+  "Medical Information": "معلومات طبية",
+  "Enter kid’s blood group": "أدخل زمرة الدم",
+  "Select group": "اختر مجموعة",
+  "Select section": "إختر قسم الفصل",
+  "Enter your kid's name": "أدخل اسم إبنك",
+  "kid's name": "إسم الطفل",
+  "Post": "أنشر",
+  "No kids found.": "لم يتم العثور على أطفال.",
+  "Absent": "غائب",
+  "last message": "اخر رسالة",
+  "Upload kid photo": "حمل صورة طفلك",
+  "Image uploaded": "تم تحميل الصورة",
+  "Place":"موضع",
   "i'm a teacher": "أنا مربي(ة)",
   "i'm a parent": "أنا ولي(ة) أمر",
   "We offer a new way to mark the children and shape them for better future.":"نقدم طريقة جديدة لتقييم الأطفال وتعليمهم من أجل مستقبل أفضل",
@@ -106,7 +129,7 @@
 
   "Groups": "الأقسام",
 
-  "View all students": "عرض كل الاطفال",
+  "View all kids": "عرض كل الاطفال",
 
   "Search student": "البحث عن الطفل",
 

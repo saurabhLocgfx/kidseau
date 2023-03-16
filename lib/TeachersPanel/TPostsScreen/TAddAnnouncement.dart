@@ -22,6 +22,8 @@ class _AddAnnouncementState extends State<AddAnnouncement> {
   DateTime? _pickedDate;
   TimeOfDay? _pickedTime;
   String dobString = 'Select date (optional)'.tr();
+  String apiDob = '';
+  String apiTime = '';
   String timeString = 'Select time (optional)'.tr();
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
@@ -108,6 +110,7 @@ class _AddAnnouncementState extends State<AddAnnouncement> {
                             return null;
                           }
                         },
+                        textInputAction: TextInputAction.done,
                         controller: _descController,
                         maxLines: 6,
                         decoration: TextFieldDecoration().curvedWhiteDecoration(
@@ -138,8 +141,9 @@ class _AddAnnouncementState extends State<AddAnnouncement> {
                               final now = DateTime.now();
                               final dt = DateTime(now.year, now.month, now.day,
                                   _pickedTime!.hour, _pickedTime!.minute);
-                              timeString =
-                                  DateFormat.Hms().format(dt); //"6:00 AM"
+                              timeString = DateFormat('hh:mm a').format(dt);
+                              apiTime =
+                                  DateFormat('hh:mm:ss').format(dt); //"6:00 AM"
                             });
                             print(timeString);
                           }
@@ -157,7 +161,9 @@ class _AddAnnouncementState extends State<AddAnnouncement> {
                             children: [
                               Text(timeString,
                                   style: TextStyle(
-                                    color: Colors.grey,
+                                    color: timeString.contains(':')
+                                        ? Colors.black
+                                        : Colors.grey,
                                   )),
                               SizedBox(
                                 width: 30,
@@ -193,6 +199,8 @@ class _AddAnnouncementState extends State<AddAnnouncement> {
                             //
                             setState(() {
                               dobString =
+                                  DateFormat('dd-MM-yyyy').format(_pickedDate!);
+                              apiDob =
                                   DateFormat('yyyy-MM-dd').format(_pickedDate!);
                             });
                             //print(dobString);
@@ -211,7 +219,9 @@ class _AddAnnouncementState extends State<AddAnnouncement> {
                             children: [
                               Text(dobString,
                                   style: TextStyle(
-                                    color: Colors.grey,
+                                    color: dobString.contains('-')
+                                        ? Colors.black
+                                        : Colors.grey,
                                   )),
                               SizedBox(
                                 width: 30,
@@ -245,14 +255,14 @@ class _AddAnnouncementState extends State<AddAnnouncement> {
                 final resp = TeacherAnnouncementApi().post(
                     title: _titleController.text,
                     desc: _descController.text,
-                    time: timeString.contains(':') ? timeString : '',
-                    date: dobString.contains('-') ? dobString : '');
+                    time: apiTime,
+                    date: apiDob);
                 resp.then((value) {
                   log(value.toString());
-                  Navigator.of(context).pop();
+                  Navigator.pop(context);
                   if (value['status'] == 1) {
                     CustomSnackBar.customSnackBar(context, value['msg']);
-                    Navigator.of(context).pop();
+                    Navigator.pop(context);
                     widget.onPop(2);
                   } else {
                     CustomSnackBar.customErrorSnackBar(context, value['msg']);

@@ -25,8 +25,9 @@ class ParentActivityHomeApi {
     request.headers.addAll(headers);
 
     http.StreamedResponse response = await request.send();
-
+    print(response.request);
     var v = jsonDecode(await response.stream.bytesToString());
+    //print(v);
     if (response.statusCode == 200) {
       return v;
     } else {

@@ -10,14 +10,14 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:grouped_list/grouped_list.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:kidseau/Constants/colors.dart';
 import 'package:kidseau/Theme.dart';
 import 'package:kidseau/Widgets/custom_snack_bar.dart';
-import 'package:kidseau/Widgets/popups.dart';
 import 'package:kidseau/api/message_apis/all_message_api.dart';
 import 'package:kidseau/api/message_apis/delete_message_api.dart';
 import 'package:kidseau/api/message_apis/get_latest_message_api.dart';
-import 'package:kidseau/api/models/message_models/all_messages_model.dart';
 import 'package:kidseau/api/message_apis/send_message_api.dart';
+import 'package:kidseau/api/models/message_models/all_messages_model.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:record/record.dart';
 
@@ -28,15 +28,15 @@ class POpenChats extends StatefulWidget {
   final String name;
   final String language;
   final Function onPop;
-  const POpenChats(
-      {Key? key,
-      required this.userId,
-      required this.userType,
-      required this.onPop,
-      required this.profilePic,
-      required this.name,
-      required this.language})
-      : super(key: key);
+  const POpenChats({
+    Key? key,
+    required this.userId,
+    required this.userType,
+    required this.onPop,
+    required this.profilePic,
+    required this.name,
+    required this.language,
+  }) : super(key: key);
 
   @override
   State<POpenChats> createState() => _POpenChatsState();
@@ -100,6 +100,8 @@ class _POpenChatsState extends State<POpenChats> {
   bool _noMessageFound = false;
   int scroll = 0;
 
+  List readMore = [];
+
   _getReloadedData() {
     scroll++;
     //_isLoading = true;
@@ -108,11 +110,15 @@ class _POpenChatsState extends State<POpenChats> {
         userType: widget.userType,
         scroll: scroll.toString());
     resp.then((value) {
-      log(value.toString());
+      //log(value.toString());
+      readMore.clear();
       if (value['status'] == 1) {
         setState(() {
           for (var v in value['allMsg']) {
             messageModel.allMsg!.add(AllMsg.fromJson(v));
+          }
+          for (var v in messageModel.allMsg!) {
+            readMore.add(false);
           }
           // messageModel = AllMessagesModel.fromJson(value);
           // _isLoading = false;
@@ -132,10 +138,14 @@ class _POpenChatsState extends State<POpenChats> {
     final resp = AllMessagesApi()
         .get(userId: widget.userId, userType: widget.userType, scroll: '0');
     resp.then((value) {
-      log(value.toString());
+      //log(value.toString());
+      readMore.clear();
       if (value['status'] == 1) {
         setState(() {
           messageModel = AllMessagesModel.fromJson(value);
+          for (var v in messageModel.allMsg!) {
+            readMore.add(false);
+          }
           _isLoading = false;
         });
       } else {
@@ -152,6 +162,7 @@ class _POpenChatsState extends State<POpenChats> {
         .get(userId: widget.userId, userType: widget.userType);
     resp.then((value) {
       if (value['status'] == 1) {
+        readMore.clear();
         setState(() {
           for (var v in value['allMsg']) {
             messageModel.allMsg!.add(AllMsg.fromJson({
@@ -165,6 +176,9 @@ class _POpenChatsState extends State<POpenChats> {
               'sender_user_type': '${v['sender_user_type']}',
               'reciever_user_type': '${v['reciever_user_type']}',
             }));
+            for (var v in messageModel.allMsg!) {
+              readMore.add(false);
+            }
           }
         });
       } else {}
@@ -186,35 +200,48 @@ class _POpenChatsState extends State<POpenChats> {
     var a = await Permission.contacts.request();
     if (a.isGranted) {
       log('granted');
-      contactList = await ContactsService.getContacts();
-      //log(contactList[0].phones![0].value.toString());
+      contactList = await ContactsService.getContacts().then((value) {
+        setState(() {
+          _isVisible = false;
+        });
+        return contactList;
+      });
+      log(contactList.length.toString());
       showDialog(
           context: context,
           builder: (ctx) {
             return AlertDialog(
-              content: Container(
-                height: 300,
-                width: 1.sw,
-                child: ListView.separated(
-                    shrinkWrap: true,
-                    itemBuilder: (context, index) {
-                      return ListTile(
-                        contentPadding: EdgeInsets.all(0),
-                        onTap: () {
-                          _controller.text =
-                              "${contactList[index].phones![0].value} \n ${contactList[index].displayName}";
-                          Navigator.of(context).pop();
-                          setState(() {
-                            _isVisible = false;
-                          });
-                        },
-                        title: Text(contactList[index].displayName ?? ''),
-                        subtitle:
-                            Text(contactList[index].phones![0].value ?? ''),
-                      );
-                    },
-                    separatorBuilder: (ctx, ind) => Divider(),
-                    itemCount: contactList.length),
+              content: SingleChildScrollView(
+                child: SizedBox(
+                  width: 1.sw,
+                  child: contactList.isEmpty
+                      ? Center(
+                          child: Text(
+                            'No Contacts Found.'.tr(),
+                            style: FontConstant.k16w500331FText,
+                          ),
+                        )
+                      : ListView.separated(
+                          shrinkWrap: true,
+                          itemBuilder: (context, index) {
+                            return ListTile(
+                              contentPadding: EdgeInsets.all(0),
+                              onTap: () {
+                                _controller.text =
+                                    "${contactList[index].phones![0].value} \n ${contactList[index].displayName}";
+                                Navigator.of(context).pop();
+                                setState(() {
+                                  _isVisible = false;
+                                });
+                              },
+                              title: Text(contactList[index].displayName ?? ''),
+                              subtitle: Text(
+                                  contactList[index].phones![0].value ?? ''),
+                            );
+                          },
+                          separatorBuilder: (ctx, ind) => Divider(),
+                          itemCount: contactList.length),
+                ),
               ),
             );
           }).then((value) {});
@@ -225,25 +252,47 @@ class _POpenChatsState extends State<POpenChats> {
 
   final record = Record();
   bool isRecording = false;
+  File audio = File('');
 
   _getVoicePermission() async {
+    print('a');
     var a = await Permission.microphone.request();
     if (a.isGranted) {
       log('granted');
-
+      print(await record.hasPermission());
       if (await record.hasPermission()) {
         // Start recording
         await record.start(
           // path: 'example.wav',
-          encoder: AudioEncoder.wav, // by default
+          encoder: AudioEncoder.aacLc, // by default
           bitRate: 128000, // by default
           //sampleRate: 44100, // by default
         );
         isRecording = await record.isRecording();
-        log(isRecording.toString());
+        //log(isRecording.toString() + '123');
+        if (isRecording) {
+          setState(() {
+            _isVisible = false;
+          });
+          showDialog(
+            context: context,
+            builder: (_) => RecorderDialog(),
+          ).then(
+            (value) async {
+              await record.stop().then((value) async {
+                if (value.toString().isNotEmpty) {
+                  print(value);
+                  setState(() {
+                    audio = File(value!);
+                  });
+                }
+              });
+            },
+          );
+        }
       }
     } else {
-      await Permission.contacts.request();
+      await Permission.microphone.request();
     }
   }
 
@@ -261,6 +310,7 @@ class _POpenChatsState extends State<POpenChats> {
             ),
           ),
         ),
+        centerTitle: false,
         title: Text(
           widget.name,
           style: FontConstant.k18w5008471Text,
@@ -294,32 +344,43 @@ class _POpenChatsState extends State<POpenChats> {
           children: [
             _pickedImg.path == ''
                 ? SizedBox.shrink()
-                : Container(
-                    height: 100,
-                    padding: EdgeInsets.symmetric(horizontal: 10),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        SizedBox(
-                            width: 100,
-                            height: 100,
-                            child: Image.file(
-                              _pickedImg,
-                              fit: BoxFit.fill,
-                            )),
-                        InkWell(
-                          onTap: () {
-                            setState(() {
-                              _pickedImg = File('');
-                            });
-                          },
-                          child: Container(
-                            color: Colors.transparent,
-                            padding: EdgeInsets.all(10),
-                            child: Icon(Icons.clear),
-                          ),
-                        )
-                      ],
+                : GestureDetector(
+                    onTap: () {
+                      showDialog(
+                        context: context,
+                        builder: (_) => PhotoViewer(
+                          asset: true,
+                          url: _pickedImg.path,
+                        ),
+                      );
+                    },
+                    child: Container(
+                      height: 100,
+                      padding: EdgeInsets.symmetric(horizontal: 10),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          SizedBox(
+                              width: 100,
+                              height: 100,
+                              child: Image.file(
+                                _pickedImg,
+                                fit: BoxFit.fill,
+                              )),
+                          InkWell(
+                            onTap: () {
+                              setState(() {
+                                _pickedImg = File('');
+                              });
+                            },
+                            child: Container(
+                              color: Colors.transparent,
+                              padding: EdgeInsets.all(10),
+                              child: Icon(Icons.clear),
+                            ),
+                          )
+                        ],
+                      ),
                     ),
                   ),
             Padding(
@@ -329,11 +390,12 @@ class _POpenChatsState extends State<POpenChats> {
                 children: [
                   Expanded(
                     child: TextField(
-                      maxLines: 2,
+                      maxLines: 5,
                       minLines: 1,
                       //keyboardType: TextInputType.multiline,
                       controller: _controller,
                       onSubmitted: (text) {},
+                      textInputAction: TextInputAction.done,
                       decoration: InputDecoration(
                         enabledBorder: OutlineInputBorder(
                           borderSide:
@@ -344,7 +406,9 @@ class _POpenChatsState extends State<POpenChats> {
                               BorderSide(width: 2, color: Color(0xffDBE8FA)),
                         ),
                         fillColor: Color(0xffF0F4FA),
-                        hintText: "Type here.".tr(),
+                        hintText: audio.path.isNotEmpty
+                            ? 'Audio File'.tr()
+                            : "Type here.".tr(),
                         hintStyle: FontConstant.k16w400B7A4Text,
                         suffixIcon: _msgLoading
                             ? Container(
@@ -358,7 +422,8 @@ class _POpenChatsState extends State<POpenChats> {
                                   log('message');
 
                                   if (_controller.text.isNotEmpty ||
-                                      _pickedImg.path != '') {
+                                      _pickedImg.path != '' ||
+                                      audio.path != '') {
                                     log('message');
 
                                     setState(() {
@@ -368,7 +433,9 @@ class _POpenChatsState extends State<POpenChats> {
                                         message: _controller.text,
                                         sendToId: widget.userId,
                                         receiverUserType: widget.userType,
-                                        image: _pickedImg);
+                                        image: audio.path.isNotEmpty
+                                            ? audio
+                                            : _pickedImg);
                                     resp.then((value) {
                                       log(value.toString());
                                       if (value['status'] == 1) {
@@ -522,168 +589,270 @@ class _POpenChatsState extends State<POpenChats> {
                               DateTime.parse(messages.createdAt!),
                           groupHeaderBuilder: (AllMsg messages) => SizedBox(),
                           indexedItemBuilder:
-                              (context, AllMsg messages, int index) =>
-                                  GestureDetector(
-                            onLongPress: messages.senderUserType == "parent"
-                                ? () {
-                                    showDialog(
-                                        barrierDismissible: true,
-                                        context: context,
-                                        builder: (ctx) {
-                                          return AlertDialog(
-                                            title: Text(
-                                              'Delete Message',
-                                              style:
-                                                  FontConstant.k18w500F970Text,
-                                            ),
-                                            content: Column(
+                              (context, AllMsg messages, int index) {
+                            return GestureDetector(
+                              onLongPress: messages.senderUserType == "parent"
+                                  ? () {
+                                      showDialog(
+                                          barrierDismissible: true,
+                                          context: context,
+                                          builder: (ctx) {
+                                            return AlertDialog(
+                                              title: Text(
+                                                'Delete Message',
+                                                style: FontConstant
+                                                    .k18w500F970Text,
+                                              ),
+                                              content: Column(
+                                                mainAxisSize: MainAxisSize.min,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  messages.fileUrl! == ''
+                                                      ? SizedBox.shrink()
+                                                      : Container(
+                                                          constraints:
+                                                              BoxConstraints(
+                                                                  // maxWidth: 200,
+                                                                  maxHeight:
+                                                                      150),
+                                                          margin:
+                                                              EdgeInsets.only(
+                                                                  bottom: 10),
+                                                          child: Image.network(
+                                                            messages.fileUrl
+                                                                .toString(),
+                                                            errorBuilder: (q, w,
+                                                                    e) =>
+                                                                Text(
+                                                                    'Image not found'),
+                                                            fit:
+                                                                BoxFit.fitWidth,
+                                                          ),
+                                                        ),
+                                                  Text(
+                                                    messages.message.toString(),
+                                                    style: FontConstant
+                                                        .k16w4008471Text
+                                                        .copyWith(
+                                                            color: Color(
+                                                                0xff5E5C70)),
+                                                  ),
+                                                ],
+                                              ),
+                                              actions: [
+                                                TextButton(
+                                                    onPressed: () {
+                                                      Navigator.of(context)
+                                                          .pop();
+                                                    },
+                                                    child: Text('Cancel')),
+                                                TextButton(
+                                                    onPressed: () {
+                                                      final resp =
+                                                          DeleteMessageApi().delete(
+                                                              msgId: messages
+                                                                  .messageId
+                                                                  .toString());
+                                                      resp.then((value) {
+                                                        log(value.toString());
+                                                        if (value['status'] ==
+                                                            1) {
+                                                          setState(() {
+                                                            messageModel
+                                                                    .allMsg![index]
+                                                                    .message =
+                                                                'This message has been deleted!'
+                                                                    .tr();
+                                                            messageModel
+                                                                .allMsg![index]
+                                                                .fileUrl = '';
+                                                            messageModel
+                                                                .allMsg![index]
+                                                                .isDeleted = '1';
+                                                            messages.isDeleted =
+                                                                '1';
+                                                          });
+                                                          Navigator.of(context)
+                                                              .pop();
+                                                        } else {
+                                                          Navigator.of(context)
+                                                              .pop();
+                                                          CustomSnackBar
+                                                              .customErrorSnackBar(
+                                                                  context,
+                                                                  value['msg']);
+                                                        }
+                                                      });
+                                                    },
+                                                    child: Text(
+                                                      'Delete',
+                                                      style: FontConstant
+                                                          .k16w400F97070,
+                                                    )),
+                                              ],
+                                            );
+                                          });
+                                    }
+                                  : () {},
+                              child: Align(
+                                alignment: messages.senderUserType == "parent"
+                                    ? Alignment.centerRight
+                                    : Alignment.centerLeft,
+                                child: Padding(
+                                  padding: const EdgeInsets.only(bottom: 32.0),
+                                  child: Container(
+                                    constraints: BoxConstraints(
+                                      maxWidth: 250,
+                                    ),
+                                    decoration: BoxDecoration(
+                                        color:
+                                            messages.senderUserType == "parent"
+                                                ? Color(0xffF2F1F8)
+                                                : Color(0xffDBE8FA),
+                                        borderRadius: BorderRadius.circular(6)),
+                                    child: Padding(
+                                      padding: EdgeInsets.all(12),
+                                      child: messages.isDeleted == '1'
+                                          ? Text(
+                                              'This message has been deleted!'
+                                                  .tr(),
+                                              style: FontConstant
+                                                  .k16w4008471Text
+                                                  .copyWith(
+                                                      color:
+                                                          Colors.red.shade400),
+                                            )
+                                          : Column(
                                               mainAxisSize: MainAxisSize.min,
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
                                               children: [
                                                 messages.fileUrl! == ''
                                                     ? SizedBox.shrink()
-                                                    : Container(
-                                                        constraints:
-                                                            BoxConstraints(
-                                                                // maxWidth: 200,
-                                                                maxHeight: 150),
-                                                        margin: EdgeInsets.only(
-                                                            bottom: 10),
-                                                        child: Image.network(
-                                                          messages.fileUrl
-                                                              .toString(),
-                                                          errorBuilder:
-                                                              (q, w, e) => Text(
-                                                                  'Image not found'),
-                                                          fit: BoxFit.fitWidth,
+                                                    : GestureDetector(
+                                                        onTap: () {
+                                                          showDialog(
+                                                            context: context,
+                                                            builder: (_) =>
+                                                                PhotoViewer(
+                                                              asset: false,
+                                                              url: messages
+                                                                  .fileUrl!,
+                                                            ),
+                                                          );
+                                                        },
+                                                        child: Container(
+                                                          constraints:
+                                                              BoxConstraints(
+                                                                  maxWidth: 200,
+                                                                  maxHeight:
+                                                                      150),
+                                                          margin:
+                                                              EdgeInsets.only(
+                                                                  bottom: 10),
+                                                          child: Image.network(
+                                                            messages.fileUrl
+                                                                .toString(),
+                                                            fit: BoxFit.cover,
+                                                            errorBuilder: (q, w,
+                                                                    e) =>
+                                                                Text(
+                                                                    'Image not found'),
+                                                          ),
                                                         ),
                                                       ),
-                                                Text(
-                                                  messages.message.toString(),
-                                                  style: FontConstant
-                                                      .k16w4008471Text
-                                                      .copyWith(
-                                                          color: Color(
-                                                              0xff5E5C70)),
-                                                ),
+                                                if (messages.message
+                                                    .toString()
+                                                    .isNotEmpty)
+                                                  (messages.senderUserType ==
+                                                          'parent')
+                                                      ? GestureDetector(
+                                                          onTap: () {
+                                                            print(messages
+                                                                    .senderUserType ==
+                                                                'parent');
+                                                          },
+                                                          child: Text(
+                                                            messages.message
+                                                                .toString(),
+                                                            style: FontConstant
+                                                                .k16w4008471Text
+                                                                .copyWith(
+                                                                    color: Color(
+                                                                        0xff5E5C70)),
+                                                          ),
+                                                        )
+                                                      : messages.message
+                                                                  .toString()
+                                                                  .length <=
+                                                              200
+                                                          ? Text(
+                                                              messages.message
+                                                                  .toString(),
+                                                              style: FontConstant
+                                                                  .k16w4008471Text
+                                                                  .copyWith(
+                                                                      color: Color(
+                                                                          0xff5E5C70)),
+                                                            )
+                                                          : RichText(
+                                                              text: readMore[
+                                                                      index]
+                                                                  ? WidgetSpan(
+                                                                      child:
+                                                                          Text(
+                                                                      '${messages.message}',
+                                                                      style: FontConstant
+                                                                          .k16w4008471Text
+                                                                          .copyWith(
+                                                                              color: Color(0xff5E5C70)),
+                                                                    ))
+                                                                  : TextSpan(
+                                                                      children: [
+                                                                        WidgetSpan(
+                                                                            child:
+                                                                                Text(
+                                                                          '${messages.message}',
+                                                                          maxLines:
+                                                                              5,
+                                                                          overflow:
+                                                                              TextOverflow.ellipsis,
+                                                                          style: FontConstant
+                                                                              .k16w4008471Text
+                                                                              .copyWith(color: Color(0xff5E5C70)),
+                                                                        )),
+                                                                        WidgetSpan(
+                                                                            baseline:
+                                                                                TextBaseline.alphabetic,
+                                                                            alignment: PlaceholderAlignment.baseline,
+                                                                            child: GestureDetector(
+                                                                              onTap: () {
+                                                                                setState(() {
+                                                                                  readMore[index] = true;
+                                                                                });
+                                                                              },
+                                                                              child: Container(
+                                                                                color: Colors.transparent,
+                                                                                child: Text(
+                                                                                  'Read More',
+                                                                                  style: FontConstant.k16w4008471Text.copyWith(
+                                                                                    color: Colors.blue,
+                                                                                  ),
+                                                                                ),
+                                                                              ),
+                                                                            )),
+                                                                      ],
+                                                                    ),
+                                                            ),
                                               ],
                                             ),
-                                            actions: [
-                                              TextButton(
-                                                  onPressed: () {
-                                                    Navigator.of(context).pop();
-                                                  },
-                                                  child: Text('Cancel')),
-                                              TextButton(
-                                                  onPressed: () {
-                                                    final resp =
-                                                        DeleteMessageApi()
-                                                            .delete(
-                                                                msgId: messages
-                                                                    .messageId
-                                                                    .toString());
-                                                    resp.then((value) {
-                                                      log(value.toString());
-                                                      if (value['status'] ==
-                                                          1) {
-                                                        setState(() {
-                                                          messageModel
-                                                                  .allMsg![index]
-                                                                  .message =
-                                                              'This message has been deleted';
-                                                          messageModel
-                                                              .allMsg![index]
-                                                              .fileUrl = '';
-                                                          messageModel
-                                                              .allMsg![index]
-                                                              .isDeleted = '1';
-                                                          messages.isDeleted =
-                                                              '1';
-                                                        });
-                                                        Navigator.of(context)
-                                                            .pop();
-                                                      } else {
-                                                        Navigator.of(context)
-                                                            .pop();
-                                                        CustomSnackBar
-                                                            .customErrorSnackBar(
-                                                                context,
-                                                                value['msg']);
-                                                      }
-                                                    });
-                                                  },
-                                                  child: Text(
-                                                    'Delete',
-                                                    style: FontConstant
-                                                        .k16w400F97070,
-                                                  )),
-                                            ],
-                                          );
-                                        });
-                                  }
-                                : () {},
-                            child: Align(
-                              alignment: messages.senderUserType == "parent"
-                                  ? Alignment.centerRight
-                                  : Alignment.centerLeft,
-                              child: Padding(
-                                padding: const EdgeInsets.only(bottom: 32.0),
-                                child: Container(
-                                  constraints: BoxConstraints(
-                                    maxWidth: 250,
-                                  ),
-                                  decoration: BoxDecoration(
-                                      color: messages.senderUserType == "parent"
-                                          ? Color(0xffF2F1F8)
-                                          : Color(0xffDBE8FA),
-                                      borderRadius: BorderRadius.circular(6)),
-                                  child: Padding(
-                                    padding: EdgeInsets.all(12),
-                                    child: messages.isDeleted == '1'
-                                        ? Text(
-                                            'This message has been deleted!',
-                                            style: FontConstant.k16w4008471Text
-                                                .copyWith(
-                                                    color: Colors.red.shade400),
-                                          )
-                                        : Column(
-                                            mainAxisSize: MainAxisSize.min,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              messages.fileUrl! == ''
-                                                  ? SizedBox.shrink()
-                                                  : Container(
-                                                      constraints:
-                                                          BoxConstraints(
-                                                              maxWidth: 200,
-                                                              maxHeight: 150),
-                                                      margin: EdgeInsets.only(
-                                                          bottom: 10),
-                                                      child: Image.network(
-                                                        messages.fileUrl
-                                                            .toString(),
-                                                        errorBuilder:
-                                                            (q, w, e) => Text(
-                                                                'Image not found'),
-                                                      ),
-                                                    ),
-                                              Text(
-                                                messages.message.toString(),
-                                                style: FontConstant
-                                                    .k16w4008471Text
-                                                    .copyWith(
-                                                        color:
-                                                            Color(0xff5E5C70)),
-                                              ),
-                                            ],
-                                          ),
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
-                          ),
+                            );
+                          },
                         ),
                       ),
                       Visibility(
@@ -705,7 +874,7 @@ class _POpenChatsState extends State<POpenChats> {
                                 topRight: Radius.circular(97.0),
                                 bottomRight: Radius.circular(97.0)),
                           ),
-                          child: Container(
+                          child: SizedBox(
                             height: 67.h,
                             width: 382.w,
                             child: Column(
@@ -862,6 +1031,126 @@ class _POpenChatsState extends State<POpenChats> {
                 ),
               ),
             ),
+    );
+  }
+}
+
+class PhotoViewer extends StatefulWidget {
+  final String url;
+  final bool asset;
+  const PhotoViewer({Key? key, required this.url, required this.asset})
+      : super(key: key);
+
+  @override
+  State<PhotoViewer> createState() => _PhotoViewerState();
+}
+
+class _PhotoViewerState extends State<PhotoViewer> {
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      contentPadding: EdgeInsets.zero,
+      insetPadding: EdgeInsets.all(40),
+      content: Container(
+        clipBehavior: Clip.hardEdge,
+        padding: EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(16),
+        ),
+        child: widget.asset
+            ? Image.file(
+                File(widget.url),
+                fit: BoxFit.cover,
+              )
+            : Image.network(
+                widget.url,
+                fit: BoxFit.cover,
+              ),
+      ),
+    );
+  }
+}
+
+class RecorderDialog extends StatefulWidget {
+  const RecorderDialog({Key? key}) : super(key: key);
+
+  @override
+  State<RecorderDialog> createState() => _RecorderDialogState();
+}
+
+class _RecorderDialogState extends State<RecorderDialog>
+    with TickerProviderStateMixin {
+  late AnimationController _controller;
+  late Animation<double> _animation;
+  @override
+  void initState() {
+    _controller = AnimationController(
+      vsync: this,
+      duration: Duration(milliseconds: 1000),
+    )..repeat(reverse: true);
+    _animation = Tween(
+      begin: 1.0,
+      end: 0.5,
+    ).animate(
+      CurvedAnimation(
+        parent: _controller,
+        curve: Curves.fastOutSlowIn,
+      ),
+    );
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      backgroundColor: Colors.transparent,
+      contentPadding: EdgeInsets.zero,
+      insetPadding: EdgeInsets.all(40),
+      content: SingleChildScrollView(
+        child: Column(
+          children: [
+            ScaleTransition(
+              scale: _animation,
+              child: Container(
+                width: 80,
+                height: 80,
+                decoration: BoxDecoration(
+                    color: AppColors().kF8F6FA, shape: BoxShape.circle),
+                child: Icon(
+                  Icons.mic,
+                  size: 50,
+                  color: Colors.black,
+                ),
+              ),
+            ),
+            SizedBox(height: 48),
+            GestureDetector(
+              onTap: () {
+                Navigator.pop(context);
+              },
+              child: Container(
+                width: 50,
+                height: 50,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: AppColors().k8267AC,
+                ),
+                child: Icon(
+                  Icons.clear,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
