@@ -5,6 +5,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_switch/flutter_switch.dart';
 import 'package:kidseau/api/Teacherpanelapi/teacher_student_performance_apis/edit_performance_api.dart';
 import 'package:kidseau/api/models/kid_detail_model/kid_performance_detail_model.dart';
 import 'package:kidseau/api/models/perforamnce_models/edit_student_performance_model.dart';
@@ -89,15 +90,21 @@ class _TStudentDetailEditScreenState extends State<TStudentDetailEditScreen> {
 
   EditStudentPerformanceModel model = EditStudentPerformanceModel();
 
+  double value = 1;
   String date = DateFormat('yyyy-MM-dd').format(DateTime.now());
   bool _performanceLoading = false;
   _getData() {
     final resp = EditStudentApi().get(kidId: widget.kidId, date: date);
     resp.then((value) {
-      print(value);
+      log(value.toString());
       if (value['status'] == 1) {
         setState(() {
           model = EditStudentPerformanceModel.fromJson(value);
+          for (var v in model.pfmRate!) {
+            _performanceStatus
+                .add({"performance": v.pfmRate, "id": v.dayActId});
+            _valueList.add(false);
+          }
           _isLoading = false;
           _performanceLoading = false;
         });
@@ -111,6 +118,8 @@ class _TStudentDetailEditScreenState extends State<TStudentDetailEditScreen> {
     });
   }
 
+  //List<Map<String, dynamic>> _performanceStatus = [];
+  List<bool> _valueList = [];
   bool _isLoading = false;
   @override
   Widget build(BuildContext context) {
@@ -355,6 +364,69 @@ class _TStudentDetailEditScreenState extends State<TStudentDetailEditScreen> {
                                                                   ],
                                                                 ),
                                                               ),
+                                                              date !=
+                                                                      DateFormat(
+                                                                              "yyyy-MM-dd")
+                                                                          .format(
+                                                                              DateTime.now())
+                                                                  ? FlutterSwitch(
+                                                                      width: 56,
+                                                                      height:
+                                                                          32,
+                                                                      toggleSize:
+                                                                          30,
+                                                                      inactiveColor:
+                                                                          ThemeColor
+                                                                              .b7A4B2,
+                                                                      activeColor:
+                                                                          ThemeColor
+                                                                              .primarycolor,
+                                                                      inactiveIcon:
+                                                                          Image.asset(
+                                                                              'assets/images/sf.png'),
+                                                                      activeIcon:
+                                                                          Image.asset(
+                                                                              'assets/images/baby.png'),
+                                                                      value:
+                                                                          false,
+                                                                      onToggle:
+                                                                          (v) {
+                                                                        /*setState(
+                                                                          () {
+                                                                        _valueList[
+                                                                            index] = v;
+                                                                      });*/
+                                                                      },
+                                                                    )
+                                                                  : FlutterSwitch(
+                                                                      width: 56,
+                                                                      height:
+                                                                          32,
+                                                                      toggleSize:
+                                                                          30,
+                                                                      inactiveColor:
+                                                                          ThemeColor
+                                                                              .b7A4B2,
+                                                                      activeColor:
+                                                                          ThemeColor
+                                                                              .primarycolor,
+                                                                      inactiveIcon:
+                                                                          Image.asset(
+                                                                              'assets/images/sf.png'),
+                                                                      activeIcon:
+                                                                          Image.asset(
+                                                                              'assets/images/baby.png'),
+                                                                      value: _valueList[
+                                                                          index],
+                                                                      onToggle:
+                                                                          (v) {
+                                                                        setState(
+                                                                            () {
+                                                                          _valueList[index] =
+                                                                              !_valueList[index];
+                                                                        });
+                                                                      },
+                                                                    ),
                                                               /*FlutterSwitch(
                                                           width: 56,
                                                           height: 32,
@@ -411,28 +483,45 @@ class _TStudentDetailEditScreenState extends State<TStudentDetailEditScreen> {
                                                 )
                                                     :*/
                                                           Slider(
-                                                            divisions: 5,
-                                                            label: model
-                                                                .pfmRate![index]
-                                                                .pfmRate!,
-                                                            activeColor: Color(
-                                                                0xFFF5C88E),
-                                                            inactiveColor:
-                                                                ThemeColor
-                                                                    .ebe6F2,
-                                                            thumbColor: Color(
-                                                                0xFFF0AD56),
-                                                            min: 0,
-                                                            max: 5,
-                                                            value: double.parse(
-                                                                model
-                                                                    .pfmRate![
-                                                                        index]
-                                                                    .pfmRate!),
-                                                            onChanged: (val) {
-                                                              setState(() {});
-                                                            },
-                                                          ),
+                                                              divisions: 5,
+                                                              label: _performanceStatus[index]
+                                                                          [
+                                                                          'performance'] ==
+                                                                      'null'
+                                                                  ? '1'
+                                                                  : _performanceStatus[
+                                                                          index]
+                                                                      [
+                                                                      'performance'],
+                                                              activeColor: Color(
+                                                                  0xFFF5C88E),
+                                                              inactiveColor:
+                                                                  ThemeColor
+                                                                      .ebe6F2,
+                                                              thumbColor: Color(
+                                                                  0xFFF0AD56),
+                                                              min: 0,
+                                                              max: 5,
+                                                              value: _performanceStatus[index]['performance'] ==
+                                                                      'null'
+                                                                  ? 0
+                                                                  : int.parse(_performanceStatus[index]['performance'])
+                                                                      .round()
+                                                                      .toDouble(),
+                                                              onChanged:
+                                                                  _valueList[index] ==
+                                                                          false
+                                                                      ? null
+                                                                      : (val) {
+                                                                          setState(
+                                                                              () {
+                                                                            value =
+                                                                                val;
+                                                                            _performanceStatus[index]['performance'] =
+                                                                                val.round().toString();
+                                                                            //_performanceStatus[index]['id'] = _studentPerformanceModel.performance![index].kidId;
+                                                                          });
+                                                                        }),
                                                         ],
                                                       ),
                                                     ),
@@ -445,6 +534,15 @@ class _TStudentDetailEditScreenState extends State<TStudentDetailEditScreen> {
                                                   height: 16.h,
                                                 ),
                                             itemCount: model.pfmRate!.length),
+                                if (date ==
+                                    DateFormat('yyyy-MM-dd')
+                                        .format(DateTime.now()))
+                                  if (!_performanceLoading)
+                                    if (model.pfmRate != null)
+                                      if (model.pfmRate!.isNotEmpty)
+                                        SizedBox(
+                                          height: 24,
+                                        ),
                                 if (date ==
                                     DateFormat('yyyy-MM-dd')
                                         .format(DateTime.now()))
@@ -469,14 +567,14 @@ class _TStudentDetailEditScreenState extends State<TStudentDetailEditScreen> {
                                                         in _performanceStatus) {
                                                       _performance.add(
                                                         {
-                                                          "kid_id": v['id'],
+                                                          "kid_id": model.kidId,
                                                           "pfm": v['performance'] ==
                                                                   'null'
                                                               ? 0
                                                               : int.parse(v[
                                                                   'performance']),
                                                           "days_activity_id":
-                                                              _selectedMap['id']
+                                                              v['id']
                                                         },
                                                       );
                                                     }

@@ -10,6 +10,7 @@ import 'package:kidseau/ParentsPanel/PProfileScreens/PSettings/PPrivacyPolicy.da
 import 'package:kidseau/ParentsPanel/PProfileScreens/PSettings/PVoucherCode.dart';
 import 'package:kidseau/Theme.dart';
 
+import '../../../Widgets/feedback_widget.dart';
 import 'PTermsAndConditions.dart';
 
 class PSettings extends StatefulWidget {
@@ -223,6 +224,38 @@ class _PSettingsState extends State<PSettings> {
                     children: [
                       Text(
                         "Kidseau support".tr(),
+                        style: FontConstant.k18w500331FText,
+                      ),
+                      Image.asset(
+                        "assets/images/rightarrow.png",
+                        height: 20,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              SizedBox(height: 20),
+              GestureDetector(
+                onTap: () {
+                  showModalBottomSheet(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.only(
+                            topLeft: const Radius.circular(20.0),
+                            topRight: const Radius.circular(20.0))),
+                    context: context,
+                    isScrollControlled: true,
+                    builder: (val) {
+                      return FeedbackWidget();
+                    },
+                  );
+                },
+                child: Container(
+                  color: Colors.transparent,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "Feedback".tr(),
                         style: FontConstant.k18w500331FText,
                       ),
                       Image.asset(

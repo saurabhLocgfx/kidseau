@@ -393,6 +393,9 @@ class _POpenChatsState extends State<POpenChats> {
                       maxLines: 5,
                       minLines: 1,
                       //keyboardType: TextInputType.multiline,
+                      inputFormatters: [
+                        LengthLimitingTextInputFormatter(500),
+                      ],
                       controller: _controller,
                       onSubmitted: (text) {},
                       textInputAction: TextInputAction.done,
