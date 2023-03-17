@@ -24,7 +24,7 @@ class TPersonalDetails extends StatefulWidget {
 }
 
 class _TPersonalDetailsState extends State<TPersonalDetails> {
-  String _selectedText = "male";
+  String _selectedText = "Male".tr();
   String _selectedlang = "";
   final TextEditingController firstName = TextEditingController();
   final TextEditingController familyName = TextEditingController();
@@ -189,7 +189,7 @@ class _TPersonalDetailsState extends State<TPersonalDetails> {
                       TextFormField(
                         validator: (familynames) {
                           if (familynames == null || familynames.isEmpty) {
-                            return 'Enter your family name';
+                            return 'Enter your family name'.tr();
                           }
                         },
                         controller: familyName,
@@ -264,7 +264,7 @@ class _TPersonalDetailsState extends State<TPersonalDetails> {
                           ? TextFormField(
                               validator: (emailadd) {
                                 if (emailadd == null || emailadd.isEmpty) {
-                                  return "Enter phone number";
+                                  return "Enter phone number".tr();
                                 }
                                 return null;
                               },
@@ -310,7 +310,7 @@ class _TPersonalDetailsState extends State<TPersonalDetails> {
                                 color: Color(0xffBE74AA), width: 1.0),
                           ),*/
                                 isDense: true,
-                                hintText: "Enter your mobile number",
+                                hintText: "Enter your mobile number".tr(),
                                 filled: true,
                                 fillColor: Colors.white,
                                 hintStyle: FontConstant.k14w400lightText
@@ -646,7 +646,7 @@ class _TPersonalDetailsState extends State<TPersonalDetails> {
                               isExpanded: true,
                               underline: SizedBox(),
                               value: _selectedText,
-                              items: <String>['male', 'female']
+                              items: <String>['Male'.tr(), 'Female'.tr()]
                                   .map((String value) {
                                 return DropdownMenuItem<String>(
                                   value: value,
@@ -758,7 +758,7 @@ class _TPersonalDetailsState extends State<TPersonalDetails> {
                           items: langList.map((String value) {
                             return DropdownMenuItem<String>(
                               value: value,
-                              child: Text(value),
+                              child: Text(value.tr()),
                             );
                           }).toList(),
                           onChanged: (String? val) {
@@ -809,7 +809,7 @@ class _TPersonalDetailsState extends State<TPersonalDetails> {
                                       SizedBox(
                                         width: 5,
                                       ),
-                                      Text(languageList[i]),
+                                      Text(languageList[i].tr()),
                                       InkWell(
                                           onTap: () {
                                             setState(() {

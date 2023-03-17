@@ -55,7 +55,7 @@ class _TSignupCodeState extends State<TSignupCode> {
                           width: 173,
                         ),
                         Text(
-                          'We offers a new way to marks the children and shape them for better future.'
+                          'We offer a new way to mark the children and shape them for better future.'
                               .tr(),
                           style: FontConstant.k16w4008471Text,
                           textAlign: TextAlign.center,
@@ -76,7 +76,7 @@ class _TSignupCodeState extends State<TSignupCode> {
                           Text("Nursery code".tr(),
                               style: FontConstant.k24w500brownText),
                           Text(
-                            "The school code is provided by director.",
+                            "The school code is provided by director.".tr(),
                             style: FontConstant.k16w400B7A4Text
                                 .copyWith(fontSize: 15),
                             textAlign: TextAlign.start,

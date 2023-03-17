@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -31,11 +33,15 @@ class _PParentNurseryWidgetState extends State<PParentNurseryWidget> {
     _isLoading = true;
     final resp = NurseryData().get();
     resp.then((value) {
+      // log(value.length.toString());
       if (mounted) {
         setState(() {
           for (var v in value) {
             dataList.add(PKidSchoolDetailModel.fromJson(v));
           }
+          /*for (var w in dataList) {
+            dataList.removeWhere((element) => element.schoolId == w.schoolId);
+          }*/
           _isLoading = false;
         });
       }

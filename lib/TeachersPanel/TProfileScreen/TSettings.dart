@@ -172,7 +172,7 @@ class _TSettingsState extends State<TSettings> {
                     ),
                   ),
                 ),
-                SizedBox(height: 20),
+                /*SizedBox(height: 20),
                 GestureDetector(
                   onTap: () {
                     Navigator.of(context).push(
@@ -204,7 +204,7 @@ class _TSettingsState extends State<TSettings> {
                       ],
                     ),
                   ),
-                ),
+                ),*/
                 SizedBox(height: 20),
                 GestureDetector(
                   onTap: () {

@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:developer';
 import 'dart:ui';
 
@@ -21,6 +22,7 @@ import '../../ParentsPanel/POnboardingScreens/PStartScreen.dart';
 import '../../Widgets/custom_snack_bar.dart';
 import '../../api/models/reminder_model/reminder_model.dart';
 import '../../api/models/teacher_profile_details_model/teacher_profile_details_model.dart';
+import '../../api/reminder_apis/delete_reminder_api.dart';
 import '../../api/reminder_apis/get_reminders_api.dart';
 import '../../restartappwidget/restartwidgets.dart';
 import '../TReminder/TReminderScreen.dart';
@@ -41,16 +43,30 @@ class _THomeScreenState extends State<THomeScreen> {
   bool colorChange = false;
   bool loadingData = false;
   bool loadingsch = false;
+  Timer? timer;
   @override
   void initState() {
     getData();
+    _getDataReminders();
+    timer = Timer.periodic(Duration(seconds: 5), (timer) {
+      //_getDataReminders();
+      _setReminder();
+    });
     super.initState();
   }
 
   int length = 0;
 
+  @override
+  void dispose() {
+    timer?.cancel();
+    super.dispose();
+  }
+
+  bool _grpLoading = false;
   getData() {
     loadingData = true;
+    _grpLoading = true;
     final rsp = THomeApi().get();
     rsp.then((value) {
       log(value.toString());
@@ -60,10 +76,12 @@ class _THomeScreenState extends State<THomeScreen> {
             _name = THomeModel.fromJson(value);
             _countLength();
             loadingData = false;
+            _grpLoading = false;
           });
         } catch (e) {
           setState(() {
             loadingData = false;
+            _grpLoading = false;
           });
         }
       } else if (value['msg'] == 'go_to_login') {
@@ -103,19 +121,23 @@ class _THomeScreenState extends State<THomeScreen> {
   THomeModel _name = THomeModel();
 
   List<ReminderModel> modelList = [];
+
   _getDataReminders() {
     loadingData = true;
     final resp = GetRemindersApi().get();
     resp.then((value) {
-      log(value.toString());
+      // log(value.toString());
       if (value['status'] == 1) {
         modelList.clear();
-        setState(() {
-          for (var v in value['reminder']) {
-            modelList.add(ReminderModel.fromJson(v));
-          }
-          loadingData = false;
-        });
+        if (mounted) {
+          setState(() {
+            for (var v in value['reminder']) {
+              modelList.add(ReminderModel.fromJson(v));
+            }
+            _setReminder();
+            loadingData = false;
+          });
+        }
       } else {
         setState(() {
           loadingData = false;
@@ -124,19 +146,37 @@ class _THomeScreenState extends State<THomeScreen> {
     });
   }
 
-  bool reminder = false;
+  ReminderModel reminder = ReminderModel();
+  _setReminder() {
+    //log("message");
+    setState(() {
+      if (!showReminder) {
+        for (var v in modelList) {
+          if (DateTime.parse('${v.remDate!} ${v.remTime!}').hour ==
+                  DateTime.now().hour &&
+              DateTime.parse('${v.remDate!} ${v.remTime!}').minute ==
+                  DateTime.now().minute) {
+            reminder = v;
+            showReminder = true;
+          }
+        }
+      }
+    });
+  }
 
-  setReminderFalse() {
+  bool showReminder = false;
+
+  /*setReminderFalse() {
     UserPrefs.setShowReminder(false);
     _getDataReminders();
     getShowReminder();
-  }
+  }*/
 
-  getShowReminder() {
+  /*getShowReminder() {
     setState(() {
       reminder = UserPrefs.getShowReminder() ?? false;
     });
-  }
+  }*/
 
   @override
   Widget build(BuildContext context) {
@@ -309,7 +349,7 @@ class _THomeScreenState extends State<THomeScreen> {
                     SizedBox(
                       height: 16,
                     ),
-                    if (modelList.isNotEmpty && reminder)
+                    if (modelList.isNotEmpty && showReminder)
                       Container(
                         width: 1.sw,
                         margin: EdgeInsets.symmetric(horizontal: 16),
@@ -335,13 +375,13 @@ class _THomeScreenState extends State<THomeScreen> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      modelList.last.title.toString(),
+                                      reminder.title.toString(),
                                       style: FontConstant2.k18w500331Ftext,
                                     ),
                                     SizedBox(height: 2),
                                     Text(
                                       DateFormat('hh:mm a').format(DateTime.parse(
-                                          '${modelList.last.remDate!} ${modelList.last.remTime!}')),
+                                          '${reminder.remDate!} ${reminder.remTime!}')),
                                       style: FontConstant.k16w4008471Text,
                                     ),
                                   ],
@@ -350,7 +390,25 @@ class _THomeScreenState extends State<THomeScreen> {
                             ),
                             GestureDetector(
                               onTap: () {
-                                setReminderFalse();
+                                setState(() {
+                                  showReminder = false;
+                                  modelList.removeWhere((element) =>
+                                      element.id.toString() ==
+                                      reminder.id.toString());
+                                });
+                                final resp = DeleteReminderApi()
+                                    .get(reminderId: reminder.id.toString());
+                                resp.then((value) {
+                                  if (value['status'] == 1) {
+                                    reminder = ReminderModel();
+                                    /*setState(() {
+                                      //modelList.removeAt(index);
+                                      //Navigator.of(context).pop();
+                                    });*/
+                                  } else {
+                                    //Navigator.of(context).pop();
+                                  }
+                                });
                               },
                               child: Container(
                                 color: Colors.transparent,
@@ -364,15 +422,18 @@ class _THomeScreenState extends State<THomeScreen> {
                     SizedBox(
                       height: 16,
                     ),
-                    _name.groupInCard!.isEmpty || _name.groupInCard == null
+                    /*_name.groupInCard!.isEmpty || _name.groupInCard == null
                         ? Text(
                             'No Groups Allotted Yet.',
                             style: FontConstant.k16w500B7A4Text,
                           )
-                        : SizedBox(
-                            height: 128,
-                            width: 1.sw,
-                            child: ListView.builder(
+                        :*/
+                    SizedBox(
+                      height: 128,
+                      width: 1.sw,
+                      child: _grpLoading
+                          ? SizedBox.shrink()
+                          : ListView.builder(
                               shrinkWrap: true,
                               scrollDirection: Axis.horizontal,
                               itemCount: _name.groupInCard!.length,
@@ -396,7 +457,7 @@ class _THomeScreenState extends State<THomeScreen> {
                                     ));
                               },
                             ),
-                          ),
+                    ),
                     SizedBox(
                       height: 32,
                     ),

@@ -199,7 +199,7 @@ class _PSettingsState extends State<PSettings> {
                   ),
                 ),
               ),
-              SizedBox(
+              /*SizedBox(
                 height: 20,
               ),
               GestureDetector(
@@ -233,7 +233,7 @@ class _PSettingsState extends State<PSettings> {
                     ],
                   ),
                 ),
-              ),
+              ),*/
               SizedBox(height: 20),
               GestureDetector(
                 onTap: () {

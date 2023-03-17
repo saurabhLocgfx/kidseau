@@ -739,6 +739,9 @@ class _ParentBottomSheetWidgetState extends State<ParentBottomSheetWidget> {
                       : FontConstant.k18w5008471Text,
                   focusNode: _emailNode,
                   keyboardType: TextInputType.emailAddress,
+                  onChanged: (val) {
+                    setState(() {});
+                  },
                   controller: _emailController,
                   validator: (val) {
                     if (_emailController.text.isEmpty) {
@@ -752,7 +755,7 @@ class _ParentBottomSheetWidgetState extends State<ParentBottomSheetWidget> {
                     filled: true,
                     hintText: 'Enter your email'.tr(),
                     suffix: InkWell(
-                      onTap: _numberTimer
+                      onTap: _emailController.text == widget.email
                           ? () {}
                           : () {
                               if (_key.currentState!.validate()) {
@@ -835,6 +838,9 @@ class _ParentBottomSheetWidgetState extends State<ParentBottomSheetWidget> {
                       ? FontConstant.k18w5008471Text2
                       : FontConstant.k18w5008471Text,
                   focusNode: _phoneNode,
+                  onChanged: (val) {
+                    setState(() {});
+                  },
                   keyboardType: TextInputType.phone,
                   controller: _numberController,
                   validator: (val) {
@@ -849,7 +855,7 @@ class _ParentBottomSheetWidgetState extends State<ParentBottomSheetWidget> {
                     filled: true,
                     hintText: 'Enter your number'.tr(),
                     suffix: InkWell(
-                      onTap: _emailTimer
+                      onTap: _numberController.text == widget.number
                           ? () {}
                           : () {
                               if (_key.currentState!.validate()) {

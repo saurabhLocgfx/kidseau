@@ -281,6 +281,7 @@ class _TPostsDashBoardState extends State<TPostsDashBoard> {
       height: 56.h,
       width: 1.sw,
       margin: EdgeInsets.symmetric(horizontal: 20),
+      padding: EdgeInsets.symmetric(horizontal: 10),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(76),

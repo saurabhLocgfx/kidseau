@@ -448,14 +448,14 @@ class _SuretyDialogState extends State<SuretyDialog> {
               Row(
                 children: [
                   Text(
-                    'Delete',
+                    'Delete'.tr(),
                     style: FontConstant.k18w500F970Text,
                   ),
                 ],
               ),
               SizedBox(height: 8),
               Text(
-                'Are you sure you want to delete this post?',
+                'Are you sure you want to delete this post?'.tr(),
                 style: FontConstant.k16w500331FText,
               ),
               SizedBox(height: 16),
@@ -464,13 +464,13 @@ class _SuretyDialogState extends State<SuretyDialog> {
                   Expanded(
                     child: materialButton2(context, () {
                       Navigator.pop(context);
-                    }, 'No', AppColors().kF8F6FA, 44.0),
+                    }, 'No'.tr(), AppColors().kF8F6FA, 44.0),
                   ),
                   SizedBox(width: 16),
                   Expanded(
                     child: materialButton(context, () {
                       widget.onYesTap();
-                    }, 'Yes, Delete', AppColors().k8267AC, 44.0),
+                    }, 'Yes, Delete'.tr(), AppColors().k8267AC, 44.0),
                   ),
                 ],
               ),

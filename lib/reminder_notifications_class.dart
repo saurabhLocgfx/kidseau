@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:timezone/data/latest.dart' as latest;
 import 'package:timezone/timezone.dart' as tz;
@@ -17,7 +19,8 @@ class NotificationServices {
       iOS: _iosInitializationSettings,
     );
     latest.initializeTimeZones();
-    await _flutterLocalNotificationsPlugin.initialize(initializationSettings);
+    await _flutterLocalNotificationsPlugin.initialize(initializationSettings,
+        onSelectNotification: _selectNotification);
   }
 
   void sendNotification() async {
@@ -51,6 +54,10 @@ class NotificationServices {
         uiLocalNotificationDateInterpretation:
             UILocalNotificationDateInterpretation.absoluteTime,
         androidAllowWhileIdle: true);
+  }
+
+  _selectNotification(var payload) {
+    log(payload);
   }
 
   void stopNotification() async {

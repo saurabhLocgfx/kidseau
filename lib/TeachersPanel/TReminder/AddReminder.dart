@@ -164,8 +164,8 @@ class _TAddReminderState extends State<TAddReminder> {
                         setState(() {
                           time = DateFormat.jm().format(DateTime(now.year,
                               now.month, now.day, q!.hour, q!.minute));
-
-                          log(time);
+                          log(holder.toString().substring(10, 15));
+                          //log(time);
                           //log(DateFormat('HH:mm').format(DateTime(now.year, now.month, now.day, q!.hour, q!.minute)));
                           /*log(int.parse(time.split(":").first).toString());
                           log(int.parse(time.split(":").last.split(" ").first)
@@ -250,9 +250,8 @@ class _TAddReminderState extends State<TAddReminder> {
                         final resp = AddReminderApi().get(
                             title: _controller.text.trim(),
                             date: date,
-                            time: time
-                                .split(" ")
-                                .first); //holder.toString().substring(10, 16));
+                            time: // time.split(" ").first);
+                                holder.toString().substring(10, 15));
                         resp.then((value) {
                           log(value.toString());
                           if (value['status'] == 1) {
@@ -265,7 +264,7 @@ class _TAddReminderState extends State<TAddReminder> {
                               id: value["id"],
                               title: value['title'],
                               body: '',
-                              datetime: DateTime.now(),
+                              datetime: dateTime,
                             );
                             UserPrefs.setShowReminder(true);
                             Reminderaddeddialog(context);
@@ -308,7 +307,7 @@ class _TAddReminderState extends State<TAddReminder> {
                     width: 240,
                   ),
                   Text(
-                    "Reminder Added",
+                    "Reminder Added".tr(),
                     style: FontConstant2.k24w500331Ftext,
                   ),
                   SizedBox(height: 20),

@@ -511,13 +511,17 @@ class _PParentsProfileState extends State<PParentsProfile> {
                       width: 1.sw,
                       child: MainButton(
                           onTap: () {
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (ctx) => PEditProfileScreen(
-                                      model: model,
-                                      onPop: () {
-                                        _getDetails();
-                                      },
-                                    )));
+                            Navigator.of(context)
+                                .push(MaterialPageRoute(
+                                    builder: (ctx) => PEditProfileScreen(
+                                          model: model,
+                                          onPop: () {
+                                            _getDetails();
+                                          },
+                                        )))
+                                .then((value) {
+                              _getDetails();
+                            });
                           },
                           title: "Edit".tr(),
                           textStyleColor: Colors.white,

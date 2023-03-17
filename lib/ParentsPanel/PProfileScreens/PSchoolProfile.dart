@@ -199,7 +199,7 @@ class _PSchoolProfileState extends State<PSchoolProfile> {
                                     ),
                                     SizedBox(width: 10),
                                     Text(
-                                        '${DateFormat.jm().format(DateFormat("hh:mm:ss").parse(model.schoolTime!.split('To').first.toString()))} to ${DateFormat.jm().format(DateFormat("hh:mm:ss").parse(model.schoolTime!.split('To').last.toString()))}',
+                                        '${DateFormat.jm().format(DateFormat("hh:mm:ss").parse(model.schoolTime!.split('To').first.toString()))} ${"to".tr()} ${DateFormat.jm().format(DateFormat("hh:mm:ss").parse(model.schoolTime!.split('To').last.toString()))}',
                                         style: FontConstant.k16w5008471Text),
                                   ],
                                 ),
@@ -219,7 +219,7 @@ class _PSchoolProfileState extends State<PSchoolProfile> {
                       SizedBox(
                         width: 150,
                         child: Text(
-                          "Email id".tr(),
+                          "Email address".tr(),
                           style: FontConstant.k16w500331FText,
                         ),
                       ),
