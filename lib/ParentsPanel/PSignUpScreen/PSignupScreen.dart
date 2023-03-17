@@ -74,7 +74,8 @@ class _PSignupScreenState extends State<PSignupScreen> {
           child: Column(
             children: [
               Container(
-                height: 1.sh,
+                //height: 1.sh,
+                constraints: BoxConstraints(maxHeight: 1.sh),
                 width: 1.sw,
                 decoration: BoxDecoration(
                   image: DecorationImage(
@@ -89,7 +90,7 @@ class _PSignupScreenState extends State<PSignupScreen> {
                     children: [
                       Padding(
                         padding:
-                            EdgeInsets.only(top: 180.h, left: 16, right: 16),
+                            EdgeInsets.only(top: 120.h, left: 16, right: 16),
                         child: Column(
                           children: [
                             Image.asset(
@@ -106,6 +107,9 @@ class _PSignupScreenState extends State<PSignupScreen> {
                         ),
                       ),
                       //Spacer(),
+                      SizedBox(
+                        height: 30,
+                      ),
                       Padding(
                         padding: const EdgeInsets.only(left: 16.0, right: 16),
                         child: Column(
@@ -246,7 +250,7 @@ class _PSignupScreenState extends State<PSignupScreen> {
                                   textStyleColor: Colors.white,
                                   backgroundColor: ThemeColor.primarycolor),
                             ),
-                            SizedBox(height: 120),
+                            SizedBox(height: 0),
                           ],
                         ),
                       ),

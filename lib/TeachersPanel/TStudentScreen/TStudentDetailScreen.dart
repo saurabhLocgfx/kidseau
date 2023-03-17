@@ -1130,7 +1130,10 @@ class _TStudentDetailScreenState extends State<TStudentDetailScreen> {
                                         onPressed: () {
                                           showDialog(
                                             context: context,
-                                            builder: (_) => CalendarPage2(),
+                                            builder: (_) => CalendarPage2(
+                                              date: DateTime.now(),
+                                              onPop: (val) {},
+                                            ),
                                           ).then((value) {});
                                         },
                                         child: Center(

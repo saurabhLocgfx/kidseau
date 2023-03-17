@@ -110,7 +110,7 @@ class _PMessagesState extends State<PMessages> {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Row(),
-                      SizedBox(height: 100.h),
+                      SizedBox(height: 100),
                       Image.asset(
                         "assets/images/empty_message.png",
                         width: 200.w,

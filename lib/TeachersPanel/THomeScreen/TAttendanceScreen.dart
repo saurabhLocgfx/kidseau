@@ -335,9 +335,11 @@ class _TAttendanceScreenState extends State<TAttendanceScreen> {
                             InkWell(
                               onTap: () {
                                 showDialog(
-                                        context: context,
-                                        builder: (_) => CalendarPage2())
-                                    .then((value) {
+                                    context: context,
+                                    builder: (_) => CalendarPage2(
+                                          date: DateTime.now(),
+                                          onPop: (val) {},
+                                        )).then((value) {
                                   getDate();
                                   _getDataWithDate();
                                 });

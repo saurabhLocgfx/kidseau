@@ -12,7 +12,9 @@ import 'package:kidseau/shard_prefs/shared_prefs.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class CalendarPage2 extends StatefulWidget {
-  const CalendarPage2({super.key});
+  final DateTime date;
+  final Function(DateTime) onPop;
+  CalendarPage2({super.key, required this.onPop, required this.date});
 
   @override
   _CalendarPage2State createState() => _CalendarPage2State();
@@ -43,7 +45,8 @@ class _CalendarPage2State extends State<CalendarPage2> {
 
   @override
   void initState() {
-    getDate();
+    _selectedDay = widget.date;
+    //getDate();
     super.initState();
   }
 
@@ -127,6 +130,7 @@ class _CalendarPage2State extends State<CalendarPage2> {
                   });
                   setPrefs(a);
                   Navigator.pop(context);
+                  widget.onPop(a);
                 },
                 focusedDay: DateTime.now(),
                 firstDay:

@@ -105,23 +105,26 @@ class _TMessagesState extends State<TMessages> {
               child: CircularProgressIndicator(),
             )
           : modelList.isEmpty
-              ? Center(
+              ? Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisSize: MainAxisSize.min,
                     children: [
+                      Row(),
+                      SizedBox(height: 100),
                       Image.asset(
                         "assets/images/empty_message.png",
-                        width: 300,
-                      ),
-                      SizedBox(
-                        height: 20,
+                        width: 200.w,
+                        height: 200.w,
                       ),
                       Text(
-                        'No messages',
+                        'Start conversation with one of your kid’s educator'
+                            .tr(),
+                        textAlign: TextAlign.center,
                         style: FontConstant.k18w500Primary,
-                      )
+                      ),
                     ],
                   ),
                 )

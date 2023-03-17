@@ -495,7 +495,7 @@ class _TPostFormScreenState extends State<TPostFormScreen> {
                             color: Colors.white),
                         decoration: TextFieldDecoration().curvedWhiteDecoration(
                           curved: true,
-                          label: '@Tag ${'kids'.tr()}',
+                          label: '@${"Tag".tr()} ${'kids'.tr()}',
                         ),
                         mentions: [
                           Mention(

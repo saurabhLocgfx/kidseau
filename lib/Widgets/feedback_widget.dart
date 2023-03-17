@@ -34,7 +34,7 @@ class _FeedbackWidgetState extends State<FeedbackWidget> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "How did we do",
+                "How did we do".tr(),
                 style: FontConstant.k18w500BlackText,
               ),
               SizedBox(
@@ -193,7 +193,7 @@ class _FeedbackWidgetState extends State<FeedbackWidget> {
                 height: 24,
               ),
               Text(
-                "Care to share your experience",
+                "Do not hesitate to share your experiences".tr(),
                 style: FontConstant.k18w500BlackText,
               ),
               SizedBox(
@@ -206,9 +206,35 @@ class _FeedbackWidgetState extends State<FeedbackWidget> {
                 /*inputFormatters: [
                   LengthLimitingTextInputFormatter(10),
                 ],*/
-                decoration:
-                    CustomInputDecoration(hintText: "Write here...".tr())
-                        .decoration(),
+                decoration: InputDecoration(
+                  contentPadding: EdgeInsets.all(14.0),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(30),
+                    borderSide:
+                        BorderSide(color: Color(0xFFF3F1FD), width: 1.0),
+                  ),
+                  errorBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(30.0)),
+                    borderSide: BorderSide(color: Colors.redAccent, width: 1.0),
+                  ),
+                  focusedErrorBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(30.0)),
+                    borderSide: BorderSide(color: Colors.redAccent, width: 1.0),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(30.0)),
+                    borderSide:
+                        BorderSide(color: Color(0xffBE74AA), width: 1.0),
+                  ),
+                  isDense: true,
+                  hintText: "Write here...".tr(),
+                  filled: true,
+                  fillColor: Colors.white,
+                  hintStyle: FontConstant.k14w400lightText.copyWith(
+                      color: Color(0xffB7A4B2),
+                      fontSize: 16.0,
+                      fontWeight: FontWeight.w400),
+                ),
                 controller: _controller,
                 /*  controller: controller,*/
               ),

@@ -1051,7 +1051,7 @@ class Groupcard extends StatelessWidget {
                 ),
               ),
               Text(
-                "${nameData.groupInCard![index].allKid.toString()} Students",
+                "${nameData.groupInCard![index].allKid.toString()} ${"Students".tr()}",
                 style: FontConstant.k18w500whiteText.copyWith(
                   fontSize: 16,
                   fontWeight: FontWeight.w500,
@@ -1224,7 +1224,7 @@ class Attendancecard extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  "${model.attendance![index].totalStudent.toString()} Students",
+                  "${model.attendance![index].totalStudent.toString()} ${"Students".tr()}",
                   style: FontConstant.k18w500whiteText.copyWith(
                     fontSize: 16,
                     fontWeight: FontWeight.w500,

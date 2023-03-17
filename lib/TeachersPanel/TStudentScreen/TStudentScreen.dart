@@ -134,7 +134,17 @@ class _TStudentScreenState extends State<TStudentScreen> {
           for (var v in _studentPerformanceModel.performance!) {
             _performanceStatus
                 .add({"performance": v.performanceRate, "id": v.kidId});
-            _valueList.add(false);
+            if (v.performanceRate == "null") {
+              _valueList.add(false);
+            } else {
+              if (int.parse(v.performanceRate ?? "0") > 0 &&
+                  DateFormat('yyyy-MM-dd').format(DateTime.parse(apiDate)) ==
+                      DateFormat('yyyy-MM-dd').format(DateTime.now())) {
+                _valueList.add(true);
+              } else {
+                _valueList.add(false);
+              }
+            }
           }
           //print(_performanceStatus[0]['performance']);
           _studentPerformanceLoading = false;
@@ -398,16 +408,22 @@ class _TStudentScreenState extends State<TStudentScreen> {
                           onTap: () {
                             showDialog(
                               context: context,
-                              builder: (_) => CalendarPage2(),
-                            ).then((value) {
-                              getDate();
-                              setState(() {
-                                _studentPerformanceLoading = true;
-                                _isLoading = true;
-                                _activityLoading = true;
-                              });
-                              _getPerformanceData();
-                            });
+                              builder: (_) => CalendarPage2(
+                                date: DateTime.parse(apiDate),
+                                onPop: (val) {
+                                  //getDate();
+                                  setState(() {
+                                    _studentPerformanceLoading = true;
+                                    apiDate =
+                                        DateFormat('yyyy-MM-dd').format(val);
+                                    date = DateFormat('dd MMM').format(val);
+                                    //_isLoading = true;
+                                    //_activityLoading = true;
+                                  });
+                                  _getPerformanceData();
+                                },
+                              ),
+                            );
                           },
                           child: Container(
                             color: Colors.transparent,
@@ -546,9 +562,11 @@ class _TStudentScreenState extends State<TStudentScreen> {
                                                                 ],
                                                               ),
                                                             ),
-                                                            date !=
+                                                            DateFormat('yyyy-MM-dd').format(DateTime.parse(
+                                                                        UserPrefs
+                                                                            .getDate()!)) !=
                                                                     DateFormat(
-                                                                            'dd MMM')
+                                                                            'yyyy-MM-dd')
                                                                         .format(
                                                                             DateTime.now())
                                                                 ? FlutterSwitch(
