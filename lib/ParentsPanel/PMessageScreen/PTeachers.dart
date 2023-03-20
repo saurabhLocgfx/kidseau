@@ -141,7 +141,7 @@ class _PTeachersState extends State<PTeachers> {
                                   borderRadius: BorderRadius.circular(8)),
                               child: Image.network(
                                 model.allTeahcer![index].techProfile.toString(),
-                                fit: BoxFit.fill,
+                                fit: BoxFit.cover,
                                 errorBuilder: (q, w, e) =>
                                     Image.asset("assets/images/teacher1.png"),
                               ),

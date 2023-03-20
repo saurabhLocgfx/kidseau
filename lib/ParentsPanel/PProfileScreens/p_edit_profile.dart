@@ -435,7 +435,8 @@ class _PEditProfileScreenState extends State<PEditProfileScreen> {
                           controller: _fatherEmailController,
                           decoration: TextFieldDecoration()
                               .curvedWhiteDecoration(
-                                  label: 'Enter your email'.tr(), curved: true),
+                                  label: 'Enter your email address'.tr(),
+                                  curved: true),
                         ),
                         SizedBox(height: 16),
                         Text('Phone number'.tr(),
@@ -452,7 +453,7 @@ class _PEditProfileScreenState extends State<PEditProfileScreen> {
                           controller: _fatherNumberController,
                           decoration: TextFieldDecoration()
                               .curvedWhiteDecoration(
-                                  label: 'Enter your phone number'.tr(),
+                                  label: 'Enter your mobile number'.tr(),
                                   curved: true),
                         ),
                         SizedBox(height: 16),

@@ -34,7 +34,7 @@ class _FeedbackWidgetState extends State<FeedbackWidget> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "How did we do".tr(),
+                "How did we do?".tr(),
                 style: FontConstant.k18w500BlackText,
               ),
               SizedBox(

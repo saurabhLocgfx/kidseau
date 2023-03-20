@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:http/http.dart' as http;
 import 'package:kidseau/Constants/string_const.dart';
 import 'package:kidseau/shard_prefs/shared_prefs.dart';
@@ -27,11 +28,7 @@ class KidsSignupInfo {
       'sec_grp': kidGroup,
       //'age': kidAge,
       'birth_date': kidBirthday,
-      'gender': kidGender == 'Male'
-          ? 'M'
-          : kidGender == 'Female'
-              ? 'F'
-              : 'O',
+      'gender': kidGender == 'Male'.tr() ? 'M' : 'F',
       //'profile_pic': "$pickedImage"
     });
     log(request.fields.toString());

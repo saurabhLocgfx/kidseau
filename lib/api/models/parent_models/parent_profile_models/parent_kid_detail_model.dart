@@ -11,6 +11,7 @@ class PKidsDetailModel {
   String? address;
   String? motherSName;
   String? occupation;
+  String? mOccupation;
   String? motherEmail;
   String? motherPhone;
   String? fatherName;
@@ -46,6 +47,7 @@ class PKidsDetailModel {
       this.weight,
       this.height,
       this.medicalStatus,
+      this.mOccupation,
       this.anyExtraToTackCare,
       this.covidVaccination,
       this.otherVaccination});
@@ -65,6 +67,7 @@ class PKidsDetailModel {
     occupation = json['occupation'];
     motherEmail = json['motherEmail'];
     motherPhone = json['motherPhone'];
+    mOccupation = json['moccupation'];
     fatherName = json['fatherName'];
     fatherEmail = json['fatherEmail'];
     fatherPhone = json['fatherPhone'];

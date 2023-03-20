@@ -147,7 +147,7 @@ class _PKidsOverviewState extends State<PKidsOverview> {
                           ),
                           //SizedBox(height: 16),
                           Text(
-                            widget.model.kidDetails!.kidGender.toString(),
+                            widget.model.kidDetails!.kidGender.toString().toLowerCase() == "m"? "Male".tr():"Female".tr(),
                             style: FontConstant.k16w5008471Text,
                           )
                         ],

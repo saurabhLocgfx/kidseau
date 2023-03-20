@@ -183,7 +183,7 @@ class _PKidsDetailsState extends State<PKidsDetails> {
                                       style: FontConstant.k24w500brownText,
                                     ),
                                     Text(
-                                        "${model.gender!.toLowerCase().toString() == 'm' ? 'S/O ' : model.gender!.toLowerCase().toString() == 'f' ? 'D/O ' : 'C/O '} - ${model.fatherName}",
+                                        "${model.gender!.toLowerCase().toString() == 'm' ? 'S/O' : 'D/O'} - ${model.fatherName}",
                                         style: FontConstant.k16w5008471Text),
                                     Row(
                                       children: [
@@ -468,7 +468,7 @@ class _PKidsDetailsState extends State<PKidsDetails> {
                                                 CrossAxisAlignment.start,
                                             children: [
                                               Text(
-                                                model.occupation.toString(),
+                                                model.mOccupation.toString(),
                                                 style: FontConstant
                                                     .k16w5008471Text,
                                               )

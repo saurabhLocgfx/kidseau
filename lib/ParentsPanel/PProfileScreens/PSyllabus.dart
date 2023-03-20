@@ -328,7 +328,7 @@ class _PSyllabusState extends State<PSyllabus> {
                                       child: Image.network(
                                         _kidModel.parentKidId![index].profilePic
                                             .toString(),
-                                        fit: BoxFit.fill,
+                                        fit: BoxFit.cover,
                                         errorBuilder: (q, w, e) => Image.asset(
                                             "assets/images/Rectangle 2715.png"),
                                       ),
