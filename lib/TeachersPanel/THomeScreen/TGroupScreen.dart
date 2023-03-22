@@ -163,7 +163,7 @@ class _TGroupScreenState extends State<TGroupScreen> {
                       ClipRRect(
                         borderRadius: BorderRadius.circular(81),
                         child: Container(
-                          width: 414,
+                          //width: 414,
                           height: 45,
                           decoration: BoxDecoration(
                             color: Colors.white,

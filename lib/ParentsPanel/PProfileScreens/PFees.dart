@@ -146,128 +146,123 @@ class _PFeesState extends State<PFees> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          SizedBox(height: 16),
-                          Container(
-                            margin: EdgeInsets.symmetric(horizontal: 0.w),
-                            // color: Colors.black,
-                            child: CarouselSlider.builder(
-                              carouselController: _controller,
-                              itemCount: _kidModel.parentKidId!.length,
-                              itemBuilder: (ctx, index, realIndex) {
-                                return InkWell(
-                                  onTap: () {
-                                    Navigator.of(context)
-                                        .push(MaterialPageRoute(
-                                            builder: (ctx) => PKidsDashboard(
-                                                  kidId: _kidModel
-                                                      .parentKidId![index].kidId
-                                                      .toString(),
-                                                )));
-                                  },
-                                  child: Container(
-                                    //width: 260,
-                                    // height: 100,
-                                    margin: EdgeInsets.only(right: 16),
-                                    decoration: BoxDecoration(
-                                      // color: Colors.red,
-                                      borderRadius: BorderRadius.circular(16),
-                                      image: DecorationImage(
-                                        image: AssetImage(
-                                            "assets/images/Student Card.png"),
-                                        fit: BoxFit.fill,
-                                      ),
-                                    ),
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 16.0, vertical: 8),
-                                    child: Row(
-                                      children: [
-                                        Container(
-                                          height: 100,
-                                          width: 72,
-                                          clipBehavior: Clip.hardEdge,
-                                          decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(8)),
-                                          child: Image.network(
-                                            _kidModel
-                                                .parentKidId![index].profilePic
+                          SizedBox(height: 32),
+                          CarouselSlider.builder(
+                            carouselController: _controller,
+                            itemCount: _kidModel.parentKidId!.length,
+                            itemBuilder: (ctx, index, realIndex) {
+                              return InkWell(
+                                onTap: () {
+                                  Navigator.of(context).push(MaterialPageRoute(
+                                      builder: (ctx) => PKidsDashboard(
+                                            kidId: _kidModel
+                                                .parentKidId![index].kidId
                                                 .toString(),
-                                            fit: BoxFit.fill,
-                                            errorBuilder: (q, w, e) => Image.asset(
-                                                "assets/images/Rectangle 2715.png"),
-                                          ),
-                                        ),
-                                        SizedBox(width: 16),
-                                        Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            /*SizedBox(
-                                          height: 8,
-                                        ),*/
-                                            Text(
-                                              _kidModel.parentKidId![index].name
-                                                  .toString(),
-                                              style: FontConstant.k16w500White,
-                                            ),
-                                            Text(
-                                              _kidModel
-                                                  .parentKidId![index].secName
-                                                  .toString(),
-                                              style: FontConstant.k14w400White,
-                                            ),
-                                            Row(
-                                              children: [
-                                                Text(
-                                                  "${"From".tr()} ${DateFormat.jm().format(DateFormat("hh:mm:ss").parse(_kidModel.parentKidId![index].schTimeIn.toString().split('.').first))} ",
-                                                  style:
-                                                      FontConstant.k14w400White,
-                                                ),
-                                                Text(
-                                                  "${"To".tr()} ${DateFormat.jm().format(DateFormat("hh:mm:ss").parse(_kidModel.parentKidId![index].schTimeOut.toString().split('.').first))}",
-                                                  style:
-                                                      FontConstant.k14w400White,
-                                                ),
-                                              ],
-                                            ),
-                                            /*Text(
-                                              _kidModel
-                                                  .parentKidId![index].grpId
-                                                  .toString()
-                                                  .tr(),
-                                              style: FontConstant.k12w400White,
-                                            ),*/
-                                          ],
-                                        ),
-                                      ],
+                                          )));
+                                },
+                                child: Container(
+                                  //width: 260,
+                                  //height: 100,
+                                  margin: EdgeInsets.only(right: 16),
+                                  decoration: BoxDecoration(
+                                    //color: Colors.red,
+                                    borderRadius: BorderRadius.circular(16),
+                                    image: DecorationImage(
+                                      image: AssetImage(
+                                          "assets/images/Student Card.png"),
+                                      fit: BoxFit.cover,
                                     ),
                                   ),
-                                );
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 16.0, vertical: 8),
+                                  child: Row(
+                                    children: [
+                                      Container(
+                                        height: 100,
+                                        width: 72,
+                                        clipBehavior: Clip.hardEdge,
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(8)),
+                                        child: Image.network(
+                                          _kidModel
+                                              .parentKidId![index].profilePic
+                                              .toString(),
+                                          fit: BoxFit.cover,
+                                          errorBuilder: (q, w, e) => Image.asset(
+                                              "assets/images/Rectangle 2715.png"),
+                                        ),
+                                      ),
+                                      SizedBox(width: 16),
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          /*SizedBox(
+                                        height: 8,
+                                      ),*/
+                                          Text(
+                                            _kidModel.parentKidId![index].name
+                                                .toString(),
+                                            style: FontConstant.k16w500White,
+                                          ),
+                                          Text(
+                                            _kidModel
+                                                .parentKidId![index].secName
+                                                .toString(),
+                                            style: FontConstant.k14w400White,
+                                          ),
+                                          Row(
+                                            children: [
+                                              Text(
+                                                "${"From".tr()} ${DateFormat.jm().format(DateFormat("hh:mm:ss").parse(_kidModel.parentKidId![index].schTimeIn.toString().split('.').first))} ",
+                                                style:
+                                                    FontConstant.k14w400White,
+                                              ),
+                                              Text(
+                                                "${"To".tr()} ${DateFormat.jm().format(DateFormat("hh:mm:ss").parse(_kidModel.parentKidId![index].schTimeOut.toString().split('.').first))}",
+                                                style:
+                                                    FontConstant.k14w400White,
+                                              ),
+                                            ],
+                                          ),
+                                          /*Text(
+                                            _kidModel
+                                                .parentKidId![index].grpId
+                                                .toString()
+                                                .tr(),
+                                            style: FontConstant.k12w400White,
+                                          ),*/
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              );
+                            },
+                            options: CarouselOptions(
+                              height: 140,
+                              onPageChanged: (index, reason) {
+                                setState(() {
+                                  _feesLoading = true;
+                                  _getFees(_kidModel.parentKidId![index].kidId
+                                      .toString());
+                                  // _index = index;
+                                  /*_isActivityLoading = true;
+                            _getActivity(_kidModel
+                                .parentKidId![index].kidId
+                                .toString());
+                            log(index.toString());*/
+                                });
                               },
-                              options: CarouselOptions(
-                                height: 150,
-                                onPageChanged: (index, reason) {
-                                  setState(() {
-                                    _feesLoading = true;
-                                    _getFees(_kidModel.parentKidId![index].kidId
-                                        .toString());
-                                    // _index = index;
-                                    /*_isActivityLoading = true;
-                              _getActivity(_kidModel
-                                  .parentKidId![index].kidId
-                                  .toString());
-                              log(index.toString());*/
-                                  });
-                                },
-                                viewportFraction:
-                                    _kidModel.parentKidId!.length > 1 ? 0.9 : 1,
-                                //enlargeCenterPage: true,
-                                padEnds: false,
-                                //pageSnapping: false,
-                                enableInfiniteScroll: false,
-                              ),
+                              viewportFraction:
+                                  _kidModel.parentKidId!.length > 1 ? 0.9 : 1,
+                              //enlargeCenterPage: true,
+                              padEnds: false,
+                              //pageSnapping: false,
+                              enableInfiniteScroll: false,
                             ),
                           ),
                           SizedBox(

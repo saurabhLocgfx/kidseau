@@ -441,7 +441,7 @@ class _TEditProfileScreenState extends State<TEditProfileScreen> {
                             padding: EdgeInsets.symmetric(vertical: 5),
                             color: Colors.transparent,
                             child: Text(
-                              'Change email & phone number'.tr(),
+                              'Change email / phone number'.tr(),
                               style: FontConstant.k16w5008471,
                             ),
                           ),

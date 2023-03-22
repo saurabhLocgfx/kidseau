@@ -104,6 +104,28 @@ class _TActivityState extends State<TActivity> {
                             Row(
                               children: [
                                 Text(
+                                  widget.schedule.schdule![index].grpName
+                                      .toString(),
+                                  style: FontConstant.k14w400lightpurpleText
+                                      .copyWith(
+                                          fontWeight: FontWeight.w400,
+                                          fontSize: 14,
+                                          color: Color(0xffB7A4B2)),
+                                ),
+                                SizedBox(
+                                  width: 5,
+                                ),
+                                Container(
+                                  width: 3,
+                                  height: 3,
+                                  decoration: BoxDecoration(
+                                      color: Color(0xffB7A4B2),
+                                      shape: BoxShape.circle),
+                                ),
+                                SizedBox(
+                                  width: 5,
+                                ),
+                                Text(
                                   "From ${widget.schedule.schdule![index].timing!.split('-').first} ",
                                   // '${groups[index]} . ${time[index]}',
                                   style: FontConstant.k14w400lightpurpleText

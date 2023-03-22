@@ -250,7 +250,7 @@ class _TMessagesState extends State<TMessages> {
                                             style:
                                                 FontConstant.k14w4008471Text),
                                         Text(
-                                            "${"last message".tr()} - ${DateFormat.yMMM().format(DateTime.parse(modelList[index].messageTime.toString()))}",
+                                            "${"last message".tr()} - ${DateFormat('dd MMM').format(DateTime.parse(modelList[index].messageTime.toString()))}",
                                             style:
                                                 FontConstant.k12w4008267Text),
                                       ],
@@ -258,125 +258,113 @@ class _TMessagesState extends State<TMessages> {
                                   ],
                                 ),
                                 Container(
-                                  child: Stack(children: [
-                                    Image.asset(
-                                      "assets/images/dots2.png",
-                                      height: 48.h,
-                                      width: 48.w,
-                                    ),
-                                    PopupMenuButton(
-                                        shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(16)),
-                                        iconSize: 10,
-                                        icon: ImageIcon(
-                                          AssetImage(
-                                            "assets/images/dots2.png",
-                                          ),
-                                        ),
-                                        itemBuilder: (context) {
-                                          return [
-                                            PopupMenuItem(
-                                              enabled: false,
-                                              child: InkWell(
-                                                onTap: () {
-                                                  final resp =
-                                                      ReadUnreadMsgApi().get(
-                                                          userID:
-                                                              modelList[index]
-                                                                  .userId
-                                                                  .toString(),
-                                                          receiverType:
-                                                              "parent");
-                                                  resp.then((value) {
-                                                    log(value.toString());
-                                                    if (value['status'] == 1) {
-                                                      setState(() {
-                                                        if (value['mark'] ==
-                                                            1) {
-                                                          modelList[index]
-                                                              .msgUnread = "0";
-                                                        } else {
-                                                          modelList[index]
-                                                              .msgUnread = "1";
-                                                        }
-                                                      });
-                                                      Navigator.of(context)
-                                                          .pop();
-                                                    } else {}
-                                                  });
-                                                },
-                                                child: Padding(
-                                                  padding: const EdgeInsets
-                                                      .symmetric(vertical: 6.0),
-                                                  child: Row(
-                                                    children: [
-                                                      Image.asset(
-                                                        "assets/images/markicon.png",
-                                                        height: 24,
-                                                      ),
-                                                      SizedBox(width: 24),
-                                                      Text(
+                                  color: Colors.transparent,
+                                  child: PopupMenuButton(
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(16)),
+                                      iconSize: 70,
+                                      icon: Image.asset(
+                                        "assets/images/dots2.png",
+                                      ),
+                                      itemBuilder: (context) {
+                                        return [
+                                          PopupMenuItem(
+                                            enabled: false,
+                                            child: InkWell(
+                                              onTap: () {
+                                                final resp = ReadUnreadMsgApi()
+                                                    .get(
+                                                        userID: modelList[index]
+                                                            .userId
+                                                            .toString(),
+                                                        receiverType: "parent");
+                                                resp.then((value) {
+                                                  log(value.toString());
+                                                  if (value['status'] == 1) {
+                                                    setState(() {
+                                                      if (value['mark'] == 1) {
                                                         modelList[index]
-                                                                    .msgUnread ==
-                                                                '0'
-                                                            ? "Mark as unread"
-                                                                .tr()
-                                                            : "Mark as read"
-                                                                .tr(),
-                                                        style: FontConstant
-                                                            .k18w5008471Text,
-                                                      )
-                                                    ],
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                            PopupMenuItem(
-                                              enabled: false,
-                                              child: InkWell(
-                                                onTap: () {
-                                                  final resp = DeleteChat().get(
-                                                      userId: modelList[index]
-                                                          .userId
-                                                          .toString(),
-                                                      userType: modelList[index]
-                                                          .userType
-                                                          .toString());
-                                                  resp.then((value) {
-                                                    log(value.toString());
-                                                    if (value['status'] == 1) {
-                                                      setState(() {
-                                                        modelList
-                                                            .removeAt(index);
-                                                      });
-                                                    }
+                                                            .msgUnread = "0";
+                                                      } else {
+                                                        modelList[index]
+                                                            .msgUnread = "1";
+                                                      }
+                                                    });
                                                     Navigator.of(context).pop();
-                                                  });
-                                                },
-                                                child: Padding(
-                                                  padding: const EdgeInsets
-                                                      .symmetric(vertical: 6.0),
-                                                  child: Row(
-                                                    children: [
-                                                      Image.asset(
-                                                        "assets/images/trashicon.png",
-                                                        height: 24,
-                                                      ),
-                                                      SizedBox(width: 24),
-                                                      Text(
-                                                        "Delete chat".tr(),
-                                                        style: FontConstant
-                                                            .k18w5008471Text,
-                                                      )
-                                                    ],
-                                                  ),
+                                                  } else {}
+                                                });
+                                              },
+                                              child: Padding(
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        vertical: 6.0),
+                                                child: Row(
+                                                  children: [
+                                                    Image.asset(
+                                                      "assets/images/markicon.png",
+                                                      height: 24,
+                                                    ),
+                                                    SizedBox(width: 24),
+                                                    Text(
+                                                      modelList[index]
+                                                                  .msgUnread ==
+                                                              '0'
+                                                          ? "Mark as unread"
+                                                              .tr()
+                                                          : "Mark as read".tr(),
+                                                      style: FontConstant
+                                                          .k18w5008471Text,
+                                                    )
+                                                  ],
                                                 ),
                                               ),
                                             ),
-                                          ];
-                                        })
-                                  ]),
+                                          ),
+                                          PopupMenuItem(
+                                            enabled: false,
+                                            child: InkWell(
+                                              onTap: () {
+                                                final resp = DeleteChat().get(
+                                                    userId: modelList[index]
+                                                        .userId
+                                                        .toString(),
+                                                    userType: modelList[index]
+                                                        .userType
+                                                        .toString());
+                                                resp.then((value) {
+                                                  log(value.toString());
+                                                  if (value['status'] == 1) {
+                                                    setState(() {
+                                                      modelList.removeAt(index);
+                                                    });
+                                                  }
+                                                  Navigator.of(context).pop();
+                                                });
+                                              },
+                                              child: Padding(
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        vertical: 6.0),
+                                                child: Row(
+                                                  children: [
+                                                    Image.asset(
+                                                      "assets/images/trashicon.png",
+                                                      height: 24,
+                                                    ),
+                                                    SizedBox(width: 24),
+                                                    Text(
+                                                      "Delete chat".tr(),
+                                                      style: FontConstant
+                                                          .k18w5008471Text,
+                                                    )
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ];
+                                      }),
                                 ),
                               ],
                             ),

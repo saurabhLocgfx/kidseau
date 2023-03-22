@@ -651,7 +651,7 @@ class _PSyllabusState extends State<PSyllabus> {
 
   Container GroupTab() {
     return Container(
-      width: 414,
+      //width: 414,
       height: 62,
       margin: const EdgeInsets.all(10),
       decoration: BoxDecoration(

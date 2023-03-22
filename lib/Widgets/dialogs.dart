@@ -444,6 +444,7 @@ class _SuretyDialogState extends State<SuretyDialog> {
         ),
         child: SingleChildScrollView(
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
                 children: [

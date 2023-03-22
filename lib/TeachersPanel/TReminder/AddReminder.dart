@@ -16,7 +16,9 @@ import 'package:kidseau/shard_prefs/shared_prefs.dart';
 
 class TAddReminder extends StatefulWidget {
   final Function onPop;
-  const TAddReminder({Key? key, required this.onPop}) : super(key: key);
+  final String? title;
+  const TAddReminder({Key? key, required this.onPop, this.title})
+      : super(key: key);
 
   @override
   State<TAddReminder> createState() => _TAddReminderState();
@@ -35,8 +37,17 @@ class _TAddReminderState extends State<TAddReminder> {
     super.dispose();
   }
 
+  setTitle() {
+    if (widget.title != null) {
+      setState(() {
+        _controller.text = widget.title!;
+      });
+    }
+  }
+
   @override
   void initState() {
+    setTitle();
     notificationServices.initializeNotification();
     super.initState();
   }

@@ -246,29 +246,41 @@ class _PNotificationScreenState extends State<PNotificationScreen> {
                                     setState(() {
                                       loading = false;
                                     });
-                                    notificationDialog(
-                                      context: context,
-                                      title: response
-                                          .allNotification[i].notificationType,
-                                      desc: response
-                                          .allNotification[i].notification,
-                                      onAddReminderTap: () {
-                                        setState(() {
-                                          notifications[i] = true;
-                                        });
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (_) => TAddReminder(
-                                              onPop: () {},
-                                            ),
-                                          ),
-                                        );
-                                      },
-                                      onPop: () {
-                                        getNotifications();
-                                      },
-                                    );
+                                    response.allNotification[i]
+                                                .notificationType ==
+                                            'post'
+                                        ? showDialog(
+                                            context: context,
+                                            builder: (_) => PostDialog(
+                                                  id: response
+                                                      .allNotification[i].id,
+                                                ))
+                                        : notificationDialog(
+                                            context: context,
+                                            title: response.allNotification[i]
+                                                .notification,
+                                            desc: response.allNotification[i]
+                                                .notificationType,
+                                            onAddReminderTap: () {
+                                              setState(() {
+                                                notifications[i] = true;
+                                              });
+                                              Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (_) => TAddReminder(
+                                                    title: response
+                                                        .allNotification[i]
+                                                        .notification,
+                                                    onPop: () {},
+                                                  ),
+                                                ),
+                                              );
+                                            },
+                                            onPop: () {
+                                              getNotifications();
+                                            },
+                                          );
                                   } else {
                                     Fluttertoast.showToast(msg: 'Error');
                                   }

@@ -801,8 +801,8 @@ class _PKidsDetailsState extends State<PKidsDetails> {
                               ),
                             ),
                           ]),
-                          Container(
-                            height: 210,
+                          SizedBox(
+                            //height: 210,
                             child: Padding(
                               padding:
                                   const EdgeInsets.symmetric(horizontal: 16.0),

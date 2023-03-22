@@ -103,7 +103,19 @@ class _TStudentDetailEditScreenState extends State<TStudentDetailEditScreen> {
           for (var v in model.pfmRate!) {
             _performanceStatus
                 .add({"performance": v.pfmRate, "id": v.dayActId});
-            _valueList.add(false);
+            if (v.pfmRate == "null" || v.pfmRate == null) {
+              _valueList.add(false);
+            } else {
+              if (int.parse(v.pfmRate ?? "0") >
+                      0 /*&&
+                  DateFormat('yyyy-MM-dd').format(DateTime.parse(apiDate)) ==
+                      DateFormat('yyyy-MM-dd').format(DateTime.now())*/
+                  ) {
+                _valueList.add(true);
+              } else {
+                _valueList.add(false);
+              }
+            }
           }
           _isLoading = false;
           _performanceLoading = false;
@@ -313,121 +325,107 @@ class _TStudentDetailEditScreenState extends State<TStudentDetailEditScreen> {
                                             physics:
                                                 NeverScrollableScrollPhysics(),
                                             itemBuilder: (context, index) {
-                                              return Container(
-                                                width: 1.sw,
-                                                height: 148,
-                                                padding: EdgeInsets.all(16),
-                                                decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(16),
-                                                  color: Colors.white,
-                                                  image: DecorationImage(
-                                                    fit: BoxFit.fill,
-                                                    image: AssetImage(
-                                                      'assets/images/sp.png',
-                                                    ),
-                                                  ),
-                                                ),
-                                                child: Row(
-                                                  children: [
-                                                    Expanded(
-                                                      child: Column(
+                                              return model.pfmRate![index]
+                                                          .actTitle
+                                                          .toString() ==
+                                                      'null'
+                                                  ? Container()
+                                                  : Container(
+                                                      width: 1.sw,
+                                                      height: 148,
+                                                      padding:
+                                                          EdgeInsets.all(16),
+                                                      decoration: BoxDecoration(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(16),
+                                                        color: Colors.white,
+                                                        image: DecorationImage(
+                                                          fit: BoxFit.fill,
+                                                          image: AssetImage(
+                                                            'assets/images/sp.png',
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      child: Row(
                                                         children: [
-                                                          Row(
-                                                            crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .start,
-                                                            children: [
-                                                              Expanded(
-                                                                child: Column(
+                                                          Expanded(
+                                                            child: Column(
+                                                              children: [
+                                                                Row(
                                                                   crossAxisAlignment:
                                                                       CrossAxisAlignment
                                                                           .start,
                                                                   children: [
-                                                                    Text(
-                                                                      model
-                                                                          .pfmRate![
-                                                                              index]
-                                                                          .actTitle
-                                                                          .toString(),
-                                                                      style: FontConstant
-                                                                          .k18w500331FText,
+                                                                    Expanded(
+                                                                      child:
+                                                                          Column(
+                                                                        crossAxisAlignment:
+                                                                            CrossAxisAlignment.start,
+                                                                        children: [
+                                                                          Text(
+                                                                            model.pfmRate![index].actTitle.toString(),
+                                                                            style:
+                                                                                FontConstant.k18w500331FText,
+                                                                          ),
+                                                                          SizedBox(
+                                                                              height: 0),
+                                                                          Text(
+                                                                            '${"Teacher".tr()} - ${model.pfmRate![index].teacherName.toString()}',
+                                                                            style:
+                                                                                FontConstant.k16w400B7A4B2Text,
+                                                                          ),
+                                                                        ],
+                                                                      ),
                                                                     ),
-                                                                    SizedBox(
-                                                                        height:
-                                                                            0),
-                                                                    Text(
-                                                                      '${"Teacher".tr()} - ${model.pfmRate![index].teacherName.toString()}',
-                                                                      style: FontConstant
-                                                                          .k16w400B7A4B2Text,
-                                                                    ),
-                                                                  ],
-                                                                ),
-                                                              ),
-                                                              date !=
-                                                                      DateFormat(
-                                                                              "yyyy-MM-dd")
-                                                                          .format(
-                                                                              DateTime.now())
-                                                                  ? FlutterSwitch(
-                                                                      width: 56,
-                                                                      height:
-                                                                          32,
-                                                                      toggleSize:
-                                                                          30,
-                                                                      inactiveColor:
-                                                                          ThemeColor
-                                                                              .b7A4B2,
-                                                                      activeColor:
-                                                                          ThemeColor
-                                                                              .primarycolor,
-                                                                      inactiveIcon:
-                                                                          Image.asset(
-                                                                              'assets/images/sf.png'),
-                                                                      activeIcon:
-                                                                          Image.asset(
-                                                                              'assets/images/baby.png'),
-                                                                      value:
-                                                                          false,
-                                                                      onToggle:
-                                                                          (v) {
-                                                                        /*setState(
-                                                                          () {
-                                                                        _valueList[
-                                                                            index] = v;
-                                                                      });*/
-                                                                      },
-                                                                    )
-                                                                  : FlutterSwitch(
-                                                                      width: 56,
-                                                                      height:
-                                                                          32,
-                                                                      toggleSize:
-                                                                          30,
-                                                                      inactiveColor:
-                                                                          ThemeColor
-                                                                              .b7A4B2,
-                                                                      activeColor:
-                                                                          ThemeColor
-                                                                              .primarycolor,
-                                                                      inactiveIcon:
-                                                                          Image.asset(
-                                                                              'assets/images/sf.png'),
-                                                                      activeIcon:
-                                                                          Image.asset(
-                                                                              'assets/images/baby.png'),
-                                                                      value: _valueList[
-                                                                          index],
-                                                                      onToggle:
-                                                                          (v) {
-                                                                        setState(
+                                                                    date != DateFormat("yyyy-MM-dd").format(DateTime.now())
+                                                                        ? IgnorePointer(
+                                                                            ignoring:
+                                                                                true,
+                                                                            child:
+                                                                                FlutterSwitch(
+                                                                              width: 56,
+                                                                              height: 32,
+                                                                              toggleSize: 30,
+                                                                              inactiveColor: ThemeColor.b7A4B2,
+                                                                              activeColor: ThemeColor.primarycolor,
+                                                                              inactiveIcon: Image.asset('assets/images/sf.png'),
+                                                                              activeIcon: Image.asset('assets/images/baby.png'),
+                                                                              value: _valueList[index],
+                                                                              onToggle: (v) {
+                                                                                /*setState(
                                                                             () {
-                                                                          _valueList[index] =
-                                                                              !_valueList[index];
-                                                                        });
-                                                                      },
-                                                                    ),
-                                                              /*FlutterSwitch(
+                                                                          _valueList[
+                                                                              index] = v;
+                                                                      });*/
+                                                                              },
+                                                                            ),
+                                                                          )
+                                                                        : FlutterSwitch(
+                                                                            width:
+                                                                                56,
+                                                                            height:
+                                                                                32,
+                                                                            toggleSize:
+                                                                                30,
+                                                                            inactiveColor:
+                                                                                ThemeColor.b7A4B2,
+                                                                            activeColor:
+                                                                                ThemeColor.primarycolor,
+                                                                            inactiveIcon:
+                                                                                Image.asset('assets/images/sf.png'),
+                                                                            activeIcon:
+                                                                                Image.asset('assets/images/baby.png'),
+                                                                            value:
+                                                                                _valueList[index],
+                                                                            onToggle:
+                                                                                (v) {
+                                                                              setState(() {
+                                                                                _valueList[index] = !_valueList[index];
+                                                                              });
+                                                                            },
+                                                                          ),
+                                                                    /*FlutterSwitch(
                                                           width: 56,
                                                           height: 32,
                                                           toggleSize: 30,
@@ -450,9 +448,9 @@ class _TStudentDetailEditScreenState extends State<TStudentDetailEditScreen> {
                                                             });
                                                           },
                                                         ),*/
-                                                            ],
-                                                          ),
-                                                          /* Row(
+                                                                  ],
+                                                                ),
+                                                                /* Row(
                                                   mainAxisAlignment:
                                                   MainAxisAlignment
                                                       .start,
@@ -482,52 +480,49 @@ class _TStudentDetailEditScreenState extends State<TStudentDetailEditScreen> {
                                                   ],
                                                 )
                                                     :*/
-                                                          Slider(
-                                                              divisions: 5,
-                                                              label: _performanceStatus[index]
-                                                                          [
-                                                                          'performance'] ==
-                                                                      'null'
-                                                                  ? '1'
-                                                                  : _performanceStatus[
-                                                                          index]
-                                                                      [
-                                                                      'performance'],
-                                                              activeColor: Color(
-                                                                  0xFFF5C88E),
-                                                              inactiveColor:
-                                                                  ThemeColor
-                                                                      .ebe6F2,
-                                                              thumbColor: Color(
-                                                                  0xFFF0AD56),
-                                                              min: 0,
-                                                              max: 5,
-                                                              value: _performanceStatus[index]['performance'] ==
-                                                                      'null'
-                                                                  ? 0
-                                                                  : int.parse(_performanceStatus[index]['performance'])
-                                                                      .round()
-                                                                      .toDouble(),
-                                                              onChanged:
-                                                                  _valueList[index] ==
-                                                                          false
-                                                                      ? null
-                                                                      : (val) {
-                                                                          setState(
-                                                                              () {
-                                                                            value =
-                                                                                val;
-                                                                            _performanceStatus[index]['performance'] =
-                                                                                val.round().toString();
-                                                                            //_performanceStatus[index]['id'] = _studentPerformanceModel.performance![index].kidId;
-                                                                          });
-                                                                        }),
+                                                                Slider(
+                                                                    divisions:
+                                                                        5,
+                                                                    label: _performanceStatus[index]['performance'] ==
+                                                                            'null'
+                                                                        ? '1'
+                                                                        : _performanceStatus[index]
+                                                                            [
+                                                                            'performance'],
+                                                                    activeColor: Color(
+                                                                        0xFFF5C88E),
+                                                                    inactiveColor:
+                                                                        ThemeColor
+                                                                            .ebe6F2,
+                                                                    thumbColor:
+                                                                        Color(
+                                                                            0xFFF0AD56),
+                                                                    min: 0,
+                                                                    max: 5,
+                                                                    value: _performanceStatus[index]['performance'] ==
+                                                                                'null' ||
+                                                                            _performanceStatus[index]['performance'] ==
+                                                                                null
+                                                                        ? 0
+                                                                        : int.parse(_performanceStatus[index]['performance'])
+                                                                            .round()
+                                                                            .toDouble(),
+                                                                    onChanged: _valueList[index] ==
+                                                                            false
+                                                                        ? null
+                                                                        : (val) {
+                                                                            setState(() {
+                                                                              value = val;
+                                                                              _performanceStatus[index]['performance'] = val.round().toString();
+                                                                              //_performanceStatus[index]['id'] = _studentPerformanceModel.performance![index].kidId;
+                                                                            });
+                                                                          }),
+                                                              ],
+                                                            ),
+                                                          ),
                                                         ],
                                                       ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              );
+                                                    );
                                             },
                                             separatorBuilder: (ctx, ind) =>
                                                 SizedBox(
@@ -569,7 +564,9 @@ class _TStudentDetailEditScreenState extends State<TStudentDetailEditScreen> {
                                                         {
                                                           "kid_id": model.kidId,
                                                           "pfm": v['performance'] ==
-                                                                  'null'
+                                                                      'null' ||
+                                                                  v['performance'] ==
+                                                                      null
                                                               ? 0
                                                               : int.parse(v[
                                                                   'performance']),
@@ -633,7 +630,7 @@ class _TStudentDetailEditScreenState extends State<TStudentDetailEditScreen> {
 
   Container GroupTab() {
     return Container(
-      width: 414,
+      //width: 414,
       height: 62,
       clipBehavior: Clip.hardEdge,
       decoration: BoxDecoration(

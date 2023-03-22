@@ -243,7 +243,7 @@ class _TPostsDashBoardState extends State<TPostsDashBoard> {
               child: ListView(
                 physics: NeverScrollableScrollPhysics(),
                 children: [
-                  PostsTab(),
+                  Center(child: PostsTab()),
                   SizedBox(
                     height: 640,
                     child: PageView(
@@ -276,20 +276,21 @@ class _TPostsDashBoardState extends State<TPostsDashBoard> {
     );
   }
 
-  Container PostsTab() {
-    return Container(
-      height: 56.h,
-      width: 1.sw,
-      margin: EdgeInsets.symmetric(horizontal: 20),
-      padding: EdgeInsets.symmetric(horizontal: 10),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(76),
-      ),
-      child: Row(
-        children: [
-          Expanded(
-            child: GestureDetector(
+  Widget PostsTab() {
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Container(
+        height: 56,
+        //width: 180.w,
+        //margin: EdgeInsets.symmetric(horizontal: 20),
+        padding: EdgeInsets.symmetric(horizontal: 10),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(76),
+        ),
+        child: Row(
+          children: [
+            GestureDetector(
               onTap: () {
                 selectedIndex = 0;
                 pageIndex = 0;
@@ -299,7 +300,9 @@ class _TPostsDashBoardState extends State<TPostsDashBoard> {
               },
               child: Container(
                 color: Colors.transparent,
+                //width: 60.w,
                 child: Row(
+                  //mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Container(
                       height: 40,
@@ -320,7 +323,7 @@ class _TPostsDashBoardState extends State<TPostsDashBoard> {
                     Padding(
                       padding: const EdgeInsets.only(left: 4.0),
                       child: SizedBox(
-                        width: 60.w,
+                        //width: 60.w,
                         child: Text("Add".tr(),
                             /* AppLoaclizations.of(context)!
                                 .translate("Add")
@@ -336,10 +339,8 @@ class _TPostsDashBoardState extends State<TPostsDashBoard> {
                 ),
               ),
             ),
-          ),
-          // SizedBox(width: 5),
-          Expanded(
-            child: GestureDetector(
+            SizedBox(width: 16),
+            GestureDetector(
               onTap: () {
                 setState(() {
                   selectedIndex = 1;
@@ -351,7 +352,9 @@ class _TPostsDashBoardState extends State<TPostsDashBoard> {
               },
               child: Container(
                 color: Colors.transparent,
+                //width: 60.w,
                 child: Row(
+                  //mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Padding(
                       padding: const EdgeInsets.only(left: 4.0),
@@ -374,7 +377,7 @@ class _TPostsDashBoardState extends State<TPostsDashBoard> {
                     ),
                     SizedBox(width: 8),
                     SizedBox(
-                      width: 60.w,
+                      //width: 60.w,
                       child: Text("Posts".tr(),
                           /* AppLoaclizations.of(context)!
                               .translate("Posts")
@@ -389,10 +392,8 @@ class _TPostsDashBoardState extends State<TPostsDashBoard> {
                 ),
               ),
             ),
-          ),
-          // SizedBox(width: 5),
-          Expanded(
-            child: GestureDetector(
+            SizedBox(width: 16),
+            GestureDetector(
               onTap: () {
                 setState(() {
                   selectedIndex = 2;
@@ -404,7 +405,9 @@ class _TPostsDashBoardState extends State<TPostsDashBoard> {
               },
               child: Container(
                 color: Colors.transparent,
+                //width: 60.w,
                 child: Row(
+                  //mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Padding(
                       padding: const EdgeInsets.only(left: 4.0),
@@ -438,8 +441,8 @@ class _TPostsDashBoardState extends State<TPostsDashBoard> {
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

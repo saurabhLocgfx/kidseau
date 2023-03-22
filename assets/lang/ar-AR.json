@@ -1,4 +1,8 @@
 {
+  "Upload primary photo": "قم بتحميل الصورة الأولية",
+  "1 image selected": "تم تحديد صورة واحدة",
+  "Enter your phone number": "أدخل رقم هاتفك",
+  "Mark as read": "ضع إشارة مقروء",
   "Who is taking this class": "من يأخذ هذا الفصل",
   "This message has been deleted!": "تم حذف هذه الرسالة",
   "New Announcement": "إعلان جديد",
@@ -334,7 +338,7 @@
   "Father's name": "إسم الأب",
   "View father’s info": "عرض معلومات الأب",
   "Enter reminder’s title": "أدخل عنوان تذكير",
-  "Change email & phone number": "تغيير البريد الإلكتروني ورقم الهاتف",
+  "Change email / phone number": "تغيير البريد الإلكتروني / رقم الهاتف",
 
 
   "Time":"الوقت",

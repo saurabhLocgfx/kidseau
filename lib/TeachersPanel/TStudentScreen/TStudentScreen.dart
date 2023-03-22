@@ -137,9 +137,11 @@ class _TStudentScreenState extends State<TStudentScreen> {
             if (v.performanceRate == "null") {
               _valueList.add(false);
             } else {
-              if (int.parse(v.performanceRate ?? "0") > 0 &&
+              if (int.parse(v.performanceRate ?? "0") >
+                      0 /*&&
                   DateFormat('yyyy-MM-dd').format(DateTime.parse(apiDate)) ==
-                      DateFormat('yyyy-MM-dd').format(DateTime.now())) {
+                      DateFormat('yyyy-MM-dd').format(DateTime.now())*/
+                  ) {
                 _valueList.add(true);
               } else {
                 _valueList.add(false);
@@ -562,74 +564,72 @@ class _TStudentScreenState extends State<TStudentScreen> {
                                                                 ],
                                                               ),
                                                             ),
-                                                            DateFormat('yyyy-MM-dd').format(DateTime.parse(
-                                                                        UserPrefs
+                                                            UserPrefs.getDate() !=
+                                                                    null
+                                                                ? DateFormat('yyyy-MM-dd').format(DateTime.parse(UserPrefs
                                                                             .getDate()!)) !=
-                                                                    DateFormat(
-                                                                            'yyyy-MM-dd')
-                                                                        .format(
-                                                                            DateTime.now())
-                                                                ? FlutterSwitch(
-                                                                    width: 56,
-                                                                    height: 32,
-                                                                    toggleSize:
-                                                                        30,
-                                                                    inactiveColor:
-                                                                        ThemeColor
-                                                                            .b7A4B2,
-                                                                    activeColor:
-                                                                        ThemeColor
-                                                                            .primarycolor,
-                                                                    inactiveIcon:
-                                                                        Image.asset(
-                                                                            'assets/images/sf.png'),
-                                                                    activeIcon:
-                                                                        Image.asset(
-                                                                            'assets/images/baby.png'),
-                                                                    value:
-                                                                        false,
-                                                                    onToggle:
-                                                                        (v) {
-                                                                      /*setState(
-                                                                          () {
-                                                                        _valueList[
-                                                                            index] = v;
-                                                                      });*/
-                                                                    },
-                                                                  )
-                                                                : FlutterSwitch(
-                                                                    width: 56,
-                                                                    height: 32,
-                                                                    toggleSize:
-                                                                        30,
-                                                                    inactiveColor:
-                                                                        ThemeColor
-                                                                            .b7A4B2,
-                                                                    activeColor:
-                                                                        ThemeColor
-                                                                            .primarycolor,
-                                                                    inactiveIcon:
-                                                                        Image.asset(
-                                                                            'assets/images/sf.png'),
-                                                                    activeIcon:
-                                                                        Image.asset(
-                                                                            'assets/images/baby.png'),
-                                                                    value: _studentPerformanceModel.performance![index].attendance! ==
-                                                                                'null' ||
-                                                                            _studentPerformanceModel.performance![index].attendance! ==
-                                                                                '0'
-                                                                        ? false
-                                                                        : _valueList[
-                                                                            index],
-                                                                    onToggle:
-                                                                        (v) {
-                                                                      setState(
-                                                                          () {
-                                                                        _valueList[
-                                                                            index] = v;
-                                                                      });
-                                                                    },
-                                                                  ),
+                                                                        DateFormat('yyyy-MM-dd')
+                                                                            .format(DateTime.now())
+                                                                    ? IgnorePointer(
+                                                                        ignoring:
+                                                                            true,
+                                                                        child:
+                                                                            FlutterSwitch(
+                                                                          width:
+                                                                              56,
+                                                                          height:
+                                                                              32,
+                                                                          toggleSize:
+                                                                              30,
+                                                                          inactiveColor:
+                                                                              ThemeColor.b7A4B2,
+                                                                          activeColor:
+                                                                              ThemeColor.primarycolor,
+                                                                          inactiveIcon:
+                                                                              Image.asset('assets/images/sf.png'),
+                                                                          activeIcon:
+                                                                              Image.asset('assets/images/baby.png'),
+                                                                          value:
+                                                                              _valueList[index],
+                                                                          onToggle:
+                                                                              (v) {
+                                                                            /*setState(
+                                                                            () {
+                                                                          _valueList[
+                                                                              index] = v;
+                                                                        });*/
+                                                                          },
+                                                                        ),
+                                                                      )
+                                                                    : FlutterSwitch(
+                                                                        width:
+                                                                            56,
+                                                                        height:
+                                                                            32,
+                                                                        toggleSize:
+                                                                            30,
+                                                                        inactiveColor:
+                                                                            ThemeColor.b7A4B2,
+                                                                        activeColor:
+                                                                            ThemeColor.primarycolor,
+                                                                        inactiveIcon:
+                                                                            Image.asset('assets/images/sf.png'),
+                                                                        activeIcon:
+                                                                            Image.asset('assets/images/baby.png'),
+                                                                        value: _studentPerformanceModel.performance![index].attendance! == 'null' ||
+                                                                                _studentPerformanceModel.performance![index].attendance! == '0'
+                                                                            ? false
+                                                                            : _valueList[index],
+                                                                        onToggle:
+                                                                            (v) {
+                                                                          setState(
+                                                                              () {
+                                                                            _valueList[index] =
+                                                                                v;
+                                                                          });
+                                                                        },
+                                                                      )
+                                                                : Container(),
                                                           ],
                                                         ),
                                                         _studentPerformanceModel
@@ -776,6 +776,7 @@ class _TStudentScreenState extends State<TStudentScreen> {
                                   textStyleColor: Colors.white,
                                   backgroundColor: ThemeColor.primarycolor),
                         ),
+                    SizedBox(height: 24),
                   ],
                 ),
               ),
@@ -840,7 +841,7 @@ class _TStudentScreenState extends State<TStudentScreen> {
   int current = 0;
   Container GroupTab() {
     return Container(
-      width: 414,
+      //width: 414,
       height: 60,
       clipBehavior: Clip.hardEdge,
       decoration: BoxDecoration(

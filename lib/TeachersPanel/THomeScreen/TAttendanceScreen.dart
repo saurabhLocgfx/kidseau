@@ -116,6 +116,7 @@ class _TAttendanceScreenState extends State<TAttendanceScreen> {
       } catch (e) {
         print(e);
         setState(() {
+          _val = 'No kids found.';
           _isLoading = false;
         });
       }
@@ -133,6 +134,7 @@ class _TAttendanceScreenState extends State<TAttendanceScreen> {
         if (value['Status'] == 1) {
           setState(() {
             model = TeacherAllAttendanceModel.fromJson(value);
+            //print(model.groupAllkid!.isEmpty);
             for (var v in model.groupAllkid!) {
               if (v.status == '0') {
                 _values.add(false);
@@ -180,6 +182,7 @@ class _TAttendanceScreenState extends State<TAttendanceScreen> {
       } catch (e) {
         print(e);
         setState(() {
+          _val = 'No kids found.';
           _isLoading = false;
         });
       }
@@ -254,19 +257,20 @@ class _TAttendanceScreenState extends State<TAttendanceScreen> {
           ? Center(
               child: CircularProgressIndicator(),
             )
-          : _val == 'No kids found.'
+          : /*_val == 'No kids found.'
               ? Center(child: Text(_val.tr()))
-              : SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      SizedBox(height: 40),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                        child: TextFormField(
-                          focusNode: searchNode,
-                          controller: _controller,
-                          onChanged: (val) {
-                            /*final resp = TeacherAttendanceSearchAPI().get(
+              : */
+          SingleChildScrollView(
+              child: Column(
+                children: [
+                  SizedBox(height: 40),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    child: TextFormField(
+                      focusNode: searchNode,
+                      controller: _controller,
+                      onChanged: (val) {
+                        /*final resp = TeacherAttendanceSearchAPI().get(
                                 groupId: widget.attendanceId,
                                 searchedName: _controller.text);
                             resp.then((value) {
@@ -278,144 +282,145 @@ class _TAttendanceScreenState extends State<TAttendanceScreen> {
                               });
                               // }
                             });*/
-                            setState(() {});
-                          },
-                          decoration: InputDecoration(
-                            filled: true,
-                            fillColor: Colors.white,
-                            contentPadding:
-                                EdgeInsets.symmetric(horizontal: 16),
-                            hintText: "Search student".tr(),
-                            hintStyle: FontConstant.k16w400B7A4Text, // Tex
-                            suffixIconConstraints: BoxConstraints(
-                              maxWidth: 60,
-                              maxHeight: 25,
-                            ), // tStyle
-                            suffixIcon: Padding(
-                              padding: const EdgeInsets.only(right: 16),
-                              child: Image.asset(
-                                "assets/images/searhcicon.png",
-                              ),
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(67.0),
-                              borderSide: BorderSide(
-                                width: 2.0,
-                                color:
-                                    ThemeColor.primarycolor.withOpacity(0.16),
-                              ), // BorderSide
-                            ), // OutlineInputBorder
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(67.0),
-                              borderSide: BorderSide(
-                                width: 2.0,
-                                color:
-                                    ThemeColor.primarycolor.withOpacity(0.16),
-                              ), // BorderSide
-                            ), // OutlineInputBorder
-                          ), // InputDecoration
+                        setState(() {});
+                      },
+                      decoration: InputDecoration(
+                        filled: true,
+                        fillColor: Colors.white,
+                        contentPadding: EdgeInsets.symmetric(horizontal: 16),
+                        hintText: "Search student".tr(),
+                        hintStyle: FontConstant.k16w400B7A4Text, // Tex
+                        suffixIconConstraints: BoxConstraints(
+                          maxWidth: 60,
+                          maxHeight: 25,
+                        ), // tStyle
+                        suffixIcon: Padding(
+                          padding: const EdgeInsets.only(right: 16),
+                          child: Image.asset(
+                            "assets/images/searhcicon.png",
+                          ),
                         ),
-                      ),
-                      SizedBox(
-                        height: 16,
-                      ),
-                      Container(
-                        width: 1.sw,
-                        decoration: BoxDecoration(
-                            color: Colors.transparent,
-                            image: DecorationImage(
-                                image: AssetImage(
-                                    'assets/images/attendancebg.png'),
-                                fit: BoxFit.fitWidth)),
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 16, vertical: 32),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            InkWell(
-                              onTap: () {
-                                showDialog(
-                                    context: context,
-                                    builder: (_) => CalendarPage2(
-                                          date: DateTime.now(),
-                                          onPop: (val) {},
-                                        )).then((value) {
-                                  getDate();
-                                  _getDataWithDate();
-                                });
-                              },
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(67.0),
+                          borderSide: BorderSide(
+                            width: 2.0,
+                            color: ThemeColor.primarycolor.withOpacity(0.16),
+                          ), // BorderSide
+                        ), // OutlineInputBorder
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(67.0),
+                          borderSide: BorderSide(
+                            width: 2.0,
+                            color: ThemeColor.primarycolor.withOpacity(0.16),
+                          ), // BorderSide
+                        ), // OutlineInputBorder
+                      ), // InputDecoration
+                    ),
+                  ),
+                  SizedBox(
+                    height: 16,
+                  ),
+                  Container(
+                    width: 1.sw,
+                    decoration: BoxDecoration(
+                        color: Colors.transparent,
+                        image: DecorationImage(
+                            image: AssetImage('assets/images/attendancebg.png'),
+                            fit: BoxFit.fitWidth)),
+                    padding: EdgeInsets.symmetric(horizontal: 16, vertical: 32),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        InkWell(
+                          onTap: () {
+                            showDialog(
+                                context: context,
+                                builder: (_) => CalendarPage2(
+                                      date: DateTime.now(),
+                                      onPop: (val) {},
+                                    )).then((value) {
+                              getDate();
+                              _getDataWithDate();
+                            });
+                          },
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text("Today’s attendance".tr(),
+                                  style: FontConstant2.k24w5008267text),
+                              Row(
                                 children: [
-                                  Text("Today’s attendance".tr(),
-                                      style: FontConstant2.k24w5008267text),
-                                  Row(
-                                    children: [
-                                      Text(
-                                        DateFormat('yMMMEd')
-                                            .format(_selectedDay),
-                                        style: FontConstant.k16w500B7A4Text,
-                                      ),
-                                      SizedBox(width: 8),
-                                      Image.asset(
-                                        "assets/images/calendericon.png",
-                                        height: 24,
-                                        fit: BoxFit.fitWidth,
-                                      )
-                                    ],
+                                  Text(
+                                    DateFormat('yMMMEd').format(_selectedDay),
+                                    style: FontConstant.k16w500B7A4Text,
+                                  ),
+                                  SizedBox(width: 8),
+                                  Image.asset(
+                                    "assets/images/calendericon.png",
+                                    height: 24,
+                                    fit: BoxFit.fitWidth,
                                   )
                                 ],
-                              ),
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              children: [
-                                SizedBox(
-                                    width: 56.w,
-                                    height: 32.w,
-                                    child: FlutterSwitch(
-                                        // toggleSize: 25,
-                                        inactiveColor: ThemeColor.b7A4B2,
-                                        activeColor: ThemeColor.primarycolor,
-                                        value: val1,
-                                        onToggle: (v) {
-                                          setState(() {
-                                            val1 = v;
-                                            // _values.clear();
-                                            for (int i = 0;
-                                                i <= _values.length - 1;
-                                                i++) {
-                                              if (v == true) {
-                                                _values[i] = true;
-                                              } else {
-                                                _values[i] = false;
-                                              }
-                                              attendanceList.clear();
-                                              for (var q
-                                                  in model.groupAllkid!) {
-                                                attendanceList.add({
-                                                  "kid_id": q.kidId,
-                                                  "status":
-                                                      v == false ? '0' : '1',
-                                                });
-                                              }
-                                              //_values[i] = !_values[i];
-                                            }
-                                          });
-                                        })),
-                                SizedBox(height: 4),
-                                Text(
-                                  "All Present".tr(),
-                                  style: FontConstant.k16w400B7A4Text,
-                                )
-                              ],
-                            ),
+                              )
+                            ],
+                          ),
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            SizedBox(
+                                width: 56.w,
+                                height: 32.w,
+                                child: FlutterSwitch(
+                                    // toggleSize: 25,
+                                    inactiveColor: ThemeColor.b7A4B2,
+                                    activeColor: ThemeColor.primarycolor,
+                                    value: val1,
+                                    onToggle: (v) {
+                                      setState(() {
+                                        val1 = v;
+                                        // _values.clear();
+                                        for (int i = 0;
+                                            i <= _values.length - 1;
+                                            i++) {
+                                          if (v == true) {
+                                            _values[i] = true;
+                                          } else {
+                                            _values[i] = false;
+                                          }
+                                          attendanceList.clear();
+                                          for (var q in model.groupAllkid!) {
+                                            attendanceList.add({
+                                              "kid_id": q.kidId,
+                                              "status": v == false ? '0' : '1',
+                                            });
+                                          }
+                                          //_values[i] = !_values[i];
+                                        }
+                                      });
+                                    })),
+                            SizedBox(height: 4),
+                            Text(
+                              "All Present".tr(),
+                              style: FontConstant.k16w400B7A4Text,
+                            )
                           ],
                         ),
-                      ),
-                      SizedBox(height: 10),
-                      if (model.groupAllkid != null)
-                        Padding(
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: 10),
+                  (model.groupAllkid == null)
+                      ? SizedBox(
+                          height: 100,
+                          child: Center(
+                            child: Text(
+                              _val.tr(),
+                              style: FontConstant.k16blackboldText,
+                            ),
+                          ),
+                        )
+                      : Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 16.0),
                           child: Column(
                             children: [
@@ -820,10 +825,10 @@ class _TAttendanceScreenState extends State<TAttendanceScreen> {
                             ],
                           ),
                         ),
-                      SizedBox(height: 30.h)
-                    ],
-                  ),
-                ),
+                  SizedBox(height: 30.h)
+                ],
+              ),
+            ),
       bottomNavigationBar: _val == 'No kids found.'
           ? SingleChildScrollView()
           : Container(

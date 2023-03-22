@@ -1,4 +1,8 @@
 {
+  "Upload primary photo": "Chargez la photo principale",
+  "1 image selected": "1 image sélectionnée",
+  "Enter your phone number": "Entrez votre numéro de téléphone",
+  "Mark as read": "Marquez comme lu",
   "Who is taking this class": "Qui prend ce cours",
   "This message has been deleted!": "Ce message a été supprimé",
   "New Announcement": "Nouvelle annonce",
@@ -147,7 +151,7 @@
   "View father’s info": "Voir les info du père",
   "Enter reminder’s title": "Entrez le titre du rappel",
   "Write here": "Ecrivez ici",
-  "Change email & phone number": "Modifier l’e-mails et le numéro de téléphone",
+  "Change email / phone number": "Modifier l’e-mails / numéro de téléphone",
 
   "Kids":"Enfants",
 
@@ -401,7 +405,7 @@
   "Enter your email address":"Entrez votre Adresse mail",
   "Are you sure you want to delete this post?": "Es-tu sûr de vouloir supprimer cette annonce?",
   "Yes, Delete": "Oui, supprimer",
-  "Feedback": "Feedback",
+  "Feedback": "Retour",
   "No": "Non",
   "Reminder Added": "Rappel ajouté",
   "How did we do?": "Comment vous nous avez trouvé?",

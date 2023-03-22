@@ -451,9 +451,16 @@ class _THomeScreenState extends State<THomeScreen> {
                                                 )),
                                       );
                                     },
-                                    child: Groupcard(
-                                      nameData: _name,
-                                      index: index,
+                                    child: Padding(
+                                      padding: EdgeInsets.only(
+                                          right: index ==
+                                                  _name.groupInCard!.length - 1
+                                              ? 16
+                                              : 0),
+                                      child: Groupcard(
+                                        nameData: _name,
+                                        index: index,
+                                      ),
                                     ));
                               },
                             ),
@@ -604,88 +611,96 @@ class _THomeScreenState extends State<THomeScreen> {
                             );
                           }),
                     ),
-                    length == _name.schdule!.length
-                        ? SizedBox.shrink()
-                        : Center(
-                            child: GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (_) => ScheduleScreen(),
-                                  ),
-                                );
-                              },
-                              child: Container(
-                                color: Colors.transparent,
-                                padding: EdgeInsets.all(16),
-                                child: Text("See more".tr(),
-                                    style:
-                                        FontConstant.k16w500purpleText.copyWith(
-                                      fontSize: 18,
-                                    )),
-                              ),
-                            ),
-                          ),
-                    //SizedBox(height: 32),
-                    _name.attendance!.isEmpty
-                        ? SizedBox.shrink()
-                        : Padding(
-                            padding: const EdgeInsets.only(
-                                left: 16.0, bottom: 10, right: 16),
-                            child: Align(
-                              alignment: Alignment.centerLeft,
-                              child: SizedBox(
-                                width: 1.sw,
-                                child: Text(
-                                  "Attendance".tr(),
-                                  style: FontConstant2.baloothampifont,
-                                ),
-                              ),
-                            ),
-                          ),
-                    _name.attendance?.isEmpty ?? [].isEmpty
-                        ? SizedBox.shrink()
-                        : Container(
-                            padding: EdgeInsets.only(left: 16),
-                            height: 128,
-                            child: ListView.separated(
-                              shrinkWrap: true,
-                              scrollDirection: Axis.horizontal,
-                              itemCount: _name.attendance!.length,
-                              itemBuilder: (context, index) => GestureDetector(
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => TAttendanceScreen(
-                                        groupName: _name
-                                            .attendance![index].groupName
-                                            .toString(),
-                                        attendanceId: _name
-                                            .attendance![index].groupId
-                                            .toString(),
+                    _name.schdule != null
+                        ? length == _name.schdule!.length
+                            ? SizedBox.shrink()
+                            : Center(
+                                child: GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (_) => ScheduleScreen(),
                                       ),
+                                    );
+                                  },
+                                  child: Container(
+                                    color: Colors.transparent,
+                                    padding: EdgeInsets.all(16),
+                                    child: Text("See more".tr(),
+                                        style: FontConstant.k16w500purpleText
+                                            .copyWith(
+                                          fontSize: 18,
+                                        )),
+                                  ),
+                                ),
+                              )
+                        : Container(),
+                    SizedBox(height: 32),
+                    _name.attendance != null
+                        ? _name.attendance!.isEmpty
+                            ? SizedBox.shrink()
+                            : Padding(
+                                padding: const EdgeInsets.only(
+                                    left: 16.0, bottom: 10, right: 16),
+                                child: Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: SizedBox(
+                                    width: 1.sw,
+                                    child: Text(
+                                      "Attendance".tr(),
+                                      style: FontConstant2.baloothampifont,
                                     ),
-                                  );
-                                },
-                                child: Padding(
-                                  padding: EdgeInsets.only(
-                                      right:
-                                          index == _name.attendance!.length - 1
+                                  ),
+                                ),
+                              )
+                        : Container(),
+                    _name.attendance != null
+                        ? _name.attendance?.isEmpty ?? [].isEmpty
+                            ? SizedBox.shrink()
+                            : Container(
+                                padding: EdgeInsets.only(left: 16),
+                                height: 128,
+                                child: ListView.separated(
+                                  shrinkWrap: true,
+                                  scrollDirection: Axis.horizontal,
+                                  itemCount: _name.attendance!.length,
+                                  itemBuilder: (context, index) =>
+                                      GestureDetector(
+                                    onTap: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              TAttendanceScreen(
+                                            groupName: _name
+                                                .attendance![index].groupName
+                                                .toString(),
+                                            attendanceId: _name
+                                                .attendance![index].groupId
+                                                .toString(),
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                    child: Padding(
+                                      padding: EdgeInsets.only(
+                                          right: index ==
+                                                  _name.attendance!.length - 1
                                               ? 16
                                               : 0),
-                                  child: Attendancecard(
-                                    index: index,
-                                    model: _name,
+                                      child: Attendancecard(
+                                        index: index,
+                                        model: _name,
+                                      ),
+                                    ),
+                                  ),
+                                  separatorBuilder: (ctx, ind) => SizedBox(
+                                    width: 16,
                                   ),
                                 ),
-                              ),
-                              separatorBuilder: (ctx, ind) => SizedBox(
-                                width: 16,
-                              ),
-                            ),
-                          ),
+                              )
+                        : Container(),
                     SizedBox(height: 90),
                   ],
                 ),
@@ -1051,7 +1066,7 @@ class Groupcard extends StatelessWidget {
                 ),
               ),
               Text(
-                "${nameData.groupInCard![index].allKid.toString()} ${"Students".tr()}",
+                "${nameData.groupInCard![index].allKid.toString()} ${"Kids".tr()}",
                 style: FontConstant.k18w500whiteText.copyWith(
                   fontSize: 16,
                   fontWeight: FontWeight.w500,
@@ -1224,7 +1239,7 @@ class Attendancecard extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  "${model.attendance![index].totalStudent.toString()} ${"Students".tr()}",
+                  "${model.attendance![index].totalStudent.toString()} ${"Kids".tr()}",
                   style: FontConstant.k18w500whiteText.copyWith(
                     fontSize: 16,
                     fontWeight: FontWeight.w500,

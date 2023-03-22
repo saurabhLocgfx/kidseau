@@ -512,7 +512,8 @@ class _PEditProfileScreenState extends State<PEditProfileScreen> {
                           controller: _motherEmailController,
                           decoration: TextFieldDecoration()
                               .curvedWhiteDecoration(
-                                  label: 'Enter your email'.tr(), curved: true),
+                                  label: 'Enter your email address'.tr(),
+                                  curved: true),
                         ),
                         SizedBox(
                           height: 16,
@@ -573,7 +574,7 @@ class _PEditProfileScreenState extends State<PEditProfileScreen> {
                             padding: EdgeInsets.symmetric(vertical: 5),
                             color: Colors.transparent,
                             child: Text(
-                              'Change email & phone number'.tr(),
+                              'Change email / phone number'.tr(),
                               style: FontConstant.k16w5008471,
                             ),
                           ),
