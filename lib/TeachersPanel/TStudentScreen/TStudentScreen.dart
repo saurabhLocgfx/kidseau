@@ -66,9 +66,11 @@ class _TStudentScreenState extends State<TStudentScreen> {
         });
       } catch (e) {
         print(e.toString());
-        setState(() {
-          _isLoading = false;
-        });
+        if (mounted) {
+          setState(() {
+            _isLoading = false;
+          });
+        }
       }
     }).then((value) {
       if (model.groupInCard!.isNotEmpty) {

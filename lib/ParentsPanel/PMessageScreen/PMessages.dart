@@ -85,12 +85,14 @@ class _PMessagesState extends State<PMessages> {
     resp.then((value) {
       //log(value.toString());
       modelList.clear();
-      setState(() {
-        for (var v in value) {
-          modelList.add(RecentMessageModel.fromJson(v));
-        }
-        _isLoading = false;
-      });
+      if (mounted) {
+        setState(() {
+          for (var v in value) {
+            modelList.add(RecentMessageModel.fromJson(v));
+          }
+          _isLoading = false;
+        });
+      }
     });
   }
 

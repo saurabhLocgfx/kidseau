@@ -3,10 +3,13 @@ import 'dart:developer';
 import 'dart:io';
 import 'dart:ui';
 
+import 'package:audioplayers/audioplayers.dart';
 import 'package:contacts_service/contacts_service.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:file/local.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_audio_recorder3/flutter_audio_recorder3.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:grouped_list/grouped_list.dart';
 import 'package:image_picker/image_picker.dart';
@@ -18,8 +21,8 @@ import 'package:kidseau/api/message_apis/delete_message_api.dart';
 import 'package:kidseau/api/message_apis/get_latest_message_api.dart';
 import 'package:kidseau/api/message_apis/send_message_api.dart';
 import 'package:kidseau/api/models/message_models/all_messages_model.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:record/record.dart';
 
 class POpenChats extends StatefulWidget {
   final String userId;
@@ -89,7 +92,6 @@ class _POpenChatsState extends State<POpenChats> {
   void dispose() {
     _timer?.cancel();
     _scrollController.dispose();
-    record.stop();
     widget.onPop();
     super.dispose();
   }
@@ -250,50 +252,93 @@ class _POpenChatsState extends State<POpenChats> {
     }
   }
 
-  final record = Record();
   bool isRecording = false;
   File audio = File('');
+
+  /*Future<File> get _localFile async {
+    final path = await _localPath;
+    return File('$path/audioFile.mp4');
+  }*/
 
   _getVoicePermission() async {
     print('a');
     var a = await Permission.microphone.request();
     if (a.isGranted) {
       log('granted');
-      print(await record.hasPermission());
-      if (await record.hasPermission()) {
-        // Start recording
-        await record.start(
-          // path: 'example.wav',
-          encoder: AudioEncoder.aacLc, // by default
-          bitRate: 128000, // by default
-          //sampleRate: 44100, // by default
-        );
-        isRecording = await record.isRecording();
-        //log(isRecording.toString() + '123');
-        if (isRecording) {
-          setState(() {
-            _isVisible = false;
-          });
-          showDialog(
-            context: context,
-            builder: (_) => RecorderDialog(),
-          ).then(
-            (value) async {
-              await record.stop().then((value) async {
-                if (value.toString().isNotEmpty) {
-                  print(value);
-                  setState(() {
-                    audio = File(value!);
-                  });
-                }
+      String customPath = '/flutter_audio_recorder_';
+      Directory appDocDirectory;
+      if (Platform.isIOS) {
+        appDocDirectory = await getApplicationDocumentsDirectory();
+      } else {
+        appDocDirectory = (await getExternalStorageDirectory())!;
+      }
+      customPath = appDocDirectory.path +
+          customPath +
+          DateTime.now().millisecondsSinceEpoch.toString();
+      var recorder =
+          FlutterAudioRecorder3(customPath, audioFormat: AudioFormat.AAC);
+      await recorder.initialized;
+      await recorder.start();
+      var recording = await recorder.current(channel: 0);
+      if (recording!.status == RecordingStatus.Recording) {
+        setState(() {
+          isRecording = true;
+        });
+      }
+      //print(await record.hasPermission());
+      // Start recording
+
+      //log(isRecording.toString() + '123');
+      if (isRecording) {
+        setState(() {
+          _isVisible = false;
+        });
+        showDialog(
+          context: context,
+          builder: (_) => RecorderDialog(),
+        ).then(
+          (value) async {
+            var result = await recorder.stop();
+            File file = LocalFileSystem().file(result?.path);
+            if (result != null) {
+              setState(() {
+                soundDuration = result.duration!;
+                _recording = result;
               });
-            },
-          );
-        }
+            }
+          },
+        );
       }
     } else {
       await Permission.microphone.request();
     }
+  }
+
+  bool playing = false;
+  Duration soundDuration = Duration.zero;
+  double soundLength = 0.0;
+  AudioPlayer audioPlayer = AudioPlayer();
+  Recording _recording = Recording();
+
+  setPosition() {
+    Timer timer;
+    timer = Timer.periodic(Duration(seconds: 1), (timer) {
+      if (mounted && playing) {
+        setState(() {
+          soundLength = soundLength + 1.0;
+        });
+        if (soundLength > soundDuration.inSeconds) {
+          timer.cancel();
+          audioPlayer.stop();
+          setState(() {
+            playing = false;
+            soundLength = 0.0;
+          });
+        }
+      } else {
+        timer.cancel();
+      }
+    });
   }
 
   @override
@@ -383,6 +428,88 @@ class _POpenChatsState extends State<POpenChats> {
                       ),
                     ),
                   ),
+            _recording.path == null
+                ? Container()
+                : Container(
+                    padding: EdgeInsets.all(16),
+                    margin: EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(50),
+                      color: Colors.white,
+                    ),
+                    child: Row(
+                      children: [
+                        GestureDetector(
+                          onTap: () async {
+                            //
+                            setState(() {
+                              playing = !playing;
+                            });
+                            if (playing) {
+                              audioPlayer.play(_recording.path!, isLocal: true);
+                              setPosition();
+                            } else {
+                              audioPlayer.stop();
+                            }
+                          },
+                          child: Container(
+                            width: 50,
+                            height: 50,
+                            padding: EdgeInsets.all(10),
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: AppColors().k8267AC,
+                            ),
+                            child: playing
+                                ? Image.asset(
+                                    'assets/images/pause.png',
+                                    color: AppColors().kF8F6FA,
+                                  )
+                                : Image.asset(
+                                    'assets/images/playB.png',
+                                    color: AppColors().kF8F6FA,
+                                  ),
+                          ),
+                        ),
+                        //SizedBox(width: 16),
+                        Expanded(
+                          child: Slider(
+                            thumbColor: AppColors().k8267AC,
+                            activeColor: AppColors().k8267AC.withOpacity(0.5),
+                            inactiveColor: Colors.grey,
+                            min: 0,
+                            max: soundDuration.inSeconds.toDouble(),
+                            value: soundLength,
+                            onChanged: (v) {
+                              setState(() {
+                                soundLength = v;
+                              });
+                            },
+                          ),
+                        ),
+                        //SizedBox(width: 16),
+                        GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              _recording = Recording();
+                            });
+                          },
+                          child: Container(
+                            width: 50,
+                            height: 50,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: AppColors().k8267AC,
+                            ),
+                            child: Icon(
+                              Icons.clear,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
             Padding(
               padding: EdgeInsets.only(
                   bottom: MediaQuery.of(context).viewInsets.bottom),
@@ -409,7 +536,7 @@ class _POpenChatsState extends State<POpenChats> {
                               BorderSide(width: 2, color: Color(0xffDBE8FA)),
                         ),
                         fillColor: Color(0xffF0F4FA),
-                        hintText: audio.path.isNotEmpty
+                        hintText: _recording.path != null
                             ? 'Audio File'.tr()
                             : "Type here.".tr(),
                         hintStyle: FontConstant.k16w400B7A4Text,
@@ -426,7 +553,7 @@ class _POpenChatsState extends State<POpenChats> {
 
                                   if (_controller.text.isNotEmpty ||
                                       _pickedImg.path != '' ||
-                                      audio.path != '') {
+                                      _recording.path != null) {
                                     log('message');
 
                                     setState(() {
@@ -436,13 +563,14 @@ class _POpenChatsState extends State<POpenChats> {
                                         message: _controller.text,
                                         sendToId: widget.userId,
                                         receiverUserType: widget.userType,
-                                        image: audio.path.isNotEmpty
-                                            ? audio
+                                        image: _recording.path != null
+                                            ? File(_recording.path!)
                                             : _pickedImg);
                                     resp.then((value) {
                                       log(value.toString());
                                       if (value['status'] == 1) {
                                         setState(() {
+                                          _recording = Recording();
                                           messageModel.allMsg!
                                               .add(AllMsg.fromJson({
                                             'message_id': '${value['msg_id']}',
@@ -593,7 +721,7 @@ class _POpenChatsState extends State<POpenChats> {
                           groupHeaderBuilder: (AllMsg messages) => SizedBox(),
                           indexedItemBuilder:
                               (context, AllMsg messages, int index) {
-                            return GestureDetector(
+                            return InkWell(
                               onLongPress: messages.senderUserType == "parent"
                                   ? () {
                                       showDialog(
@@ -606,43 +734,54 @@ class _POpenChatsState extends State<POpenChats> {
                                                 style: FontConstant
                                                     .k18w500F970Text,
                                               ),
-                                              content: Column(
-                                                mainAxisSize: MainAxisSize.min,
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  messages.fileUrl! == ''
-                                                      ? SizedBox.shrink()
-                                                      : Container(
-                                                          constraints:
-                                                              BoxConstraints(
-                                                                  // maxWidth: 200,
-                                                                  maxHeight:
-                                                                      150),
-                                                          margin:
-                                                              EdgeInsets.only(
-                                                                  bottom: 10),
-                                                          child: Image.network(
-                                                            messages.fileUrl
-                                                                .toString(),
-                                                            errorBuilder: (q, w,
-                                                                    e) =>
-                                                                Text(
-                                                                    'Image not found'),
-                                                            fit:
-                                                                BoxFit.fitWidth,
-                                                          ),
-                                                        ),
-                                                  Text(
-                                                    messages.message.toString(),
-                                                    style: FontConstant
-                                                        .k16w4008471Text
-                                                        .copyWith(
-                                                            color: Color(
-                                                                0xff5E5C70)),
-                                                  ),
-                                                ],
-                                              ),
+                                              /*content: SingleChildScrollView(
+                                                child: Column(
+                                                  mainAxisSize:
+                                                      MainAxisSize.min,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    messages.fileUrl! == ''
+                                                        ? SizedBox.shrink()
+                                                        : messages.fileUrl!
+                                                                .contains('m4a')
+                                                            ? Container()
+                                                            : Container(
+                                                                constraints:
+                                                                    BoxConstraints(
+                                                                        // maxWidth: 200,
+                                                                        maxHeight:
+                                                                            150),
+                                                                margin: EdgeInsets
+                                                                    .only(
+                                                                        bottom:
+                                                                            10),
+                                                                child: Image
+                                                                    .network(
+                                                                  messages
+                                                                      .fileUrl
+                                                                      .toString(),
+                                                                  errorBuilder: (q,
+                                                                          w,
+                                                                          e) =>
+                                                                      Text(
+                                                                          'Image not found'),
+                                                                  fit: BoxFit
+                                                                      .fitWidth,
+                                                                ),
+                                                              ),
+                                                    Text(
+                                                      messages.message
+                                                          .toString(),
+                                                      style: FontConstant
+                                                          .k16w4008471Text
+                                                          .copyWith(
+                                                              color: Color(
+                                                                  0xff5E5C70)),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),*/
                                               actions: [
                                                 TextButton(
                                                     onPressed: () {
@@ -703,19 +842,26 @@ class _POpenChatsState extends State<POpenChats> {
                                     ? Alignment.centerRight
                                     : Alignment.centerLeft,
                                 child: Padding(
-                                  padding: const EdgeInsets.only(bottom: 32.0),
+                                  padding: EdgeInsets.only(bottom: 32.0),
                                   child: Container(
                                     constraints: BoxConstraints(
                                       maxWidth: 250,
                                     ),
                                     decoration: BoxDecoration(
-                                        color:
-                                            messages.senderUserType == "parent"
-                                                ? Color(0xffF2F1F8)
+                                        color: messages.senderUserType ==
+                                                "parent"
+                                            ? messages.fileUrl!.contains('m4a')
+                                                ? Colors.transparent
+                                                : Color(0xffF2F1F8)
+                                            : messages.fileUrl!.contains('m4a')
+                                                ? Colors.transparent
                                                 : Color(0xffDBE8FA),
                                         borderRadius: BorderRadius.circular(6)),
                                     child: Padding(
-                                      padding: EdgeInsets.all(12),
+                                      padding: EdgeInsets.all(
+                                          messages.fileUrl!.contains('m4a')
+                                              ? 0
+                                              : 12),
                                       child: messages.isDeleted == '1'
                                           ? Text(
                                               'This message has been deleted!'
@@ -733,38 +879,51 @@ class _POpenChatsState extends State<POpenChats> {
                                               children: [
                                                 messages.fileUrl! == ''
                                                     ? SizedBox.shrink()
-                                                    : GestureDetector(
-                                                        onTap: () {
-                                                          showDialog(
-                                                            context: context,
-                                                            builder: (_) =>
-                                                                PhotoViewer(
-                                                              asset: false,
-                                                              url: messages
-                                                                  .fileUrl!,
+                                                    : messages.fileUrl!
+                                                            .contains('m4a')
+                                                        ? InternetAudioPlayer(
+                                                            isParent: messages
+                                                                    .senderUserType ==
+                                                                "parent",
+                                                            url: messages
+                                                                .fileUrl!)
+                                                        : GestureDetector(
+                                                            onTap: () {
+                                                              showDialog(
+                                                                context:
+                                                                    context,
+                                                                builder: (_) =>
+                                                                    PhotoViewer(
+                                                                  asset: false,
+                                                                  url: messages
+                                                                      .fileUrl!,
+                                                                ),
+                                                              );
+                                                            },
+                                                            child: Container(
+                                                              constraints:
+                                                                  BoxConstraints(
+                                                                      maxWidth:
+                                                                          200,
+                                                                      maxHeight:
+                                                                          150),
+                                                              margin: EdgeInsets
+                                                                  .only(
+                                                                      bottom:
+                                                                          10),
+                                                              child:
+                                                                  Image.network(
+                                                                messages.fileUrl
+                                                                    .toString(),
+                                                                fit: BoxFit
+                                                                    .cover,
+                                                                errorBuilder: (q,
+                                                                        w, e) =>
+                                                                    Text(
+                                                                        'Image not found'),
+                                                              ),
                                                             ),
-                                                          );
-                                                        },
-                                                        child: Container(
-                                                          constraints:
-                                                              BoxConstraints(
-                                                                  maxWidth: 200,
-                                                                  maxHeight:
-                                                                      150),
-                                                          margin:
-                                                              EdgeInsets.only(
-                                                                  bottom: 10),
-                                                          child: Image.network(
-                                                            messages.fileUrl
-                                                                .toString(),
-                                                            fit: BoxFit.cover,
-                                                            errorBuilder: (q, w,
-                                                                    e) =>
-                                                                Text(
-                                                                    'Image not found'),
                                                           ),
-                                                        ),
-                                                      ),
                                                 if (messages.message
                                                     .toString()
                                                     .isNotEmpty)
@@ -1155,6 +1314,131 @@ class _RecorderDialogState extends State<RecorderDialog>
         ),
       ),
     );
+  }
+}
+
+class InternetAudioPlayer extends StatefulWidget {
+  final String url;
+  final bool isParent;
+  const InternetAudioPlayer(
+      {Key? key, required this.url, required this.isParent})
+      : super(key: key);
+
+  @override
+  State<InternetAudioPlayer> createState() => _InternetAudioPlayerState();
+}
+
+class _InternetAudioPlayerState extends State<InternetAudioPlayer> {
+  bool playing = false;
+  AudioPlayer audioPlayer = AudioPlayer();
+
+  @override
+  void initState() {
+    /*audioPlayer.onPlayerStateChanged.listen((event) {
+      setState(() {
+        playing = event == PlayerState.PLAYING;
+      });
+    });*/
+    audioPlayer.onDurationChanged.listen((event) {
+      setState(() {
+        soundDuration = event;
+      });
+    });
+    audioPlayer.onAudioPositionChanged.listen((event) {
+      setState(() {
+        soundLength = event.inSeconds.toDouble();
+      });
+    });
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.all(8),
+      //margin: EdgeInsets.all(2),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(50),
+        color: widget.isParent ? Color(0xffF2F1F8) : Color(0xffDBE8FA),
+      ),
+      child: Row(
+        children: [
+          GestureDetector(
+            onTap: () async {
+              print('a');
+              print(playing);
+              setState(() {
+                playing = !playing;
+              });
+              print(playing);
+              if (playing) {
+                audioPlayer.play(widget.url);
+                setPosition();
+              } else {
+                setPosition();
+                audioPlayer.stop();
+              }
+            },
+            child: Container(
+              width: 50,
+              height: 50,
+              padding: EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: AppColors().k8267AC,
+              ),
+              child: playing
+                  ? Image.asset(
+                      'assets/images/pause.png',
+                      color: AppColors().kF8F6FA,
+                    )
+                  : Image.asset(
+                      'assets/images/playB.png',
+                      color: AppColors().kF8F6FA,
+                    ),
+            ),
+          ),
+          //SizedBox(width: 16),
+          Expanded(
+            child: Slider(
+              thumbColor: AppColors().k8267AC,
+              activeColor: AppColors().k8267AC.withOpacity(0.5),
+              inactiveColor: Colors.grey,
+              min: 0,
+              max: soundDuration.inSeconds.toDouble(),
+              value: soundLength,
+              onChanged: (v) {
+                soundLength = v;
+              },
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Duration soundDuration = Duration.zero;
+  double soundLength = 0.0;
+
+  setPosition() {
+    Timer timer;
+    timer = Timer.periodic(Duration(seconds: 1), (timer) {
+      if (mounted && playing) {
+        setState(() {
+          soundLength = soundLength + 1.0;
+        });
+        if (soundLength > soundDuration.inSeconds) {
+          timer.cancel();
+          audioPlayer.stop();
+          setState(() {
+            playing = false;
+            soundLength = 0.0;
+          });
+        }
+      } else {
+        timer.cancel();
+      }
+    });
   }
 }
 

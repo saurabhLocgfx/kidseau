@@ -11,7 +11,6 @@ import 'package:kidseau/api/message_apis/recent_chat_api.dart';
 import 'package:kidseau/api/models/message_models/recent_chat_model.dart';
 
 import '../../ParentsPanel/PMessageScreen/PChats.dart';
-import '../../ParentsPanel/PMessageScreen/PopenChats.dart';
 
 class TMessages extends StatefulWidget {
   const TMessages({Key? key}) : super(key: key);
@@ -86,12 +85,14 @@ class _TMessagesState extends State<TMessages> {
     resp.then((value) {
       //log(value.toString());
       modelList.clear();
-      setState(() {
-        for (var v in value) {
-          modelList.add(RecentMessageModel.fromJson(v));
-        }
-        _isLoading = false;
-      });
+      if (mounted) {
+        setState(() {
+          for (var v in value) {
+            modelList.add(RecentMessageModel.fromJson(v));
+          }
+          _isLoading = false;
+        });
+      }
     });
   }
 

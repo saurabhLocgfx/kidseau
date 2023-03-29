@@ -3,10 +3,13 @@ import 'dart:developer';
 import 'dart:io';
 import 'dart:ui';
 
+import 'package:audioplayers/audioplayers.dart';
 import 'package:contacts_service/contacts_service.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:file/local.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_audio_recorder3/flutter_audio_recorder3.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:grouped_list/grouped_list.dart';
 import 'package:image_picker/image_picker.dart';
@@ -17,7 +20,11 @@ import 'package:kidseau/api/message_apis/delete_message_api.dart';
 import 'package:kidseau/api/message_apis/get_latest_message_api.dart';
 import 'package:kidseau/api/message_apis/send_message_api.dart';
 import 'package:kidseau/api/models/message_models/all_messages_model.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
+
+import '../../Constants/colors.dart';
+import 'PopenChats.dart';
 
 class PChats extends StatefulWidget {
   final String userId;
@@ -218,8 +225,6 @@ class _PChatsState extends State<PChats> {
     }
   }
 
-  File audio = File('');
-
   ScrollController _scrollController = ScrollController();
   @override
   Widget build(BuildContext context) {
@@ -297,6 +302,88 @@ class _PChatsState extends State<PChats> {
                       ],
                     ),
                   ),
+            _recording.path == null
+                ? Container()
+                : Container(
+                    padding: EdgeInsets.all(16),
+                    margin: EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(50),
+                      color: Colors.white,
+                    ),
+                    child: Row(
+                      children: [
+                        GestureDetector(
+                          onTap: () async {
+                            //
+                            setState(() {
+                              playing = !playing;
+                              soundLength = 0.0;
+                            });
+                            if (playing) {
+                              audioPlayer.play(_recording.path!, isLocal: true);
+                              setPosition();
+                            } else {
+                              setPosition();
+                              audioPlayer.stop();
+                            }
+                          },
+                          child: Container(
+                            width: 50,
+                            height: 50,
+                            padding: EdgeInsets.all(10),
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: AppColors().k8267AC,
+                            ),
+                            child: playing
+                                ? Image.asset(
+                                    'assets/images/pause.png',
+                                    color: AppColors().kF8F6FA,
+                                  )
+                                : Image.asset(
+                                    'assets/images/playB.png',
+                                    color: AppColors().kF8F6FA,
+                                  ),
+                          ),
+                        ),
+                        //SizedBox(width: 16),
+                        Expanded(
+                          child: Slider(
+                            thumbColor: AppColors().k8267AC,
+                            activeColor: AppColors().k8267AC.withOpacity(0.5),
+                            inactiveColor: Colors.grey,
+                            min: 0,
+                            max: soundDuration.inSeconds.toDouble(),
+                            value: soundLength,
+                            onChanged: (v) {
+                              soundLength = v;
+                            },
+                          ),
+                        ),
+                        //SizedBox(width: 16),
+                        GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              _recording = Recording();
+                            });
+                          },
+                          child: Container(
+                            width: 50,
+                            height: 50,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: AppColors().k8267AC,
+                            ),
+                            child: Icon(
+                              Icons.clear,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
             Padding(
               padding: EdgeInsets.only(
                   bottom: MediaQuery.of(context).viewInsets.bottom),
@@ -323,7 +410,7 @@ class _PChatsState extends State<PChats> {
                               BorderSide(width: 2, color: Color(0xffDBE8FA)),
                         ),
                         fillColor: Color(0xffF0F4FA),
-                        hintText: audio.path.isNotEmpty
+                        hintText: _recording.path != null
                             ? 'Audio File'.tr()
                             : "Type here.".tr(),
                         hintStyle: FontConstant.k16w400B7A4Text,
@@ -337,7 +424,8 @@ class _PChatsState extends State<PChats> {
                             : GestureDetector(
                                 onTap: () {
                                   if (_controller.text.isNotEmpty ||
-                                      _pickedImg.path != '') {
+                                      _pickedImg.path != '' ||
+                                      _recording.path != null) {
                                     setState(() {
                                       _msgLoading = true;
                                     });
@@ -346,11 +434,14 @@ class _PChatsState extends State<PChats> {
                                         message: _controller.text,
                                         sendToId: widget.userId,
                                         receiverUserType: widget.userType,
-                                        image: _pickedImg);
+                                        image: _recording.path != null
+                                            ? File(_recording.path!)
+                                            : _pickedImg);
                                     resp.then((value) {
                                       log(value.toString());
                                       if (value['status'] == 1) {
                                         setState(() {
+                                          _recording = Recording();
                                           messageModel.allMsg!
                                               .add(AllMsg.fromJson({
                                             'message_id': '${value['msg_id']}',
@@ -611,7 +702,7 @@ class _PChatsState extends State<PChats> {
                                                 style: FontConstant
                                                     .k18w500F970Text,
                                               ),
-                                              content: Column(
+                                              /*content: Column(
                                                 mainAxisSize: MainAxisSize.min,
                                                 crossAxisAlignment:
                                                     CrossAxisAlignment.start,
@@ -647,7 +738,7 @@ class _PChatsState extends State<PChats> {
                                                                 0xff5E5C70)),
                                                   ),
                                                 ],
-                                              ),
+                                              ),*/
                                               actions: [
                                                 TextButton(
                                                     onPressed: () {
@@ -713,13 +804,20 @@ class _PChatsState extends State<PChats> {
                                       maxWidth: 250,
                                     ),
                                     decoration: BoxDecoration(
-                                        color:
-                                            messages.senderUserType == "teacher"
-                                                ? Color(0xffF2F1F8)
+                                        color: messages.senderUserType ==
+                                                "teacher"
+                                            ? messages.fileUrl!.contains('m4a')
+                                                ? Colors.transparent
+                                                : Color(0xffF2F1F8)
+                                            : messages.fileUrl!.contains('m4a')
+                                                ? Colors.transparent
                                                 : Color(0xffDBE8FA),
                                         borderRadius: BorderRadius.circular(6)),
                                     child: Padding(
-                                      padding: EdgeInsets.all(12),
+                                      padding: EdgeInsets.all(
+                                          messages.fileUrl!.contains('m4a')
+                                              ? 0
+                                              : 12),
                                       child: messages.isDeleted == '1'
                                           ? Text(
                                               'This message has been deleted!',
@@ -736,21 +834,34 @@ class _PChatsState extends State<PChats> {
                                               children: [
                                                 messages.fileUrl! == ''
                                                     ? SizedBox.shrink()
-                                                    : Container(
-                                                        constraints:
-                                                            BoxConstraints(
-                                                                maxWidth: 200,
-                                                                maxHeight: 150),
-                                                        margin: EdgeInsets.only(
-                                                            bottom: 10),
-                                                        child: Image.network(
-                                                          messages.fileUrl
-                                                              .toString(),
-                                                          errorBuilder:
-                                                              (q, w, e) => Text(
-                                                                  'Image not found'),
-                                                        ),
-                                                      ),
+                                                    : messages.fileUrl!
+                                                            .contains('m4a')
+                                                        ? InternetAudioPlayer(
+                                                            isParent: messages
+                                                                    .senderUserType ==
+                                                                "teacher",
+                                                            url: messages
+                                                                .fileUrl!)
+                                                        : Container(
+                                                            constraints:
+                                                                BoxConstraints(
+                                                                    maxWidth:
+                                                                        200,
+                                                                    maxHeight:
+                                                                        150),
+                                                            margin:
+                                                                EdgeInsets.only(
+                                                                    bottom: 10),
+                                                            child:
+                                                                Image.network(
+                                                              messages.fileUrl
+                                                                  .toString(),
+                                                              errorBuilder: (q,
+                                                                      w, e) =>
+                                                                  Text(
+                                                                      'Image not found'),
+                                                            ),
+                                                          ),
                                                 Text(
                                                   messages.message.toString(),
                                                   maxLines: 5,
@@ -807,7 +918,7 @@ class _PChatsState extends State<PChats> {
                                         } else {
 
                                         }*/
-                                        // _getVoicePermission();
+                                        _getVoicePermission();
                                         //log(isRecording.toString());
                                       },
                                       child: Container(
@@ -947,6 +1058,95 @@ class _PChatsState extends State<PChats> {
               ),
             ),
     );
+  }
+
+  bool isRecording = false;
+  File audio = File('');
+
+  /*Future<File> get _localFile async {
+    final path = await _localPath;
+    return File('$path/audioFile.mp4');
+  }*/
+
+  _getVoicePermission() async {
+    print('a');
+    var a = await Permission.microphone.request();
+    if (a.isGranted) {
+      log('granted');
+      String customPath = '/flutter_audio_recorder_';
+      Directory appDocDirectory;
+      if (Platform.isIOS) {
+        appDocDirectory = await getApplicationDocumentsDirectory();
+      } else {
+        appDocDirectory = (await getExternalStorageDirectory())!;
+      }
+      customPath = appDocDirectory.path +
+          customPath +
+          DateTime.now().millisecondsSinceEpoch.toString();
+      var recorder =
+          FlutterAudioRecorder3(customPath, audioFormat: AudioFormat.AAC);
+      await recorder.initialized;
+      await recorder.start();
+      var recording = await recorder.current(channel: 0);
+      if (recording!.status == RecordingStatus.Recording) {
+        setState(() {
+          isRecording = true;
+        });
+      }
+      //print(await record.hasPermission());
+      // Start recording
+
+      //log(isRecording.toString() + '123');
+      if (isRecording) {
+        setState(() {
+          _isVisible = false;
+        });
+        showDialog(
+          context: context,
+          builder: (_) => RecorderDialog(),
+        ).then(
+          (value) async {
+            var result = await recorder.stop();
+            File file = LocalFileSystem().file(result?.path);
+            if (result != null) {
+              setState(() {
+                soundDuration = result.duration!;
+                _recording = result;
+              });
+            }
+          },
+        );
+      }
+    } else {
+      await Permission.microphone.request();
+    }
+  }
+
+  bool playing = false;
+  Duration soundDuration = Duration.zero;
+  double soundLength = 0.0;
+  AudioPlayer audioPlayer = AudioPlayer();
+  Recording _recording = Recording();
+
+  setPosition() {
+    Timer timer;
+    timer = Timer.periodic(Duration(seconds: 1), (timer) {
+      if (mounted && playing) {
+        setState(() {
+          soundLength = soundLength + 1.0;
+        });
+        if (soundLength > soundDuration.inSeconds) {
+          timer.cancel();
+          audioPlayer.stop();
+          setState(() {
+            playing = false;
+            soundLength = 0.0;
+          });
+        }
+      } else {
+        timer.cancel();
+      }
+    });
   }
 }
 

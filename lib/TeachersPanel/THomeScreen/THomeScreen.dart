@@ -346,9 +346,7 @@ class _THomeScreenState extends State<THomeScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SizedBox(
-                      height: 16,
-                    ),
+                    if (modelList.isNotEmpty) SizedBox(height: 16),
                     if (modelList.isNotEmpty && showReminder)
                       Container(
                         width: 1.sw,
@@ -419,198 +417,210 @@ class _THomeScreenState extends State<THomeScreen> {
                           ],
                         ),
                       ),
-                    SizedBox(
-                      height: 16,
-                    ),
+                    if (_name.groupInCard!.isNotEmpty) SizedBox(height: 16),
                     /*_name.groupInCard!.isEmpty || _name.groupInCard == null
                         ? Text(
                             'No Groups Allotted Yet.',
                             style: FontConstant.k16w500B7A4Text,
                           )
                         :*/
-                    SizedBox(
-                      height: 128,
-                      width: 1.sw,
-                      child: _grpLoading
-                          ? SizedBox.shrink()
-                          : ListView.builder(
-                              shrinkWrap: true,
-                              scrollDirection: Axis.horizontal,
-                              itemCount: _name.groupInCard!.length,
-                              itemBuilder: (BuildContext context, int index) {
-                                return GestureDetector(
-                                    onTap: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => TGroupScreen(
-                                                  grpId: _name
-                                                      .groupInCard![index].grpId
-                                                      .toString(),
-                                                  index: index,
-                                                )),
-                                      );
-                                    },
-                                    child: Padding(
-                                      padding: EdgeInsets.only(
-                                          right: index ==
-                                                  _name.groupInCard!.length - 1
-                                              ? 16
-                                              : 0),
-                                      child: Groupcard(
-                                        nameData: _name,
-                                        index: index,
-                                      ),
-                                    ));
-                              },
+                    _grpLoading
+                        ? SizedBox.shrink()
+                        : SizedBox(
+                            height: _name.groupInCard != null &&
+                                    _name.groupInCard!.isNotEmpty
+                                ? 128
+                                : 0,
+                            width: 1.sw,
+                            child: MediaQuery.removePadding(
+                              context: context,
+                              removeTop: true,
+                              child: ListView.builder(
+                                shrinkWrap: true,
+                                scrollDirection: Axis.horizontal,
+                                itemCount: _name.groupInCard!.length,
+                                itemBuilder: (BuildContext context, int index) {
+                                  return GestureDetector(
+                                      onTap: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  TGroupScreen(
+                                                    grpId: _name
+                                                        .groupInCard![index]
+                                                        .grpId
+                                                        .toString(),
+                                                    index: index,
+                                                  )),
+                                        );
+                                      },
+                                      child: Padding(
+                                        padding: EdgeInsets.only(
+                                            right: index ==
+                                                    _name.groupInCard!.length -
+                                                        1
+                                                ? 16
+                                                : 0),
+                                        child: Groupcard(
+                                          nameData: _name,
+                                          index: index,
+                                        ),
+                                      ));
+                                },
+                              ),
                             ),
-                    ),
-                    SizedBox(
-                      height: 32,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 16.0, right: 16),
-                      child: Align(
-                        alignment: Alignment.centerLeft,
-                        child: SizedBox(
-                          width: 1.sw,
-                          child: Text(
-                            "Schedule".tr(),
-                            style: FontConstant2.baloothampifont,
+                          ),
+                    if (_name.groupInCard!.isNotEmpty) SizedBox(height: 32),
+                    if (length > 0)
+                      Padding(
+                        padding: const EdgeInsets.only(left: 16.0, right: 16),
+                        child: Align(
+                          alignment: Alignment.centerLeft,
+                          child: SizedBox(
+                            width: 1.sw,
+                            child: Text(
+                              "Schedule".tr(),
+                              style: FontConstant2.baloothampifont,
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                    SizedBox(height: 16),
-                    Container(
-                      padding: EdgeInsets.symmetric(horizontal: 16),
-                      width: 1.sw,
-                      child: ListView.separated(
-                          separatorBuilder: (ctx, ind) => SizedBox(
-                                height: 14.h,
-                              ),
-                          shrinkWrap: true,
-                          padding: EdgeInsets.zero,
-                          physics: NeverScrollableScrollPhysics(),
-                          itemCount: length,
-                          scrollDirection: Axis.vertical,
-                          itemBuilder: (BuildContext context, int index) {
-                            return InkWell(
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => TLearningAlphabets(
-                                            scheduleID: _name
-                                                .schdule![index].actId
-                                                .toString(),
-                                          )),
-                                );
-                              },
-                              child: Container(
-                                height: 64,
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(16),
+                    if (length > 0) SizedBox(height: 16),
+                    if (length > 0)
+                      Container(
+                        padding: EdgeInsets.symmetric(horizontal: 16),
+                        width: 1.sw,
+                        child: ListView.separated(
+                            separatorBuilder: (ctx, ind) => SizedBox(
+                                  height: 14.h,
                                 ),
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 15.0),
-                                  child: Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      ClipRRect(
-                                        borderRadius: BorderRadius.circular(10),
-                                        child: Image.network(
-                                          _name.schdule![index].actIcon
-                                              .toString(),
-                                          fit: BoxFit.cover,
-                                          errorBuilder: (q, w, e) {
-                                            return Text(
-                                                'Image not loaded'.tr());
-                                          },
-                                          height: 40,
-                                          width: 40,
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(left: 15.0),
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            Text(
-                                              _name.schdule![index].actTitle
+                            shrinkWrap: true,
+                            padding: EdgeInsets.zero,
+                            physics: NeverScrollableScrollPhysics(),
+                            itemCount: length,
+                            scrollDirection: Axis.vertical,
+                            itemBuilder: (BuildContext context, int index) {
+                              return InkWell(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            TLearningAlphabets(
+                                              scheduleID: _name
+                                                  .schdule![index].actId
                                                   .toString(),
-                                              style: FontConstant
-                                                  .k32w500blackText
-                                                  .copyWith(fontSize: 16),
-                                            ),
-                                            Row(
-                                              children: [
-                                                Text(
-                                                  _name.schdule![index].grpName
-                                                      .toString(),
-                                                  style: FontConstant
-                                                      .k14w400lightpurpleText
-                                                      .copyWith(
-                                                          fontWeight:
-                                                              FontWeight.w400,
-                                                          fontSize: 14,
-                                                          color: Color(
-                                                              0xffB7A4B2)),
-                                                ),
-                                                SizedBox(
-                                                  width: 5,
-                                                ),
-                                                Container(
-                                                  width: 3,
-                                                  height: 3,
-                                                  decoration: BoxDecoration(
-                                                      color: Color(0xffB7A4B2),
-                                                      shape: BoxShape.circle),
-                                                ),
-                                                SizedBox(
-                                                  width: 5,
-                                                ),
-                                                Text(
-                                                  "${"From".tr()} ${_name.schdule![index].timing!.split('-').first} ",
-                                                  style: FontConstant
-                                                      .k14w400lightpurpleText
-                                                      .copyWith(
-                                                          fontWeight:
-                                                              FontWeight.w400,
-                                                          fontSize: 14,
-                                                          color: Color(
-                                                              0xffB7A4B2)),
-                                                ),
-                                                Text(
-                                                  "${"To".tr()} ${_name.schdule![index].timing!.split('-').last}",
-                                                  style: FontConstant
-                                                      .k14w400lightpurpleText
-                                                      .copyWith(
-                                                          fontWeight:
-                                                              FontWeight.w400,
-                                                          fontSize: 14,
-                                                          color: Color(
-                                                              0xffB7A4B2)),
-                                                ),
-                                              ],
-                                            )
-                                          ],
+                                            )),
+                                  );
+                                },
+                                child: Container(
+                                  height: 64,
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(16),
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 15.0),
+                                    child: Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          child: Image.network(
+                                            _name.schdule![index].actIcon
+                                                .toString(),
+                                            fit: BoxFit.cover,
+                                            errorBuilder: (q, w, e) {
+                                              return Text(
+                                                  'Image not loaded'.tr());
+                                            },
+                                            height: 40,
+                                            width: 40,
+                                          ),
                                         ),
-                                      ),
-                                    ],
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(left: 15.0),
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              Text(
+                                                _name.schdule![index].actTitle
+                                                    .toString(),
+                                                style: FontConstant
+                                                    .k32w500blackText
+                                                    .copyWith(fontSize: 16),
+                                              ),
+                                              Row(
+                                                children: [
+                                                  Text(
+                                                    _name
+                                                        .schdule![index].grpName
+                                                        .toString(),
+                                                    style: FontConstant
+                                                        .k14w400lightpurpleText
+                                                        .copyWith(
+                                                            fontWeight:
+                                                                FontWeight.w400,
+                                                            fontSize: 14,
+                                                            color: Color(
+                                                                0xffB7A4B2)),
+                                                  ),
+                                                  SizedBox(
+                                                    width: 5,
+                                                  ),
+                                                  Container(
+                                                    width: 3,
+                                                    height: 3,
+                                                    decoration: BoxDecoration(
+                                                        color:
+                                                            Color(0xffB7A4B2),
+                                                        shape: BoxShape.circle),
+                                                  ),
+                                                  SizedBox(
+                                                    width: 5,
+                                                  ),
+                                                  Text(
+                                                    "${"From".tr()} ${_name.schdule![index].timing!.split('-').first} ",
+                                                    style: FontConstant
+                                                        .k14w400lightpurpleText
+                                                        .copyWith(
+                                                            fontWeight:
+                                                                FontWeight.w400,
+                                                            fontSize: 14,
+                                                            color: Color(
+                                                                0xffB7A4B2)),
+                                                  ),
+                                                  Text(
+                                                    "${"To".tr()} ${_name.schdule![index].timing!.split('-').last}",
+                                                    style: FontConstant
+                                                        .k14w400lightpurpleText
+                                                        .copyWith(
+                                                            fontWeight:
+                                                                FontWeight.w400,
+                                                            fontSize: 14,
+                                                            color: Color(
+                                                                0xffB7A4B2)),
+                                                  ),
+                                                ],
+                                              )
+                                            ],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ),
-                              ),
-                            );
-                          }),
-                    ),
+                              );
+                            }),
+                      ),
                     _name.schdule != null
                         ? length == _name.schdule!.length
                             ? SizedBox.shrink()

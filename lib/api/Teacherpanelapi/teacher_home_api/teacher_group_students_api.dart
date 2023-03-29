@@ -6,6 +6,7 @@ import 'package:kidseau/shard_prefs/shared_prefs.dart';
 
 class TeacherGroupStudentsAPi {
   Future<dynamic> get({required String grpId, required String page}) async {
+    print(grpId);
     String? cookie = UserPrefs.getCookies();
     String? selectedLang = UserPrefs.getLang();
     String langId = '';
