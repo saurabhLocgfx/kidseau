@@ -4,7 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kidseau/TeachersPanel/THomeScreen/THomeScreen.dart';
 import 'package:kidseau/Theme.dart';
 import 'package:kidseau/Widgets/buttons.dart';
-import 'package:kidseau/api/Teacherpanelapi/teacher_profile_api/teacher_profile.dart';
 import 'package:kidseau/api/models/teacher_profile_details_model/teacher_profile_details_model.dart';
 
 import '../../ParentsPanel/PProfileScreens/PSchoolProfile.dart';
@@ -271,7 +270,7 @@ class _TParentProfileState extends State<TParentProfile> {
                     Row(
                       children: [
                         Container(
-                          height: 32,
+                          height: 50,
                           width: 104,
                           child: Align(
                             alignment: Alignment.centerLeft,

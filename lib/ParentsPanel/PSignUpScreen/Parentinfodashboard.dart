@@ -7,9 +7,14 @@ import 'package:kidseau/Parentinfo.dart';
 import 'package:kidseau/Theme.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
+import '../../shard_prefs/shared_prefs.dart';
+import '../PDashBoard.dart';
+
 class Parentinfodashboard extends StatefulWidget {
+  final bool takeKidInfo;
   Parentinfodashboard({
     Key? key,
+    required this.takeKidInfo,
   }) : super(key: key);
 
   @override
@@ -88,25 +93,34 @@ class _ParentinfodashboardState extends State<Parentinfodashboard>
                     children: <Widget>[
                       ParentInfo(
                         onContinue: () {
-                          _pageController.animateToPage(
-                            1,
-                            duration: Duration(milliseconds: 300),
-                            curve: Curves.fastOutSlowIn,
-                          );
+                          if (widget.takeKidInfo) {
+                            UserPrefs.setIsTeacher(false);
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (ctx) => PDashboard()));
+                          } else {
+                            _pageController.animateToPage(
+                              1,
+                              duration: Duration(milliseconds: 300),
+                              curve: Curves.fastOutSlowIn,
+                            );
+                          }
                         },
+                        takeKidInfo: widget.takeKidInfo,
                       ),
-                      KidsDetails(
-                        onContinue: () {
-                          _pageController.animateToPage(
-                            2,
-                            duration: Duration(milliseconds: 300),
-                            curve: Curves.fastOutSlowIn,
-                          );
-                        },
-                      ),
-                      MedicalInfo(
-                        newKid: false,
-                      )
+                      if (!widget.takeKidInfo)
+                        KidsDetails(
+                          onContinue: () {
+                            _pageController.animateToPage(
+                              2,
+                              duration: Duration(milliseconds: 300),
+                              curve: Curves.fastOutSlowIn,
+                            );
+                          },
+                        ),
+                      if (!widget.takeKidInfo)
+                        MedicalInfo(
+                          newKid: false,
+                        )
                     ],
                   ),
                 ),
@@ -124,6 +138,7 @@ class _ParentinfodashboardState extends State<Parentinfodashboard>
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 60),
           child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               GestureDetector(
                   onTap: () {},
@@ -136,42 +151,46 @@ class _ParentinfodashboardState extends State<Parentinfodashboard>
                       ),
                     ],
                   )),
-              Expanded(
-                child: LinearPercentIndicator(
-                  padding: EdgeInsets.zero,
-                  lineHeight: 4.0,
-                  percent: pageIndex == 0 ? 0.3 : 1,
-                  backgroundColor: ThemeColor.primarycolor.withOpacity(0.16),
-                  progressColor: ThemeColor.primarycolor,
+              if (!widget.takeKidInfo)
+                Expanded(
+                  child: LinearPercentIndicator(
+                    padding: EdgeInsets.zero,
+                    lineHeight: 4.0,
+                    percent: pageIndex == 0 ? 0.3 : 1,
+                    backgroundColor: ThemeColor.primarycolor.withOpacity(0.16),
+                    progressColor: ThemeColor.primarycolor,
+                  ),
                 ),
-              ),
-              GestureDetector(
-                  onTap: () {},
-                  child: DotCircleTab(
-                    isCompleted: pageIndex != 0 && pageIndex != 1,
-                    isCurrent: pageIndex == 1,
-                    // text: 'kids info',
-                  )),
-              Expanded(
-                child: LinearPercentIndicator(
-                  padding: EdgeInsets.zero,
-                  lineHeight: 4.0,
-                  percent: pageIndex == 0
-                      ? 0
-                      : pageIndex == 1
-                          ? 0.3
-                          : 1,
-                  backgroundColor: ThemeColor.primarycolor.withOpacity(0.16),
-                  progressColor: ThemeColor.primarycolor,
+              if (!widget.takeKidInfo)
+                GestureDetector(
+                    onTap: () {},
+                    child: DotCircleTab(
+                      isCompleted: pageIndex != 0 && pageIndex != 1,
+                      isCurrent: pageIndex == 1,
+                      // text: 'kids info',
+                    )),
+              if (!widget.takeKidInfo)
+                Expanded(
+                  child: LinearPercentIndicator(
+                    padding: EdgeInsets.zero,
+                    lineHeight: 4.0,
+                    percent: pageIndex == 0
+                        ? 0
+                        : pageIndex == 1
+                            ? 0.3
+                            : 1,
+                    backgroundColor: ThemeColor.primarycolor.withOpacity(0.16),
+                    progressColor: ThemeColor.primarycolor,
+                  ),
                 ),
-              ),
-              GestureDetector(
-                  onTap: () {},
-                  child: DotCircleTab(
-                    isCompleted: false,
-                    isCurrent: pageIndex == 2,
-                    // text: 'Medical info',
-                  )),
+              if (!widget.takeKidInfo)
+                GestureDetector(
+                    onTap: () {},
+                    child: DotCircleTab(
+                      isCompleted: false,
+                      isCurrent: pageIndex == 2,
+                      // text: 'Medical info',
+                    )),
             ],
           ),
         ),
@@ -183,24 +202,26 @@ class _ParentinfodashboardState extends State<Parentinfodashboard>
                   maxLines: 2,
                   style: FontConstant.k14w5008267AC),
             ),
-            Expanded(
-              child: Text("Kid's info".tr(),
-                  textAlign: TextAlign.center,
-                  maxLines: 2,
-                  style: FontConstant.k14w5008267AC.copyWith(
-                      color: pageIndex == 1 || pageIndex == 2
-                          ? ThemeColor.primarycolor
-                          : ThemeColor.b7A4B2)),
-            ),
-            Expanded(
-              child: Text("Medical".tr(),
-                  textAlign: TextAlign.center,
-                  maxLines: 2,
-                  style: FontConstant.k14w500B7A4Text.copyWith(
-                      color: pageIndex == 2
-                          ? ThemeColor.primarycolor
-                          : ThemeColor.b7A4B2)),
-            ),
+            if (!widget.takeKidInfo)
+              Expanded(
+                child: Text("Kid's info".tr(),
+                    textAlign: TextAlign.center,
+                    maxLines: 2,
+                    style: FontConstant.k14w5008267AC.copyWith(
+                        color: pageIndex == 1 || pageIndex == 2
+                            ? ThemeColor.primarycolor
+                            : ThemeColor.b7A4B2)),
+              ),
+            if (!widget.takeKidInfo)
+              Expanded(
+                child: Text("Medical".tr(),
+                    textAlign: TextAlign.center,
+                    maxLines: 2,
+                    style: FontConstant.k14w500B7A4Text.copyWith(
+                        color: pageIndex == 2
+                            ? ThemeColor.primarycolor
+                            : ThemeColor.b7A4B2)),
+              ),
           ],
         ),
       ],

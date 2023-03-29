@@ -54,9 +54,11 @@ class _TKidsOverviewState extends State<TKidsOverview> {
   bool _isLoading = false;
   KidDetailModel model = KidDetailModel();
   _getData() {
+    print(widget.kidId);
     _isLoading = true;
     final resp = TKidDetails().get(kidId: widget.kidId);
     resp.then((value) {
+      print(value);
       if (value['status'] == 1) {
         setState(() {
           model = KidDetailModel.fromJson(value);
@@ -120,6 +122,7 @@ class _TKidsOverviewState extends State<TKidsOverview> {
               )
             : SingleChildScrollView(
                 child: Container(
+                width: 1.sw,
                 decoration: BoxDecoration(
                   image: DecorationImage(
                     image: AssetImage(
@@ -132,31 +135,33 @@ class _TKidsOverviewState extends State<TKidsOverview> {
                 child: Stack(
                   children: [
                     /*Image.asset(
-              "assets/images/postsbackground.png",
-              height: 414,
-              width: 1.sw,
-            ),*/
+                      "assets/images/postsbackground.png",
+                      height: 414,
+                      width: 1.sw,
+                    ),*/
                     Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         SizedBox(height: 140),
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 16.0),
                           child: Row(
                             children: [
-                              Container(
-                                clipBehavior: Clip.hardEdge,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(16),
+                              if (model.image != null)
+                                Container(
+                                  clipBehavior: Clip.hardEdge,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(16),
+                                  ),
+                                  height: 128,
+                                  width: 96,
+                                  child: Image.network(
+                                    model.image!.toString(),
+                                    errorBuilder: (q, w, e) => Image.asset(
+                                        "assets/images/profileperson.png"),
+                                    fit: BoxFit.cover,
+                                  ),
                                 ),
-                                height: 128,
-                                width: 96,
-                                child: Image.network(
-                                  model.image!.toString(),
-                                  errorBuilder: (q, w, e) => Image.asset(
-                                      "assets/images/profileperson.png"),
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
                               SizedBox(width: 16),
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -166,9 +171,10 @@ class _TKidsOverviewState extends State<TKidsOverview> {
                                     model.name.toString(),
                                     style: FontConstant.k24w500brownText,
                                   ),
-                                  Text(
-                                      "${model.gender!.toLowerCase() == 'm' ? 'S/O ' : model.gender!.toLowerCase() == 'f' ? 'D/O ' : 'C/O '} - ${model.fatherName}",
-                                      style: FontConstant.k16w5008471Text),
+                                  if (model.gender != null)
+                                    Text(
+                                        "${model.gender!.toLowerCase() == 'm' ? 'S/O ' : model.gender!.toLowerCase() == 'f' ? 'D/O ' : 'C/O '} - ${model.fatherName}",
+                                        style: FontConstant.k16w5008471Text),
                                   Row(
                                     children: [
                                       Text(model.group.toString().tr(),
@@ -839,7 +845,8 @@ class _TKidsOverviewState extends State<TKidsOverview> {
                           ),
                         ),
                         SizedBox(height: 8),
-                        Padding(
+                        Container(
+                          color: Colors.transparent,
                           padding: const EdgeInsets.symmetric(horizontal: 16.0),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -857,56 +864,57 @@ class _TKidsOverviewState extends State<TKidsOverview> {
                                   Text("Vaccinations".tr(),
                                       style: FontConstant2.k22w5008471text),
                                   SizedBox(height: 4),
-                                  for (int i = 0;
-                                      i < model.otherVaccination!.length;
-                                      i++)
-                                    GestureDetector(
-                                      onTap: () {
-                                        setState(() {
-                                          isChecked[i] = !isChecked[i];
-                                        });
-                                      },
-                                      child: Container(
-                                        color: Colors.transparent,
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Row(
-                                              children: [
-                                                Text(
-                                                  model.otherVaccination![i],
-                                                  style: FontConstant
-                                                      .k16w500331FText,
-                                                ),
-                                                SizedBox(width: 16),
-                                                /*Text(time[i],
+                                  if (model.otherVaccination != null)
+                                    for (int i = 0;
+                                        i < model.otherVaccination!.length;
+                                        i++)
+                                      GestureDetector(
+                                        onTap: () {
+                                          setState(() {
+                                            isChecked[i] = !isChecked[i];
+                                          });
+                                        },
+                                        child: Container(
+                                          color: Colors.transparent,
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Row(
+                                                children: [
+                                                  Text(
+                                                    model.otherVaccination![i],
+                                                    style: FontConstant
+                                                        .k16w500331FText,
+                                                  ),
+                                                  SizedBox(width: 16),
+                                                  /*Text(time[i],
                                                     style: FontConstant
                                                         .k16w400B7A4Text
                                                         .copyWith(
                                                             fontWeight:
                                                                 FontWeight
                                                                     .w500)),*/
-                                              ],
-                                            ),
-                                            Checkbox(
-                                              activeColor: Color(0xffBE74AA),
-                                              checkColor: Colors.white,
-                                              shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(5),
+                                                ],
                                               ),
-                                              value: true, // isChecked[i],
-                                              onChanged: (bool? value) {
-                                                /*setState(() {
+                                              Checkbox(
+                                                activeColor: Color(0xffBE74AA),
+                                                checkColor: Colors.white,
+                                                shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(5),
+                                                ),
+                                                value: true, // isChecked[i],
+                                                onChanged: (bool? value) {
+                                                  /*setState(() {
                                                   isChecked[i] = value!;
                                                 });*/
-                                              },
-                                            ),
-                                          ],
+                                                },
+                                              ),
+                                            ],
+                                          ),
                                         ),
                                       ),
-                                    ),
                                   SizedBox(height: 20),
                                   /*  Row(
                                     mainAxisAlignment:

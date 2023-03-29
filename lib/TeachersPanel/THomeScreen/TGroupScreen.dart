@@ -388,7 +388,9 @@ class _TGroupScreenState extends State<TGroupScreen> {
                                     : ListView.builder(
                                         physics: NeverScrollableScrollPhysics(),
                                         itemCount:
-                                            _studentModel.student!.length,
+                                            _studentModel.student!.length > 5
+                                                ? 5
+                                                : _studentModel.student!.length,
                                         shrinkWrap: true,
                                         itemBuilder:
                                             (BuildContext context, int index) {

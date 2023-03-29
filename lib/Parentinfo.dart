@@ -15,7 +15,12 @@ import 'api/parent_signup_apis/parent_signup_info_api.dart';
 
 class ParentInfo extends StatefulWidget {
   final Function onContinue;
-  const ParentInfo({Key? key, required this.onContinue}) : super(key: key);
+  final bool takeKidInfo;
+  const ParentInfo({
+    Key? key,
+    required this.onContinue,
+    required this.takeKidInfo,
+  }) : super(key: key);
 
   @override
   State<ParentInfo> createState() => _ParentInfoState();

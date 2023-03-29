@@ -5,11 +5,9 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:kidseau/ParentsPanel/PHomeScreen/PHomeScreen.dart';
 import 'package:kidseau/TeachersPanel/THomeScreen/TKidsDetails.dart';
 import 'package:kidseau/Theme.dart';
 import 'package:kidseau/api/models/teacher_group_model/t_students_model.dart';
-import 'package:kidseau/api/models/teacher_group_model/teacher_group_students_model.dart';
 import 'package:lazy_load_scrollview/lazy_load_scrollview.dart';
 
 import '../../api/Teacherpanelapi/teacher_home_api/teacher_group_students_api.dart';
@@ -29,7 +27,7 @@ class _TAllStudentsState extends State<TAllStudents> {
   @override
   void initState() {
     _scrollController.addListener(() {
-      if (_scrollController.position.maxScrollExtent ==
+      if (_scrollController.position.maxScrollExtent >
           _scrollController.offset) {
         if (_postCount >= 10) {
           _getReloadedStudents();
@@ -57,11 +55,11 @@ class _TAllStudentsState extends State<TAllStudents> {
 
   _getReloadedStudents() {
     _scroll++;
-    _isLoading = true;
+    //_isLoading = true;
     final resp = TeacherGroupStudentsAPi()
         .get(grpId: widget.grpId, page: _scroll.toString());
     resp.then((value) {
-      log(value.toString());
+      log('$value yes');
       try {
         setState(() {
           for (var v in value['student']) {
@@ -72,11 +70,11 @@ class _TAllStudentsState extends State<TAllStudents> {
             reloadedVal = 'no_post_found';
           }
           log(modelList[0].fatherName.toString());
-          _isLoading = false;
+          //_isLoading = false;
         });
       } catch (e) {
         setState(() {
-          _isLoading = false;
+          //_isLoading = false;
         });
       }
     });
@@ -174,110 +172,111 @@ class _TAllStudentsState extends State<TAllStudents> {
                       onEndOfPage: () => _getReloadedStudents(),
                       child: ListView.builder(
                           physics: NeverScrollableScrollPhysics(),
-                          itemCount: modelList.length + 1,
+                          itemCount: modelList.toSet().toList().length + 1,
                           shrinkWrap: true,
                           itemBuilder: (BuildContext context, int index) {
-                            if (index < modelList.length) {
-                              return Padding(
-                                padding: const EdgeInsets.only(bottom: 16.0),
-                                child: GestureDetector(
-                                  onTap: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => TKidsOverview(
-                                                kidId: modelList[index]
-                                                    .kidId
-                                                    .toString(),
-                                              )),
-                                    );
-                                  },
-                                  child: SizedBox(
-                                      height: 128,
-                                      width: 382,
-                                      child: Container(
-                                        width: 260.w,
-                                        decoration: BoxDecoration(
-                                          color: Colors.transparent,
-                                          borderRadius:
-                                              BorderRadius.circular(16),
-                                          image: DecorationImage(
-                                            image: AssetImage(
-                                                "assets/images/Student Card.png"),
-                                            fit: BoxFit.fitWidth,
-                                          ),
-                                        ),
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 16.0, vertical: 8),
-                                        child: Row(
-                                          children: [
-                                            Container(
-                                              height: 96,
-                                              width: 72,
-                                              clipBehavior: Clip.hardEdge,
-                                              decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(8)),
-                                              child: Image.network(
-                                                modelList[index]
-                                                    .image
-                                                    .toString(),
-                                                fit: BoxFit.fill,
-                                                errorBuilder: (q, w, e) =>
-                                                    Image.asset(
-                                                        "assets/images/Rectangle 2715.png"),
+                            if (index < modelList.toSet().toList().length) {
+                              var info = modelList.toSet().toList()[index];
+                              return Column(
+                                children: [
+                                  Padding(
+                                    padding:
+                                        const EdgeInsets.only(bottom: 16.0),
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  TKidsOverview(
+                                                    kidId:
+                                                        info.kidId.toString(),
+                                                  )),
+                                        );
+                                      },
+                                      child: SizedBox(
+                                          height: 128,
+                                          width: 382,
+                                          child: Container(
+                                            width: 260.w,
+                                            decoration: BoxDecoration(
+                                              color: Colors.transparent,
+                                              borderRadius:
+                                                  BorderRadius.circular(16),
+                                              image: DecorationImage(
+                                                image: AssetImage(
+                                                    "assets/images/Student Card.png"),
+                                                fit: BoxFit.fitWidth,
                                               ),
                                             ),
-                                            SizedBox(width: 16),
-                                            Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 16.0, vertical: 8),
+                                            child: Row(
                                               children: [
-                                                SizedBox(
-                                                  height: 8,
+                                                Container(
+                                                  height: 96,
+                                                  width: 72,
+                                                  clipBehavior: Clip.hardEdge,
+                                                  decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              8)),
+                                                  child: Image.network(
+                                                    info.image.toString(),
+                                                    fit: BoxFit.fill,
+                                                    errorBuilder: (q, w, e) =>
+                                                        Image.asset(
+                                                            "assets/images/Rectangle 2715.png"),
+                                                  ),
                                                 ),
-                                                Text(
-                                                  modelList[index]
-                                                      .name
-                                                      .toString(),
-                                                  style:
-                                                      FontConstant.k16w500White,
-                                                ),
-                                                Text(
-                                                  modelList[index]
-                                                      .sectionName
-                                                      .toString(),
-                                                  style:
-                                                      FontConstant.k14w400White,
-                                                ),
-                                                Text(
-                                                  modelList[index]
-                                                      .fatherName
-                                                      .toString(),
-                                                  style:
-                                                      FontConstant.k12w400White,
-                                                ),
-                                                Text(
-                                                  "${modelList[index].rank} ${"rank".tr()}",
-                                                  style:
-                                                      FontConstant.k12w400White,
+                                                SizedBox(width: 16),
+                                                Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    SizedBox(
+                                                      height: 8,
+                                                    ),
+                                                    Text(
+                                                      info.name.toString(),
+                                                      style: FontConstant
+                                                          .k16w500White,
+                                                    ),
+                                                    Text(
+                                                      info.sectionName
+                                                          .toString(),
+                                                      style: FontConstant
+                                                          .k14w400White,
+                                                    ),
+                                                    Text(
+                                                      info.fatherName
+                                                          .toString(),
+                                                      style: FontConstant
+                                                          .k12w400White,
+                                                    ),
+                                                    Text(
+                                                      "${info.rank} ${"rank".tr()}",
+                                                      style: FontConstant
+                                                          .k12w400White,
+                                                    ),
+                                                  ],
                                                 ),
                                               ],
                                             ),
-                                          ],
-                                        ),
-                                      )),
-                                ),
+                                          )),
+                                    ),
+                                  ),
+                                ],
                               );
-                            } else if (reloadedVal == 'no_post_found') {
-                              return Center(child: Text('No Posts found.'));
-                            } else if (_onBottom && _postCount >= 10) {
-                              return Center(child: CircularProgressIndicator());
-                            } else {
+                            } /*else if (reloadedVal == 'no_post_found') {
+                              return Center(child: Text('No kids found.'.tr()));
+                            }*/
+                            else {
                               return SizedBox.shrink();
                             }
                           }),
                     ),
+                    if (_onBottom) CircularProgressIndicator(),
                   ],
                 ),
               ),

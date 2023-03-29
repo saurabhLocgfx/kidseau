@@ -159,7 +159,9 @@ class _PSignupCodeState extends State<PSignupCode> {
                               //navigate to
                               //UserPrefs.setCookies(value['key']);
                               Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) => Parentinfodashboard()));
+                                  builder: (context) => Parentinfodashboard(
+                                        takeKidInfo: value['kid_status'] == 1,
+                                      )));
                               /* Navigator.push(
                                       context,
                                       MaterialPageRoute(
