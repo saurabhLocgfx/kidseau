@@ -64,7 +64,7 @@ class _PTermsAndConditions extends State<PTermsAndConditions> {
         ),
         backgroundColor: Color(0xff8267AC).withOpacity(0.16),
         title: Text(
-          "Privacy Policy".tr(),
+          "Terms and Conditions".tr(),
           style: FontConstant.k18w5008471Text,
         ),
         leading: Row(

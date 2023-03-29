@@ -83,7 +83,7 @@ class _PMessagesState extends State<PMessages> {
     _isLoading = true;
     final resp = RecentChatApi().get();
     resp.then((value) {
-      //log(value.toString());
+      log(value.toString());
       modelList.clear();
       if (mounted) {
         setState(() {

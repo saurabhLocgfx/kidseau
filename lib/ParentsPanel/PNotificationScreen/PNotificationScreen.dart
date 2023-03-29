@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:ui';
 
 import 'package:easy_localization/easy_localization.dart';
@@ -5,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+
 import 'package:kidseau/TeachersPanel/TReminder/AddReminder.dart';
 import 'package:kidseau/Theme.dart';
 import 'package:kidseau/Widgets/widgets.dart';
@@ -49,6 +51,7 @@ var desc2 = [
 class _PNotificationScreenState extends State<PNotificationScreen> {
   List notifications = [];
 
+  var _value;
   int page = 0;
   var response = NotificationResponse(status: 0, allNotification: []);
   getNotifications() {
@@ -57,6 +60,12 @@ class _PNotificationScreenState extends State<PNotificationScreen> {
     });
     NotificationApi().getNotifications(page).then(
       (value) {
+        log(value.toString());
+        for (var v in value['all_notification']) {
+          if (v['notification_type'] == 'post') {
+            _value = v['dis'];
+          }
+        }
         if (value['status'] == 1) {
           notifications.clear();
           response = NotificationResponse.fromJson(value);
@@ -249,11 +258,11 @@ class _PNotificationScreenState extends State<PNotificationScreen> {
                                     response.allNotification[i]
                                                 .notificationType ==
                                             'post'
-                                        ? showDialog(
+                                        ? //Navigator.of(context).push(MaterialPageRoute(builder: (ctx) => PPostNotificationScreen(value: response.allNotification[i].,)));
+                                        showDialog(
                                             context: context,
                                             builder: (_) => PostDialog(
-                                                  id: response
-                                                      .allNotification[i].id,
+                                                  value: _value,
                                                 ))
                                         : notificationDialog(
                                             context: context,

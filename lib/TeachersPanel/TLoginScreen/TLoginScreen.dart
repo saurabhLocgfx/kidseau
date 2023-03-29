@@ -10,6 +10,7 @@ import 'package:kidseau/api/Teacherpanelapi/teacher_login_apis/teacher_login_api
 
 import '../../Widgets/textfields.dart';
 import '../../shard_prefs/shared_prefs.dart';
+import '../TSignupScreen/TWaitingScreen.dart';
 import 'TLoginOtpVerification.dart';
 
 class TLoginScreen extends StatelessWidget {
@@ -142,8 +143,18 @@ class TLoginScreen extends StatelessWidget {
                                       resp.then((value) {
                                         log(value.toString());
                                         if (value['status'] == 0) {
-                                          Fluttertoast.showToast(
-                                              msg: value['msg']);
+                                          if (value['msg'] ==
+                                              "Wait For Director's Approval") {
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      TWaitingScreen()),
+                                            );
+                                          } else {
+                                            Fluttertoast.showToast(
+                                                msg: value['msg']);
+                                          }
                                         } else {
                                           UserPrefs.setCookies(value['key']);
                                           if (controller.text.contains('@')) {

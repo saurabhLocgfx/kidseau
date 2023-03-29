@@ -270,6 +270,7 @@ class _TPersonalDetailsState extends State<TPersonalDetails> {
                               },
                               controller: phoneNumber,
                               style: FontConstant.k18w5008471Text,
+                              keyboardType: TextInputType.number,
                               decoration: InputDecoration(
                                 contentPadding: EdgeInsets.all(14.0),
                                 border: OutlineInputBorder(

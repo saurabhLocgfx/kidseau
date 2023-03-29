@@ -398,6 +398,7 @@ class _TEditProfileScreenState extends State<TEditProfileScreen> {
                               ? FontConstant.k18w5008471Text2
                               : FontConstant.k18w5008471Text,
                           focusNode: _expFocus,
+                          keyboardType: TextInputType.number,
                           controller: _yearController,
                           decoration: TextFieldDecoration()
                               .curvedWhiteDecoration(
@@ -595,35 +596,46 @@ class _BottomSheetWidgetState extends State<BottomSheetWidget> {
                     hintText: 'Enter your email'.tr(),
                     suffix: InkWell(
                       onTap: _numberTimer
-                          ? () {}
-                          : () {
-                              if (_key.currentState!.validate()) {
-                                final resp = TeacherUpdateEmailNumberApi()
-                                    .get(field: _emailController.text);
-                                resp.then((value) {
-                                  log(value.toString());
-                                  if (value['status'] == 1) {
-                                    setState(() {
-                                      _start = 59;
-                                      _emailTimer = true;
-                                      _showField = true;
-                                    });
-                                    _startTimer();
-                                  } else {
-                                    Navigator.of(context).pop();
-                                    CustomSnackBar.customErrorSnackBar(
-                                        context, value['msg']);
-                                  }
-                                });
-                              }
-                              /*var value;
+                          ? () {
+                              log("message");
+                            }
+                          : _emailNode.hasFocus == false
+                              ? () {
+                                  log("message 2");
+                                }
+                              : _emailController.text == widget.model.email
+                                  ? () {
+                                      log("message 3");
+                                    }
+                                  : () {
+                                      if (_key.currentState!.validate()) {
+                                        final resp =
+                                            TeacherUpdateEmailNumberApi().get(
+                                                field: _emailController.text);
+                                        resp.then((value) {
+                                          log(value.toString());
+                                          if (value['status'] == 1) {
+                                            setState(() {
+                                              _start = 59;
+                                              _emailTimer = true;
+                                              _showField = true;
+                                            });
+                                            _startTimer();
+                                          } else {
+                                            Navigator.of(context).pop();
+                                            CustomSnackBar.customErrorSnackBar(
+                                                context, value['msg']);
+                                          }
+                                        });
+                                      }
+                                      /*var value;
                           if(value['success'] == true){
 
                           }else{
                             CustomSnackBar.customErrorSnackBar(context, '${value['message']}');
                             print(value);
                           }*/
-                            },
+                                    },
                       child: Container(
                         //color: Colors.black,
                         //padding: EdgeInsets.all(16),
@@ -686,27 +698,34 @@ class _BottomSheetWidgetState extends State<BottomSheetWidget> {
                     suffix: InkWell(
                       onTap: _emailTimer
                           ? () {}
-                          : () {
-                              if (_key.currentState!.validate()) {
-                                final resp = TeacherUpdateEmailNumberApi()
-                                    .get(field: _numberController.text);
-                                resp.then((value) {
-                                  log(value.toString());
-                                  if (value['status'] == 1) {
-                                    setState(() {
-                                      _start = 59;
-                                      _numberTimer = true;
-                                      _showField = true;
-                                    });
-                                    _startTimer();
-                                  } else {
-                                    Navigator.of(context).pop();
-                                    CustomSnackBar.customErrorSnackBar(
-                                        context, value['msg']);
-                                  }
-                                });
-                              }
-                            },
+                          : _phoneNode.hasFocus == false
+                              ? () {}
+                              : _numberController.text ==
+                                      widget.model.phoneNumber
+                                  ? () {}
+                                  : () {
+                                      //log("message");
+                                      if (_key.currentState!.validate()) {
+                                        final resp =
+                                            TeacherUpdateEmailNumberApi().get(
+                                                field: _numberController.text);
+                                        resp.then((value) {
+                                          log(value.toString());
+                                          if (value['status'] == 1) {
+                                            setState(() {
+                                              _start = 59;
+                                              _numberTimer = true;
+                                              _showField = true;
+                                            });
+                                            _startTimer();
+                                          } else {
+                                            Navigator.of(context).pop();
+                                            CustomSnackBar.customErrorSnackBar(
+                                                context, value['msg']);
+                                          }
+                                        });
+                                      }
+                                    },
                       child: Container(
                         //color: Colors.black,
                         //padding: EdgeInsets.all(16),
