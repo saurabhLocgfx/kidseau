@@ -16,54 +16,58 @@ class TWaitingScreen extends StatefulWidget {
 class _TWaitingScreenState extends State<TWaitingScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      resizeToAvoidBottomInset: true,
-      bottomNavigationBar: Padding(
-        padding: const EdgeInsets.all(16),
-        child: SizedBox(
-          height: 52,
-          width: 382,
-          child: MainButton(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => TLoginScreen()),
-                );
-              },
-              title: "Close".tr(),
-              /*AppLoaclizations.of(context)!.translate("Close").toString(),*/
-              textStyleColor: Colors.white,
-              backgroundColor: ThemeColor.primarycolor),
+    return WillPopScope(
+      onWillPop: () async {
+        return false;
+      },
+      child: Scaffold(
+        resizeToAvoidBottomInset: true,
+        bottomNavigationBar: Padding(
+          padding: const EdgeInsets.all(16),
+          child: SizedBox(
+            height: 52,
+            width: 382,
+            child: MainButton(
+                onTap: () {
+                  Navigator.of(context).pushAndRemoveUntil(
+                      MaterialPageRoute(builder: (ctx) => TLoginScreen()),
+                      (route) => false);
+                },
+                title: "Close".tr(),
+                /*AppLoaclizations.of(context)!.translate("Close").toString(),*/
+                textStyleColor: Colors.white,
+                backgroundColor: ThemeColor.primarycolor),
+          ),
         ),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0),
-        child: Column(
-          children: [
-            SizedBox(height: 111),
-            Center(child: SizedBox(height: 160, child: mainlogo())),
-            SizedBox(height: 32),
-            Center(
-              child: Image.asset(
-                "assets/images/owlwithbook.png",
-                height: 188.h,
-                width: 286.w,
+        body: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: Column(
+            children: [
+              SizedBox(height: 111),
+              Center(child: SizedBox(height: 160, child: mainlogo())),
+              SizedBox(height: 32),
+              Center(
+                child: Image.asset(
+                  "assets/images/owlwithbook.png",
+                  height: 188.h,
+                  width: 286.w,
+                ),
               ),
-            ),
-            SizedBox(height: 20.h),
-            Center(
-              child: Text(
-                "Wait for director’s approval".tr(),
-                style: FontConstant2.k32w5008267text.copyWith(fontSize: 28),
+              SizedBox(height: 20.h),
+              Center(
+                child: Text(
+                  "Wait for director’s approval".tr(),
+                  style: FontConstant2.k32w5008267text.copyWith(fontSize: 28),
+                ),
               ),
-            ),
-            Center(
-              child: Text(
-                "Thank you for your patience".tr(),
-                style: FontConstant.k16w5008471Text,
+              Center(
+                child: Text(
+                  "Thank you for your patience".tr(),
+                  style: FontConstant.k16w5008471Text,
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
