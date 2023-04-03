@@ -39,11 +39,7 @@ class TeacherInfoFill {
       'dob': dateofbirth,
       'edu': education,
       'exp': exp,
-      'gender': gender == 'male'
-          ? 'M'
-          : gender == 'female'
-              ? 'F'
-              : 'O',
+      'gender': gender.toLowerCase() == 'male' ? 'M' : 'F',
       'address': address,
       'lang': '$language',
     });
