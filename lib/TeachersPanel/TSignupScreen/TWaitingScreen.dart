@@ -58,6 +58,7 @@ class _TWaitingScreenState extends State<TWaitingScreen> {
                 child: Text(
                   "Wait for director’s approval".tr(),
                   style: FontConstant2.k32w5008267text.copyWith(fontSize: 28),
+                  textAlign: TextAlign.center,
                 ),
               ),
               Center(

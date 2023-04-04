@@ -69,7 +69,7 @@ class _THomeScreenState extends State<THomeScreen> {
     _grpLoading = true;
     final rsp = THomeApi().get();
     rsp.then((value) {
-      log(value.toString());
+      //log(value.toString());
       if (value['status'] == 1) {
         try {
           setState(() {
@@ -340,382 +340,418 @@ class _THomeScreenState extends State<THomeScreen> {
       ),
       body: loadingData
           ? Center(child: CircularProgressIndicator())
-          : SingleChildScrollView(
-              child: SizedBox(
-                width: 1.sw,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+          : _name.groupInCard!.isEmpty
+              ? Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    if (modelList.isNotEmpty) SizedBox(height: 16),
-                    if (modelList.isNotEmpty && showReminder)
-                      Container(
-                        width: 1.sw,
-                        margin: EdgeInsets.symmetric(horizontal: 16),
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(16),
-                            color: AppColors().k8267AC.withOpacity(0.32)),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
+                    Image.asset(
+                      "assets/images/chicken.png",
+                      width: 1.sw,
+                      height: 200,
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Text(
+                      "Oops!".tr(),
+                      style: FontConstant2.k24w5008267text,
+                    ),
+                    Text(
+                      "No activity assigned by director.".tr(),
+                      style: FontConstant.k16w4008471Text,
+                    ),
+                  ],
+                )
+              : SingleChildScrollView(
+                  child: SizedBox(
+                    width: 1.sw,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        if (modelList.isNotEmpty) SizedBox(height: 16),
+                        if (modelList.isNotEmpty && showReminder)
+                          Container(
+                            width: 1.sw,
+                            margin: EdgeInsets.symmetric(horizontal: 16),
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 12, vertical: 8),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(16),
+                                color: AppColors().k8267AC.withOpacity(0.32)),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Image.asset(
-                                  "assets/images/clockfilled.png",
-                                  width: 34,
-                                  height: 34,
-                                ),
-                                SizedBox(
-                                  width: 12,
-                                ),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                Row(
                                   children: [
-                                    Text(
-                                      reminder.title.toString(),
-                                      style: FontConstant2.k18w500331Ftext,
+                                    Image.asset(
+                                      "assets/images/clockfilled.png",
+                                      width: 34,
+                                      height: 34,
                                     ),
-                                    SizedBox(height: 2),
-                                    Text(
-                                      DateFormat('hh:mm a').format(DateTime.parse(
-                                          '${reminder.remDate!} ${reminder.remTime!}')),
-                                      style: FontConstant.k16w4008471Text,
+                                    SizedBox(
+                                      width: 12,
+                                    ),
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          reminder.title.toString(),
+                                          style: FontConstant2.k18w500331Ftext,
+                                        ),
+                                        SizedBox(height: 2),
+                                        Text(
+                                          DateFormat('hh:mm a').format(
+                                              DateTime.parse(
+                                                  '${reminder.remDate!} ${reminder.remTime!}')),
+                                          style: FontConstant.k16w4008471Text,
+                                        ),
+                                      ],
                                     ),
                                   ],
                                 ),
-                              ],
-                            ),
-                            GestureDetector(
-                              onTap: () {
-                                setState(() {
-                                  showReminder = false;
-                                  modelList.removeWhere((element) =>
-                                      element.id.toString() ==
-                                      reminder.id.toString());
-                                });
-                                final resp = DeleteReminderApi()
-                                    .get(reminderId: reminder.id.toString());
-                                resp.then((value) {
-                                  if (value['status'] == 1) {
-                                    reminder = ReminderModel();
-                                    /*setState(() {
+                                GestureDetector(
+                                  onTap: () {
+                                    setState(() {
+                                      showReminder = false;
+                                      modelList.removeWhere((element) =>
+                                          element.id.toString() ==
+                                          reminder.id.toString());
+                                    });
+                                    final resp = DeleteReminderApi().get(
+                                        reminderId: reminder.id.toString());
+                                    resp.then((value) {
+                                      if (value['status'] == 1) {
+                                        reminder = ReminderModel();
+                                        /*setState(() {
                                       //modelList.removeAt(index);
                                       //Navigator.of(context).pop();
                                     });*/
-                                  } else {
-                                    //Navigator.of(context).pop();
-                                  }
-                                });
-                              },
-                              child: Container(
-                                color: Colors.transparent,
-                                padding: EdgeInsets.all(12),
-                                child: Icon(Icons.close),
-                              ),
+                                      } else {
+                                        //Navigator.of(context).pop();
+                                      }
+                                    });
+                                  },
+                                  child: Container(
+                                    color: Colors.transparent,
+                                    padding: EdgeInsets.all(12),
+                                    child: Icon(Icons.close),
+                                  ),
+                                ),
+                              ],
                             ),
-                          ],
-                        ),
-                      ),
-                    if (_name.groupInCard!.isNotEmpty) SizedBox(height: 16),
-                    /*_name.groupInCard!.isEmpty || _name.groupInCard == null
+                          ),
+                        if (_name.groupInCard!.isNotEmpty) SizedBox(height: 16),
+                        /*_name.groupInCard!.isEmpty || _name.groupInCard == null
                         ? Text(
                             'No Groups Allotted Yet.',
                             style: FontConstant.k16w500B7A4Text,
                           )
                         :*/
-                    _grpLoading
-                        ? SizedBox.shrink()
-                        : SizedBox(
-                            height: _name.groupInCard != null &&
-                                    _name.groupInCard!.isNotEmpty
-                                ? 128
-                                : 0,
-                            width: 1.sw,
-                            child: MediaQuery.removePadding(
-                              context: context,
-                              removeTop: true,
-                              child: ListView.builder(
-                                shrinkWrap: true,
-                                scrollDirection: Axis.horizontal,
-                                itemCount: _name.groupInCard!.length,
-                                itemBuilder: (BuildContext context, int index) {
-                                  return GestureDetector(
-                                      onTap: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  TGroupScreen(
-                                                    grpId: _name
-                                                        .groupInCard![index]
-                                                        .grpId
-                                                        .toString(),
-                                                    index: index,
-                                                  )),
-                                        );
-                                      },
-                                      child: Padding(
-                                        padding: EdgeInsets.only(
-                                            right: index ==
-                                                    _name.groupInCard!.length -
-                                                        1
-                                                ? 16
-                                                : 0),
-                                        child: Groupcard(
-                                          nameData: _name,
-                                          index: index,
-                                        ),
-                                      ));
-                                },
+                        _grpLoading
+                            ? SizedBox.shrink()
+                            : SizedBox(
+                                height: _name.groupInCard != null &&
+                                        _name.groupInCard!.isNotEmpty
+                                    ? 128
+                                    : 0,
+                                width: 1.sw,
+                                child: MediaQuery.removePadding(
+                                  context: context,
+                                  removeTop: true,
+                                  child: ListView.builder(
+                                    shrinkWrap: true,
+                                    scrollDirection: Axis.horizontal,
+                                    itemCount: _name.groupInCard!.length,
+                                    itemBuilder:
+                                        (BuildContext context, int index) {
+                                      return GestureDetector(
+                                          onTap: () {
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      TGroupScreen(
+                                                        grpId: _name
+                                                            .groupInCard![index]
+                                                            .grpId
+                                                            .toString(),
+                                                        index: index,
+                                                      )),
+                                            );
+                                          },
+                                          child: Padding(
+                                            padding: EdgeInsets.only(
+                                                right: index ==
+                                                        _name.groupInCard!
+                                                                .length -
+                                                            1
+                                                    ? 16
+                                                    : 0),
+                                            child: Groupcard(
+                                              nameData: _name,
+                                              index: index,
+                                            ),
+                                          ));
+                                    },
+                                  ),
+                                ),
+                              ),
+                        if (_name.groupInCard!.isNotEmpty) SizedBox(height: 32),
+                        if (length > 0)
+                          Padding(
+                            padding:
+                                const EdgeInsets.only(left: 16.0, right: 16),
+                            child: Align(
+                              alignment: Alignment.centerLeft,
+                              child: SizedBox(
+                                width: 1.sw,
+                                child: Text(
+                                  "Schedule".tr(),
+                                  style: FontConstant2.baloothampifont,
+                                ),
                               ),
                             ),
                           ),
-                    if (_name.groupInCard!.isNotEmpty) SizedBox(height: 32),
-                    if (length > 0)
-                      Padding(
-                        padding: const EdgeInsets.only(left: 16.0, right: 16),
-                        child: Align(
-                          alignment: Alignment.centerLeft,
-                          child: SizedBox(
+                        if (length > 0) SizedBox(height: 16),
+                        if (length > 0)
+                          Container(
+                            padding: EdgeInsets.symmetric(horizontal: 16),
                             width: 1.sw,
-                            child: Text(
-                              "Schedule".tr(),
-                              style: FontConstant2.baloothampifont,
-                            ),
-                          ),
-                        ),
-                      ),
-                    if (length > 0) SizedBox(height: 16),
-                    if (length > 0)
-                      Container(
-                        padding: EdgeInsets.symmetric(horizontal: 16),
-                        width: 1.sw,
-                        child: ListView.separated(
-                            separatorBuilder: (ctx, ind) => SizedBox(
-                                  height: 14.h,
-                                ),
-                            shrinkWrap: true,
-                            padding: EdgeInsets.zero,
-                            physics: NeverScrollableScrollPhysics(),
-                            itemCount: length,
-                            scrollDirection: Axis.vertical,
-                            itemBuilder: (BuildContext context, int index) {
-                              return InkWell(
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            TLearningAlphabets(
-                                              scheduleID: _name
-                                                  .schdule![index].actId
-                                                  .toString(),
-                                            )),
-                                  );
-                                },
-                                child: Container(
-                                  height: 64,
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.circular(16),
-                                  ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 15.0),
-                                    child: Row(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                          child: Image.network(
-                                            _name.schdule![index].actIcon
-                                                .toString(),
-                                            fit: BoxFit.cover,
-                                            errorBuilder: (q, w, e) {
-                                              return Text(
-                                                  'Image not loaded'.tr());
-                                            },
-                                            height: 40,
-                                            width: 40,
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding:
-                                              const EdgeInsets.only(left: 15.0),
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              Text(
-                                                _name.schdule![index].actTitle
-                                                    .toString(),
-                                                style: FontConstant
-                                                    .k32w500blackText
-                                                    .copyWith(fontSize: 16),
-                                              ),
-                                              Row(
-                                                children: [
-                                                  Text(
-                                                    _name
-                                                        .schdule![index].grpName
-                                                        .toString(),
-                                                    style: FontConstant
-                                                        .k14w400lightpurpleText
-                                                        .copyWith(
-                                                            fontWeight:
-                                                                FontWeight.w400,
-                                                            fontSize: 14,
-                                                            color: Color(
-                                                                0xffB7A4B2)),
-                                                  ),
-                                                  SizedBox(
-                                                    width: 5,
-                                                  ),
-                                                  Container(
-                                                    width: 3,
-                                                    height: 3,
-                                                    decoration: BoxDecoration(
-                                                        color:
-                                                            Color(0xffB7A4B2),
-                                                        shape: BoxShape.circle),
-                                                  ),
-                                                  SizedBox(
-                                                    width: 5,
-                                                  ),
-                                                  Text(
-                                                    "${"From".tr()} ${_name.schdule![index].timing!.split('-').first} ",
-                                                    style: FontConstant
-                                                        .k14w400lightpurpleText
-                                                        .copyWith(
-                                                            fontWeight:
-                                                                FontWeight.w400,
-                                                            fontSize: 14,
-                                                            color: Color(
-                                                                0xffB7A4B2)),
-                                                  ),
-                                                  Text(
-                                                    "${"To".tr()} ${_name.schdule![index].timing!.split('-').last}",
-                                                    style: FontConstant
-                                                        .k14w400lightpurpleText
-                                                        .copyWith(
-                                                            fontWeight:
-                                                                FontWeight.w400,
-                                                            fontSize: 14,
-                                                            color: Color(
-                                                                0xffB7A4B2)),
-                                                  ),
-                                                ],
-                                              )
-                                            ],
-                                          ),
-                                        ),
-                                      ],
+                            child: ListView.separated(
+                                separatorBuilder: (ctx, ind) => SizedBox(
+                                      height: 14.h,
                                     ),
-                                  ),
-                                ),
-                              );
-                            }),
-                      ),
-                    _name.schdule != null
-                        ? length == _name.schdule!.length
-                            ? SizedBox.shrink()
-                            : Center(
-                                child: GestureDetector(
-                                  onTap: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (_) => ScheduleScreen(),
-                                      ),
-                                    );
-                                  },
-                                  child: Container(
-                                    color: Colors.transparent,
-                                    padding: EdgeInsets.all(16),
-                                    child: Text("See more".tr(),
-                                        style: FontConstant.k16w500purpleText
-                                            .copyWith(
-                                          fontSize: 18,
-                                        )),
-                                  ),
-                                ),
-                              )
-                        : Container(),
-                    SizedBox(height: 32),
-                    _name.attendance != null
-                        ? _name.attendance!.isEmpty
-                            ? SizedBox.shrink()
-                            : Padding(
-                                padding: const EdgeInsets.only(
-                                    left: 16.0, bottom: 10, right: 16),
-                                child: Align(
-                                  alignment: Alignment.centerLeft,
-                                  child: SizedBox(
-                                    width: 1.sw,
-                                    child: Text(
-                                      "Attendance".tr(),
-                                      style: FontConstant2.baloothampifont,
-                                    ),
-                                  ),
-                                ),
-                              )
-                        : Container(),
-                    _name.attendance != null
-                        ? _name.attendance?.isEmpty ?? [].isEmpty
-                            ? SizedBox.shrink()
-                            : Container(
-                                padding: EdgeInsets.only(left: 16),
-                                height: 128,
-                                child: ListView.separated(
-                                  shrinkWrap: true,
-                                  scrollDirection: Axis.horizontal,
-                                  itemCount: _name.attendance!.length,
-                                  itemBuilder: (context, index) =>
-                                      GestureDetector(
+                                shrinkWrap: true,
+                                padding: EdgeInsets.zero,
+                                physics: NeverScrollableScrollPhysics(),
+                                itemCount: length,
+                                scrollDirection: Axis.vertical,
+                                itemBuilder: (BuildContext context, int index) {
+                                  return InkWell(
                                     onTap: () {
                                       Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                          builder: (context) =>
-                                              TAttendanceScreen(
-                                            groupName: _name
-                                                .attendance![index].groupName
-                                                .toString(),
-                                            attendanceId: _name
-                                                .attendance![index].groupId
-                                                .toString(),
-                                          ),
-                                        ),
+                                            builder: (context) =>
+                                                TLearningAlphabets(
+                                                  scheduleID: _name
+                                                      .schdule![index].actId
+                                                      .toString(),
+                                                )),
                                       );
                                     },
-                                    child: Padding(
-                                      padding: EdgeInsets.only(
-                                          right: index ==
-                                                  _name.attendance!.length - 1
-                                              ? 16
-                                              : 0),
-                                      child: Attendancecard(
-                                        index: index,
-                                        model: _name,
+                                    child: Container(
+                                      height: 64,
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius: BorderRadius.circular(16),
+                                      ),
+                                      child: Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 15.0),
+                                        child: Row(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: [
+                                            ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                              child: Image.network(
+                                                _name.schdule![index].actIcon
+                                                    .toString(),
+                                                fit: BoxFit.cover,
+                                                errorBuilder: (q, w, e) {
+                                                  return Text(
+                                                      'Image not loaded'.tr());
+                                                },
+                                                height: 40,
+                                                width: 40,
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  left: 15.0),
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  Text(
+                                                    _name.schdule![index]
+                                                        .actTitle
+                                                        .toString(),
+                                                    style: FontConstant
+                                                        .k32w500blackText
+                                                        .copyWith(fontSize: 16),
+                                                  ),
+                                                  Row(
+                                                    children: [
+                                                      Text(
+                                                        _name.schdule![index]
+                                                            .grpName
+                                                            .toString(),
+                                                        style: FontConstant
+                                                            .k14w400lightpurpleText
+                                                            .copyWith(
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w400,
+                                                                fontSize: 14,
+                                                                color: Color(
+                                                                    0xffB7A4B2)),
+                                                      ),
+                                                      SizedBox(
+                                                        width: 5,
+                                                      ),
+                                                      Container(
+                                                        width: 3,
+                                                        height: 3,
+                                                        decoration:
+                                                            BoxDecoration(
+                                                                color: Color(
+                                                                    0xffB7A4B2),
+                                                                shape: BoxShape
+                                                                    .circle),
+                                                      ),
+                                                      SizedBox(
+                                                        width: 5,
+                                                      ),
+                                                      Text(
+                                                        "${"From".tr()} ${_name.schdule![index].timing!.split('-').first} ",
+                                                        style: FontConstant
+                                                            .k14w400lightpurpleText
+                                                            .copyWith(
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w400,
+                                                                fontSize: 14,
+                                                                color: Color(
+                                                                    0xffB7A4B2)),
+                                                      ),
+                                                      Text(
+                                                        "${"To".tr()} ${_name.schdule![index].timing!.split('-').last}",
+                                                        style: FontConstant
+                                                            .k14w400lightpurpleText
+                                                            .copyWith(
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w400,
+                                                                fontSize: 14,
+                                                                color: Color(
+                                                                    0xffB7A4B2)),
+                                                      ),
+                                                    ],
+                                                  )
+                                                ],
+                                              ),
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                  separatorBuilder: (ctx, ind) => SizedBox(
-                                    width: 16,
-                                  ),
-                                ),
-                              )
-                        : Container(),
-                    SizedBox(height: 90),
-                  ],
+                                  );
+                                }),
+                          ),
+                        _name.schdule != null
+                            ? length == _name.schdule!.length
+                                ? SizedBox.shrink()
+                                : Center(
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (_) => ScheduleScreen(),
+                                          ),
+                                        );
+                                      },
+                                      child: Container(
+                                        color: Colors.transparent,
+                                        padding: EdgeInsets.all(16),
+                                        child: Text("See more".tr(),
+                                            style: FontConstant
+                                                .k16w500purpleText
+                                                .copyWith(
+                                              fontSize: 18,
+                                            )),
+                                      ),
+                                    ),
+                                  )
+                            : Container(),
+                        SizedBox(height: 32),
+                        _name.attendance != null
+                            ? _name.attendance!.isEmpty
+                                ? SizedBox.shrink()
+                                : Padding(
+                                    padding: const EdgeInsets.only(
+                                        left: 16.0, bottom: 10, right: 16),
+                                    child: Align(
+                                      alignment: Alignment.centerLeft,
+                                      child: SizedBox(
+                                        width: 1.sw,
+                                        child: Text(
+                                          "Attendance".tr(),
+                                          style: FontConstant2.baloothampifont,
+                                        ),
+                                      ),
+                                    ),
+                                  )
+                            : Container(),
+                        _name.attendance != null
+                            ? _name.attendance?.isEmpty ?? [].isEmpty
+                                ? SizedBox.shrink()
+                                : Container(
+                                    padding: EdgeInsets.only(left: 16),
+                                    height: 128,
+                                    child: ListView.separated(
+                                      shrinkWrap: true,
+                                      scrollDirection: Axis.horizontal,
+                                      itemCount: _name.attendance!.length,
+                                      itemBuilder: (context, index) =>
+                                          GestureDetector(
+                                        onTap: () {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  TAttendanceScreen(
+                                                groupName: _name
+                                                    .attendance![index]
+                                                    .groupName
+                                                    .toString(),
+                                                attendanceId: _name
+                                                    .attendance![index].groupId
+                                                    .toString(),
+                                              ),
+                                            ),
+                                          );
+                                        },
+                                        child: Padding(
+                                          padding: EdgeInsets.only(
+                                              right: index ==
+                                                      _name.attendance!.length -
+                                                          1
+                                                  ? 16
+                                                  : 0),
+                                          child: Attendancecard(
+                                            index: index,
+                                            model: _name,
+                                          ),
+                                        ),
+                                      ),
+                                      separatorBuilder: (ctx, ind) => SizedBox(
+                                        width: 16,
+                                      ),
+                                    ),
+                                  )
+                            : Container(),
+                        SizedBox(height: 90),
+                      ],
+                    ),
+                  ),
                 ),
-              ),
-            ),
     );
   }
 

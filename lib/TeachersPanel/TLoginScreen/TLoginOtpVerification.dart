@@ -64,7 +64,7 @@ class _TLoginOtpVerificationState extends State<TLoginOtpVerification> {
         backgroundColor: Color(0xfff7f6fa),
         bottomNavigationBar: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.only(bottom: 25),
+            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
             child: Center(
               child: RichText(
                   text: TextSpan(children: [

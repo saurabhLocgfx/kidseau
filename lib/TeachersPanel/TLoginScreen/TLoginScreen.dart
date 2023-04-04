@@ -28,7 +28,7 @@ class TLoginScreen extends StatelessWidget {
       backgroundColor: Color(0xfff7f6fa),
       bottomNavigationBar: SingleChildScrollView(
         child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 24),
+          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
           child: Center(
             child: RichText(
               text: TextSpan(
@@ -60,7 +60,7 @@ class TLoginScreen extends StatelessWidget {
           child: Form(
             key: _formKey,
             child: Container(
-              height: 1.sh,
+              //height: 1.sh,
               width: 1.sw,
               decoration: BoxDecoration(
                 image: DecorationImage(
@@ -73,7 +73,7 @@ class TLoginScreen extends StatelessWidget {
                   fit: BoxFit.fitWidth,
                 ),
               ),
-              child: ListView(
+              child: Column(
                 children: [
                   Padding(
                     padding: EdgeInsets.only(top: 180.h, left: 16, right: 16),
@@ -186,7 +186,7 @@ class TLoginScreen extends StatelessWidget {
                             ),
                           ],
                         ),
-                        SizedBox(height: 40.h),
+                        // SizedBox(height: 40.h),
                       ],
                     ),
                   ),
