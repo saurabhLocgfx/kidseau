@@ -449,7 +449,7 @@ class _PHomeScreenState extends State<PHomeScreen> {
                                                 borderRadius:
                                                     BorderRadius.circular(20)),
                                             child: Text(
-                                              "Voucher expired!",
+                                              "Voucher expired!".tr(),
                                               style: FontConstant.k14w400White,
                                             ),
                                           )
