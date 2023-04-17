@@ -220,7 +220,7 @@ class _PMessagesState extends State<PMessages> {
                                       ),
                                       Text(modelList[index].userType.toString(),
                                           style: FontConstant.k14w4008471Text),
-                                      Text(
+                                      modelList[index].messageTime.toString() == ""? SizedBox() :Text(
                                           "${"last message".tr()} - ${DateFormat('dd MMM').format(DateTime.parse(modelList[index].messageTime.toString()))}",
                                           style: FontConstant.k12w4008267Text),
                                     ],
