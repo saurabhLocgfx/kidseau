@@ -56,6 +56,7 @@ class _TPostFormScreenState extends State<TPostFormScreen> {
   _getSections() {
     final resp = TGetSections().get();
     resp.then((value) {
+      log(value.toString());
       setState(() {
         for (var v in value['section']) {
           sectionList.add(v['sec_name']);

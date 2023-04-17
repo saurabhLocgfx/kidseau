@@ -218,7 +218,7 @@ class _TMessageDashboardState extends State<TMessageDashboard> {
               ),
               SizedBox(height: 24.h),
               SizedBox(
-                height: 1.sh,
+                height: 640.h,
                 child: PageView(
                   controller: _pageController,
                   onPageChanged: (page) {
@@ -234,9 +234,6 @@ class _TMessageDashboardState extends State<TMessageDashboard> {
                   ],
                 ),
               ),
-              SizedBox(
-                height: 100.h,
-              )
             ],
           ),
         ),

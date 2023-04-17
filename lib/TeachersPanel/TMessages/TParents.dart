@@ -3,7 +3,6 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:kidseau/ParentsPanel/PMessageScreen/PopenChats.dart';
 import 'package:kidseau/Theme.dart';
 import 'package:kidseau/api/message_apis/teacher_apis/teacher_get_parent_api.dart';
 import 'package:kidseau/api/models/message_models/teacher_message_parents_model.dart';
@@ -66,6 +65,7 @@ class _TParentsState extends State<TParents> {
   int _scroll = 0;
 
   List<TeacherMessageParentsModel> modelList = [];
+
   _getReloadedData() {
     _scroll++;
     final resp = TeacherGetParentApi().get(scroll: '$_scroll');
@@ -73,6 +73,7 @@ class _TParentsState extends State<TParents> {
       l.log(value.toString());
       if (value['status'] == 1) {
         setState(() {
+          chatCount = value["paretntInfo"].length;
           for (var v in value['paretntInfo']) {
             modelList.add(TeacherMessageParentsModel.fromJson(v));
           }
@@ -82,6 +83,7 @@ class _TParentsState extends State<TParents> {
     });
   }
 
+  int chatCount = 0;
   _getData() {
     _isLoading = true;
     final resp = TeacherGetParentApi().get(scroll: '0');
@@ -89,6 +91,7 @@ class _TParentsState extends State<TParents> {
       l.log(value.toString());
       if (value['status'] == 1) {
         setState(() {
+          chatCount = value["paretntInfo"].length;
           for (var v in value['paretntInfo']) {
             modelList.add(TeacherMessageParentsModel.fromJson(v));
           }
@@ -110,7 +113,12 @@ class _TParentsState extends State<TParents> {
               child: CircularProgressIndicator(),
             )
           : LazyLoadScrollView(
-              onEndOfPage: () => _getReloadedData(),
+              onEndOfPage: () {
+                l.log("message");
+                if (chatCount >= 20) {
+                  _getReloadedData();
+                }
+              },
               child: ListView.separated(
                   //controller: _scrollController,
                   separatorBuilder: (ctx, ind) => SizedBox(
