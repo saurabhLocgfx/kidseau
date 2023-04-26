@@ -25,6 +25,16 @@ enum SingingCharacter { father, mother }
 class _MedicalInfoState extends State<MedicalInfo> {
   SingingCharacter? _character = SingingCharacter.father;
 
+  List<String> _bloodGrpList = [
+    "A+",
+    "A-",
+    "B+",
+    "B-",
+    "O+",
+    "O-",
+    "AB+",
+    "AB-"
+  ];
   String _selectedText = "A";
 
   bool _allVaccines = false;
@@ -77,21 +87,40 @@ class _MedicalInfoState extends State<MedicalInfo> {
                   ),
                   SizedBox(height: 4),
                   Container(
-                    // height: 56.h,
+                    padding: EdgeInsets.only(left: 20, right: 10),
+                    height: 56,
                     width: 1.sw,
-                    child: TextFormField(
-                      /*validator: (address) {
-                        if (address == null || address.isEmpty) {
-                          return "This field cannot be empty".tr();
-                        }
-                        return null;
-                      },*/
-                      style: FontConstant.k18w5008471Text,
-                      decoration: CustomInputDecoration(
-                              hintText: "Enter kid’s blood group".tr())
-                          .decoration(),
-                      controller: bloodGroupController,
-                      /*  controller: controller,*/
+                    decoration: BoxDecoration(
+                        color: Color(0xffFFFFFF),
+                        borderRadius: BorderRadius.all(Radius.circular(30))),
+                    child: DropdownButton<String>(
+                      alignment: Alignment.centerLeft,
+                      borderRadius: BorderRadius.circular(30),
+                      dropdownColor: Color(0xffffffff),
+                      isExpanded: true,
+                      hint: Text(
+                        "Enter kid’s blood group".tr(),
+                        style: FontConstant.k14w400lightText.copyWith(
+                            color: Color(0xffB7A4B2),
+                            fontSize: 16.0,
+                            fontWeight: FontWeight.w400),
+                      ),
+                      elevation: 0,
+                      underline: SizedBox(),
+                      value: bloodGroupController.text.isEmpty
+                          ? _bloodGrpList[0]
+                          : bloodGroupController.text,
+                      items: _bloodGrpList.map((String value) {
+                        return DropdownMenuItem<String>(
+                          value: value,
+                          child: Text(value),
+                        );
+                      }).toList(),
+                      onChanged: (String? val) {
+                        setState(() {
+                          bloodGroupController.text = val!;
+                        });
+                      },
                     ),
                   ),
                   SizedBox(height: 10),
