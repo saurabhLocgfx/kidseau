@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -23,6 +25,12 @@ class PostDialog extends StatefulWidget {
 }
 
 class _PostDialogState extends State<PostDialog> {
+  @override
+  void initState() {
+    log(widget.value['images'].toString());
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return AlertDialog(

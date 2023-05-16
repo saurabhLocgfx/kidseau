@@ -15,9 +15,27 @@ class UserPrefs {
   static const Teacher = 'Teacher';
   static const FirebaseToken = 'FirebaseToken';
   static const SetLang = 'SetLang';
+  static const ShowOnBoarding = 'ShowOnBoarding';
+  static const ParentShowOnBoarding = 'ParentShowOnBoarding';
   static SharedPreferences? prefs;
   static Future init() async {
     prefs = await SharedPreferences.getInstance();
+  }
+
+  static Future showOnBoarding(bool val) async {
+    return await prefs?.setBool(ShowOnBoarding, val);
+  }
+
+  static bool? getShowOnBoarding() {
+    return prefs?.getBool(ShowOnBoarding);
+  }
+
+  static Future showParentOnBoarding(bool val) async {
+    return await prefs?.setBool(ParentShowOnBoarding, val);
+  }
+
+  static bool? getShowParentOnBoarding() {
+    return prefs?.getBool(ParentShowOnBoarding);
   }
 
   static Future clearData(String key) async {

@@ -5,11 +5,32 @@ import 'package:kidseau/ParentsPanel/POnboardingScreens/POnboardingScreen.dart';
 import 'package:kidseau/Theme.dart';
 import 'package:kidseau/Widgets/buttons.dart';
 import 'package:kidseau/Widgets/widgets.dart';
+import 'package:kidseau/shard_prefs/shared_prefs.dart';
 
 import '../../TeachersPanel/OnboardingScreens/TOnboardingScreen.dart';
+import '../../TeachersPanel/TLoginScreen/TLoginScreen.dart';
+import '../PLoginScreen/PLoginScreen.dart';
 
-class PStartScreen extends StatelessWidget {
+class PStartScreen extends StatefulWidget {
   const PStartScreen({Key? key}) : super(key: key);
+
+  @override
+  State<PStartScreen> createState() => _PStartScreenState();
+}
+
+class _PStartScreenState extends State<PStartScreen> {
+  bool _showOnb = true;
+  bool _showParentOnb = true;
+  @override
+  void initState() {
+    _getPrefs();
+    super.initState();
+  }
+
+  _getPrefs() async {
+    _showOnb = UserPrefs.getShowOnBoarding() ?? true;
+    _showParentOnb = UserPrefs.getShowParentOnBoarding() ?? true;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -79,10 +100,21 @@ class PStartScreen extends StatelessWidget {
                                 height: 56,
                                 child: MainButton(
                                     onTap: () {
-                                      Navigator.of(context).push(
+                                      if (_showOnb) {
+                                        final _prefs =
+                                            UserPrefs.showOnBoarding(false);
+                                        Navigator.of(context).push(
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    TOnboardingScreen()));
+                                      } else {
+                                        Navigator.push(
+                                          context,
                                           MaterialPageRoute(
-                                              builder: (context) =>
-                                                  TOnboardingScreen()));
+                                            builder: (_) => TLoginScreen(),
+                                          ),
+                                        );
+                                      }
                                     },
                                     title: "i'm a Teacher".tr(),
                                     textStyleColor: Colors.white,
@@ -102,10 +134,20 @@ class PStartScreen extends StatelessWidget {
                                 //width: 382,
                                 child: MainButton(
                                     onTap: () {
-                                      Navigator.of(context).push(
+                                      if (_showParentOnb) {
+                                        UserPrefs.showParentOnBoarding(false);
+                                        Navigator.of(context).push(
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    POnboardingScreen()));
+                                      } else {
+                                        Navigator.push(
+                                          context,
                                           MaterialPageRoute(
-                                              builder: (context) =>
-                                                  POnboardingScreen()));
+                                            builder: (_) => PLoginScreen(),
+                                          ),
+                                        );
+                                      }
                                     },
                                     title: "i'm a Parent".tr(),
                                     textStyleColor: Colors.white,

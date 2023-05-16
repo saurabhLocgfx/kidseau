@@ -72,6 +72,7 @@ class _TGroupScreenState extends State<TGroupScreen> {
   _getSchedule() {
     final resp = TeacherGroupScheduleApi().get(grpId: _grpId);
     resp.then((value) {
+      log("schedule $value");
       try {
         setState(() {
           scheduelModel = TeacherGroupsScheduelModel.fromJson(value);

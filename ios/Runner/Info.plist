@@ -26,14 +26,18 @@
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-	<key>NSPhotoLibraryUsageDescription</key>
-    <string>This app requires access to the photo library of your device to enable you adding images for your messages and posts.</string>
-    <key>NSCameraUsageDescription</key>
-    <string>This app requires access to the camera of your device to enable you adding images for your stories.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>This app requires access to the camera of your device to enable you adding images for your stories.</string>
+	<key>NSAppleMusicUsageDescription</key>
+	<string>Required usage description for a Flutter dependency</string>
 	<key>NSContactsUsageDescription</key>
 	<string>This app requires contacts access to function properly.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Required usage description for a Flutter dependency</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>We need to access to the microphone to record audio file</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>This app requires access to the photo library of your device to enable you adding images for your messages and posts.</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>UIBackgroundModes</key>
@@ -45,6 +49,8 @@
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
+	<key>UIRequiresFullScreen</key>
+	<true/>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

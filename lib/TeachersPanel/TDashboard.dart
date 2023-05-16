@@ -1,3 +1,6 @@
+import 'dart:async';
+
+import 'package:badges/badges.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +12,7 @@ import 'package:kidseau/TeachersPanel/TPostsScreen/TPostsDashBoard.dart';
 import 'package:kidseau/TeachersPanel/TProfileScreen/TProfileDashboard.dart';
 import 'package:kidseau/TeachersPanel/TStudentScreen/TStudentScreen.dart';
 import 'package:kidseau/Theme.dart';
+import 'package:kidseau/api/message_apis/message_repo.dart';
 
 import '../api/notification_api/notification_api.dart';
 import '../shard_prefs/shared_prefs.dart';
@@ -84,6 +88,10 @@ class _TDashboardState extends State<TDashboard> {
     NotificationApi().get();
   }
 
+  MessageRepo _repo = MessageRepo();
+  bool _isNewMsg = false;
+
+  Timer? _timer;
   @override
   void initState() {
     if (widget.tabindex != null) {
@@ -91,12 +99,16 @@ class _TDashboardState extends State<TDashboard> {
       pageIndex = widget.tabindex!;
     } else {}
     initializeFirebaseService();
+    _timer = Timer.periodic(Duration(seconds: 4), (timer) async {
+      _isNewMsg = await _repo.newMsg();
+    });
     super.initState();
   }
 
   @override
   void dispose() {
     _pageController.dispose();
+    _timer?.cancel();
     super.dispose();
   }
 
@@ -294,23 +306,26 @@ class _TDashboardState extends State<TDashboard> {
                 pageIndex = 4;
               });
             },
-            child: Container(
-              color: Colors.transparent,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image.asset(
-                    pageIndex == 4
-                        ? "assets/images/messageiconfill.png"
-                        : "assets/images/messageicon.png",
-                    height: 24,
-                  ),
-                  Text("Message".tr(),
-                      style: FontConstant.k12w400B7A4Text.copyWith(
-                          color: pageIndex == 4
-                              ? Color(0xff8267AC)
-                              : Color(0xffB7A4B2)))
-                ],
+            child: Badge(
+              badgeContent: Text(""),
+              child: Container(
+                color: Colors.transparent,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset(
+                      pageIndex == 4
+                          ? "assets/images/messageiconfill.png"
+                          : "assets/images/messageicon.png",
+                      height: 24,
+                    ),
+                    Text("Message".tr(),
+                        style: FontConstant.k12w400B7A4Text.copyWith(
+                            color: pageIndex == 4
+                                ? Color(0xff8267AC)
+                                : Color(0xffB7A4B2)))
+                  ],
+                ),
               ),
             ),
           ),

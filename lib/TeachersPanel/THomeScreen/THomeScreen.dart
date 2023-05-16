@@ -197,7 +197,8 @@ class _THomeScreenState extends State<THomeScreen> {
         elevation: 0,
         title: Row(
           children: [
-            Padding(
+            Container(
+              width: 150,
               padding: const EdgeInsets.only(top: 15.0),
               child: Text("${"Hello".tr()} ${_name.hello ?? ''}",
                   overflow: TextOverflow.ellipsis,

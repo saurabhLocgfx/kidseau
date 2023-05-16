@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-
 import 'package:kidseau/TeachersPanel/TReminder/AddReminder.dart';
 import 'package:kidseau/Theme.dart';
 import 'package:kidseau/Widgets/widgets.dart';
@@ -61,6 +60,7 @@ class _PNotificationScreenState extends State<PNotificationScreen> {
     NotificationApi().getNotifications(page).then(
       (value) {
         log(value.toString());
+        notifications.clear();
         for (var v in value['all_notification']) {
           if (v['notification_type'] == 'post') {
             _value = v['dis'];
@@ -161,217 +161,227 @@ class _PNotificationScreenState extends State<PNotificationScreen> {
             notifications.isNotEmpty
                 ? Padding(
                     padding: const EdgeInsets.symmetric(vertical: 40),
-                    child: ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: notifications.length,
-                      itemBuilder: (_, i) {
-                        return Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            if (notifications.length == 1)
-                              Center(
-                                child: Padding(
-                                  padding: const EdgeInsets.only(left: 16),
-                                  child: Text(
-                                    DateFormat('dd MMM, yyyy').format(
+                    child: RefreshIndicator(
+                      onRefresh: () async {
+                        getNotifications();
+                      },
+                      child: ListView.builder(
+                        shrinkWrap: true,
+                        itemCount: notifications.length,
+                        itemBuilder: (_, i) {
+                          return Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              if (notifications.length == 1)
+                                Center(
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(left: 16),
+                                    child: Text(
+                                      DateFormat('dd MMM, yyyy').format(
+                                                  DateTime.parse(response
+                                                      .allNotification[i]
+                                                      .dateTime
+                                                      .toString())) ==
+                                              DateFormat('dd MMM, yyyy')
+                                                  .format(DateTime.now())
+                                          ? 'Today'.tr()
+                                          : DateFormat('dd MMM, yyyy').format(
+                                              DateTime.parse(response
+                                                  .allNotification[i].dateTime
+                                                  .toString())),
+                                      style: FontConstant.k14w500B7A4Text,
+                                    ),
+                                  ),
+                                ),
+                              if (i == 0 && notifications.length > 1)
+                                if (DateTime.parse(response
+                                        .allNotification[i].dateTime
+                                        .toString()) !=
+                                    DateTime.parse(response
+                                        .allNotification[i + 1].dateTime
+                                        .toString()))
+                                  Center(
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(left: 16),
+                                      child: Text(
+                                        DateFormat('dd MMM, yyyy').format(
+                                                    DateTime.parse(response
+                                                        .allNotification[i]
+                                                        .dateTime
+                                                        .toString())) ==
+                                                DateFormat('dd MMM, yyyy')
+                                                    .format(DateTime.now())
+                                            ? 'Today'.tr()
+                                            : DateFormat('dd MMM, yyyy').format(
                                                 DateTime.parse(response
                                                     .allNotification[i].dateTime
-                                                    .toString())) ==
-                                            DateFormat('dd MMM, yyyy')
-                                                .format(DateTime.now())
-                                        ? 'Today'.tr()
-                                        : DateFormat('dd MMM, yyyy').format(
-                                            DateTime.parse(response
-                                                .allNotification[i].dateTime
-                                                .toString())),
-                                    style: FontConstant.k14w500B7A4Text,
-                                  ),
-                                ),
-                              ),
-                            if (i == 0 && notifications.length > 1)
-                              if (DateTime.parse(response
-                                      .allNotification[i].dateTime
-                                      .toString()) !=
-                                  DateTime.parse(response
-                                      .allNotification[i + 1].dateTime
-                                      .toString()))
-                                Center(
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(left: 16),
-                                    child: Text(
-                                      DateFormat('dd MMM, yyyy').format(
-                                                  DateTime.parse(response
-                                                      .allNotification[i]
-                                                      .dateTime
-                                                      .toString())) ==
-                                              DateFormat('dd MMM, yyyy')
-                                                  .format(DateTime.now())
-                                          ? 'Today'.tr()
-                                          : DateFormat('dd MMM, yyyy').format(
-                                              DateTime.parse(response
-                                                  .allNotification[i].dateTime
-                                                  .toString())),
-                                      style: FontConstant.k14w500B7A4Text,
+                                                    .toString())),
+                                        style: FontConstant.k14w500B7A4Text,
+                                      ),
                                     ),
                                   ),
-                                ),
-                            if (i != 0)
-                              if (DateTime.parse(response
-                                      .allNotification[i].dateTime
-                                      .toString()) ==
-                                  DateTime.parse(response
-                                      .allNotification[i - 1].dateTime
-                                      .toString()))
-                                Center(
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(left: 16),
-                                    child: Text(
-                                      DateFormat('dd MMM, yyyy').format(
-                                                  DateTime.parse(response
-                                                      .allNotification[i]
-                                                      .dateTime
-                                                      .toString())) ==
-                                              DateFormat('dd MMM, yyyy')
-                                                  .format(DateTime.now())
-                                          ? 'Today'.tr()
-                                          : DateFormat('dd MMM, yyyy').format(
-                                              DateTime.parse(response
-                                                  .allNotification[i].dateTime
-                                                  .toString())),
-                                      style: FontConstant.k14w500B7A4Text,
-                                    ),
-                                  ),
-                                ),
-                            SizedBox(height: 2),
-                            GestureDetector(
-                              onTap: () {
-                                setState(() {
-                                  loading = true;
-                                });
-                                NotificationApi().readNotification([
-                                  response.allNotification[i].id
-                                ]).then((value) {
-                                  if (value['status'] == 1) {
-                                    setState(() {
-                                      loading = false;
-                                    });
-                                    response.allNotification[i]
-                                                .notificationType ==
-                                            'post'
-                                        ? //Navigator.of(context).push(MaterialPageRoute(builder: (ctx) => PPostNotificationScreen(value: response.allNotification[i].,)));
-                                        showDialog(
-                                            context: context,
-                                            builder: (_) => PostDialog(
-                                                  value: _value,
-                                                ))
-                                        : notificationDialog(
-                                            context: context,
-                                            title: response.allNotification[i]
-                                                .notification,
-                                            desc: response.allNotification[i]
-                                                .notificationType,
-                                            onAddReminderTap: () {
-                                              setState(() {
-                                                notifications[i] = true;
-                                              });
-                                              Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                  builder: (_) => TAddReminder(
-                                                    title: response
+                              if (i != 0)
+                                if (DateTime.parse(response
+                                        .allNotification[i].dateTime
+                                        .toString()) ==
+                                    DateTime.parse(response
+                                        .allNotification[i - 1].dateTime
+                                        .toString()))
+                                  Center(
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(left: 16),
+                                      child: Text(
+                                        DateFormat('dd MMM, yyyy').format(
+                                                    DateTime.parse(response
                                                         .allNotification[i]
-                                                        .notification,
-                                                    onPop: () {},
-                                                  ),
-                                                ),
-                                              );
-                                            },
-                                            onPop: () {
-                                              getNotifications();
-                                            },
-                                          );
-                                  } else {
-                                    Fluttertoast.showToast(msg: 'Error');
-                                  }
-                                });
-                              },
-                              child: Container(
-                                color: notifications[i]
-                                    ? Colors.transparent
-                                    : ThemeColor.primarycolor.withOpacity(0.16),
-                                child: Row(
-                                  children: [
-                                    SizedBox(width: 16),
-                                    Container(
-                                      width: 60,
-                                      height: 70,
-                                      margin:
-                                          EdgeInsets.symmetric(vertical: 16),
-                                      clipBehavior: Clip.hardEdge,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(08),
-                                      ),
-                                      child: Image.network(
-                                        response.allNotification[i].userTypeFrom
-                                            .techProfile,
-                                        fit: BoxFit.cover,
-                                        errorBuilder: (_, a, b) => Container(
-                                          decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(08),
-                                              image: DecorationImage(
-                                                  image: AssetImage(
-                                                      "assets/images/person3.png"))),
-                                        ),
+                                                        .dateTime
+                                                        .toString())) ==
+                                                DateFormat('dd MMM, yyyy')
+                                                    .format(DateTime.now())
+                                            ? 'Today'.tr()
+                                            : DateFormat('dd MMM, yyyy').format(
+                                                DateTime.parse(response
+                                                    .allNotification[i].dateTime
+                                                    .toString())),
+                                        style: FontConstant.k14w500B7A4Text,
                                       ),
                                     ),
-                                    SizedBox(width: 12),
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
+                                  ),
+                              SizedBox(height: 2),
+                              GestureDetector(
+                                onTap: () {
+                                  setState(() {
+                                    loading = true;
+                                  });
+                                  NotificationApi().readNotification([
+                                    response.allNotification[i].id
+                                  ]).then((value) {
+                                    if (value['status'] == 1) {
+                                      setState(() {
+                                        loading = false;
+                                      });
+                                      response.allNotification[i]
+                                                  .notificationType ==
+                                              'post'
+                                          ? //Navigator.of(context).push(MaterialPageRoute(builder: (ctx) => PPostNotificationScreen(value: response.allNotification[i].,)));
+                                          showDialog(
+                                              context: context,
+                                              builder: (_) => PostDialog(
+                                                    value: _value,
+                                                  ))
+                                          : notificationDialog(
+                                              context: context,
+                                              title: response.allNotification[i]
+                                                  .notification,
+                                              desc: response.allNotification[i]
+                                                  .notificationType,
+                                              onAddReminderTap: () {
+                                                setState(() {
+                                                  notifications[i] = true;
+                                                });
+                                                Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                    builder: (_) =>
+                                                        TAddReminder(
+                                                      title: response
+                                                          .allNotification[i]
+                                                          .notification,
+                                                      onPop: () {},
+                                                    ),
+                                                  ),
+                                                );
+                                              },
+                                              onPop: () {
+                                                getNotifications();
+                                              },
+                                            );
+                                    } else {
+                                      Fluttertoast.showToast(msg: 'Error');
+                                    }
+                                  });
+                                },
+                                child: Container(
+                                  color: notifications[i]
+                                      ? Colors.transparent
+                                      : ThemeColor.primarycolor
+                                          .withOpacity(0.16),
+                                  child: Row(
+                                    children: [
+                                      SizedBox(width: 16),
+                                      Container(
+                                        width: 60,
+                                        height: 70,
+                                        margin:
+                                            EdgeInsets.symmetric(vertical: 16),
+                                        clipBehavior: Clip.hardEdge,
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(08),
+                                        ),
+                                        child: Image.network(
                                           response.allNotification[i]
-                                              .userTypeFrom.fName
-                                              .trim(),
-                                          maxLines: 1,
-                                          overflow: TextOverflow.ellipsis,
-                                          style: FontConstant.k16w500331FText,
+                                              .userTypeFrom.techProfile,
+                                          fit: BoxFit.cover,
+                                          errorBuilder: (_, a, b) => Container(
+                                            decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(08),
+                                                image: DecorationImage(
+                                                    image: AssetImage(
+                                                        "assets/images/person3.png"))),
+                                          ),
                                         ),
-                                        Text(
-                                          response.allNotification[i]
-                                              .notificationType
-                                              .trim(),
-                                          maxLines: 1,
-                                          overflow: TextOverflow.ellipsis,
-                                          style: FontConstant.k16w500331FText
-                                              .copyWith(
-                                                  fontWeight: FontWeight.w500),
-                                        ),
-                                        Text(
-                                          DateFormat('hh:mm a').format(
-                                              DateTime.parse(response
-                                                  .allNotification[i]
-                                                  .dateTime)),
-                                          style: FontConstant.k14w5008471Text,
-                                        ),
-                                      ],
-                                    )
-                                  ],
+                                      ),
+                                      SizedBox(width: 12),
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            response.allNotification[i]
+                                                .userTypeFrom.fName
+                                                .trim(),
+                                            maxLines: 1,
+                                            overflow: TextOverflow.ellipsis,
+                                            style: FontConstant.k16w500331FText,
+                                          ),
+                                          Text(
+                                            response.allNotification[i]
+                                                .notificationType
+                                                .trim(),
+                                            maxLines: 1,
+                                            overflow: TextOverflow.ellipsis,
+                                            style: FontConstant.k16w500331FText
+                                                .copyWith(
+                                                    fontWeight:
+                                                        FontWeight.w500),
+                                          ),
+                                          Text(
+                                            DateFormat('hh:mm a').format(
+                                                DateTime.parse(response
+                                                    .allNotification[i]
+                                                    .dateTime)),
+                                            style: FontConstant.k14w5008471Text,
+                                          ),
+                                        ],
+                                      )
+                                    ],
+                                  ),
                                 ),
                               ),
-                            ),
-                            if (i != response.allNotification.length - 1)
-                              if (DateTime.parse(response
-                                      .allNotification[i].dateTime
-                                      .toString()) ==
-                                  DateTime.parse(response
-                                      .allNotification[i + 1].dateTime
-                                      .toString()))
-                                SizedBox(height: 16),
-                          ],
-                        );
-                      },
+                              if (i != response.allNotification.length - 1)
+                                if (DateTime.parse(response
+                                        .allNotification[i].dateTime
+                                        .toString()) ==
+                                    DateTime.parse(response
+                                        .allNotification[i + 1].dateTime
+                                        .toString()))
+                                  SizedBox(height: 16),
+                            ],
+                          );
+                        },
+                      ),
                     ),
                   )
                 : SingleChildScrollView(

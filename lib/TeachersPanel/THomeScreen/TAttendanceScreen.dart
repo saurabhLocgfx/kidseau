@@ -392,29 +392,36 @@ class _TAttendanceScreenState extends State<TAttendanceScreen> {
                                     inactiveColor: ThemeColor.b7A4B2,
                                     activeColor: ThemeColor.primarycolor,
                                     value: val1,
-                                    onToggle: (v) {
-                                      setState(() {
-                                        val1 = v;
-                                        // _values.clear();
-                                        for (int i = 0;
-                                            i <= _values.length - 1;
-                                            i++) {
-                                          if (v == true) {
-                                            _values[i] = true;
-                                          } else {
-                                            _values[i] = false;
-                                          }
-                                          attendanceList.clear();
-                                          for (var q in model.groupAllkid!) {
-                                            attendanceList.add({
-                                              "kid_id": q.kidId,
-                                              "status": v == false ? '0' : '1',
+                                    onToggle: DateFormat("yyyy-MM-dd")
+                                                .format(_selectedDay) !=
+                                            DateFormat("yyyy-MM-dd")
+                                                .format(DateTime.now())
+                                        ? (v) {}
+                                        : (v) {
+                                            setState(() {
+                                              val1 = v;
+                                              // _values.clear();
+                                              for (int i = 0;
+                                                  i <= _values.length - 1;
+                                                  i++) {
+                                                if (v == true) {
+                                                  _values[i] = true;
+                                                } else {
+                                                  _values[i] = false;
+                                                }
+                                                attendanceList.clear();
+                                                for (var q
+                                                    in model.groupAllkid!) {
+                                                  attendanceList.add({
+                                                    "kid_id": q.kidId,
+                                                    "status":
+                                                        v == false ? '0' : '1',
+                                                  });
+                                                }
+                                                //_values[i] = !_values[i];
+                                              }
                                             });
-                                          }
-                                          //_values[i] = !_values[i];
-                                        }
-                                      });
-                                    })),
+                                          })),
                             SizedBox(height: 4),
                             Text(
                               "All Present".tr(),
@@ -583,23 +590,18 @@ class _TAttendanceScreenState extends State<TAttendanceScreen> {
                                                                             .primarycolor,
                                                                     value: _values[
                                                                         index],
-                                                                    onToggle:
-                                                                        (v) {
-                                                                      setState(
-                                                                          () {
-                                                                        _values[
-                                                                            index] = v;
-                                                                        attendanceList[
-                                                                            index] = {
-                                                                          "kid_id": model
-                                                                              .groupAllkid![index]
-                                                                              .kidId,
-                                                                          "status": v == false
-                                                                              ? '0'
-                                                                              : '1',
-                                                                        };
-                                                                      });
-                                                                    }),
+                                                                    onToggle: DateFormat("yyyy-MM-dd").format(_selectedDay) !=
+                                                                            DateFormat("yyyy-MM-dd").format(DateTime.now())
+                                                                        ? (v) {}
+                                                                        : (v) {
+                                                                            setState(() {
+                                                                              _values[index] = v;
+                                                                              attendanceList[index] = {
+                                                                                "kid_id": model.groupAllkid![index].kidId,
+                                                                                "status": v == false ? '0' : '1',
+                                                                              };
+                                                                            });
+                                                                          }),
                                                           ),
                                                         ],
                                                       ),
@@ -720,25 +722,18 @@ class _TAttendanceScreenState extends State<TAttendanceScreen> {
                                                                             .primarycolor,
                                                                     value: _values[
                                                                         index],
-                                                                    onToggle:
-                                                                        (v) {
-                                                                      setState(
-                                                                          () {
-                                                                        _values[
-                                                                            index] = v;
-                                                                        attendanceList[
-                                                                            index] = {
-                                                                          "kid_id": model
-                                                                              .groupAllkid!
-                                                                              .where((e) => e.name!.toLowerCase().contains(_controller.text.toLowerCase()))
-                                                                              .toList()[index]
-                                                                              .kidId,
-                                                                          "status": v == false
-                                                                              ? '0'
-                                                                              : '1',
-                                                                        };
-                                                                      });
-                                                                    }),
+                                                                    onToggle: DateFormat("yyyy-MM-dd").format(_selectedDay) !=
+                                                                            DateFormat("yyyy-MM-dd").format(DateTime.now())
+                                                                        ? (v) {}
+                                                                        : (v) {
+                                                                            setState(() {
+                                                                              _values[index] = v;
+                                                                              attendanceList[index] = {
+                                                                                "kid_id": model.groupAllkid!.where((e) => e.name!.toLowerCase().contains(_controller.text.toLowerCase())).toList()[index].kidId,
+                                                                                "status": v == false ? '0' : '1',
+                                                                              };
+                                                                            });
+                                                                          }),
                                                           ),
                                                         ],
                                                       ),
