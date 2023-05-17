@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:badges/badges.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -99,8 +100,10 @@ class _TDashboardState extends State<TDashboard> {
       pageIndex = widget.tabindex!;
     } else {}
     initializeFirebaseService();
-    _timer = Timer.periodic(Duration(seconds: 4), (timer) async {
+    _timer = Timer.periodic(Duration(seconds: 10), (timer) async {
       _isNewMsg = await _repo.newMsg();
+      setState(() {});
+      log(_isNewMsg.toString());
     });
     super.initState();
   }
@@ -307,7 +310,9 @@ class _TDashboardState extends State<TDashboard> {
               });
             },
             child: Badge(
+              position: BadgePosition.custom(top: -8, end: 4),
               badgeContent: Text(""),
+              showBadge: _isNewMsg,
               child: Container(
                 color: Colors.transparent,
                 child: Column(

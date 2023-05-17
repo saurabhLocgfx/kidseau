@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 
@@ -13,7 +12,6 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_mentions/flutter_mentions.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:http/http.dart' as http;
 import 'package:kidseau/Theme.dart';
 import 'package:kidseau/Widgets/THomeScreenWidgets/no_internet.dart';
 import 'package:kidseau/reminder_notifications_class.dart';
@@ -45,29 +43,29 @@ fn(RemoteMessage message) async {
   //AwesomeNotifications().dismissedStream.listen((event) {});
   //AwesomeNotifications().setGlobalBadgeCounter(0);
   log(message.data.toString());
-  String t = message.data['other_data'];
-  Map a = jsonDecode(t);
-  http.Response response = await http.get(Uri.parse(a['bigPicture']));
-  final bytes = response.bodyBytes;
+  //String t = message.data['other_data'];
+  //Map a = jsonDecode(t);
+  // http.Response response = await http.get(Uri.parse(a['bigPicture']));
+  // final bytes = response.bodyBytes;
   AndroidNotificationDetails androidPlatformChannelSpecifics =
       AndroidNotificationDetails('basic_channel', 'basic_channel',
           channelDescription: 'your channel description',
           importance: Importance.max,
           priority: Priority.high,
-          styleInformation: BigPictureStyleInformation(
-              ByteArrayAndroidBitmap.fromBase64String(base64Encode(bytes))),
+          // styleInformation: BigPictureStyleInformation(
+          //     ByteArrayAndroidBitmap.fromBase64String(base64Encode(bytes))),
           ticker: 'ticker');
   NotificationDetails platformChannelSpecifics =
       NotificationDetails(android: androidPlatformChannelSpecifics);
   //log(event.data['content']['id'].toString());
-  log(a['id'].toString());
-  flutterPlugin.show(
-    a['id'],
-    a['title'],
-    a['body'],
-    platformChannelSpecifics,
-    payload: a['payload'].toString(),
-  );
+  // log(a['id'].toString());
+  // flutterPlugin.show(
+  //   a['id'],
+  //   a['title'],
+  //   a['body'],
+  //   platformChannelSpecifics,
+  //   payload: a['payload'].toString(),
+  // );
   /*if (message.data['content']['payload']['type'].toString() == 'story') {
     Navigator.push(
         _navigatorKey.currentState!.context,

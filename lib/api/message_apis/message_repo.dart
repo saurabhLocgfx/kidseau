@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'check_msg.dart';
 
 class MessageRepo {
@@ -8,6 +10,7 @@ class MessageRepo {
     if (resp == false) {
       _retVal = false;
     } else {
+      log("new msg $resp");
       if (resp['msg'] == true) {
         _retVal = true;
       } else {
