@@ -552,6 +552,7 @@ class _PSyllabusState extends State<PSyllabus> {
                                               MaterialPageRoute(
                                                   builder: (ctx) =>
                                                       PLearningAplphabets(
+                                                        selectedDay: _str,
                                                         actId: syllabusModel
                                                             .allSchdule![index]
                                                             .actId

@@ -196,147 +196,144 @@ class _THomeScreenState extends State<THomeScreen> {
         automaticallyImplyLeading: false,
         elevation: 0,
         title: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Container(
-              width: 150,
-              padding: const EdgeInsets.only(top: 15.0),
+            Flexible(
+              //width: 150,
+              //padding: const EdgeInsets.only(top: 15.0),
               child: Text("${"Hello".tr()} ${_name.hello ?? ''}",
                   overflow: TextOverflow.ellipsis,
+                  textAlign: TextAlign.start,
+                  maxLines: 1,
                   style: FontConstant2.k32w5008267text.copyWith(fontSize: 20)),
             ),
           ],
         ),
         actions: [
-          SizedBox(
-            width: 164,
-            child: Padding(
-              padding: const EdgeInsets.only(top: 15.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Padding(
-                      padding: const EdgeInsets.all(15.0),
-                      child: PopupMenuButton(
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(16)),
-                          itemBuilder: (context) {
-                            return [
-                              PopupMenuItem(
-                                enabled: false,
-                                child: GestureDetector(
-                                  onTap: () {
-                                    UserPrefs.setEArbBool(false);
-                                    UserPrefs.setLang('English');
-                                    context.locale = Locale('en', 'US');
-                                    RestartWidget.restartApp(context);
-                                    setState(() {
-                                      colorChange;
-                                    });
-                                  },
-                                  child: Row(
-                                    children: [
-                                      Text(
-                                        ("English".tr()),
-                                        style: colorChange
-                                            ? FontConstant.k16w5008267Text
-                                            : FontConstant.k18w5008471Text,
-                                      )
-                                    ],
-                                  ),
-                                ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Padding(
+                  padding: const EdgeInsets.all(15.0),
+                  child: PopupMenuButton(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(16)),
+                      itemBuilder: (context) {
+                        return [
+                          PopupMenuItem(
+                            enabled: false,
+                            child: GestureDetector(
+                              onTap: () {
+                                UserPrefs.setEArbBool(false);
+                                UserPrefs.setLang('English');
+                                context.locale = Locale('en', 'US');
+                                RestartWidget.restartApp(context);
+                                setState(() {
+                                  colorChange;
+                                });
+                              },
+                              child: Row(
+                                children: [
+                                  Text(
+                                    ("English".tr()),
+                                    style: colorChange
+                                        ? FontConstant.k16w5008267Text
+                                        : FontConstant.k18w5008471Text,
+                                  )
+                                ],
                               ),
-                              PopupMenuItem(
-                                enabled: false,
-                                child: GestureDetector(
-                                  onTap: () {
-                                    UserPrefs.setEArbBool(false);
-                                    UserPrefs.setLang('French');
-                                    context.locale = Locale('fr', 'FR');
-                                    RestartWidget.restartApp(context);
-                                    setState(() {
-                                      colorChange;
-                                    });
-                                  },
-                                  child: Row(
-                                    children: [
-                                      Text(
-                                        ("French".tr()),
-                                        style: colorChange
-                                            ? FontConstant.k16w5008267Text
-                                            : FontConstant.k18w5008471Text,
-                                      )
-                                    ],
-                                  ),
-                                ),
+                            ),
+                          ),
+                          PopupMenuItem(
+                            enabled: false,
+                            child: GestureDetector(
+                              onTap: () {
+                                UserPrefs.setEArbBool(false);
+                                UserPrefs.setLang('French');
+                                context.locale = Locale('fr', 'FR');
+                                RestartWidget.restartApp(context);
+                                setState(() {
+                                  colorChange;
+                                });
+                              },
+                              child: Row(
+                                children: [
+                                  Text(
+                                    ("French".tr()),
+                                    style: colorChange
+                                        ? FontConstant.k16w5008267Text
+                                        : FontConstant.k18w5008471Text,
+                                  )
+                                ],
                               ),
-                              PopupMenuItem(
-                                enabled: false,
-                                child: GestureDetector(
-                                  onTap: () {
-                                    UserPrefs.setEArbBool(true);
-                                    UserPrefs.setLang('Arabic');
-                                    context.locale = Locale('ar', 'AR');
-                                    RestartWidget.restartApp(context);
+                            ),
+                          ),
+                          PopupMenuItem(
+                            enabled: false,
+                            child: GestureDetector(
+                              onTap: () {
+                                UserPrefs.setEArbBool(true);
+                                UserPrefs.setLang('Arabic');
+                                context.locale = Locale('ar', 'AR');
+                                RestartWidget.restartApp(context);
 
-                                    setState(() {
-                                      colorChange;
-                                    });
-                                  },
-                                  child: Row(
-                                    children: [
-                                      Text(
-                                        ("Arabic".tr()),
-                                        style: colorChange
-                                            ? FontConstant.k16w5008267Text
-                                            : FontConstant.k18w5008471Text,
-                                      )
-                                    ],
-                                  ),
-                                ),
+                                setState(() {
+                                  colorChange;
+                                });
+                              },
+                              child: Row(
+                                children: [
+                                  Text(
+                                    ("Arabic".tr()),
+                                    style: colorChange
+                                        ? FontConstant.k16w5008267Text
+                                        : FontConstant.k18w5008471Text,
+                                  )
+                                ],
                               ),
-                            ];
-                          },
-                          child: Image.asset(
-                            "assets/images/Languageicon.png",
-                            height: 24,
-                          ))),
-                  InkWell(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (_) => TReminderScreen(),
-                        ),
-                      );
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.all(15.0),
+                            ),
+                          ),
+                        ];
+                      },
                       child: Image.asset(
-                        "assets/images/clockicon.png",
+                        "assets/images/Languageicon.png",
                         height: 24,
-                      ),
+                      ))),
+              InkWell(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => TReminderScreen(),
                     ),
+                  );
+                },
+                child: Padding(
+                  padding: const EdgeInsets.all(15.0),
+                  child: Image.asset(
+                    "assets/images/clockicon.png",
+                    height: 24,
                   ),
-                  InkWell(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => PNotificationScreen()),
-                      );
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.all(15.0),
-                      child: Image.asset(
-                        "assets/images/iconbell.png",
-                        height: 24,
-                      ),
-                    ),
-                  ),
-                ],
+                ),
               ),
-            ),
-          )
+              InkWell(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => PNotificationScreen()),
+                  );
+                },
+                child: Padding(
+                  padding: const EdgeInsets.all(15.0),
+                  child: Image.asset(
+                    "assets/images/iconbell.png",
+                    height: 24,
+                  ),
+                ),
+              ),
+            ],
+          ),
         ],
       ),
       body: loadingData

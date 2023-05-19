@@ -96,7 +96,7 @@ class _PDashboardState extends State<PDashboard> {
     initializeFirebaseService();
     _timer = Timer.periodic(Duration(seconds: 4), (timer) async {
       _isNewMsg = await _repo.newMsg();
-      log(_isNewMsg.toString());
+      // log(_isNewMsg.toString());
       setState(() {});
     });
     super.initState();

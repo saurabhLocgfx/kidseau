@@ -220,9 +220,13 @@ class _PMessagesState extends State<PMessages> {
                                       ),
                                       Text(modelList[index].userType.toString(),
                                           style: FontConstant.k14w4008471Text),
-                                      modelList[index].messageTime.toString() == ""? SizedBox() :Text(
-                                          "${"last message".tr()} - ${DateFormat('dd MMM').format(DateTime.parse(modelList[index].messageTime.toString()))}",
-                                          style: FontConstant.k12w4008267Text),
+                                      modelList[index].messageTime.toString() ==
+                                              ""
+                                          ? SizedBox()
+                                          : Text(
+                                              "${"last message".tr()} - ${DateFormat('dd MMM').format(DateTime.parse(modelList[index].messageTime.toString()))}",
+                                              style:
+                                                  FontConstant.k12w4008267Text),
                                     ],
                                   ),
                                 ],
@@ -294,48 +298,49 @@ class _PMessagesState extends State<PMessages> {
                                               ),
                                             ),
                                           ),
-                                          PopupMenuItem(
-                                            enabled: false,
-                                            child: InkWell(
-                                              onTap: () {
-                                                final resp = DeleteChat().get(
-                                                    userId: modelList[index]
-                                                        .userId
-                                                        .toString(),
-                                                    userType: modelList[index]
-                                                        .userType
-                                                        .toString());
-                                                resp.then((value) {
-                                                  log(value.toString());
-                                                  if (value['status'] == 1) {
-                                                    setState(() {
-                                                      modelList.removeAt(index);
-                                                    });
-                                                  }
-                                                  Navigator.of(context).pop();
-                                                });
-                                              },
-                                              child: Padding(
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                        vertical: 6.0),
-                                                child: Row(
-                                                  children: [
-                                                    Image.asset(
-                                                      "assets/images/trashicon.png",
-                                                      height: 24,
-                                                    ),
-                                                    SizedBox(width: 24),
-                                                    Text(
-                                                      "Delete chat".tr(),
-                                                      style: FontConstant
-                                                          .k18w5008471Text,
-                                                    )
-                                                  ],
+                                          if (index != 0)
+                                            PopupMenuItem(
+                                              enabled: false,
+                                              child: InkWell(
+                                                onTap: () {
+                                                  final resp = DeleteChat().get(
+                                                      userId: modelList[index]
+                                                          .userId
+                                                          .toString(),
+                                                      userType: modelList[index]
+                                                          .userType
+                                                          .toString());
+                                                  resp.then((value) {
+                                                    log(value.toString());
+                                                    if (value['status'] == 1) {
+                                                      setState(() {
+                                                        modelList
+                                                            .removeAt(index);
+                                                      });
+                                                    }
+                                                    Navigator.of(context).pop();
+                                                  });
+                                                },
+                                                child: Padding(
+                                                  padding: const EdgeInsets
+                                                      .symmetric(vertical: 6.0),
+                                                  child: Row(
+                                                    children: [
+                                                      Image.asset(
+                                                        "assets/images/trashicon.png",
+                                                        height: 24,
+                                                      ),
+                                                      SizedBox(width: 24),
+                                                      Text(
+                                                        "Delete chat".tr(),
+                                                        style: FontConstant
+                                                            .k18w5008471Text,
+                                                      )
+                                                    ],
+                                                  ),
                                                 ),
                                               ),
                                             ),
-                                          ),
                                         ];
                                       },
                                     )

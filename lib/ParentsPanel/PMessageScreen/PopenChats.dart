@@ -163,6 +163,7 @@ class _POpenChatsState extends State<POpenChats> {
     final resp = GetLatestMessage()
         .get(userId: widget.userId, userType: widget.userType);
     resp.then((value) {
+      log("Latest msg" + value.toString());
       if (value['status'] == 1) {
         readMore.clear();
         setState(() {
@@ -1278,6 +1279,10 @@ class _RecorderDialogState extends State<RecorderDialog>
       content: SingleChildScrollView(
         child: Column(
           children: [
+            Text(
+              "Recording...",
+              style: FontConstant.k14w400White,
+            ),
             ScaleTransition(
               scale: _animation,
               child: Container(
@@ -1305,7 +1310,7 @@ class _RecorderDialogState extends State<RecorderDialog>
                   color: AppColors().k8267AC,
                 ),
                 child: Icon(
-                  Icons.clear,
+                  Icons.check,
                   color: Colors.white,
                 ),
               ),

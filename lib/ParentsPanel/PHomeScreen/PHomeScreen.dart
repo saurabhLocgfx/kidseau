@@ -174,8 +174,8 @@ class _PHomeScreenState extends State<PHomeScreen> {
         automaticallyImplyLeading: false,
         elevation: 0,
         centerTitle: false,
-        title: SizedBox(
-          width: 200.w,
+        title: Flexible(
+          //width: 200.w,
           child: Text("${"Hello".tr()} ${_activityModel.greet ?? ''}",
               maxLines: 1,
               overflow: TextOverflow.ellipsis,

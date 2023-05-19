@@ -34,7 +34,7 @@ class AppVideo {
 
   AppVideo.fromJson(Map<String, dynamic> json) {
     vTitle = json['v_title'];
-    video = json['video'];
+    video = json['v_video'];
     vPoster = json['v_poster'];
     vDate = json['v_date'];
   }

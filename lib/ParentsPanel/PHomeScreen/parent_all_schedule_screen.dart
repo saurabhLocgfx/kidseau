@@ -102,6 +102,7 @@ class _PScheduleScreenState extends State<PScheduleScreen> {
                       return InkWell(
                         onTap: () {
                           Get.to(() => PLearningAplphabets(
+                                selectedDay: "",
                                 actId: widget.model.kidAndActivity![index].actId
                                     .toString(),
                               ));

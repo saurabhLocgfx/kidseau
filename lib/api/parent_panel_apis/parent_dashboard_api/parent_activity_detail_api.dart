@@ -5,7 +5,8 @@ import 'package:kidseau/Constants/string_const.dart';
 import 'package:kidseau/shard_prefs/shared_prefs.dart';
 
 class ParentActivityDetailApi {
-  Future<dynamic> get({required String actId}) async {
+  Future<dynamic> get(
+      {required String actId, required String selectedDay}) async {
     String? cookie = UserPrefs.getCookies();
     String? selectedLang = UserPrefs.getLang();
     String langId = '';
@@ -20,7 +21,7 @@ class ParentActivityDetailApi {
     var request = http.MultipartRequest(
         'GET',
         Uri.parse(
-            '$kAPIConst/kids/parent_home_page/activity_details_page.php?act_id=$actId&lang=$langId'));
+            '$kAPIConst/kids/parent_home_page/activity_details_page.php?act_id=$actId&lang=$langId&day=$selectedDay'));
 
     request.headers.addAll(headers);
 
