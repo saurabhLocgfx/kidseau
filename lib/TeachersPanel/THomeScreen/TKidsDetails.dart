@@ -188,7 +188,8 @@ class _TKidsOverviewState extends State<TKidsOverview> {
                                           color: Color(0xffB7A4B2),
                                         ),
                                       ),
-                                      Text("${model.age.toString()} years",
+                                      Text(
+                                          "${model.age.toString()} ${"years".tr()}",
                                           style: FontConstant.k16w500B7A4Text),
                                     ],
                                   ),
@@ -204,7 +205,7 @@ class _TKidsOverviewState extends State<TKidsOverview> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                "kid".tr(),
+                                "Kid".tr(),
                                 style: FontConstant2.k22w5008471text,
                               ),
                               SizedBox(height: 8),
