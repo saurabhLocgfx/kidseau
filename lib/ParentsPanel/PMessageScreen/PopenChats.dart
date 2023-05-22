@@ -140,7 +140,7 @@ class _POpenChatsState extends State<POpenChats> {
     final resp = AllMessagesApi()
         .get(userId: widget.userId, userType: widget.userType, scroll: '0');
     resp.then((value) {
-      //log(value.toString());
+      // log("initial resp" + value.toString());
       readMore.clear();
       if (value['status'] == 1) {
         setState(() {
@@ -163,7 +163,7 @@ class _POpenChatsState extends State<POpenChats> {
     final resp = GetLatestMessage()
         .get(userId: widget.userId, userType: widget.userType);
     resp.then((value) {
-      log("Latest msg" + value.toString());
+      // log("Latest msg" + value.toString());
       if (value['status'] == 1) {
         readMore.clear();
         setState(() {
@@ -1344,6 +1344,7 @@ class _InternetAudioPlayerState extends State<InternetAudioPlayer> {
         playing = event == PlayerState.PLAYING;
       });
     });*/
+    audioPlayer.setUrl(widget.url);
     audioPlayer.onDurationChanged.listen((event) {
       setState(() {
         soundDuration = event;
@@ -1352,9 +1353,20 @@ class _InternetAudioPlayerState extends State<InternetAudioPlayer> {
     audioPlayer.onAudioPositionChanged.listen((event) {
       setState(() {
         soundLength = event.inSeconds.toDouble();
+        //log(soundLength.toString());
       });
     });
+    audioPlayer.onPlayerError.listen((event) {
+      print("Error: $event");
+    });
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    //timer.cancel();
+    audioPlayer.stop();
+    super.dispose();
   }
 
   @override
@@ -1370,18 +1382,21 @@ class _InternetAudioPlayerState extends State<InternetAudioPlayer> {
         children: [
           GestureDetector(
             onTap: () async {
-              print('a');
-              print(playing);
+              print(widget.url);
+              print(soundLength);
+              print(soundDuration);
+              print(await audioPlayer.getDuration());
+              //print(playing);
               setState(() {
                 playing = !playing;
               });
               print(playing);
               if (playing) {
-                audioPlayer.play(widget.url);
+                await audioPlayer.play(widget.url);
                 setPosition();
               } else {
                 setPosition();
-                audioPlayer.stop();
+                await audioPlayer.stop();
               }
             },
             child: Container(

@@ -188,8 +188,8 @@ class PLoginScreen extends StatelessWidget {
                                                         .text
                                                         .trim(),
                                                   )));
-                                      Fluttertoast.showToast(
-                                          msg: 'Your OTP is ${value['OTP']}');
+                                      // Fluttertoast.showToast(
+                                      //     msg: 'Your OTP is ${value['OTP']}');
                                     }
                                   });
                                 }

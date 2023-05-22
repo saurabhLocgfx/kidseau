@@ -172,9 +172,9 @@ class TLoginScreen extends StatelessWidget {
                                                         isEmail: isEmail,
                                                         mobileText: mobileText,
                                                       )));
-                                          Fluttertoast.showToast(
-                                              msg:
-                                                  'Your OTP is ${value['OTP']}');
+                                          // Fluttertoast.showToast(
+                                          //     msg:
+                                          //         'Your OTP is ${value['OTP']}');
                                         }
                                       });
                                       print(controller.text);

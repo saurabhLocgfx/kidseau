@@ -239,9 +239,9 @@ class _PSignupScreenState extends State<PSignupScreen> {
                                                                 .text,
                                                         parent: parent,
                                                       )));
-                                          Fluttertoast.showToast(
-                                              msg:
-                                                  'Your OTP is ${value['OTP']}');
+                                          // Fluttertoast.showToast(
+                                          //     msg:
+                                          //         'Your OTP is ${value['OTP']}');
                                         }
                                       });
                                     }
