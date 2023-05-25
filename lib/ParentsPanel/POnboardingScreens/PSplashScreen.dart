@@ -1,13 +1,21 @@
 import 'dart:async';
+import 'dart:developer';
 
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kidseau/ParentsPanel/POnboardingScreens/PStartScreen.dart';
 import 'package:kidseau/Widgets/widgets.dart';
+import 'package:kidseau/api/user_login.dart';
 import 'package:kidseau/choose_language_screen.dart';
 import 'package:kidseau/shard_prefs/shared_prefs.dart';
+
+import '../../TeachersPanel/TDashboard.dart';
+import '../../Widgets/THomeScreenWidgets/no_internet.dart';
+import '../../restartappwidget/restartwidgets.dart';
+import '../PDashBoard.dart';
 
 class PSplashScreen extends StatefulWidget {
   @override
@@ -16,6 +24,38 @@ class PSplashScreen extends StatefulWidget {
 
 class _PSplashScreenState extends State<PSplashScreen> {
   String _fcmToken = '';
+  ConnectivityResult _connectionStatus = ConnectivityResult.none;
+  final Connectivity _connectivity = Connectivity();
+  late StreamSubscription<ConnectivityResult> _connectivitySubscription;
+
+  Future<void> initConnectivity() async {
+    late ConnectivityResult result;
+    // Platform messages may fail, so we use a try/catch PlatformException.
+    try {
+      result = await _connectivity.checkConnectivity();
+    } on PlatformException catch (e) {
+      log('Couldn\'t check connectivity status', error: e);
+      return;
+    }
+
+    // If the widget was removed from the tree while the asynchronous platform
+    // message was in flight, we want to discard the reply rather than calling
+    // setState to update our non-existent appearance.
+    if (!mounted) {
+      return Future.value(null);
+    }
+
+    return _updateConnectionStatus(result);
+  }
+
+  Future<void> _updateConnectionStatus(ConnectivityResult result) async {
+    if (mounted) {
+      setState(() {
+        _connectionStatus = result;
+      });
+    }
+  }
+
   Future<void> initializeFirebaseService() async {
     FirebaseMessaging messaging = FirebaseMessaging.instance;
 
@@ -37,51 +77,87 @@ class _PSplashScreenState extends State<PSplashScreen> {
     }
 
     print('Firebase token: $firebaseAppToken');
-    /*var _prefs = await SharedPreferences.getInstance();
-      _prefs.setString('fcmToken', firebaseAppToken);*/
-    // UserPrefs.setFcm(_fcmToken);
-    /*FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-      if (!AwesomeStringUtils.isNullOrEmpty(message.notification?.title,
-              considerWhiteSpaceAsEmpty: true) ||
-          !AwesomeStringUtils.isNullOrEmpty(message.notification?.body,
-              considerWhiteSpaceAsEmpty: true)) {
-        print('Message also contained a notification: ${message.notification}');
-
-        late String imageUrl;
-        imageUrl = message.notification!.android!.imageUrl!;
-        imageUrl = message.notification!.apple!.imageUrl!;
-
-        Map<String, dynamic> notificationAdapter = {
-          NOTIFICATION_CONTENT: {
-            NOTIFICATION_ID: Random().nextInt(2147483647),
-            NOTIFICATION_CHANNEL_KEY: 'basic_channel',
-            NOTIFICATION_TITLE: message.notification!.title,
-            NOTIFICATION_BODY: message.notification!.body,
-          }
-        };
-
-        AwesomeNotifications()
-            .createNotificationFromJsonData(notificationAdapter);
-      } else {
-        AwesomeNotifications().createNotificationFromJsonData(message.data);
-      }
-    });*/
-    // NotificationAPI.get(uniqueId: _fcmToken.toString(), isLoggedIn: false);
-
     //TODO: Call notifications API
+  }
+
+  getRoute() {
+    print(_connectionStatus);
+    if ((_connectionStatus != ConnectivityResult.none)) {
+      if (UserPrefs.getIsFirst() == null) {
+        log('cookie null 1');
+        Navigator.pushReplacement(context,
+            MaterialPageRoute(builder: (context) => ChooseLanguageScreen()));
+        //return ChooseLanguageScreen();
+        //
+      } else {
+        log('cookie not null');
+        if (UserPrefs.getIsTeacher() == null) {
+          log('cookie not null');
+          Navigator.pushReplacement(
+              context, MaterialPageRoute(builder: (context) => PStartScreen()));
+          //return PStartScreen();
+        } else if (UserPrefs.getIsTeacher() == true) {
+          log('teacher true');
+          final resp = UserLogin().get();
+          resp.then((value) {
+            if (value['status'] == 1) {
+              UserPrefs.setCookies(value['key']);
+              Navigator.pushReplacement(context,
+                  MaterialPageRoute(builder: (context) => TDashboard()));
+            } else {
+              Navigator.pushReplacement(context,
+                  MaterialPageRoute(builder: (context) => PStartScreen()));
+            }
+          });
+        } else if (UserPrefs.getIsTeacher() == false) {
+          log('teacher false');
+          final resp = UserLogin().get();
+          resp.then((value) {
+            if (value['status'] == 1) {
+              UserPrefs.setCookies(value['key']);
+              Navigator.pushReplacement(context,
+                  MaterialPageRoute(builder: (context) => PDashboard()));
+            } else {
+              Navigator.pushReplacement(context,
+                  MaterialPageRoute(builder: (context) => PStartScreen()));
+            }
+          });
+        } else {
+          Navigator.pushReplacement(
+              context, MaterialPageRoute(builder: (context) => PStartScreen()));
+        }
+      }
+    } else {
+      Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+              builder: (context) => NoInternet(
+                    onRetryTap: () {
+                      Connectivity().checkConnectivity();
+                      RestartWidget.restartApp(context);
+                    },
+                  )));
+      // return NoInternet(
+      //   onRetryTap: () {
+      //     Connectivity().checkConnectivity();
+      //     RestartWidget.restartApp(context);
+      //   },
+      // );
+    }
+    /*return NoInternet(
+      onRetryTap: () {
+        Connectivity().checkConnectivity();
+      },
+    );*/
   }
 
   @override
   void initState() {
     super.initState();
-    Timer(
-        Duration(seconds: 3),
-        () => Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-                builder: (context) => UserPrefs.getIsFirst() == null
-                    ? ChooseLanguageScreen()
-                    : PStartScreen())));
+    initConnectivity();
+    _connectivitySubscription =
+        _connectivity.onConnectivityChanged.listen(_updateConnectionStatus);
+    Timer(Duration(seconds: 4), () => getRoute());
     initializeFirebaseService();
   }
 

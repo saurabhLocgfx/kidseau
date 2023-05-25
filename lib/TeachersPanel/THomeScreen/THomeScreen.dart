@@ -847,7 +847,7 @@ class _THomeScreenState extends State<THomeScreen> {
                                                 width: 5,
                                               ),
                                               Text(
-                                                "From ${_name.schdule![index].timing!.split('-').first} ",
+                                                "${"From".tr()} ${_name.schdule![index].timing!.split('-').first} ",
                                                 style: FontConstant
                                                     .k14w400lightpurpleText
                                                     .copyWith(

@@ -180,6 +180,8 @@ class PLoginScreen extends StatelessWidget {
                                       Fluttertoast.showToast(msg: value['msg']);
                                     } else {
                                       UserPrefs.setCookies(value['key']);
+                                      UserPrefs.setOTP(value['OTP']);
+                                      log(value['key']);
                                       Navigator.of(context).push(
                                           MaterialPageRoute(
                                               builder: (context) =>

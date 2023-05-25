@@ -555,14 +555,21 @@ class _TStudentScreenState extends State<TStudentScreen> {
                                                                     style: FontConstant
                                                                         .k18w500331FText,
                                                                   ),
-                                                                  Text(
-                                                                    _studentPerformanceModel.performance![index].gender!.toLowerCase() ==
-                                                                            'm'
-                                                                        ? "S/O ${_studentPerformanceModel.performance![index].fatherName}"
-                                                                        : "D/O ${_studentPerformanceModel.performance![index].fatherName}",
-                                                                    style: FontConstant
-                                                                        .k16w400B7A4B2Text,
-                                                                  ),
+                                                                  _studentPerformanceModel
+                                                                              .performance![index]
+                                                                              .fatherName ==
+                                                                          ""
+                                                                      ? SizedBox(
+                                                                          height:
+                                                                              27,
+                                                                        )
+                                                                      : Text(
+                                                                          _studentPerformanceModel.performance![index].gender!.toLowerCase() == 'm'
+                                                                              ? "S/O ${_studentPerformanceModel.performance![index].fatherName}"
+                                                                              : "D/O ${_studentPerformanceModel.performance![index].fatherName}",
+                                                                          style:
+                                                                              FontConstant.k16w400B7A4B2Text,
+                                                                        ),
                                                                 ],
                                                               ),
                                                             ),

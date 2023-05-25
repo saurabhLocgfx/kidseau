@@ -1,9 +1,18 @@
+// import 'package:flutter/material.dart';
+// import 'package:flutter_screenutil/flutter_screenutil.dart';
+// import 'package:get/get.dart';
+// import 'package:kidseau/TeachersPanel/THomeScreen/TLearningAlphabets.dart';
+// import 'package:kidseau/Theme.dart';
+// import 'package:kidseau/api/models/T_all_schedule_model.dart';
+
+import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
-import 'package:kidseau/TeachersPanel/THomeScreen/TLearningAlphabets.dart';
-import 'package:kidseau/Theme.dart';
-import 'package:kidseau/api/models/T_all_schedule_model.dart';
+
+import '../../TeachersPanel/THomeScreen/TLearningAlphabets.dart';
+import '../../Theme.dart';
+import '../../api/models/T_all_schedule_model.dart';
 
 class TActivity extends StatefulWidget {
   TAllScheduleModel schedule;
@@ -59,10 +68,11 @@ class _TActivityState extends State<TActivity> {
           itemBuilder: (BuildContext context, int index) {
             return InkWell(
               onTap: () {
-                Get.to(() => TLearningAlphabets(
-                      scheduleID:
-                          widget.schedule.schdule![index].actId.toString(),
-                    ));
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (ctx) => TLearningAlphabets(
+                          scheduleID:
+                              widget.schedule.schdule![index].actId.toString(),
+                        )));
               },
               child: Container(
                 height: 64,
@@ -126,7 +136,7 @@ class _TActivityState extends State<TActivity> {
                                   width: 5,
                                 ),
                                 Text(
-                                  "From ${widget.schedule.schdule![index].timing!.split('-').first} ",
+                                  "${"From".tr()} ${widget.schedule.schdule![index].timing!.split('-').first} ",
                                   // '${groups[index]} . ${time[index]}',
                                   style: FontConstant.k14w400lightpurpleText
                                       .copyWith(
@@ -135,7 +145,7 @@ class _TActivityState extends State<TActivity> {
                                           color: Color(0xffB7A4B2)),
                                 ),
                                 Text(
-                                  "To ${widget.schedule.schdule![index].timing!.split('-').last}",
+                                  "${"To".tr()} ${widget.schedule.schdule![index].timing!.split('-').last}",
                                   // '${groups[index]} . ${time[index]}',
                                   style: FontConstant.k14w400lightpurpleText
                                       .copyWith(

@@ -97,7 +97,9 @@ class _PDashboardState extends State<PDashboard> {
     _timer = Timer.periodic(Duration(seconds: 4), (timer) async {
       _isNewMsg = await _repo.newMsg();
       // log(_isNewMsg.toString());
-      setState(() {});
+      if (mounted) {
+        setState(() {});
+      }
     });
     super.initState();
   }
@@ -105,6 +107,7 @@ class _PDashboardState extends State<PDashboard> {
   @override
   void dispose() {
     _pageController.dispose();
+    _timer?.cancel();
     super.dispose();
   }
 

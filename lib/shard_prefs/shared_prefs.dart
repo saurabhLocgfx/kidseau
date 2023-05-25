@@ -17,9 +17,18 @@ class UserPrefs {
   static const SetLang = 'SetLang';
   static const ShowOnBoarding = 'ShowOnBoarding';
   static const ParentShowOnBoarding = 'ParentShowOnBoarding';
+  static const UserOTP = 'UserOTP';
   static SharedPreferences? prefs;
   static Future init() async {
     prefs = await SharedPreferences.getInstance();
+  }
+
+  static Future setOTP(String value) async {
+    return await prefs?.setString(UserOTP, value);
+  }
+
+  static String? getOTP() {
+    return prefs?.getString(UserOTP);
   }
 
   static Future showOnBoarding(bool val) async {

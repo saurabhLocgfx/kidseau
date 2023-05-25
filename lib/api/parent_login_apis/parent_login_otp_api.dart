@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:http/http.dart' as http;
 import 'package:kidseau/Constants/string_const.dart';
@@ -8,6 +9,7 @@ import '../../shard_prefs/shared_prefs.dart';
 class ParentLoginOtp {
   Future<dynamic> get({required String code}) async {
     String? cookie = UserPrefs.getCookies();
+    log("cookie $cookie");
     var headers = {
       'Content-Type': 'application/json',
       'Cookie': 'PHPSESSID=$cookie'

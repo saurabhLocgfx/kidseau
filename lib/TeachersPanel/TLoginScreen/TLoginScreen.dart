@@ -165,6 +165,7 @@ class TLoginScreen extends StatelessWidget {
                                           print(isEmail);
                                           mobileText = controller.text;
                                           print(mobileText);
+                                          UserPrefs.setOTP(value['OTP']);
                                           Navigator.of(context).push(
                                               MaterialPageRoute(
                                                   builder: (context) =>

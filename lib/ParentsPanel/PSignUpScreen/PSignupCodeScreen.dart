@@ -256,35 +256,39 @@ class _PSignupCodeState extends State<PSignupCode> {
                                 ),
                               ),
                               SizedBox(height: 25),
-                              InkWell(
-                                onTap: () {
-                                  showDialog(
-                                      context: context,
-                                      builder: (ctx) {
-                                        return VoucherVideoDialog(model: model);
-                                      });
-                                },
-                                child: Center(
-                                  child: Container(
-                                    height: 214.h,
-                                    // width: 382.w,
-                                    clipBehavior: Clip.hardEdge,
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(12),
-                                        image: DecorationImage(
-                                            image: NetworkImage(
-                                              model.appVideo![0].vPoster
-                                                  .toString(),
+                              model.appVideo!.isEmpty
+                                  ? SizedBox.shrink()
+                                  : InkWell(
+                                      onTap: () {
+                                        showDialog(
+                                            context: context,
+                                            builder: (ctx) {
+                                              return VoucherVideoDialog(
+                                                  model: model);
+                                            });
+                                      },
+                                      child: Center(
+                                        child: Container(
+                                          height: 214.h,
+                                          // width: 382.w,
+                                          clipBehavior: Clip.hardEdge,
+                                          decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(12),
+                                              image: DecorationImage(
+                                                  image: NetworkImage(
+                                                    model.appVideo![0].vPoster
+                                                        .toString(),
+                                                  ),
+                                                  fit: BoxFit.fitWidth)),
+                                          child: Center(
+                                            child: Image.asset(
+                                              "assets/images/play.png",
+                                              width: 40,
+                                              height: 40,
                                             ),
-                                            fit: BoxFit.fitWidth)),
-                                    child: Center(
-                                      child: Image.asset(
-                                        "assets/images/play.png",
-                                        width: 40,
-                                        height: 40,
-                                      ),
-                                    ),
-                                    /* Image.network(
+                                          ),
+                                          /* Image.network(
                                          ??
                                             '',
                                         errorBuilder: (q, w, e) => Image.asset(
@@ -296,9 +300,9 @@ class _PSignupCodeState extends State<PSignupCode> {
                               height: 46,
                               width: 46,
                             )),*/
-                                  ),
-                                ),
-                              ),
+                                        ),
+                                      ),
+                                    ),
                               SizedBox(height: 100),
                               /*SizedBox(
                                 height: 40,
