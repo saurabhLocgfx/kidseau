@@ -21,7 +21,7 @@ class ParentActivityDetailApi {
     var request = http.MultipartRequest(
         'GET',
         Uri.parse(
-            '$kAPIConst/kids/parent_home_page/activity_details_page.php?act_id=$actId&lang=$langId&day=$selectedDay'));
+            '$kAPIConst/parent_home_page/activity_details_page.php?act_id=$actId&lang=$langId&day=$selectedDay'));
 
     request.headers.addAll(headers);
 

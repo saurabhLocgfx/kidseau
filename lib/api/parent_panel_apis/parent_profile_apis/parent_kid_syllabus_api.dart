@@ -11,7 +11,7 @@ class ParentKidSyllabusApi {
     var request = http.Request(
         'GET',
         Uri.parse(
-            '$kAPIConst/kids/api_parent_profile/school_group.php?sch_id=$schId'));
+            '$kAPIConst/api_parent_profile/school_group.php?sch_id=$schId'));
 
     request.headers.addAll(headers);
 

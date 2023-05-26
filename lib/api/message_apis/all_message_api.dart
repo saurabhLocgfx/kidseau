@@ -14,7 +14,7 @@ class AllMessagesApi {
     var request = http.Request(
         'GET',
         Uri.parse(
-            '$kAPIConst/kids/api_message/getMessage.php?user_id=$userId&user_type=$userType&scrol=$scroll'));
+            '$kAPIConst/api_message/getMessage.php?user_id=$userId&user_type=$userType&scrol=$scroll'));
 
     request.headers.addAll(headers);
 

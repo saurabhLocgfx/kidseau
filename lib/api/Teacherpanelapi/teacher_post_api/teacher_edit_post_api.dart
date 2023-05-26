@@ -12,10 +12,8 @@ class TeacherEditPostApi {
       required List<String> tagId}) async {
     String? cookie = UserPrefs.getCookies();
     var headers = {'Cookie': 'PHPSESSID=$cookie'};
-    var request = http.MultipartRequest(
-        'POST',
-        Uri.parse(
-            '$kAPIConst/kids/api_teacher_login/teacher_post/post_edit.php'));
+    var request = http.MultipartRequest('POST',
+        Uri.parse('$kAPIConst/api_teacher_login/teacher_post/post_edit.php'));
     request.fields.addAll({
       'post_id': postId,
       'captions': caption,

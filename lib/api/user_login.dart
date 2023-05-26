@@ -10,7 +10,7 @@ class UserLogin {
     String? otp = UserPrefs.getOTP();
     var headers = {'Cookie': 'PHPSESSID=$cookie'};
     var request = http.MultipartRequest(
-        'POST', Uri.parse('$kAPIConst/kids/password_check.php'));
+        'POST', Uri.parse('$kAPIConst/password_check.php'));
     request.fields.addAll({'enter_password': "$otp"});
 
     request.headers.addAll(headers);

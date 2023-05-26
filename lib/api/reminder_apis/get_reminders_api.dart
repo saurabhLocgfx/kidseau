@@ -9,7 +9,7 @@ class GetRemindersApi {
     String? cookie = UserPrefs.getCookies();
     var headers = {'Cookie': 'PHPSESSID=$cookie'};
     var request = http.Request(
-        'GET', Uri.parse('$kAPIConst/kids/reminder/get_allReminder.php'));
+        'GET', Uri.parse('$kAPIConst/reminder/get_allReminder.php'));
 
     request.headers.addAll(headers);
 

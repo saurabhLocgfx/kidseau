@@ -17,7 +17,7 @@ class TeacherUpdateProfile {
     var request = http.MultipartRequest(
         'POST',
         Uri.parse(
-            '$kAPIConst/kids/api_teacher_login/teacher_profile/teach_update_profile.php'));
+            '$kAPIConst/api_teacher_login/teacher_profile/teach_update_profile.php'));
     request.fields.addAll({
       'dob': dob,
       'edu': education,

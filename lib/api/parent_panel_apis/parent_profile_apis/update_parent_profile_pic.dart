@@ -10,10 +10,8 @@ class UpdateParentProfilePic {
   Future<dynamic> get({required File pickedImg}) async {
     String? cookie = UserPrefs.getCookies();
     var headers = {'Cookie': 'PHPSESSID=$cookie'};
-    var request = http.MultipartRequest(
-        'POST',
-        Uri.parse(
-            '$kAPIConst/kids/api_parent_profile/parent_image_upadte.php'));
+    var request = http.MultipartRequest('POST',
+        Uri.parse('$kAPIConst/api_parent_profile/parent_image_upadte.php'));
     request.files.add(
         await http.MultipartFile.fromPath('update_image_pt', pickedImg.path));
     request.headers.addAll(headers);

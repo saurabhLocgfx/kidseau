@@ -4,6 +4,8 @@ import 'dart:developer';
 import 'package:http/http.dart' as http;
 import 'package:kidseau/shard_prefs/shared_prefs.dart';
 
+import '../../../Constants/string_const.dart';
+
 class TeacherInfoFill {
   Future<dynamic> get(
       {required String fname,
@@ -18,10 +20,8 @@ class TeacherInfoFill {
       required List<String> language}) async {
     String? cookie = UserPrefs.getCookies();
     var headers = {'Cookie': 'PHPSESSID=$cookie'};
-    var request = http.MultipartRequest(
-        'POST',
-        Uri.parse(
-            'https://cerebal.locgfx.com/kidsue/kids/api_teacher_login/teacher_info_fill.php'));
+    var request = http.MultipartRequest('POST',
+        Uri.parse('$kAPIConst/api_teacher_login/teacher_info_fill.php'));
 
     /*final input = '$language';
     final removedBrackets = input.substring(1, input.length - 1);

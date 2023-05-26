@@ -11,7 +11,7 @@ class TeacherGetParentApi {
     var request = http.Request(
         'GET',
         Uri.parse(
-            '$kAPIConst/kids/api_message/teahAllParentContect.php?scrool=$scroll'));
+            '$kAPIConst/api_message/teahAllParentContect.php?scrool=$scroll'));
 
     request.headers.addAll(headers);
 

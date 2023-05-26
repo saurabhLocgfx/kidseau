@@ -11,7 +11,7 @@ class TeacherHidePostApi {
     var request = http.MultipartRequest(
         'POST',
         Uri.parse(
-            '$kAPIConst/kids/api_teacher_login/teacher_post/hide_post_action.php'));
+            '$kAPIConst/api_teacher_login/teacher_post/hide_post_action.php'));
     request.fields.addAll({'post_id': postId});
 
     request.headers.addAll(headers);

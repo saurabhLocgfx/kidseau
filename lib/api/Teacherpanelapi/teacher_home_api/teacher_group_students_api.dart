@@ -21,7 +21,7 @@ class TeacherGroupStudentsAPi {
     var request = http.Request(
         'GET',
         Uri.parse(
-            '$kAPIConst/kids/api_teacher_login/teacher_home_page/teach_class_all_kid.php?grp_id=$grpId&page_no=$page&lang=$langId'));
+            '$kAPIConst/api_teacher_login/teacher_home_page/teach_class_all_kid.php?grp_id=$grpId&page_no=$page&lang=$langId'));
 
     request.headers.addAll(headers);
 

@@ -17,7 +17,7 @@ class ParentUpdateApi {
       'Cookie': 'PHPSESSID=$cookie'
     };
     var request = http.Request('POST',
-        Uri.parse('$kAPIConst/kids/api_parent_profile/kid_parent_update.php'));
+        Uri.parse('$kAPIConst/api_parent_profile/kid_parent_update.php'));
     request.body = json.encode({
       "m_name": mName,
       "m_occup": mOccupation,

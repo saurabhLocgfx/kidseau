@@ -1,9 +1,7 @@
 import 'dart:convert';
-import 'dart:developer';
 
 import 'package:http/http.dart' as http;
 import 'package:kidseau/Constants/string_const.dart';
-import 'package:kidseau/api/Teacherpanelapi/Tmodel/THomemodel.dart';
 import 'package:kidseau/shard_prefs/shared_prefs.dart';
 
 class THomeApi {
@@ -25,7 +23,7 @@ class THomeApi {
     var request = http.Request(
         'GET',
         Uri.parse(
-            '$kAPIConst/kids/api_teacher_login/teacher_home_page/teacher_home screen.php?grp_id=1&lang=$langId'));
+            '$kAPIConst/api_teacher_login/teacher_home_page/teacher_home screen.php?grp_id=1&lang=$langId'));
     request.body = '''''';
     request.headers.addAll(headers);
 

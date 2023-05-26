@@ -20,7 +20,7 @@ class TeacherGroupApi {
     var request = http.Request(
         'GET',
         Uri.parse(
-            '$kAPIConst/kids/api_teacher_login/teacher_home_page/teacher_kid_group.php?lang=$langId'));
+            '$kAPIConst/api_teacher_login/teacher_home_page/teacher_kid_group.php?lang=$langId'));
     request.body = '''''';
     request.headers.addAll(headers);
 

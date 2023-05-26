@@ -12,7 +12,7 @@ class ParentChangeVoucherCode {
     var request = http.MultipartRequest(
         'POST',
         Uri.parse(
-            '$kAPIConst/kids/api_parent_profile/kid_voucher_change_code.php?kid_id=$kidId'));
+            '$kAPIConst/api_parent_profile/kid_voucher_change_code.php?kid_id=$kidId'));
     request.fields.addAll({'voucher_code': voucherCode});
 
     request.headers.addAll(headers);

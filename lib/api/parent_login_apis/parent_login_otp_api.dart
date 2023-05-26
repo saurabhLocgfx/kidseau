@@ -15,7 +15,7 @@ class ParentLoginOtp {
       'Cookie': 'PHPSESSID=$cookie'
     };
     var request = http.Request(
-        'POST', Uri.parse('$kAPIConst/kids/api_parent_login/login_otp.php'));
+        'POST', Uri.parse('$kAPIConst/api_parent_login/login_otp.php'));
     request.body = json.encode({"enter_otp": code});
     request.headers.addAll(headers);
     print(request.body);

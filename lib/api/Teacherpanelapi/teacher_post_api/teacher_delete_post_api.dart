@@ -11,7 +11,7 @@ class TeacherDeletePostApi {
     var request = http.Request(
         'GET',
         Uri.parse(
-            '$kAPIConst/kids/api_teacher_login/teacher_post/post_delete.php?post_id=$postId'));
+            '$kAPIConst/api_teacher_login/teacher_post/post_delete.php?post_id=$postId'));
 
     request.headers.addAll(headers);
 

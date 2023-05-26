@@ -20,7 +20,7 @@ class KidOverviewApi {
     var request = http.Request(
         'GET',
         Uri.parse(
-            '$kAPIConst/kids/parent_home_page/kids_profile_home.php?kid_id=$kidId&lang=$langId'));
+            '$kAPIConst/parent_home_page/kids_profile_home.php?kid_id=$kidId&lang=$langId'));
 
     request.headers.addAll(headers);
 
@@ -50,7 +50,7 @@ class KidOverviewApi {
     var request = http.Request(
         'GET',
         Uri.parse(
-            '$kAPIConst/kids/api_parent_profile/kid_all_group.php?kid_id=$kidId'));
+            '$kAPIConst/api_parent_profile/kid_all_group.php?kid_id=$kidId'));
 
     request.headers.addAll(headers);
 

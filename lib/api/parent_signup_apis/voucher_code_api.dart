@@ -12,8 +12,8 @@ class VoucherCode {
       'Content-Type': 'application/json',
       'Cookie': 'PHPSESSID=$cookie'
     };
-    var request = http.Request('POST',
-        Uri.parse('$kAPIConst/kids/api_parent_login/voucher_verified.php'));
+    var request = http.Request(
+        'POST', Uri.parse('$kAPIConst/api_parent_login/voucher_verified.php'));
     request.body = json.encode({"voucher": Vouchercode});
     print(request.body);
     request.headers.addAll(headers);

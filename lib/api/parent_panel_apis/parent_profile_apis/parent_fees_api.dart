@@ -11,7 +11,7 @@ class ParentFeesApi {
     var request = http.Request(
         'GET',
         Uri.parse(
-            '$kAPIConst/kids/api_parent_profile/kid_fees_show.php?kid_id=$kidId'));
+            '$kAPIConst/api_parent_profile/kid_fees_show.php?kid_id=$kidId'));
 
     request.headers.addAll(headers);
 

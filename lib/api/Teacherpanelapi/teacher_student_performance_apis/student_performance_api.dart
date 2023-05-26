@@ -20,7 +20,7 @@ class TeacherStudentPerformanceApi {
     var request = http.Request(
         'GET',
         Uri.parse(
-            '$kAPIConst/kids/api_teacher_login/student_prefomance/activity_name.php?grp_id=$grpId&lang=$langId'));
+            '$kAPIConst/api_teacher_login/student_prefomance/activity_name.php?grp_id=$grpId&lang=$langId'));
 
     request.headers.addAll(headers);
 

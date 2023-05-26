@@ -20,7 +20,7 @@ class AppDetailsApi {
     var request = http.Request(
         'GET',
         Uri.parse(
-            '$kAPIConst/kids/appDetails/appDetails.php?title_id=$id&lang=$langId'));
+            '$kAPIConst/appDetails/appDetails.php?title_id=$id&lang=$langId'));
 
     request.headers.addAll(headers);
 

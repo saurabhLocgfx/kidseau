@@ -14,7 +14,7 @@ class UpdateFieldOTP {
     var request = http.Request(
         'POST',
         Uri.parse(
-            '$kAPIConst/kids/api_parent_profile/number_change_and_verified/check_change_num_email.php'));
+            '$kAPIConst/api_parent_profile/number_change_and_verified/check_change_num_email.php'));
     request.body = json.encode({"enter_otp": otp});
     request.headers.addAll(headers);
 

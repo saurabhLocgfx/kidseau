@@ -7,8 +7,8 @@ import 'package:kidseau/Constants/string_const.dart';
 class ParentSignUp {
   Future<dynamic> get({required String email, required String parents}) async {
     var headers = {'Content-Type': 'application/json'};
-    var request = http.Request('POST',
-        Uri.parse('$kAPIConst/kids/api_parent_login/pt_ft_sign_up.php'));
+    var request = http.Request(
+        'POST', Uri.parse('$kAPIConst/api_parent_login/pt_ft_sign_up.php'));
     request.body = json.encode(
         {"email_phone": email, if (parents == "Mother") "you_are": parents});
     log(request.body.toString());

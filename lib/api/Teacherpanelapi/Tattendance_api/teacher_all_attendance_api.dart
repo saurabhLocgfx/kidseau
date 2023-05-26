@@ -13,7 +13,7 @@ class TeacherAllAttendanceApi {
     var request = http.Request(
         'GET',
         Uri.parse(
-            '$kAPIConst/kids/api_teacher_login/teacher_home_page/attendance_grp_kid_show.php?attend_group_id=$attendanceId&date=$date'));
+            '$kAPIConst/api_teacher_login/teacher_home_page/attendance_grp_kid_show.php?attend_group_id=$attendanceId&date=$date'));
 
     request.headers.addAll(headers);
 
@@ -35,7 +35,7 @@ class TeacherAllAttendanceApi {
     var request = http.Request(
         'GET',
         Uri.parse(
-            '$kAPIConst/kids/api_teacher_login/teacher_home_page/atend_present_kid_serch_date.php?attend_group_id=$attendanceId&set_date=$date'));
+            '$kAPIConst/api_teacher_login/teacher_home_page/atend_present_kid_serch_date.php?attend_group_id=$attendanceId&set_date=$date'));
     log(date);
     request.headers.addAll(headers);
 

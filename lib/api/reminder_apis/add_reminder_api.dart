@@ -12,7 +12,7 @@ class AddReminderApi {
     String? cookie = UserPrefs.getCookies();
     var headers = {'Cookie': 'PHPSESSID=$cookie'};
     var request = http.MultipartRequest(
-        'POST', Uri.parse('$kAPIConst/kids/reminder/add_reminder.php'));
+        'POST', Uri.parse('$kAPIConst/reminder/add_reminder.php'));
     request.fields.addAll({'title': title, 'date': date, 'time': time});
 
     request.headers.addAll(headers);

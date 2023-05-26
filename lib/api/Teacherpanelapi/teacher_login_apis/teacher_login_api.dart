@@ -5,8 +5,8 @@ import 'package:kidseau/Constants/string_const.dart';
 
 class TeacherLogin {
   Future<dynamic> get({required String email}) async {
-    var request = http.MultipartRequest('POST',
-        Uri.parse('$kAPIConst/kids/api_teacher_login/teacher_login.php'));
+    var request = http.MultipartRequest(
+        'POST', Uri.parse('$kAPIConst/api_teacher_login/teacher_login.php'));
     request.fields.addAll({'t_email_phone': email});
     print(request.fields);
     http.StreamedResponse response = await request.send();

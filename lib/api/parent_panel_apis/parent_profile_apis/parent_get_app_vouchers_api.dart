@@ -11,10 +11,8 @@ class ParentGetAllVouchers {
       'Content-Type': 'application/json',
       'Cookie': 'PHPSESSID=$cookie'
     };
-    var request = http.Request(
-        'GET',
-        Uri.parse(
-            '$kAPIConst/kids/api_parent_profile/kid_voucher_info_api.php'));
+    var request = http.Request('GET',
+        Uri.parse('$kAPIConst/api_parent_profile/kid_voucher_info_api.php'));
 
     request.headers.addAll(headers);
 

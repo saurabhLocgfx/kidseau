@@ -8,8 +8,8 @@ class DeleteMessageApi {
   Future<dynamic> delete({required String msgId}) async {
     String? cookie = UserPrefs.getCookies();
     var headers = {'Cookie': 'PHPSESSID=$cookie'};
-    var request = http.Request('GET',
-        Uri.parse('$kAPIConst/kids/api_message/deleteMsg.php?msg_id=$msgId'));
+    var request = http.Request(
+        'GET', Uri.parse('$kAPIConst/api_message/deleteMsg.php?msg_id=$msgId'));
 
     request.headers.addAll(headers);
 

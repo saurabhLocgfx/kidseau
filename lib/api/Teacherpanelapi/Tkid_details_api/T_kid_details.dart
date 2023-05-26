@@ -11,7 +11,7 @@ class TKidDetails {
     var request = http.Request(
         'GET',
         Uri.parse(
-            '$kAPIConst/kids/api_teacher_login/teacher_home_page/teach_home_kid_details.php?kid_id=$kidId'));
+            '$kAPIConst/api_teacher_login/teacher_home_page/teach_home_kid_details.php?kid_id=$kidId'));
 
     request.headers.addAll(headers);
 

@@ -12,7 +12,7 @@ class TeacherOtpCheck {
       'Cookie': 'PHPSESSID=$cookie'
     };
     var request = http.Request('POST',
-        Uri.parse('$kAPIConst/kids/api_teacher_login/teacher_otp_check.php'));
+        Uri.parse('$kAPIConst/api_teacher_login/teacher_otp_check.php'));
     request.body = json.encode({"enter_otp": code});
     request.headers.addAll(headers);
     print(request.body);

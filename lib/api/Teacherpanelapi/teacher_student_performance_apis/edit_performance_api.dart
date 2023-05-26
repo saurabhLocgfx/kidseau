@@ -11,7 +11,7 @@ class EditStudentApi {
     var request = http.Request(
         'GET',
         Uri.parse(
-            '$kAPIConst/kids/api_teacher_login/student_prefomance/kidProfileAct.php?kid_id=$kidId&date=$date'));
+            '$kAPIConst/api_teacher_login/student_prefomance/kidProfileAct.php?kid_id=$kidId&date=$date'));
 
     request.headers.addAll(headers);
 

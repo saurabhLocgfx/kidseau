@@ -16,7 +16,7 @@ class SubmitPerformanceApi {
     var request = http.Request(
         'POST',
         Uri.parse(
-            '$kAPIConst/kids/api_teacher_login/student_prefomance/actvity_action.php'));
+            '$kAPIConst/api_teacher_login/student_prefomance/actvity_action.php'));
     request.body = json.encode({
       if (date != null) "date": date,
       "arr": performance

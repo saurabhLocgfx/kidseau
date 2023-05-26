@@ -20,7 +20,7 @@ class ParentProfileApi {
     var request = http.Request(
         'GET',
         Uri.parse(
-            '$kAPIConst/kids/api_parent_profile/profile_parent.php?lang=$langId'));
+            '$kAPIConst/api_parent_profile/profile_parent.php?lang=$langId'));
     request.body = '''''';
     request.headers.addAll(headers);
 

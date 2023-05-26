@@ -8,7 +8,7 @@ class LogoutApi {
   Future<dynamic> get() async {
     String? cookie = UserPrefs.getCookies();
     var headers = {'Cookie': 'PHPSESSID=$cookie'};
-    var request = http.Request('GET', Uri.parse('$kAPIConst/kids/logout.php'));
+    var request = http.Request('GET', Uri.parse('$kAPIConst/logout.php'));
 
     request.headers.addAll(headers);
 

@@ -16,7 +16,7 @@ class SendMessageApi {
     String? cookie = UserPrefs.getCookies();
     var headers = {'Cookie': 'PHPSESSID=$cookie'};
     var request = http.MultipartRequest(
-        'POST', Uri.parse('$kAPIConst/kids/api_message/sendTextmsg.php'));
+        'POST', Uri.parse('$kAPIConst/api_message/sendTextmsg.php'));
     request.fields.addAll({
       'message': message,
       'send_to_id': sendToId,

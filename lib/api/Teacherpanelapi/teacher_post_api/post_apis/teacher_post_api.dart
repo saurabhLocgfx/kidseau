@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 
-import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:kidseau/Constants/string_const.dart';
 import 'package:kidseau/shard_prefs/shared_prefs.dart';
@@ -19,7 +18,7 @@ class TeacherPostAPI {
     var request = http.MultipartRequest(
         'POST',
         Uri.parse(
-            '$kAPIConst/kids/api_teacher_login/teacher_post/post_send_cap_img.php'));
+            '$kAPIConst/api_teacher_login/teacher_post/post_send_cap_img.php'));
     //log(idList.length.toString());
     request.fields.addAll({
       'captions': caption,

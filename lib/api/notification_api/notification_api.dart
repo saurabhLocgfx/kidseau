@@ -14,8 +14,8 @@ class NotificationApi {
       'Content-Type': 'application/json',
       'Cookie': 'PHPSESSID=$cookie'
     };
-    var request = http.Request(
-        'POST', Uri.parse('$kAPIConst/kids/notification-token.php'));
+    var request =
+        http.Request('POST', Uri.parse('$kAPIConst/notification-token.php'));
     request.body = json.encode({
       "fcm_token": "$fcmToken",
       "device_type": Platform.isAndroid ? "android" : "ios"
@@ -45,8 +45,8 @@ class NotificationApi {
       'Content-Type': 'application/json',
       'Cookie': 'PHPSESSID=$cookie'
     };
-    var request = http.MultipartRequest('POST',
-        Uri.parse('$kAPIConst/kids/notification/notification_setting.php'));
+    var request = http.MultipartRequest(
+        'POST', Uri.parse('$kAPIConst/notification/notification_setting.php'));
     request.fields.addAll({
       'post_n': post,
       'annous_n': announcement,
@@ -68,10 +68,8 @@ class NotificationApi {
       'Content-Type': 'application/json',
       'Cookie': 'PHPSESSID=$cookie'
     };
-    var request = http.Request(
-        'GET',
-        Uri.parse(
-            '$kAPIConst/kids/notification/get_notification.php?scrol=$page'));
+    var request = http.Request('GET',
+        Uri.parse('$kAPIConst/notification/get_notification.php?scrol=$page'));
     request.headers.addAll(headers);
     http.StreamedResponse response = await request.send();
     var v = jsonDecode(await response.stream.bytesToString());
@@ -88,10 +86,8 @@ class NotificationApi {
       'Content-Type': 'application/json',
       'Cookie': 'PHPSESSID=$cookie'
     };
-    var request = http.Request(
-        'GET',
-        Uri.parse(
-            '$kAPIConst/kids/notification/read_notification.php?n_id=$ids'));
+    var request = http.Request('GET',
+        Uri.parse('$kAPIConst/notification/read_notification.php?n_id=$ids'));
     request.headers.addAll(headers);
     http.StreamedResponse response = await request.send();
     var v = jsonDecode(await response.stream.bytesToString());

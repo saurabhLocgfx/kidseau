@@ -22,7 +22,7 @@ class KidsSignupInfo {
       'Cookie': 'PHPSESSID=$cookie',
     };
     var request = http.MultipartRequest('POST',
-        Uri.parse('$kAPIConst/kids/api_parent_login/pt_kidinfo_sign_up.php'));
+        Uri.parse('$kAPIConst/api_parent_login/pt_kidinfo_sign_up.php'));
     request.fields.addAll({
       'kid_name': kidName,
       'sec_grp': kidGroup,

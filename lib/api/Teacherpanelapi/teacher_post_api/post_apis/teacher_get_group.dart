@@ -4,8 +4,8 @@ import 'package:http/http.dart' as http;
 import 'package:kidseau/Constants/string_const.dart';
 import 'package:kidseau/shard_prefs/shared_prefs.dart';
 
-class TeacherGetGroup{
-  Future<dynamic> get({required String secId})async{
+class TeacherGetGroup {
+  Future<dynamic> get({required String secId}) async {
     String? cookie = UserPrefs.getCookies();
     String? selectedLang = UserPrefs.getLang();
     String langId = '';
@@ -16,20 +16,20 @@ class TeacherGetGroup{
     } else {
       langId = '1';
     }
-    var headers = {
-      'Cookie': 'PHPSESSID=$cookie'
-    };
-    var request = http.Request('GET', Uri.parse('$kAPIConst/kids/api_teacher_login/teacher_post/tech_sch_sec_all_group.php?sec_id=$secId'));
+    var headers = {'Cookie': 'PHPSESSID=$cookie'};
+    var request = http.Request(
+        'GET',
+        Uri.parse(
+            '$kAPIConst/api_teacher_login/teacher_post/tech_sch_sec_all_group.php?sec_id=$secId'));
 
     request.headers.addAll(headers);
 
     http.StreamedResponse response = await request.send();
 
-    var v  = jsonDecode(await response.stream.bytesToString());
+    var v = jsonDecode(await response.stream.bytesToString());
     if (response.statusCode == 200) {
-     return v;
-    }
-    else {
+      return v;
+    } else {
       print(response.reasonPhrase);
       return v;
     }

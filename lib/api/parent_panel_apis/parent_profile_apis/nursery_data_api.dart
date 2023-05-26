@@ -11,10 +11,8 @@ class NurseryData {
       'Content-Type': 'application/json',
       'Cookie': 'PHPSESSID=$cookie'
     };
-    var request = http.Request(
-        'GET',
-        Uri.parse(
-            '$kAPIConst/kids/api_parent_profile/kid_school_details_api.php'));
+    var request = http.Request('GET',
+        Uri.parse('$kAPIConst/api_parent_profile/kid_school_details_api.php'));
 
     request.headers.addAll(headers);
 

@@ -11,7 +11,7 @@ class HolidayApi {
     var request = http.Request(
         'GET',
         Uri.parse(
-            '$kAPIConst/kids/api_teacher_login/teacher_home_page/holiday_date.php'));
+            '$kAPIConst/api_teacher_login/teacher_home_page/holiday_date.php'));
 
     request.headers.addAll(headers);
 

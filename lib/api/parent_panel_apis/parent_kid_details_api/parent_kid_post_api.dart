@@ -11,7 +11,7 @@ class ParentKidPostApi {
     var request = http.Request(
         'GET',
         Uri.parse(
-            '$kAPIConst/kids/parent_home_page/parent_gallery.php?kid_id=$kidId&scrol=$scroll'));
+            '$kAPIConst/parent_home_page/parent_gallery.php?kid_id=$kidId&scrol=$scroll'));
 
     request.headers.addAll(headers);
 

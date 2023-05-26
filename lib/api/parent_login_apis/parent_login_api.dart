@@ -3,8 +3,6 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:kidseau/Constants/string_const.dart';
 
-import '../../shard_prefs/shared_prefs.dart';
-
 class ParentLogin {
   Future<dynamic> get({required String email}) async {
     /* String? cookie = UserPrefs.getCookies();
@@ -13,7 +11,7 @@ class ParentLogin {
       'Cookie': 'PHPSESSID=$cookie'
     };*/
     var request = http.Request(
-        'POST', Uri.parse('$kAPIConst/kids/api_parent_login/pt_login.php'));
+        'POST', Uri.parse('$kAPIConst/api_parent_login/pt_login.php'));
     request.body = json.encode({"email_phone": email});
     // request.headers.addAll(headers);
     // print(request.body);

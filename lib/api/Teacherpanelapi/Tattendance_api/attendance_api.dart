@@ -15,7 +15,7 @@ class TeacherSubmitAttendanceAPI {
     var request = http.Request(
         'POST',
         Uri.parse(
-            '$kAPIConst/kids/api_teacher_login/teacher_home_page/attendance_action_p_a.php'));
+            '$kAPIConst/api_teacher_login/teacher_home_page/attendance_action_p_a.php'));
     request.body = json.encode(attendanceList
         /*[
       {

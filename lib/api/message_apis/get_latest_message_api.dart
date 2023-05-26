@@ -12,7 +12,7 @@ class GetLatestMessage {
     var request = http.Request(
         'GET',
         Uri.parse(
-            '$kAPIConst/kids/api_message/getCurrentMsg.php?user_id=$userId&user_type=$userType'));
+            '$kAPIConst/api_message/getCurrentMsg.php?user_id=$userId&user_type=$userType'));
 
     request.headers.addAll(headers);
 

@@ -57,8 +57,8 @@ class ParentMedicalInfo {
     }
     String? cookie = UserPrefs.getCookies();
     var headers = {'Cookie': 'PHPSESSID=$cookie'};
-    var request = http.MultipartRequest('POST',
-        Uri.parse('$kAPIConst/kids/api_parent_login/pt_kd_medinfo.php'));
+    var request = http.MultipartRequest(
+        'POST', Uri.parse('$kAPIConst/api_parent_login/pt_kd_medinfo.php'));
     request.fields.addAll({
       'bld_grp': bloodGrp,
       'weight': weight,

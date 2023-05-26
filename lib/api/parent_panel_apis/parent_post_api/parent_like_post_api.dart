@@ -9,7 +9,7 @@ class ParentLikePostApi {
     String? cookie = UserPrefs.getCookies();
     var headers = {'Cookie': 'PHPSESSID=$cookie'};
     var request = http.MultipartRequest('POST',
-        Uri.parse('$kAPIConst/kids/api_parent_show_post/parent_like_post.php'));
+        Uri.parse('$kAPIConst/api_parent_show_post/parent_like_post.php'));
     request.fields.addAll({'post_id': postId});
 
     request.headers.addAll(headers);

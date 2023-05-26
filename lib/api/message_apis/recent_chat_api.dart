@@ -8,8 +8,8 @@ class RecentChatApi {
   Future<dynamic> get() async {
     String? cookie = UserPrefs.getCookies();
     var headers = {'Cookie': 'PHPSESSID=$cookie'};
-    var request = http.Request('GET',
-        Uri.parse('$kAPIConst/kids/api_message/current-message-user.php'));
+    var request = http.Request(
+        'GET', Uri.parse('$kAPIConst/api_message/current-message-user.php'));
 
     request.headers.addAll(headers);
 

@@ -12,7 +12,7 @@ class ReportPostApi {
     var request = http.MultipartRequest(
         'POST',
         Uri.parse(
-            '$kAPIConst/kids/api_teacher_login/teacher_post/report_action.php'));
+            '$kAPIConst/api_teacher_login/teacher_post/report_action.php'));
     request.fields.addAll({'post_id': postId, 'report_dec': reportDesc});
 
     request.headers.addAll(headers);

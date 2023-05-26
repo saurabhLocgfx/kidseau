@@ -21,7 +21,7 @@ class TScheduleApi {
     var request = http.Request(
         'GET',
         Uri.parse(
-            '$kAPIConst/kids/api_teacher_login/teacher_home_page/teach_class_schedule.php?lang=$langId'));
+            '$kAPIConst/api_teacher_login/teacher_home_page/teach_class_schedule.php?lang=$langId'));
 
     request.headers.addAll(headers);
 

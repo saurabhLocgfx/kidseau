@@ -12,7 +12,7 @@ class ReadUnreadMsgApi {
     var request = http.Request(
         'GET',
         Uri.parse(
-            '$kAPIConst/kids/api_message/read_and_unread.php?user_id=$userID&type=$receiverType'));
+            '$kAPIConst/api_message/read_and_unread.php?user_id=$userID&type=$receiverType'));
 
     request.headers.addAll(headers);
 

@@ -26,7 +26,7 @@ class ParentSignUpInfo {
       'Cookie': 'PHPSESSID=$cookie',
     };
     var request = http.MultipartRequest(
-        'POST', Uri.parse('$kAPIConst/kids/api_parent_login/pt_sign_up.php'));
+        'POST', Uri.parse('$kAPIConst/api_parent_login/pt_sign_up.php'));
     request.fields.addAll({
       'mother_name': motherName,
       'mother_occupation': motherOccupation,
@@ -58,7 +58,7 @@ class ParentSignUpInfo {
     }
 
     /*var request = http.MultipartRequest(
-        'POST', Uri.parse('$kAPIConst/kids/api_parent_login/pt_sign_up.php'));
+        'POST', Uri.parse('$kAPIConst/api_parent_login/pt_sign_up.php'));
     request.fields.addAll({
       'mother_name': motherName,
       'mother_occupation': motherOccupation,

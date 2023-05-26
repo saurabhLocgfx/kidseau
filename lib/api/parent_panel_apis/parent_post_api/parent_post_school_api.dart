@@ -8,8 +8,8 @@ class ParentPostSchoolApi {
   Future<dynamic> get() async {
     String? cookie = UserPrefs.getCookies();
     var headers = {'Cookie': 'PHPSESSID=$cookie'};
-    var request = http.Request('GET',
-        Uri.parse('$kAPIConst/kids/api_parent_show_post/all_post_show.php'));
+    var request = http.Request(
+        'GET', Uri.parse('$kAPIConst/api_parent_show_post/all_post_show.php'));
 
     request.headers.addAll(headers);
 

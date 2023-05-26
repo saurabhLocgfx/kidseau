@@ -20,7 +20,7 @@ class PKidDetailApi {
     var request = http.MultipartRequest(
         'GET',
         Uri.parse(
-            '$kAPIConst/kids/api_parent_profile/kid_details_all.php?kid_id=$kidId&lang=$langId'));
+            '$kAPIConst/api_parent_profile/kid_details_all.php?kid_id=$kidId&lang=$langId'));
 
     request.headers.addAll(headers);
 

@@ -17,7 +17,7 @@ class GetStudentPerformance {
     var request = http.Request(
         'GET',
         Uri.parse(
-            '$kAPIConst/kids/api_teacher_login/student_prefomance/actGroupStudent.php?grp_id=$grpId&act_id=$actId&date=$date'));
+            '$kAPIConst/api_teacher_login/student_prefomance/actGroupStudent.php?grp_id=$grpId&act_id=$actId&date=$date'));
     request.body = '''''';
     request.headers.addAll(headers);
 

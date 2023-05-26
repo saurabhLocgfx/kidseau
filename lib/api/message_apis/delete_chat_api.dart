@@ -12,7 +12,7 @@ class DeleteChat {
     var request = http.Request(
         'GET',
         Uri.parse(
-            '$kAPIConst/kids/api_message/delete-chat.php?user_id=$userId&user_type=$userType'));
+            '$kAPIConst/api_message/delete-chat.php?user_id=$userId&user_type=$userType'));
 
     request.headers.addAll(headers);
 

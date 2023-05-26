@@ -21,7 +21,7 @@ class ParentKidApi {
     var request = http.Request(
         'GET',
         Uri.parse(
-            '$kAPIConst/kids/parent_home_page/parent_all_kid_id.php?lang=$langId'));
+            '$kAPIConst/parent_home_page/parent_all_kid_id.php?lang=$langId'));
 
     request.headers.addAll(headers);
 

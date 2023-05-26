@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
 
 import 'package:http/http.dart' as http;
 import 'package:kidseau/Constants/string_const.dart';
@@ -13,7 +12,7 @@ class TeacherMyPostApi {
     var request = http.Request(
         'GET',
         Uri.parse(
-            '$kAPIConst/kids/api_teacher_login/teacher_post/tech_my_post.php?scrol=$scroll'));
+            '$kAPIConst/api_teacher_login/teacher_post/tech_my_post.php?scrol=$scroll'));
 
     request.headers.addAll(headers);
 

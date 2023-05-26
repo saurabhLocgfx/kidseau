@@ -12,6 +12,7 @@ import 'package:kidseau/shard_prefs/shared_prefs.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../Constants/string_const.dart';
 import '../../api/parent_login_apis/parent_login_api.dart';
 import '../../api/parent_login_apis/parent_login_otp_api.dart';
 import '../PDashBoard.dart';
@@ -67,8 +68,8 @@ class _PLoginOtpVerificationState extends State<PLoginOtpVerification> {
               TextSpan(
                 recognizer: TapGestureRecognizer()
                   ..onTap = () {
-                    launchUrl(Uri.parse(
-                        "https://cerebal.locgfx.com/kidsue/kids/appDetails/privacy-policy.php"));
+                    launchUrl(
+                        Uri.parse("$kAPIConst/appDetails/privacy-policy.php"));
                   },
                 text: "Privacy Policy".tr(),
                 style: FontConstant.k14w500B7A4TextU,
@@ -81,7 +82,7 @@ class _PLoginOtpVerificationState extends State<PLoginOtpVerification> {
                 recognizer: TapGestureRecognizer()
                   ..onTap = () {
                     launchUrl(Uri.parse(
-                        "https://cerebal.locgfx.com/kidsue/kids/appDetails/terms-conditions.php"));
+                        "$kAPIConst/appDetails/terms-conditions.php"));
                   },
                 text: "Terms and Conditions".tr(),
                 style: FontConstant.k14w500B7A4TextU,

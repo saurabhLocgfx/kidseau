@@ -20,7 +20,7 @@ class ParentActivityHomeApi {
     var request = http.Request(
         'GET',
         Uri.parse(
-            '$kAPIConst/kids/parent_home_page/parent_home.php?grp_id=$kidId&lang=$langId'));
+            '$kAPIConst/parent_home_page/parent_home.php?grp_id=$kidId&lang=$langId'));
 
     request.headers.addAll(headers);
 

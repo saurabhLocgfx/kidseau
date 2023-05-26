@@ -10,7 +10,7 @@ class SendFeedbackApi {
     String? cookie = UserPrefs.getCookies();
     var headers = {'Cookie': 'PHPSESSID=$cookie'};
     var request = http.MultipartRequest(
-        'POST', Uri.parse('$kAPIConst/kids/notification/feedback.php'));
+        'POST', Uri.parse('$kAPIConst/notification/feedback.php'));
     request.fields.addAll({'feedback': feedback, 'ratings': rating});
 
     request.headers.addAll(headers);

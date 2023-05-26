@@ -14,7 +14,7 @@ class ParentGetPosts {
     var request = http.Request(
         'GET',
         Uri.parse(
-            '$kAPIConst/kids/api_parent_show_post/p_show_pt_by_grp.php?scrol=$scroll&grp_id=$grpId&sec_id=$secId'));
+            '$kAPIConst/api_parent_show_post/p_show_pt_by_grp.php?scrol=$scroll&grp_id=$grpId&sec_id=$secId'));
 
     request.headers.addAll(headers);
 

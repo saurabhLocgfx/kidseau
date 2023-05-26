@@ -11,7 +11,7 @@ class DeleteReminderApi {
     var request = http.Request(
         'GET',
         Uri.parse(
-            '$kAPIConst/kids/reminder/delete_reminder.php?reminder_id=$reminderId'));
+            '$kAPIConst/reminder/delete_reminder.php?reminder_id=$reminderId'));
 
     request.headers.addAll(headers);
 

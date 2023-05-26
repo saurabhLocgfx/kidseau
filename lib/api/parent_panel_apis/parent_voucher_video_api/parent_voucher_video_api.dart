@@ -10,7 +10,7 @@ class ParentVoucherVideoApi {
     String? cookie = UserPrefs.getCookies();
     var headers = {'Cookie': 'PHPSESSID=$cookie'};
     var request = http.Request(
-        'GET', Uri.parse('$kAPIConst/kids/reminder/app_voucher_video.php'));
+        'GET', Uri.parse('$kAPIConst/reminder/app_voucher_video.php'));
 
     request.headers.addAll(headers);
     log(request.headers.toString());

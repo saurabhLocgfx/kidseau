@@ -18,7 +18,7 @@ class ParentUpdateNumberEmailApi {
     var request = http.Request(
         'POST',
         Uri.parse(
-            '$kAPIConst/kids/api_parent_profile/number_change_and_verified/enter_chnage_num_email.php'));
+            '$kAPIConst/api_parent_profile/number_change_and_verified/enter_chnage_num_email.php'));
     request.body = json.encode({
       if (!isMother && phone.isNotEmpty) "f_con": phone,
       if (!isMother && email.isNotEmpty) "f_email": email,

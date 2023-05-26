@@ -12,7 +12,7 @@ class TeacherSyllabusApi {
     var request = http.MultipartRequest(
         'POST',
         Uri.parse(
-            '$kAPIConst/kids/api_teacher_login/teacher_profile/teacher_syllabus.php'));
+            '$kAPIConst/api_teacher_login/teacher_profile/teacher_syllabus.php'));
     request.fields.addAll({'grp_id': grpId, 'days': day});
 
     log(request.fields.toString());
