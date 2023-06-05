@@ -198,6 +198,7 @@ class _CalendarPage3State extends State<CalendarPage3> {
 
   List holidays = [];
 
+  bool _isLoading = false;
   @override
   void initState() {
     getDates();
@@ -207,6 +208,7 @@ class _CalendarPage3State extends State<CalendarPage3> {
   HolidayApiModel model = HolidayApiModel();
 
   getDates() {
+    _isLoading = true;
     final resp = HolidayApi().get().then((value) {
       print(value);
       if (value['status'] == 1) {
@@ -215,6 +217,7 @@ class _CalendarPage3State extends State<CalendarPage3> {
           for (var v in model.allHoliday!) {
             holidays.add(v.holidayDate);
           }
+          _isLoading = false;
         });
       } else {
         Fluttertoast.showToast(msg: 'Error');
@@ -321,7 +324,7 @@ class _CalendarPage3State extends State<CalendarPage3> {
                     firstDay: DateTime(DateTime.now().year, 1, 1),
                     lastDay: DateTime(DateTime.now().year + 1),
                   ),
-                  if (holidays.isEmpty)
+                  if (_isLoading)
                     Container(
                         width: 100,
                         height: 100,

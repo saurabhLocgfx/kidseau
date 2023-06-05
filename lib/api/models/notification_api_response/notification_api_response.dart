@@ -44,6 +44,7 @@ class AllNotification {
   late final String seen;
   late final String userTypeTo;
   late final String userIdTo;
+  late final String dis;
 
   AllNotification.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -56,6 +57,7 @@ class AllNotification {
     seen = json['seen'];
     userTypeTo = json['user_type_to'];
     userIdTo = json['user_id_to'];
+    dis = json['dis'] ?? "";
   }
 
   Map<String, dynamic> toJson() {

@@ -70,6 +70,8 @@ class _TActivityState extends State<TActivity> {
               onTap: () {
                 Navigator.of(context).push(MaterialPageRoute(
                     builder: (ctx) => TLearningAlphabets(
+                          grpId:
+                              widget.schedule.schdule![index].grpId.toString(),
                           scheduleID:
                               widget.schedule.schdule![index].actId.toString(),
                         )));

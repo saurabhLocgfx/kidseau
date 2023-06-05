@@ -5,13 +5,14 @@ import 'package:kidseau/Constants/string_const.dart';
 import 'package:kidseau/shard_prefs/shared_prefs.dart';
 
 class TScheduleDetailApi {
-  Future<dynamic> get({required String scheduleId}) async {
+  Future<dynamic> get(
+      {required String scheduleId, required String grpId}) async {
     String? cookie = UserPrefs.getCookies();
     var headers = {'Cookie': 'PHPSESSID=$cookie'};
     var request = http.Request(
         'GET',
         Uri.parse(
-            '$kAPIConst/api_teacher_login/teacher_home_page/teach_attend_act_details.php?act_id=$scheduleId'));
+            '$kAPIConst/api_teacher_login/teacher_home_page/teach_attend_act_details.php?act_id=$scheduleId&grp_id=$grpId'));
 
     request.headers.addAll(headers);
 

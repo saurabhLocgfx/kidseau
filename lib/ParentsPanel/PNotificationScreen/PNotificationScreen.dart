@@ -272,9 +272,9 @@ class _PNotificationScreenState extends State<PNotificationScreen> {
                                           : notificationDialog(
                                               context: context,
                                               title: response.allNotification[i]
-                                                  .notification,
-                                              desc: response.allNotification[i]
                                                   .notificationType,
+                                              desc: response
+                                                  .allNotification[i].dis,
                                               onAddReminderTap: () {
                                                 setState(() {
                                                   notifications[i] = true;

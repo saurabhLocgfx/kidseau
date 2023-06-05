@@ -7,10 +7,10 @@ class THomeModel {
 
   THomeModel(
       {this.status,
-        this.hello,
-        this.groupInCard,
-        this.schdule,
-        this.attendance});
+      this.hello,
+      this.groupInCard,
+      this.schdule,
+      this.attendance});
 
   THomeModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];
@@ -87,12 +87,14 @@ class Schdule {
   String? actId;
   String? timing;
   String? grpName;
+  String? grpId;
 
   Schdule({this.actTitle, this.actIcon, this.actId, this.timing, this.grpName});
 
   Schdule.fromJson(Map<String, dynamic> json) {
     actTitle = json['act_title'];
     actIcon = json['act_icon'];
+    grpId = json['grp_id'];
     actId = json['act_id'];
     timing = json['timing'];
     grpName = json['grp_name'];
@@ -119,11 +121,11 @@ class Attendance {
 
   Attendance(
       {this.groupId,
-        this.groupImage,
-        this.groupName,
-        this.sectionName,
-        this.totalStudent,
-        this.studentPresent});
+      this.groupImage,
+      this.groupName,
+      this.sectionName,
+      this.totalStudent,
+      this.studentPresent});
 
   Attendance.fromJson(Map<String, dynamic> json) {
     groupId = json['groupId'];

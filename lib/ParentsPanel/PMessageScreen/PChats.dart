@@ -438,7 +438,7 @@ class _PChatsState extends State<PChats> {
                                             ? File(_recording.path!)
                                             : _pickedImg);
                                     resp.then((value) {
-                                      log(value.toString());
+                                      // log(value.toString() + "send message response");
                                       if (value['status'] == 1) {
                                         setState(() {
                                           _recording = Recording();

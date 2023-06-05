@@ -60,6 +60,7 @@ class _TSyllabusState extends State<TSyllabus> {
         setState(() {
           model = TeacherGroupsModel.fromJson(value);
           _grpId = model.groupInCard![0].grpId ?? '';
+          log("Syllabus grp id $_grpId");
         });
       } catch (e) {
         print(e.toString());
@@ -234,6 +235,7 @@ class _TSyllabusState extends State<TSyllabus> {
                                                   MaterialPageRoute(
                                                       builder: (ctx) =>
                                                           TLearningAlphabets(
+                                                              grpId: _grpId,
                                                               scheduleID:
                                                                   _syllabusModel
                                                                       .syllabus![

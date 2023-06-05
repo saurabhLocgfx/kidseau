@@ -15,7 +15,9 @@ import 'TKidsDetails.dart';
 
 class TLearningAlphabets extends StatefulWidget {
   String scheduleID;
-  TLearningAlphabets({Key? key, required this.scheduleID}) : super(key: key);
+  String grpId;
+  TLearningAlphabets({Key? key, required this.scheduleID, required this.grpId})
+      : super(key: key);
 
   @override
   State<TLearningAlphabets> createState() => _TLearningAlphabetsState();
@@ -24,6 +26,7 @@ class TLearningAlphabets extends StatefulWidget {
 class _TLearningAlphabetsState extends State<TLearningAlphabets> {
   @override
   void initState() {
+    log(widget.grpId.toString());
     _getData();
     super.initState();
   }
@@ -33,7 +36,8 @@ class _TLearningAlphabetsState extends State<TLearningAlphabets> {
   TScheduleDetailModel _model = TScheduleDetailModel();
   _getData() {
     _isLoading = true;
-    final resp = TScheduleDetailApi().get(scheduleId: widget.scheduleID);
+    final resp = TScheduleDetailApi()
+        .get(scheduleId: widget.scheduleID, grpId: widget.grpId);
     resp.then((value) {
       try {
         setState(() {

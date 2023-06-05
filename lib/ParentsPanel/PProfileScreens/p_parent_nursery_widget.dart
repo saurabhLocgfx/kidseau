@@ -1,10 +1,9 @@
-import 'dart:developer';
-
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:kidseau/Widgets/custom_snack_bar.dart';
 import 'package:kidseau/api/models/parent_models/parent_profile_models/kid_school_detail_model.dart';
 import 'package:kidseau/api/parent_panel_apis/parent_profile_apis/nursery_data_api.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -219,10 +218,21 @@ class _PParentNurseryWidgetState extends State<PParentNurseryWidget> {
                       children: [
                         InkWell(
                           onTap: () {
-                            launchUrl(Uri.parse(dataList[currentIndex]
-                                .socialMedia!
-                                .facebook
-                                .toString()));
+                            if (dataList[currentIndex]
+                                    .socialMedia!
+                                    .facebook
+                                    .toString() ==
+                                "null") {
+                              CustomSnackBar.customErrorSnackBar(
+                                  context,
+                                  "School does not have this social media"
+                                      .tr());
+                            } else {
+                              launchUrl(Uri.parse(dataList[currentIndex]
+                                  .socialMedia!
+                                  .facebook
+                                  .toString()));
+                            }
                           },
                           child: CircleAvatar(
                               radius: 24,
@@ -232,10 +242,21 @@ class _PParentNurseryWidgetState extends State<PParentNurseryWidget> {
                         ),
                         InkWell(
                           onTap: () {
-                            launchUrl(Uri.parse(dataList[currentIndex]
-                                .socialMedia!
-                                .twitter
-                                .toString()));
+                            if (dataList[currentIndex]
+                                    .socialMedia!
+                                    .twitter
+                                    .toString() ==
+                                "null") {
+                              CustomSnackBar.customErrorSnackBar(
+                                  context,
+                                  "School does not have this social media"
+                                      .tr());
+                            } else {
+                              launchUrl(Uri.parse(dataList[currentIndex]
+                                  .socialMedia!
+                                  .twitter
+                                  .toString()));
+                            }
                           },
                           child: CircleAvatar(
                               radius: 24,
@@ -245,10 +266,21 @@ class _PParentNurseryWidgetState extends State<PParentNurseryWidget> {
                         ),
                         InkWell(
                           onTap: () {
-                            launchUrl(Uri.parse(dataList[currentIndex]
-                                .socialMedia!
-                                .linkedIn
-                                .toString()));
+                            if (dataList[currentIndex]
+                                    .socialMedia!
+                                    .linkedIn
+                                    .toString() ==
+                                "null") {
+                              CustomSnackBar.customErrorSnackBar(
+                                  context,
+                                  "School does not have this social media"
+                                      .tr());
+                            } else {
+                              launchUrl(Uri.parse(dataList[currentIndex]
+                                  .socialMedia!
+                                  .linkedIn
+                                  .toString()));
+                            }
                           },
                           child: CircleAvatar(
                               radius: 24,
@@ -258,10 +290,21 @@ class _PParentNurseryWidgetState extends State<PParentNurseryWidget> {
                         ),
                         InkWell(
                           onTap: () {
-                            launchUrl(Uri.parse(dataList[currentIndex]
-                                .socialMedia!
-                                .instagram
-                                .toString()));
+                            if (dataList[currentIndex]
+                                    .socialMedia!
+                                    .instagram
+                                    .toString() ==
+                                "null") {
+                              CustomSnackBar.customErrorSnackBar(
+                                  context,
+                                  "School does not have this social media"
+                                      .tr());
+                            } else {
+                              launchUrl(Uri.parse(dataList[currentIndex]
+                                  .socialMedia!
+                                  .instagram
+                                  .toString()));
+                            }
                           },
                           child: CircleAvatar(
                               radius: 24,

@@ -30,6 +30,7 @@ class Schdule {
   String? actIcon;
   String? timing;
   String? grpName;
+  String? grpId;
 
   Schdule({this.actId, this.actTitle, this.actIcon, this.timing, this.grpName});
 
@@ -39,6 +40,7 @@ class Schdule {
     actIcon = json['act_icon'];
     timing = json['timing'];
     grpName = json['grp_name'];
+    grpId = json['grp_id'];
   }
 
   Map<String, dynamic> toJson() {

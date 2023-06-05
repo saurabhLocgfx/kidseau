@@ -533,6 +533,9 @@ class _THomeScreenState extends State<THomeScreen> {
                                         MaterialPageRoute(
                                             builder: (context) =>
                                                 TLearningAlphabets(
+                                                  grpId: _name
+                                                      .schdule![index].grpId
+                                                      .toString(),
                                                   scheduleID: _name
                                                       .schdule![index].actId
                                                       .toString(),
@@ -777,6 +780,8 @@ class _THomeScreenState extends State<THomeScreen> {
                           context,
                           MaterialPageRoute(
                               builder: (context) => TLearningAlphabets(
+                                    grpId:
+                                        _name.schdule![index].grpId.toString(),
                                     scheduleID:
                                         _name.schdule![index].actId.toString(),
                                   )),
@@ -947,6 +952,7 @@ class _schedulewidgetapiState extends State<schedulewidgetapi> {
                             context,
                             MaterialPageRoute(
                                 builder: (context) => TLearningAlphabets(
+                                      grpId: "",
                                       scheduleID: '',
                                     )),
                           );
@@ -1131,6 +1137,7 @@ class SchoolCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    //log(model.school!.schoolTime!.toString());
     return Container(
       height: 128,
       width: 1.sw,
@@ -1177,7 +1184,8 @@ class SchoolCard extends StatelessWidget {
                         )),
                     SizedBox(width: 8),
                     Text(
-                      '${DateFormat.jm().format(DateFormat("hh:mm:ss").parse(model.school!.schoolTime!.split('To').first.toString()))} to ${DateFormat.jm().format(DateFormat("hh:mm:ss").parse(model.school!.schoolTime!.split(' To ').last.toString()))}',
+                      '${DateFormat.jm().format(DateFormat("hh:mm:ss").parse(model.school!.schoolTime!.split('To').first.toString()))} ${"to".tr()} ${DateFormat.jm().format(DateFormat("hh:mm:ss").parse(model.school!.schoolTime!.split('To').last.toString()))}',
+                      //'${DateFormat.jm().format(DateFormat("hh:mm:ss").parse(model.school!.schoolTime!.split('To').first.toString()))} to ${DateFormat.jm().format(DateFormat("hh:mm:ss").parse(model.school!.schoolTime!.split(' To ').last.toString()))}',
                       style: FontConstant.k18w500whiteText.copyWith(
                         fontSize: 16,
                         fontWeight: FontWeight.w400,

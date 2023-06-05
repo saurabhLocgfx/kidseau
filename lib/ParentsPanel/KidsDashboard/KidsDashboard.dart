@@ -160,7 +160,7 @@ class _PKidsDashboardState extends State<PKidsDashboard> {
                                 children: [
                                   Container(
                                     height: 128,
-                                    width: 96,
+                                    width: 90,
                                     clipBehavior: Clip.hardEdge,
                                     decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(8)),

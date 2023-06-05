@@ -1,4 +1,3 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -6,7 +5,6 @@ import 'package:kidseau/TeachersPanel/THomeScreen/TLearningAlphabets.dart';
 import 'package:kidseau/Theme.dart';
 import 'package:kidseau/api/Teacherpanelapi/Tmodel/THomemodel.dart';
 import 'package:kidseau/api/Teacherpanelapi/Tmodel/TScheduleModel.dart';
-import 'package:kidseau/api/Teacherpanelapi/Tschedule_api/schedule_api.dart';
 import 'package:kidseau/api/Teacherpanelapi/teacher_home_api/THomeApi.dart';
 
 class schedulewidgetapi extends StatefulWidget {
@@ -43,7 +41,7 @@ class _schedulewidgetapiState extends State<schedulewidgetapi> {
     });
   }
 
- /* getSchedule() {
+  /* getSchedule() {
     loadingsch = true;
     final rsp = TScheduleApi().get();
     rsp.then((value) {
@@ -91,8 +89,10 @@ class _schedulewidgetapiState extends State<schedulewidgetapi> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) =>
-                                    TLearningAlphabets(scheduleID: '',)),
+                                builder: (context) => TLearningAlphabets(
+                                      scheduleID: '',
+                                      grpId: '',
+                                    )),
                           );
                         } else if (index == 1) {
                         } else if (index == 2) {
@@ -139,31 +139,42 @@ class _schedulewidgetapiState extends State<schedulewidgetapi> {
                                           ),
                                           Row(
                                             children: [
-                                              Text(_name.schdule![index].grpName.toString(),style: FontConstant
-                                                  .k14w400lightpurpleText
-                                                  .copyWith(
-                                                  fontWeight: FontWeight.w400,
-                                                  fontSize: 14,
-                                                  color: Color(0xffB7A4B2)),),
-                                              SizedBox(width: 5,),
+                                              Text(
+                                                _name.schdule![index].grpName
+                                                    .toString(),
+                                                style: FontConstant
+                                                    .k14w400lightpurpleText
+                                                    .copyWith(
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                        fontSize: 14,
+                                                        color:
+                                                            Color(0xffB7A4B2)),
+                                              ),
+                                              SizedBox(
+                                                width: 5,
+                                              ),
                                               Container(
                                                 width: 3,
                                                 height: 3,
                                                 decoration: BoxDecoration(
                                                     color: Color(0xffB7A4B2),
-                                                    shape: BoxShape.circle
-                                                ),
+                                                    shape: BoxShape.circle),
                                               ),
-                                              SizedBox(width: 5,),
+                                              SizedBox(
+                                                width: 5,
+                                              ),
                                               Text(
                                                 "From ${_name.schdule![index].timing!.split('-').first} ",
                                                 // '${groups[index]} . ${time[index]}',
                                                 style: FontConstant
                                                     .k14w400lightpurpleText
                                                     .copyWith(
-                                                    fontWeight: FontWeight.w400,
-                                                    fontSize: 14,
-                                                    color: Color(0xffB7A4B2)),
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                        fontSize: 14,
+                                                        color:
+                                                            Color(0xffB7A4B2)),
                                               ),
                                               Text(
                                                 "To ${_name.schdule![index].timing!.split('-').last}",
@@ -171,9 +182,11 @@ class _schedulewidgetapiState extends State<schedulewidgetapi> {
                                                 style: FontConstant
                                                     .k14w400lightpurpleText
                                                     .copyWith(
-                                                    fontWeight: FontWeight.w400,
-                                                    fontSize: 14,
-                                                    color: Color(0xffB7A4B2)),
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                        fontSize: 14,
+                                                        color:
+                                                            Color(0xffB7A4B2)),
                                               ),
                                             ],
                                           )

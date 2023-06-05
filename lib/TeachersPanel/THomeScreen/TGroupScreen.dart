@@ -262,6 +262,7 @@ class _TGroupScreenState extends State<TGroupScreen> {
                                               MaterialPageRoute(
                                                   builder: (context) =>
                                                       TLearningAlphabets(
+                                                        grpId: _grpId,
                                                         scheduleID:
                                                             scheduelModel
                                                                 .schdule![index]
