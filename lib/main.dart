@@ -317,6 +317,7 @@ class MyAppState extends State<MyApp> {
         _connectivity.onConnectivityChanged.listen(_updateConnectionStatus);
     super.initState();
   }
+  // nujnnujnju
 
   ConnectivityResult _connectionStatus = ConnectivityResult.none;
   final Connectivity _connectivity = Connectivity();
