@@ -78,11 +78,12 @@ dependencies:
   flutter_widget_from_html: ^0.8.5
   timezone: 0.8.0
   audioplayers: 0.20.1
-#  flutter_audio_recorder3: 0.0.5
+  flutter_audio_recorder3: 0.0.5
 #  flutter_sound: 9.2.1
   path_provider: 2.0.11
   connectivity_plus: 3.0.2
   badges: ^3.1.1
+  google_sign_in: ^6.1.4
 
 
 dev_dependencies:

@@ -4,6 +4,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:kidseau/Google_SignIn/google_sign_in.dart';
 import 'package:kidseau/Theme.dart';
 import 'package:kidseau/Widgets/buttons.dart';
 import 'package:kidseau/api/Teacherpanelapi/teacher_login_apis/teacher_login_api.dart';
@@ -187,7 +188,14 @@ class TLoginScreen extends StatelessWidget {
                             ),
                           ],
                         ),
-                        // SizedBox(height: 40.h),
+                        SizedBox(height: 40.h),
+                        MainButton(
+                            onTap: () {
+                              final auth = GoogleSignInClass().login();
+                            },
+                            title: 'Google',
+                            textStyleColor: Colors.white,
+                            backgroundColor: ThemeColor.primarycolor)
                       ],
                     ),
                   ),
