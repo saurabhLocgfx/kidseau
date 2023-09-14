@@ -105,8 +105,6 @@ class _PSignupOtpVerificationState extends State<PSignupOtpVerification> {
                                     Fluttertoast.showToast(msg: value['msg']);
                                   } else {
                                     UserPrefs.setCookies(value['key']);
-                                    Fluttertoast.showToast(
-                                        msg: 'Your OTP is ${value['OTP']}');
                                   }
                                 });
                               },

@@ -16,8 +16,12 @@ import 'package:kidseau/api/parent_panel_apis/parent_dashboard_api/parent_activi
 class PLearningAplphabets extends StatefulWidget {
   final String actId;
   final String selectedDay;
+  final String dayId;
   const PLearningAplphabets(
-      {Key? key, required this.actId, required this.selectedDay})
+      {Key? key,
+      required this.actId,
+      required this.selectedDay,
+      required this.dayId})
       : super(key: key);
 
   @override
@@ -38,8 +42,10 @@ class _PLearningAplphabetsState extends State<PLearningAplphabets> {
   _getData() {
     _isLoading = true;
     //log("selected day ${widget.selectedDay}");
-    final resp = ParentActivityDetailApi()
-        .get(actId: widget.actId, selectedDay: widget.selectedDay);
+    final resp = ParentActivityDetailApi().get(
+        actId: widget.actId,
+        selectedDay: widget.selectedDay,
+        dayId: widget.dayId);
     resp.then((value) {
       print(value);
       if (value['status'] == 1) {

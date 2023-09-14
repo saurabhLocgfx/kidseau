@@ -7,9 +7,20 @@ import 'package:kidseau/shard_prefs/shared_prefs.dart';
 class GetSections {
   Future<dynamic> get() async {
     String? cookie = UserPrefs.getCookies();
+    String? selectedLang = UserPrefs.getLang();
+    String langId = '';
+    if (selectedLang.toString() == 'English') {
+      langId = '0';
+    } else if (selectedLang.toString() == 'French') {
+      langId = '2';
+    } else {
+      langId = '1';
+    }
     var headers = {'Cookie': 'PHPSESSID=$cookie'};
-    var request = http.Request('GET',
-        Uri.parse('$kAPIConst/api_parent_login/kid_sch_all_section_fetch.php'));
+    var request = http.Request(
+        'GET',
+        Uri.parse(
+            '$kAPIConst/api_parent_login/kid_sch_all_section_fetch.php?lang=$langId'));
 
     request.headers.addAll(headers);
 
@@ -26,11 +37,20 @@ class GetSections {
 
   Future<dynamic> getGroups({required String sectionId}) async {
     String? cookie = UserPrefs.getCookies();
+    String? selectedLang = UserPrefs.getLang();
+    String langId = '';
+    if (selectedLang.toString() == 'English') {
+      langId = '0';
+    } else if (selectedLang.toString() == 'French') {
+      langId = '2';
+    } else {
+      langId = '1';
+    }
     var headers = {'Cookie': 'PHPSESSID=$cookie'};
     var request = http.Request(
         'GET',
         Uri.parse(
-            '$kAPIConst/api_parent_login/kid_section_and_group.php?sec_id=$sectionId'));
+            '$kAPIConst/api_parent_login/kid_section_and_group.php?sec_id=$sectionId&lang=$langId'));
 
     request.headers.addAll(headers);
 

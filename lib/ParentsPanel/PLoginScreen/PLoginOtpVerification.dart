@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/gestures.dart';
@@ -163,13 +164,13 @@ class _PLoginOtpVerificationState extends State<PLoginOtpVerification> {
                                 final resp = ParentLogin()
                                     .get(email: widget.loginField.trim());
                                 resp.then((value) {
-                                  // log(value.toString());
+                                  log(value.toString());
                                   if (value['status'] == 0) {
                                     Fluttertoast.showToast(msg: value['msg']);
                                   } else {
                                     UserPrefs.setCookies(value['key']);
-                                    Fluttertoast.showToast(
-                                        msg: 'Your OTP is ${value['OTP']}');
+                                    UserPrefs.setOTP(value['OTP']);
+                                    // Fluttertoast.showToast(msg: 'Your OTP is ${value['OTP']}');
                                   }
                                 });
                               },

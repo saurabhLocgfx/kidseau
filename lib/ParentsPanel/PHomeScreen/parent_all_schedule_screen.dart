@@ -105,6 +105,8 @@ class _PScheduleScreenState extends State<PScheduleScreen> {
                                 selectedDay: "",
                                 actId: widget.model.kidAndActivity![index].actId
                                     .toString(),
+                                dayId: widget.model.kidAndActivity![index].dayId
+                                    .toString(),
                               ));
                         },
                         child: Container(

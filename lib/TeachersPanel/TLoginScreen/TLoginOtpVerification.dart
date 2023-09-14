@@ -171,9 +171,10 @@ class _TLoginOtpVerificationState extends State<TLoginOtpVerification> {
                                             } else {
                                               UserPrefs.setCookies(
                                                   value['key']);
-                                              Fluttertoast.showToast(
-                                                  msg:
-                                                      'Your OTP is ${value['OTP']}');
+                                              UserPrefs.setOTP(value['OTP']);
+                                              // Fluttertoast.showToast(
+                                              //     msg:
+                                              //         'Your OTP is ${value['OTP']}');
                                             }
                                           });
                                         },

@@ -626,9 +626,9 @@ class _KidsDetailsState extends State<KidsDetails> {
                                       fontWeight: FontWeight.w400),
                                 ),
                               ),
-                              SizedBox(
-                                width: 120,
-                              ),
+                              // SizedBox(
+                              //   width: 200,
+                              // ),
                               Padding(
                                 padding: const EdgeInsets.only(right: 10),
                                 child: ImageIcon(

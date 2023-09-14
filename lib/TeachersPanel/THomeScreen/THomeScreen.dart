@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:developer';
 import 'dart:ui';
 
+import 'package:badges/badges.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -22,6 +23,7 @@ import '../../ParentsPanel/POnboardingScreens/PStartScreen.dart';
 import '../../Widgets/custom_snack_bar.dart';
 import '../../api/models/reminder_model/reminder_model.dart';
 import '../../api/models/teacher_profile_details_model/teacher_profile_details_model.dart';
+import '../../api/notification_api/notification_repo.dart';
 import '../../api/reminder_apis/delete_reminder_api.dart';
 import '../../api/reminder_apis/get_reminders_api.dart';
 import '../../restartappwidget/restartwidgets.dart';
@@ -44,13 +46,18 @@ class _THomeScreenState extends State<THomeScreen> {
   bool loadingData = false;
   bool loadingsch = false;
   Timer? timer;
+  NotificationRepo _notificationRepo = NotificationRepo();
   @override
   void initState() {
     getData();
     _getDataReminders();
-    timer = Timer.periodic(Duration(seconds: 5), (timer) {
+    timer = Timer.periodic(Duration(seconds: 7), (timer) async {
       //_getDataReminders();
       _setReminder();
+      _isNewNot = await _notificationRepo.newNot();
+      if (mounted) {
+        setState(() {});
+      }
     });
     super.initState();
   }
@@ -164,7 +171,9 @@ class _THomeScreenState extends State<THomeScreen> {
     });
   }
 
+  bool _isNewNot = false;
   bool showReminder = false;
+  // Timer? _timer;
 
   /*setReminderFalse() {
     UserPrefs.setShowReminder(false);
@@ -324,11 +333,16 @@ class _THomeScreenState extends State<THomeScreen> {
                         builder: (context) => PNotificationScreen()),
                   );
                 },
-                child: Padding(
-                  padding: const EdgeInsets.all(15.0),
-                  child: Image.asset(
-                    "assets/images/iconbell.png",
-                    height: 24,
+                child: Badge(
+                  position: BadgePosition.topEnd(top: 12, end: 12),
+                  // badgeContent: Text(""),
+                  showBadge: _isNewNot,
+                  child: Padding(
+                    padding: const EdgeInsets.all(15.0),
+                    child: Image.asset(
+                      "assets/images/iconbell.png",
+                      height: 24,
+                    ),
                   ),
                 ),
               ),

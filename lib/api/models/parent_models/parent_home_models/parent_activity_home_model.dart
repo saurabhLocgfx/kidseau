@@ -45,11 +45,14 @@ class KidAndActivity {
   String? actTitle;
   String? actIcon;
   String? timing;
+  String? dayId;
 
-  KidAndActivity({this.actId, this.actTitle, this.actIcon, this.timing});
+  KidAndActivity(
+      {this.actId, this.actTitle, this.actIcon, this.timing, this.dayId});
 
   KidAndActivity.fromJson(Map<String, dynamic> json) {
     actId = json['act_id'];
+    dayId = json['day_id'];
     actTitle = json['act_title'];
     actIcon = json['act_icon'];
     timing = json['timing'];
@@ -58,6 +61,7 @@ class KidAndActivity {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['act_id'] = this.actId;
+    data['day_id'] = this.dayId;
     data['act_title'] = this.actTitle;
     data['act_icon'] = this.actIcon;
     data['timing'] = this.timing;

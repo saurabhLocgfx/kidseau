@@ -29,11 +29,14 @@ class AllSchdule {
   String? actTitle;
   String? actIcon;
   String? timing;
+  String? dayId;
 
-  AllSchdule({this.actId, this.actTitle, this.actIcon, this.timing});
+  AllSchdule(
+      {this.actId, this.actTitle, this.actIcon, this.timing, this.dayId});
 
   AllSchdule.fromJson(Map<String, dynamic> json) {
     actId = json['act_id'];
+    dayId = json['day_id'];
     actTitle = json['act_title'];
     actIcon = json['act_icon'];
     timing = json['timing'];

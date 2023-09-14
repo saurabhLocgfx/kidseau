@@ -218,6 +218,10 @@ class _PParentNurseryWidgetState extends State<PParentNurseryWidget> {
                       children: [
                         InkWell(
                           onTap: () {
+                            // log(dataList[currentIndex]
+                            //     .socialMedia!
+                            //     .facebook
+                            //     .toString());
                             if (dataList[currentIndex]
                                     .socialMedia!
                                     .facebook

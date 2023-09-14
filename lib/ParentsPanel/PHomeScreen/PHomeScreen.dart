@@ -119,7 +119,7 @@ class _PHomeScreenState extends State<PHomeScreen> {
   _getActivity(String kidId) {
     final resp = ParentActivityHomeApi().get(kidId: kidId);
     resp.then((value) {
-      //print(value);
+      print(value);
       if (value['status'] == 1) {
         setState(() {
           _activityModel = ParentActivityHomeModel.fromJson(value);

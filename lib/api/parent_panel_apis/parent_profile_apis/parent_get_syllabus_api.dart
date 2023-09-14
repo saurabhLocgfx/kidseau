@@ -7,11 +7,20 @@ import 'package:kidseau/shard_prefs/shared_prefs.dart';
 class ParentGetSyllabusApi {
   Future<dynamic> get({required String grpId, required String day}) async {
     String? cookie = UserPrefs.getCookies();
+    String? selectedLang = UserPrefs.getLang();
+    String langId = '';
+    if (selectedLang.toString() == 'English') {
+      langId = '0';
+    } else if (selectedLang.toString() == 'French') {
+      langId = '2';
+    } else {
+      langId = '1';
+    }
     var headers = {'Cookie': 'PHPSESSID=$cookie'};
     var request = http.Request(
         'GET',
         Uri.parse(
-            '$kAPIConst/api_parent_profile/kid_profile_syllabus.php?syllabus_id=$grpId&days=$day'));
+            '$kAPIConst/api_parent_profile/kid_profile_syllabus.php?syllabus_id=$grpId&days=$day&lang=$langId'));
 
     request.headers.addAll(headers);
 

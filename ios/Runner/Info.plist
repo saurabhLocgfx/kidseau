@@ -31,7 +31,7 @@
 	<key>NSAppleMusicUsageDescription</key>
 	<string>Required usage description for a Flutter dependency</string>
 	<key>NSContactsUsageDescription</key>
-	<string>This app requires contacts access to function properly.</string>
+	<string>This app requires contacts access to share contacts to another user. Enabling this will allow us to store the shared contact on our server.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Required usage description for a Flutter dependency</string>
 	<key>NSMicrophoneUsageDescription</key>

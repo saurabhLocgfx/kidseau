@@ -14,6 +14,7 @@ import 'package:kidseau/ParentsPanel/PPostsScreen/PPostScreen.dart';
 import 'package:kidseau/ParentsPanel/PProfileScreens/PProfileDashBoard.dart';
 import 'package:kidseau/Theme.dart';
 import 'package:kidseau/api/notification_api/notification_api.dart';
+import 'package:kidseau/api/notification_api/notification_repo.dart';
 import 'package:kidseau/shard_prefs/shared_prefs.dart';
 
 import '../api/message_apis/message_repo.dart';
@@ -88,14 +89,18 @@ class _PDashboardState extends State<PDashboard> {
   }
 
   MessageRepo _repo = MessageRepo();
+  NotificationRepo _notificationRepo = NotificationRepo();
   bool _isNewMsg = false;
+  bool _isNewNot = false;
 
   Timer? _timer;
+
   @override
   void initState() {
     initializeFirebaseService();
-    _timer = Timer.periodic(Duration(seconds: 4), (timer) async {
+    _timer = Timer.periodic(Duration(seconds: 6), (timer) async {
       _isNewMsg = await _repo.newMsg();
+      _isNewNot = await _notificationRepo.newNot();
       // log(_isNewMsg.toString());
       if (mounted) {
         setState(() {});
@@ -277,23 +282,28 @@ class _PDashboardState extends State<PDashboard> {
                 pageIndex = 3;
               });
             },
-            child: Container(
-              color: Colors.transparent,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image.asset(
-                    pageIndex == 3
-                        ? "assets/images/notificationiconfill.png"
-                        : "assets/images/notificationicon.png",
-                    height: 24,
-                  ),
-                  Text("Notification".tr(),
-                      style: FontConstant.k12w400B7A4Text.copyWith(
-                          color: pageIndex == 3
-                              ? Color(0xff8267AC)
-                              : Color(0xffB7A4B2)))
-                ],
+            child: Badge(
+              position: BadgePosition.custom(top: -8, end: 4),
+              badgeContent: Text(""),
+              showBadge: _isNewNot,
+              child: Container(
+                color: Colors.transparent,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset(
+                      pageIndex == 3
+                          ? "assets/images/notificationiconfill.png"
+                          : "assets/images/notificationicon.png",
+                      height: 24,
+                    ),
+                    Text("Notification".tr(),
+                        style: FontConstant.k12w400B7A4Text.copyWith(
+                            color: pageIndex == 3
+                                ? Color(0xff8267AC)
+                                : Color(0xffB7A4B2)))
+                  ],
+                ),
               ),
             ),
           ),

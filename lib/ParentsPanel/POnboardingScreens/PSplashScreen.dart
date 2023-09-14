@@ -92,7 +92,7 @@ class _PSplashScreenState extends State<PSplashScreen> {
       } else {
         log('cookie not null');
         if (UserPrefs.getIsTeacher() == null) {
-          log('cookie not null');
+          log('teacher null');
           Navigator.pushReplacement(
               context, MaterialPageRoute(builder: (context) => PStartScreen()));
           //return PStartScreen();
@@ -113,6 +113,7 @@ class _PSplashScreenState extends State<PSplashScreen> {
           log('teacher false');
           final resp = UserLogin().get();
           resp.then((value) {
+            log("parent login $value");
             if (value['status'] == 1) {
               UserPrefs.setCookies(value['key']);
               Navigator.pushReplacement(context,
