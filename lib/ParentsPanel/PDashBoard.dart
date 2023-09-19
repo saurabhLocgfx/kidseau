@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'dart:developer';
-
+import 'package:badges/badges.dart' as badges;
 import 'package:badges/badges.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -282,7 +282,7 @@ class _PDashboardState extends State<PDashboard> {
                 pageIndex = 3;
               });
             },
-            child: Badge(
+            child: badges.Badge(
               position: BadgePosition.custom(top: -8, end: 4),
               badgeContent: Text(""),
               showBadge: _isNewNot,
@@ -317,7 +317,7 @@ class _PDashboardState extends State<PDashboard> {
                 pageIndex = 4;
               });
             },
-            child: Badge(
+            child: badges.Badge(
               position: BadgePosition.custom(top: -8, end: 4),
               badgeContent: Text(""),
               showBadge: _isNewMsg,

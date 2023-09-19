@@ -84,6 +84,8 @@ dependencies:
   connectivity_plus: 3.0.2
   badges: ^3.1.1
   google_sign_in: ^6.1.4
+  google_fonts: ^4.0.4
+  sign_in_with_apple: ^4.3.0
 
 
 dev_dependencies:
@@ -92,6 +94,7 @@ dev_dependencies:
 dependency_overrides:
  #firebase_messaging_platform_interface: 4.1.5
   firebase_core_platform_interface: 4.5.1
+  intl: any
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -99,7 +102,7 @@ dependency_overrides:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^2.0.0
-  google_fonts: ^3.0.1
+#  google_fonts: ^3.0.1
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

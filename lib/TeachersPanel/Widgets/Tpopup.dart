@@ -1,10 +1,12 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:kidseau/TeachersPanel/TProfileScreen/TDeleteAccount.dart';
 import 'package:kidseau/TeachersPanel/TProfileScreen/TSettings.dart';
 import 'package:kidseau/TeachersPanel/TProfileScreen/TSyllabus.dart';
 import 'package:kidseau/Theme.dart';
 
 import '../../ParentsPanel/POnboardingScreens/PStartScreen.dart';
+import '../../ParentsPanel/PProfileScreens/PSettings/PDelete..dart';
 import '../../Widgets/custom_snack_bar.dart';
 import '../../api/logout_api/logout_api.dart';
 import '../../shard_prefs/shared_prefs.dart';
@@ -119,6 +121,49 @@ class TProfilepopup extends StatelessWidget {
                 ),
               ),
             ),
+            PopupMenuItem(
+              enabled: false,
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.pop(context);
+                  showModalBottomSheet(
+
+                      useSafeArea: true,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.only(topRight: Radius.circular(24),
+                              topLeft: Radius.circular(24))
+                      ),
+
+
+                      context: context,
+
+                      //backgroundColor: Colors.transparent,
+                      elevation: 0,
+                      isDismissible: false,
+                      isScrollControlled: true,
+                      builder: (context){
+                        return TDeleteModalSheet();
+                      });
+                },
+                child: Row(
+                  children: [
+                    Image.asset(
+                      "assets/images/trashicon.png",
+                      height: 24,
+                    ),
+                    SizedBox(width: 15),
+                    Text(
+                      "Delete".tr(),
+                      /*AppLoaclizations.of(context)!
+                                .translate("Syllabus")
+                                .toString(),*/
+                      style: FontConstant.k18w5008471Text,
+                    )
+                  ],
+                ),
+              ),
+            ),
+
           ];
         });
   }

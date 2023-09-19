@@ -10,10 +10,13 @@ import 'package:kidseau/ParentsPanel/PSignUpScreen/PSignupScreen.dart';
 import 'package:kidseau/Theme.dart';
 import 'package:kidseau/Widgets/buttons.dart';
 import 'package:kidseau/shard_prefs/shared_prefs.dart';
+import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../Constants/string_const.dart';
+import '../../Google_SignIn/google_sign_in.dart';
 import '../../Widgets/textfields.dart';
+import '../../api/google_sign_in/google_sign_in_api.dart';
 import '../../api/parent_login_apis/parent_login_api.dart';
 
 class PLoginScreen extends StatelessWidget {
@@ -201,8 +204,106 @@ class PLoginScreen extends StatelessWidget {
                               textStyleColor: Colors.white,
                               backgroundColor: ThemeColor.primarycolor),
                         ),
+
+                        SizedBox(height: 40.h),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            GestureDetector(
+                              onTap: () async {
+                                final credential =
+                                await SignInWithApple.getAppleIDCredential(
+                                  scopes: [
+                                    AppleIDAuthorizationScopes.email,
+                                    AppleIDAuthorizationScopes.fullName,
+                                  ],
+                                );
+                                print(credential);
+                              },
+                              // child: Container(
+                              //   margin: EdgeInsets.all(16),
+                              //   padding: EdgeInsets.all(12),
+                              //   decoration: BoxDecoration(
+                              //
+                              //     color: Colors.white,
+                              //     borderRadius: BorderRadius.circular(12)
+                              //   ),
+                              child: Image.asset('assets/images/apple logo.png',fit: BoxFit.cover,height: 40,
+                              ),
+                              //),
+                            ),
+                            SizedBox(width: 20,),
+                            GestureDetector(
+                              onTap: () async{
+                                final auth = await GoogleSignInClass().login();
+
+                                googleSignInApi(id_token: auth.idToken.toString()).then((value) {
+
+
+
+                                  if(value['status'] == 2){
+
+                                    /*Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                TSignupCode(isEmail: true, mobileText: '',
+                                                  *//*isEmail:
+                                                    widget
+                                                        .isEmail,
+                                                    mobileText: widget
+                                                        .mobileText*//*)));*/
+                                  }
+                                  else{}
+
+
+                                });
+
+
+                              },
+                              /*child: Container(
+                                margin: EdgeInsets.all(16),
+                                padding: EdgeInsets.all(12),
+                                clipBehavior: Clip.hardEdge,
+                                decoration: BoxDecoration(
+
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(12)
+                                ),*/
+                              child: CircleAvatar(
+                                backgroundColor: Color(0xfff7f6fa),
+                                child: Image.asset('assets/images/glogo.png',fit: BoxFit.cover,height: 40,
+                                ),
+                              ),
+                              //),
+                            ),
+
+                            SizedBox(width: 20,),
+                            GestureDetector(
+                              onTap: (){},
+                              /*child: Container(
+                                margin: EdgeInsets.all(16),
+                                padding: EdgeInsets.all(12),
+                                clipBehavior: Clip.hardEdge,
+                                decoration: BoxDecoration(
+
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(12)
+                                ),*/
+                              child: CircleAvatar(
+                                backgroundColor: Color(0xfff7f6fa),
+                                child: Image.asset('assets/images/facebookicon.png',fit: BoxFit.cover,height: 40,
+                                ),
+                              ),
+                              //),
+                            ),
+
+
+
+                          ],
+                        ),
                         SizedBox(
-                          height: 40,
+                          height: 40.h,
                         ),
                         Center(
                           child: GestureDetector(

@@ -11,6 +11,8 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_mentions/flutter_mentions.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:kidseau/ParentsPanel/PProfileScreens/PProfileDashBoard.dart';
+import 'package:kidseau/ParentsPanel/PProfileScreens/PSettings/PDelete..dart';
 import 'package:kidseau/Theme.dart';
 import 'package:kidseau/reminder_notifications_class.dart';
 import 'package:kidseau/restartappwidget/restartwidgets.dart';
@@ -365,6 +367,8 @@ class MyAppState extends State<MyApp> {
                     // TDashboard(),
                     // PDashboard(),
                     //PSplashScreen(),
+               //PProfileDashBoard()),
+
                     PSplashScreen()),
           );
         });

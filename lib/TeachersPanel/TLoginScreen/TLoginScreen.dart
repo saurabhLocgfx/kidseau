@@ -8,21 +8,40 @@ import 'package:kidseau/Google_SignIn/google_sign_in.dart';
 import 'package:kidseau/Theme.dart';
 import 'package:kidseau/Widgets/buttons.dart';
 import 'package:kidseau/api/Teacherpanelapi/teacher_login_apis/teacher_login_api.dart';
+import 'package:kidseau/api/google_sign_in/google_sign_in_api.dart';
+import 'package:kidseau/api/models/google_sign_in_model/google_sign_in_model.dart';
+import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
 import '../../Widgets/textfields.dart';
 import '../../shard_prefs/shared_prefs.dart';
+import '../TDashboard.dart';
+import '../THomeScreen/THomeScreen.dart';
+import '../TSignupScreen/TSignupCode.dart';
 import '../TSignupScreen/TWaitingScreen.dart';
 import 'TLoginOtpVerification.dart';
 
-class TLoginScreen extends StatelessWidget {
+class TLoginScreen extends StatefulWidget {
   TLoginScreen({
     Key? key,
   }) : super(key: key);
 
+  @override
+  State<TLoginScreen> createState() => _TLoginScreenState();
+}
+
+class _TLoginScreenState extends State<TLoginScreen> {
   final TextEditingController controller = TextEditingController();
+
   final _formKey = GlobalKey<FormState>();
+
   bool isEmail = false;
+
   String mobileText = ' ';
+
+  GoogleSignInModal? response;
+
+  bool _isLoading = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -189,13 +208,135 @@ class TLoginScreen extends StatelessWidget {
                           ],
                         ),
                         SizedBox(height: 40.h),
-                        MainButton(
-                            onTap: () {
-                              final auth = GoogleSignInClass().login();
-                            },
-                            title: 'Google',
-                            textStyleColor: Colors.white,
-                            backgroundColor: ThemeColor.primarycolor)
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            GestureDetector(
+                              onTap: () async {
+                                final credential =
+                                    await SignInWithApple.getAppleIDCredential(
+                                  scopes: [
+                                    AppleIDAuthorizationScopes.email,
+                                    AppleIDAuthorizationScopes.fullName,
+                                  ],
+                                );
+                                print(credential);
+                                print(credential.authorizationCode);
+                                print(credential.identityToken);
+                              },
+                              // child: Container(
+                              //   margin: EdgeInsets.all(16),
+                              //   padding: EdgeInsets.all(12),
+                              //   decoration: BoxDecoration(
+                              //
+                              //     color: Colors.white,
+                              //     borderRadius: BorderRadius.circular(12)
+                              //   ),
+                                child: Image.asset('assets/images/apple logo.png',fit: BoxFit.cover,height: 40,
+                                ),
+                              //),
+                            ),
+                            SizedBox(width: 20,),
+                            GestureDetector(
+                              onTap: () async{
+                                final auth = await GoogleSignInClass().login();
+
+                                googleSignInApi(id_token: auth.idToken.toString()).then((value) {
+                                  if (value == false) {
+                                    Fluttertoast.showToast(
+                                        msg: "Sign in failed! Please try again.");
+                                    setState(() {
+                                      _isLoading = false;
+                                    });
+                                  }
+                                  else if (value['status'] == 0) {
+                                    setState(() {
+                                      _isLoading = false;
+                                    });
+                                    Fluttertoast.showToast(msg: "Sign in failed! Please try again.");
+                                  }
+
+
+                                  else {
+                                    UserPrefs.setCookies(value['key']);
+                                    //UserPrefs.setOTP(value['OTP']);
+
+                                    if (value['status'] == 1) {
+                                      Navigator.of(context).push(
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  TSignupCode(isEmail: true,
+                                                    mobileText: '',
+                                                    /*isEmail:
+                                                    widget
+                                                        .isEmail,
+                                                    mobileText: widget
+                                                        .mobileText*/)));
+                                    }
+                                    else {
+                                      //if(value['status'] == 2){
+
+                                      // UserPrefs.setCookies(value['key']);
+                                      // UserPrefs.setOTP(value['OTP']);
+
+                                      Navigator.of(context).push(
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  TDashboard()));
+                                      // }
+                                      // else{}
+
+                                    }
+                                  }
+
+
+                                });
+
+
+                                },
+                              /*child: Container(
+                                margin: EdgeInsets.all(16),
+                                padding: EdgeInsets.all(12),
+                                clipBehavior: Clip.hardEdge,
+                                decoration: BoxDecoration(
+
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(12)
+                                ),*/
+                                child: CircleAvatar(
+                                  backgroundColor: Color(0xfff7f6fa),
+                                  child: Image.asset('assets/images/glogo.png',fit: BoxFit.cover,height: 40,
+                                  ),
+                                ),
+                              //),
+                            ),
+
+                            SizedBox(width: 20,),
+                            GestureDetector(
+                              onTap: (){},
+                              /*child: Container(
+                                margin: EdgeInsets.all(16),
+                                padding: EdgeInsets.all(12),
+                                clipBehavior: Clip.hardEdge,
+                                decoration: BoxDecoration(
+
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(12)
+                                ),*/
+                              child: CircleAvatar(
+                                backgroundColor: Color(0xfff7f6fa),
+                                child: Image.asset('assets/images/facebookicon.png',fit: BoxFit.cover,height: 40,
+                                ),
+                              ),
+                              //),
+                            ),
+
+
+
+                          ],
+                        )
+
                       ],
                     ),
                   ),

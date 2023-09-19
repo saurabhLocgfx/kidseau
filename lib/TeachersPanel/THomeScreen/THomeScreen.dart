@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:developer';
 import 'dart:ui';
-
+import 'package:badges/badges.dart' as badges;
 import 'package:badges/badges.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
@@ -333,7 +333,7 @@ class _THomeScreenState extends State<THomeScreen> {
                         builder: (context) => PNotificationScreen()),
                   );
                 },
-                child: Badge(
+                child: badges.Badge(
                   position: BadgePosition.topEnd(top: 12, end: 12),
                   // badgeContent: Text(""),
                   showBadge: _isNewNot,

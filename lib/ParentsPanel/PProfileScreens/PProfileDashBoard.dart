@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kidseau/ParentsPanel/POnboardingScreens/PStartScreen.dart';
 import 'package:kidseau/ParentsPanel/PProfileScreens/PParentProfile.dart';
+import 'package:kidseau/ParentsPanel/PProfileScreens/PSettings/PDelete..dart';
 import 'package:kidseau/ParentsPanel/PProfileScreens/PSettings/PSettings.dart';
 import 'package:kidseau/ParentsPanel/PProfileScreens/PSyllabus.dart';
 import 'package:kidseau/ParentsPanel/PProfileScreens/p_parent_nursery_widget.dart';
@@ -357,6 +358,44 @@ class Pprofilepopup extends StatelessWidget {
                     SizedBox(width: 15),
                     Text(
                       "Logout".tr(),
+                      style: FontConstant.k18w5008471Text,
+                    )
+                  ],
+                ),
+              ),
+            ),
+            PopupMenuItem(
+              enabled: false,
+              child: GestureDetector(
+                onTap: () {
+                  showModalBottomSheet(
+
+                   useSafeArea: true,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.only(topRight: Radius.circular(24),
+                        topLeft: Radius.circular(24))
+                      ),
+
+
+                      context: context,
+
+                      //backgroundColor: Colors.transparent,
+                      elevation: 0,
+                      isDismissible: false,
+                      isScrollControlled: true,
+                      builder: (context){
+                    return DeleteModalSheet();
+                      });
+                },
+                child: Row(
+                  children: [
+                    Image.asset(
+                      "assets/images/trash.png",
+                      height: 24,
+                    ),
+                    SizedBox(width: 15),
+                    Text(
+                      "Delete Account".tr(),
                       style: FontConstant.k18w5008471Text,
                     )
                   ],
