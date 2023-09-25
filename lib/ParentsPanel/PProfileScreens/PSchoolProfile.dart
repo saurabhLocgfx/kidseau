@@ -164,49 +164,53 @@ class _PSchoolProfileState extends State<PSchoolProfile> {
                   children: [
                     Padding(
                       padding: const EdgeInsets.only(top: 40),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Container(
-                            height: 128,
-                            width: 96,
-                            clipBehavior: Clip.hardEdge,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(12)),
-                            child: Image.network(
-                              model.schoolImage.toString(),
-                              fit: BoxFit.fill,
-                              errorBuilder: (q, w, e) => Image.asset(
-                                  "assets/images/profileperson.png"),
-                            ),
-                          ),
-                          SizedBox(width: 16),
-                          Align(
-                            alignment: Alignment.center,
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  model.schoolName.toString(),
-                                  style: FontConstant.k24w500brownText,
+                      child: Expanded(
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Expanded(
+                              child: Container(
+                                height: 128,
+                                width: 96,
+                                clipBehavior: Clip.hardEdge,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(12)),
+                                child: Image.network(
+                                  model.schoolImage.toString(),
+                                  fit: BoxFit.fill,
+                                  errorBuilder: (q, w, e) => Image.asset(
+                                      "assets/images/profileperson.png"),
                                 ),
-                                Row(
-                                  children: [
-                                    Image.asset(
-                                      "assets/images/clockicon.png",
-                                      height: 24,
-                                    ),
-                                    SizedBox(width: 10),
-                                    Text(
-                                        '${DateFormat.jm().format(DateFormat("hh:mm:ss").parse(model.schoolTime!.split('To').first.toString()))} ${"to".tr()} ${DateFormat.jm().format(DateFormat("hh:mm:ss").parse(model.schoolTime!.split('To').last.toString()))}',
-                                        style: FontConstant.k16w5008471Text),
-                                  ],
-                                ),
-                              ],
+                              ),
                             ),
-                          ),
-                        ],
+                            SizedBox(width: 16),
+                            Align(
+                              alignment: Alignment.center,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    model.schoolName.toString(),
+                                    style: FontConstant.k24w500brownText,
+                                  ),
+                                  Row(
+                                    children: [
+                                      Image.asset(
+                                        "assets/images/clockicon.png",
+                                        height: 24,
+                                      ),
+                                      SizedBox(width: 10),
+                                      Text(
+                                          '${DateFormat.jm().format(DateFormat("hh:mm:ss").parse(model.schoolTime!.split('To').first.toString()))} ${"to".tr()} ${DateFormat.jm().format(DateFormat("hh:mm:ss").parse(model.schoolTime!.split('To').last.toString()))}',
+                                          style: FontConstant.k16w5008471Text),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                     SizedBox(height: 15),

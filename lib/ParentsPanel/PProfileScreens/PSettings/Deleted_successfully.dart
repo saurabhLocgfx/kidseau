@@ -3,6 +3,7 @@ import 'package:kidseau/Constants/text_style.dart';
 import 'package:kidseau/ParentsPanel/PLoginScreen/PLoginScreen.dart';
 import 'package:kidseau/Widgets/buttons.dart';
 
+import '../../../TeachersPanel/TLoginScreen/TLoginScreen.dart';
 import '../../../Theme.dart';
 
 class SuccessfullyDeletedScreen extends StatelessWidget {
@@ -31,7 +32,7 @@ class SuccessfullyDeletedScreen extends StatelessWidget {
               Text('We’re looking forward to see you again',style: k16_500_847171F,),
               SizedBox(height: 24,),
               MainButton(onTap: (){
-               Navigator.of(context).push(MaterialPageRoute(builder: (context) => PLoginScreen()));
+               Navigator.of(context).push(MaterialPageRoute(builder: (context) => TLoginScreen()));
               },
                   title: 'Take me to Login',
                   textStyleColor: Colors.white,

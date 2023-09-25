@@ -124,6 +124,7 @@ class TProfilepopup extends StatelessWidget {
             PopupMenuItem(
               enabled: false,
               child: GestureDetector(
+                behavior: HitTestBehavior.translucent,
                 onTap: () {
                   Navigator.pop(context);
                   showModalBottomSheet(

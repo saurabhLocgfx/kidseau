@@ -58,12 +58,17 @@ Future<dynamic> googleSignInApiParent({
   request.headers.addAll(headers);
 
   http.StreamedResponse response = await request.send();
+  var resBody = jsonDecode(await response.stream.bytesToString());
 
   if (response.statusCode == 200) {
-    print(await response.stream.bytesToString());
+    print(resBody);
+    return resBody;
   }
   else {
     print(response.reasonPhrase);
+    print(response.statusCode);
+    print(resBody);
+    return resBody;
   }
 
 }

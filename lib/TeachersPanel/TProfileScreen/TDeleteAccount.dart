@@ -66,8 +66,6 @@ class TDeleteModalSheet extends StatelessWidget {
                       borderRadius: BorderRadius.circular(8)
                   ),
                   padding: EdgeInsets.symmetric(vertical: 12),
-
-
                   child: Text('No',style: k18_500_166B8E,textAlign: TextAlign.center),
                   height: 55,
                   width: 160,
@@ -81,15 +79,21 @@ class TDeleteModalSheet extends StatelessWidget {
                       showDialog(
 
                           context: context,
-                          builder: (context) => AlertDialog(
+                          builder: (context) => WillPopScope(
+                            onWillPop: () async {
+                              return false;
+                            }
+                            ,
+                            child: AlertDialog(
 
-                            backgroundColor: Colors.transparent,
+                              backgroundColor: Colors.transparent,
 
-                            elevation: 0,
-                            contentPadding: EdgeInsets.all(12),
-                            insetPadding: EdgeInsets.all(16),
+                              elevation: 0,
+                              contentPadding: EdgeInsets.all(12),
+                              insetPadding: EdgeInsets.all(16),
 
-                            content: SuccessfullyDeletedScreen(),
+                              content: SuccessfullyDeletedScreen(),
+                            ),
                           )
 
 

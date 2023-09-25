@@ -302,6 +302,8 @@ class _ParentInfoState extends State<ParentInfo> {
                     child: TextFormField(
                       focusNode: fEmail,
                       keyboardType: TextInputType.emailAddress,
+                     // enabled:
+
                       enabled:
                           !_isMother && enteredVal.contains('@') ? false : true,
                       validator: (fatherEmail) {
@@ -439,6 +441,7 @@ class _ParentInfoState extends State<ParentInfo> {
                                     setState(() {
                                       _btnLoading = false;
                                     });
+                                    print(_pickedImage);
                                   } else {
                                     //navigate to
                                     //UserPrefs.setCookies(value['key']);

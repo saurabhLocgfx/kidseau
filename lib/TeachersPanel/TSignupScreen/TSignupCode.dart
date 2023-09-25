@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:kidseau/TeachersPanel/TSignupScreen/TPersonalDetails.dart';
+import 'package:kidseau/TeachersPanel/TSignupScreen/TWaitingScreen.dart';
 import 'package:kidseau/Theme.dart';
 import 'package:kidseau/Widgets/buttons.dart';
 import 'package:kidseau/api/Teacherpanelapi/teacher_login_apis/teacher_sch_code.dart';
@@ -151,7 +152,14 @@ class _TSignupCodeState extends State<TSignupCode> {
                                       if (value['status'] == 0) {
                                         Fluttertoast.showToast(
                                             msg: value['msg']);
-                                      } else {
+                                      }
+                                      else if(value['status'] == 2){
+                                        Navigator.of(context).push(
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    TWaitingScreen()
+                                                    ));
+                                      }else {
                                         // UserPrefs.setCookies(value['key']);
                                         print(widget.mobileText);
                                         Navigator.of(context).push(

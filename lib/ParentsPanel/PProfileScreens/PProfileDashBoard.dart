@@ -367,6 +367,7 @@ class Pprofilepopup extends StatelessWidget {
             PopupMenuItem(
               enabled: false,
               child: GestureDetector(
+                behavior: HitTestBehavior.translucent,
                 onTap: () {
                   showModalBottomSheet(
 

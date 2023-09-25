@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kidseau/Constants/text_style.dart';
 import 'package:kidseau/ParentsPanel/PProfileScreens/PSettings/Deleted_successfully.dart';
+import 'package:kidseau/TeachersPanel/TProfileScreen/Parent_deleted_successfully.dart';
 import 'package:kidseau/api/delete_account_api/delete_api.dart';
 import 'package:kidseau/api/message_apis/delete_message_api.dart';
 
@@ -90,15 +91,20 @@ if(value['status'] == 1){
   showDialog(
 
       context: context,
-      builder: (context) => AlertDialog(
+      builder: (context) => WillPopScope(
+        onWillPop: () async {
+          return false;
+        },
+        child: AlertDialog(
 
-        backgroundColor: Colors.transparent,
+          backgroundColor: Colors.transparent,
 
-        elevation: 0,
-        contentPadding: EdgeInsets.all(12),
-        insetPadding: EdgeInsets.all(16),
+          elevation: 0,
+          contentPadding: EdgeInsets.all(12),
+          insetPadding: EdgeInsets.all(16),
 
-        content: SuccessfullyDeletedScreen(),
+          content: ParentSuccessfullyDeletedScreen(),
+        ),
       )
 
 

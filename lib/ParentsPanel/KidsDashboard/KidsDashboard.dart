@@ -14,7 +14,9 @@ import 'package:kidseau/api/parent_panel_apis/parent_kid_details_api/parent_kid_
 
 class PKidsDashboard extends StatefulWidget {
   final String kidId;
-  const PKidsDashboard({Key? key, required this.kidId}) : super(key: key);
+  const PKidsDashboard({Key? key,
+    required this.kidId
+  }) : super(key: key);
 
   @override
   State<PKidsDashboard> createState() => _PKidsDashboardState();
@@ -50,7 +52,9 @@ class _PKidsDashboardState extends State<PKidsDashboard> {
   bool _isLoading = false;
   _getData() {
     _isLoading = true;
-    final resp = KidOverviewApi().get(kidId: widget.kidId);
+    final resp = KidOverviewApi().get(
+        kidId: widget.kidId
+    );
     resp.then((value) {
       if (value['Status'] == 1) {
         setState(() {

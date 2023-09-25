@@ -2,6 +2,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class UserPrefs {
   static const String cookies = "cookies";
+  static const String kidsStatus = 'kids_status';
   static const String showReminder = 'show_reminder';
   static const String selectedDate = 'selected_date';
   static const String noti1 = 'post';
@@ -161,5 +162,13 @@ class UserPrefs {
 
   static String? getFCM() {
     return prefs?.getString(FirebaseToken);
+  }
+
+  static Future setKidsStatus(String value) async {
+    return await prefs?.setString(kidsStatus, value);
+  }
+
+  static String? getKidsStatus() {
+    return prefs?.getString(kidsStatus);
   }
 }

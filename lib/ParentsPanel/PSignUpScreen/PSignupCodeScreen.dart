@@ -16,10 +16,16 @@ import 'package:kidseau/api/parent_panel_apis/parent_voucher_video_api/parent_vo
 import 'package:kidseau/api/parent_signup_apis/voucher_code_api.dart';
 import 'package:video_player/video_player.dart';
 
+import '../PDashBoard.dart';
 import '../PProfileScreens/parent_add_new_kid_screens/add_new_kid_details.dart';
 
 class PSignupCode extends StatefulWidget {
   final bool newKid;
+
+
+
+
+
   PSignupCode({Key? key, required this.newKid}) : super(key: key);
 
   @override
@@ -121,25 +127,31 @@ class _PSignupCodeState extends State<PSignupCode> {
                           resp.then((value) {
                             print(value);
                             if (value['status'] == 0) {
+
                               Fluttertoast.showToast(msg: value['msg']);
                               Navigator.pop(context);
                             } else {
                               if (value['status'] == 1) {
+
                                 Navigator.of(context).push(MaterialPageRoute(
                                     builder: (context) => ParentAddNewKidDetail(
                                           newKid: widget.newKid,
-                                        )));
+                                        ),
+                                ),
+                                );
                               } else if (value['status'] == 2) {
-                                Navigator.pop(context);
+
+                                //Navigator.pop(context);
+                               // Navigator.push(context, MaterialPageRoute(builder: (context)=> PDashboard()));
                               }
                               //navigate to
                               //UserPrefs.setCookies(value['key']);
                               /**/
-                              /* Navigator.push(
+                               Navigator.push(
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) => PDashboard()),
-                                    );*/
+                                    );
                               /*Fluttertoast.showToast(
                                         msg: 'Your OTP is ${value['voucher']}');*/
                             }

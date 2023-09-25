@@ -67,6 +67,7 @@ class _TPersonalDetailsState extends State<TPersonalDetails> {
       print(langList);
       print(_selectedText);
       // langList.length;
+      print(resp);
     });
   }
 
