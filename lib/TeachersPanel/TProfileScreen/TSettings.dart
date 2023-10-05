@@ -12,6 +12,7 @@ import '../../ParentsPanel/PMessageScreen/PChats.dart';
 import '../../ParentsPanel/PMessageScreen/PopenChats.dart';
 import '../../ParentsPanel/PProfileScreens/PSettings/PNotificationSettings.dart';
 import '../../Widgets/feedback_widget.dart';
+import 'TDeleteAccount.dart';
 
 class TSettings extends StatefulWidget {
   TSettings({Key? key}) : super(key: key);
@@ -237,6 +238,50 @@ class _TSettingsState extends State<TSettings> {
                     ),
                   ),
                 ),
+                SizedBox(height: 20),
+                GestureDetector(
+                    behavior: HitTestBehavior.translucent,
+                  onTap: () {
+
+                    Navigator.pop(context);
+                    showModalBottomSheet(
+
+                        useSafeArea: true,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.only(topRight: Radius.circular(24),
+                                topLeft: Radius.circular(24))
+                        ),
+
+
+                        context: context,
+
+                        //backgroundColor: Colors.transparent,
+                        elevation: 0,
+                        isDismissible: false,
+                        isScrollControlled: true,
+                        builder: (context){
+                          return TDeleteModalSheet();
+                        });
+
+                  },
+                  child: Container(
+                    color: Colors.transparent,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "Delete Account".tr(),
+                          style: FontConstant.k18w500F970Text,
+                        ),
+                        Image.asset(
+                          "assets/images/rightarrow.png",
+                          height: 20,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+
               ],
             ),
           ),

@@ -71,11 +71,14 @@ class _THomeScreenState extends State<THomeScreen> {
   }
 
   bool _grpLoading = false;
+
   getData() {
     loadingData = true;
     _grpLoading = true;
     final rsp = THomeApi().get();
     rsp.then((value) {
+      print(THomeModel());
+      print(_name.attendance);
       //log(value.toString());
       if (value['status'] == 1) {
         try {
@@ -85,6 +88,7 @@ class _THomeScreenState extends State<THomeScreen> {
             loadingData = false;
             _grpLoading = false;
           });
+
         } catch (e) {
           setState(() {
             loadingData = false;
@@ -172,7 +176,7 @@ class _THomeScreenState extends State<THomeScreen> {
   }
 
   bool _isNewNot = false;
-  bool showReminder = false;
+  bool  showReminder = false;
   // Timer? _timer;
 
   /*setReminderFalse() {
@@ -352,7 +356,7 @@ class _THomeScreenState extends State<THomeScreen> {
       ),
       body: loadingData
           ? Center(child: CircularProgressIndicator())
-          : _name.groupInCard!.isEmpty
+          : ( _name.schdule == null || _name.attendance == null || _name.groupInCard == null )
               ? Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -374,7 +378,8 @@ class _THomeScreenState extends State<THomeScreen> {
                     ),
                   ],
                 )
-              : SingleChildScrollView(
+              :
+      SingleChildScrollView(
                   child: SizedBox(
                     width: 1.sw,
                     child: Column(

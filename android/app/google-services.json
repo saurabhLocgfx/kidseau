@@ -7,14 +7,22 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:38434211867:android:5370e1b88cf0ac20c850be",
+        "mobilesdk_app_id": "1:38434211867:android:427108ac1d2b5ca2c850be",
         "android_client_info": {
           "package_name": "com.locgfx.kidseau"
         }
       },
       "oauth_client": [
         {
-          "client_id": "38434211867-881ln4o402bbf2jbjgte6c2in1bcah3f.apps.googleusercontent.com",
+          "client_id": "38434211867-127vnn6v7o3ro4cjle6dbepsh9od5nce.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.locgfx.kidseau",
+            "certificate_hash": "8cb4a5bb6c6e94467deccd2df03c3d6f51992c93"
+          }
+        },
+        {
+          "client_id": "38434211867-kcv81hptrv78f1dnaj6c9egdiu2s0v70.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
@@ -29,6 +37,13 @@
             {
               "client_id": "38434211867-881ln4o402bbf2jbjgte6c2in1bcah3f.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "38434211867-l6mfmbj1au63vc0hr58bjbrj4svrn2in.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.locgfx.kidseau"
+              }
             }
           ]
         }

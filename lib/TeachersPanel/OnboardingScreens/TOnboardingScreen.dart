@@ -87,34 +87,36 @@ class _TOnboardingScreenState extends State<TOnboardingScreen> {
                           });
                         },
                         itemBuilder: (_, i) {
-                          return Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 16.0),
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                SizedBox(height: 30),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    SizedBox(
-                                      height: 280.h,
-                                      width: 340.w,
-                                      child: Image.asset(
-                                        contents[i].image,
+                          return SingleChildScrollView(
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 16.0),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  SizedBox(height: 30),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      SizedBox(
+                                        height: 280.h,
+                                        width: 340.w,
+                                        child: Image.asset(
+                                          contents[i].image,
+                                        ),
                                       ),
-                                    ),
-                                  ],
-                                ),
-                                //Spacer(),
-                                SizedBox(height: 30),
-                                Text(contents[i].title.tr(),
-                                    style: FontConstant2.k26w500331FtextLine),
-                                Text(contents[i].discription.tr(),
-                                    maxLines: 2,
-                                    style: FontConstant.k16w4008471Text),
-                              ],
+                                    ],
+                                  ),
+                                  //Spacer(),
+                                  SizedBox(height: 30),
+                                  Text(contents[i].title.tr(),
+                                      style: FontConstant2.k26w500331FtextLine),
+                                  Text(contents[i].discription.tr(),
+                                      maxLines: 2,
+                                      style: FontConstant.k16w4008471Text),
+                                ],
+                              ),
                             ),
                           );
                         },

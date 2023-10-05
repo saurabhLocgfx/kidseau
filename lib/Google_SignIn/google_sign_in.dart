@@ -13,8 +13,8 @@ class GoogleSignInClass {
     } else {
       auth = await account.authentication;
     }
-    log(auth.idToken.toString());
-    log(auth.idToken!.length.toString());
+    // log(auth.idToken.toString());
+    // log(auth.idToken!.length.toString());
     return auth;
   }
 }

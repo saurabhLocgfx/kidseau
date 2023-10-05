@@ -1,10 +1,13 @@
 import 'dart:developer';
+import 'dart:io' show Platform;
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:kidseau/Apple_Sign_In/apple_sign_in_api.dart';
+import 'package:kidseau/Facebook_Sign_In/facebook_sign_in.dart';
 import 'package:kidseau/Google_SignIn/google_sign_in.dart';
 import 'package:kidseau/ParentsPanel/PDashBoard.dart';
 import 'package:kidseau/Theme.dart';
@@ -219,6 +222,7 @@ class _TLoginScreenState extends State<TLoginScreen> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
+                              Platform.isIOS ?
                               GestureDetector(
                                 onTap: () async {
 
@@ -229,9 +233,7 @@ class _TLoginScreenState extends State<TLoginScreen> {
                                       AppleIDAuthorizationScopes.fullName,
                                     ],
                                   );
-                                  print(credential);
                                   print(credential.authorizationCode);
-                                  print(credential.identityToken);
 
                                   appleSignInApi(id_token: credential.identityToken.toString(), auth_code: credential.authorizationCode.toString(),
                                       ParentTeacher: 'teacher').then((value) {
@@ -300,13 +302,16 @@ class _TLoginScreenState extends State<TLoginScreen> {
                                   child: Image.asset('assets/images/apple logo.png',fit: BoxFit.cover,height: 40,
                                   ),
                                 //),
-                              ),
+                              ) : SizedBox(),
                               SizedBox(width: 20,),
                               GestureDetector(
                                 onTap: () async{
                                   final auth = await GoogleSignInClass().login();
+                                  print('below id token');
+                                  print(auth.idToken);
 
-                                  googleSignInApi(id_token: auth.idToken.toString()).then((value) {
+
+                                  googleSignInApi(id_token: auth.idToken!).then((value) {
                                     if (value == false) {
                                       Fluttertoast.showToast(
                                           msg: "Sign in failed! Please try again.");
@@ -379,24 +384,102 @@ class _TLoginScreenState extends State<TLoginScreen> {
                               ),
 
                               SizedBox(width: 20,),
-                              GestureDetector(
-                                onTap: (){},
-                                /*child: Container(
-                                  margin: EdgeInsets.all(16),
-                                  padding: EdgeInsets.all(12),
-                                  clipBehavior: Clip.hardEdge,
-                                  decoration: BoxDecoration(
-
-                                      color: Colors.white,
-                                      borderRadius: BorderRadius.circular(12)
-                                  ),*/
-                                child: CircleAvatar(
-                                  backgroundColor: Color(0xfff7f6fa),
-                                  child: Image.asset('assets/images/facebookicon.png',fit: BoxFit.cover,height: 40,
-                                  ),
-                                ),
-                                //),
-                              ),
+                              // GestureDetector(
+                              //   onTap: () async {
+                              // _isLoading = true;
+                              // FacebookAuth.instance.login(
+                              // permissions: [
+                              // "public_profile",
+                              // "email"
+                              // ]).then((v) {
+                              // print('${v.accessToken!.token}');
+                              // print(v.accessToken!.token.length);
+                              // print(v.accessToken!.token);
+                              // // print(v.accessToken!.token.length);
+                              // // print(v.accessToken!.token);
+                              // /*var d = FacebookAuthProvider.credential(v.accessToken!.token);
+                              //     print('_________________________________${d.idToken}');*/
+                              // FacebookAuth.instance
+                              //     .getUserData()
+                              //     .then((val) {
+                              // print(val);
+                              //
+                              //
+                              // facebookSignInApi(idToken: v.accessToken!.token.toString(),
+                              // parentTeacher: 'teacher', device: 'facebook').then((value) {
+                              //
+                              // if (value == false) {
+                              // Fluttertoast.showToast(
+                              // msg: "Sign in failed! Please try again.");
+                              // setState(() {
+                              // _isLoading = false;
+                              // });
+                              // }
+                              // else if (value['status'] == 0) {
+                              // setState(() {
+                              // _isLoading = false;
+                              // });
+                              // Fluttertoast.showToast(msg: "Wait For Director's Approval");
+                              // }
+                              //
+                              //
+                              // else {
+                              // UserPrefs.setCookies(value['key']);
+                              // //UserPrefs.setOTP(value['OTP']);
+                              //
+                              // if (value['status'] == 1) {
+                              // Navigator.of(context).push(
+                              // MaterialPageRoute(
+                              // builder: (context) =>
+                              // TSignupCode(isEmail: false,
+                              // mobileText: '',
+                              // /*isEmail:
+                              //                         widget
+                              //                             .isEmail,
+                              //                         mobileText: widget
+                              //                             .mobileText*/
+                              //
+                              // )));
+                              // }
+                              // else {
+                              // //if(value['status'] == 2){
+                              //
+                              // // UserPrefs.setCookies(value['key']);
+                              // // UserPrefs.setOTP(value['OTP']);
+                              //
+                              // Navigator.of(context).push(
+                              // MaterialPageRoute(
+                              // builder: (context) =>
+                              // TDashboard()));
+                              // // }
+                              // // else{}
+                              //
+                              // }
+                              // }
+                              //
+                              // });
+                              //
+                              //
+                              // });
+                              // });
+                              // },
+                              //
+                              //   /*child: Container(
+                              //     margin: EdgeInsets.all(16),
+                              //     padding: EdgeInsets.all(12),
+                              //     clipBehavior: Clip.hardEdge,
+                              //     decoration: BoxDecoration(
+                              //
+                              //         color: Colors.white,
+                              //         borderRadius: BorderRadius.circular(12)
+                              //     ),*/
+                              //   child: CircleAvatar(
+                              //     backgroundColor: Color(0xfff7f6fa),
+                              //     child: Image.asset('assets/images/facebookicon.png',fit: BoxFit.cover,height: 40,
+                              //     ),
+                              //   ),
+                              //   //),
+                              // ),
 
 
 

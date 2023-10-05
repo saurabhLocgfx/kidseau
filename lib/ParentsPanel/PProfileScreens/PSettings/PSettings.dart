@@ -11,6 +11,7 @@ import 'package:kidseau/ParentsPanel/PProfileScreens/PSettings/PVoucherCode.dart
 import 'package:kidseau/Theme.dart';
 
 import '../../../Widgets/feedback_widget.dart';
+import 'PDelete..dart';
 import 'PTermsAndConditions.dart';
 
 class PSettings extends StatefulWidget {
@@ -266,6 +267,48 @@ class _PSettingsState extends State<PSettings> {
                   ),
                 ),
               ),
+              SizedBox(height: 20),
+              GestureDetector(
+                behavior: HitTestBehavior.translucent,
+                onTap: () {
+
+                  showModalBottomSheet(
+
+                      useSafeArea: true,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.only(topRight: Radius.circular(24),
+                              topLeft: Radius.circular(24))
+                      ),
+
+
+                      context: context,
+
+                      //backgroundColor: Colors.transparent,
+                      elevation: 0,
+                      isDismissible: false,
+                      isScrollControlled: true,
+                      builder: (context){
+                        return DeleteModalSheet();
+                      });
+                },
+                child: Container(
+                  color: Colors.transparent,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "Delete Account".tr(),
+                        style: FontConstant.k18w500F970Text,
+                      ),
+                      Image.asset(
+                        "assets/images/rightarrow.png",
+                        height: 20,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+
             ],
           ),
         ));

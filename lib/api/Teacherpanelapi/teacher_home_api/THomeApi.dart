@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:http/http.dart' as http;
 import 'package:kidseau/Constants/string_const.dart';
@@ -31,7 +32,7 @@ class THomeApi {
 
     var v = jsonDecode(await response.stream.bytesToString());
     if (response.statusCode == 200) {
-      //log('response $v');
+      log('response $v');
       return v;
     } else {
       print(response.reasonPhrase);

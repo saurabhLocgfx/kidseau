@@ -347,14 +347,14 @@ class Pprofilepopup extends StatelessWidget {
                 },
                 child: Row(
                   children: [
-                    /*Image.asset(
-                      "assets/images/gearicon.png",
+                    Image.asset(
+                      "assets/images/newlogout.png",
                       height: 24,
-                    )*/
-                    Icon(
+                    ),
+                   /* Icon(
                       Icons.logout,
                       color: Color(0xff331F2D),
-                    ),
+                    ),*/
                     SizedBox(width: 15),
                     Text(
                       "Logout".tr(),
@@ -364,45 +364,7 @@ class Pprofilepopup extends StatelessWidget {
                 ),
               ),
             ),
-            PopupMenuItem(
-              enabled: false,
-              child: GestureDetector(
-                behavior: HitTestBehavior.translucent,
-                onTap: () {
-                  showModalBottomSheet(
 
-                   useSafeArea: true,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.only(topRight: Radius.circular(24),
-                        topLeft: Radius.circular(24))
-                      ),
-
-
-                      context: context,
-
-                      //backgroundColor: Colors.transparent,
-                      elevation: 0,
-                      isDismissible: false,
-                      isScrollControlled: true,
-                      builder: (context){
-                    return DeleteModalSheet();
-                      });
-                },
-                child: Row(
-                  children: [
-                    Image.asset(
-                      "assets/images/trash.png",
-                      height: 24,
-                    ),
-                    SizedBox(width: 15),
-                    Text(
-                      "Delete Account".tr(),
-                      style: FontConstant.k18w5008471Text,
-                    )
-                  ],
-                ),
-              ),
-            ),
           ];
         });
   }
