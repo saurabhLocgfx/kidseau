@@ -15,6 +15,7 @@ class GoogleSignInClass {
     }
     // log(auth.idToken.toString());
     // log(auth.idToken!.length.toString());
+
     return auth;
   }
 }

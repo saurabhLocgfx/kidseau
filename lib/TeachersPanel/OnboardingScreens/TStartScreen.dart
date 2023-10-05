@@ -36,7 +36,7 @@ class TStartScreen extends StatelessWidget {
                 width: 414,
                 decoration: BoxDecoration(
                   color: Colors.white,
-                  borderRadius: new BorderRadius.only(
+                  borderRadius: BorderRadius.only(
                     topLeft: const Radius.circular(24.0),
                     topRight: const Radius.circular(24.0),
                   ),

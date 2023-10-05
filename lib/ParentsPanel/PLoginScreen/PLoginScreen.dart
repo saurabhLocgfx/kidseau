@@ -308,10 +308,85 @@ class _PLoginScreenState extends State<PLoginScreen> {
                               SizedBox(
                                 width: 20,
                               ),
+
+
+                              Platform.isIOS ?
                               GestureDetector(
                                 onTap: () async {
                                   final auth = await GoogleSignInClass().login();
-                                 googleSignInApiParent(id_token: auth.idToken.toString()).then((value) {
+
+
+                                  googleSignInApiAndroid(id_Token: auth.idToken!, device: 'google', ParentTeacher: 'parent').then((value){
+
+
+                                    if(value == false){
+                                      Fluttertoast.showToast(
+                                          msg: "Sign in failed! Please try again.");
+                                      setState(() {
+                                        _isLoading = false;
+                                      });
+                                    }
+
+                                    else if (value['status'] == 0) {
+                                      setState(() {
+                                        _isLoading = false;
+                                      });
+                                      Fluttertoast.showToast(msg: "Sign in failed! Please try again.");
+                                    }
+
+                                    else{
+
+                                      UserPrefs.setCookies(value['key']);
+                                      if(value['status'] == 1 ){
+                                        Navigator.push(context, MaterialPageRoute(builder: (context) =>
+                                            PSignupCode(newKid: true)));
+
+                                        //UserPrefs.getKidsStatus();
+
+                                      }
+
+                                      else{
+
+                                        UserPrefs.setIsTeacher(false);
+
+
+
+                                        //if(value['status'] == 2) {
+                                        Navigator.push(context, MaterialPageRoute(builder: (context)=> PDashboard()));
+                                        // }
+                                        // else{}
+
+                                      }
+                                    }
+                                  });
+                                },
+                                /*child: Container(
+                              margin: EdgeInsets.all(16),
+                              padding: EdgeInsets.all(12),
+                              clipBehavior: Clip.hardEdge,
+                              decoration: BoxDecoration(
+
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(12)
+                              ),*/
+                                child: CircleAvatar(
+                                  backgroundColor: Color(0xfff7f6fa),
+                                  child: Image.asset(
+                                    'assets/images/glogo.png',
+                                    fit: BoxFit.cover,
+                                    height: 40,
+                                  ),
+                                ),
+                                //),
+                              ) :
+
+                              GestureDetector(
+                                onTap: () async {
+                                  final auth = await GoogleSignInClass().login();
+
+
+                                  googleSignInApiAndroid(id_Token: auth.idToken!, device: 'android', ParentTeacher: 'parent').then((value){
+
 
                                    if(value == false){
                                      Fluttertoast.showToast(

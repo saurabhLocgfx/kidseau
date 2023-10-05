@@ -91,36 +91,38 @@ class _POnboardingScreenState extends State<POnboardingScreen> {
                           });
                         },
                         itemBuilder: (_, i) {
-                          return Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 16.0),
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                SizedBox(height: 30),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    SizedBox(
-                                      height: 300.h,
-                                      width: 350.w,
-                                      child: Image.asset(
-                                        Pcontents[i].image,
+                          return SingleChildScrollView(
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 16.0),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  SizedBox(height: 30),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      SizedBox(
+                                        height: 300.h,
+                                        width: 350.w,
+                                        child: Image.asset(
+                                          Pcontents[i].image,
+                                        ),
                                       ),
-                                    ),
-                                  ],
-                                ),
-                                Spacer(),
-                                Text(Pcontents[i].title.tr(),
-                                    style: FontConstant2.k26w500331FtextLine),
-                                SizedBox(
-                                  width: 1.sw,
-                                  child: Text(Pcontents[i].discription.tr(),
-                                      maxLines: 2,
-                                      style: FontConstant.k16w4008471Text),
-                                ),
-                              ],
+                                    ],
+                                  ),
+                                  Spacer(),
+                                  Text(Pcontents[i].title.tr(),
+                                      style: FontConstant2.k26w500331FtextLine),
+                                  SizedBox(
+                                    width: 1.sw,
+                                    child: Text(Pcontents[i].discription.tr(),
+                                        maxLines: 2,
+                                        style: FontConstant.k16w4008471Text),
+                                  ),
+                                ],
+                              ),
                             ),
                           );
                         },

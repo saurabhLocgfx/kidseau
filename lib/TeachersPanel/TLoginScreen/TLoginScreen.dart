@@ -304,14 +304,20 @@ class _TLoginScreenState extends State<TLoginScreen> {
                                 //),
                               ) : SizedBox(),
                               SizedBox(width: 20,),
+
+                              Platform.isIOS ?
                               GestureDetector(
                                 onTap: () async{
                                   final auth = await GoogleSignInClass().login();
                                   print('below id token');
-                                  print(auth.idToken);
+                                  // print(auth.idToken);
+                                  log(auth.idToken.toString());
+                                  log(auth.idToken!.length.toString());
 
 
-                                  googleSignInApi(id_token: auth.idToken!).then((value) {
+
+                                  googleSignInApiAndroid(id_Token: auth.idToken!, device: 'google', ParentTeacher: 'teacher').then((value)
+                                  {
                                     if (value == false) {
                                       Fluttertoast.showToast(
                                           msg: "Sign in failed! Please try again.");
@@ -362,7 +368,92 @@ class _TLoginScreenState extends State<TLoginScreen> {
                                     }
 
 
-                                  });
+                                  }
+                                  );
+
+
+                                },
+                                /*child: Container(
+                                  margin: EdgeInsets.all(16),
+                                  padding: EdgeInsets.all(12),
+                                  clipBehavior: Clip.hardEdge,
+                                  decoration: BoxDecoration(
+
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(12)
+                                  ),*/
+                                child: CircleAvatar(
+                                  backgroundColor: Color(0xfff7f6fa),
+                                  child: Image.asset('assets/images/glogo.png',fit: BoxFit.cover,height: 40,
+                                  ),
+                                ),
+                                //),
+                              ) :
+
+                              GestureDetector(
+                                onTap: () async{
+                                  final auth = await GoogleSignInClass().login();
+                                  print('below id token');
+                                 // print(auth.idToken);
+                                  log(auth.idToken.toString());
+                                  log(auth.idToken!.length.toString());
+
+
+
+                                  googleSignInApiAndroid(id_Token: auth.idToken!, device: 'android', ParentTeacher: 'teacher').then((value)
+                                   {
+                                    if (value == false) {
+                                      Fluttertoast.showToast(
+                                          msg: "Sign in failed! Please try again.");
+                                      setState(() {
+                                        _isLoading = false;
+                                      });
+                                    }
+                                    else if (value['status'] == 0) {
+                                      setState(() {
+                                        _isLoading = false;
+                                      });
+                                      Fluttertoast.showToast(msg: "Wait For Director's Approval");
+                                    }
+
+
+                                    else {
+                                      UserPrefs.setCookies(value['key']);
+                                      //UserPrefs.setOTP(value['OTP']);
+
+                                      if (value['status'] == 1) {
+                                        Navigator.of(context).push(
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    TSignupCode(isEmail: false,
+                                                      mobileText: '',
+                                                      /*isEmail:
+                                                      widget
+                                                          .isEmail,
+                                                      mobileText: widget
+                                                          .mobileText*/
+
+                                                    )));
+                                      }
+                                      else {
+                                        //if(value['status'] == 2){
+
+                                        // UserPrefs.setCookies(value['key']);
+                                        // UserPrefs.setOTP(value['OTP']);
+
+                                        Navigator.of(context).push(
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    TDashboard()));
+                                        // }
+                                        // else{}
+
+                                      }
+                                    }
+
+
+                                  }
+                                  );
 
 
                                   },
