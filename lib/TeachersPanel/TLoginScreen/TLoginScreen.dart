@@ -3,13 +3,10 @@ import 'dart:io' show Platform;
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:kidseau/Apple_Sign_In/apple_sign_in_api.dart';
-import 'package:kidseau/Facebook_Sign_In/facebook_sign_in.dart';
 import 'package:kidseau/Google_SignIn/google_sign_in.dart';
-import 'package:kidseau/ParentsPanel/PDashBoard.dart';
 import 'package:kidseau/Theme.dart';
 import 'package:kidseau/Widgets/buttons.dart';
 import 'package:kidseau/api/Teacherpanelapi/teacher_login_apis/teacher_login_api.dart';
@@ -18,10 +15,10 @@ import 'package:kidseau/api/google_sign_in/google_sign_in_api.dart';
 import 'package:kidseau/api/models/google_sign_in_model/google_sign_in_model.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
+import '../../ParentsPanel/POnboardingScreens/PStartScreen.dart';
 import '../../Widgets/textfields.dart';
 import '../../shard_prefs/shared_prefs.dart';
 import '../TDashboard.dart';
-import '../THomeScreen/THomeScreen.dart';
 import '../TSignupScreen/TSignupCode.dart';
 import '../TSignupScreen/TWaitingScreen.dart';
 import 'TLoginOtpVerification.dart';
@@ -106,9 +103,32 @@ class _TLoginScreenState extends State<TLoginScreen> {
                 child: Column(
                   children: [
                     Padding(
-                      padding: EdgeInsets.only(top: 180.h, left: 16, right: 16),
+                      padding: EdgeInsets.only(
+                          // top: 180.h,
+                          left: 16,
+                          right: 16),
                       child: Column(
                         children: [
+                          Align(
+                            alignment: Alignment.centerLeft,
+                            child: GestureDetector(
+                              behavior: HitTestBehavior.translucent,
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (_) => PStartScreen(),
+                                  ),
+                                );
+                              },
+                              child: Image.asset(
+                                "assets/images/arrow-left.png",
+                                height: 24,
+                                width: 24,
+                              ),
+                            ),
+                          ),
+                          SizedBox(height: 80),
                           Image.asset(
                             "assets/images/logo.png",
                             height: 172.h,
@@ -201,7 +221,8 @@ class _TLoginScreenState extends State<TLoginScreen> {
                                                     builder: (context) =>
                                                         TLoginOtpVerification(
                                                           isEmail: isEmail,
-                                                          mobileText: mobileText,
+                                                          mobileText:
+                                                              mobileText,
                                                         )));
                                             // Fluttertoast.showToast(
                                             //     msg:
@@ -222,259 +243,261 @@ class _TLoginScreenState extends State<TLoginScreen> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              Platform.isIOS ?
-                              GestureDetector(
-                                onTap: () async {
+                              Platform.isIOS
+                                  ? GestureDetector(
+                                      onTap: () async {
+                                        final credential = await SignInWithApple
+                                            .getAppleIDCredential(
+                                          scopes: [
+                                            AppleIDAuthorizationScopes.email,
+                                            AppleIDAuthorizationScopes.fullName,
+                                          ],
+                                        );
+                                        print(credential.authorizationCode);
 
-                                  final credential =
-                                      await SignInWithApple.getAppleIDCredential(
-                                    scopes: [
-                                      AppleIDAuthorizationScopes.email,
-                                      AppleIDAuthorizationScopes.fullName,
-                                    ],
-                                  );
-                                  print(credential.authorizationCode);
+                                        appleSignInApi(
+                                                id_token: credential
+                                                    .identityToken
+                                                    .toString(),
+                                                auth_code: credential
+                                                    .authorizationCode
+                                                    .toString(),
+                                                ParentTeacher: 'teacher')
+                                            .then((value) {
+                                          if (value == false) {
+                                            Fluttertoast.showToast(
+                                                msg:
+                                                    "Sign in failed! Please try again.");
+                                            setState(() {
+                                              _isLoading = false;
+                                            });
+                                          } else if (value['status'] == 0) {
+                                            setState(() {
+                                              _isLoading = false;
+                                            });
+                                            Fluttertoast.showToast(
+                                                msg:
+                                                    "Wait For Director's Approval" // "Sign in failed! Please try again."
+                                                );
+                                          } else {
+                                            UserPrefs.setCookies(value['key']);
+                                            //UserPrefs.setOTP(value['OTP']);
 
-                                  appleSignInApi(id_token: credential.identityToken.toString(), auth_code: credential.authorizationCode.toString(),
-                                      ParentTeacher: 'teacher').then((value) {
-                                    if (value == false) {
-                                      Fluttertoast.showToast(
-                                          msg: "Sign in failed! Please try again.");
-                                      setState(() {
-                                        _isLoading = false;
-                                      });
-                                    }
-                                    else if (value['status'] == 0) {
-                                      setState(() {
-                                        _isLoading = false;
-                                      });
-                                      Fluttertoast.showToast(msg: "Wait For Director's Approval"                                     // "Sign in failed! Please try again."
-                                      );
-                                    }
-
-
-                                    else {
-                                      UserPrefs.setCookies(value['key']);
-                                      //UserPrefs.setOTP(value['OTP']);
-
-                                      if (value['status'] == 1) {
-                                        Navigator.of(context).push(
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    TSignupCode(isEmail: false,
-                                                      mobileText: '',
-                                                      /*isEmail:
+                                            if (value['status'] == 1) {
+                                              Navigator.of(context).push(
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          TSignupCode(
+                                                            isEmail: false,
+                                                            mobileText: '',
+                                                            /*isEmail:
                                                       widget
                                                           .isEmail,
                                                       mobileText: widget
                                                           .mobileText*/
+                                                          )));
+                                            } else {
+                                              //if(value['status'] == 2){
 
-                                                    )));
-                                      }
-                                      else {
-                                        //if(value['status'] == 2){
+                                              // UserPrefs.setCookies(value['key']);
+                                              // UserPrefs.setOTP(value['OTP']);
 
-                                        // UserPrefs.setCookies(value['key']);
-                                        // UserPrefs.setOTP(value['OTP']);
+                                              Navigator.of(context).push(
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          TDashboard()));
+                                              // }
+                                              // else{}
+                                            }
+                                          }
+                                        });
+                                      },
 
-                                        Navigator.of(context).push(
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    TDashboard()));
-                                        // }
-                                        // else{}
-
-                                      }
-                                    }
-
-                                  });
-
-                                },
-
-                                // child: Container(
-                                //   margin: EdgeInsets.all(16),
-                                //   padding: EdgeInsets.all(12),
-                                //   decoration: BoxDecoration(
-                                //
-                                //     color: Colors.white,
-                                //     borderRadius: BorderRadius.circular(12)
-                                //   ),
-                                  child: Image.asset('assets/images/apple logo.png',fit: BoxFit.cover,height: 40,
-                                  ),
-                                //),
-                              ) : SizedBox(),
-                              SizedBox(width: 20,),
-
-                              Platform.isIOS ?
-                              GestureDetector(
-                                onTap: () async{
-                                  final auth = await GoogleSignInClass().login();
-                                  print('below id token');
-                                  // print(auth.idToken);
-                                  log(auth.idToken.toString());
-                                  log(auth.idToken!.length.toString());
-
-
-
-                                  googleSignInApiAndroid(id_Token: auth.idToken!, device: 'google', ParentTeacher: 'teacher').then((value)
-                                  {
-                                    if (value == false) {
-                                      Fluttertoast.showToast(
-                                          msg: "Sign in failed! Please try again.");
-                                      setState(() {
-                                        _isLoading = false;
-                                      });
-                                    }
-                                    else if (value['status'] == 0) {
-                                      setState(() {
-                                        _isLoading = false;
-                                      });
-                                      Fluttertoast.showToast(msg: "Wait For Director's Approval");
-                                    }
-
-
-                                    else {
-                                      UserPrefs.setCookies(value['key']);
-                                      //UserPrefs.setOTP(value['OTP']);
-
-                                      if (value['status'] == 1) {
-                                        Navigator.of(context).push(
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    TSignupCode(isEmail: false,
-                                                      mobileText: '',
-                                                      /*isEmail:
-                                                      widget
-                                                          .isEmail,
-                                                      mobileText: widget
-                                                          .mobileText*/
-
-                                                    )));
-                                      }
-                                      else {
-                                        //if(value['status'] == 2){
-
-                                        // UserPrefs.setCookies(value['key']);
-                                        // UserPrefs.setOTP(value['OTP']);
-
-                                        Navigator.of(context).push(
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    TDashboard()));
-                                        // }
-                                        // else{}
-
-                                      }
-                                    }
-
-
-                                  }
-                                  );
-
-
-                                },
-                                /*child: Container(
-                                  margin: EdgeInsets.all(16),
-                                  padding: EdgeInsets.all(12),
-                                  clipBehavior: Clip.hardEdge,
-                                  decoration: BoxDecoration(
-
-                                      color: Colors.white,
-                                      borderRadius: BorderRadius.circular(12)
-                                  ),*/
-                                child: CircleAvatar(
-                                  backgroundColor: Color(0xfff7f6fa),
-                                  child: Image.asset('assets/images/glogo.png',fit: BoxFit.cover,height: 40,
-                                  ),
-                                ),
-                                //),
-                              ) :
-
-                              GestureDetector(
-                                onTap: () async{
-                                  final auth = await GoogleSignInClass().login();
-                                  print('below id token');
-                                 // print(auth.idToken);
-                                  log(auth.idToken.toString());
-                                  log(auth.idToken!.length.toString());
-
-
-
-                                  googleSignInApiAndroid(id_Token: auth.idToken!, device: 'android', ParentTeacher: 'teacher').then((value)
-                                   {
-                                    if (value == false) {
-                                      Fluttertoast.showToast(
-                                          msg: "Sign in failed! Please try again.");
-                                      setState(() {
-                                        _isLoading = false;
-                                      });
-                                    }
-                                    else if (value['status'] == 0) {
-                                      setState(() {
-                                        _isLoading = false;
-                                      });
-                                      Fluttertoast.showToast(msg: "Wait For Director's Approval");
-                                    }
-
-
-                                    else {
-                                      UserPrefs.setCookies(value['key']);
-                                      //UserPrefs.setOTP(value['OTP']);
-
-                                      if (value['status'] == 1) {
-                                        Navigator.of(context).push(
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    TSignupCode(isEmail: false,
-                                                      mobileText: '',
-                                                      /*isEmail:
-                                                      widget
-                                                          .isEmail,
-                                                      mobileText: widget
-                                                          .mobileText*/
-
-                                                    )));
-                                      }
-                                      else {
-                                        //if(value['status'] == 2){
-
-                                        // UserPrefs.setCookies(value['key']);
-                                        // UserPrefs.setOTP(value['OTP']);
-
-                                        Navigator.of(context).push(
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    TDashboard()));
-                                        // }
-                                        // else{}
-
-                                      }
-                                    }
-
-
-                                  }
-                                  );
-
-
-                                  },
-                                /*child: Container(
-                                  margin: EdgeInsets.all(16),
-                                  padding: EdgeInsets.all(12),
-                                  clipBehavior: Clip.hardEdge,
-                                  decoration: BoxDecoration(
-
-                                      color: Colors.white,
-                                      borderRadius: BorderRadius.circular(12)
-                                  ),*/
-                                  child: CircleAvatar(
-                                    backgroundColor: Color(0xfff7f6fa),
-                                    child: Image.asset('assets/images/glogo.png',fit: BoxFit.cover,height: 40,
-                                    ),
-                                  ),
-                                //),
+                                      // child: Container(
+                                      //   margin: EdgeInsets.all(16),
+                                      //   padding: EdgeInsets.all(12),
+                                      //   decoration: BoxDecoration(
+                                      //
+                                      //     color: Colors.white,
+                                      //     borderRadius: BorderRadius.circular(12)
+                                      //   ),
+                                      child: Image.asset(
+                                        'assets/images/apple logo.png',
+                                        fit: BoxFit.cover,
+                                        height: 40,
+                                      ),
+                                      //),
+                                    )
+                                  : SizedBox(),
+                              SizedBox(
+                                width: 20,
                               ),
 
-                              SizedBox(width: 20,),
+                              Platform.isIOS
+                                  ? GestureDetector(
+                                      onTap: () async {
+                                        final auth =
+                                            await GoogleSignInClass().login();
+                                        print('below id token');
+                                        // print(auth.idToken);
+                                        log(auth.idToken.toString());
+                                        log(auth.idToken!.length.toString());
+
+                                        googleSignInApiAndroid(
+                                                id_Token: auth.idToken!,
+                                                device: 'google',
+                                                ParentTeacher: 'teacher')
+                                            .then((value) {
+                                          if (value == false) {
+                                            Fluttertoast.showToast(
+                                                msg:
+                                                    "Sign in failed! Please try again.");
+                                            setState(() {
+                                              _isLoading = false;
+                                            });
+                                          } else if (value['status'] == 0) {
+                                            setState(() {
+                                              _isLoading = false;
+                                            });
+                                            Fluttertoast.showToast(
+                                                msg:
+                                                    "Wait For Director's Approval");
+                                          } else {
+                                            UserPrefs.setCookies(value['key']);
+                                            //UserPrefs.setOTP(value['OTP']);
+
+                                            if (value['status'] == 1) {
+                                              Navigator.of(context).push(
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          TSignupCode(
+                                                            isEmail: false,
+                                                            mobileText: '',
+                                                            /*isEmail:
+                                                      widget
+                                                          .isEmail,
+                                                      mobileText: widget
+                                                          .mobileText*/
+                                                          )));
+                                            } else {
+                                              //if(value['status'] == 2){
+
+                                              // UserPrefs.setCookies(value['key']);
+                                              // UserPrefs.setOTP(value['OTP']);
+
+                                              Navigator.of(context).push(
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          TDashboard()));
+                                              // }
+                                              // else{}
+                                            }
+                                          }
+                                        });
+                                      },
+                                      /*child: Container(
+                                  margin: EdgeInsets.all(16),
+                                  padding: EdgeInsets.all(12),
+                                  clipBehavior: Clip.hardEdge,
+                                  decoration: BoxDecoration(
+
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(12)
+                                  ),*/
+                                      child: CircleAvatar(
+                                        backgroundColor: Color(0xfff7f6fa),
+                                        child: Image.asset(
+                                          'assets/images/glogo.png',
+                                          fit: BoxFit.cover,
+                                          height: 40,
+                                        ),
+                                      ),
+                                      //),
+                                    )
+                                  : GestureDetector(
+                                      onTap: () async {
+                                        final auth =
+                                            await GoogleSignInClass().login();
+                                        print('below id token');
+                                        // print(auth.idToken);
+                                        log(auth.idToken.toString());
+                                        log(auth.idToken!.length.toString());
+
+                                        googleSignInApiAndroid(
+                                                id_Token: auth.idToken!,
+                                                device: 'android',
+                                                ParentTeacher: 'teacher')
+                                            .then((value) {
+                                          if (value == false) {
+                                            Fluttertoast.showToast(
+                                                msg:
+                                                    "Sign in failed! Please try again.");
+                                            setState(() {
+                                              _isLoading = false;
+                                            });
+                                          } else if (value['status'] == 0) {
+                                            setState(() {
+                                              _isLoading = false;
+                                            });
+                                            Fluttertoast.showToast(
+                                                msg:
+                                                    "Wait For Director's Approval");
+                                          } else {
+                                            UserPrefs.setCookies(value['key']);
+                                            //UserPrefs.setOTP(value['OTP']);
+
+                                            if (value['status'] == 1) {
+                                              Navigator.of(context).push(
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          TSignupCode(
+                                                            isEmail: false,
+                                                            mobileText: '',
+                                                            /*isEmail:
+                                                      widget
+                                                          .isEmail,
+                                                      mobileText: widget
+                                                          .mobileText*/
+                                                          )));
+                                            } else {
+                                              //if(value['status'] == 2){
+
+                                              // UserPrefs.setCookies(value['key']);
+                                              // UserPrefs.setOTP(value['OTP']);
+
+                                              Navigator.of(context).push(
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          TDashboard()));
+                                              // }
+                                              // else{}
+                                            }
+                                          }
+                                        });
+                                      },
+                                      /*child: Container(
+                                  margin: EdgeInsets.all(16),
+                                  padding: EdgeInsets.all(12),
+                                  clipBehavior: Clip.hardEdge,
+                                  decoration: BoxDecoration(
+
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(12)
+                                  ),*/
+                                      child: CircleAvatar(
+                                        backgroundColor: Color(0xfff7f6fa),
+                                        child: Image.asset(
+                                          'assets/images/glogo.png',
+                                          fit: BoxFit.cover,
+                                          height: 40,
+                                        ),
+                                      ),
+                                      //),
+                                    ),
+
+                              SizedBox(
+                                width: 20,
+                              ),
                               // GestureDetector(
                               //   onTap: () async {
                               // _isLoading = true;
@@ -571,12 +594,8 @@ class _TLoginScreenState extends State<TLoginScreen> {
                               //   ),
                               //   //),
                               // ),
-
-
-
                             ],
                           )
-
                         ],
                       ),
                     ),

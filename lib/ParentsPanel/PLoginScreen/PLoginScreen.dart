@@ -4,7 +4,6 @@ import 'dart:io' show Platform;
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:kidseau/Apple_Sign_In/apple_sign_in_api.dart';
@@ -15,19 +14,14 @@ import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../Constants/string_const.dart';
-import '../../Facebook_Sign_In/facebook_sign_in.dart';
 import '../../Google_SignIn/google_sign_in.dart';
-import '../../TeachersPanel/TDashboard.dart';
-
-
-
-import '../../TeachersPanel/TSignupScreen/TSignupCode.dart';
 import '../../Theme.dart';
 import '../../Widgets/buttons.dart';
 import '../../Widgets/textfields.dart';
 import '../../api/google_sign_in/google_sign_in_api.dart';
 import '../../api/parent_login_apis/parent_login_api.dart';
 import '../../shard_prefs/shared_prefs.dart';
+import '../POnboardingScreens/PStartScreen.dart';
 import '../PSignUpScreen/PSignupScreen.dart';
 import 'PLoginOtpVerification.dart';
 
@@ -64,8 +58,8 @@ class _PLoginScreenState extends State<PLoginScreen> {
                 TextSpan(
                   recognizer: TapGestureRecognizer()
                     ..onTap = () {
-                      launchUrl(
-                          Uri.parse("$kAPIConst/appDetails/privacy-policy.php"));
+                      launchUrl(Uri.parse(
+                          "$kAPIConst/appDetails/privacy-policy.php"));
                     },
                   text: "Privacy Policy".tr(),
                   style: FontConstant.k14w500B7A4TextU,
@@ -105,10 +99,30 @@ class _PLoginScreenState extends State<PLoginScreen> {
                 child: ListView(
                   children: [
                     Padding(
-                      padding: EdgeInsets.only(top: 120.h, left: 16, right: 16),
+                      padding: EdgeInsets.only(left: 16, right: 16),
                       child: Center(
                         child: Column(
                           children: [
+                            Align(
+                              alignment: Alignment.centerLeft,
+                              child: GestureDetector(
+                                behavior: HitTestBehavior.translucent,
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (_) => PStartScreen(),
+                                    ),
+                                  );
+                                },
+                                child: Image.asset(
+                                  "assets/images/arrow-left.png",
+                                  height: 24,
+                                  width: 24,
+                                ),
+                              ),
+                            ),
+                            SizedBox(height: 80),
                             Image.asset(
                               "assets/images/logo.png",
                               height: 150.w,
@@ -198,12 +212,13 @@ class _PLoginScreenState extends State<PLoginScreen> {
                             child: MainButton(
                                 onTap: () {
                                   if (_formKey.currentState!.validate()) {
-                                    final resp = ParentLogin()
-                                        .get(email: emailController.text.trim());
+                                    final resp = ParentLogin().get(
+                                        email: emailController.text.trim());
                                     resp.then((value) {
                                       log(value.toString());
                                       if (value['status'] == 0) {
-                                        Fluttertoast.showToast(msg: value['msg']);
+                                        Fluttertoast.showToast(
+                                            msg: value['msg']);
                                       } else {
                                         UserPrefs.setCookies(value['key']);
                                         UserPrefs.setOTP(value['OTP']);
@@ -212,9 +227,9 @@ class _PLoginScreenState extends State<PLoginScreen> {
                                             MaterialPageRoute(
                                                 builder: (context) =>
                                                     PLoginOtpVerification(
-                                                      loginField: emailController
-                                                          .text
-                                                          .trim(),
+                                                      loginField:
+                                                          emailController.text
+                                                              .trim(),
                                                     )));
                                         // Fluttertoast.showToast(
                                         //     msg: 'Your OTP is ${value['OTP']}');
@@ -231,136 +246,140 @@ class _PLoginScreenState extends State<PLoginScreen> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              Platform.isIOS ?
-                              GestureDetector(
-                                onTap: () async {
-                                  final credential =
-                                      await SignInWithApple.getAppleIDCredential(
-                                    scopes: [
-                                      AppleIDAuthorizationScopes.email,
-                                      AppleIDAuthorizationScopes.fullName,
-                                    ],
-                                  );
+                              Platform.isIOS
+                                  ? GestureDetector(
+                                      onTap: () async {
+                                        final credential = await SignInWithApple
+                                            .getAppleIDCredential(
+                                          scopes: [
+                                            AppleIDAuthorizationScopes.email,
+                                            AppleIDAuthorizationScopes.fullName,
+                                          ],
+                                        );
 
+                                        appleSignInApi(
+                                                id_token: credential
+                                                    .identityToken
+                                                    .toString(),
+                                                auth_code: credential
+                                                    .authorizationCode
+                                                    .toString(),
+                                                ParentTeacher: 'parent')
+                                            .then((value) {
+                                          if (value == false) {
+                                            Fluttertoast.showToast(
+                                                msg:
+                                                    "Sign in failed! Please try again.");
+                                            setState(() {
+                                              _isLoading = false;
+                                            });
+                                          } else if (value['status'] == 0) {
+                                            setState(() {
+                                              _isLoading = false;
+                                            });
+                                            Fluttertoast.showToast(
+                                                msg:
+                                                    "Sign in failed! Please try again.");
+                                          } else {
+                                            UserPrefs.setCookies(value['key']);
+                                            if (value['status'] == 1) {
+                                              Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          PSignupCode(
+                                                              newKid: true)));
 
-                                  appleSignInApi(id_token: credential.identityToken.toString(), auth_code: credential.authorizationCode.toString(),
-                                      ParentTeacher: 'parent').then((value) {
+                                              //UserPrefs.getKidsStatus();
+                                            } else {
+                                              //UserPrefs.setIsTeacher(false);
+                                              UserPrefs.setIsTeacher(false);
 
-                                    if(value == false){
-                                      Fluttertoast.showToast(
-                                          msg: "Sign in failed! Please try again.");
-                                      setState(() {
-                                        _isLoading = false;
-                                      });
-                                    }
-
-                                    else if (value['status'] == 0) {
-                                      setState(() {
-                                        _isLoading = false;
-                                      });
-                                      Fluttertoast.showToast(msg: "Sign in failed! Please try again.");
-                                    }
-
-                                    else{
-
-                                      UserPrefs.setCookies(value['key']);
-                                      if(value['status'] == 1 ){
-                                        Navigator.push(context, MaterialPageRoute(builder: (context) =>
-                                            PSignupCode(newKid: true)));
-
-                                        //UserPrefs.getKidsStatus();
-
-                                      }
-
-                                      else{
-                                        //UserPrefs.setIsTeacher(false);
-                                        UserPrefs.setIsTeacher(false);
-
-
-
-                                        //if(value['status'] == 2) {
-                                        Navigator.push(context, MaterialPageRoute(builder: (context)=> PDashboard()));
-                                        // }
-                                        // else{}
-
-                                      }
-                                    }
-
-                                  });
-                                  print(credential);
-
-                                },
-                                // child: Container(
-                                //   margin: EdgeInsets.all(16),
-                                //   padding: EdgeInsets.all(12),
-                                //   decoration: BoxDecoration(
-                                //
-                                //     color: Colors.white,
-                                //     borderRadius: BorderRadius.circular(12)
-                                //   ),
-                                child: Image.asset(
-                                  'assets/images/apple logo.png',
-                                  fit: BoxFit.cover,
-                                  height: 40,
-                                ),
-                                //),
-                              ) : SizedBox(),
+                                              //if(value['status'] == 2) {
+                                              Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          PDashboard()));
+                                              // }
+                                              // else{}
+                                            }
+                                          }
+                                        });
+                                        print(credential);
+                                      },
+                                      // child: Container(
+                                      //   margin: EdgeInsets.all(16),
+                                      //   padding: EdgeInsets.all(12),
+                                      //   decoration: BoxDecoration(
+                                      //
+                                      //     color: Colors.white,
+                                      //     borderRadius: BorderRadius.circular(12)
+                                      //   ),
+                                      child: Image.asset(
+                                        'assets/images/apple logo.png',
+                                        fit: BoxFit.cover,
+                                        height: 40,
+                                      ),
+                                      //),
+                                    )
+                                  : SizedBox(),
                               SizedBox(
                                 width: 20,
                               ),
 
+                              Platform.isIOS
+                                  ? GestureDetector(
+                                      onTap: () async {
+                                        final auth =
+                                            await GoogleSignInClass().login();
 
-                              Platform.isIOS ?
-                              GestureDetector(
-                                onTap: () async {
-                                  final auth = await GoogleSignInClass().login();
+                                        googleSignInApiAndroid(
+                                                id_Token: auth.idToken!,
+                                                device: 'google',
+                                                ParentTeacher: 'parent')
+                                            .then((value) {
+                                          if (value == false) {
+                                            Fluttertoast.showToast(
+                                                msg:
+                                                    "Sign in failed! Please try again.");
+                                            setState(() {
+                                              _isLoading = false;
+                                            });
+                                          } else if (value['status'] == 0) {
+                                            setState(() {
+                                              _isLoading = false;
+                                            });
+                                            Fluttertoast.showToast(
+                                                msg:
+                                                    "Sign in failed! Please try again.");
+                                          } else {
+                                            UserPrefs.setCookies(value['key']);
+                                            if (value['status'] == 1) {
+                                              Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          PSignupCode(
+                                                              newKid: true)));
 
+                                              //UserPrefs.getKidsStatus();
+                                            } else {
+                                              UserPrefs.setIsTeacher(false);
 
-                                  googleSignInApiAndroid(id_Token: auth.idToken!, device: 'google', ParentTeacher: 'parent').then((value){
-
-
-                                    if(value == false){
-                                      Fluttertoast.showToast(
-                                          msg: "Sign in failed! Please try again.");
-                                      setState(() {
-                                        _isLoading = false;
-                                      });
-                                    }
-
-                                    else if (value['status'] == 0) {
-                                      setState(() {
-                                        _isLoading = false;
-                                      });
-                                      Fluttertoast.showToast(msg: "Sign in failed! Please try again.");
-                                    }
-
-                                    else{
-
-                                      UserPrefs.setCookies(value['key']);
-                                      if(value['status'] == 1 ){
-                                        Navigator.push(context, MaterialPageRoute(builder: (context) =>
-                                            PSignupCode(newKid: true)));
-
-                                        //UserPrefs.getKidsStatus();
-
-                                      }
-
-                                      else{
-
-                                        UserPrefs.setIsTeacher(false);
-
-
-
-                                        //if(value['status'] == 2) {
-                                        Navigator.push(context, MaterialPageRoute(builder: (context)=> PDashboard()));
-                                        // }
-                                        // else{}
-
-                                      }
-                                    }
-                                  });
-                                },
-                                /*child: Container(
+                                              //if(value['status'] == 2) {
+                                              Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          PDashboard()));
+                                              // }
+                                              // else{}
+                                            }
+                                          }
+                                        });
+                                      },
+                                      /*child: Container(
                               margin: EdgeInsets.all(16),
                               padding: EdgeInsets.all(12),
                               clipBehavior: Clip.hardEdge,
@@ -369,67 +388,67 @@ class _PLoginScreenState extends State<PLoginScreen> {
                                   color: Colors.white,
                                   borderRadius: BorderRadius.circular(12)
                               ),*/
-                                child: CircleAvatar(
-                                  backgroundColor: Color(0xfff7f6fa),
-                                  child: Image.asset(
-                                    'assets/images/glogo.png',
-                                    fit: BoxFit.cover,
-                                    height: 40,
-                                  ),
-                                ),
-                                //),
-                              ) :
+                                      child: CircleAvatar(
+                                        backgroundColor: Color(0xfff7f6fa),
+                                        child: Image.asset(
+                                          'assets/images/glogo.png',
+                                          fit: BoxFit.cover,
+                                          height: 40,
+                                        ),
+                                      ),
+                                      //),
+                                    )
+                                  : GestureDetector(
+                                      onTap: () async {
+                                        final auth =
+                                            await GoogleSignInClass().login();
 
-                              GestureDetector(
-                                onTap: () async {
-                                  final auth = await GoogleSignInClass().login();
+                                        googleSignInApiAndroid(
+                                                id_Token: auth.idToken!,
+                                                device: 'android',
+                                                ParentTeacher: 'parent')
+                                            .then((value) {
+                                          if (value == false) {
+                                            Fluttertoast.showToast(
+                                                msg:
+                                                    "Sign in failed! Please try again.");
+                                            setState(() {
+                                              _isLoading = false;
+                                            });
+                                          } else if (value['status'] == 0) {
+                                            setState(() {
+                                              _isLoading = false;
+                                            });
+                                            Fluttertoast.showToast(
+                                                msg:
+                                                    "Sign in failed! Please try again.");
+                                          } else {
+                                            UserPrefs.setCookies(value['key']);
+                                            if (value['status'] == 1) {
+                                              Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          PSignupCode(
+                                                              newKid: true)));
 
+                                              //UserPrefs.getKidsStatus();
+                                            } else {
+                                              UserPrefs.setIsTeacher(false);
 
-                                  googleSignInApiAndroid(id_Token: auth.idToken!, device: 'android', ParentTeacher: 'parent').then((value){
-
-
-                                   if(value == false){
-                                     Fluttertoast.showToast(
-                                         msg: "Sign in failed! Please try again.");
-                                     setState(() {
-                                       _isLoading = false;
-                                     });
-                                   }
-
-                                   else if (value['status'] == 0) {
-                                     setState(() {
-                                       _isLoading = false;
-                                     });
-                                     Fluttertoast.showToast(msg: "Sign in failed! Please try again.");
-                                   }
-
-                                   else{
-
-                                     UserPrefs.setCookies(value['key']);
-                                     if(value['status'] == 1 ){
-                                       Navigator.push(context, MaterialPageRoute(builder: (context) =>
-                                           PSignupCode(newKid: true)));
-
-                                      //UserPrefs.getKidsStatus();
-
-                                     }
-
-                                     else{
-
-                                       UserPrefs.setIsTeacher(false);
-
-
-
-                                       //if(value['status'] == 2) {
-                                         Navigator.push(context, MaterialPageRoute(builder: (context)=> PDashboard()));
-                                       // }
-                                       // else{}
-
-                                     }
-                                   }
-                                 });
-                                },
-                                /*child: Container(
+                                              //if(value['status'] == 2) {
+                                              Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          PDashboard()));
+                                              // }
+                                              // else{}
+                                            }
+                                          }
+                                        });
+                                      },
+                                      /*child: Container(
                               margin: EdgeInsets.all(16),
                               padding: EdgeInsets.all(12),
                               clipBehavior: Clip.hardEdge,
@@ -438,16 +457,16 @@ class _PLoginScreenState extends State<PLoginScreen> {
                                   color: Colors.white,
                                   borderRadius: BorderRadius.circular(12)
                               ),*/
-                                child: CircleAvatar(
-                                  backgroundColor: Color(0xfff7f6fa),
-                                  child: Image.asset(
-                                    'assets/images/glogo.png',
-                                    fit: BoxFit.cover,
-                                    height: 40,
-                                  ),
-                                ),
-                                //),
-                              ),
+                                      child: CircleAvatar(
+                                        backgroundColor: Color(0xfff7f6fa),
+                                        child: Image.asset(
+                                          'assets/images/glogo.png',
+                                          fit: BoxFit.cover,
+                                          height: 40,
+                                        ),
+                                      ),
+                                      //),
+                                    ),
                               SizedBox(
                                 width: 20,
                               ),

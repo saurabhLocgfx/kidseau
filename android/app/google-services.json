@@ -7,18 +7,18 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:38434211867:android:427108ac1d2b5ca2c850be",
+        "mobilesdk_app_id": "1:38434211867:android:ca8a953d52393f97c850be",
         "android_client_info": {
           "package_name": "com.locgfx.kidseau"
         }
       },
       "oauth_client": [
         {
-          "client_id": "38434211867-127vnn6v7o3ro4cjle6dbepsh9od5nce.apps.googleusercontent.com",
+          "client_id": "38434211867-eqc6e8o4qcv0i1uf8jpcu92h70bdr0hc.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.locgfx.kidseau",
-            "certificate_hash": "8cb4a5bb6c6e94467deccd2df03c3d6f51992c93"
+            "certificate_hash": "23b5ccb9a86e1d536a8676e260caced125b7be72"
           }
         },
         {
