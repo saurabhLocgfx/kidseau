@@ -100,8 +100,8 @@ class _TOnboardingScreenState extends State<TOnboardingScreen> {
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       SizedBox(
-                                        height: 280.h,
-                                        width: 340.w,
+                                        height: 300.h,
+                                        width: 350.w,
                                         child: Image.asset(
                                           contents[i].image,
                                         ),

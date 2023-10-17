@@ -307,7 +307,7 @@ SPEC CHECKSUMS:
   flutter_facebook_auth: 42016bec1574eabf69bc2fe4311e8cd55813d352
   flutter_local_notifications: 0c0b1ae97e741e1521e4c1629a459d04b9aec743
   flutter_secure_storage: 23fc622d89d073675f2eaa109381aefbcf5a49be
-  fluttertoast: 48c57db1b71b0ce9e6bba9f31c940ff4b001293c
+  fluttertoast: eb263d302cc92e04176c053d2385237e9f43fad0
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   google_maps_flutter_ios: 3e0b99383a8003b8169d06e7e324170bd0424105
   google_sign_in_ios: 1256ff9d941db546373826966720b0c24804bcdd
@@ -338,4 +338,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: a15dec492f19f7bdee1263b3c3572c5475a07ea4
 
-COCOAPODS: 1.13.0
+COCOAPODS: 1.12.1
