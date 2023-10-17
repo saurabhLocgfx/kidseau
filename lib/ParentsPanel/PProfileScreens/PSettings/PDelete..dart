@@ -11,15 +11,15 @@ import '../../../Constants/colors.dart';
    const DeleteModalSheet({super.key});
 
 
-   Future<void> clearCache() async {
-     final cacheManager = DefaultCacheManager();
-     try {
-       await cacheManager.emptyCache();
-       print('Cache cleared successfully');
-     } catch (e) {
-       print('Error clearing cache: $e');
-     }
-   }
+   // Future<void> clearCache() async {
+   //   final cacheManager = DefaultCacheManager();
+   //   try {
+   //     await cacheManager.emptyCache();
+   //     print('Cache cleared successfully');
+   //   } catch (e) {
+   //     print('Error clearing cache: $e');
+   //   }
+   // }
 
 
    @override
@@ -99,7 +99,7 @@ Padding(
     SizedBox(width: 8,),
     GestureDetector(
           onTap: () async{
-            await clearCache();
+            //await clearCache();
 deleteApi().then((value) {
 if(value['status'] == 1){
   showDialog(

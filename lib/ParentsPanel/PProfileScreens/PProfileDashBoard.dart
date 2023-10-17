@@ -247,15 +247,15 @@ class Pprofilepopup extends StatelessWidget {
   }) : super(key: key);
 
 
-  Future<void> clearCache() async {
-    final cacheManager = DefaultCacheManager();
-    try {
-      await cacheManager.emptyCache();
-      print('Cache cleared successfully');
-    } catch (e) {
-      print('Error clearing cache: $e');
-    }
-  }
+  // Future<void> clearCache() async {
+  //   final cacheManager = DefaultCacheManager();
+  //   try {
+  //     await cacheManager.emptyCache();
+  //     print('Cache cleared successfully');
+  //   } catch (e) {
+  //     print('Error clearing cache: $e');
+  //   }
+  // }
 
 
   @override
@@ -351,12 +351,12 @@ class Pprofilepopup extends StatelessWidget {
 
               enabled: false,
               child: GestureDetector(
-                onTap: () async {
+                onTap: ()  {
                  // await _googleSignIn.disconnect();
                 //  await FirebaseAuth.instance.signOut();
 
 
-                  await clearCache();
+                 // await clearCache();
                   print('smaile');
 
                   final resp = LogoutApi().get();

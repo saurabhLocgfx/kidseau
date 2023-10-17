@@ -4,7 +4,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 
 class GoogleSignInClass {
   final GoogleSignIn _googleSignIn = GoogleSignIn();
-  Future logOut() => _googleSignIn.disconnect();
+  //Future logOut() => _googleSignIn.disconnect();
 
   Future<GoogleSignInAuthentication> login() async {
     GoogleSignInAuthentication auth;
