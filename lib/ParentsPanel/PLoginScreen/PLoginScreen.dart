@@ -588,6 +588,7 @@ class _PLoginScreenState extends State<PLoginScreen> {
                                         style: FontConstant.k16w4008471Text),
                                     SizedBox(width: 5.w),
                                     Text("Register".tr(),
+
                                         style: FontConstant.k16w500purpleText)
                                   ],
                                 ),

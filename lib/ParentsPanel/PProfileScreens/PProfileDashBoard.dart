@@ -1,8 +1,10 @@
 import 'dart:ui';
 
 import 'package:easy_localization/easy_localization.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kidseau/ParentsPanel/POnboardingScreens/PStartScreen.dart';
 import 'package:kidseau/ParentsPanel/PProfileScreens/PParentProfile.dart';
@@ -15,6 +17,7 @@ import 'package:kidseau/Widgets/custom_snack_bar.dart';
 import 'package:kidseau/api/logout_api/logout_api.dart';
 import 'package:kidseau/shard_prefs/shared_prefs.dart';
 
+import '../../Google_SignIn/google_sign_in.dart';
 import 'PFees.dart';
 
 class PProfileDashBoard extends StatefulWidget {
@@ -35,8 +38,11 @@ class _PProfileDashBoardState extends State<PProfileDashBoard> {
 
   @override
   void initState() {
+
     super.initState();
   }
+
+
 
   final PageController _pageController = PageController(
     initialPage: 0,
@@ -240,6 +246,18 @@ class Pprofilepopup extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
+
+  Future<void> clearCache() async {
+    final cacheManager = DefaultCacheManager();
+    try {
+      await cacheManager.emptyCache();
+      print('Cache cleared successfully');
+    } catch (e) {
+      print('Error clearing cache: $e');
+    }
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return PopupMenuButton(
@@ -327,11 +345,20 @@ class Pprofilepopup extends StatelessWidget {
                   ],
                 ),
               ),
+
             ),
             PopupMenuItem(
+
               enabled: false,
               child: GestureDetector(
-                onTap: () {
+                onTap: () async {
+                 // await _googleSignIn.disconnect();
+                //  await FirebaseAuth.instance.signOut();
+
+
+                  await clearCache();
+                  print('smaile');
+
                   final resp = LogoutApi().get();
                   resp.then((value) {
                     if (value['status'] == 1) {

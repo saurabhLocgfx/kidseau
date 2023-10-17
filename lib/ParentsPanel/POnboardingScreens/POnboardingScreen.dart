@@ -36,9 +36,7 @@ class _POnboardingScreenState extends State<POnboardingScreen> {
 
   bool ezarabic2 = false;
 
-  PageController _pageController = PageController(
-    initialPage: 0,
-  );
+  final PageController _pageController = PageController(initialPage: 0);
 
   @override
   Widget build(BuildContext context) {

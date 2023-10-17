@@ -14,15 +14,26 @@
       },
       "oauth_client": [
         {
-          "client_id": "38434211867-eqc6e8o4qcv0i1uf8jpcu92h70bdr0hc.apps.googleusercontent.com",
+          "client_id": "38434211867-3nhgpe3kmb1nva72gohgaa0ddkfnuies.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.locgfx.kidseau",
-            "certificate_hash": "23b5ccb9a86e1d536a8676e260caced125b7be72"
+            "certificate_hash": "16815ddfd36010b1667e2187ced2a79edc0f44af"
           }
         },
         {
           "client_id": "38434211867-kcv81hptrv78f1dnaj6c9egdiu2s0v70.apps.googleusercontent.com",
+
+
+
+
+
+
+
+
+
+
+
           "client_type": 3
         }
       ],

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:kidseau/Constants/text_style.dart';
 import 'package:kidseau/ParentsPanel/PProfileScreens/PSettings/Deleted_successfully.dart';
 import 'package:kidseau/TeachersPanel/TProfileScreen/Parent_deleted_successfully.dart';
@@ -8,7 +9,19 @@ import 'package:kidseau/api/message_apis/delete_message_api.dart';
 import '../../../Constants/colors.dart';
  class DeleteModalSheet extends StatelessWidget {
    const DeleteModalSheet({super.key});
- 
+
+
+   Future<void> clearCache() async {
+     final cacheManager = DefaultCacheManager();
+     try {
+       await cacheManager.emptyCache();
+       print('Cache cleared successfully');
+     } catch (e) {
+       print('Error clearing cache: $e');
+     }
+   }
+
+
    @override
    Widget build(BuildContext context) {
      return /*Container(
@@ -85,7 +98,8 @@ Padding(
     ),
     SizedBox(width: 8,),
     GestureDetector(
-          onTap: (){
+          onTap: () async{
+            await clearCache();
 deleteApi().then((value) {
 if(value['status'] == 1){
   showDialog(

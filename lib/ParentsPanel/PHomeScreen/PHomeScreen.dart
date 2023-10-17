@@ -76,6 +76,7 @@ class _PHomeScreenState extends State<PHomeScreen> {
     getShowReminder();
     _getData();
     _getDataReminders();
+
     // cookie = UserPrefs.getCookies()!;
     super.initState();
   }
@@ -109,6 +110,7 @@ class _PHomeScreenState extends State<PHomeScreen> {
         });
       }
     }).then((value) {
+      _isActivityLoading = true;
       _getActivity(_kidModel.parentKidId![0].grpId.toString());
     });
   }
@@ -116,24 +118,30 @@ class _PHomeScreenState extends State<PHomeScreen> {
   bool _isActivityLoading = false;
 
   ParentActivityHomeModel _activityModel = ParentActivityHomeModel();
+
   _getActivity(String kidId) {
-    final resp = ParentActivityHomeApi().get(kidId: kidId);
-    resp.then((value) {
-      print(value);
-      if (value['status'] == 1) {
-        setState(() {
-          _activityModel = ParentActivityHomeModel.fromJson(value);
-          _countLength();
-          _isLoading = false;
-          _isActivityLoading = false;
-        });
-      } else {
-        setState(() {
-          _isLoading = false;
-          _isActivityLoading = false;
-        });
-      }
-    });
+    _isLoading = true;
+    _isActivityLoading = true;
+    if(mounted){
+      final resp = ParentActivityHomeApi().get(kidId: kidId);
+      resp.then((value) {
+        print(value);
+        if (value['status'] == 1) {
+          setState(() {
+            _activityModel = ParentActivityHomeModel.fromJson(value);
+            _countLength();
+            _isLoading = false;
+            _isActivityLoading = false;
+          });
+        } else {
+          setState(() {
+            _isLoading = false;
+            _isActivityLoading = false;
+          });
+        }
+      });
+    }
+
   }
 
   int length = 0;
@@ -186,7 +194,85 @@ class _PHomeScreenState extends State<PHomeScreen> {
             child: Container(
                 color: Colors.transparent,
                 padding: EdgeInsets.all(10),
-                child: PopupMenuButton(
+                child:
+                // PopupMenuButton(
+                //   key: pop,
+                //   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                //   onSelected: (String selectedLanguage) {
+                //     // Update the language and colorChange state here
+                //     setState(() {
+                //       if (selectedLanguage == 'English') {
+                //         UserPrefs.setEArbBool(false);
+                //         UserPrefs.setLang('English');
+                //         context.locale = Locale('en', 'US');
+                //         colorChange = true;
+                //         log("Eng");
+                //       } else if (selectedLanguage == 'French') {
+                //         UserPrefs.setEArbBool(false);
+                //         UserPrefs.setLang('French');
+                //         context.locale = Locale('fr', 'FR');
+                //         colorChange = false;
+                //         log('fre');
+                //       } else if (selectedLanguage == 'Arabic') {
+                //         UserPrefs.setEArbBool(true);
+                //         UserPrefs.setLang('Arabic');
+                //         context.locale = Locale('ar', 'AR');
+                //         colorChange = true;
+                //         log('ar');
+                //       }else{}
+                //
+                //     });
+                //   },
+                //   itemBuilder: (context) {
+                //     return [
+                //       PopupMenuItem(
+                //         value: 'English',
+                //         child: Row(
+                //           children: [
+                //             Text(
+                //               "English".tr(),
+                //               style: colorChange
+                //                   ? FontConstant.k16w5008267Text
+                //                   : FontConstant.k18w5008471Text,
+                //             ),
+                //           ],
+                //         ),
+                //       ),
+                //       PopupMenuItem(
+                //         value: 'French',
+                //         child: Row(
+                //           children: [
+                //             Text(
+                //               "French".tr(),
+                //               style: colorChange
+                //                   ? FontConstant.k16w5008267Text
+                //                   : FontConstant.k18w5008471Text,
+                //             ),
+                //           ],
+                //         ),
+                //       ),
+                //       PopupMenuItem(
+                //         value: 'Arabic',
+                //         child: Row(
+                //           children: [
+                //             Text(
+                //               "Arabic".tr(),
+                //               style: colorChange
+                //                   ? FontConstant.k16w5008267Text
+                //                   : FontConstant.k18w5008471Text,
+                //             ),
+                //           ],
+                //         ),
+                //       ),
+                //     ];
+                //   },
+                //   child: Image.asset(
+                //     "assets/images/Languageicon.png",
+                //     height: 24,
+                //     width: 24,
+                //   ),
+                // )
+                PopupMenuButton(
                     key: pop,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(16)),
@@ -247,7 +333,7 @@ class _PHomeScreenState extends State<PHomeScreen> {
                               UserPrefs.setEArbBool(true);
                               UserPrefs.setLang('Arabic');
                               context.locale = Locale('ar', 'AR');
-                              RestartWidget.restartApp(context);
+                             RestartWidget.restartApp(context);
 
                               setState(() {
                                 colorChange;
@@ -271,7 +357,8 @@ class _PHomeScreenState extends State<PHomeScreen> {
                       "assets/images/Languageicon.png",
                       height: 24,
                       width: 24,
-                    ))),
+                    ))
+            ),
           ),
           SizedBox(width: 8),
           InkWell(
