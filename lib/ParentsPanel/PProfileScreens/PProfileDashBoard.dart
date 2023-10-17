@@ -6,7 +6,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kidseau/ParentsPanel/POnboardingScreens/PStartScreen.dart';
 import 'package:kidseau/ParentsPanel/PProfileScreens/PParentProfile.dart';
-import 'package:kidseau/ParentsPanel/PProfileScreens/PSettings/PDelete..dart';
 import 'package:kidseau/ParentsPanel/PProfileScreens/PSettings/PSettings.dart';
 import 'package:kidseau/ParentsPanel/PProfileScreens/PSyllabus.dart';
 import 'package:kidseau/ParentsPanel/PProfileScreens/p_parent_nursery_widget.dart';
@@ -14,6 +13,7 @@ import 'package:kidseau/Theme.dart';
 import 'package:kidseau/Widgets/custom_snack_bar.dart';
 import 'package:kidseau/api/logout_api/logout_api.dart';
 import 'package:kidseau/shard_prefs/shared_prefs.dart';
+import 'package:path_provider/path_provider.dart';
 
 import 'PFees.dart';
 
@@ -43,6 +43,16 @@ class _PProfileDashBoardState extends State<PProfileDashBoard> {
   );
   int pageIndex = 0;
   int selectedIndex = 0;
+
+  Future<void> _deleteCacheDir() async {
+    final cacheDir = await getTemporaryDirectory();
+
+    if (cacheDir.existsSync()) {
+      cacheDir.deleteSync(recursive: true);
+    }
+  }
+
+  /// this will delete app's storage
 
   @override
   Widget build(BuildContext context) {
@@ -240,6 +250,14 @@ class Pprofilepopup extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
+  Future<void> _deleteAppDir() async {
+    final appDir = await getApplicationSupportDirectory();
+
+    if (appDir.existsSync()) {
+      appDir.deleteSync(recursive: true);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return PopupMenuButton(
@@ -256,6 +274,7 @@ class Pprofilepopup extends StatelessWidget {
             PopupMenuItem(
               enabled: false,
               child: GestureDetector(
+                behavior: HitTestBehavior.translucent,
                 onTap: () {
                   Navigator.of(context).push(
                     MaterialPageRoute(
@@ -281,6 +300,7 @@ class Pprofilepopup extends StatelessWidget {
             PopupMenuItem(
               enabled: false,
               child: GestureDetector(
+                behavior: HitTestBehavior.translucent,
                 onTap: () {
                   Navigator.of(context).push(
                     MaterialPageRoute(
@@ -306,6 +326,7 @@ class Pprofilepopup extends StatelessWidget {
             PopupMenuItem(
               enabled: false,
               child: GestureDetector(
+                behavior: HitTestBehavior.translucent,
                 onTap: () {
                   Navigator.of(context).push(
                     MaterialPageRoute(
@@ -331,6 +352,7 @@ class Pprofilepopup extends StatelessWidget {
             PopupMenuItem(
               enabled: false,
               child: GestureDetector(
+                behavior: HitTestBehavior.translucent,
                 onTap: () {
                   final resp = LogoutApi().get();
                   resp.then((value) {
@@ -342,6 +364,7 @@ class Pprofilepopup extends StatelessWidget {
                           (route) => false);
                       CustomSnackBar.customSnackBar(
                           context, 'Logged out successfully.');
+                      _deleteAppDir();
                     } else {}
                   });
                 },
@@ -351,7 +374,7 @@ class Pprofilepopup extends StatelessWidget {
                       "assets/images/newlogout.png",
                       height: 24,
                     ),
-                   /* Icon(
+                    /* Icon(
                       Icons.logout,
                       color: Color(0xff331F2D),
                     ),*/
@@ -364,7 +387,6 @@ class Pprofilepopup extends StatelessWidget {
                 ),
               ),
             ),
-
           ];
         });
   }

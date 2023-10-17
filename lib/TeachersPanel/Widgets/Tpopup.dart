@@ -1,12 +1,11 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:kidseau/TeachersPanel/TProfileScreen/TDeleteAccount.dart';
 import 'package:kidseau/TeachersPanel/TProfileScreen/TSettings.dart';
 import 'package:kidseau/TeachersPanel/TProfileScreen/TSyllabus.dart';
 import 'package:kidseau/Theme.dart';
+import 'package:path_provider/path_provider.dart';
 
 import '../../ParentsPanel/POnboardingScreens/PStartScreen.dart';
-import '../../ParentsPanel/PProfileScreens/PSettings/PDelete..dart';
 import '../../Widgets/custom_snack_bar.dart';
 import '../../api/logout_api/logout_api.dart';
 import '../../shard_prefs/shared_prefs.dart';
@@ -15,6 +14,14 @@ class TProfilepopup extends StatelessWidget {
   const TProfilepopup({
     Key? key,
   }) : super(key: key);
+
+  Future<void> _deleteAppDir() async {
+    final appDir = await getApplicationSupportDirectory();
+
+    if (appDir.existsSync()) {
+      appDir.deleteSync(recursive: true);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,6 +39,7 @@ class TProfilepopup extends StatelessWidget {
             PopupMenuItem(
               enabled: false,
               child: GestureDetector(
+                behavior: HitTestBehavior.translucent,
                 onTap: () {
                   Navigator.pop(context);
                   Navigator.of(context).push(
@@ -61,6 +69,7 @@ class TProfilepopup extends StatelessWidget {
             PopupMenuItem(
               enabled: false,
               child: GestureDetector(
+                behavior: HitTestBehavior.translucent,
                 onTap: () {
                   Navigator.pop(context);
                   Navigator.of(context).push(
@@ -88,6 +97,7 @@ class TProfilepopup extends StatelessWidget {
             PopupMenuItem(
               enabled: false,
               child: GestureDetector(
+                behavior: HitTestBehavior.translucent,
                 onTap: () {
                   final resp = LogoutApi().get();
                   resp.then((value) {
@@ -101,6 +111,7 @@ class TProfilepopup extends StatelessWidget {
                           context, 'Logged out successfully.');
                     } else {}
                   });
+                  _deleteAppDir();
                 },
                 child: Row(
                   children: [
@@ -121,8 +132,6 @@ class TProfilepopup extends StatelessWidget {
                 ),
               ),
             ),
-
-
           ];
         });
   }
