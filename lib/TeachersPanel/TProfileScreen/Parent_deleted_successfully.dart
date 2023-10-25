@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 
 import '../../Constants/text_style.dart';
+import '../../Google_SignIn/google_sign_in.dart';
 import '../../ParentsPanel/PLoginScreen/PLoginScreen.dart';
 import '../../Theme.dart';
 import '../../Widgets/buttons.dart';
@@ -59,7 +60,7 @@ class ParentSuccessfullyDeletedScreen extends StatelessWidget {
                 onTap: () {
                   Navigator.of(context).push(
                       MaterialPageRoute(builder: (context) => PLoginScreen()));
-                  _deleteAppDir();
+                  GoogleSignInHelper().signOut();
                 },
                 title: 'Take me to Login',
                 textStyleColor: Colors.white,

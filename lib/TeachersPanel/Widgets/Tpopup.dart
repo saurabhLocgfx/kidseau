@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:kidseau/Google_SignIn/google_sign_in.dart';
 import 'package:kidseau/TeachersPanel/TProfileScreen/TSettings.dart';
 import 'package:kidseau/TeachersPanel/TProfileScreen/TSyllabus.dart';
 import 'package:kidseau/Theme.dart';
@@ -100,7 +101,7 @@ class TProfilepopup extends StatelessWidget {
                 behavior: HitTestBehavior.translucent,
                 onTap: () {
                   final resp = LogoutApi().get();
-                  resp.then((value) {
+                  resp.then((value) async {
                     if (value['status'] == 1) {
                       UserPrefs.clearData(UserPrefs.cookies);
                       UserPrefs.clearData(UserPrefs.Teacher);
@@ -109,9 +110,11 @@ class TProfilepopup extends StatelessWidget {
                           (route) => false);
                       CustomSnackBar.customSnackBar(
                           context, 'Logged out successfully.');
+                      GoogleSignInHelper().signOut();
+                      // await DefaultCacheManager().emptyCache();
+                      // _deleteAppDir();
                     } else {}
                   });
-                  _deleteAppDir();
                 },
                 child: Row(
                   children: [

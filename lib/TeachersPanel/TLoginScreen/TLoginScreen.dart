@@ -241,7 +241,6 @@ class _TLoginScreenState extends State<TLoginScreen> {
                           SizedBox(height: 40.h),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Platform.isIOS
                                   ? GestureDetector(
@@ -332,7 +331,6 @@ class _TLoginScreenState extends State<TLoginScreen> {
                               SizedBox(
                                 width: 20,
                               ),
-
                               Platform.isIOS
                                   ? GestureDetector(
                                       onTap: () async {
@@ -495,9 +493,9 @@ class _TLoginScreenState extends State<TLoginScreen> {
                                       //),
                                     ),
 
-                              SizedBox(
-                                width: 20,
-                              ),
+                              // SizedBox(
+                              //   width: 20,
+                              // ),
                               // GestureDetector(
                               //   onTap: () async {
                               // _isLoading = true;

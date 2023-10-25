@@ -467,9 +467,9 @@ class _PLoginScreenState extends State<PLoginScreen> {
                                       ),
                                       //),
                                     ),
-                              SizedBox(
-                                width: 20,
-                              ),
+                              // SizedBox(
+                              //   width: 20,
+                              // ),
                               // GestureDetector(
                               //   onTap: () async
                               //   {

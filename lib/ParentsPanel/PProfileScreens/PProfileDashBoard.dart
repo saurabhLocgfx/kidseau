@@ -15,6 +15,7 @@ import 'package:kidseau/api/logout_api/logout_api.dart';
 import 'package:kidseau/shard_prefs/shared_prefs.dart';
 import 'package:path_provider/path_provider.dart';
 
+import '../../Google_SignIn/google_sign_in.dart';
 import 'PFees.dart';
 
 class PProfileDashBoard extends StatefulWidget {
@@ -362,9 +363,9 @@ class Pprofilepopup extends StatelessWidget {
                       Navigator.of(context).pushAndRemoveUntil(
                           MaterialPageRoute(builder: (ctx) => PStartScreen()),
                           (route) => false);
+                      GoogleSignInHelper().signOut();
                       CustomSnackBar.customSnackBar(
                           context, 'Logged out successfully.');
-                      _deleteAppDir();
                     } else {}
                   });
                 },

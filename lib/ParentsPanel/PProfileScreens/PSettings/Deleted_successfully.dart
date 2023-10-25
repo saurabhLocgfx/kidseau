@@ -3,6 +3,7 @@ import 'package:kidseau/Constants/text_style.dart';
 import 'package:kidseau/Widgets/buttons.dart';
 import 'package:path_provider/path_provider.dart';
 
+import '../../../Google_SignIn/google_sign_in.dart';
 import '../../../TeachersPanel/TLoginScreen/TLoginScreen.dart';
 import '../../../Theme.dart';
 
@@ -59,7 +60,7 @@ class SuccessfullyDeletedScreen extends StatelessWidget {
                 onTap: () {
                   Navigator.of(context).push(
                       MaterialPageRoute(builder: (context) => TLoginScreen()));
-                  _deleteAppDir();
+                  GoogleSignInHelper().signOut();
                 },
                 title: 'Take me to Login',
                 textStyleColor: Colors.white,

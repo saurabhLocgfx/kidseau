@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:google_sign_in/google_sign_in.dart';
 
 class GoogleSignInClass {
@@ -17,5 +15,17 @@ class GoogleSignInClass {
     // log(auth.idToken!.length.toString());
 
     return auth;
+  }
+}
+
+class GoogleSignInHelper {
+  final GoogleSignIn _googleSignIn = GoogleSignIn();
+
+  Future<void> signOut() async {
+    try {
+      await _googleSignIn.signOut();
+    } catch (error) {
+      print('Error signing out from Google: $error');
+    }
   }
 }
