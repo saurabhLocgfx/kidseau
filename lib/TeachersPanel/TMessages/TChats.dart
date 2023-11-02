@@ -89,43 +89,48 @@ class _TChatsState extends State<TChats> {
         child: Row(
           children: [
             Expanded(
-              child: TextField(
-                onSubmitted: (text) {
-                  final message = Messages(
-                      text: text, date: DateTime.now(), isSentByme: true);
-                  setState(() => messages.add(message));
-                },
-                decoration: InputDecoration(
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(width: 2, color: Color(0xffDBE8FA)),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(width: 2, color: Color(0xffDBE8FA)),
-                  ),
-                  fillColor: Color(0xffF0F4FA),
-                  hintText: "Type here.".tr(),
-                  /*AppLoaclizations.of(context)!
-                                .translate("Type here."),*/
-                  hintStyle: FontConstant.k16w400B7A4Text,
-                  suffixIcon: GestureDetector(
-                    onTap: () {},
-                    child: Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: ImageIcon(
-                        AssetImage("assets/images/sendicon.png"),
-                        size: 12,
-                        color: ThemeColor.primarycolor,
+              child: Container(
+                color: Colors.white,
+                child: TextField(
+                  onSubmitted: (text) {
+                    final message = Messages(
+                        text: text, date: DateTime.now(), isSentByme: true);
+                    setState(() => messages.add(message));
+                  },
+                  decoration: InputDecoration(
+                    enabledBorder: OutlineInputBorder(
+                      borderSide:
+                          BorderSide(width: 2, color: Color(0xffDBE8FA)),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide:
+                          BorderSide(width: 2, color: Color(0xffDBE8FA)),
+                    ),
+                    fillColor: Color(0xffF0F4FA),
+                    hintText: "Type here.".tr(),
+                    /*AppLoaclizations.of(context)!
+                                  .translate("Type here."),*/
+                    hintStyle: FontConstant.k16w400B7A4Text,
+                    suffixIcon: GestureDetector(
+                      onTap: () {},
+                      child: Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: ImageIcon(
+                          AssetImage("assets/images/sendicon.png"),
+                          size: 12,
+                          color: ThemeColor.primarycolor,
+                        ),
                       ),
                     ),
-                  ),
-                  prefixIcon: Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: GestureDetector(
-                      onTap: showToast,
-                      child: ImageIcon(
-                        AssetImage("assets/images/add-circle.png"),
-                        size: 12,
-                        color: ThemeColor.darkpurple,
+                    prefixIcon: Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: GestureDetector(
+                        onTap: showToast,
+                        child: ImageIcon(
+                          AssetImage("assets/images/add-circle.png"),
+                          size: 12,
+                          color: ThemeColor.darkpurple,
+                        ),
                       ),
                     ),
                   ),

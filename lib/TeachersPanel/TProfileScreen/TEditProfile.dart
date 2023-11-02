@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:developer';
 import 'dart:io';
 import 'dart:ui';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -38,7 +39,7 @@ class _TEditProfileScreenState extends State<TEditProfileScreen> {
   /* final TextEditingController _emailController = TextEditingController();
   final TextEditingController _numberController = TextEditingController();*/
   String _birthday = '';
-  String _gender = '';
+  String _gender = 'Male'.tr();
 
   @override
   void initState() {
@@ -104,381 +105,389 @@ class _TEditProfileScreenState extends State<TEditProfileScreen> {
     return Container(
       height: 1.sh,
       width: 1.sw,
-      child: Scaffold(
-        // backgroundColor: AppColors().bgColor,
-        appBar: AppBar(
-          toolbarHeight: 70.0,
-          flexibleSpace: ClipRect(
-            child: BackdropFilter(
-              filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-              child: Container(
-                color: Colors.transparent,
+      child: GestureDetector(
+        onTap: () {
+          FocusScope.of(context).unfocus();
+        },
+        child: Scaffold(
+          // backgroundColor: AppColors().bgColor,
+          appBar: AppBar(
+            toolbarHeight: 70.0,
+            flexibleSpace: ClipRect(
+              child: BackdropFilter(
+                filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                child: Container(
+                  color: Colors.transparent,
+                ),
               ),
             ),
-          ),
-          automaticallyImplyLeading: false,
-          elevation: 0,
-          centerTitle: false,
-          systemOverlayStyle: SystemUiOverlayStyle(
-            statusBarColor: Color(0xff8267AC).withOpacity(0.16),
-          ),
-          backgroundColor: Color(0xff8267AC).withOpacity(0.16),
-          leading: Row(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 16.0),
-                child: GestureDetector(
-                  onTap: () {
-                    Navigator.pop(context);
-                  },
-                  child: Image.asset(
-                    "assets/images/backarrow.png",
-                    height: 24,
-                    width: 24,
-                  ),
-                ),
-              ),
-            ],
-          ),
-          title: Text(
-            "Edit Profile".tr(),
-            style: FontConstant.k18w5008471Text,
-          ),
-        ),
-        body: SingleChildScrollView(
-          child: Container(
-            // height: 414,
-            decoration: BoxDecoration(
-                image: DecorationImage(
-                    alignment: Alignment.topCenter,
-                    image: AssetImage(
-                      "assets/images/Group8270.png",
+            automaticallyImplyLeading: false,
+            elevation: 0,
+            centerTitle: false,
+            systemOverlayStyle: SystemUiOverlayStyle(
+              statusBarColor: Color(0xff8267AC).withOpacity(0.16),
+            ),
+            backgroundColor: Color(0xff8267AC).withOpacity(0.16),
+            leading: Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 16.0),
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                    child: Image.asset(
+                      "assets/images/backarrow.png",
+                      height: 24,
+                      width: 24,
                     ),
-                    fit: BoxFit.fitWidth)),
-            child: Container(
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [
-                    Color(0xffF8F6FA).withOpacity(0.7),
-                    Color(0xffF8F6FA),
-                    Color(0xffF8F6FA)
-                  ],
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  stops: [0.3, 0.6, 0.9],
-                ),
-              ),
-              child: Stack(
-                children: [
-                  SizedBox(
-                    width: 1.sw,
-                    /* child: Image.asset(
-                  "assets/images/Group8270.png",
-                  fit: BoxFit.fitWidth,
-                ),*/
                   ),
-                  Container(
-                    width: 1.sw,
-                    height: 455,
-                    /* decoration: BoxDecoration(
+                ),
+              ],
+            ),
+            title: Text(
+              "Edit Profile".tr(),
+              style: FontConstant.k18w5008471Text,
+            ),
+          ),
+          body: SingleChildScrollView(
+            child: Container(
+              // height: 414,
+              decoration: BoxDecoration(
+                  image: DecorationImage(
+                      alignment: Alignment.topCenter,
+                      image: AssetImage(
+                        "assets/images/Group8270.png",
+                      ),
+                      fit: BoxFit.fitWidth)),
+              child: Container(
+                decoration: BoxDecoration(
                   gradient: LinearGradient(
                     colors: [
-                      Colors.white.withOpacity(0.7),
-                      Colors.white,
-                      Colors.white
+                      Color(0xffF8F6FA).withOpacity(0.7),
+                      Color(0xffF8F6FA),
+                      Color(0xffF8F6FA)
                     ],
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
                     stops: [0.3, 0.6, 0.9],
                   ),
-                ),*/
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(height: 40),
-                        Center(
-                          child: Container(
-                            width: 96,
-                            height: 128,
-                            clipBehavior: Clip.hardEdge,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(16),
-                            ),
-                            child: Image.network(
-                              profileImageUrl,
-                              fit: BoxFit.fitHeight,
-                              loadingBuilder: (q, w, e) {
-                                if (e == null) {
-                                  return w;
-                                } else {
-                                  return SpinKitThreeBounce(
-                                    size: 30,
-                                    color: Colors.grey,
-                                  );
-                                }
-                              },
-                              errorBuilder: (q, w, e) => Image.asset(
-                                  'assets/images/profileperson.png'),
+                ),
+                child: Stack(
+                  children: [
+                    SizedBox(
+                      width: 1.sw,
+                      /* child: Image.asset(
+                    "assets/images/Group8270.png",
+                    fit: BoxFit.fitWidth,
+                  ),*/
+                    ),
+                    Container(
+                      width: 1.sw,
+                      height: 455,
+                      /* decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [
+                        Colors.white.withOpacity(0.7),
+                        Colors.white,
+                        Colors.white
+                      ],
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      stops: [0.3, 0.6, 0.9],
+                    ),
+                  ),*/
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SizedBox(height: 40),
+                          Center(
+                            child: Container(
+                              width: 96,
+                              height: 128,
+                              clipBehavior: Clip.hardEdge,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(16),
+                              ),
+                              child: Image.network(
+                                profileImageUrl,
+                                fit: BoxFit.fitHeight,
+                                loadingBuilder: (q, w, e) {
+                                  if (e == null) {
+                                    return w;
+                                  } else {
+                                    return SpinKitThreeBounce(
+                                      size: 30,
+                                      color: Colors.grey,
+                                    );
+                                  }
+                                },
+                                errorBuilder: (q, w, e) => Image.asset(
+                                    'assets/images/profileperson.png'),
+                              ),
                             ),
                           ),
-                        ),
-                        SizedBox(height: 12.5),
-                        GestureDetector(
-                          onTap: () async {
-                            XFile? image = await _picker.pickImage(
-                                source: ImageSource.gallery);
-                            if (image != null) {
-                              _pickedFile = File(image.path);
-                              final resp = TeacherUpdateProfilePicture()
-                                  .get(pickedImage: _pickedFile);
+                          SizedBox(height: 12.5),
+                          GestureDetector(
+                            onTap: () async {
+                              XFile? image = await _picker.pickImage(
+                                  source: ImageSource.gallery);
+                              if (image != null) {
+                                _pickedFile = File(image.path);
+                                final resp = TeacherUpdateProfilePicture()
+                                    .get(pickedImage: _pickedFile);
+                                resp.then((value) {
+                                  log(value.toString());
+                                  if (value['status'] == 1) {
+                                    setState(() {
+                                      profileImageUrl = value['imgLocation'];
+                                    });
+                                    CustomSnackBar.customSnackBar(
+                                        context, value['msg']);
+                                  } else {
+                                    setState(() {
+                                      profileImageUrl =
+                                          widget.model.image.toString();
+                                    });
+                                    CustomSnackBar.customErrorSnackBar(
+                                        context, value['msg']);
+                                  }
+                                });
+                              }
+                            },
+                            child: Container(
+                              color: Colors.transparent,
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 50, vertical: 10),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  SizedBox(
+                                    width: 25,
+                                    child:
+                                        Image.asset('assets/images/edit.png'),
+                                  ),
+                                  SizedBox(width: 16),
+                                  Text(
+                                    'Change Profile Photo'.tr(),
+                                    style: FontConstant.k16w5008471Text,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          SizedBox(height: 40),
+                          Text('Personal Details'.tr(),
+                              style: FontConstant2.k24w5008471text),
+                          SizedBox(height: 24),
+                          Text('Education'.tr(),
+                              style: _eduFocus.hasFocus
+                                  ? FontConstant.k16w5008471Text
+                                  : FontConstant.k16w500331FText),
+                          SizedBox(height: 4),
+                          TextFormField(
+                            style: _eduFocus.hasFocus
+                                ? FontConstant.k18w5008471Text2
+                                : FontConstant.k18w5008471Text,
+                            focusNode: _eduFocus,
+                            controller: _educationController,
+                            decoration: TextFieldDecoration()
+                                .curvedWhiteDecoration(
+                                    label: 'Enter your highest degree'.tr(),
+                                    curved: true),
+                          ),
+                          SizedBox(height: 16),
+                          Text('Birthday'.tr(),
+                              style: FontConstant.k16w500331FText),
+                          SizedBox(height: 4),
+                          InkWell(
+                            onTap: () async {
+                              _pickedDate = await showDatePicker(
+                                  context: context,
+                                  initialDate: DateTime.now(),
+                                  firstDate: DateTime(1960),
+                                  lastDate: DateTime(2100));
+                              if (_pickedDate == null) {
+                                return;
+                              } else {
+                                setState(() {
+                                  _birthday = DateFormat('yyyy-MM-dd')
+                                      .format(_pickedDate!);
+                                });
+                              }
+                            },
+                            child: Container(
+                              width: 1.sw,
+                              height: 64.h,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(90),
+                              ),
+                              padding: EdgeInsets.symmetric(horizontal: 18),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(_birthday,
+                                      style: FontConstant.k18w5008471Text),
+                                  SizedBox(
+                                    width: 30,
+                                    child: Image.asset(
+                                      'assets/images/calendericon.png',
+                                      color: ThemeColor.b7A4B2,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          SizedBox(height: 16),
+                          Text('Gender'.tr(),
+                              style: FontConstant.k16w500331FText),
+                          SizedBox(height: 4),
+                          Center(
+                            child: Container(
+                              height: 64,
+                              padding: EdgeInsets.only(left: 16, right: 16),
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(90)),
+                              child: Center(
+                                child: DropdownButton<String>(
+                                  alignment: Alignment.topRight,
+                                  borderRadius: BorderRadius.circular(30),
+                                  dropdownColor: Color(0xffffffff),
+                                  hint: Text(
+                                    "Select your gender".tr(),
+                                  ),
+                                  icon: Padding(
+                                    padding: const EdgeInsets.only(right: 15.0),
+                                    child: Image.asset(
+                                      "assets/images/downarrow.png",
+                                      height: 15,
+                                      width: 15,
+                                    ),
+                                  ),
+                                  elevation: 0,
+                                  isExpanded: true,
+                                  underline: SizedBox(),
+                                  value: _gender,
+                                  items: <String>['Male'.tr(), 'Female'.tr()]
+                                      .map((String value) {
+                                    return DropdownMenuItem<String>(
+                                      value: value,
+                                      child: Text(
+                                        value,
+                                        style: FontConstant.k18w5008471Text,
+                                      ),
+                                    );
+                                  }).toList(),
+                                  onChanged: (String? val) {
+                                    setState(() {
+                                      _gender = val!;
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                          SizedBox(height: 16),
+                          Text('Year of Experience'.tr(),
+                              style: _expFocus.hasFocus
+                                  ? FontConstant.k16w5008471Text
+                                  : FontConstant.k16w500331FText),
+                          SizedBox(height: 4),
+                          TextFormField(
+                            style: _expFocus.hasFocus
+                                ? FontConstant.k18w5008471Text2
+                                : FontConstant.k18w5008471Text,
+                            focusNode: _expFocus,
+                            keyboardType: TextInputType.number,
+                            controller: _yearController,
+                            decoration: TextFieldDecoration()
+                                .curvedWhiteDecoration(
+                                    label:
+                                        'Enter your years of experience'.tr(),
+                                    curved: true),
+                          ),
+                          SizedBox(height: 16),
+                          Text('Address'.tr(),
+                              style: _addressFocus.hasFocus
+                                  ? FontConstant.k16w5008471Text
+                                  : FontConstant.k16w500331FText),
+                          SizedBox(height: 4),
+                          TextFormField(
+                            style: _addressFocus.hasFocus
+                                ? FontConstant.k18w5008471Text2
+                                : FontConstant.k18w5008471Text,
+                            focusNode: _addressFocus,
+                            controller: _addressController,
+                            decoration: TextFieldDecoration()
+                                .curvedWhiteDecoration(
+                                    label: 'Enter your address'.tr(),
+                                    curved: true),
+                          ),
+                          SizedBox(
+                            height: 16,
+                          ),
+                          InkWell(
+                            onTap: () {
+                              showModalBottomSheet(
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.only(
+                                          topLeft: Radius.circular(24),
+                                          topRight: Radius.circular(24))),
+                                  context: context,
+                                  isScrollControlled: true,
+                                  builder: (ctx) {
+                                    return _showBottomSheet();
+                                  }).then((value) {});
+                            },
+                            child: Container(
+                              padding: EdgeInsets.symmetric(vertical: 5),
+                              color: Colors.transparent,
+                              child: Text(
+                                'Change email / phone number'.tr(),
+                                style: FontConstant.k16w5008471,
+                              ),
+                            ),
+                          ),
+                          SizedBox(height: 32),
+                          materialButton(
+                            context,
+                            () {
+                              ScreenLoader().onLoading(context);
+                              final resp = TeacherUpdateProfile().update(
+                                  dob: _birthday,
+                                  education: _educationController.text,
+                                  experience: _yearController.text,
+                                  gender: _gender[0].toLowerCase(),
+                                  address: _addressController.text);
                               resp.then((value) {
-                                log(value.toString());
                                 if (value['status'] == 1) {
-                                  setState(() {
-                                    profileImageUrl = value['imgLocation'];
-                                  });
+                                  Navigator.of(context).pop();
                                   CustomSnackBar.customSnackBar(
                                       context, value['msg']);
                                 } else {
-                                  setState(() {
-                                    profileImageUrl =
-                                        widget.model.image.toString();
-                                  });
+                                  Navigator.of(context).pop();
                                   CustomSnackBar.customErrorSnackBar(
                                       context, value['msg']);
                                 }
                               });
-                            }
-                          },
-                          child: Container(
-                            color: Colors.transparent,
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 50, vertical: 10),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                SizedBox(
-                                  width: 25,
-                                  child: Image.asset('assets/images/edit.png'),
-                                ),
-                                SizedBox(width: 16),
-                                Text(
-                                  'Change Profile Photo'.tr(),
-                                  style: FontConstant.k16w5008471Text,
-                                ),
-                              ],
-                            ),
+                            },
+                            "Save".tr(),
+                            ThemeColor.primarycolor,
+                            52.0,
                           ),
-                        ),
-                        SizedBox(height: 40),
-                        Text('Personal Details'.tr(),
-                            style: FontConstant2.k24w5008471text),
-                        SizedBox(height: 24),
-                        Text('Education'.tr(),
-                            style: _eduFocus.hasFocus
-                                ? FontConstant.k16w5008471Text
-                                : FontConstant.k16w500331FText),
-                        SizedBox(height: 4),
-                        TextFormField(
-                          style: _eduFocus.hasFocus
-                              ? FontConstant.k18w5008471Text2
-                              : FontConstant.k18w5008471Text,
-                          focusNode: _eduFocus,
-                          controller: _educationController,
-                          decoration: TextFieldDecoration()
-                              .curvedWhiteDecoration(
-                                  label: 'Enter your highest degree'.tr(),
-                                  curved: true),
-                        ),
-                        SizedBox(height: 16),
-                        Text('Birthday'.tr(),
-                            style: FontConstant.k16w500331FText),
-                        SizedBox(height: 4),
-                        InkWell(
-                          onTap: () async {
-                            _pickedDate = await showDatePicker(
-                                context: context,
-                                initialDate: DateTime.now(),
-                                firstDate: DateTime(1960),
-                                lastDate: DateTime(2100));
-                            if (_pickedDate == null) {
-                              return;
-                            } else {
-                              setState(() {
-                                _birthday = DateFormat('yyyy-MM-dd')
-                                    .format(_pickedDate!);
-                              });
-                            }
-                          },
-                          child: Container(
-                            width: 1.sw,
-                            height: 64.h,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(90),
-                            ),
-                            padding: EdgeInsets.symmetric(horizontal: 18),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(_birthday,
-                                    style: FontConstant.k18w5008471Text),
-                                SizedBox(
-                                  width: 30,
-                                  child: Image.asset(
-                                    'assets/images/calendericon.png',
-                                    color: ThemeColor.b7A4B2,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        SizedBox(height: 16),
-                        Text('Gender'.tr(),
-                            style: FontConstant.k16w500331FText),
-                        SizedBox(height: 4),
-                        Center(
-                          child: Container(
-                            height: 64,
-                            padding: EdgeInsets.only(left: 16, right: 16),
-                            decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(90)),
-                            child: Center(
-                              child: DropdownButton<String>(
-                                alignment: Alignment.topRight,
-                                borderRadius: BorderRadius.circular(30),
-                                dropdownColor: Color(0xffffffff),
-                                hint: Text(
-                                  "Select your gender".tr(),
-                                ),
-                                icon: Padding(
-                                  padding: const EdgeInsets.only(right: 15.0),
-                                  child: Image.asset(
-                                    "assets/images/downarrow.png",
-                                    height: 15,
-                                    width: 15,
-                                  ),
-                                ),
-                                elevation: 0,
-                                isExpanded: true,
-                                underline: SizedBox(),
-                                value: _gender,
-                                items: <String>['Male'.tr(), 'Female'.tr()]
-                                    .map((String value) {
-                                  return DropdownMenuItem<String>(
-                                    value: value,
-                                    child: Text(
-                                      value,
-                                      style: FontConstant.k18w5008471Text,
-                                    ),
-                                  );
-                                }).toList(),
-                                onChanged: (String? val) {
-                                  setState(() {
-                                    _gender = val!;
-                                  });
-                                },
-                              ),
-                            ),
-                          ),
-                        ),
-                        SizedBox(height: 16),
-                        Text('Year of Experience'.tr(),
-                            style: _expFocus.hasFocus
-                                ? FontConstant.k16w5008471Text
-                                : FontConstant.k16w500331FText),
-                        SizedBox(height: 4),
-                        TextFormField(
-                          style: _expFocus.hasFocus
-                              ? FontConstant.k18w5008471Text2
-                              : FontConstant.k18w5008471Text,
-                          focusNode: _expFocus,
-                          keyboardType: TextInputType.number,
-                          controller: _yearController,
-                          decoration: TextFieldDecoration()
-                              .curvedWhiteDecoration(
-                                  label: 'Enter your years of experience'.tr(),
-                                  curved: true),
-                        ),
-                        SizedBox(height: 16),
-                        Text('Address'.tr(),
-                            style: _addressFocus.hasFocus
-                                ? FontConstant.k16w5008471Text
-                                : FontConstant.k16w500331FText),
-                        SizedBox(height: 4),
-                        TextFormField(
-                          style: _addressFocus.hasFocus
-                              ? FontConstant.k18w5008471Text2
-                              : FontConstant.k18w5008471Text,
-                          focusNode: _addressFocus,
-                          controller: _addressController,
-                          decoration: TextFieldDecoration()
-                              .curvedWhiteDecoration(
-                                  label: 'Enter your address'.tr(),
-                                  curved: true),
-                        ),
-                        SizedBox(
-                          height: 16,
-                        ),
-                        InkWell(
-                          onTap: () {
-                            showModalBottomSheet(
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.only(
-                                        topLeft: Radius.circular(24),
-                                        topRight: Radius.circular(24))),
-                                context: context,
-                                isScrollControlled: true,
-                                builder: (ctx) {
-                                  return _showBottomSheet();
-                                }).then((value) {});
-                          },
-                          child: Container(
-                            padding: EdgeInsets.symmetric(vertical: 5),
-                            color: Colors.transparent,
-                            child: Text(
-                              'Change email / phone number'.tr(),
-                              style: FontConstant.k16w5008471,
-                            ),
-                          ),
-                        ),
-                        SizedBox(height: 32),
-                        materialButton(
-                          context,
-                          () {
-                            ScreenLoader().onLoading(context);
-                            final resp = TeacherUpdateProfile().update(
-                                dob: _birthday,
-                                education: _educationController.text,
-                                experience: _yearController.text,
-                                gender: _gender[0].toLowerCase(),
-                                address: _addressController.text);
-                            resp.then((value) {
-                              if (value['status'] == 1) {
-                                Navigator.of(context).pop();
-                                CustomSnackBar.customSnackBar(
-                                    context, value['msg']);
-                              } else {
-                                Navigator.of(context).pop();
-                                CustomSnackBar.customErrorSnackBar(
-                                    context, value['msg']);
-                              }
-                            });
-                          },
-                          "Save".tr(),
-                          ThemeColor.primarycolor,
-                          52.0,
-                        ),
-                        SizedBox(height: 30),
-                      ],
+                          SizedBox(height: 30),
+                        ],
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),

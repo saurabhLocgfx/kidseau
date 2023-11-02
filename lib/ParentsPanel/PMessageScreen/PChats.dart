@@ -13,17 +13,17 @@ import 'package:flutter_audio_recorder3/flutter_audio_recorder3.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:grouped_list/grouped_list.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:kidseau/Theme.dart';
+import 'package:kidseau/Constants/colors.dart';
 import 'package:kidseau/Widgets/custom_snack_bar.dart';
 import 'package:kidseau/api/message_apis/all_message_api.dart';
 import 'package:kidseau/api/message_apis/delete_message_api.dart';
 import 'package:kidseau/api/message_apis/get_latest_message_api.dart';
-import 'package:kidseau/api/message_apis/send_message_api.dart';
 import 'package:kidseau/api/models/message_models/all_messages_model.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-import '../../Constants/colors.dart';
+import '../../Theme.dart';
+import '../../api/message_apis/send_message_api.dart';
 import 'PopenChats.dart';
 
 class PChats extends StatefulWidget {
@@ -87,7 +87,12 @@ class _PChatsState extends State<PChats> {
       _getLatestMessage();
     });
     super.initState();
+    focusNode.addListener(() {
+      setState(() {});
+    });
   }
+
+  final focusNode = FocusNode();
 
   @override
   void dispose() {
@@ -229,7 +234,6 @@ class _PChatsState extends State<PChats> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      extendBodyBehindAppBar: true,
       appBar: AppBar(
         toolbarHeight: 70.0,
         flexibleSpace: ClipRect(
@@ -269,450 +273,185 @@ class _PChatsState extends State<PChats> {
           ],
         ),
       ),
-      bottomNavigationBar: SingleChildScrollView(
-        child: Column(
-          children: [
-            _pickedImg.path == ''
-                ? SizedBox.shrink()
-                : Container(
-                    height: 100,
-                    padding: EdgeInsets.symmetric(horizontal: 10),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        SizedBox(
-                            width: 100,
-                            height: 100,
-                            child: Image.file(
-                              _pickedImg,
-                              fit: BoxFit.fill,
-                            )),
-                        InkWell(
-                          onTap: () {
-                            setState(() {
-                              _pickedImg = File('');
-                            });
-                          },
-                          child: Container(
-                            color: Colors.transparent,
-                            padding: EdgeInsets.all(10),
-                            child: Icon(Icons.clear),
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-            _recording.path == null
-                ? Container()
-                : Container(
-                    padding: EdgeInsets.all(16),
-                    margin: EdgeInsets.all(8),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(50),
-                      color: Colors.white,
-                    ),
-                    child: Row(
-                      children: [
-                        GestureDetector(
-                          onTap: () async {
-                            //
-                            setState(() {
-                              playing = !playing;
-                              soundLength = 0.0;
-                            });
-                            if (playing) {
-                              audioPlayer.play(_recording.path!, isLocal: true);
-                              setPosition();
-                            } else {
-                              setPosition();
-                              audioPlayer.stop();
-                            }
-                          },
-                          child: Container(
-                            width: 50,
-                            height: 50,
-                            padding: EdgeInsets.all(10),
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: AppColors().k8267AC,
-                            ),
-                            child: playing
-                                ? Image.asset(
-                                    'assets/images/pause.png',
-                                    color: AppColors().kF8F6FA,
-                                  )
-                                : Image.asset(
-                                    'assets/images/playB.png',
-                                    color: AppColors().kF8F6FA,
-                                  ),
-                          ),
-                        ),
-                        //SizedBox(width: 16),
-                        Expanded(
-                          child: Slider(
-                            thumbColor: AppColors().k8267AC,
-                            activeColor: AppColors().k8267AC.withOpacity(0.5),
-                            inactiveColor: Colors.grey,
-                            min: 0,
-                            max: soundDuration.inSeconds.toDouble(),
-                            value: soundLength,
-                            onChanged: (v) {
-                              soundLength = v;
-                            },
-                          ),
-                        ),
-                        //SizedBox(width: 16),
-                        GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              _recording = Recording();
-                            });
-                          },
-                          child: Container(
-                            width: 50,
-                            height: 50,
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: AppColors().k8267AC,
-                            ),
-                            child: Icon(
-                              Icons.clear,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-            Padding(
-              padding: EdgeInsets.only(
-                  bottom: MediaQuery.of(context).viewInsets.bottom),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: TextField(
-                      maxLines: 5,
-                      minLines: 1,
-                      //keyboardType: TextInputType.multiline,
-                      inputFormatters: [
-                        LengthLimitingTextInputFormatter(500),
-                      ],
-                      controller: _controller,
-                      onSubmitted: (text) {},
-                      textInputAction: TextInputAction.done,
-                      decoration: InputDecoration(
-                        enabledBorder: OutlineInputBorder(
-                          borderSide:
-                              BorderSide(width: 2, color: Color(0xffDBE8FA)),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide:
-                              BorderSide(width: 2, color: Color(0xffDBE8FA)),
-                        ),
-                        fillColor: Color(0xffF0F4FA),
-                        hintText: _recording.path != null
-                            ? 'Audio File'.tr()
-                            : "Type here.".tr(),
-                        hintStyle: FontConstant.k16w400B7A4Text,
-                        suffixIcon: _msgLoading
-                            ? Container(
-                                padding: EdgeInsets.all(10),
-                                width: 10,
-                                height: 10,
-                                child: CircularProgressIndicator(),
-                              )
-                            : GestureDetector(
-                                onTap: () {
-                                  if (_controller.text.isNotEmpty ||
-                                      _pickedImg.path != '' ||
-                                      _recording.path != null) {
-                                    setState(() {
-                                      _msgLoading = true;
-                                    });
-                                    log('message');
-                                    final resp = SendMessageApi().get(
-                                        message: _controller.text,
-                                        sendToId: widget.userId,
-                                        receiverUserType: widget.userType,
-                                        image: _recording.path != null
-                                            ? File(_recording.path!)
-                                            : _pickedImg);
-                                    resp.then((value) {
-                                      // log(value.toString() + "send message response");
-                                      if (value['status'] == 1) {
-                                        setState(() {
-                                          _recording = Recording();
-                                          messageModel.allMsg!
-                                              .add(AllMsg.fromJson({
-                                            'message_id': '${value['msg_id']}',
-                                            'message': '${value['msg']}',
-                                            'file_url': value['file'] == null
-                                                ? ''
-                                                : "${value['file']}",
-                                            'created_at':
-                                                '${value['date_time']}',
-                                            'read_at': '',
-                                            'send_to_id': widget.userId,
-                                            'is_deleted': '0',
-                                            'sender_user_type': 'teacher',
-                                            'reciever_user_type':
-                                                widget.userType,
-                                          }));
-                                          _msgLoading = false;
-                                        });
-                                        /*final message = Messages(
-                                      text: _controller.text,
-                                      date: DateTime.now(),
-                                      isSentByme: true);
-                                  setState(() => messages.add(message));*/
-                                        _controller.clear();
-                                        _pickedImg = File('');
-                                      } else {
-                                        log(value.toString());
-                                        setState(() {
-                                          _msgLoading = false;
-                                        });
-                                      }
-                                    });
-                                  }
-                                },
-                                child: Padding(
-                                  padding: const EdgeInsets.only(
-                                    left: 10.0,
-                                  ),
-                                  child: ImageIcon(
-                                    AssetImage("assets/images/sendicon.png"),
-                                    size: 12,
-                                    color: ThemeColor.primarycolor,
-                                  ),
-                                ),
-                              ),
-                        prefixIconConstraints:
-                            BoxConstraints(minHeight: 40, minWidth: 40),
-                        prefixIcon: GestureDetector(
-                          onTap: showToast,
-                          child: Padding(
-                            padding: EdgeInsets.only(
-                                left: 10.0, top: 10, bottom: 10, right: 20),
-                            child: ImageIcon(
-                              AssetImage("assets/images/add-circle.png"),
-                              //size: 19,
-                              color: ThemeColor.darkpurple,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  /*Expanded(
-                    child: TextField(
-                      maxLines: 5,
-                      controller: _controller,
-                      onSubmitted: (text) {},
-                      decoration: InputDecoration(
-                        enabledBorder: OutlineInputBorder(
-                          borderSide:
-                              BorderSide(width: 2, color: Color(0xffDBE8FA)),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide:
-                              BorderSide(width: 2, color: Color(0xffDBE8FA)),
-                        ),
-                        fillColor: Color(0xffF0F4FA),
-                        hintText: "Type here.".tr(),
-                        hintStyle: FontConstant.k16w400B7A4Text,
-                        suffixIcon: _msgLoading
-                            ? Container(
-                                padding: EdgeInsets.all(10),
-                                width: 10,
-                                height: 10,
-                                child: CircularProgressIndicator(),
-                              )
-                            : GestureDetector(
-                                onTap: () {
-                                  if (_controller.text.isNotEmpty ||
-                                      _pickedImg.path != '') {
-                                    setState(() {
-                                      _msgLoading = true;
-                                    });
-                                    log('message');
-                                    final resp = SendMessageApi().get(
-                                        message: _controller.text,
-                                        sendToId: widget.userId,
-                                        receiverUserType: widget.userType,
-                                        image: _pickedImg);
-                                    resp.then((value) {
-                                      log(value.toString());
-                                      if (value['status'] == 1) {
-                                        setState(() {
-                                          messageModel.allMsg!
-                                              .add(AllMsg.fromJson({
-                                            'message_id': '${value['msg_id']}',
-                                            'message': '${value['msg']}',
-                                            'file_url': value['file'] == null
-                                                ? ''
-                                                : "${value['file']}",
-                                            'created_at':
-                                                '${value['date_time']}',
-                                            'read_at': '',
-                                            'send_to_id': widget.userId,
-                                            'is_deleted': '0',
-                                            'sender_user_type': 'teacher',
-                                            'reciever_user_type':
-                                                widget.userType,
-                                          }));
-                                          _msgLoading = false;
-                                        });
-                                        */ /*final message = Messages(
-                                      text: _controller.text,
-                                      date: DateTime.now(),
-                                      isSentByme: true);
-                                  setState(() => messages.add(message));*/ /*
-                                        _controller.clear();
-                                        _pickedImg = File('');
-                                      } else {
-                                        log(value.toString());
-                                        setState(() {
-                                          _msgLoading = false;
-                                        });
-                                      }
-                                    });
-                                  }
-                                },
-                                child: Padding(
-                                  padding: const EdgeInsets.all(10.0),
-                                  child: ImageIcon(
-                                    AssetImage("assets/images/sendicon.png"),
-                                    size: 12,
-                                    color: ThemeColor.primarycolor,
-                                  ),
-                                ),
-                              ),
-                        prefixIcon: Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: GestureDetector(
-                            onTap: showToast,
-                            child: ImageIcon(
-                              AssetImage("assets/images/add-circle.png"),
-                              size: 12,
-                              color: ThemeColor.darkpurple,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),*/
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
       body: _isLoading
           ? Center(
               child: CircularProgressIndicator(),
             )
-          : SafeArea(
-              child: Container(
-                // height: 896.h,
-                // width: 414.w,
-                constraints: BoxConstraints(maxHeight: 1.sh),
-                decoration: BoxDecoration(
-                  //color: Colors.black,
-                  image: DecorationImage(
-                      image: AssetImage(
-                        "assets/images/framemessages.png",
-                      ),
-                      colorFilter: ColorFilter.mode(
-                        Colors.transparent.withOpacity(0.4),
-                        BlendMode.modulate,
-                      ),
-                      fit: BoxFit.cover),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 16.0, right: 16),
-                  child: Column(
+          : Container(
+              height: 1.sh,
+              child: Stack(
+                children: [
+                  ListView(
                     children: [
-                      SizedBox(height: 16),
-                      /*Container(
-                        color: Colors.transparent,
-                        child: Row(
-                          children: [
-                            Container(
-                              height: 112,
-                              width: 84,
-                              clipBehavior: Clip.hardEdge,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(8)),
-                              child: Image.network(
-                                widget.profilePic,
-                                fit: BoxFit.fill,
-                                errorBuilder: (q, w, e) =>
-                                    Image.asset("assets/images/teacher1.png"),
-                              ),
-                            ),
-                            SizedBox(
-                              width: 16,
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(widget.name,
-                                    style: FontConstant.k24w500brownText.copyWith(
-                                        color: ThemeColor.primarycolor)),
-                                Text(
-                                  widget.userType,
-                                  style: FontConstant.k16w400B7A4Text,
-                                ),
-                                Text(
-                                  widget.language,
-                                  style: FontConstant.k16w4008471Text,
-                                )
-                              ],
-                            )
-                          ],
-                        ),
-                      ),*/
-                      Expanded(
-                        //height: 500,
-                        child: GroupedListView<AllMsg, DateTime>(
-                          controller: _scrollController,
-                          //itemExtent: messageModel.allMsg!.length.toDouble(),
-                          reverse: true,
-                          order: GroupedListOrder.DESC,
-                          padding: EdgeInsets.all(16),
-                          elements: messageModel.allMsg!,
-                          groupBy: (messages) =>
-                              DateTime.parse(messages.createdAt!),
-                          groupHeaderBuilder: (AllMsg messages) => SizedBox(),
-                          indexedItemBuilder:
-                              (context, AllMsg messages, int index) {
-                            log(messages.senderUserType.toString());
-                            return GestureDetector(
-                              onLongPress: messages.senderUserType == "teacher"
-                                  ? () {
-                                      showDialog(
-                                          barrierDismissible: true,
-                                          context: context,
-                                          builder: (ctx) {
-                                            return AlertDialog(
-                                              title: Text(
-                                                'Delete Message',
-                                                style: FontConstant
-                                                    .k18w500F970Text,
-                                              ),
-                                              /*content: Column(
-                                                mainAxisSize: MainAxisSize.min,
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  messages.fileUrl! == ''
-                                                      ? SizedBox.shrink()
+                      GroupedListView<AllMsg, DateTime>(
+                        shrinkWrap: true,
+                        controller: _scrollController,
+                        //itemExtent: messageModel.allMsg!.length.toDouble(),
+                        reverse: true,
+                        order: GroupedListOrder.DESC,
+                        padding: EdgeInsets.all(16),
+                        elements: messageModel.allMsg!,
+                        groupBy: (messages) =>
+                            DateTime.parse(messages.createdAt!),
+                        groupHeaderBuilder: (AllMsg messages) => SizedBox(),
+                        indexedItemBuilder:
+                            (context, AllMsg messages, int index) {
+                          log(messages.senderUserType.toString());
+                          return GestureDetector(
+                            onLongPress: messages.senderUserType == "teacher"
+                                ? () {
+                                    showDialog(
+                                        barrierDismissible: true,
+                                        context: context,
+                                        builder: (ctx) {
+                                          return AlertDialog(
+                                            title: Text(
+                                              'Delete Message',
+                                              style:
+                                                  FontConstant.k18w500F970Text,
+                                            ),
+                                            /*content: Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          messages.fileUrl! == ''
+                                              ? SizedBox.shrink()
+                                              : Container(
+                                                  constraints:
+                                                      BoxConstraints(
+                                                          // maxWidth: 200,
+                                                          maxHeight:
+                                                              150),
+                                                  margin:
+                                                      EdgeInsets.only(
+                                                          bottom: 10),
+                                                  child: Image.network(
+                                                    messages.fileUrl
+                                                        .toString(),
+                                                    errorBuilder: (q, w,
+                                                            e) =>
+                                                        Text(
+                                                            'Image not found'),
+                                                    fit:
+                                                        BoxFit.fitWidth,
+                                                  ),
+                                                ),
+                                          Text(
+                                            messages.message.toString(),
+                                            style: FontConstant
+                                                .k16w4008471Text
+                                                .copyWith(
+                                                    color: Color(
+                                                        0xff5E5C70)),
+                                          ),
+                                        ],
+                                      ),*/
+                                            actions: [
+                                              TextButton(
+                                                  onPressed: () {
+                                                    Navigator.of(context).pop();
+                                                  },
+                                                  child: Text('Cancel')),
+                                              TextButton(
+                                                  onPressed: () {
+                                                    final resp =
+                                                        DeleteMessageApi()
+                                                            .delete(
+                                                                msgId: messages
+                                                                    .messageId
+                                                                    .toString());
+                                                    resp.then((value) {
+                                                      log(value.toString());
+                                                      if (value['status'] ==
+                                                          1) {
+                                                        setState(() {
+                                                          messageModel
+                                                                  .allMsg![index]
+                                                                  .message =
+                                                              'This message has been deleted';
+                                                          messageModel
+                                                              .allMsg![index]
+                                                              .fileUrl = '';
+                                                          messageModel
+                                                              .allMsg![index]
+                                                              .isDeleted = '1';
+                                                          messages.isDeleted =
+                                                              '1';
+                                                        });
+                                                        Navigator.of(context)
+                                                            .pop();
+                                                      } else {
+                                                        Navigator.of(context)
+                                                            .pop();
+                                                        CustomSnackBar
+                                                            .customErrorSnackBar(
+                                                                context,
+                                                                value['msg']);
+                                                      }
+                                                    });
+                                                  },
+                                                  child: Text(
+                                                    'Delete',
+                                                    style: FontConstant
+                                                        .k16w400F97070,
+                                                  )),
+                                            ],
+                                          );
+                                        });
+                                  }
+                                : () {},
+                            child: Align(
+                              alignment: messages.senderUserType == "teacher"
+                                  ? Alignment.centerRight
+                                  : Alignment.centerLeft,
+                              child: Padding(
+                                padding: const EdgeInsets.only(bottom: 32.0),
+                                child: Container(
+                                  constraints: BoxConstraints(
+                                    maxWidth: 250,
+                                  ),
+                                  decoration: BoxDecoration(
+                                      color: messages.senderUserType ==
+                                              "teacher"
+                                          ? messages.fileUrl!.contains('m4a')
+                                              ? Colors.transparent
+                                              : Color(0xffF2F1F8)
+                                          : messages.fileUrl!.contains('m4a')
+                                              ? Colors.transparent
+                                              : Color(0xffDBE8FA),
+                                      borderRadius: BorderRadius.circular(6)),
+                                  child: Padding(
+                                    padding: EdgeInsets.all(
+                                        messages.fileUrl!.contains('m4a')
+                                            ? 0
+                                            : 12),
+                                    child: messages.isDeleted == '1'
+                                        ? Text(
+                                            'This message has been deleted!',
+                                            style: FontConstant.k16w4008471Text
+                                                .copyWith(
+                                                    color: Colors.red.shade400),
+                                          )
+                                        : Column(
+                                            mainAxisSize: MainAxisSize.min,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              messages.fileUrl! == ''
+                                                  ? SizedBox.shrink()
+                                                  : messages.fileUrl!
+                                                          .contains('m4a')
+                                                      ? InternetAudioPlayer(
+                                                          isParent: messages
+                                                                  .senderUserType ==
+                                                              "teacher",
+                                                          url:
+                                                              messages.fileUrl!)
                                                       : Container(
                                                           constraints:
                                                               BoxConstraints(
-                                                                  // maxWidth: 200,
+                                                                  maxWidth: 200,
                                                                   maxHeight:
                                                                       150),
                                                           margin:
@@ -725,161 +464,25 @@ class _PChatsState extends State<PChats> {
                                                                     e) =>
                                                                 Text(
                                                                     'Image not found'),
-                                                            fit:
-                                                                BoxFit.fitWidth,
                                                           ),
                                                         ),
-                                                  Text(
-                                                    messages.message.toString(),
-                                                    style: FontConstant
-                                                        .k16w4008471Text
-                                                        .copyWith(
-                                                            color: Color(
-                                                                0xff5E5C70)),
-                                                  ),
-                                                ],
-                                              ),*/
-                                              actions: [
-                                                TextButton(
-                                                    onPressed: () {
-                                                      Navigator.of(context)
-                                                          .pop();
-                                                    },
-                                                    child: Text('Cancel')),
-                                                TextButton(
-                                                    onPressed: () {
-                                                      final resp =
-                                                          DeleteMessageApi().delete(
-                                                              msgId: messages
-                                                                  .messageId
-                                                                  .toString());
-                                                      resp.then((value) {
-                                                        log(value.toString());
-                                                        if (value['status'] ==
-                                                            1) {
-                                                          setState(() {
-                                                            messageModel
-                                                                    .allMsg![index]
-                                                                    .message =
-                                                                'This message has been deleted';
-                                                            messageModel
-                                                                .allMsg![index]
-                                                                .fileUrl = '';
-                                                            messageModel
-                                                                .allMsg![index]
-                                                                .isDeleted = '1';
-                                                            messages.isDeleted =
-                                                                '1';
-                                                          });
-                                                          Navigator.of(context)
-                                                              .pop();
-                                                        } else {
-                                                          Navigator.of(context)
-                                                              .pop();
-                                                          CustomSnackBar
-                                                              .customErrorSnackBar(
-                                                                  context,
-                                                                  value['msg']);
-                                                        }
-                                                      });
-                                                    },
-                                                    child: Text(
-                                                      'Delete',
-                                                      style: FontConstant
-                                                          .k16w400F97070,
-                                                    )),
-                                              ],
-                                            );
-                                          });
-                                    }
-                                  : () {},
-                              child: Align(
-                                alignment: messages.senderUserType == "teacher"
-                                    ? Alignment.centerRight
-                                    : Alignment.centerLeft,
-                                child: Padding(
-                                  padding: const EdgeInsets.only(bottom: 32.0),
-                                  child: Container(
-                                    constraints: BoxConstraints(
-                                      maxWidth: 250,
-                                    ),
-                                    decoration: BoxDecoration(
-                                        color: messages.senderUserType ==
-                                                "teacher"
-                                            ? messages.fileUrl!.contains('m4a')
-                                                ? Colors.transparent
-                                                : Color(0xffF2F1F8)
-                                            : messages.fileUrl!.contains('m4a')
-                                                ? Colors.transparent
-                                                : Color(0xffDBE8FA),
-                                        borderRadius: BorderRadius.circular(6)),
-                                    child: Padding(
-                                      padding: EdgeInsets.all(
-                                          messages.fileUrl!.contains('m4a')
-                                              ? 0
-                                              : 12),
-                                      child: messages.isDeleted == '1'
-                                          ? Text(
-                                              'This message has been deleted!',
-                                              style: FontConstant
-                                                  .k16w4008471Text
-                                                  .copyWith(
-                                                      color:
-                                                          Colors.red.shade400),
-                                            )
-                                          : Column(
-                                              mainAxisSize: MainAxisSize.min,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                messages.fileUrl! == ''
-                                                    ? SizedBox.shrink()
-                                                    : messages.fileUrl!
-                                                            .contains('m4a')
-                                                        ? InternetAudioPlayer(
-                                                            isParent: messages
-                                                                    .senderUserType ==
-                                                                "teacher",
-                                                            url: messages
-                                                                .fileUrl!)
-                                                        : Container(
-                                                            constraints:
-                                                                BoxConstraints(
-                                                                    maxWidth:
-                                                                        200,
-                                                                    maxHeight:
-                                                                        150),
-                                                            margin:
-                                                                EdgeInsets.only(
-                                                                    bottom: 10),
-                                                            child:
-                                                                Image.network(
-                                                              messages.fileUrl
-                                                                  .toString(),
-                                                              errorBuilder: (q,
-                                                                      w, e) =>
-                                                                  Text(
-                                                                      'Image not found'),
-                                                            ),
-                                                          ),
-                                                Text(
-                                                  messages.message.toString(),
-                                                  maxLines: 5,
-                                                  style: FontConstant
-                                                      .k16w4008471Text
-                                                      .copyWith(
-                                                          color: Color(
-                                                              0xff5E5C70)),
-                                                ),
-                                              ],
-                                            ),
-                                    ),
+                                              Text(
+                                                messages.message.toString(),
+                                                maxLines: 5,
+                                                style: FontConstant
+                                                    .k16w4008471Text
+                                                    .copyWith(
+                                                        color:
+                                                            Color(0xff5E5C70)),
+                                              ),
+                                            ],
+                                          ),
                                   ),
                                 ),
                               ),
-                            );
-                          },
-                        ),
+                            ),
+                          );
+                        },
                       ),
                       Visibility(
                         visible: _isVisible,
@@ -913,11 +516,11 @@ class _PChatsState extends State<PChats> {
                                     InkWell(
                                       onTap: () {
                                         /*
-                                        if (isRecording) {
-                                          record.stop();
-                                        } else {
+                                  if (isRecording) {
+                                    record.stop();
+                                  } else {
 
-                                        }*/
+                                  }*/
                                         _getVoicePermission();
                                         //log(isRecording.toString());
                                       },
@@ -932,8 +535,8 @@ class _PChatsState extends State<PChats> {
                                             Text(
                                               "Voice note".tr(),
                                               /*AppLoaclizations.of(context)!
-                              .translate("Voice note")
-                              .toString(),*/
+                        .translate("Voice note")
+                        .toString(),*/
                                               style:
                                                   FontConstant.k16w5008471Text,
                                             ),
@@ -999,62 +602,381 @@ class _PChatsState extends State<PChats> {
                           ),
                         ),
                       ),
-                      SizedBox(
-                        height: 8.h,
-                      ),
-                      /* Container(
-                height: 52.h,
-                width: 382.w,
-                child: TextField(
-                  onSubmitted: (text) {
-                    final message = Messages(
-                        text: text, date: DateTime.now(), isSentByme: true);
-                    setState(() => messages.add(message));
-                  },
-                  decoration: InputDecoration(
-                    enabledBorder: OutlineInputBorder(
-                      borderSide:
-                          BorderSide(width: 2, color: Color(0xffDBE8FA)),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide:
-                          BorderSide(width: 2, color: Color(0xffDBE8FA)),
-                    ),
-                    fillColor: Color(0xffF0F4FA),
-                    hintText: "Type here.".tr(),
-                    */ /* AppLoaclizations.of(context)!.translate("Type here."),*/ /*
-                    hintStyle: FontConstant.k16w400B7A4Text,
-                    suffixIcon: GestureDetector(
-                      onTap: () {},
-                      child: Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: ImageIcon(
-                          AssetImage("assets/images/sendicon.png"),
-                          size: 12,
-                          color: ThemeColor.primarycolor,
-                        ),
-                      ),
-                    ),
-                    prefixIcon: Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: GestureDetector(
-                        onTap: showToast,
-                        child: ImageIcon(
-                          AssetImage("assets/images/add-circle.png"),
-                          size: 12,
-                          color: ThemeColor.darkpurple,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ),*/
-                      /*SizedBox(
-                        height: 32.h,
-                      ),*/
                     ],
                   ),
-                ),
+                  Positioned(
+                    bottom: 0,
+                    child: Container(
+                      padding: EdgeInsets.symmetric(horizontal: 16),
+                      height: 100,
+                      width: 1.sw,
+                      child: Column(
+                        children: [
+                          _pickedImg.path == ''
+                              ? SizedBox.shrink()
+                              : Container(
+                                  height: 100,
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      SizedBox(
+                                          width: 100,
+                                          height: 100,
+                                          child: Image.file(
+                                            _pickedImg,
+                                            fit: BoxFit.fill,
+                                          )),
+                                      InkWell(
+                                        onTap: () {
+                                          setState(() {
+                                            _pickedImg = File('');
+                                          });
+                                        },
+                                        child: Container(
+                                          color: Colors.transparent,
+                                          padding: EdgeInsets.all(10),
+                                          child: Icon(Icons.clear),
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                          _recording.path == null
+                              ? Container()
+                              : Container(
+                                  padding: EdgeInsets.all(16),
+                                  margin: EdgeInsets.all(8),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(50),
+                                    color: Colors.white,
+                                  ),
+                                  child: Row(
+                                    children: [
+                                      GestureDetector(
+                                        onTap: () async {
+                                          //
+                                          setState(() {
+                                            playing = !playing;
+                                            soundLength = 0.0;
+                                          });
+                                          if (playing) {
+                                            audioPlayer.play(_recording.path!,
+                                                isLocal: true);
+                                            setPosition();
+                                          } else {
+                                            setPosition();
+                                            audioPlayer.stop();
+                                          }
+                                        },
+                                        child: Container(
+                                          width: 50,
+                                          height: 50,
+                                          padding: EdgeInsets.all(10),
+                                          decoration: BoxDecoration(
+                                            shape: BoxShape.circle,
+                                            color: AppColors().k8267AC,
+                                          ),
+                                          child: playing
+                                              ? Image.asset(
+                                                  'assets/images/pause.png',
+                                                  color: AppColors().kF8F6FA,
+                                                )
+                                              : Image.asset(
+                                                  'assets/images/playB.png',
+                                                  color: AppColors().kF8F6FA,
+                                                ),
+                                        ),
+                                      ),
+                                      //SizedBox(width: 16),
+                                      Expanded(
+                                        child: Slider(
+                                          thumbColor: AppColors().k8267AC,
+                                          activeColor: AppColors()
+                                              .k8267AC
+                                              .withOpacity(0.5),
+                                          inactiveColor: Colors.grey,
+                                          min: 0,
+                                          max: soundDuration.inSeconds
+                                              .toDouble(),
+                                          value: soundLength,
+                                          onChanged: (v) {
+                                            soundLength = v;
+                                          },
+                                        ),
+                                      ),
+                                      //SizedBox(width: 16),
+                                      GestureDetector(
+                                        onTap: () {
+                                          setState(() {
+                                            _recording = Recording();
+                                          });
+                                        },
+                                        child: Container(
+                                          width: 50,
+                                          height: 50,
+                                          decoration: BoxDecoration(
+                                            shape: BoxShape.circle,
+                                            color: AppColors().k8267AC,
+                                          ),
+                                          child: Icon(
+                                            Icons.clear,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                          Row(
+                            children: [
+                              Expanded(
+                                child: Container(
+                                  color: Colors.white,
+                                  child: TextField(
+                                    maxLines: 5,
+                                    minLines: 1,
+                                    focusNode: focusNode,
+                                    //keyboardType: TextInputType.multiline,
+                                    inputFormatters: [
+                                      LengthLimitingTextInputFormatter(500),
+                                    ],
+                                    controller: _controller,
+                                    onSubmitted: (text) {},
+                                    textInputAction: TextInputAction.done,
+                                    decoration: InputDecoration(
+                                      enabledBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                            width: 2, color: Color(0xffDBE8FA)),
+                                      ),
+                                      focusedBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                            width: 2, color: Color(0xffDBE8FA)),
+                                      ),
+                                      fillColor: Color(0xffF0F4FA),
+                                      hintText: _recording.path != null
+                                          ? 'Audio File'.tr()
+                                          : "Type here.".tr(),
+                                      hintStyle: FontConstant.k16w400B7A4Text,
+                                      suffixIcon: _msgLoading
+                                          ? Container(
+                                              padding: EdgeInsets.all(10),
+                                              width: 10,
+                                              height: 10,
+                                              child:
+                                                  CircularProgressIndicator(),
+                                            )
+                                          : GestureDetector(
+                                              onTap: () {
+                                                if (_controller
+                                                        .text.isNotEmpty ||
+                                                    _pickedImg.path != '' ||
+                                                    _recording.path != null) {
+                                                  setState(() {
+                                                    _msgLoading = true;
+                                                  });
+                                                  log('message');
+                                                  final resp = SendMessageApi()
+                                                      .get(
+                                                          message:
+                                                              _controller.text,
+                                                          sendToId:
+                                                              widget.userId,
+                                                          receiverUserType:
+                                                              widget.userType,
+                                                          image: _recording
+                                                                      .path !=
+                                                                  null
+                                                              ? File(_recording
+                                                                  .path!)
+                                                              : _pickedImg);
+                                                  resp.then((value) {
+                                                    // log(value.toString() + "send message response");
+                                                    if (value['status'] == 1) {
+                                                      setState(() {
+                                                        _recording =
+                                                            Recording();
+                                                        messageModel.allMsg!
+                                                            .add(AllMsg
+                                                                .fromJson({
+                                                          'message_id':
+                                                              '${value['msg_id']}',
+                                                          'message':
+                                                              '${value['msg']}',
+                                                          'file_url': value[
+                                                                      'file'] ==
+                                                                  null
+                                                              ? ''
+                                                              : "${value['file']}",
+                                                          'created_at':
+                                                              '${value['date_time']}',
+                                                          'read_at': '',
+                                                          'send_to_id':
+                                                              widget.userId,
+                                                          'is_deleted': '0',
+                                                          'sender_user_type':
+                                                              'teacher',
+                                                          'reciever_user_type':
+                                                              widget.userType,
+                                                        }));
+                                                        _msgLoading = false;
+                                                      });
+                                                      /*final message = Messages(
+                              text: _controller.text,
+                              date: DateTime.now(),
+                              isSentByme: true);
+                          setState(() => messages.add(message));*/
+                                                      _controller.clear();
+                                                      _pickedImg = File('');
+                                                    } else {
+                                                      log(value.toString());
+                                                      setState(() {
+                                                        _msgLoading = false;
+                                                      });
+                                                    }
+                                                  });
+                                                }
+                                              },
+                                              child: Padding(
+                                                padding: const EdgeInsets.only(
+                                                  left: 10.0,
+                                                ),
+                                                child: ImageIcon(
+                                                  AssetImage(
+                                                      "assets/images/sendicon.png"),
+                                                  size: 12,
+                                                  color:
+                                                      ThemeColor.primarycolor,
+                                                ),
+                                              ),
+                                            ),
+                                      prefixIconConstraints: BoxConstraints(
+                                          minHeight: 40, minWidth: 40),
+                                      prefixIcon: GestureDetector(
+                                        onTap: showToast,
+                                        child: Padding(
+                                          padding: EdgeInsets.only(
+                                              left: 10.0,
+                                              top: 10,
+                                              bottom: 10,
+                                              right: 20),
+                                          child: ImageIcon(
+                                            AssetImage(
+                                                "assets/images/add-circle.png"),
+                                            //size: 19,
+                                            color: ThemeColor.darkpurple,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              /*Expanded(
+              child: TextField(
+                  maxLines: 5,
+                  controller: _controller,
+                  onSubmitted: (text) {},
+                  decoration: InputDecoration(
+                  enabledBorder: OutlineInputBorder(
+                  borderSide:
+                      BorderSide(width: 2, color: Color(0xffDBE8FA)),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                  borderSide:
+                      BorderSide(width: 2, color: Color(0xffDBE8FA)),
+                  ),
+                  fillColor: Color(0xffF0F4FA),
+                  hintText: "Type here.".tr(),
+                  hintStyle: FontConstant.k16w400B7A4Text,
+                  suffixIcon: _msgLoading
+                    ? Container(
+                        padding: EdgeInsets.all(10),
+                        width: 10,
+                        height: 10,
+                        child: CircularProgressIndicator(),
+                      )
+                    : GestureDetector(
+                        onTap: () {
+                          if (_controller.text.isNotEmpty ||
+                              _pickedImg.path != '') {
+                            setState(() {
+                              _msgLoading = true;
+                            });
+                            log('message');
+                            final resp = SendMessageApi().get(
+                                message: _controller.text,
+                                sendToId: widget.userId,
+                                receiverUserType: widget.userType,
+                                image: _pickedImg);
+                            resp.then((value) {
+                              log(value.toString());
+                              if (value['status'] == 1) {
+                                setState(() {
+                                  messageModel.allMsg!
+                                      .add(AllMsg.fromJson({
+                                    'message_id': '${value['msg_id']}',
+                                    'message': '${value['msg']}',
+                                    'file_url': value['file'] == null
+                                        ? ''
+                                        : "${value['file']}",
+                                    'created_at':
+                                        '${value['date_time']}',
+                                    'read_at': '',
+                                    'send_to_id': widget.userId,
+                                    'is_deleted': '0',
+                                    'sender_user_type': 'teacher',
+                                    'reciever_user_type':
+                                        widget.userType,
+                                  }));
+                                  _msgLoading = false;
+                                });
+                                */ /*final message = Messages(
+                              text: _controller.text,
+                              date: DateTime.now(),
+                              isSentByme: true);
+                          setState(() => messages.add(message));*/ /*
+                                _controller.clear();
+                                _pickedImg = File('');
+                              } else {
+                                log(value.toString());
+                                setState(() {
+                                  _msgLoading = false;
+                                });
+                              }
+                            });
+                          }
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: ImageIcon(
+                            AssetImage("assets/images/sendicon.png"),
+                            size: 12,
+                            color: ThemeColor.primarycolor,
+                          ),
+                        ),
+                      ),
+                  prefixIcon: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: GestureDetector(
+                    onTap: showToast,
+                    child: ImageIcon(
+                      AssetImage("assets/images/add-circle.png"),
+                      size: 12,
+                      color: ThemeColor.darkpurple,
+                    ),
+                  ),
+                  ),
+                  ),
+              ),
+              ),*/
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
     );

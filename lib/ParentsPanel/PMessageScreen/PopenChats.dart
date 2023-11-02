@@ -386,258 +386,268 @@ class _POpenChatsState extends State<POpenChats> {
         ),
       ),
       bottomNavigationBar: SingleChildScrollView(
-        child: Column(
-          children: [
-            _pickedImg.path == ''
-                ? SizedBox.shrink()
-                : GestureDetector(
-                    onTap: () {
-                      showDialog(
-                        context: context,
-                        builder: (_) => PhotoViewer(
-                          asset: true,
-                          url: _pickedImg.path,
+        child: Padding(
+          padding: const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 34),
+          child: Column(
+            children: [
+              _pickedImg.path == ''
+                  ? SizedBox.shrink()
+                  : GestureDetector(
+                      onTap: () {
+                        showDialog(
+                          context: context,
+                          builder: (_) => PhotoViewer(
+                            asset: true,
+                            url: _pickedImg.path,
+                          ),
+                        );
+                      },
+                      child: Container(
+                        height: 100,
+                        padding: EdgeInsets.symmetric(horizontal: 10),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            SizedBox(
+                                width: 100,
+                                height: 100,
+                                child: Image.file(
+                                  _pickedImg,
+                                  fit: BoxFit.fill,
+                                )),
+                            InkWell(
+                              onTap: () {
+                                setState(() {
+                                  _pickedImg = File('');
+                                });
+                              },
+                              child: Container(
+                                color: Colors.transparent,
+                                padding: EdgeInsets.all(10),
+                                child: Icon(Icons.clear),
+                              ),
+                            )
+                          ],
                         ),
-                      );
-                    },
-                    child: Container(
-                      height: 100,
-                      padding: EdgeInsets.symmetric(horizontal: 10),
+                      ),
+                    ),
+              _recording.path == null
+                  ? Container()
+                  : Container(
+                      padding: EdgeInsets.all(16),
+                      margin: EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(50),
+                        color: Colors.white,
+                      ),
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          SizedBox(
-                              width: 100,
-                              height: 100,
-                              child: Image.file(
-                                _pickedImg,
-                                fit: BoxFit.fill,
-                              )),
-                          InkWell(
+                          GestureDetector(
+                            onTap: () async {
+                              //
+                              setState(() {
+                                playing = !playing;
+                              });
+                              if (playing) {
+                                audioPlayer.play(_recording.path!,
+                                    isLocal: true);
+                                setPosition();
+                              } else {
+                                audioPlayer.stop();
+                              }
+                            },
+                            child: Container(
+                              width: 50,
+                              height: 50,
+                              padding: EdgeInsets.all(10),
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: AppColors().k8267AC,
+                              ),
+                              child: playing
+                                  ? Image.asset(
+                                      'assets/images/pause.png',
+                                      color: AppColors().kF8F6FA,
+                                    )
+                                  : Image.asset(
+                                      'assets/images/playB.png',
+                                      color: AppColors().kF8F6FA,
+                                    ),
+                            ),
+                          ),
+                          //SizedBox(width: 16),
+                          Expanded(
+                            child: Slider(
+                              thumbColor: AppColors().k8267AC,
+                              activeColor: AppColors().k8267AC.withOpacity(0.5),
+                              inactiveColor: Colors.grey,
+                              min: 0,
+                              max: soundDuration.inSeconds.toDouble(),
+                              value: soundLength,
+                              onChanged: (v) {
+                                setState(() {
+                                  soundLength = v;
+                                });
+                              },
+                            ),
+                          ),
+                          //SizedBox(width: 16),
+                          GestureDetector(
                             onTap: () {
                               setState(() {
-                                _pickedImg = File('');
+                                _recording = Recording();
                               });
                             },
                             child: Container(
-                              color: Colors.transparent,
-                              padding: EdgeInsets.all(10),
-                              child: Icon(Icons.clear),
+                              width: 50,
+                              height: 50,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: AppColors().k8267AC,
+                              ),
+                              child: Icon(
+                                Icons.clear,
+                                color: Colors.white,
+                              ),
                             ),
-                          )
+                          ),
                         ],
                       ),
                     ),
-                  ),
-            _recording.path == null
-                ? Container()
-                : Container(
-                    padding: EdgeInsets.all(16),
-                    margin: EdgeInsets.all(8),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(50),
-                      color: Colors.white,
-                    ),
-                    child: Row(
-                      children: [
-                        GestureDetector(
-                          onTap: () async {
-                            //
-                            setState(() {
-                              playing = !playing;
-                            });
-                            if (playing) {
-                              audioPlayer.play(_recording.path!, isLocal: true);
-                              setPosition();
-                            } else {
-                              audioPlayer.stop();
-                            }
-                          },
-                          child: Container(
-                            width: 50,
-                            height: 50,
-                            padding: EdgeInsets.all(10),
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: AppColors().k8267AC,
+              Padding(
+                padding: EdgeInsets.only(
+                    bottom: MediaQuery.of(context).viewInsets.bottom),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Container(
+                        color: Colors.white,
+                        child: TextField(
+                          maxLines: 5,
+                          minLines: 1,
+                          //keyboardType: TextInputType.multiline,
+                          inputFormatters: [
+                            LengthLimitingTextInputFormatter(500),
+                          ],
+                          controller: _controller,
+                          onSubmitted: (text) {},
+                          textInputAction: TextInputAction.done,
+                          decoration: InputDecoration(
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  width: 2, color: Color(0xffDBE8FA)),
                             ),
-                            child: playing
-                                ? Image.asset(
-                                    'assets/images/pause.png',
-                                    color: AppColors().kF8F6FA,
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  width: 2, color: Color(0xffDBE8FA)),
+                            ),
+                            fillColor: Color(0xffF0F4FA),
+                            hintText: _recording.path != null
+                                ? 'Audio File'.tr()
+                                : "Type here.".tr(),
+                            hintStyle: FontConstant.k16w400B7A4Text,
+                            suffixIcon: _msgLoading
+                                ? Container(
+                                    padding: EdgeInsets.all(10),
+                                    width: 10,
+                                    height: 10,
+                                    child: CircularProgressIndicator(),
                                   )
-                                : Image.asset(
-                                    'assets/images/playB.png',
-                                    color: AppColors().kF8F6FA,
-                                  ),
-                          ),
-                        ),
-                        //SizedBox(width: 16),
-                        Expanded(
-                          child: Slider(
-                            thumbColor: AppColors().k8267AC,
-                            activeColor: AppColors().k8267AC.withOpacity(0.5),
-                            inactiveColor: Colors.grey,
-                            min: 0,
-                            max: soundDuration.inSeconds.toDouble(),
-                            value: soundLength,
-                            onChanged: (v) {
-                              setState(() {
-                                soundLength = v;
-                              });
-                            },
-                          ),
-                        ),
-                        //SizedBox(width: 16),
-                        GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              _recording = Recording();
-                            });
-                          },
-                          child: Container(
-                            width: 50,
-                            height: 50,
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: AppColors().k8267AC,
-                            ),
-                            child: Icon(
-                              Icons.clear,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-            Padding(
-              padding: EdgeInsets.only(
-                  bottom: MediaQuery.of(context).viewInsets.bottom),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: TextField(
-                      maxLines: 5,
-                      minLines: 1,
-                      //keyboardType: TextInputType.multiline,
-                      inputFormatters: [
-                        LengthLimitingTextInputFormatter(500),
-                      ],
-                      controller: _controller,
-                      onSubmitted: (text) {},
-                      textInputAction: TextInputAction.done,
-                      decoration: InputDecoration(
-                        enabledBorder: OutlineInputBorder(
-                          borderSide:
-                              BorderSide(width: 2, color: Color(0xffDBE8FA)),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide:
-                              BorderSide(width: 2, color: Color(0xffDBE8FA)),
-                        ),
-                        fillColor: Color(0xffF0F4FA),
-                        hintText: _recording.path != null
-                            ? 'Audio File'.tr()
-                            : "Type here.".tr(),
-                        hintStyle: FontConstant.k16w400B7A4Text,
-                        suffixIcon: _msgLoading
-                            ? Container(
-                                padding: EdgeInsets.all(10),
-                                width: 10,
-                                height: 10,
-                                child: CircularProgressIndicator(),
-                              )
-                            : GestureDetector(
-                                onTap: () {
-                                  log('message');
+                                : GestureDetector(
+                                    onTap: () {
+                                      log('message');
 
-                                  if (_controller.text.isNotEmpty ||
-                                      _pickedImg.path != '' ||
-                                      _recording.path != null) {
-                                    log('message');
+                                      if (_controller.text.isNotEmpty ||
+                                          _pickedImg.path != '' ||
+                                          _recording.path != null) {
+                                        log('message');
 
-                                    setState(() {
-                                      _msgLoading = true;
-                                    });
-                                    final resp = SendMessageApi().get(
-                                        message: _controller.text,
-                                        sendToId: widget.userId,
-                                        receiverUserType: widget.userType,
-                                        image: _recording.path != null
-                                            ? File(_recording.path!)
-                                            : _pickedImg);
-                                    resp.then((value) {
-                                      log(value.toString());
-                                      if (value['status'] == 1) {
                                         setState(() {
-                                          _recording = Recording();
-                                          messageModel.allMsg!
-                                              .add(AllMsg.fromJson({
-                                            'message_id': '${value['msg_id']}',
-                                            'message': '${value['msg']}',
-                                            'file_url': value['file'] == null
-                                                ? ''
-                                                : "${value['file']}",
-                                            'created_at':
-                                                '${value['date_time']}',
-                                            'read_at': '',
-                                            'send_to_id': widget.userId,
-                                            'is_deleted': '0',
-                                            'sender_user_type': 'parent',
-                                            'reciever_user_type':
-                                                widget.userType,
-                                          }));
-                                          _msgLoading = false;
+                                          _msgLoading = true;
                                         });
-                                        /*final message = Messages(
-                                      text: _controller.text,
-                                      date: DateTime.now(),
-                                      isSentByme: true);
-                                  setState(() => messages.add(message));*/
-                                        _controller.clear();
-                                        _pickedImg = File('');
-                                      } else {
-                                        log(value.toString());
-                                        setState(() {
-                                          _msgLoading = false;
+                                        final resp = SendMessageApi().get(
+                                            message: _controller.text,
+                                            sendToId: widget.userId,
+                                            receiverUserType: widget.userType,
+                                            image: _recording.path != null
+                                                ? File(_recording.path!)
+                                                : _pickedImg);
+                                        resp.then((value) {
+                                          log(value.toString());
+                                          if (value['status'] == 1) {
+                                            setState(() {
+                                              _recording = Recording();
+                                              messageModel.allMsg!
+                                                  .add(AllMsg.fromJson({
+                                                'message_id':
+                                                    '${value['msg_id']}',
+                                                'message': '${value['msg']}',
+                                                'file_url':
+                                                    value['file'] == null
+                                                        ? ''
+                                                        : "${value['file']}",
+                                                'created_at':
+                                                    '${value['date_time']}',
+                                                'read_at': '',
+                                                'send_to_id': widget.userId,
+                                                'is_deleted': '0',
+                                                'sender_user_type': 'parent',
+                                                'reciever_user_type':
+                                                    widget.userType,
+                                              }));
+                                              _msgLoading = false;
+                                            });
+                                            /*final message = Messages(
+                                          text: _controller.text,
+                                          date: DateTime.now(),
+                                          isSentByme: true);
+                                      setState(() => messages.add(message));*/
+                                            _controller.clear();
+                                            _pickedImg = File('');
+                                          } else {
+                                            log(value.toString());
+                                            setState(() {
+                                              _msgLoading = false;
+                                            });
+                                          }
                                         });
                                       }
-                                    });
-                                  }
-                                },
-                                child: Padding(
-                                  padding: const EdgeInsets.only(
-                                    left: 10.0,
+                                    },
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(
+                                        left: 10.0,
+                                      ),
+                                      child: ImageIcon(
+                                        AssetImage(
+                                            "assets/images/sendicon.png"),
+                                        size: 12,
+                                        color: ThemeColor.primarycolor,
+                                      ),
+                                    ),
                                   ),
-                                  child: ImageIcon(
-                                    AssetImage("assets/images/sendicon.png"),
-                                    size: 12,
-                                    color: ThemeColor.primarycolor,
-                                  ),
+                            prefixIconConstraints:
+                                BoxConstraints(minHeight: 40, minWidth: 40),
+                            prefixIcon: GestureDetector(
+                              onTap: showToast,
+                              child: Padding(
+                                padding: EdgeInsets.only(
+                                    left: 10.0, top: 10, bottom: 10, right: 20),
+                                child: ImageIcon(
+                                  AssetImage("assets/images/add-circle.png"),
+                                  //size: 19,
+                                  color: ThemeColor.darkpurple,
                                 ),
                               ),
-                        prefixIconConstraints:
-                            BoxConstraints(minHeight: 40, minWidth: 40),
-                        prefixIcon: GestureDetector(
-                          onTap: showToast,
-                          child: Padding(
-                            padding: EdgeInsets.only(
-                                left: 10.0, top: 10, bottom: 10, right: 20),
-                            child: ImageIcon(
-                              AssetImage("assets/images/add-circle.png"),
-                              //size: 19,
-                              color: ThemeColor.darkpurple,
                             ),
                           ),
                         ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
       body: _isLoading

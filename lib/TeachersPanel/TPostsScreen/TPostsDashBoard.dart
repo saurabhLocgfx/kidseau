@@ -23,7 +23,6 @@ class TPostsDashBoard extends StatefulWidget {
 }
 
 class _TPostsDashBoardState extends State<TPostsDashBoard> {
-
   int selectedIndex = 0;
 
   PageController controller = PageController(initialPage: 1);
@@ -316,7 +315,7 @@ class _TPostsDashBoardState extends State<TPostsDashBoard> {
                       child: Center(
                         child: Image.asset(
                             pageIndex == 0
-                                ? "assets/images/addFil.png"
+                                ? "assets/images/icongalleryfill.png"
                                 : "assets/images/gallery-add.png",
                             height: pageIndex == 0 ? 24 : 25),
                       ),
