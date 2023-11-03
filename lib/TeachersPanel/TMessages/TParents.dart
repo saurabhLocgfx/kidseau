@@ -3,7 +3,6 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:kidseau/ParentsPanel/PMessageScreen/PopenChats.dart';
 import 'package:kidseau/Theme.dart';
 import 'package:kidseau/api/message_apis/teacher_apis/teacher_get_parent_api.dart';
 import 'package:kidseau/api/models/message_models/teacher_message_parents_model.dart';

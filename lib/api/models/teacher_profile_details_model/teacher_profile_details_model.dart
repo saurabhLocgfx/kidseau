@@ -17,19 +17,19 @@ class TeacherProfileDetailsModel {
 
   TeacherProfileDetailsModel(
       {this.status,
-        this.image,
-        this.name,
-        this.education,
-        this.email,
-        this.school,
-        this.info,
-        this.fristName,
-        this.familyName,
-        this.gender,
-        this.brithday,
-        this.yearOfExp,
-        this.phoneNumber,
-        this.address});
+      this.image,
+      this.name,
+      this.education,
+      this.email,
+      this.school,
+      this.info,
+      this.fristName,
+      this.familyName,
+      this.gender,
+      this.brithday,
+      this.yearOfExp,
+      this.phoneNumber,
+      this.address});
 
   TeacherProfileDetailsModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];
@@ -39,7 +39,7 @@ class TeacherProfileDetailsModel {
     education = json['education'];
     email = json['email'];
     school =
-    json['school'] != null ? new School.fromJson(json['school']) : null;
+        json['school'] != null ? new School.fromJson(json['school']) : null;
     info = json['info'];
     fristName = json['fristName'];
     familyName = json['familyName'];
@@ -79,10 +79,10 @@ class School {
 
   School(
       {this.schoolId,
-        this.schoolImage,
-        this.schoolName,
-        this.schoolTime,
-        this.schoolPhone});
+      this.schoolImage,
+      this.schoolName,
+      this.schoolTime,
+      this.schoolPhone});
 
   School.fromJson(Map<String, dynamic> json) {
     schoolId = json['schoolId'];

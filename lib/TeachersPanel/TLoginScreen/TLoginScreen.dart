@@ -255,6 +255,7 @@ class _TLoginScreenState extends State<TLoginScreen> {
                                           ],
                                         );
                                         print(credential.authorizationCode);
+                                        print(credential.identityToken);
 
                                         appleSignInApi(
                                                 id_token: credential

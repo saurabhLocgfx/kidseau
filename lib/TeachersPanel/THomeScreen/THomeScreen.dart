@@ -1,12 +1,11 @@
 import 'dart:async';
 import 'dart:developer';
 import 'dart:ui';
+
 import 'package:badges/badges.dart' as badges;
 import 'package:badges/badges.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:kidseau/Constants/colors.dart';
@@ -88,7 +87,6 @@ class _THomeScreenState extends State<THomeScreen> {
             loadingData = false;
             _grpLoading = false;
           });
-
         } catch (e) {
           setState(() {
             loadingData = false;
@@ -176,7 +174,7 @@ class _THomeScreenState extends State<THomeScreen> {
   }
 
   bool _isNewNot = false;
-  bool  showReminder = false;
+  bool showReminder = false;
   // Timer? _timer;
 
   /*setReminderFalse() {
@@ -356,7 +354,9 @@ class _THomeScreenState extends State<THomeScreen> {
       ),
       body: loadingData
           ? Center(child: CircularProgressIndicator())
-          : ( _name.schdule == null || _name.attendance == null || _name.groupInCard == null )
+          : (_name.schdule == null ||
+                  _name.attendance == null ||
+                  _name.groupInCard == null)
               ? Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -378,8 +378,7 @@ class _THomeScreenState extends State<THomeScreen> {
                     ),
                   ],
                 )
-              :
-      SingleChildScrollView(
+              : SingleChildScrollView(
                   child: SizedBox(
                     width: 1.sw,
                     child: Column(
@@ -1179,7 +1178,10 @@ class SchoolCard extends StatelessWidget {
             clipBehavior: Clip.hardEdge,
             decoration: BoxDecoration(borderRadius: BorderRadius.circular(8)),
             child: Image.network(
-              model.school!.schoolImage.toString(),
+              model.school!.schoolImage == null ||
+                      model.school!.schoolImage!.isEmpty
+                  ? ''
+                  : model.school!.schoolImage.toString(),
               errorBuilder: (q, w, e) => Text('Image not loaded'),
               fit: BoxFit.fitHeight,
             ),
