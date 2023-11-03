@@ -258,10 +258,10 @@ class _TPostsScreenState extends State<TPostsScreen> {
                                                             shape: RoundedRectangleBorder(
                                                                 borderRadius: BorderRadius.only(
                                                                     topLeft: const Radius
-                                                                            .circular(
+                                                                        .circular(
                                                                         20.0),
                                                                     topRight: const Radius
-                                                                            .circular(
+                                                                        .circular(
                                                                         20.0))),
                                                             context: context,
                                                             isScrollControlled:
@@ -274,7 +274,7 @@ class _TPostsScreenState extends State<TPostsScreen> {
                                                                         borderRadius: BorderRadius.only(topLeft: const Radius.circular(20.0), topRight: const Radius.circular(20.0))),
                                                                     child: Padding(
                                                                       padding: const EdgeInsets
-                                                                              .only(
+                                                                          .only(
                                                                           left:
                                                                               16),
                                                                       child:
@@ -384,29 +384,59 @@ class _TPostsScreenState extends State<TPostsScreen> {
                                                     enabled: false,
                                                     child: InkWell(
                                                       onTap: () async {
+                                                        Navigator.pop(context);
                                                         for (var url
                                                             in _postList[index]
                                                                 .image!) {
                                                           try {
-                                                            var response =
+                                                            final response =
                                                                 await http.get(
                                                                     Uri.parse(url
                                                                         .fileName
                                                                         .toString()));
-                                                            final result = await ImageGallerySaver.saveImage(
-                                                                Uint8List.fromList(
-                                                                    response
-                                                                        .bodyBytes),
-                                                                quality: 60,
-                                                                name:
-                                                                    "newImage");
+                                                            final imageBytes =
+                                                                response
+                                                                    .bodyBytes;
+
+                                                            final result =
+                                                                await ImageGallerySaver
+                                                                    .saveImage(
+                                                              Uint8List.fromList(
+                                                                  imageBytes),
+                                                              quality: 80,
+                                                              name:
+                                                                  "downloaded_image_$url",
+                                                            );
+                                                            if (result[
+                                                                'isSuccess']) {
+                                                              Fluttertoast
+                                                                  .showToast(
+                                                                msg:
+                                                                    'Image downloaded and saved successfully',
+                                                                // toastLength:
+                                                                //     Toast.LENGTH_SHORT,
+                                                                // gravity:
+                                                                //     ToastGravity.BOTTOM,
+                                                                // timeInSecForIosWeb:
+                                                                //     1,
+                                                                backgroundColor:
+                                                                    Color(
+                                                                        0xff8267AC),
+                                                                textColor:
+                                                                    Colors
+                                                                        .white,
+                                                              );
+                                                              print(
+                                                                  'Image downloaded and saved successfully');
+                                                            } else {
+                                                              print(
+                                                                  'Failed to download and save the image');
+                                                            }
                                                           } catch (error) {
-                                                            print(error);
+                                                            print(
+                                                                'Error: $error');
                                                           }
                                                         }
-                                                        Fluttertoast.showToast(
-                                                            msg:
-                                                                'Download complete');
                                                       },
                                                       child: Container(
                                                         color:
@@ -439,10 +469,10 @@ class _TPostsScreenState extends State<TPostsScreen> {
                                                             shape: RoundedRectangleBorder(
                                                                 borderRadius: BorderRadius.only(
                                                                     topLeft: const Radius
-                                                                            .circular(
+                                                                        .circular(
                                                                         20.0),
                                                                     topRight: const Radius
-                                                                            .circular(
+                                                                        .circular(
                                                                         20.0))),
                                                             context: context,
                                                             isScrollControlled:
@@ -455,7 +485,7 @@ class _TPostsScreenState extends State<TPostsScreen> {
                                                                         borderRadius: BorderRadius.only(topLeft: const Radius.circular(20.0), topRight: const Radius.circular(20.0))),
                                                                     child: Padding(
                                                                       padding: const EdgeInsets
-                                                                              .only(
+                                                                          .only(
                                                                           left:
                                                                               16),
                                                                       child:

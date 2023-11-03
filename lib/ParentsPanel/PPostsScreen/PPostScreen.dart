@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:kidseau/Theme.dart';
@@ -148,6 +149,7 @@ class _PPostScreenState extends State<PPostScreen> {
 
   String parentPostTag2 = 'parentPostTag2';
   final GlobalKey<PopupMenuButtonState> pop = GlobalKey<PopupMenuButtonState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -691,25 +693,84 @@ class _PPostScreenState extends State<PPostScreen> {
                                                                 child: InkWell(
                                                                   onTap:
                                                                       () async {
+                                                                    Navigator.pop(
+                                                                        context);
                                                                     for (var url
                                                                         in _postList[index]
                                                                             .images!) {
                                                                       try {
-                                                                        var response = await http.get(Uri.parse(url
+                                                                        final response = await http.get(Uri.parse(url
                                                                             .fileName
                                                                             .toString()));
-                                                                        final result = await ImageGallerySaver.saveImage(
-                                                                            Uint8List.fromList(response
-                                                                                .bodyBytes),
-                                                                            quality:
-                                                                                60,
-                                                                            name:
-                                                                                "newImage");
+                                                                        final imageBytes =
+                                                                            response.bodyBytes;
+
+                                                                        final result =
+                                                                            await ImageGallerySaver.saveImage(
+                                                                          Uint8List.fromList(
+                                                                              imageBytes),
+                                                                          quality:
+                                                                              80,
+                                                                          name:
+                                                                              "downloaded_image_$url",
+                                                                        );
+                                                                        if (result[
+                                                                            'isSuccess']) {
+                                                                          Fluttertoast
+                                                                              .showToast(
+                                                                            msg:
+                                                                                'Image downloaded and saved successfully',
+                                                                            // toastLength:
+                                                                            //     Toast.LENGTH_SHORT,
+                                                                            // gravity:
+                                                                            //     ToastGravity.BOTTOM,
+                                                                            // timeInSecForIosWeb:
+                                                                            //     1,
+                                                                            backgroundColor:
+                                                                                Color(0xff8267AC),
+                                                                            textColor:
+                                                                                Colors.white,
+                                                                          );
+                                                                          print(
+                                                                              'Image downloaded and saved successfully');
+                                                                        } else {
+                                                                          print(
+                                                                              'Failed to download and save the image');
+                                                                        }
                                                                       } catch (error) {
                                                                         print(
-                                                                            error);
+                                                                            'Error: $error');
                                                                       }
                                                                     }
+
+                                                                    // for (var url
+                                                                    //     in _postList[index]
+                                                                    //         .images!) {
+                                                                    //   try {
+                                                                    //     var response = await http.get(Uri.parse(url
+                                                                    //         .fileName
+                                                                    //         .toString()));
+                                                                    //     final result = await ImageGallerySaver.saveImage(
+                                                                    //         Uint8List.fromList(response
+                                                                    //             .bodyBytes),
+                                                                    //         quality:
+                                                                    //             60,
+                                                                    //         name:
+                                                                    //             "newImage");
+                                                                    //   } catch (error) {
+                                                                    //     print(
+                                                                    //         error);
+                                                                    //   }
+                                                                    // }
+                                                                    // String url = _postList[
+                                                                    //         index]
+                                                                    //     .images
+                                                                    //     .toString();
+                                                                    // await GallerySaver.saveImage(
+                                                                    //     url,
+                                                                    //     albumName:
+                                                                    //         'kidseau');
+
                                                                     /*Navigator.of(
                                                                             context)
                                                                         .pop();*/
