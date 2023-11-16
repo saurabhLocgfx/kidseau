@@ -25,12 +25,13 @@ class NotificationApi {
 
     http.StreamedResponse response = await request.send();
 
-    // var v = jsonDecode(await response.stream.bytesToString());
+    var v = jsonDecode(await response.stream.bytesToString());
     if (response.statusCode == 200) {
-      // return v;
+      print('check notification ${v}');
+      return v;
     } else {
       print(response.reasonPhrase);
-      // return v;
+      return v;
     }
   }
 

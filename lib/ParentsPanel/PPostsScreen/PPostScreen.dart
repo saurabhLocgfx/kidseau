@@ -720,12 +720,10 @@ class _PPostScreenState extends State<PPostScreen> {
                                                                               .showToast(
                                                                             msg:
                                                                                 'Image downloaded and saved successfully',
-                                                                            // toastLength:
-                                                                            //     Toast.LENGTH_SHORT,
-                                                                            // gravity:
-                                                                            //     ToastGravity.BOTTOM,
-                                                                            // timeInSecForIosWeb:
-                                                                            //     1,
+                                                                            toastLength:
+                                                                                Toast.LENGTH_SHORT,
+                                                                            gravity:
+                                                                                ToastGravity.BOTTOM,
                                                                             backgroundColor:
                                                                                 Color(0xff8267AC),
                                                                             textColor:

@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:developer';
+
 import 'package:badges/badges.dart' as badges;
 import 'package:badges/badges.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -54,6 +55,8 @@ class _PDashboardState extends State<PDashboard> {
 
     UserPrefs.setFCM(_fcmToken);
     log('Firebase token: $firebaseAppToken');
+
+    print(_fcmToken);
     /*var _prefs = await SharedPreferences.getInstance();
       _prefs.setString('fcmToken', firebaseAppToken);*/
     // UserPrefs.setFcm(_fcmToken);

@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 
@@ -39,8 +40,8 @@ fn(RemoteMessage message) async {
   //AwesomeNotifications().dismissedStream.listen((event) {});
   //AwesomeNotifications().setGlobalBadgeCounter(0);
   log(message.data.toString());
-  //String t = message.data['other_data'];
-  //Map a = jsonDecode(t);
+  String t = message.data['other_data'];
+  Map a = jsonDecode(t.toString());
   // http.Response response = await http.get(Uri.parse(a['bigPicture']));
   // final bytes = response.bodyBytes;
   AndroidNotificationDetails androidPlatformChannelSpecifics =
@@ -53,6 +54,16 @@ fn(RemoteMessage message) async {
           ticker: 'ticker');
   NotificationDetails platformChannelSpecifics =
       NotificationDetails(android: androidPlatformChannelSpecifics);
+
+  if (a['id'] != null && a['id'] is int) {
+    flutterPlugin.show(
+      a['id'],
+      a['title'].toString(),
+      a['body'].toString(),
+      platformChannelSpecifics,
+      payload: a['payload'].toString(),
+    );
+  }
   //log(event.data['content']['id'].toString());
   // log(a['id'].toString());
   // flutterPlugin.show(
@@ -368,7 +379,6 @@ class MyAppState extends State<MyApp> {
                     //PSplashScreen(),
                     //PProfileDashBoard()),
                     //PKidsDashboard()),
-
                     PSplashScreen()),
           );
         });

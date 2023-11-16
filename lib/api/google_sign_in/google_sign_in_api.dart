@@ -1,59 +1,18 @@
-import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 import 'dart:convert';
+
+import 'package:http/http.dart' as http;
 
 import '../../shard_prefs/shared_prefs.dart';
 
 Future<dynamic> googleSignInApi({
   required String id_token,
-
-
-}) async{
-   String? cookie = UserPrefs.getCookies();
-  var headers = {'Cookie': 'PHPSESSID=$cookie'};
-
-
-
-var request = http.MultipartRequest('POST', Uri.parse('https://application.kidseau.com/sign-up-with-google.php'));
-request.fields.addAll({
-'id_token': id_token,
-'user_type': 'teacher'
-});
-
-request.headers.addAll(headers);
-
-http.StreamedResponse response = await request.send();
-var resBody = jsonDecode(await response.stream.bytesToString());
-
-if (response.statusCode == 200) {
-print(resBody);
-return resBody;
-}
-else {
-print(response.reasonPhrase);
-print(response.statusCode);
-print(resBody);
-return resBody;
-
-}
-
-}
-
-Future<dynamic> googleSignInApiParent({
-  required String id_token,
-}) async{
-
+}) async {
   String? cookie = UserPrefs.getCookies();
   var headers = {'Cookie': 'PHPSESSID=$cookie'};
 
-
-  var request = http.MultipartRequest('POST', Uri.parse('https://application.kidseau.com/sign-up-with-google.php'));
-  request.fields.addAll({
-    'id_token': id_token,
-
-    'device': 'google',
-    'user_type': 'parent'
-  });
+  var request = http.MultipartRequest('POST',
+      Uri.parse('https://application.kidseau.com/sign-up-with-google.php'));
+  request.fields.addAll({'id_token': id_token, 'user_type': 'teacher'});
 
   request.headers.addAll(headers);
 
@@ -63,47 +22,66 @@ Future<dynamic> googleSignInApiParent({
   if (response.statusCode == 200) {
     print(resBody);
     return resBody;
-  }
-  else {
+  } else {
     print(response.reasonPhrase);
     print(response.statusCode);
     print(resBody);
     return resBody;
   }
+}
 
+Future<dynamic> googleSignInApiParent({
+  required String id_token,
+}) async {
+  String? cookie = UserPrefs.getCookies();
+  var headers = {'Cookie': 'PHPSESSID=$cookie'};
+
+  var request = http.MultipartRequest('POST',
+      Uri.parse('https://application.kidseau.com/sign-up-with-google.php'));
+  request.fields.addAll(
+      {'id_token': id_token, 'device': 'google', 'user_type': 'parent'});
+
+  request.headers.addAll(headers);
+
+  http.StreamedResponse response = await request.send();
+  var resBody = jsonDecode(await response.stream.bytesToString());
+
+  if (response.statusCode == 200) {
+    print(resBody);
+    return resBody;
+  } else {
+    print(response.reasonPhrase);
+    print(response.statusCode);
+    print(resBody);
+    return resBody;
+  }
 }
 
 Future<dynamic> googleSignInApiAndroid({
   required String id_Token,
   required String device,
   required String ParentTeacher,
-}) async{
+}) async {
+  String? cookie = UserPrefs.getCookies();
+  var headers = {'Cookie': 'PHPSESSID=$cookie'};
 
-String? cookie = UserPrefs.getCookies();
-var headers = {'Cookie': 'PHPSESSID=$cookie'};
+  var request = http.MultipartRequest('POST',
+      Uri.parse('https://application.kidseau.com/sign-up-with-google.php'));
+  request.fields.addAll(
+      {'id_token': id_Token, 'device': device, 'user_type': ParentTeacher});
 
-var request = http.MultipartRequest('POST', Uri.parse('https://application.kidseau.com/sign-up-with-google.php'));
-request.fields.addAll({
-  'id_token': id_Token,
-  'device': device,
-  'user_type': ParentTeacher
-});
+  request.headers.addAll(headers);
 
-request.headers.addAll(headers);
+  http.StreamedResponse response = await request.send();
+  var resBody = jsonDecode(await response.stream.bytesToString());
 
-http.StreamedResponse response = await request.send();
-var resBody = jsonDecode(await response.stream.bytesToString());
-
-if (response.statusCode == 200) {
-  print(resBody);
-  return resBody;
-}
-else {
-  print(response.reasonPhrase);
-  print(response.statusCode);
-  print(resBody);
-  return false;
-}
-
-
+  if (response.statusCode == 200) {
+    print(resBody);
+    return resBody;
+  } else {
+    print(response.reasonPhrase);
+    print(response.statusCode);
+    print(resBody);
+    return false;
+  }
 }

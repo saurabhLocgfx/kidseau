@@ -295,8 +295,18 @@ class _TMyPostsState extends State<TMyPosts> {
                                                         }
                                                       }
                                                       Fluttertoast.showToast(
-                                                          msg:
-                                                              'Download complete');
+                                                        msg:
+                                                            'Image downloaded and saved successfully',
+                                                        // toastLength:
+                                                        //     Toast.LENGTH_SHORT,
+                                                        // gravity:
+                                                        //     ToastGravity.BOTTOM,
+                                                        // timeInSecForIosWeb:
+                                                        //     1,
+                                                        backgroundColor:
+                                                            Color(0xff8267AC),
+                                                        textColor: Colors.white,
+                                                      );
                                                     },
                                                     child: Container(
                                                       width: 160,
@@ -331,18 +341,52 @@ class _TMyPostsState extends State<TMyPosts> {
                                                         builder: (_) =>
                                                             SuretyDialog(
                                                           onYesTap: () {
-                                                            final resp = TeacherDeletePostApi().delete(
+                                                            print(_postList[
+                                                                    index]
+                                                                .postId
+                                                                .toString());
+                                                            final resp = tDeletePostApi(
                                                                 postId: _postList[
                                                                         index]
                                                                     .postId
                                                                     .toString());
                                                             resp.then((value) {
+                                                              _isLoading
+                                                                  ? SizedBox(
+                                                                      height:
+                                                                          1.sh,
+                                                                      child:
+                                                                          Center(
+                                                                        child:
+                                                                            CircularProgressIndicator(),
+                                                                      ))
+                                                                  : _getData();
+                                                              Navigator.of(
+                                                                      context)
+                                                                  .pop();
                                                               log(value
                                                                   .toString());
                                                               if (value[
                                                                       'status'] ==
                                                                   1) {
                                                                 setState(() {
+                                                                  Fluttertoast
+                                                                      .showToast(
+                                                                    msg: value[
+                                                                        'msg'],
+                                                                    toastLength:
+                                                                        Toast
+                                                                            .LENGTH_SHORT,
+                                                                    gravity:
+                                                                        ToastGravity
+                                                                            .BOTTOM,
+                                                                    backgroundColor:
+                                                                        Color(
+                                                                            0xff8267AC),
+                                                                    textColor:
+                                                                        Colors
+                                                                            .white,
+                                                                  );
                                                                   _postList
                                                                       .removeAt(
                                                                           index);
@@ -350,6 +394,23 @@ class _TMyPostsState extends State<TMyPosts> {
                                                                           context)
                                                                       .pop();
                                                                 });
+                                                              } else {
+                                                                Fluttertoast
+                                                                    .showToast(
+                                                                  msg: value[
+                                                                      'msg'],
+                                                                  toastLength: Toast
+                                                                      .LENGTH_SHORT,
+                                                                  gravity:
+                                                                      ToastGravity
+                                                                          .BOTTOM,
+                                                                  backgroundColor:
+                                                                      Color(
+                                                                          0xff8267AC),
+                                                                  textColor:
+                                                                      Colors
+                                                                          .white,
+                                                                );
                                                               }
                                                             });
                                                           },

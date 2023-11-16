@@ -28,6 +28,7 @@ class TGetSections {
 
     var v = jsonDecode(await response.stream.bytesToString());
     if (response.statusCode == 200) {
+      print('check ${v}');
       return v;
     } else {
       print(response.reasonPhrase);

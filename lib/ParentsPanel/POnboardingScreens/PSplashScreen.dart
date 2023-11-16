@@ -145,12 +145,9 @@ class _PSplashScreenState extends State<PSplashScreen> {
       //   },
       // );
     }
-    /*return NoInternet(
-      onRetryTap: () {
-        Connectivity().checkConnectivity();
-      },
-    );*/
   }
+
+  bool _isLoading = false;
 
   @override
   void initState() {

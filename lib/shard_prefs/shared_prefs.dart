@@ -18,10 +18,21 @@ class UserPrefs {
   static const SetLang = 'SetLang';
   static const ShowOnBoarding = 'ShowOnBoarding';
   static const ParentShowOnBoarding = 'ParentShowOnBoarding';
+
   static const UserOTP = 'UserOTP';
+  static const googleLogin = 'googleLogin';
+  static const appleLogin = 'appleLogin';
   static SharedPreferences? prefs;
   static Future init() async {
     prefs = await SharedPreferences.getInstance();
+  }
+
+  static Future setGoogleLogin(bool isTeacher) async {
+    return await prefs?.setBool(Teacher, isTeacher);
+  }
+
+  static bool? getGoogleLogin() {
+    return prefs?.getBool(Teacher);
   }
 
   static Future setOTP(String value) async {

@@ -417,7 +417,7 @@ class _TStudentDetailScreenState extends State<TStudentDetailScreen> {
                                                             16)),
                                                 child: Padding(
                                                   padding: const EdgeInsets
-                                                          .symmetric(
+                                                      .symmetric(
                                                       horizontal: 16.0),
                                                   child: Column(
                                                     mainAxisAlignment:
@@ -490,7 +490,7 @@ class _TStudentDetailScreenState extends State<TStudentDetailScreen> {
                                                             16)),
                                                 child: Padding(
                                                   padding: const EdgeInsets
-                                                          .symmetric(
+                                                      .symmetric(
                                                       horizontal: 16.0),
                                                   child: Column(
                                                     mainAxisAlignment:
@@ -945,7 +945,7 @@ class _TStudentDetailScreenState extends State<TStudentDetailScreen> {
                                                 Image.asset(
                                                   "assets/images/bar3.png",
                                                   height: 24,
-                                                )
+                                                ),
                                               ],
                                             ),
                                             SizedBox(height: 15),

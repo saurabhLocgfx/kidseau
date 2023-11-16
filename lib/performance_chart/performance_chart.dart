@@ -1,10 +1,8 @@
 import 'dart:async';
-import 'dart:math';
 
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:kidseau/Theme.dart';
-import 'package:kidseau/api/models/parent_models/kid_details_models/parent_kid_overview_model.dart';
 
 class BarChartSample1 extends StatefulWidget {
   final List<dynamic> activityList;
@@ -83,12 +81,18 @@ class BarChartSample1State extends State<BarChartSample1> {
   }
 
   BarChartGroupData makeGroupData(
+    // int x,
+    // double y,
+    // double z, {
+    // bool isTouched = false,
+    // Color? barColor,
+    // double width = 10,
+    // List<int> showTooltips = const [],
     int x,
-    double y,
-    double z, {
+    double y, {
     bool isTouched = false,
     Color? barColor,
-    double width = 10,
+    double width = 14,
     List<int> showTooltips = const [],
   }) {
     barColor ??= widget.barColor;
@@ -96,7 +100,7 @@ class BarChartSample1State extends State<BarChartSample1> {
       x: x,
       barRods: [
         BarChartRodData(
-          toY: y,
+          toY: isTouched ? y + 1 : y,
           color: isTouched ? widget.touchedBarColor : barColor,
           width: width,
           borderSide: isTouched
@@ -104,7 +108,7 @@ class BarChartSample1State extends State<BarChartSample1> {
               : const BorderSide(color: Colors.white, width: 0),
           backDrawRodData: BackgroundBarChartRodData(
             show: true,
-            toY: 100, //z
+            toY: 05, //z
             color: widget.barBackgroundColor,
           ),
         ),
@@ -113,29 +117,76 @@ class BarChartSample1State extends State<BarChartSample1> {
     );
   }
 
+  // List<BarChartGroupData> showingGroups() => List.generate(7, (i) {
+  //       switch (i) {
+  //         case 0:
+  //           return makeGroupData(0, 5, isTouched: i == touchedIndex);
+  //         case 1:
+  //           return makeGroupData(1, 6.5, isTouched: i == touchedIndex);
+  //         case 2:
+  //           return makeGroupData(2, 5, isTouched: i == touchedIndex);
+  //         case 3:
+  //           return makeGroupData(3, 7.5, isTouched: i == touchedIndex);
+  //         case 4:
+  //           return makeGroupData(4, 9, isTouched: i == touchedIndex);
+  //         case 5:
+  //           return makeGroupData(5, 11.5, isTouched: i == touchedIndex);
+  //         case 6:
+  //           return makeGroupData(6, 6.5, isTouched: i == touchedIndex);
+  //         default:
+  //           return throw Error();
+  //       }
+  //     });
+
   List<BarChartGroupData> showingGroups() =>
       List.generate(widget.activityList.length, (i) {
-        /*switch (i) {
+        switch (i) {
           case 0:
-            return makeGroupData(i, double.parse(widget.activityList[i].pfmSum!), isTouched: i == touchedIndex);
+            return makeGroupData(
+                i, double.parse(widget.activityList[0].pfmSum!),
+                isTouched: i == touchedIndex);
           case 1:
-            return makeGroupData(1, 6.5, isTouched: i == touchedIndex);
+            return makeGroupData(
+                i, double.parse(widget.activityList[1].pfmSum!),
+                isTouched: i == touchedIndex);
           case 2:
-            return makeGroupData(2, 5, isTouched: i == touchedIndex);
+            return makeGroupData(
+                i, double.parse(widget.activityList[2].pfmSum!),
+                isTouched: i == touchedIndex);
           case 3:
-            return makeGroupData(3, 7.5, isTouched: i == touchedIndex);
+            return makeGroupData(
+                i, double.parse(widget.activityList[3].pfmSum!),
+                isTouched: i == touchedIndex);
           case 4:
-            return makeGroupData(4, 9, isTouched: i == touchedIndex);
-          case 5:
-            return makeGroupData(5, 11.5, isTouched: i == touchedIndex);
-          case 6:
-            return makeGroupData(6, 6.5, isTouched: i == touchedIndex);
+            return makeGroupData(
+                i, double.parse(widget.activityList[4].pfmSum!),
+                isTouched: i == touchedIndex);
+          // case 5:
+          //   return makeGroupData(
+          //       i, double.parse(widget.activityList[i].pfmSum!),
+          //       isTouched: i == touchedIndex);
+          // case 6:
+          //   return makeGroupData(
+          //       i, double.parse(widget.activityList[i].pfmSum!),
+          //       isTouched: i == touchedIndex);
+          // case 1:
+          //   return makeGroupData(1, 6.5, isTouched: i == touchedIndex);
+          // case 2:
+          //   return makeGroupData(2, 5, isTouched: i == touchedIndex);
+          // case 3:
+          //   return makeGroupData(3, 7.5, isTouched: i == touchedIndex);
+          // case 4:
+          //   return makeGroupData(4, 9, isTouched: i == touchedIndex);
+          // case 5:
+          //   return makeGroupData(5, 11.5, isTouched: i == touchedIndex);
+          // case 6:
+          //   return makeGroupData(6, 6.5, isTouched: i == touchedIndex);
           default:
             return throw Error();
-        }*/
-        return makeGroupData(i, double.parse(widget.activityList[i].pfmSum!),
-            double.parse(widget.activityList[i].totalSub!),
-            isTouched: i == touchedIndex);
+        }
+        // return makeGroupData(i, double.parse(widget.activityList[i].pfmSum!),
+        //     double.parse(widget.activityList[i].totalSub!),
+        //     isTouched: i == touchedIndex);
       });
 
   BarChartData mainBarData() {
@@ -279,8 +330,10 @@ class BarChartSample1State extends State<BarChartSample1> {
   Widget getTopTitles(double value, TitleMeta meta) {
     final style = FontConstant.k14w400lightpurpleText;
     Widget text;
-    text = Text(
-        '${(int.parse(widget.activityList[value.toInt()].pfmSum!) / int.parse(widget.activityList[value.toInt()].totalSub!)) * 100}%',
+    text = Text('${(int.parse(widget.activityList[value.toInt()].pfmSum!))}',
+
+        // '${(int.parse(widget.activityList[value.toInt()].pfmSum!)}',
+        // '${(int.parse(widget.activityList[value.toInt()].pfmSum!) / int.parse(widget.activityList[value.toInt()].totalSub!)) * 100}%',
         style: style);
     /*switch (value.toInt()) {
       case 0:

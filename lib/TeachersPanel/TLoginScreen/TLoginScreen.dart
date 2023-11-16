@@ -3,7 +3,6 @@ import 'dart:io' show Platform;
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:kidseau/Apple_Sign_In/apple_sign_in_api.dart';
@@ -16,7 +15,6 @@ import 'package:kidseau/api/google_sign_in/google_sign_in_api.dart';
 import 'package:kidseau/api/models/google_sign_in_model/google_sign_in_model.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
-import '../../Facebook_Sign_In/facebook_sign_in.dart';
 import '../../ParentsPanel/POnboardingScreens/PStartScreen.dart';
 import '../../Widgets/textfields.dart';
 import '../../shard_prefs/shared_prefs.dart';
@@ -243,6 +241,7 @@ class _TLoginScreenState extends State<TLoginScreen> {
                           SizedBox(height: 40.h),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Platform.isIOS
                                   ? GestureDetector(
@@ -255,7 +254,6 @@ class _TLoginScreenState extends State<TLoginScreen> {
                                           ],
                                         );
                                         print(credential.authorizationCode);
-                                        print(credential.identityToken);
 
                                         appleSignInApi(
                                                 id_token: credential
@@ -286,6 +284,7 @@ class _TLoginScreenState extends State<TLoginScreen> {
                                             //UserPrefs.setOTP(value['OTP']);
 
                                             if (value['status'] == 1) {
+                                              // UserPrefs.setIsTeacher(true);
                                               Navigator.of(context).push(
                                                   MaterialPageRoute(
                                                       builder: (context) =>
@@ -299,6 +298,8 @@ class _TLoginScreenState extends State<TLoginScreen> {
                                                           .mobileText*/
                                                           )));
                                             } else {
+                                              UserPrefs.setGoogleLogin(true);
+
                                               //if(value['status'] == 2){
 
                                               // UserPrefs.setCookies(value['key']);
@@ -334,6 +335,7 @@ class _TLoginScreenState extends State<TLoginScreen> {
                               SizedBox(
                                 width: 20,
                               ),
+
                               Platform.isIOS
                                   ? GestureDetector(
                                       onTap: () async {
@@ -368,6 +370,7 @@ class _TLoginScreenState extends State<TLoginScreen> {
                                             //UserPrefs.setOTP(value['OTP']);
 
                                             if (value['status'] == 1) {
+                                              UserPrefs.setIsTeacher(true);
                                               Navigator.of(context).push(
                                                   MaterialPageRoute(
                                                       builder: (context) =>
@@ -423,7 +426,6 @@ class _TLoginScreenState extends State<TLoginScreen> {
                                         // print(auth.idToken);
                                         log(auth.idToken.toString());
                                         log(auth.idToken!.length.toString());
-
                                         googleSignInApiAndroid(
                                                 id_Token: auth.idToken!,
                                                 device: 'android',
@@ -448,6 +450,7 @@ class _TLoginScreenState extends State<TLoginScreen> {
                                             //UserPrefs.setOTP(value['OTP']);
 
                                             if (value['status'] == 1) {
+                                              // UserPrefs.setIsTeacher(true);
                                               Navigator.of(context).push(
                                                   MaterialPageRoute(
                                                       builder: (context) =>
@@ -461,6 +464,7 @@ class _TLoginScreenState extends State<TLoginScreen> {
                                                           .mobileText*/
                                                           )));
                                             } else {
+                                              UserPrefs.setIsTeacher(true);
                                               //if(value['status'] == 2){
 
                                               // UserPrefs.setCookies(value['key']);
@@ -495,103 +499,106 @@ class _TLoginScreenState extends State<TLoginScreen> {
                                       ),
                                       //),
                                     ),
+
                               SizedBox(
                                 width: 20,
                               ),
-                              GestureDetector(
-                                onTap: () async {
-                                  _isLoading = true;
-                                  FacebookAuth.instance.login(permissions: [
-                                    "public_profile",
-                                    "email"
-                                  ]).then((v) {
-                                    print('${v.accessToken!.token}');
-                                    print(v.accessToken!.token.length);
-                                    print(v.accessToken!.token);
-                                    // print(v.accessToken!.token.length);
-                                    // print(v.accessToken!.token);
-                                    /*var d = FacebookAuthProvider.credential(v.accessToken!.token);
-                                  print('_________________________________${d.idToken}');*/
-                                    FacebookAuth.instance
-                                        .getUserData()
-                                        .then((val) {
-                                      print(val);
-
-                                      facebookSignInApi(
-                                              idToken: v.accessToken!.token
-                                                  .toString(),
-                                              parentTeacher: 'teacher',
-                                              device: 'facebook')
-                                          .then((value) {
-                                        if (value == false) {
-                                          Fluttertoast.showToast(
-                                              msg:
-                                                  "Sign in failed! Please try again.");
-                                          setState(() {
-                                            _isLoading = false;
-                                          });
-                                        } else if (value['status'] == 0) {
-                                          setState(() {
-                                            _isLoading = false;
-                                          });
-                                          Fluttertoast.showToast(
-                                              msg:
-                                                  "Wait For Director's Approval");
-                                        } else {
-                                          UserPrefs.setCookies(value['key']);
-                                          //UserPrefs.setOTP(value['OTP']);
-
-                                          if (value['status'] == 1) {
-                                            Navigator.of(context).push(
-                                                MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        TSignupCode(
-                                                          isEmail: false,
-                                                          mobileText: '',
-                                                          /*isEmail:
-                                                      widget
-                                                          .isEmail,
-                                                      mobileText: widget
-                                                          .mobileText*/
-                                                        )));
-                                          } else {
-                                            //if(value['status'] == 2){
-
-                                            // UserPrefs.setCookies(value['key']);
-                                            // UserPrefs.setOTP(value['OTP']);
-
-                                            Navigator.of(context).push(
-                                                MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        TDashboard()));
-                                            // }
-                                            // else{}
-                                          }
-                                        }
-                                      });
-                                    });
-                                  });
-                                },
-
-                                /*child: Container(
-                                  margin: EdgeInsets.all(16),
-                                  padding: EdgeInsets.all(12),
-                                  clipBehavior: Clip.hardEdge,
-                                  decoration: BoxDecoration(
-
-                                      color: Colors.white,
-                                      borderRadius: BorderRadius.circular(12)
-                                  ),*/
-                                child: CircleAvatar(
-                                  backgroundColor: Color(0xfff7f6fa),
-                                  child: Image.asset(
-                                    'assets/images/facebookicon.png',
-                                    fit: BoxFit.cover,
-                                    height: 40,
-                                  ),
-                                ),
-                                //),
-                              ),
+                              // GestureDetector(
+                              //   onTap: () async {
+                              // _isLoading = true;
+                              // FacebookAuth.instance.login(
+                              // permissions: [
+                              // "public_profile",
+                              // "email"
+                              // ]).then((v) {
+                              // print('${v.accessToken!.token}');
+                              // print(v.accessToken!.token.length);
+                              // print(v.accessToken!.token);
+                              // // print(v.accessToken!.token.length);
+                              // // print(v.accessToken!.token);
+                              // /*var d = FacebookAuthProvider.credential(v.accessToken!.token);
+                              //     print('_________________________________${d.idToken}');*/
+                              // FacebookAuth.instance
+                              //     .getUserData()
+                              //     .then((val) {
+                              // print(val);
+                              //
+                              //
+                              // facebookSignInApi(idToken: v.accessToken!.token.toString(),
+                              // parentTeacher: 'teacher', device: 'facebook').then((value) {
+                              //
+                              // if (value == false) {
+                              // Fluttertoast.showToast(
+                              // msg: "Sign in failed! Please try again.");
+                              // setState(() {
+                              // _isLoading = false;
+                              // });
+                              // }
+                              // else if (value['status'] == 0) {
+                              // setState(() {
+                              // _isLoading = false;
+                              // });
+                              // Fluttertoast.showToast(msg: "Wait For Director's Approval");
+                              // }
+                              //
+                              //
+                              // else {
+                              // UserPrefs.setCookies(value['key']);
+                              // //UserPrefs.setOTP(value['OTP']);
+                              //
+                              // if (value['status'] == 1) {
+                              // Navigator.of(context).push(
+                              // MaterialPageRoute(
+                              // builder: (context) =>
+                              // TSignupCode(isEmail: false,
+                              // mobileText: '',
+                              // /*isEmail:
+                              //                         widget
+                              //                             .isEmail,
+                              //                         mobileText: widget
+                              //                             .mobileText*/
+                              //
+                              // )));
+                              // }
+                              // else {
+                              // //if(value['status'] == 2){
+                              //
+                              // // UserPrefs.setCookies(value['key']);
+                              // // UserPrefs.setOTP(value['OTP']);
+                              //
+                              // Navigator.of(context).push(
+                              // MaterialPageRoute(
+                              // builder: (context) =>
+                              // TDashboard()));
+                              // // }
+                              // // else{}
+                              //
+                              // }
+                              // }
+                              //
+                              // });
+                              //
+                              //
+                              // });
+                              // });
+                              // },
+                              //
+                              //   /*child: Container(
+                              //     margin: EdgeInsets.all(16),
+                              //     padding: EdgeInsets.all(12),
+                              //     clipBehavior: Clip.hardEdge,
+                              //     decoration: BoxDecoration(
+                              //
+                              //         color: Colors.white,
+                              //         borderRadius: BorderRadius.circular(12)
+                              //     ),*/
+                              //   child: CircleAvatar(
+                              //     backgroundColor: Color(0xfff7f6fa),
+                              //     child: Image.asset('assets/images/facebookicon.png',fit: BoxFit.cover,height: 40,
+                              //     ),
+                              //   ),
+                              //   //),
+                              // ),
                             ],
                           )
                         ],
