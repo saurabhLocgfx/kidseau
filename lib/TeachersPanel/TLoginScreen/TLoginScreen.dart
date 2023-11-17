@@ -217,13 +217,14 @@ class _TLoginScreenState extends State<TLoginScreen> {
                                             print(mobileText);
                                             UserPrefs.setOTP(value['OTP']);
                                             Navigator.of(context).push(
-                                                MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        TLoginOtpVerification(
-                                                          isEmail: isEmail,
-                                                          mobileText:
-                                                              mobileText,
-                                                        )));
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    TLoginOtpVerification(
+                                                  isEmail: isEmail,
+                                                  mobileText: mobileText,
+                                                ),
+                                              ),
+                                            );
                                             // Fluttertoast.showToast(
                                             //     msg:
                                             //         'Your OTP is ${value['OTP']}');
@@ -298,8 +299,8 @@ class _TLoginScreenState extends State<TLoginScreen> {
                                                           .mobileText*/
                                                           )));
                                             } else {
-                                              UserPrefs.setGoogleLogin(true);
-
+                                              UserPrefs.setIsTeacher(true);
+                                              UserPrefs.setOTP(value['OTP']);
                                               //if(value['status'] == 2){
 
                                               // UserPrefs.setCookies(value['key']);
@@ -370,7 +371,6 @@ class _TLoginScreenState extends State<TLoginScreen> {
                                             //UserPrefs.setOTP(value['OTP']);
 
                                             if (value['status'] == 1) {
-                                              UserPrefs.setIsTeacher(true);
                                               Navigator.of(context).push(
                                                   MaterialPageRoute(
                                                       builder: (context) =>
@@ -384,6 +384,8 @@ class _TLoginScreenState extends State<TLoginScreen> {
                                                           .mobileText*/
                                                           )));
                                             } else {
+                                              UserPrefs.setIsTeacher(true);
+                                              UserPrefs.setOTP(value['OTP']);
                                               //if(value['status'] == 2){
 
                                               // UserPrefs.setCookies(value['key']);
@@ -465,11 +467,10 @@ class _TLoginScreenState extends State<TLoginScreen> {
                                                           )));
                                             } else {
                                               UserPrefs.setIsTeacher(true);
+                                              UserPrefs.setOTP(value['OTP']);
                                               //if(value['status'] == 2){
-
                                               // UserPrefs.setCookies(value['key']);
                                               // UserPrefs.setOTP(value['OTP']);
-
                                               Navigator.of(context).push(
                                                   MaterialPageRoute(
                                                       builder: (context) =>
