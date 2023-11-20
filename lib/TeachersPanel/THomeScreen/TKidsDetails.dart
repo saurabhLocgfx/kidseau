@@ -177,7 +177,7 @@ class _TKidsOverviewState extends State<TKidsOverview> {
                                         style: FontConstant.k16w5008471Text),
                                   Row(
                                     children: [
-                                      Text(model.group.toString().tr(),
+                                      Text(model.group.toString(),
                                           style: FontConstant.k16w500B7A4Text),
                                       Padding(
                                         padding: const EdgeInsets.symmetric(
@@ -287,7 +287,9 @@ class _TKidsOverviewState extends State<TKidsOverview> {
                                   SizedBox(width: 16.w),
                                   Expanded(
                                     child: Text(
-                                      model.address.toString(),
+                                      model.address == null
+                                          ? ''
+                                          : model.address.toString(),
                                       overflow: TextOverflow.visible,
                                       style: FontConstant.k16w5008471Text,
                                     ),
@@ -351,7 +353,9 @@ class _TKidsOverviewState extends State<TKidsOverview> {
                                               CrossAxisAlignment.start,
                                           children: [
                                             Text(
-                                              model.motherName.toString(),
+                                              model.motherName == null
+                                                  ? ''
+                                                  : model.motherName.toString(),
                                               style:
                                                   FontConstant.k16w5008471Text,
                                             )
@@ -389,7 +393,10 @@ class _TKidsOverviewState extends State<TKidsOverview> {
                                               CrossAxisAlignment.start,
                                           children: [
                                             Text(
-                                              model.mOccupation.toString(),
+                                              model.mOccupation == null
+                                                  ? ''
+                                                  : model.mOccupation
+                                                      .toString(),
                                               style:
                                                   FontConstant.k16w5008471Text,
                                             )
@@ -427,7 +434,10 @@ class _TKidsOverviewState extends State<TKidsOverview> {
                                               CrossAxisAlignment.start,
                                           children: [
                                             Text(
-                                              model.motherEmail.toString(),
+                                              model.motherEmail == null
+                                                  ? ''
+                                                  : model.motherEmail
+                                                      .toString(),
                                               style:
                                                   FontConstant.k16w5008471Text,
                                             )
@@ -465,7 +475,10 @@ class _TKidsOverviewState extends State<TKidsOverview> {
                                               CrossAxisAlignment.start,
                                           children: [
                                             Text(
-                                              model.motherPhone.toString(),
+                                              model.motherPhone == null
+                                                  ? ''
+                                                  : model.motherPhone
+                                                      .toString(),
                                               style:
                                                   FontConstant.k16w5008471Text,
                                             )
@@ -551,8 +564,11 @@ class _TKidsOverviewState extends State<TKidsOverview> {
                                                             .start,
                                                     children: [
                                                       Text(
-                                                        model.fOccupation
-                                                            .toString(),
+                                                        model.fOccupation ==
+                                                                null
+                                                            ? ''
+                                                            : model.fOccupation
+                                                                .toString(),
                                                         style: FontConstant
                                                             .k16w5008471Text,
                                                       )
@@ -631,8 +647,11 @@ class _TKidsOverviewState extends State<TKidsOverview> {
                                                             .start,
                                                     children: [
                                                       Text(
-                                                        model.fatherPhone
-                                                            .toString(),
+                                                        model.fatherPhone ==
+                                                                null
+                                                            ? ''
+                                                            : model.fatherPhone
+                                                                .toString(),
                                                         style: FontConstant
                                                             .k16w5008471Text,
                                                       )

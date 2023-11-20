@@ -358,7 +358,7 @@ class _POpenChatsState extends State<POpenChats> {
         ),
         centerTitle: false,
         title: Text(
-          widget.name,
+          widget.name.contains('null') ? 'User' : widget.name,
           style: FontConstant.k18w5008471Text,
         ),
         automaticallyImplyLeading: false,

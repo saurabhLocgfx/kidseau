@@ -48,6 +48,18 @@
   "Updated details will be your login credentials": "ستكون التفاصيل المحدثة هي بيانات اعتماد تسجيل الدخول الخاصة بك",
   "Voucher Code": "كود الدخول",
   "Changed email/phone number belongs to Mother":"تم تغيير البريد الإلكتروني/رقم الهاتف إلى الأم",
+  "Class Teacher" :"معلم الصف",
+
+  "Enter your Full name": "أدخل اسمك الكامل",
+  "Enter your Occupation": "أدخل مهنتك",
+  "Enter your full name": "أدخل اسمك الكامل",
+  "Enter your occupation" : "أدخل مهنتك",
+  "Delete Account": "حذف الحساب",
+  " & " : " &",
+
+
+
+
 
   "I don’t like this": "أنا لا أحب هذا",
   "Not from the same group":"ليس من نفس المجموعة",
@@ -101,9 +113,15 @@
   "Ask Question": "إطرح سؤال",
   "Overview": "ملخص",
 
+
+
+
   "A OTP has been sent to . ":"تم إرسال  الرمز على الرقم . ",
 
-  "Please enter the OTP here.": "الرجاء إدخاله",
+  " Please enter the OTP here.": "الرجاء إدخاله",
+  "A OTP has been sent to ": "تم إرسال OTP إلى",
+
+
 
   "Continue":"استمر",
 

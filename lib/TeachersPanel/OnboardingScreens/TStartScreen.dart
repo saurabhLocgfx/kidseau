@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
+// import 'package:get/get.dart';
 import 'package:kidseau/ParentsPanel/POnboardingScreens/POnboardingScreen.dart';
 import 'package:kidseau/TeachersPanel/OnboardingScreens/TOnboardingScreen.dart';
 import 'package:kidseau/Theme.dart';
@@ -22,7 +22,8 @@ class TStartScreen extends StatelessWidget {
             children: [
               Container(
                 height: 229,
-                width: Get.size.width,
+                width: MediaQuery.sizeOf(context).height,
+                // width: Get.size.width,
                 decoration: BoxDecoration(
                   color: Colors.transparent,
                 ),
@@ -53,7 +54,8 @@ class TStartScreen extends StatelessWidget {
                         child: mainlogo(),
                       ),
                       SizedBox(
-                        height: Get.size.height * 0.05,
+                        height: MediaQuery.sizeOf(context).height * 0.05,
+                        // height: Get.size.height * 0.05,
                       ),
                       SizedBox(
                         height: 56,
@@ -68,7 +70,8 @@ class TStartScreen extends StatelessWidget {
                             backgroundColor: ThemeColor.primaryorange),
                       ),
                       SizedBox(
-                        height: Get.size.height * 0.02,
+                        height: MediaQuery.sizeOf(context).height * 0.02,
+                        // height: Get.size.height * 0.02,
                       ),
                       SizedBox(
                         height: 56,
@@ -83,7 +86,8 @@ class TStartScreen extends StatelessWidget {
                             backgroundColor: ThemeColor.primarycolor),
                       ),
                       SizedBox(
-                        height: Get.size.height * 0.18,
+                        height: MediaQuery.sizeOf(context).height * 0.18,
+                        // height: Get.size.height * 0.18,
                       ),
                       Image.asset("assets/images/Made with ❤️ Locgfx.png")
                     ],

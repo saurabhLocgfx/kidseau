@@ -478,8 +478,8 @@ class _PHomeScreenState extends State<PHomeScreen> {
                                               Text(
                                                 _kidModel
                                                     .parentKidId![index].grpName
-                                                    .toString()
-                                                    .tr(),
+                                                    .toString(),
+                                                // .tr(),
                                                 style:
                                                     FontConstant.k12w400White,
                                               ),

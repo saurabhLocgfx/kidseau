@@ -11,7 +11,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_mentions/flutter_mentions.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
+// import 'package:get/get.dart';
 import 'package:kidseau/Theme.dart';
 import 'package:kidseau/reminder_notifications_class.dart';
 import 'package:kidseau/restartappwidget/restartwidgets.dart';
@@ -335,22 +335,22 @@ class MyAppState extends State<MyApp> {
         splitScreenMode: true,
         builder: (context, child) {
           return Portal(
-            child: GetMaterialApp(
-                textDirection: TextDirection.ltr,
+            child: MaterialApp(
+                locale: context.locale,
+                supportedLocales: context.supportedLocales,
+                // supportedLocales: [
+                //   Locale('ar', 'Ar'),
+                //   Locale('en', 'US'),
+                //   Locale('fr', 'FR'),
+                // ],
+                localizationsDelegates: context.localizationDelegates,
+                // textDirection: TextDirection.ltr,
                 theme: ThemeData().copyWith(
                   colorScheme: ThemeData().colorScheme.copyWith(
                         primary: ThemeColor.primarycolor,
                       ),
                 ),
-                supportedLocales: context.supportedLocales,
-                /*supportedLocales: [
-                Locale('en', 'US'),
-                Locale('ar', 'AR'),
-                Locale('fr', 'FR'),
-              ],*/
-                /* locale: _locale,*/
-                locale: context.locale,
-                localizationsDelegates: context.localizationDelegates,
+
                 /* localizationsDelegates: [
                 AppLoaclizations.delegate,
                 GlobalMaterialLocalizations.delegate,

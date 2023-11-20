@@ -15,6 +15,7 @@
   "We offer a new way to track your children and watch them grow.": "We offer a new way to track your children and watch them grow.",
   "By proceeding you agree to our ": "By proceeding you agree to our ",
   "Account": "Account",
+  "Teacher": "Teacher",
 
   "Parent’s Information": "Parent’s Information",
   "Mother’s name": "Mother’s name",
@@ -119,7 +120,7 @@
 
   "A OTP has been sent to . ":  "A OTP has been sent to . ",
 
-  "Please enter the OTP here.": "Please enter the OTP here.",
+  " Please enter the OTP here.": "Please enter the OTP here.",
 
   "Continue": "Continue",
 
@@ -157,6 +158,24 @@
 
   "Back": "Back",
 
+  "Class Teacher": "Class Teacher",
+
+  "Enter your Full name": "Enter your Full name",
+  "Enter your occupation": "Enter your occupation",
+  "Enter your full name": "Enter your full name",
+  "Enter your phone number": "Enter your phone number",
+  "Change email / phone number": "Change email / phone number",
+  "Delete Account": "Delete Account",
+  "New Announcement": "New Announcement",
+  " & " : " &",
+  "A OTP has been sent to " : "A OTP has been sent to ",
+
+
+
+
+
+
+
   "Groups":  "Groups",
 
   "View all kids": "View all kids",
@@ -172,6 +191,8 @@
   "S/O": "S/O",
 
   "Holidays": "Holidays",
+
+  "Messages" : "Messages",
 
   "5 years": "5 years",
 
@@ -238,6 +259,11 @@
   "Class Section": "Class Section",
 
   "Performance": "Performance",
+
+  "rank": "rank",
+  "Absent": "Absent",
+  "Today": "Today",
+
 
   "Growth Rank": "Growth Rank",
 
@@ -357,7 +383,11 @@
 
   "Add reminder": "Add reminder",
 
+  "Add Reminder" : "Add Reminder",
+
   "Save": "Save",
+
+  "Who is taking this class": "Who is taking this class",
 
   "students":  "students",
   "English": "English",

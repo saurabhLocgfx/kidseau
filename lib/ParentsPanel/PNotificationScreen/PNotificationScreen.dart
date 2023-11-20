@@ -198,7 +198,7 @@ class _PNotificationScreenState extends State<PNotificationScreen> {
                                                       .toString())) ==
                                               DateFormat('dd MMM, yyyy')
                                                   .format(DateTime.now())
-                                          ? 'Today'.tr()
+                                          ? 'Today'
                                           : DateFormat('dd MMM, yyyy').format(
                                               DateTime.parse(response
                                                   .allNotification[i].dateTime

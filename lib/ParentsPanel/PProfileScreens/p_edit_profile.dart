@@ -417,7 +417,7 @@ class _PEditProfileScreenState extends State<PEditProfileScreen> {
                           controller: _fatherOccupationController,
                           decoration: TextFieldDecoration()
                               .curvedWhiteDecoration(
-                                  label: 'Enter your Occupation'.tr(),
+                                  label: 'Enter your occupation'.tr(),
                                   curved: true),
                         ),
                         SizedBox(height: 16),

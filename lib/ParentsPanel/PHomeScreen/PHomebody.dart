@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
+// import 'package:get/get.dart';
 import 'package:kidseau/ParentsPanel/PHomeScreen/PLearningAlphabets.dart';
 import 'package:kidseau/Theme.dart';
 import 'package:video_player/video_player.dart';
@@ -64,13 +64,24 @@ class _ActivityState extends State<Activity> {
           itemBuilder: (BuildContext context, int index) {
             return InkWell(
               onTap: () {
-                Get.to(() => PLearningAplphabets(
-                      selectedDay: "",
-                      actId:
-                          widget.model.kidAndActivity![index].actId.toString(),
-                      dayId:
-                          widget.model.kidAndActivity![index].dayId.toString(),
-                    ));
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => PLearningAplphabets(
+                            selectedDay: "",
+                            actId: widget.model.kidAndActivity![index].actId
+                                .toString(),
+                            dayId: widget.model.kidAndActivity![index].dayId
+                                .toString(),
+                          )),
+                );
+                // Get.to(() => PLearningAplphabets(
+                //       selectedDay: "",
+                //       actId:
+                //           widget.model.kidAndActivity![index].actId.toString(),
+                //       dayId:
+                //           widget.model.kidAndActivity![index].dayId.toString(),
+                //     ));
               },
               child: Container(
                 height: 64,

@@ -185,9 +185,11 @@ class _PMessagesState extends State<PMessages> {
                                       Row(
                                         children: [
                                           Text(
-                                            modelList[index]
-                                                .userName
-                                                .toString(),
+                                            modelList[index].userName == null
+                                                ? 'User'
+                                                : modelList[index]
+                                                    .userName
+                                                    .toString(),
                                             style: FontConstant.k18w5008471Text
                                                 .copyWith(
                                                     fontSize: 18,

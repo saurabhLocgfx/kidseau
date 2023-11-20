@@ -209,7 +209,10 @@ class _TLearningAlphabetsState extends State<TLearningAlphabets> {
                       ),
                       SizedBox(height: 24),
                       HtmlWidget(
-                          _model.learningAlaphabets!.description.toString(),
+                          _model.learningAlaphabets!.description == null
+                              ? ""
+                              : _model.learningAlaphabets!.description
+                                  .toString(),
                           textStyle: FontConstant.k14w4008471Text.copyWith(
                               fontWeight: FontWeight.w400, fontSize: 18)),
                       SizedBox(height: 30),

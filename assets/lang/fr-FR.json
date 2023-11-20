@@ -109,7 +109,7 @@
 
   "A OTP has been sent to . ": "Un OTP a été envoyé au . ",
 
-  "Please enter the OTP here.": "Veuillez entrer l'OTP",
+  " Please enter the OTP here.": "Veuillez entrer l'OTP",
 
   "Continue":"Continuez",
 
@@ -122,6 +122,8 @@
   "Hello":"Bonjour",
 
   "From": "De",
+
+  "Messages" : "Messages",
 
   "To": "à",
 
@@ -300,15 +302,25 @@
   "Discard": "Abandonner",
   "Description": "Description",
 
+
   "Time":"Heure",
 
   "Date": "Date",
+  "Delete Account": "Supprimer le compte",
+  " & " : " &",
+  "A OTP has been sent to " :"Un OTP a été envoyé à",
+
 
   "Announce":"Annoncer",
 
   "Syllabus": "Programme",
 
+
   "Fees":"Frais",
+  "Absent": "Absente",
+
+
+
 
   "Settings":"Paramètres",
 
@@ -381,9 +393,16 @@
 
   "Signup with OTP"  : "S'inscrire avec OTP",
 
+  "Class Teacher": "Professeur de classe",
+
   "Tomorrow is holiday":"Demain c'est férié",
 
   "Scheduled  at": "Programmé à",
+
+  "Enter your Full name": "Entrez votre nom complet",
+  "Enter your occupation": "Entrez votre profession",
+  "Enter your full name": "Entrez votre nom complete",
+
 
   "Bring notebook":"Apporter un cahier",
 
@@ -479,7 +498,9 @@
 
   "Talk to class teacher":"Parlez au professeur de la classe",
 
-  "Kid’s Profile":"Profil de l'enfant"
+  "Kid’s Profile":"Profil de l'enfant",
+
+  "Teacher": "Teacher"
 
 
 }

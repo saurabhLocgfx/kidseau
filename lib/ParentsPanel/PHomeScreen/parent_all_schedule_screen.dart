@@ -4,7 +4,7 @@ import 'package:easy_localization/easy_localization.dart' as local;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
+// import 'package:get/get.dart';
 import 'package:kidseau/api/models/parent_models/parent_home_models/parent_activity_home_model.dart';
 
 import '../../Theme.dart';
@@ -101,13 +101,28 @@ class _PScheduleScreenState extends State<PScheduleScreen> {
                     itemBuilder: (BuildContext context, int index) {
                       return InkWell(
                         onTap: () {
-                          Get.to(() => PLearningAplphabets(
-                                selectedDay: "",
-                                actId: widget.model.kidAndActivity![index].actId
-                                    .toString(),
-                                dayId: widget.model.kidAndActivity![index].dayId
-                                    .toString(),
-                              ));
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => PLearningAplphabets(
+                                      selectedDay: "",
+                                      actId: widget
+                                          .model.kidAndActivity![index].actId
+                                          .toString(),
+                                      dayId: widget
+                                          .model.kidAndActivity![index].dayId
+                                          .toString(),
+                                    )),
+                          );
+                          // Get.to(
+                          //   () => PLearningAplphabets(
+                          //     selectedDay: "",
+                          //     actId: widget.model.kidAndActivity![index].actId
+                          //         .toString(),
+                          //     dayId: widget.model.kidAndActivity![index].dayId
+                          //         .toString(),
+                          //   ),
+                          // );
                         },
                         child: Container(
                           height: 64,
