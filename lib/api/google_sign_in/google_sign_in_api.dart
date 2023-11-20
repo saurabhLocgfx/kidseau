@@ -69,6 +69,7 @@ Future<dynamic> googleSignInApiAndroid({
       Uri.parse('https://application.kidseau.com/sign-up-with-google.php'));
   request.fields.addAll(
       {'id_token': id_Token, 'device': device, 'user_type': ParentTeacher});
+  print('cookie ${headers}');
 
   request.headers.addAll(headers);
 

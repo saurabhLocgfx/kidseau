@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:kidseau/Constants/colors.dart';
@@ -139,9 +138,9 @@ class _TLoginOtpVerificationState extends State<TLoginOtpVerification> {
                             RichText(
                                 text: TextSpan(children: [
                               TextSpan(
-                                text: "A OTP has been sent to . ".tr() +
+                                text: "A OTP has been sent to ".tr() +
                                     widget.mobileText +
-                                    "Please enter the OTP here.".tr(),
+                                    " Please enter the OTP here.".tr(),
                                 /*AppLoaclizations.of(context)!
                                     .translate(
                                         "A OTP has been sent to “9876543210”. Please enter the OTP here.")

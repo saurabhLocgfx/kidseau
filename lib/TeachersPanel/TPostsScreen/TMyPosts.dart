@@ -361,9 +361,9 @@ class _TMyPostsState extends State<TMyPosts> {
                                                                             CircularProgressIndicator(),
                                                                       ))
                                                                   : _getData();
-                                                              Navigator.of(
-                                                                      context)
-                                                                  .pop();
+                                                              // Navigator.of(
+                                                              //         context)
+                                                              //     .pop();
                                                               log(value
                                                                   .toString());
                                                               if (value[

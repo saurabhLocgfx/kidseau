@@ -57,7 +57,8 @@ class AllNotification {
     seen = json['seen'];
     userTypeTo = json['user_type_to'];
     userIdTo = json['user_id_to'];
-    dis = json['dis'] ?? "";
+    // dis = json['dis'] ?? "";
+    dis = json['dis']?.toString() ?? "";
   }
 
   Map<String, dynamic> toJson() {

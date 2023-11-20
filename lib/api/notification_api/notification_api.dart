@@ -71,6 +71,7 @@ class NotificationApi {
     };
     var request = http.Request('GET',
         Uri.parse('$kAPIConst/notification/get_notification.php?scrol=$page'));
+
     request.headers.addAll(headers);
     http.StreamedResponse response = await request.send();
     var v = jsonDecode(await response.stream.bytesToString());
@@ -78,6 +79,7 @@ class NotificationApi {
       return v;
     } else {
       print(response.reasonPhrase);
+      return v;
     }
   }
 
@@ -93,6 +95,7 @@ class NotificationApi {
     http.StreamedResponse response = await request.send();
     var v = jsonDecode(await response.stream.bytesToString());
     if (response.statusCode == 200) {
+      print('check notifications${v}');
       return v;
     } else {
       print(response.reasonPhrase);

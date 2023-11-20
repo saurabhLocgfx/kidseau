@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -17,8 +15,10 @@ Center mainlogo() {
 }
 
 class PostDialog extends StatefulWidget {
-  var value;
-  PostDialog({Key? key, required this.value}) : super(key: key);
+  final List<dynamic> dis;
+  final String captions;
+  PostDialog({Key? key, required this.dis, required this.captions})
+      : super(key: key);
 
   @override
   State<PostDialog> createState() => _PostDialogState();
@@ -27,8 +27,8 @@ class PostDialog extends StatefulWidget {
 class _PostDialogState extends State<PostDialog> {
   @override
   void initState() {
-    log(widget.value['images'].toString());
     super.initState();
+    print(widget.dis.length);
   }
 
   @override
@@ -44,7 +44,7 @@ class _PostDialogState extends State<PostDialog> {
           width: 200,
           decoration: BoxDecoration(
             color: Colors.white,
-            borderRadius: BorderRadius.circular(20),
+            borderRadius: BorderRadius.circular(40),
           ),
           child: Column(
             children: [
@@ -53,7 +53,10 @@ class _PostDialogState extends State<PostDialog> {
                 children: [
                   Expanded(
                     child: Text(
-                      widget.value['captions'],
+                      widget.captions,
+                      // widget.dis,
+                      // widget.value['captions'],
+                      // widget.value['captions'],
                       style: FontConstant.k16w4008471Text,
                     ),
                   ),
@@ -62,19 +65,82 @@ class _PostDialogState extends State<PostDialog> {
               SizedBox(height: 6),
               SizedBox(
                 height: 200,
+                // child: PageView.builder(
+                //   itemCount: widget.dis.length,
+                //   onPageChanged: (currentIndex) {
+                //     // log(_postList[index].image![currentIndex].fileName.toString());
+                //   },
+                //   itemBuilder: (ctx, indexx) {
+                //     List<String>? images = widget.dis
+                //         .expand((dis) => dis.dis?.images ?? [])
+                //         .cast<String>()
+                //         .toList();
+                //
+                //     return ClipRRect(
+                //       borderRadius: BorderRadius.circular(8),
+                //       child: Container(
+                //         decoration: BoxDecoration(
+                //           borderRadius: BorderRadius.circular(8),
+                //         ),
+                //         child: images != null && images.isNotEmpty
+                //             ? PageView.builder(
+                //                 itemCount: images.length,
+                //                 itemBuilder: (ctx, index) {
+                //                   return ClipRRect(
+                //                     borderRadius: BorderRadius.circular(8),
+                //                     child: Container(
+                //                       decoration: BoxDecoration(
+                //                         borderRadius: BorderRadius.circular(8),
+                //                       ),
+                //                       child: Image.network(
+                //                         images[index].toString(),
+                //                         fit: BoxFit.cover,
+                //                         loadingBuilder: (q, w, e) {
+                //                           if (e == null) {
+                //                             return w;
+                //                           } else {
+                //                             return SpinKitThreeBounce(
+                //                               size: 30,
+                //                               color: Colors.grey,
+                //                             );
+                //                           }
+                //                         },
+                //                         errorBuilder: (q, w, e) => SizedBox(
+                //                           width: 1.sw,
+                //                           child: Center(
+                //                               child: Text('No image found')),
+                //                         ),
+                //                         width: 1.sw,
+                //                       ),
+                //                     ),
+                //                   );
+                //                 },
+                //               )
+                //             : SizedBox.shrink(),
+                //       ),
+                //     );
+                //   },
+                // ),
+
                 child: PageView.builder(
-                    itemCount: widget.value['images'].length,
+                    // itemCount: widget.value['images'].length,
+                    itemCount: widget.dis.length,
                     onPageChanged: (currentIndex) {
                       // log(_postList[index].image![currentIndex].fileName.toString());
                     },
                     itemBuilder: (ctx, indexx) {
+                      // print("check image" +
+                      //     widget.dis[indexx].dis!.images.toString());
                       return ClipRRect(
                         borderRadius: BorderRadius.circular(8),
                         child: Container(
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(8)),
                           child: Image.network(
-                            widget.value['images'][indexx],
+                            widget.dis[indexx].toString(),
+                            // widget.dis[indexx].dis!.images![indexx].toString(),
+                            // widget.value['images'][indexx],
+                            // '',
                             fit: BoxFit.cover,
                             loadingBuilder: (q, w, e) {
                               if (e == null) {

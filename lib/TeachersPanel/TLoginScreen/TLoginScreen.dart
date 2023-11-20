@@ -347,59 +347,59 @@ class _TLoginScreenState extends State<TLoginScreen> {
                                         log(auth.idToken.toString());
                                         log(auth.idToken!.length.toString());
 
-                                        googleSignInApiAndroid(
-                                                id_Token: auth.idToken!,
-                                                device: 'google',
-                                                ParentTeacher: 'teacher')
-                                            .then((value) {
-                                          if (value == false) {
-                                            Fluttertoast.showToast(
-                                                msg:
-                                                    "Sign in failed! Please try again.");
-                                            setState(() {
-                                              _isLoading = false;
-                                            });
-                                          } else if (value['status'] == 0) {
-                                            setState(() {
-                                              _isLoading = false;
-                                            });
-                                            Fluttertoast.showToast(
-                                                msg:
-                                                    "Wait For Director's Approval");
-                                          } else {
-                                            UserPrefs.setCookies(value['key']);
-                                            //UserPrefs.setOTP(value['OTP']);
-
-                                            if (value['status'] == 1) {
-                                              Navigator.of(context).push(
-                                                  MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          TSignupCode(
-                                                            isEmail: false,
-                                                            mobileText: '',
-                                                            /*isEmail:
-                                                      widget
-                                                          .isEmail,
-                                                      mobileText: widget
-                                                          .mobileText*/
-                                                          )));
-                                            } else {
-                                              UserPrefs.setIsTeacher(true);
-                                              UserPrefs.setOTP(value['OTP']);
-                                              //if(value['status'] == 2){
-
-                                              // UserPrefs.setCookies(value['key']);
-                                              // UserPrefs.setOTP(value['OTP']);
-
-                                              Navigator.of(context).push(
-                                                  MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          TDashboard()));
-                                              // }
-                                              // else{}
-                                            }
-                                          }
-                                        });
+                                        // googleSignInApiAndroid(
+                                        //         id_Token: auth.idToken!,
+                                        //         device: 'google',
+                                        //         ParentTeacher: 'teacher')
+                                        //     .then((value) {
+                                        //   if (value == false) {
+                                        //     Fluttertoast.showToast(
+                                        //         msg:
+                                        //             "Sign in failed! Please try again.");
+                                        //     setState(() {
+                                        //       _isLoading = false;
+                                        //     });
+                                        //   } else if (value['status'] == 0) {
+                                        //     setState(() {
+                                        //       _isLoading = false;
+                                        //     });
+                                        //     Fluttertoast.showToast(
+                                        //         msg:
+                                        //             "Wait For Director's Approval");
+                                        //   } else {
+                                        //     UserPrefs.setCookies(value['key']);
+                                        //     //UserPrefs.setOTP(value['OTP']);
+                                        //
+                                        //     if (value['status'] == 1) {
+                                        //       Navigator.of(context).push(
+                                        //           MaterialPageRoute(
+                                        //               builder: (context) =>
+                                        //                   TSignupCode(
+                                        //                     isEmail: false,
+                                        //                     mobileText: '',
+                                        //                     /*isEmail:
+                                        //               widget
+                                        //                   .isEmail,
+                                        //               mobileText: widget
+                                        //                   .mobileText*/
+                                        //                   )));
+                                        //     } else {
+                                        //       UserPrefs.setIsTeacher(true);
+                                        //       UserPrefs.setOTP(value['OTP']);
+                                        //       //if(value['status'] == 2){
+                                        //
+                                        //       // UserPrefs.setCookies(value['key']);
+                                        //       // UserPrefs.setOTP(value['OTP']);
+                                        //
+                                        //       Navigator.of(context).push(
+                                        //           MaterialPageRoute(
+                                        //               builder: (context) =>
+                                        //                   TDashboard()));
+                                        //       // }
+                                        //       // else{}
+                                        //     }
+                                        //   }
+                                        // });
                                       },
                                       /*child: Container(
                                   margin: EdgeInsets.all(16),

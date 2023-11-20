@@ -430,7 +430,10 @@ class _PKidsDetailsState extends State<PKidsDetails> {
                                                 CrossAxisAlignment.start,
                                             children: [
                                               Text(
-                                                model.motherSName.toString(),
+                                                model.motherSName == null
+                                                    ? ''
+                                                    : model.motherSName
+                                                        .toString(),
                                                 style: FontConstant
                                                     .k16w5008471Text,
                                               )

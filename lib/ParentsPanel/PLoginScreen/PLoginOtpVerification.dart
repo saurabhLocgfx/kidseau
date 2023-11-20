@@ -142,9 +142,9 @@ class _PLoginOtpVerificationState extends State<PLoginOtpVerification> {
                   RichText(
                       text: TextSpan(children: [
                     TextSpan(
-                      text: "A OTP has been sent to . ".tr() +
+                      text: "A OTP has been sent to ".tr() +
                           widget.loginField +
-                          "Please enter the OTP here.".tr(),
+                          ". Please enter the OTP here.".tr(),
                       /*AppLoaclizations.of(context)!
                                   .translate(
                                       "A OTP has been sent to “9876543210”. Please enter the OTP here.")

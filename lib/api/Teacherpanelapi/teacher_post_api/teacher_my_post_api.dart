@@ -12,7 +12,7 @@ class TeacherMyPostApi {
     var request = http.Request(
         'GET',
         Uri.parse(
-            '$kAPIConst/api_teacher_login/teacher_post/tech_my_post.php?scrol=$scroll'));
+            '$kAPIConst/api_teacher_login/teacher_post/tech_my_post.php?scroll=$scroll'));
 
     request.headers.addAll(headers);
 

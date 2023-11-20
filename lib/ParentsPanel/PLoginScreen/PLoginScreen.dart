@@ -294,6 +294,7 @@ class _PLoginScreenState extends State<PLoginScreen> {
                                             } else {
                                               //UserPrefs.setIsTeacher(false);
                                               UserPrefs.setIsTeacher(false);
+                                              UserPrefs.setOTP(value['OTP']);
 
                                               //if(value['status'] == 2) {
                                               Navigator.push(
@@ -365,6 +366,7 @@ class _PLoginScreenState extends State<PLoginScreen> {
                                               //UserPrefs.getKidsStatus();
                                             } else {
                                               UserPrefs.setIsTeacher(false);
+                                              UserPrefs.setOTP(value['OTP']);
 
                                               //if(value['status'] == 2) {
                                               Navigator.push(
@@ -435,6 +437,7 @@ class _PLoginScreenState extends State<PLoginScreen> {
                                               //UserPrefs.getKidsStatus();
                                             } else {
                                               UserPrefs.setIsTeacher(false);
+                                              UserPrefs.setOTP(value['OTP']);
 
                                               //if(value['status'] == 2) {
                                               Navigator.push(

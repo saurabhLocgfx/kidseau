@@ -11,6 +11,7 @@ import 'package:kidseau/Theme.dart';
 import 'package:kidseau/Widgets/widgets.dart';
 import 'package:kidseau/api/models/notification_api_response/notification_api_response.dart';
 import 'package:kidseau/api/notification_api/notification_api.dart';
+import 'package:kidseau/models/noti_dis_model.dart';
 
 class PNotificationScreen extends StatefulWidget {
   const PNotificationScreen({Key? key}) : super(key: key);
@@ -49,6 +50,10 @@ var desc2 = [
 
 class _PNotificationScreenState extends State<PNotificationScreen> {
   List notifications = [];
+  List<dynamic> notiDis = [];
+  // List<AllNotificationModel> dis = [];
+  List<AllNotificationModel> dis = [];
+  List<Dis> img = [];
 
   var _value;
   int page = 0;
@@ -61,11 +66,20 @@ class _PNotificationScreenState extends State<PNotificationScreen> {
       (value) {
         log(value.toString());
         notifications.clear();
+
         for (var v in value['all_notification']) {
           if (v['notification_type'] == 'post') {
-            _value = v['dis'];
+            dis.add(AllNotificationModel.fromJson(v));
+            // notiDis = v['dis'];
+            // notiDis.add(v['dis']);
+            // for (var q in v['dis']) {
+            //   dis.add(NotificationDisModel.fromJson(q));
+            // }
+            // dis.add(NotificationDisModel(v['dis']));
           }
         }
+
+        print('check img${img.length}');
         if (value['status'] == 1) {
           notifications.clear();
           response = NotificationResponse.fromJson(value);
@@ -267,7 +281,13 @@ class _PNotificationScreenState extends State<PNotificationScreen> {
                                           showDialog(
                                               context: context,
                                               builder: (_) => PostDialog(
-                                                    value: _value,
+                                                    captions: dis[i]
+                                                        .notification
+                                                        .toString(),
+                                                    dis: dis[i]
+                                                        .dis!
+                                                        .images!
+                                                        .toList(),
                                                   ))
                                           : notificationDialog(
                                               context: context,
@@ -364,6 +384,8 @@ class _PNotificationScreenState extends State<PNotificationScreen> {
                                                     .dateTime)),
                                             style: FontConstant.k14w5008471Text,
                                           ),
+                                          Text(response
+                                              .allNotification[i].notification)
                                         ],
                                       )
                                     ],
