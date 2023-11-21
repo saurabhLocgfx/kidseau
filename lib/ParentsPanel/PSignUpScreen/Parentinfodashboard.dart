@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:kidseau/Constants/globals.dart';
 import 'package:kidseau/Kidsdetails.dart';
 import 'package:kidseau/Medicalinfo.dart';
 import 'package:kidseau/Parentinfo.dart';
@@ -59,72 +60,74 @@ class _ParentinfodashboardState extends State<Parentinfodashboard>
         }*/
         return false;
       },
-      child: Scaffold(
-        //resizeToAvoidBottomInset: true,
-        body: Container(
-          color: ThemeColor.primarycolor.withOpacity(.06),
-          child: SingleChildScrollView(
-            physics: NeverScrollableScrollPhysics(),
-            child: Column(
-              children: [
-                SizedBox(height: 72.h),
-                Center(
-                  child: Image.asset(
-                    "assets/images/logo without text.png",
-                    height: 63,
-                    width: 52,
+      child: TextFieldUnFocusOnTap(
+        child: Scaffold(
+          //resizeToAvoidBottomInset: true,
+          body: Container(
+            color: ThemeColor.primarycolor.withOpacity(.06),
+            child: SingleChildScrollView(
+              physics: NeverScrollableScrollPhysics(),
+              child: Column(
+                children: [
+                  SizedBox(height: 72.h),
+                  Center(
+                    child: Image.asset(
+                      "assets/images/logo without text.png",
+                      height: 63,
+                      width: 52,
+                    ),
                   ),
-                ),
-                SizedBox(height: 40),
-                dottab(),
-                //SizedBox(height: 40),
-                SizedBox(
-                  height: 1.sh,
-                  child: PageView(
-                    physics: NeverScrollableScrollPhysics(),
-                    controller: _pageController,
-                    onPageChanged: (page) {
-                      setState(
-                        () {
-                          pageIndex = page;
-                        },
-                      );
-                    },
-                    children: <Widget>[
-                      ParentInfo(
-                        onContinue: () {
-                          if (widget.takeKidInfo) {
-                            UserPrefs.setIsTeacher(false);
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (ctx) => PDashboard()));
-                          } else {
-                            _pageController.animateToPage(
-                              1,
-                              duration: Duration(milliseconds: 300),
-                              curve: Curves.fastOutSlowIn,
-                            );
-                          }
-                        },
-                        takeKidInfo: widget.takeKidInfo,
-                      ),
-                      if (!widget.takeKidInfo)
-                        KidsDetails(
-                          onContinue: () {
-                            _pageController.animateToPage(
-                              2,
-                              duration: Duration(milliseconds: 300),
-                              curve: Curves.fastOutSlowIn,
-                            );
+                  SizedBox(height: 40),
+                  dottab(),
+                  //SizedBox(height: 40),
+                  SizedBox(
+                    height: 1.sh,
+                    child: PageView(
+                      physics: NeverScrollableScrollPhysics(),
+                      controller: _pageController,
+                      onPageChanged: (page) {
+                        setState(
+                          () {
+                            pageIndex = page;
                           },
+                        );
+                      },
+                      children: <Widget>[
+                        ParentInfo(
+                          onContinue: () {
+                            if (widget.takeKidInfo) {
+                              UserPrefs.setIsTeacher(false);
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (ctx) => PDashboard()));
+                            } else {
+                              _pageController.animateToPage(
+                                1,
+                                duration: Duration(milliseconds: 300),
+                                curve: Curves.fastOutSlowIn,
+                              );
+                            }
+                          },
+                          takeKidInfo: widget.takeKidInfo,
                         ),
-                      if (!widget.takeKidInfo)
-                        MedicalInfo(
-                          newKid: false,
-                        )
-                    ],
+                        if (!widget.takeKidInfo)
+                          KidsDetails(
+                            onContinue: () {
+                              _pageController.animateToPage(
+                                2,
+                                duration: Duration(milliseconds: 300),
+                                curve: Curves.fastOutSlowIn,
+                              );
+                            },
+                          ),
+                        if (!widget.takeKidInfo)
+                          MedicalInfo(
+                            newKid: false,
+                          )
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),

@@ -265,6 +265,9 @@ class _TPostFormScreenState extends State<TPostFormScreen> {
                       Text("Caption".tr(), style: FontConstant.k16w500331FText),
                       SizedBox(height: 4),
                       TextFormField(
+                        inputFormatters: [
+                          LengthLimitingTextInputFormatter(200),
+                        ],
                         textInputAction: TextInputAction.done,
                         validator: (val) {
                           if (_captionController.text.isEmpty) {

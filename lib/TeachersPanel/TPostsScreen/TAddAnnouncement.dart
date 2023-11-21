@@ -82,6 +82,9 @@ class _AddAnnouncementState extends State<AddAnnouncement> {
                           style: FontConstant.k16w500331FText),
                       SizedBox(height: 4),
                       TextFormField(
+                        inputFormatters: [
+                          LengthLimitingTextInputFormatter(50),
+                        ],
                         validator: (val) {
                           if (_titleController.text.isEmpty) {
                             return 'This field cannot be empty'.tr();
@@ -103,6 +106,9 @@ class _AddAnnouncementState extends State<AddAnnouncement> {
                           style: FontConstant.k16w500331FText),
                       SizedBox(height: 4),
                       TextFormField(
+                        inputFormatters: [
+                          LengthLimitingTextInputFormatter(200),
+                        ],
                         validator: (val) {
                           if (_descController.text.isEmpty) {
                             return 'This field cannot be empty'.tr();

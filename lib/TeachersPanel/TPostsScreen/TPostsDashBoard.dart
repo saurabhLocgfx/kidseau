@@ -316,7 +316,7 @@ class _TPostsDashBoardState extends State<TPostsDashBoard> {
                         child: Image.asset(
                             pageIndex == 0
                                 ? "assets/images/icongalleryfill.png"
-                                : "assets/images/gallery-add.png",
+                                : "assets/images/icongalleryunfill.png",
                             height: pageIndex == 0 ? 24 : 25),
                       ),
                     ),

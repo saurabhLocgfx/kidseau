@@ -36,152 +36,141 @@ class _PostDialogState extends State<PostDialog> {
     return AlertDialog(
       contentPadding: EdgeInsets.zero,
       insetPadding: EdgeInsets.symmetric(horizontal: 16),
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.transparent,
       content: SingleChildScrollView(
         child: Container(
-          padding: EdgeInsets.all(16),
-          // height: 500,
-          width: 200,
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(40),
-          ),
+          color: Colors.transparent,
+          width: MediaQuery.of(context).size.width * 0.8,
           child: Column(
+            mainAxisSize: MainAxisSize.min,
             children: [
-              SizedBox(height: 08),
-              Row(
-                children: [
-                  Expanded(
-                    child: Text(
-                      widget.captions,
-                      // widget.dis,
-                      // widget.value['captions'],
-                      // widget.value['captions'],
-                      style: FontConstant.k16w4008471Text,
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(height: 6),
-              SizedBox(
-                height: 200,
-                // child: PageView.builder(
-                //   itemCount: widget.dis.length,
-                //   onPageChanged: (currentIndex) {
-                //     // log(_postList[index].image![currentIndex].fileName.toString());
-                //   },
-                //   itemBuilder: (ctx, indexx) {
-                //     List<String>? images = widget.dis
-                //         .expand((dis) => dis.dis?.images ?? [])
-                //         .cast<String>()
-                //         .toList();
-                //
-                //     return ClipRRect(
-                //       borderRadius: BorderRadius.circular(8),
-                //       child: Container(
-                //         decoration: BoxDecoration(
-                //           borderRadius: BorderRadius.circular(8),
-                //         ),
-                //         child: images != null && images.isNotEmpty
-                //             ? PageView.builder(
-                //                 itemCount: images.length,
-                //                 itemBuilder: (ctx, index) {
-                //                   return ClipRRect(
-                //                     borderRadius: BorderRadius.circular(8),
-                //                     child: Container(
-                //                       decoration: BoxDecoration(
-                //                         borderRadius: BorderRadius.circular(8),
-                //                       ),
-                //                       child: Image.network(
-                //                         images[index].toString(),
-                //                         fit: BoxFit.cover,
-                //                         loadingBuilder: (q, w, e) {
-                //                           if (e == null) {
-                //                             return w;
-                //                           } else {
-                //                             return SpinKitThreeBounce(
-                //                               size: 30,
-                //                               color: Colors.grey,
-                //                             );
-                //                           }
-                //                         },
-                //                         errorBuilder: (q, w, e) => SizedBox(
-                //                           width: 1.sw,
-                //                           child: Center(
-                //                               child: Text('No image found')),
-                //                         ),
-                //                         width: 1.sw,
-                //                       ),
-                //                     ),
-                //                   );
-                //                 },
-                //               )
-                //             : SizedBox.shrink(),
-                //       ),
-                //     );
-                //   },
-                // ),
-
-                child: PageView.builder(
-                    // itemCount: widget.value['images'].length,
-                    itemCount: widget.dis.length,
-                    onPageChanged: (currentIndex) {
-                      // log(_postList[index].image![currentIndex].fileName.toString());
-                    },
-                    itemBuilder: (ctx, indexx) {
-                      // print("check image" +
-                      //     widget.dis[indexx].dis!.images.toString());
-                      return ClipRRect(
-                        borderRadius: BorderRadius.circular(8),
-                        child: Container(
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8)),
-                          child: Image.network(
-                            widget.dis[indexx].toString(),
-                            // widget.dis[indexx].dis!.images![indexx].toString(),
-                            // widget.value['images'][indexx],
-                            // '',
-                            fit: BoxFit.cover,
-                            loadingBuilder: (q, w, e) {
-                              if (e == null) {
-                                return w;
-                              } else {
-                                return SpinKitThreeBounce(
-                                  size: 30,
-                                  color: Colors.grey,
-                                );
-                              }
-                            },
-                            errorBuilder: (q, w, e) => SizedBox(
-                                width: 1.sw,
-                                child: Center(child: Text('No image found'))),
-                            width: 1.sw,
-                          ),
-                        ),
-                      );
-                    }),
-                // ListView.separated(
-                //   itemBuilder: (ctx, indexx){
-                //   return Image.network(
-                //     'https://d2dupazv4z3oi6.cloudfront.net/i/nic/abp_live.jpg', errorBuilder: (q, w, e) =>
-                //       SizedBox(width: 1.sw,child: Text('No image found')),width: 1.sw,);
-                // }, separatorBuilder: (ctx, ind)=> SizedBox.shrink(),
-                //   itemCount: _postList[index].image!.length,
-                //   shrinkWrap: true,
-                //   scrollDirection: Axis.horizontal,)
-              ),
-              /*SizedBox(height: 16),
               Container(
-                width: 1.sw,
-                height: 3,
                 color: Colors.white,
+                width: double.infinity,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    widget.captions,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    style: FontConstant.k16w4008471Text,
+                  ),
+                ),
               ),
-              SizedBox(height: 5),*/
+              Container(
+                color: Colors.white,
+                height: MediaQuery.of(context).size.height * 0.5,
+                width: double.infinity,
+                child: PageView.builder(
+                  itemCount: widget.dis.length,
+                  itemBuilder: (context, index) {
+                    return Image.network(
+                      widget.dis[index].toString(),
+                      fit: BoxFit.cover,
+                      loadingBuilder: (q, w, e) {
+                        if (e == null) {
+                          return w;
+                        } else {
+                          return SpinKitThreeBounce(
+                            size: 30,
+                            color: Colors.grey,
+                          );
+                        }
+                      },
+                      errorBuilder: (q, w, e) => SizedBox(
+                          width: 1.sw,
+                          child: Center(child: Text('No image found'))),
+                      width: 1.sw,
+                    );
+                  },
+                ),
+              ),
+              SizedBox(height: 16),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text('Close'),
+              ),
+              SizedBox(height: 16),
             ],
           ),
         ),
       ),
     );
+    // return AlertDialog(
+    //   contentPadding: EdgeInsets.zero,
+    //   insetPadding: EdgeInsets.symmetric(horizontal: 16),
+    //   backgroundColor: Colors.transparent,
+    //   content: SingleChildScrollView(
+    //     child: Container(
+    //       padding: EdgeInsets.only(bottom: 16),
+    //       // height: 500,
+    //       width: 200,
+    //       decoration: BoxDecoration(
+    //         color: Colors.white,
+    //         borderRadius: BorderRadius.circular(20),
+    //       ),
+    //       child: Column(
+    //         children: [
+    //           SizedBox(height: 08),
+    //           Row(
+    //             children: [
+    //               Expanded(
+    //                 child: Padding(
+    //                   padding: const EdgeInsets.only(left: 20.0),
+    //                   child: Text(
+    //                     widget.captions,
+    //                     // widget.dis,
+    //                     // widget.value['captions'],
+    //                     // widget.value['captions'],
+    //                     style: FontConstant.k16w4008471Text,
+    //                   ),
+    //                 ),
+    //               ),
+    //             ],
+    //           ),
+    //           Container(
+    //             height: 200,
+    //             decoration:
+    //                 BoxDecoration(borderRadius: BorderRadius.circular(8)),
+    //             child: PageView.builder(
+    //                 // itemCount: widget.value['images'].length,
+    //                 itemCount: widget.dis.length,
+    //                 onPageChanged: (currentIndex) {
+    //                   // log(_postList[index].image![currentIndex].fileName.toString());
+    //                 },
+    //                 itemBuilder: (ctx, indexx) {
+    //                   // print("check image" +
+    //                   //     widget.dis[indexx].dis!.images.toString());
+    //                   return Image.network(
+    //                     widget.dis[indexx].toString(),
+    //                     // widget.dis[indexx].dis!.images![indexx].toString(),
+    //                     // widget.value['images'][indexx],
+    //                     // '',
+    //                     fit: BoxFit.cover,
+    //                     loadingBuilder: (q, w, e) {
+    //                       if (e == null) {
+    //                         return w;
+    //                       } else {
+    //                         return SpinKitThreeBounce(
+    //                           size: 30,
+    //                           color: Colors.grey,
+    //                         );
+    //                       }
+    //                     },
+    //                     errorBuilder: (q, w, e) => SizedBox(
+    //                         width: 1.sw,
+    //                         child: Center(child: Text('No image found'))),
+    //                     width: 1.sw,
+    //                   );
+    //                 }),
+    //           ),
+    //         ],
+    //       ),
+    //     ),
+    //   ),
+    // );
   }
 }
 

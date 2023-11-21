@@ -329,65 +329,76 @@ class _PNotificationScreenState extends State<PNotificationScreen> {
                                   child: Row(
                                     children: [
                                       SizedBox(width: 16),
-                                      Container(
-                                        width: 60,
-                                        height: 70,
-                                        margin:
-                                            EdgeInsets.symmetric(vertical: 16),
-                                        clipBehavior: Clip.hardEdge,
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(08),
-                                        ),
-                                        child: Image.network(
-                                          response.allNotification[i]
-                                              .userTypeFrom.techProfile,
-                                          fit: BoxFit.cover,
-                                          errorBuilder: (_, a, b) => Container(
-                                            decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(08),
-                                                image: DecorationImage(
-                                                    image: AssetImage(
-                                                        "assets/images/person3.png"))),
+                                      Expanded(
+                                        child: Container(
+                                          width: 60,
+                                          height: 70,
+                                          margin: EdgeInsets.symmetric(
+                                              vertical: 16),
+                                          clipBehavior: Clip.hardEdge,
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(08),
+                                          ),
+                                          child: Image.network(
+                                            response.allNotification[i]
+                                                .userTypeFrom.techProfile,
+                                            fit: BoxFit.cover,
+                                            errorBuilder: (_, a, b) =>
+                                                Container(
+                                              decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(08),
+                                                  image: DecorationImage(
+                                                      image: AssetImage(
+                                                          "assets/images/person3.png"))),
+                                            ),
                                           ),
                                         ),
                                       ),
                                       SizedBox(width: 12),
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            response.allNotification[i]
-                                                .userTypeFrom.fName
-                                                .trim(),
-                                            maxLines: 1,
-                                            overflow: TextOverflow.ellipsis,
-                                            style: FontConstant.k16w500331FText,
-                                          ),
-                                          Text(
-                                            response.allNotification[i]
-                                                .notificationType
-                                                .trim(),
-                                            maxLines: 1,
-                                            overflow: TextOverflow.ellipsis,
-                                            style: FontConstant.k16w500331FText
-                                                .copyWith(
-                                                    fontWeight:
-                                                        FontWeight.w500),
-                                          ),
-                                          Text(
-                                            DateFormat('hh:mm a').format(
-                                                DateTime.parse(response
-                                                    .allNotification[i]
-                                                    .dateTime)),
-                                            style: FontConstant.k14w5008471Text,
-                                          ),
-                                          Text(response
-                                              .allNotification[i].notification)
-                                        ],
-                                      )
+                                      Expanded(
+                                          flex: 5,
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                response.allNotification[i]
+                                                    .userTypeFrom.fName
+                                                    .trim(),
+                                                maxLines: 2,
+                                                overflow: TextOverflow.ellipsis,
+                                                style: FontConstant
+                                                    .k16w500331FText,
+                                              ),
+                                              Text(
+                                                response.allNotification[i]
+                                                    .notificationType
+                                                    .trim(),
+                                                maxLines: 1,
+                                                overflow: TextOverflow.ellipsis,
+                                                style: FontConstant
+                                                    .k16w500331FText
+                                                    .copyWith(
+                                                        fontWeight:
+                                                            FontWeight.w500),
+                                              ),
+                                              Text(
+                                                DateFormat('hh:mm a').format(
+                                                    DateTime.parse(response
+                                                        .allNotification[i]
+                                                        .dateTime)),
+                                                style: FontConstant
+                                                    .k14w5008471Text,
+                                              ),
+                                              Text(response.allNotification[i]
+                                                  .notification),
+                                              SizedBox(
+                                                height: 10,
+                                              ),
+                                            ],
+                                          ))
                                     ],
                                   ),
                                 ),

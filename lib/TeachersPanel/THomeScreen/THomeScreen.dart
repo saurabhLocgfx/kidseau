@@ -234,6 +234,7 @@ class _THomeScreenState extends State<THomeScreen> {
                           PopupMenuItem(
                             enabled: false,
                             child: GestureDetector(
+                              behavior: HitTestBehavior.translucent,
                               onTap: () {
                                 UserPrefs.setEArbBool(false);
                                 UserPrefs.setLang('English');
@@ -258,6 +259,7 @@ class _THomeScreenState extends State<THomeScreen> {
                           PopupMenuItem(
                             enabled: false,
                             child: GestureDetector(
+                              behavior: HitTestBehavior.translucent,
                               onTap: () {
                                 UserPrefs.setEArbBool(false);
                                 UserPrefs.setLang('French');
@@ -282,6 +284,7 @@ class _THomeScreenState extends State<THomeScreen> {
                           PopupMenuItem(
                             enabled: false,
                             child: GestureDetector(
+                              behavior: HitTestBehavior.translucent,
                               onTap: () {
                                 UserPrefs.setEArbBool(true);
                                 UserPrefs.setLang('Arabic');

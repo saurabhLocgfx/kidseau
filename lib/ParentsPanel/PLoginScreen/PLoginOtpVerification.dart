@@ -93,155 +93,177 @@ class _PLoginOtpVerificationState extends State<PLoginOtpVerification> {
         ),
       ),
       backgroundColor: Color(0xfff7f6fa),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Stack(children: [
-              Container(
-                height: 414.h,
-                width: 1.sw,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage("assets/images/postsbackground.png"),
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.only(top: 180.h, left: 16, right: 16),
-                child: Center(
-                  child: Column(
-                    children: [
-                      Image.asset(
-                        "assets/images/logo.png",
-                        height: 172,
-                        width: 173,
-                      ),
-                      Text(
-                        "We offer a new way to track your children and watch them grow."
-                            .tr(),
-                        style: FontConstant.k16w4008471Text,
-                        textAlign: TextAlign.center,
-                      ),
-                    ],
-                  ),
-                ),
-              )
-            ]),
-            Padding(
-              padding: const EdgeInsets.only(left: 16.0, right: 16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(height: 25),
-                  Text("OTP verification".tr(),
-                      /* AppLoaclizations.of(context)!
-                          .translate("OTP verification")
-                          .toString(),*/
-                      style: FontConstant.k24w500brownText),
-                  RichText(
-                      text: TextSpan(children: [
-                    TextSpan(
-                      text: "A OTP has been sent to ".tr() +
-                          widget.loginField +
-                          ". Please enter the OTP here.".tr(),
-                      /*AppLoaclizations.of(context)!
-                                  .translate(
-                                      "A OTP has been sent to “9876543210”. Please enter the OTP here.")
-                                  .toString(),*/
-                      style:
-                          FontConstant.k16w400B7A4Text.copyWith(fontSize: 15),
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Stack(children: [
+                Container(
+                  height: 414.h,
+                  width: 1.sw,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage("assets/images/postsbackground.png"),
+                      fit: BoxFit.cover,
                     ),
-                    seconds != 0
-                        ? TextSpan(
-                            text: ' $seconds',
-                            style: FontConstant.k16w500purpleText)
-                        : WidgetSpan(
-                            alignment: PlaceholderAlignment.baseline,
-                            baseline: TextBaseline.alphabetic,
-                            child: GestureDetector(
-                              onTap: () {
-                                final resp = ParentLogin()
-                                    .get(email: widget.loginField.trim());
-                                resp.then((value) {
-                                  log(value.toString());
-                                  if (value['status'] == 0) {
-                                    Fluttertoast.showToast(msg: value['msg']);
-                                  } else {
-                                    UserPrefs.setCookies(value['key']);
-                                    UserPrefs.setOTP(value['OTP']);
-                                    // Fluttertoast.showToast(msg: 'Your OTP is ${value['OTP']}');
-                                  }
-                                });
-                              },
-                              child: Text(
-                                "  Resend".tr(),
-                                style: FontConstant.k16w500purpleText,
-                              ),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(
+                      // top: 170,
+                      top: 10,
+                      left: 16,
+                      right: 16),
+                  child: Center(
+                    child: Column(
+                      children: [
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: GestureDetector(
+                            behavior: HitTestBehavior.translucent,
+                            onTap: () {
+                              Navigator.pop(context);
+                            },
+                            child: Image.asset(
+                              "assets/images/arrow-left.png",
+                              height: 24,
+                              width: 24,
                             ),
                           ),
-                    /*TextSpan(
-                      recognizer: TapGestureRecognizer()
-                        ..onTap = () {
-                          //log('');
-                          final resp =
-                              ParentLogin().get(email: loginField.trim());
-                          resp.then((value) {
-                            // log(value.toString());
-                            if (value['status'] == 0) {
-                              Fluttertoast.showToast(msg: value['msg']);
-                            } else {
-                              UserPrefs.setCookies(value['key']);
-                              Fluttertoast.showToast(
-                                  msg: 'Your OTP is ${value['OTP']}');
-                            }
-                          });
-                        },
-                      text: "  Resend".tr(),
-                      style: FontConstant.k16w500purpleText,
-                    ),*/
-                  ])),
-                  SizedBox(height: 43),
-                  PinCodeTextField(
-                    controller: pinTextController,
-                    cursorColor: AppColors().k8267AC,
-                    keyboardType: TextInputType.number,
-                    appContext: context,
-                    length: 4,
-                    onChanged: (val) {},
-                    pinTheme: PinTheme(
-                      activeColor: AppColors().k8267AC,
-                      inactiveColor: AppColors().k8267AC,
+                        ),
+                        SizedBox(
+                          height: 130,
+                        ),
+                        Image.asset(
+                          "assets/images/logo.png",
+                          height: 172,
+                          width: 173,
+                        ),
+                        Text(
+                          "We offer a new way to track your children and watch them grow."
+                              .tr(),
+                          style: FontConstant.k16w4008471Text,
+                          textAlign: TextAlign.center,
+                        ),
+                      ],
                     ),
                   ),
-                  SizedBox(height: 32),
-                  SizedBox(
-                    height: 52,
-                    //width: 382,
-                    child: MainButton(
-                        onTap: () {
-                          final resp = ParentLoginOtp()
-                              .get(code: pinTextController.text);
-                          resp.then((value) {
-                            print(value);
-                            if (value['status'] == 0) {
-                              Fluttertoast.showToast(msg: value['msg']);
-                            } else {
-                              UserPrefs.setIsTeacher(false);
-                              Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) => PDashboard()));
-                            }
-                          });
-                        },
-                        title: "Continue".tr(),
-                        textStyleColor: Colors.white,
-                        backgroundColor: ThemeColor.primarycolor),
-                  ),
-                  SizedBox(height: 13.h),
-                ],
+                )
+              ]),
+              Padding(
+                padding: const EdgeInsets.only(left: 16.0, right: 16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text("OTP verification".tr(),
+                        /* AppLoaclizations.of(context)!
+                            .translate("OTP verification")
+                            .toString(),*/
+                        style: FontConstant.k24w500brownText),
+                    RichText(
+                        text: TextSpan(children: [
+                      TextSpan(
+                        text: "A OTP has been sent to ".tr() +
+                            widget.loginField +
+                            ". Please enter the OTP here.".tr(),
+                        /*AppLoaclizations.of(context)!
+                                    .translate(
+                                        "A OTP has been sent to “9876543210”. Please enter the OTP here.")
+                                    .toString(),*/
+                        style:
+                            FontConstant.k16w400B7A4Text.copyWith(fontSize: 15),
+                      ),
+                      seconds != 0
+                          ? TextSpan(
+                              text: ' $seconds',
+                              style: FontConstant.k16w500purpleText)
+                          : WidgetSpan(
+                              alignment: PlaceholderAlignment.baseline,
+                              baseline: TextBaseline.alphabetic,
+                              child: GestureDetector(
+                                onTap: () {
+                                  final resp = ParentLogin()
+                                      .get(email: widget.loginField.trim());
+                                  resp.then((value) {
+                                    log(value.toString());
+                                    if (value['status'] == 0) {
+                                      Fluttertoast.showToast(msg: value['msg']);
+                                    } else {
+                                      UserPrefs.setCookies(value['key']);
+                                      UserPrefs.setOTP(value['OTP']);
+                                      // Fluttertoast.showToast(msg: 'Your OTP is ${value['OTP']}');
+                                    }
+                                  });
+                                },
+                                child: Text(
+                                  "  Resend".tr(),
+                                  style: FontConstant.k16w500purpleText,
+                                ),
+                              ),
+                            ),
+                      /*TextSpan(
+                        recognizer: TapGestureRecognizer()
+                          ..onTap = () {
+                            //log('');
+                            final resp =
+                                ParentLogin().get(email: loginField.trim());
+                            resp.then((value) {
+                              // log(value.toString());
+                              if (value['status'] == 0) {
+                                Fluttertoast.showToast(msg: value['msg']);
+                              } else {
+                                UserPrefs.setCookies(value['key']);
+                                Fluttertoast.showToast(
+                                    msg: 'Your OTP is ${value['OTP']}');
+                              }
+                            });
+                          },
+                        text: "  Resend".tr(),
+                        style: FontConstant.k16w500purpleText,
+                      ),*/
+                    ])),
+                    SizedBox(height: 43),
+                    PinCodeTextField(
+                      controller: pinTextController,
+                      cursorColor: AppColors().k8267AC,
+                      keyboardType: TextInputType.number,
+                      appContext: context,
+                      length: 4,
+                      onChanged: (val) {},
+                      pinTheme: PinTheme(
+                        activeColor: AppColors().k8267AC,
+                        inactiveColor: AppColors().k8267AC,
+                      ),
+                    ),
+                    SizedBox(height: 32),
+                    SizedBox(
+                      height: 52,
+                      //width: 382,
+                      child: MainButton(
+                          onTap: () {
+                            final resp = ParentLoginOtp()
+                                .get(code: pinTextController.text);
+                            resp.then((value) {
+                              print(value);
+                              if (value['status'] == 0) {
+                                Fluttertoast.showToast(msg: value['msg']);
+                              } else {
+                                UserPrefs.setIsTeacher(false);
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (context) => PDashboard()));
+                              }
+                            });
+                          },
+                          title: "Continue".tr(),
+                          textStyleColor: Colors.white,
+                          backgroundColor: ThemeColor.primarycolor),
+                    ),
+                    SizedBox(height: 13.h),
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
