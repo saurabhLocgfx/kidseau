@@ -106,6 +106,7 @@ fn(RemoteMessage message) async {
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  // FacebookAuth.instance;
   await local.EasyLocalization.ensureInitialized();
   await UserPrefs.init();
   const AndroidInitializationSettings initializationSettingsAndroid =

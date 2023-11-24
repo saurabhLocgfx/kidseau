@@ -127,7 +127,7 @@ class _TSignupCodeState extends State<TSignupCode> {
                       SizedBox(height: 24),
                       SizedBox(
                         height: 52,
-                        width: 382.w,
+                        width: 1.sw,
                         child: loading
                             ? MaterialButton(
                                 elevation: 1,
@@ -152,14 +152,12 @@ class _TSignupCodeState extends State<TSignupCode> {
                                       if (value['status'] == 0) {
                                         Fluttertoast.showToast(
                                             msg: value['msg']);
-                                      }
-                                      else if(value['status'] == 2){
+                                      } else if (value['status'] == 2) {
                                         Navigator.of(context).push(
                                             MaterialPageRoute(
                                                 builder: (context) =>
-                                                    TWaitingScreen()
-                                                    ));
-                                      }else {
+                                                    TWaitingScreen()));
+                                      } else {
                                         // UserPrefs.setCookies(value['key']);
                                         print(widget.mobileText);
                                         Navigator.of(context).push(

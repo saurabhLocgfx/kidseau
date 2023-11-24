@@ -12,7 +12,6 @@ import 'package:kidseau/Google_SignIn/google_sign_in.dart';
 import 'package:kidseau/Theme.dart';
 import 'package:kidseau/Widgets/buttons.dart';
 import 'package:kidseau/api/Teacherpanelapi/teacher_login_apis/teacher_login_api.dart';
-//import 'package:kidseau/api/apple_sign_in/appleapi.dart';
 import 'package:kidseau/api/google_sign_in/google_sign_in_api.dart';
 import 'package:kidseau/api/models/google_sign_in_model/google_sign_in_model.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
@@ -503,13 +502,15 @@ class _TLoginScreenState extends State<TLoginScreen> {
                             GestureDetector(
                               onTap: () async {
                                 _isLoading = true;
+
                                 FacebookAuth.instance.login(permissions: [
                                   "public_profile",
-                                  "email"
+                                  "email",
                                 ]).then((v) {
                                   print('${v.accessToken!.token}');
                                   print(v.accessToken!.token.length);
                                   print(v.accessToken!.token);
+                                  // print("user_birthday");
                                   // print(v.accessToken!.token.length);
                                   // print(v.accessToken!.token);
                                   /*var d = FacebookAuthProvider.credential(v.accessToken!.token);
