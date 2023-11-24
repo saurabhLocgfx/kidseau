@@ -4,6 +4,8 @@ import 'dart:io' show Platform;
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
+// import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
+
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:kidseau/Apple_Sign_In/apple_sign_in_api.dart';
@@ -501,8 +503,6 @@ class _TLoginScreenState extends State<TLoginScreen> {
                             ),
                             GestureDetector(
                               onTap: () async {
-                                _isLoading = true;
-
                                 FacebookAuth.instance.login(permissions: [
                                   "public_profile",
                                   "email",

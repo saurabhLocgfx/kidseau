@@ -4,9 +4,11 @@ import 'dart:io' show Platform;
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:kidseau/Apple_Sign_In/apple_sign_in_api.dart';
+import 'package:kidseau/Facebook_Sign_In/facebook_sign_in.dart';
 import 'package:kidseau/ParentsPanel/PDashBoard.dart';
 import 'package:kidseau/ParentsPanel/PSignUpScreen/PSignupCodeScreen.dart';
 //import 'package:kidseau/api/apple_sign_in/appleapi.dart';
@@ -467,96 +469,91 @@ class _PLoginScreenState extends State<PLoginScreen> {
                             SizedBox(
                               width: 20,
                             ),
-                            // GestureDetector(
-                            //   onTap: () async
-                            //   {
-                            //     _isLoading = true;
-                            //     FacebookAuth.instance.login(
-                            //         permissions: [
-                            //           "public_profile",
-                            //           "email"
-                            //         ]).then((v) {
-                            //       print('${v.accessToken!.token}');
-                            //       print(v.accessToken!.token.length);
-                            //       print(v.accessToken!.token);
-                            //       // print(v.accessToken!.token.length);
-                            //       // print(v.accessToken!.token);
-                            //       /*var d = FacebookAuthProvider.credential(v.accessToken!.token);
-                            //     print('_________________________________${d.idToken}');*/
-                            //       FacebookAuth.instance
-                            //           .getUserData()
-                            //           .then((val) {
-                            //         print(val);
-                            //
-                            //
-                            //         facebookSignInApi(idToken: v.accessToken!.token.toString(),
-                            //             parentTeacher: 'parent', device: 'facebook').then((value) {
-                            //
-                            //           if(value == false){
-                            //             Fluttertoast.showToast(
-                            //                 msg: "Sign in failed! Please try again.");
-                            //             setState(() {
-                            //               _isLoading = false;
-                            //             });
-                            //           }
-                            //
-                            //           else if (value['status'] == 0) {
-                            //             setState(() {
-                            //               _isLoading = false;
-                            //             });
-                            //             Fluttertoast.showToast(msg: "Sign in failed! Please try again.");
-                            //           }
-                            //
-                            //           else{
-                            //
-                            //             UserPrefs.setCookies(value['key']);
-                            //             if(value['status'] == 1 ){
-                            //               Navigator.push(context, MaterialPageRoute(builder: (context) =>
-                            //                   PSignupCode(newKid: true)));
-                            //
-                            //               //UserPrefs.getKidsStatus();
-                            //
-                            //             }
-                            //
-                            //             else{
-                            //
-                            //               UserPrefs.setIsTeacher(false);
-                            //
-                            //
-                            //
-                            //               //if(value['status'] == 2) {
-                            //               Navigator.push(context, MaterialPageRoute(builder: (context)=> PDashboard()));
-                            //               // }
-                            //               // else{}
-                            //
-                            //             }
-                            //           }
-                            //
-                            //         });
-                            //
-                            //
-                            //       });
-                            //     });
-                            //   },
-                            //   /*child: Container(
-                            // margin: EdgeInsets.all(16),
-                            // padding: EdgeInsets.all(12),
-                            // clipBehavior: Clip.hardEdge,
-                            // decoration: BoxDecoration(
-                            //
-                            //     color: Colors.white,
-                            //     borderRadius: BorderRadius.circular(12)
-                            // ),*/
-                            //   child: CircleAvatar(
-                            //     backgroundColor: Color(0xfff7f6fa),
-                            //     child: Image.asset(
-                            //       'assets/images/facebookicon.png',
-                            //       fit: BoxFit.cover,
-                            //       height: 40,
-                            //     ),
-                            //   ),
-                            //   //),
-                            // ),
+                            GestureDetector(
+                              onTap: () async {
+                                _isLoading = true;
+                                FacebookAuth.instance.login(permissions: [
+                                  "public_profile",
+                                  "email"
+                                ]).then((v) {
+                                  print('${v.accessToken!.token}');
+                                  print(v.accessToken!.token.length);
+                                  print(v.accessToken!.token);
+                                  // print(v.accessToken!.token.length);
+                                  // print(v.accessToken!.token);
+                                  /*var d = FacebookAuthProvider.credential(v.accessToken!.token);
+                                print('_________________________________${d.idToken}');*/
+                                  FacebookAuth.instance
+                                      .getUserData()
+                                      .then((val) {
+                                    print(val);
+                                    facebookSignInApi(
+                                            idToken:
+                                                v.accessToken!.token.toString(),
+                                            parentTeacher: 'parent',
+                                            device: 'facebook')
+                                        .then((value) {
+                                      if (value == false) {
+                                        Fluttertoast.showToast(
+                                            msg:
+                                                "Sign in failed! Please try again.");
+                                        setState(() {
+                                          _isLoading = false;
+                                        });
+                                      } else if (value['status'] == 0) {
+                                        setState(() {
+                                          _isLoading = false;
+                                        });
+                                        Fluttertoast.showToast(
+                                            msg:
+                                                "Sign in failed! Please try again.");
+                                      } else {
+                                        UserPrefs.setCookies(value['key']);
+                                        if (value['status'] == 1) {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      PSignupCode(
+                                                          newKid: true)));
+
+                                          //UserPrefs.getKidsStatus();
+                                        } else {
+                                          UserPrefs.setIsTeacher(false);
+
+                                          //if(value['status'] == 2) {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      PDashboard()));
+                                          // }
+                                          // else{}
+                                        }
+                                      }
+                                    });
+                                  });
+                                });
+                              },
+                              /*child: Container(
+                            margin: EdgeInsets.all(16),
+                            padding: EdgeInsets.all(12),
+                            clipBehavior: Clip.hardEdge,
+                            decoration: BoxDecoration(
+
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(12)
+                            ),*/
+                              child: CircleAvatar(
+                                backgroundColor: Color(0xfff7f6fa),
+                                child: Image.asset(
+                                  'assets/images/facebookicon.png',
+                                  fit: BoxFit.cover,
+                                  height: 40,
+                                ),
+                              ),
+                              //),
+                            ),
                           ],
                         ),
                         SizedBox(

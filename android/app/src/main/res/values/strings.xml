@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">kidseau</string>
+    <string name="facebook_app_id">257841552216574</string>
+    <string name="facebook_client_token">591612df0ef1dc2a41373262b9edcd01</string>
+    <string name="fb_login_protocol_scheme">fb257841552216574</string>
+</resources>
