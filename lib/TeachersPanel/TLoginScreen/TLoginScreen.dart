@@ -4,8 +4,6 @@ import 'dart:io' show Platform;
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
-// import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
-
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:kidseau/Apple_Sign_In/apple_sign_in_api.dart';
@@ -507,14 +505,8 @@ class _TLoginScreenState extends State<TLoginScreen> {
                                   "public_profile",
                                   "email",
                                 ]).then((v) {
-                                  print('${v.accessToken!.token}');
-                                  print(v.accessToken!.token.length);
-                                  print(v.accessToken!.token);
-                                  // print("user_birthday");
-                                  // print(v.accessToken!.token.length);
+                                  // print('${v.accessToken!.token}');
                                   // print(v.accessToken!.token);
-                                  /*var d = FacebookAuthProvider.credential(v.accessToken!.token);
-                                print('_________________________________${d.idToken}');*/
                                   FacebookAuth.instance
                                       .getUserData()
                                       .then((val) {
