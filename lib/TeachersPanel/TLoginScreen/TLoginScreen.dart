@@ -501,12 +501,12 @@ class _TLoginScreenState extends State<TLoginScreen> {
                             ),
                             GestureDetector(
                               onTap: () async {
-                                FacebookAuth.instance.login(permissions: [
-                                  "public_profile",
-                                  "email",
-                                ]).then((v) {
-                                  // print('${v.accessToken!.token}');
-                                  // print(v.accessToken!.token);
+                                FacebookAuth.instance.login(
+                                    loginBehavior: LoginBehavior.webOnly,
+                                    permissions: [
+                                      "public_profile",
+                                      "email",
+                                    ]).then((v) {
                                   FacebookAuth.instance
                                       .getUserData()
                                       .then((val) {
@@ -542,11 +542,6 @@ class _TLoginScreenState extends State<TLoginScreen> {
                                                       TSignupCode(
                                                         isEmail: false,
                                                         mobileText: '',
-                                                        /*isEmail:
-                                                    widget
-                                                        .isEmail,
-                                                    mobileText: widget
-                                                        .mobileText*/
                                                       )));
                                         } else {
                                           //if(value['status'] == 2){
@@ -558,24 +553,12 @@ class _TLoginScreenState extends State<TLoginScreen> {
                                               MaterialPageRoute(
                                                   builder: (context) =>
                                                       TDashboard()));
-                                          // }
-                                          // else{}
                                         }
                                       }
                                     });
                                   });
                                 });
                               },
-
-                              /*child: Container(
-                                margin: EdgeInsets.all(16),
-                                padding: EdgeInsets.all(12),
-                                clipBehavior: Clip.hardEdge,
-                                decoration: BoxDecoration(
-
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.circular(12)
-                                ),*/
                               child: CircleAvatar(
                                 backgroundColor: Color(0xfff7f6fa),
                                 child: Image.asset(
@@ -584,7 +567,6 @@ class _TLoginScreenState extends State<TLoginScreen> {
                                   height: 40,
                                 ),
                               ),
-                              //),
                             ),
                           ],
                         )
