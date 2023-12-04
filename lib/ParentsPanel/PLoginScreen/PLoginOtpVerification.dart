@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:developer';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/gestures.dart';
@@ -28,27 +27,48 @@ class PLoginOtpVerification extends StatefulWidget {
 
 class _PLoginOtpVerificationState extends State<PLoginOtpVerification> {
   final TextEditingController pinTextController = TextEditingController();
-  Timer? timer;
-  int seconds = 30;
+  // Timer? timer;
+  // int seconds = 30;
+  //
+  // startTimer() {
+  //   timer = Timer.periodic(Duration(seconds: 1), (timer) {
+  //     if (seconds != 0) {
+  //       setState(() {});
+  //       seconds--;
+  //     }
+  //   });
+  // }
 
-  startTimer() {
-    timer = Timer.periodic(Duration(seconds: 1), (timer) {
-      if (seconds != 0) {
-        setState(() {});
-        seconds--;
-      }
-    });
+  Timer? _timer;
+  int _start = 30;
+
+  _startTimer() {
+    const oneSec = Duration(seconds: 1);
+    _timer = Timer.periodic(
+      oneSec,
+      (Timer timer) {
+        if (_start == 0) {
+          setState(() {
+            timer.cancel();
+          });
+        } else {
+          setState(() {
+            _start--;
+          });
+        }
+      },
+    );
   }
 
   @override
   void initState() {
-    startTimer();
+    _startTimer();
     super.initState();
   }
 
   @override
   void dispose() {
-    timer!.cancel();
+    _timer!.cancel();
     super.dispose();
   }
 
@@ -160,68 +180,101 @@ class _PLoginOtpVerificationState extends State<PLoginOtpVerification> {
                             .translate("OTP verification")
                             .toString(),*/
                         style: FontConstant.k24w500brownText),
-                    RichText(
-                        text: TextSpan(children: [
-                      TextSpan(
-                        text: "A OTP has been sent to ".tr() +
-                            widget.loginField +
-                            ". Please enter the OTP here.".tr(),
-                        /*AppLoaclizations.of(context)!
-                                    .translate(
-                                        "A OTP has been sent to “9876543210”. Please enter the OTP here.")
-                                    .toString(),*/
-                        style:
-                            FontConstant.k16w400B7A4Text.copyWith(fontSize: 15),
-                      ),
-                      seconds != 0
-                          ? TextSpan(
-                              text: ' $seconds',
-                              style: FontConstant.k16w500purpleText)
-                          : WidgetSpan(
-                              alignment: PlaceholderAlignment.baseline,
-                              baseline: TextBaseline.alphabetic,
-                              child: GestureDetector(
-                                onTap: () {
-                                  final resp = ParentLogin()
-                                      .get(email: widget.loginField.trim());
-                                  resp.then((value) {
-                                    log(value.toString());
-                                    if (value['status'] == 0) {
-                                      Fluttertoast.showToast(msg: value['msg']);
-                                    } else {
-                                      UserPrefs.setCookies(value['key']);
-                                      UserPrefs.setOTP(value['OTP']);
-                                      // Fluttertoast.showToast(msg: 'Your OTP is ${value['OTP']}');
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "A OTP has been sent to ".tr() +
+                              widget.loginField +
+                              "".tr(),
+                          style: FontConstant.k16w400B7A4Text
+                              .copyWith(fontSize: 15),
+                        ),
+                        Row(
+                          children: [
+                            Text(
+                              "Please enter the OTP here.",
+                              style: FontConstant.k16w400B7A4Text
+                                  .copyWith(fontSize: 15),
+                            ),
+                            GestureDetector(
+                              behavior: HitTestBehavior.translucent,
+                              onTap: _start == 0
+                                  ? () {
+                                      setState(() {
+                                        _start = 30;
+                                      });
+                                      _startTimer();
+                                      final resp = ParentLogin()
+                                          .get(email: widget.loginField.trim());
+                                      resp.then((value) {
+                                        // log(value.toString());
+                                        if (value['status'] == 0) {
+                                          Fluttertoast.showToast(
+                                              msg: value['msg']);
+                                        } else {
+                                          UserPrefs.setCookies(value['key']);
+                                          UserPrefs.setOTP(value['OTP']);
+                                          Fluttertoast.showToast(
+                                              msg:
+                                                  'Your OTP is ${value['OTP']}');
+                                        }
+                                      });
                                     }
-                                  });
-                                },
-                                child: Text(
-                                  "  Resend".tr(),
-                                  style: FontConstant.k16w500purpleText,
-                                ),
+                                  : () {},
+                              child: Text(
+                                "  Resend ${_start.toString()}",
+                                style: FontConstant.k16w500purpleText,
                               ),
                             ),
-                      /*TextSpan(
-                        recognizer: TapGestureRecognizer()
-                          ..onTap = () {
-                            //log('');
-                            final resp =
-                                ParentLogin().get(email: loginField.trim());
-                            resp.then((value) {
-                              // log(value.toString());
-                              if (value['status'] == 0) {
-                                Fluttertoast.showToast(msg: value['msg']);
-                              } else {
-                                UserPrefs.setCookies(value['key']);
-                                Fluttertoast.showToast(
-                                    msg: 'Your OTP is ${value['OTP']}');
-                              }
-                            });
-                          },
-                        text: "  Resend".tr(),
-                        style: FontConstant.k16w500purpleText,
-                      ),*/
-                    ])),
+                          ],
+                        ),
+                      ],
+                    ),
+                    // Column(
+                    //   children: [
+                    //     Row(
+                    //       children: [
+                    //         Text(
+                    //           "A OTP has been sent to ".tr() +
+                    //               widget.loginField +
+                    //               ". Please enter the OTP here.".tr(),
+                    //           style: FontConstant.k16w400B7A4Text
+                    //               .copyWith(fontSize: 15),
+                    //         ),
+                    //         // GestureDetector(
+                    //         //   onTap: _start == 0
+                    //         //       ? () {
+                    //         //           setState(() {
+                    //         //             _start = 30;
+                    //         //           });
+                    //         //           _startTimer();
+                    //         //           final resp = ParentLogin()
+                    //         //               .get(email: widget.loginField.trim());
+                    //         //           resp.then((value) {
+                    //         //             // log(value.toString());
+                    //         //             if (value['status'] == 0) {
+                    //         //               Fluttertoast.showToast(
+                    //         //                   msg: value['msg']);
+                    //         //             } else {
+                    //         //               UserPrefs.setCookies(value['key']);
+                    //         //               UserPrefs.setOTP(value['OTP']);
+                    //         //               // Fluttertoast.showToast(msg: 'Your OTP is ${value['OTP']}');
+                    //         //             }
+                    //         //           });
+                    //         //         }
+                    //         //       : () {
+                    //         //           // print(otp.length);
+                    //         //         },
+                    //         //   child: Text(
+                    //         //     "  Resend ${_start.toString()}".tr(),
+                    //         //     style: FontConstant.k16w500purpleText,
+                    //         //   ),
+                    //         // ),
+                    //       ],
+                    //     ),
+                    //   ],
+                    // ),
                     SizedBox(height: 43),
                     PinCodeTextField(
                       controller: pinTextController,

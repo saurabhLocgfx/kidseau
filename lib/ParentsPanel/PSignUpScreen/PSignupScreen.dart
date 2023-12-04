@@ -1,18 +1,23 @@
+import 'dart:io';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:kidseau/Apple_Sign_In/apple_sign_in_api.dart';
+import 'package:kidseau/Facebook_Sign_In/facebook_sign_in.dart';
 import 'package:kidseau/Theme.dart';
 import 'package:kidseau/Widgets/buttons.dart';
 import 'package:kidseau/shard_prefs/shared_prefs.dart';
+import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../Constants/string_const.dart';
 import '../../Google_SignIn/google_sign_in.dart';
 import '../../api/google_sign_in/google_sign_in_api.dart';
 import '../../api/parent_signup_apis/parent_signup_api.dart';
-import '../PDashBoard.dart';
 import 'PSignupCodeScreen.dart';
 import 'PSignupOtpVerification.dart';
 
@@ -274,327 +279,526 @@ class _PSignupScreenState extends State<PSignupScreen> {
                             SizedBox(height: 40.h),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                // Platform.isIOS
-                                //     ? GestureDetector(
-                                //         onTap: () async {
-                                //           final credential =
-                                //               await SignInWithApple
-                                //                   .getAppleIDCredential(
-                                //             scopes: [
-                                //               AppleIDAuthorizationScopes.email,
-                                //               AppleIDAuthorizationScopes
-                                //                   .fullName,
-                                //             ],
-                                //           );
-                                //
-                                //           appleSignInApi(
-                                //                   id_token: credential
-                                //                       .identityToken
-                                //                       .toString(),
-                                //                   auth_code: credential
-                                //                       .authorizationCode
-                                //                       .toString(),
-                                //                   ParentTeacher: 'parent')
-                                //               .then((value) {
-                                //             if (value == false) {
-                                //               Fluttertoast.showToast(
-                                //                   msg:
-                                //                       "Sign in failed! Please try again.");
-                                //               setState(() {
-                                //                 _isLoading = false;
-                                //               });
-                                //             } else if (value['status'] == 0) {
-                                //               setState(() {
-                                //                 _isLoading = false;
-                                //               });
-                                //               Fluttertoast.showToast(
-                                //                   msg:
-                                //                       "Sign in failed! Please try again.");
-                                //             } else {
-                                //               UserPrefs.setCookies(
-                                //                   value['key']);
-                                //               if (value['status'] == 1) {
-                                //                 Navigator.push(
-                                //                     context,
-                                //                     MaterialPageRoute(
-                                //                         builder: (context) =>
-                                //                             PSignupCode(
-                                //                                 newKid: true)));
-                                //
-                                //                 //UserPrefs.getKidsStatus();
-                                //               } else {
-                                //                 //UserPrefs.setIsTeacher(false);
-                                //                 UserPrefs.setIsTeacher(false);
-                                //
-                                //                 //if(value['status'] == 2) {
-                                //                 Navigator.push(
-                                //                     context,
-                                //                     MaterialPageRoute(
-                                //                         builder: (context) =>
-                                //                             PDashboard()));
-                                //                 // }
-                                //                 // else{}
-                                //               }
-                                //             }
-                                //           });
-                                //           print(credential);
-                                //         },
-                                //         // child: Container(
-                                //         //   margin: EdgeInsets.all(16),
-                                //         //   padding: EdgeInsets.all(12),
-                                //         //   decoration: BoxDecoration(
-                                //         //
-                                //         //     color: Colors.white,
-                                //         //     borderRadius: BorderRadius.circular(12)
-                                //         //   ),
-                                //         child: Image.asset(
-                                //           'assets/images/apple logo.png',
-                                //           fit: BoxFit.cover,
-                                //           height: 40,
-                                //         ),
-                                //         //),
-                                //       )
-                                //     : SizedBox(),
-                                // SizedBox(
-                                //   width: 20,
-                                // ),
-                                //   Platform.isIOS
-                                //       ? GestureDetector(
-                                //           onTap: () async {
-                                //             final auth =
-                                //                 await GoogleSignInClass().login();
-                                //
-                                //             googleSignInApiAndroid(
-                                //                     id_Token: auth.idToken!,
-                                //                     device: 'google',
-                                //                     ParentTeacher: 'parent')
-                                //                 .then((value) {
-                                //               if (value == false) {
-                                //                 Fluttertoast.showToast(
-                                //                     msg:
-                                //                         "Sign in failed! Please try again.");
-                                //                 setState(() {
-                                //                   _isLoading = false;
-                                //                 });
-                                //               } else if (value['status'] == 0) {
-                                //                 setState(() {
-                                //                   _isLoading = false;
-                                //                 });
-                                //                 Fluttertoast.showToast(
-                                //                     msg:
-                                //                         "Sign in failed! Please try again.");
-                                //               } else {
-                                //                 UserPrefs.setCookies(
-                                //                     value['key']);
-                                //                 if (value['status'] == 1) {
-                                //                   Navigator.push(
-                                //                       context,
-                                //                       MaterialPageRoute(
-                                //                           builder: (context) =>
-                                //                               PSignupCode(
-                                //                                   newKid: true)));
-                                //
-                                //                   //UserPrefs.getKidsStatus();
-                                //                 } else {
-                                //                   UserPrefs.setIsTeacher(false);
-                                //
-                                //                   //if(value['status'] == 2) {
-                                //                   Navigator.push(
-                                //                       context,
-                                //                       MaterialPageRoute(
-                                //                           builder: (context) =>
-                                //                               PDashboard()));
-                                //                   // }
-                                //                   // else{}
-                                //                 }
-                                //               }
-                                //             });
-                                //           },
-                                //           /*child: Container(
-                                // margin: EdgeInsets.all(16),
-                                // padding: EdgeInsets.all(12),
-                                // clipBehavior: Clip.hardEdge,
-                                // decoration: BoxDecoration(
-                                //
-                                //     color: Colors.white,
-                                //     borderRadius: BorderRadius.circular(12)
-                                // ),*/
-                                //           child: CircleAvatar(
-                                //             backgroundColor: Color(0xfff7f6fa),
-                                //             child: Image.asset(
-                                //               'assets/images/glogo.png',
-                                //               fit: BoxFit.cover,
-                                //               height: 40,
-                                //             ),
-                                //           ),
-                                //           //),
-                                //         )
-                                //       :
+                                Platform.isIOS
+                                    ? GestureDetector(
+                                        onTap: () async {
+                                          final credential =
+                                              await SignInWithApple
+                                                  .getAppleIDCredential(
+                                            scopes: [
+                                              AppleIDAuthorizationScopes.email,
+                                              AppleIDAuthorizationScopes
+                                                  .fullName,
+                                            ],
+                                          );
+
+                                          appleSignInApi(
+                                                  id_token: credential
+                                                      .identityToken
+                                                      .toString(),
+                                                  auth_code: credential
+                                                      .authorizationCode
+                                                      .toString(),
+                                                  ParentTeacher: 'parent')
+                                              .then((value) {
+                                            if (value == false) {
+                                              Fluttertoast.showToast(
+                                                  msg:
+                                                      "Sign in failed! Please try again.");
+                                              setState(() {
+                                                _isLoading = false;
+                                              });
+                                            } else if (value['status'] == 0) {
+                                              setState(() {
+                                                _isLoading = false;
+                                              });
+                                              Fluttertoast.showToast(
+                                                  msg:
+                                                      "Sign in failed! Please try again.");
+                                            } else {
+                                              UserPrefs.setCookies(
+                                                  value['key']);
+                                              if (value['status'] == 1) {
+                                                Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            PSignupCode(
+                                                                newKid: true)));
+
+                                                //UserPrefs.getKidsStatus();
+                                              } else {
+                                                //UserPrefs.setIsTeacher(false);
+                                                UserPrefs.setIsTeacher(false);
+                                                UserPrefs.setOTP(value['OTP']);
+
+                                                //if(value['status'] == 2) {
+                                                Fluttertoast.showToast(
+                                                  msg:
+                                                      'Already Register Please Login',
+                                                  toastLength:
+                                                      Toast.LENGTH_SHORT,
+                                                  gravity: ToastGravity.BOTTOM,
+                                                  backgroundColor:
+                                                      Color(0xff8267AC),
+                                                  textColor: Colors.white,
+                                                );
+                                                // Navigator.push(
+                                                //     context,
+                                                //     MaterialPageRoute(
+                                                //         builder: (context) =>
+                                                //             PDashboard()));
+                                                // }
+                                                // else{}
+                                              }
+                                            }
+                                          });
+                                          print(credential);
+                                        },
+                                        // child: Container(
+                                        //   margin: EdgeInsets.all(16),
+                                        //   padding: EdgeInsets.all(12),
+                                        //   decoration: BoxDecoration(
+                                        //
+                                        //     color: Colors.white,
+                                        //     borderRadius: BorderRadius.circular(12)
+                                        //   ),
+                                        child: Image.asset(
+                                          'assets/images/apple logo.png',
+                                          fit: BoxFit.cover,
+                                          height: 40,
+                                        ),
+                                        //),
+                                      )
+                                    : SizedBox(),
+                                SizedBox(
+                                  width: 20,
+                                ),
+                                Platform.isIOS
+                                    ? GestureDetector(
+                                        onTap: () async {
+                                          final auth =
+                                              await GoogleSignInClass().login();
+                                          print(auth.idToken!);
+                                          googleSignInApiAndroid(
+                                                  id_Token: auth.idToken!,
+                                                  device: 'google',
+                                                  ParentTeacher: 'parent')
+                                              .then((value) {
+                                            if (value == false) {
+                                              Fluttertoast.showToast(
+                                                  msg:
+                                                      "Sign in failed! Please try again.");
+                                              setState(() {
+                                                _isLoading = false;
+                                              });
+                                            } else if (value['status'] == 0) {
+                                              setState(() {
+                                                _isLoading = false;
+                                              });
+                                              Fluttertoast.showToast(
+                                                  msg:
+                                                      "Sign in failed! Please try again.");
+                                            } else {
+                                              UserPrefs.setCookies(
+                                                  value['key']);
+                                              if (value['status'] == 1) {
+                                                Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            PSignupCode(
+                                                                newKid: true)));
+
+                                                //UserPrefs.getKidsStatus();
+                                              } else {
+                                                UserPrefs.setIsTeacher(false);
+                                                UserPrefs.setOTP(value['OTP']);
+
+                                                //if(value['status'] == 2) {
+                                                Fluttertoast.showToast(
+                                                  msg:
+                                                      'Already Register Please Login',
+                                                  toastLength:
+                                                      Toast.LENGTH_SHORT,
+                                                  gravity: ToastGravity.BOTTOM,
+                                                  backgroundColor:
+                                                      Color(0xff8267AC),
+                                                  textColor: Colors.white,
+                                                );
+                                                // Navigator.push(
+                                                //     context,
+                                                //     MaterialPageRoute(
+                                                //         builder: (context) =>
+                                                //             PDashboard()));
+                                                // }
+                                                // else{}
+                                              }
+                                            }
+                                          });
+                                        },
+                                        /*child: Container(
+                            margin: EdgeInsets.all(16),
+                            padding: EdgeInsets.all(12),
+                            clipBehavior: Clip.hardEdge,
+                            decoration: BoxDecoration(
+
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(12)
+                            ),*/
+                                        child: CircleAvatar(
+                                          backgroundColor: Color(0xfff7f6fa),
+                                          child: Image.asset(
+                                            'assets/images/glogo.png',
+                                            fit: BoxFit.cover,
+                                            height: 40,
+                                          ),
+                                        ),
+                                        //),
+                                      )
+                                    : GestureDetector(
+                                        onTap: () async {
+                                          final auth =
+                                              await GoogleSignInClass().login();
+                                          print(auth.idToken!);
+
+                                          googleSignInApiAndroid(
+                                                  id_Token: auth.idToken!,
+                                                  device: 'android',
+                                                  ParentTeacher: 'parent')
+                                              .then((value) {
+                                            if (value == false) {
+                                              Fluttertoast.showToast(
+                                                  msg:
+                                                      "Sign in failed! Please try again.");
+                                              setState(() {
+                                                _isLoading = false;
+                                              });
+                                            } else if (value['status'] == 0) {
+                                              setState(() {
+                                                _isLoading = false;
+                                              });
+                                              Fluttertoast.showToast(
+                                                  msg:
+                                                      "Sign in failed! Please try again.");
+                                            } else {
+                                              UserPrefs.setCookies(
+                                                  value['key']);
+                                              if (value['status'] == 1) {
+                                                Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            PSignupCode(
+                                                                newKid: true)));
+
+                                                //UserPrefs.getKidsStatus();
+                                              } else {
+                                                UserPrefs.setIsTeacher(false);
+                                                UserPrefs.setOTP(value['OTP']);
+                                                Fluttertoast.showToast(
+                                                  msg:
+                                                      'Already Register Please Login',
+                                                  toastLength:
+                                                      Toast.LENGTH_SHORT,
+                                                  gravity: ToastGravity.BOTTOM,
+                                                  backgroundColor:
+                                                      Color(0xff8267AC),
+                                                  textColor: Colors.white,
+                                                );
+
+                                                //if(value['status'] == 2) {
+                                                // Navigator.push(
+                                                //     context,
+                                                //     MaterialPageRoute(
+                                                //         builder: (context) =>
+                                                //             PDashboard()));
+                                                // }
+                                                // else{}
+                                              }
+                                            }
+                                          });
+                                        },
+                                        /*child: Container(
+                            margin: EdgeInsets.all(16),
+                            padding: EdgeInsets.all(12),
+                            clipBehavior: Clip.hardEdge,
+                            decoration: BoxDecoration(
+
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(12)
+                            ),*/
+                                        child: CircleAvatar(
+                                          backgroundColor: Color(0xfff7f6fa),
+                                          child: Image.asset(
+                                            'assets/images/glogo.png',
+                                            fit: BoxFit.cover,
+                                            height: 40,
+                                          ),
+                                        ),
+                                        //),
+                                      ),
+                                SizedBox(
+                                  width: 20,
+                                ),
                                 GestureDetector(
                                   onTap: () async {
-                                    final auth =
-                                        await GoogleSignInClass().login();
+                                    _isLoading = true;
+                                    FacebookAuth.instance.login(
+                                        loginBehavior: LoginBehavior.webOnly,
+                                        permissions: [
+                                          "public_profile",
+                                          "email",
+                                        ]).then((v) {
+                                      print('${v.accessToken!.token}');
+                                      print(v.accessToken!.token);
 
-                                    googleSignInApiAndroid(
-                                            id_Token: auth.idToken!,
-                                            device: 'android',
-                                            ParentTeacher: 'parent')
-                                        .then((value) {
-                                      if (value == false) {
-                                        Fluttertoast.showToast(
-                                            msg:
-                                                "Sign in failed! Please try again.");
-                                        setState(() {
-                                          _isLoading = false;
+                                      FacebookAuth.instance
+                                          .getUserData()
+                                          .then((val) {
+                                        print(val);
+                                        facebookSignInApi(
+                                                idToken: v.accessToken!.token
+                                                    .toString(),
+                                                parentTeacher: 'parent',
+                                                device: 'facebook')
+                                            .then((value) {
+                                          if (value == false) {
+                                            Fluttertoast.showToast(
+                                                msg:
+                                                    "Sign in failed! Please try again.");
+                                            setState(() {
+                                              _isLoading = false;
+                                            });
+                                          } else if (value['status'] == 0) {
+                                            setState(() {
+                                              _isLoading = false;
+                                            });
+                                            Fluttertoast.showToast(
+                                                msg:
+                                                    "Wait For Director's Approval");
+                                          } else {
+                                            UserPrefs.setCookies(value['key']);
+                                            //UserPrefs.setOTP(value['OTP']);
+
+                                            if (value['status'] == 1) {
+                                              Navigator.of(context).push(
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          PSignupCode(
+                                                              newKid: true)));
+                                            } else {
+                                              Fluttertoast.showToast(
+                                                msg:
+                                                    'Already Register Please Login',
+                                                toastLength: Toast.LENGTH_SHORT,
+                                                gravity: ToastGravity.BOTTOM,
+                                                backgroundColor:
+                                                    Color(0xff8267AC),
+                                                textColor: Colors.white,
+                                              );
+
+                                              // Navigator.of(context).push(
+                                              //     MaterialPageRoute(
+                                              //         builder: (context) =>
+                                              //             PDashboard()));
+                                              // }
+                                              // else{}
+                                            }
+                                          }
                                         });
-                                      } else if (value['status'] == 0) {
-                                        setState(() {
-                                          _isLoading = false;
-                                        });
-                                        Fluttertoast.showToast(
-                                            msg:
-                                                "Sign in failed! Please try again.");
-                                      } else {
-                                        UserPrefs.setCookies(value['key']);
-                                        if (value['status'] == 1) {
-                                          Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      PSignupCode(
-                                                          newKid: true)));
-
-                                          //UserPrefs.getKidsStatus();
-                                        } else {
-                                          UserPrefs.setIsTeacher(false);
-
-                                          //if(value['status'] == 2) {
-                                          Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      PDashboard()));
-                                          // }
-                                          // else{}
-                                        }
-                                      }
+                                      });
                                     });
                                   },
-                                  /*child: Container(
-                              margin: EdgeInsets.all(16),
-                              padding: EdgeInsets.all(12),
-                              clipBehavior: Clip.hardEdge,
-                              decoration: BoxDecoration(
-
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(12)
-                              ),*/
                                   child: CircleAvatar(
                                     backgroundColor: Color(0xfff7f6fa),
                                     child: Image.asset(
-                                      'assets/images/glogo.png',
+                                      'assets/images/facebookicon.png',
                                       fit: BoxFit.cover,
                                       height: 40,
                                     ),
                                   ),
                                   //),
                                 ),
-                                // SizedBox(
-                                //   width: 20,
-                                // ),
-                                // GestureDetector(
-                                //   onTap: () async
-                                //   {
-                                //     _isLoading = true;
-                                //     FacebookAuth.instance.login(
-                                //         permissions: [
-                                //           "public_profile",
-                                //           "email"
-                                //         ]).then((v) {
-                                //       print('${v.accessToken!.token}');
-                                //       print(v.accessToken!.token.length);
-                                //       print(v.accessToken!.token);
-                                //       // print(v.accessToken!.token.length);
-                                //       // print(v.accessToken!.token);
-                                //       /*var d = FacebookAuthProvider.credential(v.accessToken!.token);
-                                //     print('_________________________________${d.idToken}');*/
-                                //       FacebookAuth.instance
-                                //           .getUserData()
-                                //           .then((val) {
-                                //         print(val);
-                                //
-                                //
-                                //         facebookSignInApi(idToken: v.accessToken!.token.toString(),
-                                //             parentTeacher: 'parent', device: 'facebook').then((value) {
-                                //
-                                //           if(value == false){
-                                //             Fluttertoast.showToast(
-                                //                 msg: "Sign in failed! Please try again.");
-                                //             setState(() {
-                                //               _isLoading = false;
-                                //             });
-                                //           }
-                                //
-                                //           else if (value['status'] == 0) {
-                                //             setState(() {
-                                //               _isLoading = false;
-                                //             });
-                                //             Fluttertoast.showToast(msg: "Sign in failed! Please try again.");
-                                //           }
-                                //
-                                //           else{
-                                //
-                                //             UserPrefs.setCookies(value['key']);
-                                //             if(value['status'] == 1 ){
-                                //               Navigator.push(context, MaterialPageRoute(builder: (context) =>
-                                //                   PSignupCode(newKid: true)));
-                                //
-                                //               //UserPrefs.getKidsStatus();
-                                //
-                                //             }
-                                //
-                                //             else{
-                                //
-                                //               UserPrefs.setIsTeacher(false);
-                                //
-                                //
-                                //
-                                //               //if(value['status'] == 2) {
-                                //               Navigator.push(context, MaterialPageRoute(builder: (context)=> PDashboard()));
-                                //               // }
-                                //               // else{}
-                                //
-                                //             }
-                                //           }
-                                //
-                                //         });
-                                //
-                                //
-                                //       });
-                                //     });
-                                //   },
-                                //   /*child: Container(
-                                // margin: EdgeInsets.all(16),
-                                // padding: EdgeInsets.all(12),
-                                // clipBehavior: Clip.hardEdge,
-                                // decoration: BoxDecoration(
-                                //
-                                //     color: Colors.white,
-                                //     borderRadius: BorderRadius.circular(12)
-                                // ),*/
-                                //   child: CircleAvatar(
-                                //     backgroundColor: Color(0xfff7f6fa),
-                                //     child: Image.asset(
-                                //       'assets/images/facebookicon.png',
-                                //       fit: BoxFit.cover,
-                                //       height: 40,
-                                //     ),
-                                //   ),
-                                //   //),
-                                // ),
                               ],
                             ),
+                            // Row(
+                            //   mainAxisAlignment: MainAxisAlignment.center,
+                            //   children: [
+                            //     GestureDetector(
+                            //       onTap: () async {
+                            //         final auth =
+                            //             await GoogleSignInClass().login();
+                            //
+                            //         googleSignInApiAndroid(
+                            //                 id_Token: auth.idToken!,
+                            //                 device: 'android',
+                            //                 ParentTeacher: 'parent')
+                            //             .then((value) {
+                            //           if (value == false) {
+                            //             Fluttertoast.showToast(
+                            //                 msg:
+                            //                     "Sign in failed! Please try again.");
+                            //             setState(() {
+                            //               _isLoading = false;
+                            //             });
+                            //           } else if (value['status'] == 0) {
+                            //             setState(() {
+                            //               _isLoading = false;
+                            //             });
+                            //             Fluttertoast.showToast(
+                            //                 msg:
+                            //                     "Sign in failed! Please try again.");
+                            //           } else {
+                            //             UserPrefs.setCookies(value['key']);
+                            //             if (value['status'] == 1) {
+                            //               Navigator.push(
+                            //                   context,
+                            //                   MaterialPageRoute(
+                            //                       builder: (context) =>
+                            //                           PSignupCode(
+                            //                               newKid: true)));
+                            //
+                            //               //UserPrefs.getKidsStatus();
+                            //             } else {
+                            //               UserPrefs.setIsTeacher(false);
+                            //               Fluttertoast.showToast(
+                            //                 msg:
+                            //                     'Already Register Please Login',
+                            //                 toastLength: Toast.LENGTH_SHORT,
+                            //                 gravity: ToastGravity.BOTTOM,
+                            //                 backgroundColor: Color(0xff8267AC),
+                            //                 textColor: Colors.white,
+                            //               );
+                            //
+                            //               //if(value['status'] == 2) {
+                            //               // Navigator.push(
+                            //               //     context,
+                            //               //     MaterialPageRoute(
+                            //               //         builder: (context) =>
+                            //               //             PDashboard()));
+                            //               // }
+                            //               // else{}
+                            //             }
+                            //           }
+                            //         });
+                            //       },
+                            //       /*child: Container(
+                            //   margin: EdgeInsets.all(16),
+                            //   padding: EdgeInsets.all(12),
+                            //   clipBehavior: Clip.hardEdge,
+                            //   decoration: BoxDecoration(
+                            //
+                            //       color: Colors.white,
+                            //       borderRadius: BorderRadius.circular(12)
+                            //   ),*/
+                            //       child: CircleAvatar(
+                            //         backgroundColor: Color(0xfff7f6fa),
+                            //         child: Image.asset(
+                            //           'assets/images/glogo.png',
+                            //           fit: BoxFit.cover,
+                            //           height: 40,
+                            //         ),
+                            //       ),
+                            //       //),
+                            //     ),
+                            //     // SizedBox(
+                            //     //   width: 20,
+                            //     // ),
+                            //     // GestureDetector(
+                            //     //   onTap: () async
+                            //     //   {
+                            //     //     _isLoading = true;
+                            //     //     FacebookAuth.instance.login(
+                            //     //         permissions: [
+                            //     //           "public_profile",
+                            //     //           "email"
+                            //     //         ]).then((v) {
+                            //     //       print('${v.accessToken!.token}');
+                            //     //       print(v.accessToken!.token.length);
+                            //     //       print(v.accessToken!.token);
+                            //     //       // print(v.accessToken!.token.length);
+                            //     //       // print(v.accessToken!.token);
+                            //     //       /*var d = FacebookAuthProvider.credential(v.accessToken!.token);
+                            //     //     print('_________________________________${d.idToken}');*/
+                            //     //       FacebookAuth.instance
+                            //     //           .getUserData()
+                            //     //           .then((val) {
+                            //     //         print(val);
+                            //     //
+                            //     //
+                            //     //         facebookSignInApi(idToken: v.accessToken!.token.toString(),
+                            //     //             parentTeacher: 'parent', device: 'facebook').then((value) {
+                            //     //
+                            //     //           if(value == false){
+                            //     //             Fluttertoast.showToast(
+                            //     //                 msg: "Sign in failed! Please try again.");
+                            //     //             setState(() {
+                            //     //               _isLoading = false;
+                            //     //             });
+                            //     //           }
+                            //     //
+                            //     //           else if (value['status'] == 0) {
+                            //     //             setState(() {
+                            //     //               _isLoading = false;
+                            //     //             });
+                            //     //             Fluttertoast.showToast(msg: "Sign in failed! Please try again.");
+                            //     //           }
+                            //     //
+                            //     //           else{
+                            //     //
+                            //     //             UserPrefs.setCookies(value['key']);
+                            //     //             if(value['status'] == 1 ){
+                            //     //               Navigator.push(context, MaterialPageRoute(builder: (context) =>
+                            //     //                   PSignupCode(newKid: true)));
+                            //     //
+                            //     //               //UserPrefs.getKidsStatus();
+                            //     //
+                            //     //             }
+                            //     //
+                            //     //             else{
+                            //     //
+                            //     //               UserPrefs.setIsTeacher(false);
+                            //     //
+                            //     //
+                            //     //
+                            //     //               //if(value['status'] == 2) {
+                            //     //               Navigator.push(context, MaterialPageRoute(builder: (context)=> PDashboard()));
+                            //     //               // }
+                            //     //               // else{}
+                            //     //
+                            //     //             }
+                            //     //           }
+                            //     //
+                            //     //         });
+                            //     //
+                            //     //
+                            //     //       });
+                            //     //     });
+                            //     //   },
+                            //     //   /*child: Container(
+                            //     // margin: EdgeInsets.all(16),
+                            //     // padding: EdgeInsets.all(12),
+                            //     // clipBehavior: Clip.hardEdge,
+                            //     // decoration: BoxDecoration(
+                            //     //
+                            //     //     color: Colors.white,
+                            //     //     borderRadius: BorderRadius.circular(12)
+                            //     // ),*/
+                            //     //   child: CircleAvatar(
+                            //     //     backgroundColor: Color(0xfff7f6fa),
+                            //     //     child: Image.asset(
+                            //     //       'assets/images/facebookicon.png',
+                            //     //       fit: BoxFit.cover,
+                            //     //       height: 40,
+                            //     //     ),
+                            //     //   ),
+                            //     //   //),
+                            //     // ),
+                            //   ],
+                            // ),
                             SizedBox(
                               height: 100,
                             ),

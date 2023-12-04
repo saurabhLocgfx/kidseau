@@ -77,9 +77,32 @@ class _PTeachersState extends State<PTeachers> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: _isLoading
-          ? Center(
-              child: CircularProgressIndicator(),
-            )
+          ? model.allTeahcer!.isEmpty
+              ? Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Row(),
+                      SizedBox(height: 100),
+                      Image.asset(
+                        "assets/images/empty_message.png",
+                        width: 200.w,
+                        height: 200.w,
+                      ),
+                      Text(
+                        'Start conversation with one of your kid’s educator',
+                        textAlign: TextAlign.center,
+                        style: FontConstant.k18w500Primary,
+                      ),
+                    ],
+                  ),
+                )
+              : Center(
+                  child: CircularProgressIndicator(),
+                )
           : ListView.separated(
               separatorBuilder: (ctx, ind) => SizedBox(
                     height: 16.h,

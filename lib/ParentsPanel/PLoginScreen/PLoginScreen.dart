@@ -474,10 +474,12 @@ class _PLoginScreenState extends State<PLoginScreen> {
                             GestureDetector(
                               onTap: () async {
                                 _isLoading = true;
-                                FacebookAuth.instance.login(permissions: [
-                                  "public_profile",
-                                  "email",
-                                ]).then((v) {
+                                FacebookAuth.instance.login(
+                                    loginBehavior: LoginBehavior.webOnly,
+                                    permissions: [
+                                      "public_profile",
+                                      "email",
+                                    ]).then((v) {
                                   print('${v.accessToken!.token}');
                                   print(v.accessToken!.token);
 
@@ -488,7 +490,7 @@ class _PLoginScreenState extends State<PLoginScreen> {
                                     facebookSignInApi(
                                             idToken:
                                                 v.accessToken!.token.toString(),
-                                            parentTeacher: 'teacher',
+                                            parentTeacher: 'parent',
                                             device: 'facebook')
                                         .then((value) {
                                       if (value == false) {
@@ -532,76 +534,7 @@ class _PLoginScreenState extends State<PLoginScreen> {
                                     });
                                   });
                                 });
-                                FacebookAuth.instance.login(
-                                    loginBehavior: LoginBehavior.webOnly,
-                                    permissions: [
-                                      "public_profile",
-                                      "email"
-                                    ]).then((v) {
-                                  print('${v.accessToken!.token}');
-                                  print(v.accessToken!.token.length);
-                                  print(v.accessToken!.token);
-                                  FacebookAuth.instance
-                                      .getUserData()
-                                      .then((val) {
-                                    print(val);
-                                    facebookSignInApi(
-                                            idToken:
-                                                v.accessToken!.token.toString(),
-                                            parentTeacher: 'parent',
-                                            device: 'facebook')
-                                        .then((value) {
-                                      if (value == false) {
-                                        Fluttertoast.showToast(
-                                            msg:
-                                                "Sign in failed! Please try again.");
-                                        setState(() {
-                                          _isLoading = false;
-                                        });
-                                      } else if (value['status'] == 0) {
-                                        setState(() {
-                                          _isLoading = false;
-                                        });
-                                        Fluttertoast.showToast(
-                                            msg:
-                                                "Sign in failed! Please try again.");
-                                      } else {
-                                        UserPrefs.setCookies(value['key']);
-                                        if (value['status'] == 1) {
-                                          Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      PSignupCode(
-                                                          newKid: true)));
-
-                                          //UserPrefs.getKidsStatus();
-                                        } else {
-                                          UserPrefs.setIsTeacher(false);
-
-                                          //if(value['status'] == 2) {
-                                          Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      PDashboard()));
-                                          // }
-                                          // else{}
-                                        }
-                                      }
-                                    });
-                                  });
-                                });
                               },
-                              /*child: Container(
-                            margin: EdgeInsets.all(16),
-                            padding: EdgeInsets.all(12),
-                            clipBehavior: Clip.hardEdge,
-                            decoration: BoxDecoration(
-
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(12)
-                            ),*/
                               child: CircleAvatar(
                                 backgroundColor: Color(0xfff7f6fa),
                                 child: Image.asset(

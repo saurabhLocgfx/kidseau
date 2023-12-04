@@ -80,7 +80,9 @@ class _PMessagesState extends State<PMessages> {
   List<RecentMessageModel> modelList = [];
   bool _isLoading = false;
   _getData() {
-    _isLoading = true;
+    setState(() {
+      _isLoading = true;
+    });
     final resp = RecentChatApi().get();
     resp.then((value) {
       //log(value.toString());
@@ -92,6 +94,10 @@ class _PMessagesState extends State<PMessages> {
           }
           _isLoading = false;
         });
+      } else {
+        setState(() {
+          _isLoading = false;
+        });
       }
     });
   }
@@ -99,33 +105,31 @@ class _PMessagesState extends State<PMessages> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _isLoading
-          ? Center(
-              child: CircularProgressIndicator(),
-            )
-          : modelList.isEmpty
-              ? Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Row(),
-                      SizedBox(height: 100),
-                      Image.asset(
-                        "assets/images/empty_message.png",
-                        width: 200.w,
-                        height: 200.w,
-                      ),
-                      Text(
-                        'Start conversation with one of your kid’s educator'
-                            .tr(),
-                        textAlign: TextAlign.center,
-                        style: FontConstant.k18w500Primary,
-                      ),
-                    ],
+      body: modelList.isEmpty
+          ? Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  SizedBox(height: 100),
+                  Image.asset(
+                    "assets/images/empty_message.png",
+                    width: 200.w,
+                    height: 200.w,
                   ),
+                  Text(
+                    'Start conversation with one of your kid’s educator'.tr(),
+                    textAlign: TextAlign.center,
+                    style: FontConstant.k18w500Primary,
+                  ),
+                ],
+              ),
+            )
+          : _isLoading
+              ? Center(
+                  child: CircularProgressIndicator(),
                 )
               : ListView.builder(
                   itemCount: modelList.length,

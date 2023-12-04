@@ -108,7 +108,7 @@ class BarChartSample1State extends State<BarChartSample1> {
               : const BorderSide(color: Colors.white, width: 0),
           backDrawRodData: BackgroundBarChartRodData(
             show: true,
-            toY: 20, //z
+            toY: 10, //z
             color: widget.barBackgroundColor,
           ),
         ),

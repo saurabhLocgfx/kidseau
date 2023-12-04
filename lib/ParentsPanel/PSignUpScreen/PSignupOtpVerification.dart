@@ -32,27 +32,48 @@ class _PSignupOtpVerificationState extends State<PSignupOtpVerification> {
   final TextEditingController pinSignTextController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
-  Timer? timer;
-  int seconds = 30;
+  // Timer? timer;
+  // int seconds = 30;
+  //
+  // startTimer() {
+  //   timer = Timer.periodic(Duration(seconds: 1), (timer) {
+  //     if (seconds != 0) {
+  //       setState(() {});
+  //       seconds--;
+  //     }
+  //   });
+  // }
 
-  startTimer() {
-    timer = Timer.periodic(Duration(seconds: 1), (timer) {
-      if (seconds != 0) {
-        setState(() {});
-        seconds--;
-      }
-    });
+  Timer? _timer;
+  int _start = 30;
+
+  _startTimer() {
+    const oneSec = Duration(seconds: 1);
+    _timer = Timer.periodic(
+      oneSec,
+      (Timer timer) {
+        if (_start == 0) {
+          setState(() {
+            timer.cancel();
+          });
+        } else {
+          setState(() {
+            _start--;
+          });
+        }
+      },
+    );
   }
 
   @override
   void initState() {
-    startTimer();
+    _startTimer();
     super.initState();
   }
 
   @override
   void dispose() {
-    timer!.cancel();
+    _timer!.cancel();
     super.dispose();
   }
 
@@ -73,57 +94,107 @@ class _PSignupOtpVerificationState extends State<PSignupOtpVerification> {
                 children: [
                   Text("OTP verification".tr(),
                       style: FontConstant.k24w500brownText),
-                  RichText(
-                      text: TextSpan(children: [
-                    TextSpan(
-                      text: "A OTP has been sent to . ".tr() +
-                          "${widget.signUpField} " +
-                          "Please enter the OTP here.".tr(),
-                      /*AppLoaclizations.of(context)!
-                                      .translate(
-                                          "A OTP has been sent to “9876543210”. Please enter the OTP here.")
-                                      .toString(),*/
-                      style:
-                          FontConstant.k16w400B7A4Text.copyWith(fontSize: 15),
-                    ),
-                    seconds != 0
-                        ? TextSpan(
-                            text: ' $seconds',
-                            style: FontConstant.k16w500purpleText)
-                        : WidgetSpan(
-                            alignment: PlaceholderAlignment.baseline,
-                            baseline: TextBaseline.alphabetic,
-                            child: GestureDetector(
-                              onTap: () {
-                                final resp = ParentSignUp().get(
-                                  email: widget.signUpField.trim(),
-                                  parents: widget.parent,
-                                );
-                                resp.then((value) {
-                                  // log(value.toString());
-                                  if (value['status'] == 0) {
-                                    Fluttertoast.showToast(msg: value['msg']);
-                                  } else {
-                                    UserPrefs.setCookies(value['key']);
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "A OTP has been sent to ".tr() +
+                            widget.signUpField +
+                            "".tr(),
+                        style:
+                            FontConstant.k16w400B7A4Text.copyWith(fontSize: 15),
+                      ),
+                      Row(
+                        children: [
+                          Text(
+                            "Please enter the OTP here.",
+                            style: FontConstant.k16w400B7A4Text
+                                .copyWith(fontSize: 15),
+                          ),
+                          GestureDetector(
+                            behavior: HitTestBehavior.translucent,
+                            onTap: _start == 0
+                                ? () {
+                                    setState(() {
+                                      _start = 30;
+                                    });
+                                    _startTimer();
+                                    final resp = ParentSignUp().get(
+                                      email: widget.signUpField.trim(),
+                                      parents: widget.parent,
+                                    );
+                                    resp.then((value) {
+                                      // log(value.toString());
+                                      if (value['status'] == 0) {
+                                        Fluttertoast.showToast(
+                                            msg: value['msg']);
+                                      } else {
+                                        UserPrefs.setCookies(value['key']);
+                                      }
+                                    });
                                   }
-                                });
-                              },
-                              child: Text(
-                                "  Resend".tr(),
-                                style: FontConstant.k16w500purpleText,
-                              ),
+                                : () {},
+                            child: Text(
+                              "  Resend ${_start.toString()}",
+                              style: FontConstant.k16w500purpleText,
                             ),
                           ),
-                    /*TextSpan(
-                              recognizer: TapGestureRecognizer()
-                                ..onTap = () {
-                                  //log('');
+                        ],
+                      ),
+                    ],
+                  ),
 
-                                },
-                              text: "  Resend".tr(),
-                              style: FontConstant.k16w500purpleText,
-                            ),*/
-                  ])),
+                  // RichText(
+                  //     text: TextSpan(children: [
+                  //   TextSpan(
+                  //     text: "A OTP has been sent to . ".tr() +
+                  //         "${widget.signUpField} " +
+                  //         "Please enter the OTP here.".tr(),
+                  //     /*AppLoaclizations.of(context)!
+                  //                     .translate(
+                  //                         "A OTP has been sent to “9876543210”. Please enter the OTP here.")
+                  //                     .toString(),*/
+                  //     style:
+                  //         FontConstant.k16w400B7A4Text.copyWith(fontSize: 15),
+                  //   ),
+                  //   seconds != 0
+                  //       ? TextSpan(
+                  //           text: ' $seconds',
+                  //           style: FontConstant.k16w500purpleText)
+                  //       : WidgetSpan(
+                  //           alignment: PlaceholderAlignment.baseline,
+                  //           baseline: TextBaseline.alphabetic,
+                  //           child: GestureDetector(
+                  //             onTap: () {
+                  //               final resp = ParentSignUp().get(
+                  //                 email: widget.signUpField.trim(),
+                  //                 parents: widget.parent,
+                  //               );
+                  //               resp.then((value) {
+                  //                 // log(value.toString());
+                  //                 if (value['status'] == 0) {
+                  //                   Fluttertoast.showToast(msg: value['msg']);
+                  //                 } else {
+                  //                   UserPrefs.setCookies(value['key']);
+                  //                 }
+                  //               });
+                  //             },
+                  //             child: Text(
+                  //               "  Resend".tr(),
+                  //               style: FontConstant.k16w500purpleText,
+                  //             ),
+                  //           ),
+                  //         ),
+                  //   /*TextSpan(
+                  //             recognizer: TapGestureRecognizer()
+                  //               ..onTap = () {
+                  //                 //log('');
+                  //
+                  //               },
+                  //             text: "  Resend".tr(),
+                  //             style: FontConstant.k16w500purpleText,
+                  //           ),*/
+                  // ])),
                   SizedBox(height: 43),
                   PinCodeTextField(
                     validator: (pinText) {

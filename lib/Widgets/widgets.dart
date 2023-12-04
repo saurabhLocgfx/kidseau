@@ -39,14 +39,20 @@ class _PostDialogState extends State<PostDialog> {
       backgroundColor: Colors.transparent,
       content: SingleChildScrollView(
         child: Container(
-          color: Colors.transparent,
           width: MediaQuery.of(context).size.width * 0.8,
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               Container(
-                color: Colors.white,
+                // color: Colors.white,
                 width: double.infinity,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(12),
+                    topRight: Radius.circular(12),
+                  ),
+                ),
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
@@ -58,9 +64,16 @@ class _PostDialogState extends State<PostDialog> {
                 ),
               ),
               Container(
-                color: Colors.white,
+                // color: Colors.white,
                 height: MediaQuery.of(context).size.height * 0.5,
                 width: double.infinity,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(12),
+                    bottomRight: Radius.circular(12),
+                  ),
+                ),
                 child: PageView.builder(
                   itemCount: widget.dis.length,
                   itemBuilder: (context, index) {
@@ -252,11 +265,11 @@ Future<dynamic> notificationDialog({
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Image.asset(
-                                  "assets/images/clockicon.png",
-                                  height: 24,
-                                  color: Colors.white,
-                                ),
+                                // Image.asset(
+                                //   "assets/images/clockicon.png",
+                                //   height: 24,
+                                //   color: Colors.white,
+                                // ),
                                 SizedBox(width: 8),
                                 Text("Add Reminder".tr(),
                                     /*AppLoaclizations.of(context)!

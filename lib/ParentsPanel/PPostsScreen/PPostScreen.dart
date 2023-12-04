@@ -316,11 +316,6 @@ class _PPostScreenState extends State<PPostScreen> {
                           Color(0xffF8F6FA).withOpacity(.0),
                         ],
                       ),
-                      // image: DecorationImage(
-                      //     image: AssetImage(
-                      //       "assets/images/postsbackground.png",
-                      //     ),
-                      //     fit: BoxFit.cover),
                     ),
                     child: Column(
                       children: [
@@ -333,69 +328,92 @@ class _PPostScreenState extends State<PPostScreen> {
                           width: 40,
                         ),
                         SizedBox(height: 13),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            if (model.kidSch!.length > 1)
-                              InkWell(
-                                onTap: () {
-                                  _controller.previousPage();
-                                },
-                                child: Container(
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: 16, vertical: 8),
-                                  child: Image.asset(
-                                    "assets/images/arrleft.png",
-                                    height: 24,
-                                    width: 24,
+                        model.kidSch == null
+                            ? SizedBox()
+                            : Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  if (model.kidSch!.length > 1)
+                                    InkWell(
+                                      onTap: () {
+                                        _controller.previousPage();
+                                      },
+                                      child: Container(
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 16, vertical: 8),
+                                        child: Image.asset(
+                                          "assets/images/arrleft.png",
+                                          height: 24,
+                                          width: 24,
+                                        ),
+                                      ),
+                                    ),
+                                  SizedBox(
+                                    width: 200,
+                                    child: CarouselSlider.builder(
+                                      carouselController: _controller,
+                                      itemCount: model.kidSch!.length,
+                                      itemBuilder: (ctx, index, realIndex) {
+                                        return Text(
+                                          model.kidSch![index].schoolName
+                                              .toString(),
+                                          style: FontConstant2.k24w5008267text,
+                                        );
+                                      },
+                                      options: CarouselOptions(
+                                        //scrollPhysics: NeverScrollableScrollPhysics(),
+                                        height: 40.h,
+                                        onPageChanged: (index, reason) {
+                                          setState(() {
+                                            _index = index;
+                                            _postsLoading = true;
+                                            _getPosts();
+                                          });
+                                        },
+                                        viewportFraction: 1,
+                                        enlargeCenterPage: true,
+                                        //pageSnapping: false,
+                                        enableInfiniteScroll: false,
+                                      ),
+                                    ),
                                   ),
-                                ),
+                                  // model.kidSch == null
+                                  //     ? SizedBox()
+                                  //     : (model.kidSch!.length > 1
+                                  //         ? InkWell(
+                                  //             onTap: () {
+                                  //               _controller.nextPage();
+                                  //             },
+                                  //             child: Container(
+                                  //               padding: EdgeInsets.symmetric(
+                                  //                   horizontal: 16, vertical: 8),
+                                  //               child: Image.asset(
+                                  //                 "assets/images/arrright.png",
+                                  //                 height: 24,
+                                  //                 width: 24,
+                                  //               ),
+                                  //             ),
+                                  //           )
+                                  //         : SizedBox()),
+                                  // model.kidSch!.isEmpty ?
+                                  //     SizedBox():
+                                  if (model.kidSch!.length > 1)
+                                    InkWell(
+                                      onTap: () {
+                                        _controller.nextPage();
+                                      },
+                                      child: Container(
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 16, vertical: 8),
+                                        child: Image.asset(
+                                          "assets/images/arrright.png",
+                                          height: 24,
+                                          width: 24,
+                                        ),
+                                      ),
+                                    ),
+                                ],
                               ),
-                            SizedBox(
-                              width: 200,
-                              child: CarouselSlider.builder(
-                                carouselController: _controller,
-                                itemCount: model.kidSch!.length,
-                                itemBuilder: (ctx, index, realIndex) {
-                                  return Text(
-                                    model.kidSch![index].schoolName.toString(),
-                                    style: FontConstant2.k24w5008267text,
-                                  );
-                                },
-                                options: CarouselOptions(
-                                  //scrollPhysics: NeverScrollableScrollPhysics(),
-                                  height: 40.h,
-                                  onPageChanged: (index, reason) {
-                                    setState(() {
-                                      _index = index;
-                                      _postsLoading = true;
-                                      _getPosts();
-                                    });
-                                  },
-                                  viewportFraction: 1,
-                                  enlargeCenterPage: true,
-                                  //pageSnapping: false,
-                                  enableInfiniteScroll: false,
-                                ),
-                              ),
-                            ),
-                            if (model.kidSch!.length > 1)
-                              InkWell(
-                                onTap: () {
-                                  _controller.nextPage();
-                                },
-                                child: Container(
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: 16, vertical: 8),
-                                  child: Image.asset(
-                                    "assets/images/arrright.png",
-                                    height: 24,
-                                    width: 24,
-                                  ),
-                                ),
-                              ),
-                          ],
-                        ),
                         SizedBox(height: 38),
                         Container(
                           height: 5,
