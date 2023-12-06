@@ -731,7 +731,14 @@ class _TStudentScreenState extends State<TStudentScreen> {
                                             .performance!.length),
                                   )
                             : Center(
-                                child: Text('No kids found.'.tr()),
+                                child: Padding(
+                                  padding: const EdgeInsets.only(top: 60.0),
+                                  child: Text(
+                                    'No kids found.'.tr(),
+                                    style: FontConstant2.k32w5008267text
+                                        .copyWith(fontSize: 25),
+                                  ),
+                                ),
                               ),
                     SizedBox(height: 24),
                     if (_studentPerformanceModel.performance != null)

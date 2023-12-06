@@ -2,7 +2,6 @@ import 'dart:ui';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kidseau/TeachersPanel/TMessages/TMessages.dart';
 import 'package:kidseau/TeachersPanel/TMessages/TParents.dart';
@@ -208,37 +207,34 @@ class _TMessageDashboardState extends State<TMessageDashboard> {
             )
           ],
         ),
-        body: SingleChildScrollView(
-          //clipBehavior: Clip.none,
-          child: Column(
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [SizedBox(height: 40), PageviewTab()],
+        body: Column(
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [SizedBox(height: 40), PageviewTab()],
+            ),
+            SizedBox(height: 24.h),
+            Expanded(
+              // height: 1.sh,
+              child: PageView(
+                controller: _pageController,
+                onPageChanged: (page) {
+                  setState(
+                    () {
+                      pageIndex = page;
+                    },
+                  );
+                },
+                children: <Widget>[
+                  TMessages(),
+                  TParents(),
+                ],
               ),
-              SizedBox(height: 24.h),
-              SizedBox(
-                height: 1.sh,
-                child: PageView(
-                  controller: _pageController,
-                  onPageChanged: (page) {
-                    setState(
-                      () {
-                        pageIndex = page;
-                      },
-                    );
-                  },
-                  children: <Widget>[
-                    TMessages(),
-                    TParents(),
-                  ],
-                ),
-              ),
-              SizedBox(
-                height: 100.h,
-              )
-            ],
-          ),
+            ),
+            SizedBox(
+              height: 100.h,
+            )
+          ],
         ),
       ),
     );

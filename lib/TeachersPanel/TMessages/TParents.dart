@@ -116,7 +116,7 @@ class _TParentsState extends State<TParents> {
                         height: 16.h,
                       ),
                   shrinkWrap: true,
-                  // physics: NeverScrollableScrollPhysics(),
+                  physics: AlwaysScrollableScrollPhysics(),
                   itemCount: modelList.length,
                   scrollDirection: Axis.vertical,
                   itemBuilder: (BuildContext context, int index) {

@@ -62,20 +62,23 @@ class _PNotificationScreenState extends State<PNotificationScreen> {
     setState(() {
       loading = true;
     });
+
     NotificationApi().getNotifications(page).then(
       (value) {
+        if (value == null) {
+          // Handle the case where the value is null, e.g., show an error message.
+          setState(() {
+            loading = false;
+          });
+          return;
+        }
+
         log(value.toString());
         notifications.clear();
 
-        for (var v in value['all_notification']) {
+        for (var v in value['all_notification'] ?? []) {
           if (v['notification_type'] == 'post') {
             dis.add(AllNotificationModel.fromJson(v));
-            // notiDis = v['dis'];
-            // notiDis.add(v['dis']);
-            // for (var q in v['dis']) {
-            //   dis.add(NotificationDisModel.fromJson(q));
-            // }
-            // dis.add(NotificationDisModel(v['dis']));
           }
         }
 
@@ -98,6 +101,47 @@ class _PNotificationScreenState extends State<PNotificationScreen> {
       },
     );
   }
+
+  // getNotifications() {
+  //   setState(() {
+  //     loading = true;
+  //   });
+  //   NotificationApi().getNotifications(page).then(
+  //     (value) {
+  //       log(value.toString());
+  //       notifications.clear();
+  //
+  //       for (var v in value['all_notification']) {
+  //         if (v['notification_type'] == 'post') {
+  //           dis.add(AllNotificationModel.fromJson(v));
+  //           // notiDis = v['dis'];
+  //           // notiDis.add(v['dis']);
+  //           // for (var q in v['dis']) {
+  //           //   dis.add(NotificationDisModel.fromJson(q));
+  //           // }
+  //           // dis.add(NotificationDisModel(v['dis']));
+  //         }
+  //       }
+  //
+  //       print('check img${img.length}');
+  //       if (value['status'] == 1) {
+  //         notifications.clear();
+  //         response = NotificationResponse.fromJson(value);
+  //         for (int i = 0; i < response.allNotification.length; i++) {
+  //           notifications
+  //               .add(response.allNotification[i].seen == '0' ? false : true);
+  //         }
+  //         setState(() {
+  //           loading = false;
+  //         });
+  //       } else {
+  //         setState(() {
+  //           loading = false;
+  //         });
+  //       }
+  //     },
+  //   );
+  // }
 
   @override
   void initState() {
@@ -332,7 +376,7 @@ class _PNotificationScreenState extends State<PNotificationScreen> {
                                       Expanded(
                                         child: Container(
                                           width: 60,
-                                          height: 70,
+                                          height: 80,
                                           margin: EdgeInsets.symmetric(
                                               vertical: 16),
                                           clipBehavior: Clip.hardEdge,
@@ -362,7 +406,12 @@ class _PNotificationScreenState extends State<PNotificationScreen> {
                                           child: Column(
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
                                             children: [
+                                              SizedBox(
+                                                height: 10,
+                                              ),
                                               Text(
                                                 response.allNotification[i]
                                                     .userTypeFrom.fName
@@ -384,6 +433,11 @@ class _PNotificationScreenState extends State<PNotificationScreen> {
                                                         fontWeight:
                                                             FontWeight.w500),
                                               ),
+                                              Text(response.allNotification[i]
+                                                  .notification),
+                                              SizedBox(
+                                                height: 5,
+                                              ),
                                               Text(
                                                 DateFormat('hh:mm a').format(
                                                     DateTime.parse(response
@@ -392,8 +446,6 @@ class _PNotificationScreenState extends State<PNotificationScreen> {
                                                 style: FontConstant
                                                     .k14w5008471Text,
                                               ),
-                                              Text(response.allNotification[i]
-                                                  .notification),
                                               SizedBox(
                                                 height: 10,
                                               ),

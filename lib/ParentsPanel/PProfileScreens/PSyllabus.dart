@@ -33,6 +33,17 @@ class _PSyllabusState extends State<PSyllabus> {
     "Group E",
   ];
 
+  bool loading = true;
+  _startLoading() {
+    // Simulate a delay of 2 seconds
+    Future.delayed(Duration(seconds: 1), () {
+      setState(() {
+        // Stop loading after 2 seconds
+        loading = false;
+      });
+    });
+  }
+
   ParentPostSchoolModel model = ParentPostSchoolModel();
   final CarouselController _controller = CarouselController();
   ParentKidHomeModel _kidModel = ParentKidHomeModel();
@@ -46,6 +57,7 @@ class _PSyllabusState extends State<PSyllabus> {
       selected = DateFormat('EEEE').format(DateTime.now());
     }
     _getData();
+    _startLoading();
     super.initState();
   }
 
@@ -199,24 +211,34 @@ class _PSyllabusState extends State<PSyllabus> {
           ],
         ),
       ),
-      body: _isLoading
+      body: loading
           ? Center(
               child: CircularProgressIndicator(),
             )
-          : SafeArea(
-              child: Stack(
-                children: [
-                  Image.asset(
-                    "assets/images/postsbackground.png",
-                    height: 414,
-                    width: 1.sw,
-                    alignment: Alignment.topLeft,
-                  ),
-                  SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        SizedBox(height: 16),
-                        /*Row(
+          : (_kidModel.parentKidId == null || _kidModel.parentKidId!.isEmpty)
+              ? Center(
+                  child: Text(
+                  "No syllabus added yet",
+                  style: FontConstant.k18w5008471Text,
+                ))
+              : _isLoading
+                  ? Center(
+                      child: CircularProgressIndicator(),
+                    )
+                  : SafeArea(
+                      child: Stack(
+                        children: [
+                          Image.asset(
+                            "assets/images/postsbackground.png",
+                            height: 414,
+                            width: 1.sw,
+                            alignment: Alignment.topLeft,
+                          ),
+                          SingleChildScrollView(
+                            child: Column(
+                              children: [
+                                SizedBox(height: 16),
+                                /*Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             if (model.kidSch!.length > 1)
@@ -253,10 +275,10 @@ class _PSyllabusState extends State<PSyllabus> {
                                   onPageChanged: (index, reason) {
                                     setState(() {
                                       */
-                        /*_index = index;
+                                /*_index = index;
                                 _postsLoading = true;
                                 _getPosts();*/
-                        /*
+                                /*
                                       _grpLoading = true;
                                       _getSchGroups(model.kidSch![index].schId
                                           .toString());
@@ -286,127 +308,141 @@ class _PSyllabusState extends State<PSyllabus> {
                               ),
                           ],
                         ),*/
-                        CarouselSlider.builder(
-                          carouselController: _controller,
-                          itemCount: _kidModel.parentKidId!.length,
-                          itemBuilder: (ctx, index, realIndex) {
-                            return InkWell(
-                              onTap: () {
-                                /*Navigator.of(context)
+                                CarouselSlider.builder(
+                                  carouselController: _controller,
+                                  itemCount: _kidModel.parentKidId!.length,
+                                  itemBuilder: (ctx, index, realIndex) {
+                                    return InkWell(
+                                      onTap: () {
+                                        /*Navigator.of(context)
                                     .push(MaterialPageRoute(
                                     builder: (ctx) => PKidsDashboard(
                                       kidId: _kidModel
                                           .parentKidId![index].kidId
                                           .toString(),
                                     )));*/
-                              },
-                              child: Container(
-                                //width: 260,
-                                // height: 100,
-                                margin: EdgeInsets.only(
-                                    right: 16, left: index == 0 ? 16 : 0),
-                                decoration: BoxDecoration(
-                                  // color: Colors.red,
-                                  borderRadius: BorderRadius.circular(16),
-                                  image: DecorationImage(
-                                    image: AssetImage(
-                                        "assets/images/Student Card.png"),
-                                    fit: BoxFit.fill,
-                                  ),
-                                ),
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 16.0, vertical: 8),
-                                child: Row(
-                                  children: [
-                                    Container(
-                                      height: 100,
-                                      width: 72,
-                                      clipBehavior: Clip.hardEdge,
-                                      decoration: BoxDecoration(
+                                      },
+                                      child: Container(
+                                        //width: 260,
+                                        // height: 100,
+                                        margin: EdgeInsets.only(
+                                            right: 16,
+                                            left: index == 0 ? 16 : 0),
+                                        decoration: BoxDecoration(
+                                          // color: Colors.red,
                                           borderRadius:
-                                              BorderRadius.circular(8)),
-                                      child: Image.network(
-                                        _kidModel.parentKidId![index].profilePic
-                                            .toString(),
-                                        fit: BoxFit.cover,
-                                        errorBuilder: (q, w, e) => Image.asset(
-                                            "assets/images/Rectangle 2715.png"),
-                                      ),
-                                    ),
-                                    SizedBox(width: 16),
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        /*SizedBox(
+                                              BorderRadius.circular(16),
+                                          image: DecorationImage(
+                                            image: AssetImage(
+                                                "assets/images/Student Card.png"),
+                                            fit: BoxFit.fill,
+                                          ),
+                                        ),
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 16.0, vertical: 8),
+                                        child: Row(
+                                          children: [
+                                            Container(
+                                              height: 100,
+                                              width: 72,
+                                              clipBehavior: Clip.hardEdge,
+                                              decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(8)),
+                                              child: Image.network(
+                                                _kidModel.parentKidId![index]
+                                                    .profilePic
+                                                    .toString(),
+                                                fit: BoxFit.cover,
+                                                errorBuilder: (q, w, e) =>
+                                                    Image.asset(
+                                                        "assets/images/Rectangle 2715.png"),
+                                              ),
+                                            ),
+                                            SizedBox(width: 16),
+                                            Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                /*SizedBox(
                                         height: 8,
                                       ),*/
-                                        Text(
-                                          _kidModel.parentKidId![index].name
-                                              .toString(),
-                                          style: FontConstant.k16w500White,
-                                        ),
-                                        Text(
-                                          _kidModel.parentKidId![index].secName
-                                              .toString(),
-                                          style: FontConstant.k14w400White,
-                                        ),
-                                        Row(
-                                          children: [
-                                            Text(
-                                              "${"From".tr()} ${DateFormat.jm().format(DateFormat("hh:mm:ss").parse(_kidModel.parentKidId![index].schTimeIn.toString().split('.').first))} ",
-                                              style: FontConstant.k14w400White,
-                                            ),
-                                            Text(
-                                              "${"To".tr()} ${DateFormat.jm().format(DateFormat("hh:mm:ss").parse(_kidModel.parentKidId![index].schTimeOut.toString().split('.').first))}",
-                                              style: FontConstant.k14w400White,
+                                                Text(
+                                                  _kidModel
+                                                      .parentKidId![index].name
+                                                      .toString(),
+                                                  style:
+                                                      FontConstant.k16w500White,
+                                                ),
+                                                Text(
+                                                  _kidModel.parentKidId![index]
+                                                      .secName
+                                                      .toString(),
+                                                  style:
+                                                      FontConstant.k14w400White,
+                                                ),
+                                                Row(
+                                                  children: [
+                                                    Text(
+                                                      "${"From".tr()} ${DateFormat.jm().format(DateFormat("hh:mm:ss").parse(_kidModel.parentKidId![index].schTimeIn.toString().split('.').first))} ",
+                                                      style: FontConstant
+                                                          .k14w400White,
+                                                    ),
+                                                    Text(
+                                                      "${"To".tr()} ${DateFormat.jm().format(DateFormat("hh:mm:ss").parse(_kidModel.parentKidId![index].schTimeOut.toString().split('.').first))}",
+                                                      style: FontConstant
+                                                          .k14w400White,
+                                                    ),
+                                                  ],
+                                                ),
+                                                Text(
+                                                  _kidModel.parentKidId![index]
+                                                      .grpName
+                                                      .toString(),
+                                                  style:
+                                                      FontConstant.k12w400White,
+                                                ),
+                                              ],
                                             ),
                                           ],
                                         ),
-                                        Text(
-                                          _kidModel.parentKidId![index].grpName
-                                              .toString(),
-                                          style: FontConstant.k12w400White,
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            );
-                          },
-                          options: CarouselOptions(
-                            height: 150,
-                            onPageChanged: (index, reason) {
-                              setState(() {
-                                _grpLoading = true;
-                                _syllabusLoading = true;
-                                _getKidGroups(
-                                    _kidModel.parentKidId![index].kidId
-                                        .toString(),
-                                    index);
-                                /*_feesLoading = true;
+                                      ),
+                                    );
+                                  },
+                                  options: CarouselOptions(
+                                    height: 150,
+                                    onPageChanged: (index, reason) {
+                                      setState(() {
+                                        _grpLoading = true;
+                                        _syllabusLoading = true;
+                                        _getKidGroups(
+                                            _kidModel.parentKidId![index].kidId
+                                                .toString(),
+                                            index);
+                                        /*_feesLoading = true;
                                 _getFees(_kidModel.parentKidId![index].kidId
                                     .toString());*/
-                                // _index = index;
-                                /*_isActivityLoading = true;
+                                        // _index = index;
+                                        /*_isActivityLoading = true;
                             _getActivity(_kidModel
                                 .parentKidId![index].kidId
                                 .toString());
                             log(index.toString());*/
-                              });
-                            },
-                            viewportFraction:
-                                _kidModel.parentKidId!.length > 1 ? 0.9 : 1,
-                            //enlargeCenterPage: true,
-                            padEnds: false,
-                            //pageSnapping: false,
-                            enableInfiniteScroll: false,
-                          ),
-                        ),
-                        /*SizedBox(height: 30),
+                                      });
+                                    },
+                                    viewportFraction:
+                                        _kidModel.parentKidId!.length > 1
+                                            ? 0.9
+                                            : 1,
+                                    //enlargeCenterPage: true,
+                                    padEnds: false,
+                                    //pageSnapping: false,
+                                    enableInfiniteScroll: false,
+                                  ),
+                                ),
+                                /*SizedBox(height: 30),
                         _grpLoading
                             ? SizedBox.shrink()
                             : Container(
@@ -480,41 +516,42 @@ class _PSyllabusState extends State<PSyllabus> {
                                       );
                                     }),
                               ),*/
-                        SizedBox(height: 16),
-                        _grpLoading
-                            ? SizedBox.shrink()
-                            : Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  DropdownButton<String>(
-                                    icon: Image.asset(
-                                      "assets/images/arrowdown.png",
-                                      width: 24,
-                                      height: 24,
-                                      color: Color(0xff84717F),
-                                    ),
-                                    hint: Text(selected.tr()),
-                                    items: <String>[
-                                      'Sunday'.tr(),
-                                      'Monday'.tr(),
-                                      'Tuesday'.tr(),
-                                      'Wednesday'.tr(),
-                                      'Thursday'.tr(),
-                                    ].map((String value) {
-                                      return DropdownMenuItem<String>(
-                                        value: value,
-                                        child: Text(value),
-                                      );
-                                    }).toList(),
-                                    onChanged: (val) {
-                                      setState(() {
-                                        selected = val!;
-                                        _syllabusLoading = true;
-                                        _getSyllabus(_syllabusId);
-                                      });
-                                    },
-                                  ),
-                                  /*Text(
+                                SizedBox(height: 16),
+                                _grpLoading
+                                    ? SizedBox.shrink()
+                                    : Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          DropdownButton<String>(
+                                            icon: Image.asset(
+                                              "assets/images/arrowdown.png",
+                                              width: 24,
+                                              height: 24,
+                                              color: Color(0xff84717F),
+                                            ),
+                                            hint: Text(selected.tr()),
+                                            items: <String>[
+                                              'Sunday'.tr(),
+                                              'Monday'.tr(),
+                                              'Tuesday'.tr(),
+                                              'Wednesday'.tr(),
+                                              'Thursday'.tr(),
+                                            ].map((String value) {
+                                              return DropdownMenuItem<String>(
+                                                value: value,
+                                                child: Text(value),
+                                              );
+                                            }).toList(),
+                                            onChanged: (val) {
+                                              setState(() {
+                                                selected = val!;
+                                                _syllabusLoading = true;
+                                                _getSyllabus(_syllabusId);
+                                              });
+                                            },
+                                          ),
+                                          /*Text(
                         "Today",
                         style: FontConstant.k18w5008471Text,
                       ),
@@ -524,132 +561,145 @@ class _PSyllabusState extends State<PSyllabus> {
                         height: 24,
                         color: Color(0xff84717F),
                       )*/
-                                ],
-                              ),
-                        SizedBox(height: 20),
-                        _syllabusLoading
-                            ? Center(
-                                child: CircularProgressIndicator(),
-                              )
-                            : Container(
-                                padding: EdgeInsets.symmetric(horizontal: 16),
-                                width: 1.sw,
-                                child: ListView.separated(
-                                    separatorBuilder: (ctx, ind) => SizedBox(
-                                          height: 14.h,
-                                        ),
-                                    shrinkWrap: true,
-                                    padding: EdgeInsets.zero,
-                                    physics: NeverScrollableScrollPhysics(),
-                                    itemCount: syllabusModel.allSchdule!.length,
-                                    scrollDirection: Axis.vertical,
-                                    itemBuilder:
-                                        (BuildContext context, int index) {
-                                      return InkWell(
-                                        onTap: () {
-                                          Navigator.of(context).push(
-                                              MaterialPageRoute(
-                                                  builder: (ctx) =>
-                                                      PLearningAplphabets(
-                                                        dayId: syllabusModel
-                                                            .allSchdule![index]
-                                                            .dayId
-                                                            .toString(),
-                                                        selectedDay: _str,
-                                                        actId: syllabusModel
-                                                            .allSchdule![index]
-                                                            .actId
-                                                            .toString(),
-                                                      )));
-                                        },
-                                        child: Container(
-                                          height: 64,
-                                          decoration: BoxDecoration(
-                                            color: Colors.white,
-                                            borderRadius:
-                                                BorderRadius.circular(16),
-                                          ),
-                                          child: Padding(
-                                            padding: const EdgeInsets.symmetric(
-                                                horizontal: 15.0),
-                                            child: Row(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.center,
-                                              children: [
-                                                Image.network(
-                                                  syllabusModel
-                                                      .allSchdule![index]
-                                                      .actIcon
-                                                      .toString(),
-                                                  errorBuilder: (q, w, e) {
-                                                    return Image.asset(
-                                                      "assets/images/book 1.png",
-                                                      height: 40,
-                                                      width: 40,
-                                                    );
-                                                  },
-                                                  height: 40,
-                                                  width: 40,
+                                        ],
+                                      ),
+                                SizedBox(height: 20),
+                                _syllabusLoading
+                                    ? Center(
+                                        child: CircularProgressIndicator(),
+                                      )
+                                    : Container(
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 16),
+                                        width: 1.sw,
+                                        child: ListView.separated(
+                                            separatorBuilder: (ctx, ind) =>
+                                                SizedBox(
+                                                  height: 14.h,
                                                 ),
-                                                Padding(
-                                                  padding: EdgeInsets.only(
-                                                      left: 15.0),
-                                                  child: Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .center,
-                                                    children: [
-                                                      Text(
-                                                        syllabusModel
-                                                            .allSchdule![index]
-                                                            .actTitle
-                                                            .toString(),
-                                                        style: FontConstant
-                                                            .k32w500blackText
-                                                            .copyWith(
-                                                                fontSize: 16),
-                                                      ),
-                                                      Row(
-                                                        children: [
-                                                          Text(
-                                                            syllabusModel
-                                                                .allSchdule![
-                                                                    index]
-                                                                .timing
-                                                                .toString(),
-                                                            style: FontConstant
-                                                                .k14w400lightpurpleText
-                                                                .copyWith(
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w400,
-                                                                    fontSize:
-                                                                        14,
-                                                                    color: Color(
-                                                                        0xffB7A4B2)),
+                                            shrinkWrap: true,
+                                            padding: EdgeInsets.zero,
+                                            physics:
+                                                NeverScrollableScrollPhysics(),
+                                            itemCount: syllabusModel
+                                                .allSchdule!.length,
+                                            scrollDirection: Axis.vertical,
+                                            itemBuilder: (BuildContext context,
+                                                int index) {
+                                              return InkWell(
+                                                onTap: () {
+                                                  Navigator.of(context).push(
+                                                      MaterialPageRoute(
+                                                          builder: (ctx) =>
+                                                              PLearningAplphabets(
+                                                                dayId: syllabusModel
+                                                                    .allSchdule![
+                                                                        index]
+                                                                    .dayId
+                                                                    .toString(),
+                                                                selectedDay:
+                                                                    _str,
+                                                                actId: syllabusModel
+                                                                    .allSchdule![
+                                                                        index]
+                                                                    .actId
+                                                                    .toString(),
+                                                              )));
+                                                },
+                                                child: Container(
+                                                  height: 64,
+                                                  decoration: BoxDecoration(
+                                                    color: Colors.white,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            16),
+                                                  ),
+                                                  child: Padding(
+                                                    padding: const EdgeInsets
+                                                        .symmetric(
+                                                        horizontal: 15.0),
+                                                    child: Row(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .center,
+                                                      children: [
+                                                        Image.network(
+                                                          syllabusModel
+                                                              .allSchdule![
+                                                                  index]
+                                                              .actIcon
+                                                              .toString(),
+                                                          errorBuilder:
+                                                              (q, w, e) {
+                                                            return Image.asset(
+                                                              "assets/images/book 1.png",
+                                                              height: 40,
+                                                              width: 40,
+                                                            );
+                                                          },
+                                                          height: 40,
+                                                          width: 40,
+                                                        ),
+                                                        Padding(
+                                                          padding:
+                                                              EdgeInsets.only(
+                                                                  left: 15.0),
+                                                          child: Column(
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .start,
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .center,
+                                                            children: [
+                                                              Text(
+                                                                syllabusModel
+                                                                    .allSchdule![
+                                                                        index]
+                                                                    .actTitle
+                                                                    .toString(),
+                                                                style: FontConstant
+                                                                    .k32w500blackText
+                                                                    .copyWith(
+                                                                        fontSize:
+                                                                            16),
+                                                              ),
+                                                              Row(
+                                                                children: [
+                                                                  Text(
+                                                                    syllabusModel
+                                                                        .allSchdule![
+                                                                            index]
+                                                                        .timing
+                                                                        .toString(),
+                                                                    style: FontConstant.k14w400lightpurpleText.copyWith(
+                                                                        fontWeight:
+                                                                            FontWeight
+                                                                                .w400,
+                                                                        fontSize:
+                                                                            14,
+                                                                        color: Color(
+                                                                            0xffB7A4B2)),
+                                                                  ),
+                                                                ],
+                                                              )
+                                                            ],
                                                           ),
-                                                        ],
-                                                      )
-                                                    ],
+                                                        ),
+                                                      ],
+                                                    ),
                                                   ),
                                                 ),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                      );
-                                    }),
-                              ),
-                        SizedBox(height: 25),
-                      ],
+                                              );
+                                            }),
+                                      ),
+                                SizedBox(height: 25),
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
                     ),
-                  )
-                ],
-              ),
-            ),
     );
   }
 

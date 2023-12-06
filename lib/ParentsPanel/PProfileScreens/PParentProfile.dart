@@ -275,7 +275,7 @@ class _PParentsProfileState extends State<PParentsProfile> {
                             children: [
                               if (model.mOccupation!.trim().isNotEmpty)
                                 Text(
-                                  "info".tr(),
+                                  "Info".tr(),
                                   style: FontConstant2.k22w5008471text,
                                 ),
                               if (model.motherName != '')

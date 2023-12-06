@@ -925,7 +925,7 @@ class _TStudentDetailScreenState extends State<TStudentDetailScreen> {
                                               BorderRadius.circular(16)),
                                       child: Padding(
                                         padding: const EdgeInsets.symmetric(
-                                            horizontal: 16.0, vertical: 5),
+                                            horizontal: 16.0, vertical: 16),
                                         child: Column(
                                           mainAxisAlignment:
                                               MainAxisAlignment.center,
@@ -975,13 +975,18 @@ class _TStudentDetailScreenState extends State<TStudentDetailScreen> {
                                                   )
                                                 : Row(
                                                     children: [
-                                                      SizedBox(
-                                                        width: 1.sw / 2,
-                                                        height: 180,
-                                                        child: BarChartSample1(
-                                                            activityList:
-                                                                model.actvity ??
-                                                                    []),
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(4.0),
+                                                        child: SizedBox(
+                                                          width: 1.sw / 2,
+                                                          height: 180,
+                                                          child: BarChartSample1(
+                                                              activityList:
+                                                                  model.actvity ??
+                                                                      []),
+                                                        ),
                                                       ),
                                                       Expanded(
                                                         child: SizedBox(

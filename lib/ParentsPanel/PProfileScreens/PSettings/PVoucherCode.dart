@@ -7,7 +7,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kidseau/Constants/colors.dart';
 import 'package:kidseau/ParentsPanel/PProfileScreens/PSettings/PChangeVoucherScreen.dart';
 import 'package:kidseau/Theme.dart';
-import 'package:kidseau/Widgets/buttons.dart';
 import 'package:kidseau/api/models/parent_models/parent_profile_models/kid_voucher_detail_model.dart';
 import 'package:kidseau/api/parent_panel_apis/parent_profile_apis/parent_get_app_vouchers_api.dart';
 
@@ -22,6 +21,7 @@ class _PVouchercodeState extends State<PVouchercode> {
   @override
   void initState() {
     _getData();
+    _startLoading();
     super.initState();
   }
 
@@ -36,6 +36,17 @@ class _PVouchercodeState extends State<PVouchercode> {
           modelList.add(KidVoucherDetailModel.fromJson(v));
         }
         _isLoading = false;
+      });
+    });
+  }
+
+  bool loading = true;
+  _startLoading() {
+    // Simulate a delay of 2 seconds
+    Future.delayed(Duration(seconds: 1), () {
+      setState(() {
+        // Stop loading after 2 seconds
+        loading = false;
       });
     });
   }
@@ -85,181 +96,210 @@ class _PVouchercodeState extends State<PVouchercode> {
               ],
             ),
           ),
-          body: _isLoading
+          body: loading
               ? Center(
                   child: CircularProgressIndicator(),
                 )
-              : SingleChildScrollView(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                    child: Column(
-                      children: [
-                        SizedBox(height: 16),
-                        MediaQuery.removePadding(
-                          context: context,
-                          removeTop: true,
-                          child: ListView.separated(
-                            itemBuilder: (context, index) {
-                              return InkWell(
-                                onTap: () {
-                                  Navigator.of(context).push(
-                                    MaterialPageRoute(
-                                      builder: (context) =>
-                                          PChangeVoucherScreen(
-                                        onPop: () {
-                                          _getData();
+              : (modelList.isEmpty || modelList == null)
+                  ? Center(
+                      child: Text(
+                      "No voucher Code yet",
+                      style: FontConstant.k18w5008471Text,
+                    ))
+                  : _isLoading
+                      ? Center(
+                          child: CircularProgressIndicator(),
+                        )
+                      : SingleChildScrollView(
+                          child: Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 16.0),
+                            child: Column(
+                              children: [
+                                SizedBox(height: 16),
+                                MediaQuery.removePadding(
+                                  context: context,
+                                  removeTop: true,
+                                  child: ListView.separated(
+                                    itemBuilder: (context, index) {
+                                      return InkWell(
+                                        onTap: () {
+                                          Navigator.of(context).push(
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  PChangeVoucherScreen(
+                                                onPop: () {
+                                                  _getData();
+                                                },
+                                                kidId: modelList[index]
+                                                    .kidId
+                                                    .toString(),
+                                              ),
+                                            ),
+                                          );
                                         },
-                                        kidId:
-                                            modelList[index].kidId.toString(),
-                                      ),
-                                    ),
-                                  );
-                                },
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    Container(
-                                      height: 93.h,
-                                      width: 1.sw,
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(20),
-                                          image: DecorationImage(
-                                              image: AssetImage(
-                                                  "assets/images/vouchercard.png"),
-                                              fit: BoxFit.cover)),
-                                      child: Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 16.0),
                                         child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
+                                          mainAxisSize: MainAxisSize.min,
                                           children: [
+                                            Container(
+                                              height: 93.h,
+                                              width: 1.sw,
+                                              decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(20),
+                                                  image: DecorationImage(
+                                                      image: AssetImage(
+                                                          "assets/images/vouchercard.png"),
+                                                      fit: BoxFit.cover)),
+                                              child: Padding(
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        horizontal: 16.0),
+                                                child: Column(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
+                                                      children: [
+                                                        Text(
+                                                            "Current Code".tr(),
+                                                            style: FontConstant
+                                                                .k16w4008471Text
+                                                                .copyWith(
+                                                                    color: Colors
+                                                                        .white)),
+                                                        Text("Valid till".tr(),
+                                                            style: FontConstant
+                                                                .k16w4008471Text
+                                                                .copyWith(
+                                                                    color: Colors
+                                                                        .white)),
+                                                      ],
+                                                    ),
+                                                    Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
+                                                      children: [
+                                                        SizedBox(
+                                                          width: 200,
+                                                          child: Text(
+                                                            modelList[index]
+                                                                .currentCode
+                                                                .toString(),
+                                                            overflow:
+                                                                TextOverflow
+                                                                    .ellipsis,
+                                                            style: FontConstant2
+                                                                .k24w5008267text
+                                                                .copyWith(
+                                                                    color: Colors
+                                                                        .white),
+                                                          ),
+                                                        ),
+                                                        modelList[index]
+                                                                    .validTill
+                                                                    .toString() ==
+                                                                ""
+                                                            ? Text('')
+                                                            : Text(
+                                                                DateFormat
+                                                                        .yMMM()
+                                                                    .format(DateTime.parse(modelList[
+                                                                            index]
+                                                                        .validTill
+                                                                        .toString())),
+                                                                style: FontConstant
+                                                                    .k18w500331FText
+                                                                    .copyWith(
+                                                                        color: Colors
+                                                                            .white),
+                                                              ),
+                                                      ],
+                                                    )
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                            SizedBox(height: 16),
                                             Row(
                                               mainAxisAlignment:
                                                   MainAxisAlignment
                                                       .spaceBetween,
                                               children: [
-                                                Text("Current Code".tr(),
-                                                    style: FontConstant
-                                                        .k16w4008471Text
-                                                        .copyWith(
-                                                            color:
-                                                                Colors.white)),
-                                                Text("Valid till".tr(),
-                                                    style: FontConstant
-                                                        .k16w4008471Text
-                                                        .copyWith(
-                                                            color:
-                                                                Colors.white)),
+                                                Text(
+                                                  "Issued by".tr(),
+                                                  style: FontConstant
+                                                      .k16w400331FText,
+                                                ),
+                                                Text(
+                                                  modelList[index]
+                                                      .issuedBy
+                                                      .toString(),
+                                                  style: FontConstant
+                                                      .k16w4008471Text,
+                                                ),
                                               ],
                                             ),
+                                            SizedBox(height: 12),
                                             Row(
                                               mainAxisAlignment:
                                                   MainAxisAlignment
                                                       .spaceBetween,
                                               children: [
-                                                SizedBox(
-                                                  width: 200,
-                                                  child: Text(
-                                                    modelList[index]
-                                                        .currentCode
-                                                        .toString(),
-                                                    overflow:
-                                                        TextOverflow.ellipsis,
-                                                    style: FontConstant2
-                                                        .k24w5008267text
-                                                        .copyWith(
-                                                            color:
-                                                                Colors.white),
-                                                  ),
+                                                Text(
+                                                  "Issued date".tr(),
+                                                  style: FontConstant
+                                                      .k16w400331FText,
                                                 ),
-                                                modelList[index]
-                                                            .validTill
-                                                            .toString() ==
-                                                        ""
-                                                    ? Text('')
-                                                    : Text(
-                                                        DateFormat.yMMM().format(
-                                                            DateTime.parse(
-                                                                modelList[index]
-                                                                    .validTill
-                                                                    .toString())),
-                                                        style: FontConstant
-                                                            .k18w500331FText
-                                                            .copyWith(
-                                                                color: Colors
-                                                                    .white),
-                                                      ),
+                                                Text(
+                                                  modelList[index]
+                                                      .issuedData
+                                                      .toString()
+                                                      .split(' ')
+                                                      .first,
+                                                  style: FontConstant
+                                                      .k16w4008471Text,
+                                                ),
                                               ],
-                                            )
+                                            ),
+                                            SizedBox(height: 12),
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Text(
+                                                  "Issued for".tr(),
+                                                  style: FontConstant
+                                                      .k16w400331FText,
+                                                ),
+                                                Text(
+                                                  modelList[index]
+                                                      .issuedFor
+                                                      .toString(),
+                                                  style: FontConstant
+                                                      .k16w4008471Text,
+                                                ),
+                                              ],
+                                            ),
                                           ],
                                         ),
-                                      ),
+                                      );
+                                    },
+                                    separatorBuilder: (ctx, ind) => Divider(
+                                      color: AppColors().bgColor,
+                                      thickness: 2,
                                     ),
-                                    SizedBox(height: 16),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(
-                                          "Issued by".tr(),
-                                          style: FontConstant.k16w400331FText,
-                                        ),
-                                        Text(
-                                          modelList[index].issuedBy.toString(),
-                                          style: FontConstant.k16w4008471Text,
-                                        ),
-                                      ],
-                                    ),
-                                    SizedBox(height: 12),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(
-                                          "Issued date".tr(),
-                                          style: FontConstant.k16w400331FText,
-                                        ),
-                                        Text(
-                                          modelList[index]
-                                              .issuedData
-                                              .toString()
-                                              .split(' ')
-                                              .first,
-                                          style: FontConstant.k16w4008471Text,
-                                        ),
-                                      ],
-                                    ),
-                                    SizedBox(height: 12),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(
-                                          "Issued for".tr(),
-                                          style: FontConstant.k16w400331FText,
-                                        ),
-                                        Text(
-                                          modelList[index].issuedFor.toString(),
-                                          style: FontConstant.k16w4008471Text,
-                                        ),
-                                      ],
-                                    ),
-                                  ],
+                                    itemCount: modelList.length,
+                                    physics: NeverScrollableScrollPhysics(),
+                                    shrinkWrap: true,
+                                  ),
                                 ),
-                              );
-                            },
-                            separatorBuilder: (ctx, ind) => Divider(
-                              color: AppColors().bgColor,
-                              thickness: 2,
-                            ),
-                            itemCount: modelList.length,
-                            physics: NeverScrollableScrollPhysics(),
-                            shrinkWrap: true,
-                          ),
-                        ),
-                        /*Expanded(
+                                /*Expanded(
                     child: Align(
                       alignment: Alignment.bottomCenter,
                       child: SizedBox(
@@ -279,13 +319,13 @@ class _PVouchercodeState extends State<PVouchercode> {
                       ),
                     ),
                   ),*/
-                        SizedBox(
-                          height: 50,
-                        )
-                      ],
-                    ),
-                  ),
-                )),
+                                SizedBox(
+                                  height: 50,
+                                )
+                              ],
+                            ),
+                          ),
+                        )),
     );
   }
 }

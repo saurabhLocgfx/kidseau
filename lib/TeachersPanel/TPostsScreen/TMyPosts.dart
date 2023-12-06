@@ -372,8 +372,8 @@ class _TMyPostsState extends State<TMyPosts> {
                                                                 setState(() {
                                                                   Fluttertoast
                                                                       .showToast(
-                                                                    msg: value[
-                                                                        'msg'],
+                                                                    msg:
+                                                                        "Deleted Successfully",
                                                                     toastLength:
                                                                         Toast
                                                                             .LENGTH_SHORT,

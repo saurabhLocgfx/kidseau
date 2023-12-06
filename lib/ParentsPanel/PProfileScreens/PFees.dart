@@ -36,7 +36,19 @@ class _PFeesState extends State<PFees> {
   @override
   void initState() {
     _getData();
+    _startLoading();
     super.initState();
+  }
+
+  bool loading = true;
+  _startLoading() {
+    // Simulate a delay of 2 seconds
+    Future.delayed(Duration(seconds: 1), () {
+      setState(() {
+        // Stop loading after 2 seconds
+        loading = false;
+      });
+    });
   }
 
   bool _isLoading = false;
@@ -123,328 +135,354 @@ class _PFeesState extends State<PFees> {
           ],
         ),
       ),
-      body: _isLoading
+      body: loading
           ? Center(
               child: CircularProgressIndicator(),
             )
-          : SafeArea(
-              child: Stack(
-                children: [
-                  Image.asset(
-                    "assets/images/postsbackground.png",
-                    height: 414,
-                    width: 1.sw,
-                    fit: BoxFit.fitWidth,
-                    alignment: Alignment.topLeft,
-                    color: Color(0xffD9D9D9),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(
-                      left: 16.0,
-                    ),
-                    child: SingleChildScrollView(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+          : (_kidModel.parentKidId == null || _kidModel.parentKidId!.isEmpty)
+              ? Center(
+                  child: Text(
+                  "No Fees yet",
+                  style: FontConstant.k18w5008471Text,
+                ))
+              : _isLoading
+                  ? Center(
+                      child: CircularProgressIndicator(),
+                    )
+                  : SafeArea(
+                      child: Stack(
                         children: [
-                          SizedBox(height: 32),
-                          CarouselSlider.builder(
-                            carouselController: _controller,
-                            itemCount: _kidModel.parentKidId!.length,
-                            itemBuilder: (ctx, index, realIndex) {
-                              return InkWell(
-                                onTap: () {
-                                  Navigator.of(context).push(MaterialPageRoute(
-                                      builder: (ctx) => PKidsDashboard(
-                                            kidId: _kidModel
-                                                .parentKidId![index].kidId
-                                                .toString(),
-                                          )));
-                                },
-                                child: Container(
-                                  //width: 260,
-                                  //height: 100,
-                                  margin: EdgeInsets.only(right: 16),
-                                  decoration: BoxDecoration(
-                                    //color: Colors.red,
-                                    borderRadius: BorderRadius.circular(16),
-                                    image: DecorationImage(
-                                      image: AssetImage(
-                                          "assets/images/Student Card.png"),
-                                      fit: BoxFit.cover,
-                                    ),
-                                  ),
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 16.0, vertical: 8),
-                                  child: Row(
-                                    children: [
-                                      Container(
-                                        height: 100,
-                                        width: 72,
-                                        clipBehavior: Clip.hardEdge,
-                                        decoration: BoxDecoration(
+                          Image.asset(
+                            "assets/images/postsbackground.png",
+                            height: 414,
+                            width: 1.sw,
+                            fit: BoxFit.fitWidth,
+                            alignment: Alignment.topLeft,
+                            color: Color(0xffD9D9D9),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                              left: 16.0,
+                            ),
+                            child: SingleChildScrollView(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  SizedBox(height: 32),
+                                  CarouselSlider.builder(
+                                    carouselController: _controller,
+                                    itemCount: _kidModel.parentKidId!.length,
+                                    itemBuilder: (ctx, index, realIndex) {
+                                      return InkWell(
+                                        onTap: () {
+                                          Navigator.of(context).push(
+                                              MaterialPageRoute(
+                                                  builder: (ctx) =>
+                                                      PKidsDashboard(
+                                                        kidId: _kidModel
+                                                            .parentKidId![index]
+                                                            .kidId
+                                                            .toString(),
+                                                      )));
+                                        },
+                                        child: Container(
+                                          //width: 260,
+                                          //height: 100,
+                                          margin: EdgeInsets.only(right: 16),
+                                          decoration: BoxDecoration(
+                                            //color: Colors.red,
                                             borderRadius:
-                                                BorderRadius.circular(8)),
-                                        child: Image.network(
-                                          _kidModel
-                                              .parentKidId![index].profilePic
-                                              .toString(),
-                                          fit: BoxFit.cover,
-                                          errorBuilder: (q, w, e) => Image.asset(
-                                              "assets/images/Rectangle 2715.png"),
-                                        ),
-                                      ),
-                                      SizedBox(width: 16),
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          /*SizedBox(
+                                                BorderRadius.circular(16),
+                                            image: DecorationImage(
+                                              image: AssetImage(
+                                                  "assets/images/Student Card.png"),
+                                              fit: BoxFit.cover,
+                                            ),
+                                          ),
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 16.0, vertical: 8),
+                                          child: Row(
+                                            children: [
+                                              Container(
+                                                height: 100,
+                                                width: 72,
+                                                clipBehavior: Clip.hardEdge,
+                                                decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            8)),
+                                                child: Image.network(
+                                                  _kidModel.parentKidId![index]
+                                                      .profilePic
+                                                      .toString(),
+                                                  fit: BoxFit.cover,
+                                                  errorBuilder: (q, w, e) =>
+                                                      Image.asset(
+                                                          "assets/images/Rectangle 2715.png"),
+                                                ),
+                                              ),
+                                              SizedBox(width: 16),
+                                              Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  /*SizedBox(
                                         height: 8,
                                       ),*/
-                                          Text(
-                                            _kidModel.parentKidId![index].name
-                                                .toString(),
-                                            style: FontConstant.k16w500White,
-                                          ),
-                                          Text(
-                                            _kidModel
-                                                .parentKidId![index].secName
-                                                .toString(),
-                                            style: FontConstant.k14w400White,
-                                          ),
-                                          Row(
-                                            children: [
-                                              Text(
-                                                "${"From".tr()} ${DateFormat.jm().format(DateFormat("hh:mm:ss").parse(_kidModel.parentKidId![index].schTimeIn.toString().split('.').first))} ",
-                                                style:
-                                                    FontConstant.k14w400White,
-                                              ),
-                                              Text(
-                                                "${"To".tr()} ${DateFormat.jm().format(DateFormat("hh:mm:ss").parse(_kidModel.parentKidId![index].schTimeOut.toString().split('.').first))}",
-                                                style:
-                                                    FontConstant.k14w400White,
-                                              ),
-                                            ],
-                                          ),
-                                          /*Text(
+                                                  Text(
+                                                    _kidModel
+                                                        .parentKidId![index]
+                                                        .name
+                                                        .toString(),
+                                                    style: FontConstant
+                                                        .k16w500White,
+                                                  ),
+                                                  Text(
+                                                    _kidModel
+                                                        .parentKidId![index]
+                                                        .secName
+                                                        .toString(),
+                                                    style: FontConstant
+                                                        .k14w400White,
+                                                  ),
+                                                  Row(
+                                                    children: [
+                                                      Text(
+                                                        "${"From".tr()} ${DateFormat.jm().format(DateFormat("hh:mm:ss").parse(_kidModel.parentKidId![index].schTimeIn.toString().split('.').first))} ",
+                                                        style: FontConstant
+                                                            .k14w400White,
+                                                      ),
+                                                      Text(
+                                                        "${"To".tr()} ${DateFormat.jm().format(DateFormat("hh:mm:ss").parse(_kidModel.parentKidId![index].schTimeOut.toString().split('.').first))}",
+                                                        style: FontConstant
+                                                            .k14w400White,
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  /*Text(
                                             _kidModel
                                                 .parentKidId![index].grpId
                                                 .toString()
                                                 .tr(),
                                             style: FontConstant.k12w400White,
                                           ),*/
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              );
-                            },
-                            options: CarouselOptions(
-                              height: 140,
-                              onPageChanged: (index, reason) {
-                                setState(() {
-                                  _feesLoading = true;
-                                  _getFees(_kidModel.parentKidId![index].kidId
-                                      .toString());
-                                  // _index = index;
-                                  /*_isActivityLoading = true;
+                                                ],
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                    options: CarouselOptions(
+                                      height: 140,
+                                      onPageChanged: (index, reason) {
+                                        setState(() {
+                                          _feesLoading = true;
+                                          _getFees(_kidModel
+                                              .parentKidId![index].kidId
+                                              .toString());
+                                          // _index = index;
+                                          /*_isActivityLoading = true;
                             _getActivity(_kidModel
                                 .parentKidId![index].kidId
                                 .toString());
                             log(index.toString());*/
-                                });
-                              },
-                              viewportFraction:
-                                  _kidModel.parentKidId!.length > 1 ? 0.9 : 1,
-                              //enlargeCenterPage: true,
-                              padEnds: false,
-                              //pageSnapping: false,
-                              enableInfiniteScroll: false,
-                            ),
-                          ),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          _feesLoading
-                              ? Center(
-                                  child: CircularProgressIndicator(),
-                                )
-                              : Padding(
-                                  padding: EdgeInsets.only(right: 16.0),
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text(
-                                            "Remaining fees".tr(),
-                                            style:
-                                                FontConstant.k24w500brownText,
-                                          ),
-                                          Text(
-                                            feesModel.remainingFees.toString(),
-                                            style:
-                                                FontConstant.k24w500brownText,
-                                          ),
-                                        ],
-                                      ),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text(
-                                            "Total Paid fees".tr(),
-                                            style: FontConstant.k16w4008471Text,
-                                          ),
-                                          SizedBox(height: 16),
-                                          Text(
-                                            feesModel.totalFees.toString(),
-                                            style: FontConstant.k16w4008471Text,
-                                          ),
-                                        ],
-                                      ),
-                                      SizedBox(height: 20),
-                                      Align(
-                                        alignment: Alignment.center,
-                                        child: Text(
-                                          "View Fees Structure".tr(),
-                                          style: FontConstant.k18w5008267Text,
-                                        ),
-                                      ),
-                                      SizedBox(height: 20),
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            "Previous Payment".tr(),
-                                            style: FontConstant.k22w5008471Text
-                                                .copyWith(fontSize: 22),
-                                          ),
-                                          SizedBox(
-                                            // width: 382.w,
-                                            // height: 400.h,
-                                            child: ListView.builder(
-                                                padding: EdgeInsets.zero,
-                                                shrinkWrap: true,
-                                                itemCount: feesModel
-                                                    .previousPayment!.length,
-                                                physics:
-                                                    NeverScrollableScrollPhysics(),
-                                                itemBuilder:
-                                                    (BuildContext context,
-                                                        int index) {
-                                                  return Padding(
-                                                    padding: const EdgeInsets
-                                                            .symmetric(
-                                                        vertical: 8.0),
-                                                    child: Row(
-                                                      children: [
-                                                        Container(
-                                                          height: 67,
-                                                          width: 50,
-                                                          clipBehavior:
-                                                              Clip.hardEdge,
-                                                          decoration:
-                                                              BoxDecoration(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        8),
-                                                          ),
-                                                          child: Image.network(
-                                                            feesModel
-                                                                .previousPayment![
-                                                                    index]
-                                                                .schoolImage
-                                                                .toString(),
-                                                            fit: BoxFit.fill,
-                                                            errorBuilder: (q, w,
-                                                                    e) =>
-                                                                Image.asset(
-                                                                    "assets/images/feesimage1.png"),
-                                                          ),
-                                                        ),
-                                                        SizedBox(width: 16),
-                                                        Expanded(
-                                                          child: Row(
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .spaceBetween,
-                                                            children: [
-                                                              Column(
-                                                                crossAxisAlignment:
-                                                                    CrossAxisAlignment
-                                                                        .start,
-                                                                children: [
-                                                                  Text(
-                                                                    "Paid to"
-                                                                        .tr(),
-                                                                    style: FontConstant
-                                                                        .k16w400B7A4Text,
-                                                                  ),
-                                                                  Text(
-                                                                    feesModel
-                                                                        .previousPayment![
-                                                                            index]
-                                                                        .schoolName
-                                                                        .toString(),
-                                                                    style: FontConstant
-                                                                        .k18w500331FText,
-                                                                  ),
-                                                                ],
-                                                              ),
-                                                              Column(
-                                                                crossAxisAlignment:
-                                                                    CrossAxisAlignment
-                                                                        .end,
-                                                                children: [
-                                                                  Text(
-                                                                    feesModel
-                                                                        .previousPayment![
-                                                                            index]
-                                                                        .date
-                                                                        .toString(),
-                                                                    style: FontConstant
-                                                                        .k16w400B7A4Text,
-                                                                  ),
-                                                                  Text(
-                                                                    feesModel
-                                                                        .previousPayment![
-                                                                            index]
-                                                                        .paidFees
-                                                                        .toString(),
-                                                                    style: FontConstant
-                                                                        .k18w500331FText,
-                                                                  ),
-                                                                ],
-                                                              )
-                                                            ],
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  );
-                                                }),
-                                          )
-                                        ],
-                                      ),
-                                    ],
+                                        });
+                                      },
+                                      viewportFraction:
+                                          _kidModel.parentKidId!.length > 1
+                                              ? 0.9
+                                              : 1,
+                                      //enlargeCenterPage: true,
+                                      padEnds: false,
+                                      //pageSnapping: false,
+                                      enableInfiniteScroll: false,
+                                    ),
                                   ),
-                                ),
-                          SizedBox(height: 24),
+                                  SizedBox(
+                                    height: 20,
+                                  ),
+                                  _feesLoading
+                                      ? Center(
+                                          child: CircularProgressIndicator(),
+                                        )
+                                      : Padding(
+                                          padding: EdgeInsets.only(right: 16.0),
+                                          child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            children: [
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  Text(
+                                                    "Remaining fees".tr(),
+                                                    style: FontConstant
+                                                        .k24w500brownText,
+                                                  ),
+                                                  Text(
+                                                    feesModel.remainingFees
+                                                        .toString(),
+                                                    style: FontConstant
+                                                        .k24w500brownText,
+                                                  ),
+                                                ],
+                                              ),
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  Text(
+                                                    "Total Paid fees".tr(),
+                                                    style: FontConstant
+                                                        .k16w4008471Text,
+                                                  ),
+                                                  SizedBox(height: 16),
+                                                  Text(
+                                                    feesModel.totalFees
+                                                        .toString(),
+                                                    style: FontConstant
+                                                        .k16w4008471Text,
+                                                  ),
+                                                ],
+                                              ),
+                                              SizedBox(height: 20),
+                                              Align(
+                                                alignment: Alignment.center,
+                                                child: Text(
+                                                  "View Fees Structure".tr(),
+                                                  style: FontConstant
+                                                      .k18w5008267Text,
+                                                ),
+                                              ),
+                                              SizedBox(height: 20),
+                                              Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Text(
+                                                    "Previous Payment".tr(),
+                                                    style: FontConstant
+                                                        .k22w5008471Text
+                                                        .copyWith(fontSize: 22),
+                                                  ),
+                                                  SizedBox(
+                                                    // width: 382.w,
+                                                    // height: 400.h,
+                                                    child: ListView.builder(
+                                                        padding:
+                                                            EdgeInsets.zero,
+                                                        shrinkWrap: true,
+                                                        itemCount: feesModel
+                                                            .previousPayment!
+                                                            .length,
+                                                        physics:
+                                                            NeverScrollableScrollPhysics(),
+                                                        itemBuilder:
+                                                            (BuildContext
+                                                                    context,
+                                                                int index) {
+                                                          return Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .symmetric(
+                                                                    vertical:
+                                                                        8.0),
+                                                            child: Row(
+                                                              children: [
+                                                                Container(
+                                                                  height: 67,
+                                                                  width: 50,
+                                                                  clipBehavior:
+                                                                      Clip.hardEdge,
+                                                                  decoration:
+                                                                      BoxDecoration(
+                                                                    borderRadius:
+                                                                        BorderRadius
+                                                                            .circular(8),
+                                                                  ),
+                                                                  child: Image
+                                                                      .network(
+                                                                    feesModel
+                                                                        .previousPayment![
+                                                                            index]
+                                                                        .schoolImage
+                                                                        .toString(),
+                                                                    fit: BoxFit
+                                                                        .fill,
+                                                                    errorBuilder: (q,
+                                                                            w,
+                                                                            e) =>
+                                                                        Image.asset(
+                                                                            "assets/images/feesimage1.png"),
+                                                                  ),
+                                                                ),
+                                                                SizedBox(
+                                                                    width: 16),
+                                                                Expanded(
+                                                                  child: Row(
+                                                                    mainAxisAlignment:
+                                                                        MainAxisAlignment
+                                                                            .spaceBetween,
+                                                                    children: [
+                                                                      Column(
+                                                                        crossAxisAlignment:
+                                                                            CrossAxisAlignment.start,
+                                                                        children: [
+                                                                          Text(
+                                                                            "Paid to".tr(),
+                                                                            style:
+                                                                                FontConstant.k16w400B7A4Text,
+                                                                          ),
+                                                                          Text(
+                                                                            feesModel.previousPayment![index].schoolName.toString(),
+                                                                            style:
+                                                                                FontConstant.k18w500331FText,
+                                                                          ),
+                                                                        ],
+                                                                      ),
+                                                                      Column(
+                                                                        crossAxisAlignment:
+                                                                            CrossAxisAlignment.end,
+                                                                        children: [
+                                                                          Text(
+                                                                            feesModel.previousPayment![index].date.toString(),
+                                                                            style:
+                                                                                FontConstant.k16w400B7A4Text,
+                                                                          ),
+                                                                          Text(
+                                                                            feesModel.previousPayment![index].paidFees.toString(),
+                                                                            style:
+                                                                                FontConstant.k18w500331FText,
+                                                                          ),
+                                                                        ],
+                                                                      )
+                                                                    ],
+                                                                  ),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          );
+                                                        }),
+                                                  )
+                                                ],
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                  SizedBox(height: 24),
+                                ],
+                              ),
+                            ),
+                          )
                         ],
                       ),
                     ),
-                  )
-                ],
-              ),
-            ),
     );
   }
 }

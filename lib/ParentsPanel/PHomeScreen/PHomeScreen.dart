@@ -14,6 +14,7 @@ import 'package:kidseau/api/models/parent_models/parent_home_models/parent_kid_h
 import 'package:kidseau/api/parent_panel_apis/parent_dashboard_api/parent_activity_home_api.dart';
 import 'package:kidseau/api/parent_panel_apis/parent_dashboard_api/parent_kid_api.dart';
 import 'package:kidseau/shard_prefs/shared_prefs.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 import '../../Constants/colors.dart';
 import '../../TeachersPanel/TReminder/TReminderScreen.dart';
@@ -76,8 +77,20 @@ class _PHomeScreenState extends State<PHomeScreen> {
     getShowReminder();
     _getData();
     _getDataReminders();
+    _startLoading();
     // cookie = UserPrefs.getCookies()!;
     super.initState();
+  }
+
+  bool loading = true;
+  _startLoading() {
+    // Simulate a delay of 2 seconds
+    Future.delayed(Duration(seconds: 2), () {
+      setState(() {
+        // Stop loading after 2 seconds
+        loading = false;
+      });
+    });
   }
 
   // String cookie = '';
@@ -330,6 +343,7 @@ class _PHomeScreenState extends State<PHomeScreen> {
               child: Column(
                 children: [
                   SizedBox(height: 16),
+
                   if (modelList.isNotEmpty && reminder)
                     Container(
                       width: 1.sw,
@@ -562,35 +576,50 @@ class _PHomeScreenState extends State<PHomeScreen> {
                       SizedBox(
                         height: 5.h,
                       ),
-                      if (_activityModel.kidAndActivity != null)
-                        _isActivityLoading
-                            ? Center(
-                                child: CircularProgressIndicator(),
-                              )
-                            : _activityModel.kidAndActivity!.isEmpty
-                                ? Column(
-                                    children: [
-                                      Image.asset(
-                                        "assets/images/chicken.png",
-                                        width: 1.sw,
-                                        height: 200,
-                                      ),
-                                      SizedBox(
-                                        height: 20,
-                                      ),
-                                      Text(
-                                        "Oops!".tr(),
-                                        style: FontConstant2.k24w5008267text,
-                                      ),
-                                      Text(
-                                        "No activity available for the kid."
-                                            .tr(),
-                                        style: FontConstant.k16w4008471Text,
-                                      ),
-                                    ],
-                                  )
-                                : Activity(
-                                    model: _activityModel, length: length),
+                      // if (_activityModel.kidAndActivity != null)
+                      // loading
+                      //     ? Center(
+                      //         child: CircularProgressIndicator(),
+                      //       )
+                      //     :
+                      loading
+                          ? Padding(
+                              padding:
+                                  const EdgeInsets.only(top: 80, bottom: 80),
+                              child: Center(
+                                child: LoadingAnimationWidget.staggeredDotsWave(
+                                  color: AppColors().k8267AC,
+                                  size: 20,
+                                ),
+                              ),
+                            )
+                          : _activityModel.kidAndActivity == null
+                              ? Column(
+                                  children: [
+                                    Image.asset(
+                                      "assets/images/chicken.png",
+                                      width: 1.sw,
+                                      height: 200,
+                                    ),
+                                    SizedBox(
+                                      height: 20,
+                                    ),
+                                    Text(
+                                      "Oops!".tr(),
+                                      style: FontConstant2.k24w5008267text,
+                                    ),
+                                    Text(
+                                      "No activity available for the kid.".tr(),
+                                      style: FontConstant.k16w4008471Text,
+                                    ),
+                                  ],
+                                )
+                              : _isActivityLoading
+                                  ? Center(
+                                      child: CircularProgressIndicator(),
+                                    )
+                                  : Activity(
+                                      model: _activityModel, length: length),
                       SizedBox(height: 10),
                       if (_activityModel.kidAndActivity != null)
                         length == _activityModel.kidAndActivity!.length

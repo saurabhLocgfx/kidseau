@@ -65,10 +65,21 @@ class _PMessagesState extends State<PMessages> {
   @override
   void initState() {
     _getData();
-    _timer = Timer.periodic(Duration(seconds: 4), (timer) {
+    _timer = Timer.periodic(Duration(seconds: 5), (timer) {
       _getData();
     });
+    _startLoading();
     super.initState();
+  }
+
+  _startLoading() {
+    // Simulate a delay of 2 seconds
+    Future.delayed(Duration(seconds: 1), () {
+      setState(() {
+        // Stop loading after 2 seconds
+        loading = false;
+      });
+    });
   }
 
   @override
@@ -79,6 +90,7 @@ class _PMessagesState extends State<PMessages> {
 
   List<RecentMessageModel> modelList = [];
   bool _isLoading = false;
+  bool loading = true;
   _getData() {
     setState(() {
       _isLoading = true;
@@ -105,240 +117,232 @@ class _PMessagesState extends State<PMessages> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: modelList.isEmpty
-          ? Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  SizedBox(height: 100),
-                  Image.asset(
-                    "assets/images/empty_message.png",
-                    width: 200.w,
-                    height: 200.w,
-                  ),
-                  Text(
-                    'Start conversation with one of your kid’s educator'.tr(),
-                    textAlign: TextAlign.center,
-                    style: FontConstant.k18w500Primary,
-                  ),
-                ],
-              ),
+      body: loading
+          ? Center(
+              child: CircularProgressIndicator(),
             )
-          : _isLoading
-              ? Center(
-                  child: CircularProgressIndicator(),
+          : modelList.isEmpty
+              ? Align(
+                  alignment: Alignment.topCenter,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        SizedBox(height: 100),
+                        Image.asset(
+                          "assets/images/empty_message.png",
+                          width: 200.w,
+                          height: 200.w,
+                        ),
+                        Text(
+                          'Start conversation with one of your kid’s educator'
+                              .tr(),
+                          textAlign: TextAlign.center,
+                          style: FontConstant.k18w500Primary,
+                        ),
+                      ],
+                    ),
+                  ),
                 )
-              : ListView.builder(
-                  itemCount: modelList.length,
-                  physics: AlwaysScrollableScrollPhysics(),
-                  scrollDirection: Axis.vertical,
-                  shrinkWrap: true,
-                  itemBuilder: (BuildContext context, int index) {
-                    return GestureDetector(
-                      onTap: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) => POpenChats(
-                              onPop: () {
-                                _getData();
-                              },
-                              profilePic:
-                                  modelList[index].userProfile.toString(),
-                              name: modelList[index].userName.toString(),
-                              language: modelList[index].lang.toString(),
-                              userId: modelList[index].userId.toString(),
-                              userType: modelList[index].userType.toString(),
-                            ),
-                          ),
-                        );
-                      },
-                      child: Container(
-                        height: 90,
-                        width: 1.sw,
-                        color: Colors.transparent,
-                        child: Padding(
-                          padding: const EdgeInsets.only(left: 16, right: 16),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Row(
-                                children: [
-                                  Container(
-                                    height: 70,
-                                    width: 50,
-                                    clipBehavior: Clip.hardEdge,
-                                    decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        borderRadius: BorderRadius.circular(8)),
-                                    child: Image.network(
+              : _isLoading
+                  ? Center(
+                      child: CircularProgressIndicator(),
+                    )
+                  : ListView.builder(
+                      itemCount: modelList.length,
+                      physics: AlwaysScrollableScrollPhysics(),
+                      scrollDirection: Axis.vertical,
+                      shrinkWrap: true,
+                      itemBuilder: (BuildContext context, int index) {
+                        return GestureDetector(
+                          onTap: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => POpenChats(
+                                  onPop: () {
+                                    _getData();
+                                  },
+                                  profilePic:
                                       modelList[index].userProfile.toString(),
-                                      fit: BoxFit.cover,
-                                      errorBuilder: (q, w, e) => Image.asset(
-                                          "assets/images/messageperson1.png"),
-                                    ),
-                                  ),
-                                  SizedBox(width: 16),
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Row(
-                                        children: [
-                                          Text(
-                                            modelList[index].userName == null
-                                                ? 'User'
-                                                : modelList[index]
-                                                    .userName
-                                                    .toString(),
-                                            style: FontConstant.k18w5008471Text
-                                                .copyWith(
-                                                    fontSize: 18,
-                                                    fontWeight: FontWeight.w500,
-                                                    color: Color(0xff331F2D)),
-                                          ),
-                                          modelList[index]
-                                                      .msgUnread
-                                                      .toString() ==
-                                                  '0'
-                                              ? SizedBox.shrink()
-                                              : Container(
-                                                  padding: EdgeInsets.symmetric(
-                                                      horizontal: 5,
-                                                      vertical: 2),
-                                                  decoration: BoxDecoration(
-                                                      color: Colors.red,
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              20)),
-                                                  child: Text(
-                                                    modelList[index]
-                                                        .msgUnread
-                                                        .toString(),
-                                                    style: FontConstant
-                                                        .k12w400White,
-                                                  ),
-                                                )
-                                        ],
-                                      ),
-                                      Text(modelList[index].userType.toString(),
-                                          style: FontConstant.k14w4008471Text),
-                                      modelList[index].messageTime.toString() ==
-                                              ""
-                                          ? SizedBox()
-                                          : Text(
-                                              "${"last message".tr()} - ${DateFormat('dd MMM').format(DateTime.parse(modelList[index].messageTime.toString()))}",
-                                              style:
-                                                  FontConstant.k12w4008267Text),
-                                    ],
-                                  ),
-                                ],
+                                  name: modelList[index].userName.toString(),
+                                  language: modelList[index].lang.toString(),
+                                  userId: modelList[index].userId.toString(),
+                                  userType:
+                                      modelList[index].userType.toString(),
+                                ),
                               ),
-                              Container(
-                                child: Stack(
-                                  children: [
-                                    Image.asset(
-                                      "assets/images/dots2.png",
-                                      height: 48.h,
-                                      width: 48.w,
-                                    ),
-                                    PopupMenuButton(
-                                      shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(16)),
-                                      iconSize: 10,
-                                      icon: ImageIcon(
-                                        AssetImage(
-                                          "assets/images/dots2.png",
+                            );
+                          },
+                          child: Container(
+                            height: 90,
+                            width: 1.sw,
+                            color: Colors.transparent,
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.only(left: 16, right: 16),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Row(
+                                    children: [
+                                      Container(
+                                        height: 70,
+                                        width: 50,
+                                        clipBehavior: Clip.hardEdge,
+                                        decoration: BoxDecoration(
+                                            color: Colors.white,
+                                            borderRadius:
+                                                BorderRadius.circular(8)),
+                                        child: Image.network(
+                                          modelList[index]
+                                              .userProfile
+                                              .toString(),
+                                          fit: BoxFit.cover,
+                                          errorBuilder: (q, w, e) => Image.asset(
+                                              "assets/images/messageperson1.png"),
                                         ),
                                       ),
-                                      itemBuilder: (context) {
-                                        return [
-                                          PopupMenuItem(
-                                            enabled: false,
-                                            child: InkWell(
-                                              onTap: () {
-                                                final resp = ReadUnreadMsgApi()
-                                                    .get(
-                                                        userID: modelList[index]
-                                                            .userId
-                                                            .toString(),
-                                                        receiverType:
-                                                            "teacher");
-                                                resp.then((value) {
-                                                  log(value.toString());
-                                                  if (value['status'] == 1) {
-                                                    setState(() {
-                                                      if (value['mark'] == 1) {
-                                                        modelList[index]
-                                                            .msgUnread = "0";
-                                                      } else {
-                                                        modelList[index]
-                                                            .msgUnread = "1";
-                                                      }
-                                                    });
-                                                    Navigator.of(context).pop();
-                                                  } else {}
-                                                });
-                                              },
-                                              child: Row(
-                                                children: [
-                                                  Image.asset(
-                                                    "assets/images/markicon.png",
-                                                    height: 24,
-                                                  ),
-                                                  SizedBox(width: 24),
-                                                  Text(
-                                                    modelList[index]
-                                                                .msgUnread ==
-                                                            '0'
-                                                        ? "Mark as unread".tr()
-                                                        : "Mark as read".tr(),
-                                                    style: FontConstant
-                                                        .k18w5008471Text,
-                                                  )
-                                                ],
+                                      SizedBox(width: 16),
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Row(
+                                            children: [
+                                              Text(
+                                                modelList[index].userName ==
+                                                        null
+                                                    ? 'User'
+                                                    : modelList[index]
+                                                        .userName
+                                                        .toString(),
+                                                style: FontConstant
+                                                    .k18w5008471Text
+                                                    .copyWith(
+                                                        fontSize: 18,
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                        color:
+                                                            Color(0xff331F2D)),
                                               ),
+                                              modelList[index]
+                                                          .msgUnread
+                                                          .toString() ==
+                                                      '0'
+                                                  ? SizedBox.shrink()
+                                                  : Container(
+                                                      padding:
+                                                          EdgeInsets.symmetric(
+                                                              horizontal: 5,
+                                                              vertical: 2),
+                                                      decoration: BoxDecoration(
+                                                          color: Colors.red,
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      20)),
+                                                      child: Text(
+                                                        modelList[index]
+                                                            .msgUnread
+                                                            .toString(),
+                                                        style: FontConstant
+                                                            .k12w400White,
+                                                      ),
+                                                    )
+                                            ],
+                                          ),
+                                          Text(
+                                              modelList[index]
+                                                  .userType
+                                                  .toString(),
+                                              style:
+                                                  FontConstant.k14w4008471Text),
+                                          modelList[index]
+                                                      .messageTime
+                                                      .toString() ==
+                                                  ""
+                                              ? SizedBox()
+                                              : Text(
+                                                  "${"last message".tr()} - ${DateFormat('dd MMM').format(DateTime.parse(modelList[index].messageTime.toString()))}",
+                                                  style: FontConstant
+                                                      .k12w4008267Text),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                  Container(
+                                    child: Stack(
+                                      children: [
+                                        Image.asset(
+                                          "assets/images/dots2.png",
+                                          height: 48.h,
+                                          width: 48.w,
+                                        ),
+                                        PopupMenuButton(
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(16)),
+                                          iconSize: 10,
+                                          icon: ImageIcon(
+                                            AssetImage(
+                                              "assets/images/dots2.png",
                                             ),
                                           ),
-                                          if (index != 0)
-                                            PopupMenuItem(
-                                              enabled: false,
-                                              child: InkWell(
-                                                onTap: () {
-                                                  final resp = DeleteChat().get(
-                                                      userId: modelList[index]
-                                                          .userId
-                                                          .toString(),
-                                                      userType: modelList[index]
-                                                          .userType
-                                                          .toString());
-                                                  resp.then((value) {
-                                                    log(value.toString());
-                                                    if (value['status'] == 1) {
-                                                      setState(() {
-                                                        modelList
-                                                            .removeAt(index);
-                                                      });
-                                                    }
-                                                    Navigator.of(context).pop();
-                                                  });
-                                                },
-                                                child: Padding(
-                                                  padding: const EdgeInsets
-                                                      .symmetric(vertical: 6.0),
+                                          itemBuilder: (context) {
+                                            return [
+                                              PopupMenuItem(
+                                                enabled: false,
+                                                child: InkWell(
+                                                  onTap: () {
+                                                    final resp =
+                                                        ReadUnreadMsgApi().get(
+                                                            userID:
+                                                                modelList[index]
+                                                                    .userId
+                                                                    .toString(),
+                                                            receiverType:
+                                                                "teacher");
+                                                    resp.then((value) {
+                                                      log(value.toString());
+                                                      if (value['status'] ==
+                                                          1) {
+                                                        setState(() {
+                                                          if (value['mark'] ==
+                                                              1) {
+                                                            modelList[index]
+                                                                    .msgUnread =
+                                                                "0";
+                                                          } else {
+                                                            modelList[index]
+                                                                    .msgUnread =
+                                                                "1";
+                                                          }
+                                                        });
+                                                        Navigator.of(context)
+                                                            .pop();
+                                                      } else {}
+                                                    });
+                                                  },
                                                   child: Row(
                                                     children: [
                                                       Image.asset(
-                                                        "assets/images/trashicon.png",
+                                                        "assets/images/markicon.png",
                                                         height: 24,
                                                       ),
                                                       SizedBox(width: 24),
                                                       Text(
-                                                        "Delete chat".tr(),
+                                                        modelList[index]
+                                                                    .msgUnread ==
+                                                                '0'
+                                                            ? "Mark as unread"
+                                                                .tr()
+                                                            : "Mark as read"
+                                                                .tr(),
                                                         style: FontConstant
                                                             .k18w5008471Text,
                                                       )
@@ -346,20 +350,67 @@ class _PMessagesState extends State<PMessages> {
                                                   ),
                                                 ),
                                               ),
-                                            ),
-                                        ];
-                                      },
-                                    )
-                                  ],
-                                ),
+                                              if (index != 0)
+                                                PopupMenuItem(
+                                                  enabled: false,
+                                                  child: InkWell(
+                                                    onTap: () {
+                                                      final resp = DeleteChat().get(
+                                                          userId:
+                                                              modelList[index]
+                                                                  .userId
+                                                                  .toString(),
+                                                          userType:
+                                                              modelList[index]
+                                                                  .userType
+                                                                  .toString());
+                                                      resp.then((value) {
+                                                        log(value.toString());
+                                                        if (value['status'] ==
+                                                            1) {
+                                                          setState(() {
+                                                            modelList.removeAt(
+                                                                index);
+                                                          });
+                                                        }
+                                                        Navigator.of(context)
+                                                            .pop();
+                                                      });
+                                                    },
+                                                    child: Padding(
+                                                      padding: const EdgeInsets
+                                                          .symmetric(
+                                                          vertical: 6.0),
+                                                      child: Row(
+                                                        children: [
+                                                          Image.asset(
+                                                            "assets/images/trashicon.png",
+                                                            height: 24,
+                                                          ),
+                                                          SizedBox(width: 24),
+                                                          Text(
+                                                            "Delete chat".tr(),
+                                                            style: FontConstant
+                                                                .k18w5008471Text,
+                                                          )
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                            ];
+                                          },
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                ],
                               ),
-                            ],
+                            ),
                           ),
-                        ),
-                      ),
-                    );
-                  },
-                ),
+                        );
+                      },
+                    ),
     );
   }
 }

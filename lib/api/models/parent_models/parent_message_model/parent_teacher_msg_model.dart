@@ -60,3 +60,48 @@ class AllTeahcer {
     return data;
   }
 }
+//
+// class ParentMsgTeacherModel {
+//   String? teacherId;
+//   String? fName;
+//   String? familyName;
+//   String? techProfile;
+//   String? gender;
+//   String? schName;
+//   String? langId;
+//   String? userType;
+//
+//   ParentMsgTeacherModel(
+//       {this.teacherId,
+//       this.fName,
+//       this.familyName,
+//       this.techProfile,
+//       this.gender,
+//       this.schName,
+//       this.langId,
+//       this.userType});
+//
+//   ParentMsgTeacherModel.fromJson(Map<String, dynamic> json) {
+//     teacherId = json['teacher_id'];
+//     fName = json['f_name'];
+//     familyName = json['family_name'];
+//     techProfile = json['tech_profile'];
+//     gender = json['gender'];
+//     schName = json['sch_name'];
+//     langId = json['lang_id'];
+//     userType = json['user_type'];
+//   }
+//
+//   Map<String, dynamic> toJson() {
+//     final Map<String, dynamic> data = new Map<String, dynamic>();
+//     data['teacher_id'] = this.teacherId;
+//     data['f_name'] = this.fName;
+//     data['family_name'] = this.familyName;
+//     data['tech_profile'] = this.techProfile;
+//     data['gender'] = this.gender;
+//     data['sch_name'] = this.schName;
+//     data['lang_id'] = this.langId;
+//     data['user_type'] = this.userType;
+//     return data;
+//   }
+// }

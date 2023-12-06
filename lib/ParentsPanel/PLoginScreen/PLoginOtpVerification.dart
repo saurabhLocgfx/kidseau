@@ -215,9 +215,9 @@ class _PLoginOtpVerificationState extends State<PLoginOtpVerification> {
                                         } else {
                                           UserPrefs.setCookies(value['key']);
                                           UserPrefs.setOTP(value['OTP']);
-                                          Fluttertoast.showToast(
-                                              msg:
-                                                  'Your OTP is ${value['OTP']}');
+                                          // Fluttertoast.showToast(
+                                          //     msg:
+                                          //         'Your OTP is ${value['OTP']}');
                                         }
                                       });
                                     }

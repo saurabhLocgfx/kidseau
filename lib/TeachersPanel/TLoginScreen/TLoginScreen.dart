@@ -549,6 +549,9 @@ class _TLoginScreenState extends State<TLoginScreen> {
                                           // UserPrefs.setCookies(value['key']);
                                           // UserPrefs.setOTP(value['OTP']);
 
+                                          UserPrefs.setIsTeacher(true);
+                                          UserPrefs.setOTP(value['OTP']);
+
                                           Navigator.of(context).push(
                                               MaterialPageRoute(
                                                   builder: (context) =>

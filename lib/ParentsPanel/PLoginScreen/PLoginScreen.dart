@@ -522,6 +522,8 @@ class _PLoginScreenState extends State<PLoginScreen> {
 
                                           // UserPrefs.setCookies(value['key']);
                                           // UserPrefs.setOTP(value['OTP']);
+                                          UserPrefs.setIsTeacher(false);
+                                          UserPrefs.setOTP(value['OTP']);
 
                                           Navigator.of(context).push(
                                               MaterialPageRoute(
@@ -583,7 +585,7 @@ class _PLoginScreenState extends State<PLoginScreen> {
                       ],
                     ),
                   ),
-                  SizedBox(height: 80),
+                  SizedBox(height: 180),
                 ],
               ),
             ),
